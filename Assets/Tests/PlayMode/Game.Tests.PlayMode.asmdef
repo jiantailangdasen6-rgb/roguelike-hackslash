@@ -3,9 +3,8 @@
     "rootNamespace": "Game.Tests",
     "references": [
         "Game.Core",
-        "Game.Player",
-        "Unity.InputSystem",
-        "Unity.InputSystem.TestFramework",
+        "Game.Gameplay",
+        "Unity.Netcode.Runtime",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],

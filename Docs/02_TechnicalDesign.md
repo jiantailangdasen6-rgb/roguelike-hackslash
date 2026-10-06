@@ -1,179 +1,120 @@
 # 技術設計書
 
-> ステータス: ドラフト v0.1（2026-10-06）
+> ステータス: v0.2（2026-10-06）— バンサバ型・オンライン協力の試作（P1）に合わせて更新
 > 企画書: [01_GameDesign.md](01_GameDesign.md)
 
 ---
 
 ## 1. 環境・パッケージ
 
-| 項目 | 選定 | 理由 |
+| 項目 | 選定 | 備考 |
 |---|---|---|
-| Unity | 6000.6.2f1 | インストール済み |
-| テンプレート | Universal 2D（URP 2D） | 2D ライト・スプライト最適化 |
-| 入力 | Input System | PC / パッド / タッチを 1 つのアクション定義で扱える。`OnScreenStick` でバーチャルスティック |
-| カメラ | Cinemachine | 追従・画面揺れ（Impulse）・部屋境界の Confiner |
-| マップ | Tilemap ＋ 2D Tilemap Extras | 部屋テンプレートを Tilemap で作る |
-| UI | uGUI ＋ TextMeshPro | スマホのタッチ UI 実績が多い |
-| アセット管理 | 最初は直接参照 → 規模が増えたら Addressables | 早すぎる最適化を避ける |
-| テスト | Unity Test Framework（EditMode） | ダメージ計算・ドロップ抽選・生成ロジックをテスト |
-| バージョン管理 | Git ＋ Git LFS（画像・音） | Unity 用 .gitignore |
+| Unity | 6000.6.2f1 | |
+| 描画 | URP 2D | 2D テンプレートから作成 |
+| 通信 | **Netcode for GameObjects 2.13.3** ＋ Unity Transport | 3.x は Unity 6.7 以降が必要なため 2.x 系 |
+| 入力 | Input System | PC / パッド / タッチ（On-Screen Controls が仮想ゲームパッドとして入力） |
+| カメラ | Cinemachine 3 | 自分のプレイヤーを追従、アリーナ境界で Confine |
+| UI | uGUI（コードで組み立て） | 日本語は OS フォントを動的に使用（フォント同梱なし） |
+| テスト | Unity Test Framework | EditMode（ロジック）/ PlayMode（ソロ実起動）/ ビルド版の 3 プロセス通信テスト |
 
 ---
 
-## 2. フォルダ構成
+## 2. 全体構成
+
+```
+┌──────────────── ホスト（= サーバー兼プレイヤー）────────────────┐
+│  RunSimulation（純 C#・Unity 非依存）                              │
+│    部屋進行 / 敵の出現と移動 / 武器 / 被ダメ / 経験値 / レベルアップ / ドロップ │
+│        ▲ 各プレイヤーの位置                │ イベント列・敵の位置            │
+│  RunDirector（NetworkBehaviour, 30Hz）     ▼                              │
+└──────────────┬───────────────────────────────┬──────────────────┘
+               │ NetworkTransform（位置はオーナー権限）│ 名前付きメッセージ
+               ▼                                ▼
+┌──────────── 各クライアント（ホスト自身も含む）─────────────────────┐
+│  PlayerMover（自分の移動だけ計算）                                     │
+│  EnemyView / EventPresenter / LootSystem / HUD / LevelUpView …（表示のみ）│
+└──────────────────────────────────────────────────────────┘
+```
+
+- **ゲームのロジックはすべてホストの `RunSimulation` で計算**する（チート耐性より実装の単純さと同期ズレの無さを優先）
+- `RunSimulation` は Unity にも通信にも依存しない純 C# → EditMode テストで高速に検証できる
+- プレイヤーの**移動だけはオーナー権限**（各自の端末で即座に反映 → 操作が遅延しない）。ホストは受け取った位置で当たり判定する
+
+### 2.1 同期の方式
+
+| データ | 方式 | 理由 |
+|---|---|---|
+| プレイヤー位置 | `NetworkTransform`（Owner 権限・XY のみ） | 操作レスポンス重視 |
+| HP・ダウン・移動速度・オーラ半径 | `NetPlayer` の NetworkVariable | 変化した時だけ送られる |
+| 部屋・目標・チームLv・経験値・一時停止 | `RunDirector` の NetworkVariable | 同上 |
+| 敵の位置（最大 350 体） | **スナップショット**: 1体 7 バイトに量子化、100 体ずつ分割して Unreliable で 15Hz | 敵 1 体ずつを NetworkObject にすると重すぎるため |
+| 攻撃・被弾・撃破・ジェム・ドロップ・レベルアップ等 | **イベント列**（`SimEvent` を種類ごとに必要な項目だけ詰めて送る）Reliable で毎 tick | 表示は各端末で再現（斧の軌道などは開始位置と速度から計算） |
+| 装備の効果 | オーナー → ホストへ RPC（`SubmitEquipmentRpc`） | 装備は各自の端末に保存されているため |
+| レベルアップの選択 | クライアント → ホストへ RPC（`ChooseUpgradeRpc`） | |
+
+- 装備ドロップは**乱数シードだけ**を送り、受け取った本人の端末で `ItemGenerator` が同じアイテムを再生成する（各自に個別ドロップ）
+
+### 2.2 接続
+
+- ロビーで「ソロ / 部屋を作る / IP で参加」。最大 3 人、ゲーム開始後の途中参加は不可（接続承認で拒否）
+- ポート 7777（UDP）。試作は同じ Wi-Fi 内のみ。インターネット越しは P4 で Unity Relay ＋ ルームコード方式に切り替える予定
+
+---
+
+## 3. フォルダ構成
 
 ```
 Assets/
 ├── _Project/
-│   ├── Art/            スプライト・アニメーション・タイル
-│   ├── Audio/
-│   ├── Data/           ScriptableObject アセット（武器・敵・アフィックス・ドロップ表）
-│   ├── Prefabs/
-│   │   ├── Player/
-│   │   ├── Enemies/
-│   │   ├── Rooms/      部屋テンプレート
-│   │   └── UI/
-│   ├── Scenes/         Boot / Title / Hub / Dungeon
-│   ├── Settings/       Input Actions・URP 設定
+│   ├── Art/            仮素材（ビルダーが生成）
+│   ├── Resources/      GameArt, NetPlayer.prefab, NetworkManager.prefab（実行時に読み込み）
+│   ├── Scenes/         Lobby, Game（ビルダーが生成）
+│   ├── Settings/       GameControls.inputactions, NetworkPrefabs
 │   └── Scripts/
-│       ├── Core/       共通基盤（RNG・プール・イベント・ステートマシン・セーブ）
-│       ├── Combat/     ダメージ・HP・攻撃・投射物・状態異常
-│       ├── Stats/      ステータスと修飾子
-│       ├── Player/     入力・移動・オートエイム
-│       ├── Enemies/    敵 AI
-│       ├── Items/      装備・アフィックス・ドロップ・インベントリ
-│       ├── Dungeon/    ダンジョン生成・部屋制御
-│       ├── Run/        ラン進行・レベルアップ・レリック
-│       ├── Meta/       拠点・恒久強化
-│       └── UI/
+│       ├── Core/       Game.Core — 純 C#。Stats / Items / Run（武器・パッシブ・強化）/ Sim（RunSimulation 他）
+│       ├── Gameplay/   Game.Gameplay — Net（RunDirector, NetPlayer, 同期コーデック）/ View / UI / Session
+│       ├── UI/         Game.UI — MobileControls
+│       └── Editor/     Game.Editor — PrototypeBuilder（シーン・プレハブ生成）, PlayerBuild
 └── Tests/
-    └── EditMode/
+    ├── EditMode/       ロジックのテスト
+    └── PlayMode/       ソロで実際にランを起動するテスト
 ```
 
-- `Scripts/` 以下はフォルダごとに **Assembly Definition** を切る（コンパイル時間短縮・依存方向の強制）
-- 依存方向: `Core ← Stats ← Combat ← Items/Enemies/Player ← Dungeon/Run ← UI`
+- シーン・プレハブ・仮素材は **`PrototypeBuilder` がコードから生成**する（手で YAML を編集しない）
 
 ---
 
-## 3. 全体アーキテクチャ
+## 4. 主要クラス
 
-### 3.1 データとランタイムの分離
-- **定義データ = ScriptableObject**（エディタで編集、実行中は不変）
-  - `WeaponDefinition`, `ArmorDefinition`, `AffixDefinition`, `EnemyDefinition`, `LootTable`, `RelicDefinition`, `RoomTemplate`, `BiomeDefinition`
-- **実行時インスタンス = 普通の C# クラス**（シリアライズ可能、セーブ対象）
-  - `ItemInstance`（定義 ID ＋ レアリティ ＋ 抽選済みアフィックス値 ＋ アイテムレベル）
-
-```
-WeaponDefinition (SO) ──┐
-AffixDefinition (SO) ───┼─▶ ItemGenerator.Roll(itemLevel, rng) ─▶ ItemInstance
-LootTable (SO) ─────────┘
-```
-
-### 3.2 シーン構成
-| シーン | 役割 |
+| クラス | 役割 |
 |---|---|
-| Boot | サービス初期化（セーブ・設定・オーディオ）。常駐 |
-| Title | タイトル |
-| Hub | 拠点・恒久強化 |
-| Dungeon | ダンジョン。フロアはシーン内で生成し直す（シーン遷移しない） |
-
-### 3.3 サービスの扱い
-- シングルトン乱立を避け、`Boot` で生成する小さなサービス群（`SaveService`, `AudioService`, `RunState`）を静的な `Services` から参照する程度に留める
-- ゲーム内イベント（敵撃破・アイテム取得・部屋クリア）は C# `event` / 型付きイベントバスで通知し、UI・実績・レリック効果が購読する
-
----
-
-## 4. 主要システム設計
-
-### 4.1 ステータス（Stats）
-ハクスラの中核。装備・レリック・レベルアップ・バフ全てを「修飾子」として同じ仕組みで扱う。
-
-```csharp
-public enum StatType { MaxHealth, Attack, AttackSpeed, MoveSpeed, CritChance, CritDamage, Armor, /* ... */ }
-public enum ModifierKind { Flat, PercentAdd, PercentMult }
-
-public readonly struct StatModifier
-{
-    public readonly StatType Stat;
-    public readonly ModifierKind Kind;
-    public readonly float Value;
-    public readonly object Source; // 装備を外したとき、この Source の修飾子をまとめて除去
-}
-```
-
-- 最終値 = `(基本値 + ΣFlat) × (1 + ΣPercentAdd) × Π(1 + PercentMult)`
-- `StatSheet` が修飾子リストを持ち、変更時のみ再計算（ダーティフラグ）
-
-### 4.2 戦闘
-- `Health` コンポーネント: HP・無敵時間・死亡イベント
-- ダメージは `DamageInfo`（量・属性・クリティカル・ノックバック・発生源・付与状態異常）を `IDamageable.TakeDamage()` に渡す
-- ダメージ計算は MonoBehaviour から切り離した純粋関数 `DamageCalculator` にして EditMode テスト可能にする
-- 攻撃判定: 近接は `Physics2D.OverlapCircle/Box` を攻撃フレームで実行、遠距離は `Projectile`（プール管理）
-- 「攻撃時/撃破時/被弾時」系のアフィックス・レリックは、戦闘イベントを購読する `ITriggeredEffect` として実装
-
-### 4.3 プレイヤー
-- `PlayerInputReader`: Input Actions を読み取り、移動ベクトル・照準方向・ボタンを公開（入力デバイスの違いをここで吸収）
-- `AimProvider`: マウス / 右スティック / オートエイム（最寄り敵）を切り替え
-- 移動は `Rigidbody2D.linearVelocity` ベース。回避中は無敵＋当たり判定レイヤー変更
-
-### 4.4 敵 AI
-- 軽量な **有限ステートマシン**（Idle / Chase / Attack / Stagger / Dead）
-- 行動パラメータは `EnemyDefinition` に置き、行動ロジックはタイプ別クラス（突進・射撃・自爆…）
-- 敵数が増えても重くならないよう、経路探索は最初は「直進＋壁回避」で済ませ、必要になったら部屋単位のグリッド A* を導入
-
-### 4.5 ダンジョン生成
-1. **グラフ生成**: スタート → ボスまでのメインパスを作り、分岐に宝箱・ショップ・イベントを配置
-2. **配置**: グリッド上に部屋を割り当て（隣接 = 扉でつながる）
-3. **実体化**: 各ノードに条件に合う `RoomTemplate` プレハブをランダムに選んで生成。使わない扉は壁で塞ぐ
-4. **入室制御**: `RoomController` がプレイヤー入室で扉を閉じ、敵ウェーブを出し、全滅で開放＋報酬
-
-- 部屋は「1部屋ずつ画面に収まるサイズ」＋カメラを部屋境界に Confine（Enter the Gungeon 方式）
-
-### 4.6 乱数（シード）
-- `UnityEngine.Random` は使わず、独自の `GameRandom`（xorshift 等）をシステムごとに分けて持つ
-  - `dungeonRng`, `lootRng`, `combatRng`
-- ランのシードから派生させることで **同じシード＝同じダンジョン**（デバッグ・デイリーチャレンジ用）
-
-### 4.7 ドロップ
-- `LootTable`: 重み付き抽選（何もドロップしない枠を含む）
-- `ItemGenerator`: アイテムレベル → レアリティ抽選 → ベースアイテム抽選 → アフィックス数抽選 → アフィックス（重複不可・アイテムレベルで値の幅が変化）
-
-### 4.8 セーブ
-- `JsonUtility`（必要なら Newtonsoft JSON）で `Application.persistentDataPath` に保存
-- **メタセーブ**（恒久進行）と **ランセーブ**（中断再開用: シード・フロア番号・所持品・ステータス）を分離
-- アイテム・定義は文字列 ID で保存（ScriptableObject の参照を直接保存しない）
-- セーブデータにバージョン番号を持たせ、将来の形式変更に備える
-
-### 4.9 オブジェクトプール
-- 弾・エフェクト・ダメージ数字・ドロップ品は `UnityEngine.Pool.ObjectPool<T>` でプール
+| `RunSimulation` | ラン全体。`Step(dt)` で 1 tick 進め、`Events` に起きたことを積む |
+| `EnemySimulation` | 敵の配列＋一様グリッドで近傍検索。Unity 物理を使わない |
+| `SimPlayer` | ホスト側のプレイヤー状態（HP・ステータス・武器・パッシブ） |
+| `StatSheet` | (基本値 + 加算) × (1 + %加算) × Π(1 + %乗算)。装備・パッシブ共通 |
+| `ItemGenerator` / `Stash` | シードからのアイテム生成 / 所持品と装備（JSON で端末に保存） |
+| `UpgradeRoller` | レベルアップ 3 択の抽選と適用 |
+| `RunDirector` | ホストでシミュレーションを回し、状態とイベントを配信。全端末でイベントを受信して `EventReceived` を発火 |
+| `NetPlayer` / `PlayerMover` | プレイヤーのアバター / オーナー側の移動・ダッシュ |
+| `GameSession` | ソロ・ホスト・参加・ロビー復帰 |
 
 ---
 
-## 5. PC / スマホ両対応の方針
+## 5. PC / スマホ両対応
 
 | 項目 | 方針 |
 |---|---|
-| 入力 | Input Actions に Keyboard&Mouse / Gamepad のコントロールスキームを定義 |
-| タッチ UI | `OnScreenStick` / `OnScreenButton`（仮想ゲームパッドとして入力）を使い、スマホ実行時のみ表示。ゲーム側はタッチを意識しない |
-| 画面 | 横画面固定。Canvas Scaler（基準 1920×1080, Match 0.5）、ノッチ対策で Safe Area 対応 |
-| 性能目標 | スマホ 60fps（低スペック機 30fps）。敵 50 体＋弾 200 発を目安に計測 |
-| 描画 | Sprite Atlas でドローコール削減。2D ライトはスマホで品質設定を下げられるようにする |
-| GC | 毎フレームの new / LINQ / 文字列結合を避ける。`OverlapCircle` は NonAlloc 系 API を使う |
+| 入力 | Input Actions（Keyboard&Mouse / Gamepad）。タッチは仮想ゲームパッドなのでゲーム側はタッチを意識しない |
+| 画面 | 横画面固定。CanvasScaler 基準 1920×1080。Safe Area は ugui 標準の `SafeArea` |
+| 性能 | 敵は物理なし・SpriteRenderer をプールで再利用。敵上限 350 |
+| バックグラウンド | `runInBackground = true`（ホストが裏に回っても進行を止めない） |
 
 ---
 
-## 6. 開発の進め方
+## 6. テストと検証
 
-- 各マイルストーン（企画書 §8）ごとに、まず仮素材で「遊べる状態」を作ってから作り込む
-- ロジック（ダメージ計算・抽選・生成）は EditMode テストを書く
-- デバッグ用: シード固定・無敵・アイテム生成・フロアスキップのデバッグメニューを早めに用意
-
----
-
-## 7. 次のステップ
-
-1. 企画書の【要決定】項目を決める
-2. Unity Hub で **Universal 2D** テンプレートからプロジェクト作成（このフォルダ直下）
-3. Git 初期化・.gitignore・パッケージ導入（Input System / Cinemachine / Test Framework）
-4. M0: フォルダ構成・Assembly Definition・入力・プレイヤー移動・カメラ
+| 種類 | 内容 | 実行 |
+|---|---|---|
+| EditMode | ステータス計算・アイテム生成・所持品・強化抽選・敵 AI・ラン進行（部屋クリア、ダウン/蘇生、全滅、レベルアップ待ち） | `Tools/RunTests.ps1 -Platform EditMode` |
+| PlayMode | ロビーからソロ開始 → ラン開始・プレイヤー生成・敵表示・イベント受信 | `Tools/RunTests.ps1 -Platform PlayMode` |
+| 通信 | Windows ビルドをホスト＋クライアント 2 で起動、ボット操作で 1 分プレイし状態を照合・スクショ | `Tools/NetTest.ps1` |

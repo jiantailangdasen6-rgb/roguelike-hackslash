@@ -3,10 +3,12 @@
     "rootNamespace": "Game.EditorTools",
     "references": [
         "Game.Core",
-        "Game.Player",
+        "Game.Gameplay",
         "Game.UI",
         "Unity.InputSystem",
         "Unity.Cinemachine",
+        "Unity.Netcode.Runtime",
+        "Unity.Networking.Transport",
         "Unity.RenderPipelines.Universal.Runtime",
         "Unity.RenderPipelines.Universal.2D.Runtime"
     ],

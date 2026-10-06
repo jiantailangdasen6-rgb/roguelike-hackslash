@@ -1,0 +1,14 @@
+{
+    "name": "Game.Gameplay",
+    "rootNamespace": "Game.Gameplay",
+    "references": [
+        "Game.Core",
+        "Game.UI",
+        "Unity.InputSystem",
+        "Unity.Netcode.Runtime",
+        "Unity.Networking.Transport",
+        "Unity.Cinemachine",
+        "UnityEngine.UI"
+    ],
+    "autoReferenced": true
+}

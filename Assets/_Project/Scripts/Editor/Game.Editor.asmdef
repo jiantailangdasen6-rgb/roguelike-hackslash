@@ -1,0 +1,17 @@
+{
+    "name": "Game.Editor",
+    "rootNamespace": "Game.EditorTools",
+    "references": [
+        "Game.Core",
+        "Game.Player",
+        "Game.UI",
+        "Unity.InputSystem",
+        "Unity.Cinemachine",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Universal.2D.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "autoReferenced": false
+}

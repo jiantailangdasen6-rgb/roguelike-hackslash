@@ -1,0 +1,118 @@
+using System.Collections.Generic;
+
+namespace Game.Core
+{
+    public enum PerkId : byte
+    {
+        // Common
+        Vitality,
+        Swiftness,
+        Fury,
+        Focus,
+        Lifesteal,
+        GuardianBond,
+        Resonance,
+        Rapid,
+        SecondWind,
+
+        // Warrior
+        Whirlwind,
+        SwordWave,
+        Bulwark,
+        Crusher,
+        Rush,
+        Bloodlust,
+
+        // Mage
+        SplitBolt,
+        Multicast,
+        Permafrost,
+        ChainBolt,
+        Mercy,
+        Ignite,
+
+        // Ranger
+        Spread,
+        Piercing,
+        HunterEye,
+        Venom,
+        DeepMark,
+        Evasive,
+    }
+
+    /// <summary>
+    /// A perk offered on level-up (Hades-boon style). Stat perks apply <see cref="PerLevel"/> automatically;
+    /// behaviour perks are checked by the combat code through <see cref="SimPlayer.PerkLevel"/>.
+    /// Perks with <see cref="Locked"/> only appear after being unlocked in the class mastery (out-of-run growth).
+    /// </summary>
+    public sealed class PerkDef
+    {
+        public PerkId Id;
+        public string Name;
+        public ClassId? Class;
+        public int MaxLevel = 1;
+        public bool Locked;
+        public StatModifier? PerLevel;
+        public string Text; // {0} is replaced with the level-scaled number when present
+        public float Number;  // value per level used in the text
+
+        public string Describe(int level) => string.Format(Text, Number * level);
+    }
+
+    public static class PerkCatalog
+    {
+        private static StatModifier Mod(StatType s, ModifierKind k, float v) => new(s, k, v);
+
+        public static readonly PerkDef[] All =
+        {
+            // ---------------- Common
+            new() { Id = PerkId.Vitality, Name = "鋼の肉体", MaxLevel = 3, PerLevel = Mod(StatType.MaxHealth, ModifierKind.PercentAdd, 0.2f), Text = "最大HP +{0:0}%", Number = 20 },
+            new() { Id = PerkId.Swiftness, Name = "疾風", MaxLevel = 3, PerLevel = Mod(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.08f), Text = "移動速度 +{0:0}%", Number = 8 },
+            new() { Id = PerkId.Fury, Name = "殺意", MaxLevel = 3, PerLevel = Mod(StatType.Might, ModifierKind.PercentAdd, 0.12f), Text = "与えるダメージ +{0:0}%", Number = 12 },
+            new() { Id = PerkId.Focus, Name = "集中", MaxLevel = 3, PerLevel = Mod(StatType.Cooldown, ModifierKind.PercentAdd, -0.1f), Text = "スキルのクールダウン −{0:0}%", Number = 10 },
+            new() { Id = PerkId.Rapid, Name = "連撃", MaxLevel = 3, PerLevel = Mod(StatType.AttackSpeed, ModifierKind.PercentAdd, 0.12f), Text = "通常攻撃の速度 +{0:0}%", Number = 12 },
+            new() { Id = PerkId.Lifesteal, Name = "血の契約", MaxLevel = 3, Text = "敵を倒すとHPが {0:0} 回復", Number = 3 },
+            new() { Id = PerkId.GuardianBond, Name = "守護の絆", MaxLevel = 2, PerLevel = Mod(StatType.ReviveSpeed, ModifierKind.PercentAdd, 0.6f), Text = "仲間の復活速度 +{0:0}%。復活させた仲間に短い無敵", Number = 60 },
+            new() { Id = PerkId.Resonance, Name = "共鳴", MaxLevel = 2, Text = "凍結・印・気絶中の敵へのダメージ +{0:0}%（仲間との連携）", Number = 25 },
+            new() { Id = PerkId.SecondWind, Name = "不屈", MaxLevel = 1, Text = "部屋ごとに1回、致命傷をHP1で耐える", Number = 0 },
+
+            // ---------------- Warrior
+            new() { Id = PerkId.Whirlwind, Name = "旋風", Class = ClassId.Warrior, MaxLevel = 1, Text = "3撃目が周囲360°を斬る回転斬りになる", Number = 0 },
+            new() { Id = PerkId.SwordWave, Name = "剣圧", Class = ClassId.Warrior, MaxLevel = 2, Text = "3撃目で前方に斬撃波を飛ばす（威力 {0:0}%）", Number = 60 },
+            new() { Id = PerkId.Bulwark, Name = "鉄壁の号令", Class = ClassId.Warrior, MaxLevel = 2, Text = "鬨の声で仲間に {0:0} のシールドを与える", Number = 25 },
+            new() { Id = PerkId.Rush, Name = "猛進", Class = ClassId.Warrior, MaxLevel = 2, Text = "突進斬りのクールダウン −{0:0}%、威力 +{0:0}%", Number = 20 },
+            new() { Id = PerkId.Crusher, Name = "粉砕", Class = ClassId.Warrior, MaxLevel = 2, Locked = true, Text = "凍った敵を砕いたときのダメージ +{0:0}%、破片が広がる", Number = 50 },
+            new() { Id = PerkId.Bloodlust, Name = "血の渇き", Class = ClassId.Warrior, MaxLevel = 1, Locked = true, Text = "攻撃を当てるたび攻撃力 +3%（最大30%、3秒で切れる）", Number = 0 },
+
+            // ---------------- Mage
+            new() { Id = PerkId.Multicast, Name = "多重詠唱", Class = ClassId.Mage, MaxLevel = 2, Text = "魔弾が +{0:0} 発", Number = 1 },
+            new() { Id = PerkId.SplitBolt, Name = "分裂弾", Class = ClassId.Mage, MaxLevel = 1, Text = "魔弾が命中すると2つに分裂する", Number = 0 },
+            new() { Id = PerkId.Permafrost, Name = "永久凍土", Class = ClassId.Mage, MaxLevel = 2, Text = "凍結時間 +{0:0}秒、凍結陣の範囲 +20%", Number = 1 },
+            new() { Id = PerkId.Mercy, Name = "慈愛", Class = ClassId.Mage, MaxLevel = 2, Text = "癒しの光の回復量 +{0:0}%、回復した仲間の攻撃力も上がる", Number = 40 },
+            new() { Id = PerkId.ChainBolt, Name = "連鎖する魔弾", Class = ClassId.Mage, MaxLevel = 2, Locked = true, Text = "魔弾が近くの敵 {0:0} 体に連鎖する", Number = 1 },
+            new() { Id = PerkId.Ignite, Name = "燃焼", Class = ClassId.Mage, MaxLevel = 2, Locked = true, Text = "魔弾が敵を燃やす（毎秒 {0:0} ダメージ×3秒）", Number = 4 },
+
+            // ---------------- Ranger
+            new() { Id = PerkId.Spread, Name = "散射", Class = ClassId.Ranger, MaxLevel = 2, Text = "通常攻撃の矢が +{0:0} 本（扇状）", Number = 2 },
+            new() { Id = PerkId.Piercing, Name = "貫通", Class = ClassId.Ranger, MaxLevel = 2, Text = "矢が敵を {0:0} 体貫通する", Number = 1 },
+            new() { Id = PerkId.HunterEye, Name = "狩人の目", Class = ClassId.Ranger, MaxLevel = 2, PerLevel = Mod(StatType.CritChance, ModifierKind.Flat, 0.15f), Text = "会心率 +{0:0}%（会心はダメージ2倍）", Number = 15 },
+            new() { Id = PerkId.DeepMark, Name = "深い印", Class = ClassId.Ranger, MaxLevel = 2, Text = "印の効果 +{0:0}%、印の範囲 +25%", Number = 15 },
+            new() { Id = PerkId.Venom, Name = "毒矢", Class = ClassId.Ranger, MaxLevel = 2, Locked = true, Text = "矢が毒を与える（毎秒 {0:0} ダメージ×4秒）", Number = 3 },
+            new() { Id = PerkId.Evasive, Name = "身軽", Class = ClassId.Ranger, MaxLevel = 1, Locked = true, Text = "回避のクールダウン −40%、回避後0.5秒は攻撃速度2倍", Number = 0 },
+        };
+
+        private static Dictionary<PerkId, PerkDef> _byId;
+
+        public static PerkDef Get(PerkId id)
+        {
+            if (_byId == null)
+            {
+                _byId = new Dictionary<PerkId, PerkDef>();
+                foreach (var p in All) _byId[p.Id] = p;
+            }
+            return _byId[id];
+        }
+
+        public static readonly int Count = System.Enum.GetValues(typeof(PerkId)).Length;
+    }
+}

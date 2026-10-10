@@ -11,11 +11,16 @@ namespace Game.Gameplay
     /// </summary>
     public static class UIKit
     {
-        public static readonly Color PanelColor = new(0.08f, 0.08f, 0.12f, 1f);
-        public static readonly Color ButtonColor = new(0.22f, 0.24f, 0.32f, 1f);
-        public static readonly Color AccentColor = new(0.95f, 0.75f, 0.3f, 1f);
+        // Dark-fantasy palette: near-black panels, tarnished gold trim, blood red accents.
+        public static readonly Color PanelColor = new(0.055f, 0.045f, 0.06f, 0.96f);
+        public static readonly Color ButtonColor = new(0.17f, 0.1f, 0.11f, 1f);
+        public static readonly Color AccentColor = new(0.88f, 0.7f, 0.34f, 1f);
+        public static readonly Color GoldTrim = new(0.55f, 0.42f, 0.2f, 1f);
+        public static readonly Color BloodColor = new(0.62f, 0.1f, 0.1f, 1f);
+        public static readonly Color MutedText = new(0.68f, 0.64f, 0.6f, 1f);
 
         private static Font _font;
+        private static Font _titleFont;
 
         public static Font Font
         {
@@ -30,6 +35,39 @@ namespace Game.Gameplay
                 }, 32);
                 return _font;
             }
+        }
+
+        /// <summary>Serif (Mincho) face for titles and numbers — closer to a gothic, dark-fantasy feel.</summary>
+        public static Font TitleFont
+        {
+            get
+            {
+                if (_titleFont != null) return _titleFont;
+                _titleFont = Font.CreateDynamicFontFromOSFont(new[]
+                {
+                    "Yu Mincho Demibold", "Yu Mincho", "游明朝", "MS PMincho", "MS Mincho",
+                    "Hiragino Mincho ProN", "Noto Serif CJK JP", "Noto Serif JP", "Times New Roman",
+                }, 32);
+                return _titleFont;
+            }
+        }
+
+        /// <summary>A dark panel with a thin gold border; returns the inner panel to put content in.</summary>
+        public static Image Framed(Transform parent, string name, Color? fill = null, Color? border = null)
+        {
+            var outer = Panel(parent, name, border ?? GoldTrim);
+            var inner = Panel(outer.transform, "Inner", fill ?? PanelColor);
+            inner.rectTransform.Stretch(2f);
+            return inner;
+        }
+
+        public static RectTransform Outer(this Image framedInner) => (RectTransform)framedInner.transform.parent;
+
+        public static Text Title(Transform parent, string text, int size, TextAnchor align = TextAnchor.MiddleCenter, Color? color = null)
+        {
+            var label = Label(parent, text, size, align, color ?? AccentColor);
+            label.font = TitleFont;
+            return label;
         }
 
         public static Canvas CreateCanvas(string name, int sortingOrder, Transform parent = null)

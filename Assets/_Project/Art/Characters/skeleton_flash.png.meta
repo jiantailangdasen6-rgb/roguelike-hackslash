@@ -1,0 +1,886 @@
+fileFormatVersion: 2
+guid: f6d3b06b557c8414dbfcaa424488a52e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8639303318169809980
+    second: skeleton_flash_0
+  - first:
+      213: -6334722254214558165
+    second: skeleton_flash_1
+  - first:
+      213: -4570685163523493491
+    second: skeleton_flash_2
+  - first:
+      213: -6394423641234603307
+    second: skeleton_flash_3
+  - first:
+      213: 8648896911497977416
+    second: skeleton_flash_4
+  - first:
+      213: 1017144790062607372
+    second: skeleton_flash_5
+  - first:
+      213: 8472221555284882679
+    second: skeleton_flash_6
+  - first:
+      213: 7564637565787730060
+    second: skeleton_flash_7
+  - first:
+      213: -1160536990035348113
+    second: skeleton_flash_8
+  - first:
+      213: 6654964290911193127
+    second: skeleton_flash_9
+  - first:
+      213: -5264164146222382626
+    second: skeleton_flash_10
+  - first:
+      213: -4949754575653502776
+    second: skeleton_flash_11
+  - first:
+      213: 5118044090003626597
+    second: skeleton_flash_12
+  - first:
+      213: -4988229671904813293
+    second: skeleton_flash_13
+  - first:
+      213: 1637957248207524937
+    second: skeleton_flash_14
+  - first:
+      213: -5198441349008023052
+    second: skeleton_flash_15
+  - first:
+      213: -8564290726922606715
+    second: skeleton_flash_16
+  - first:
+      213: -7163805722188608144
+    second: skeleton_flash_17
+  - first:
+      213: -3520247212570504757
+    second: skeleton_flash_18
+  - first:
+      213: 3731600160383151198
+    second: skeleton_flash_19
+  - first:
+      213: 2208719879509558293
+    second: skeleton_flash_20
+  - first:
+      213: 1971510120611441597
+    second: skeleton_flash_21
+  - first:
+      213: 1298959416274440373
+    second: skeleton_flash_22
+  - first:
+      213: -881965467536400793
+    second: skeleton_flash_23
+  - first:
+      213: 7104733428439699433
+    second: skeleton_flash_24
+  - first:
+      213: 7721826792537189000
+    second: skeleton_flash_25
+  - first:
+      213: -8528034643974915346
+    second: skeleton_flash_26
+  - first:
+      213: -6148602900810409012
+    second: skeleton_flash_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: skeleton_flash_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 328
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cb82a5b7670b1880800000000000000
+      internalID: -8639303318169809980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 328
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2e87ce2cab8618a0800000000000000
+      internalID: -6334722254214558165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 327
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d81b8007f0aa190c0800000000000000
+      internalID: -4570685163523493491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_3
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 327
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d20ad0d3917247a0800000000000000
+      internalID: -6394423641234603307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_4
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 265
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84e5fcccaed070870800000000000000
+      internalID: 8648896911497977416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_5
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 264
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0c22d82ccf9d1e00800000000000000
+      internalID: 1017144790062607372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_6
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 264
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f4b925ed90639570800000000000000
+      internalID: 8472221555284882679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_7
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 265
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c807a5379cdfaf860800000000000000
+      internalID: 7564637565787730060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_8
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 264
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f65fd30a1c1f4efe0800000000000000
+      internalID: -1160536990035348113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_9
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 264
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 728cba853ce2b5c50800000000000000
+      internalID: 6654964290911193127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_10
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 200
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed14119899ee1f6b0800000000000000
+      internalID: -5264164146222382626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_11
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 199
+        width: 17
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c00fc83070fe4bb0800000000000000
+      internalID: -4949754575653502776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_12
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 199
+        width: 17
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56a1479bbf1f60740800000000000000
+      internalID: 5118044090003626597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_13
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 136
+        width: 32
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31fdc0cca8f36cab0800000000000000
+      internalID: -4988229671904813293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_14
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 133
+        width: 37
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9449fa060713bb610800000000000000
+      internalID: 1637957248207524937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_15
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 133
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f1aca6b22d6bd7b0800000000000000
+      internalID: -5198441349008023052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_16
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 133
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5872b9c95f6852980800000000000000
+      internalID: -8564290726922606715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_17
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 72
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07d8901b6ac059c90800000000000000
+      internalID: -7163805722188608144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_18
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 72
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc11d2dafc1952fc0800000000000000
+      internalID: -3520247212570504757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_19
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 8
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5cad63339e49c330800000000000000
+      internalID: 3731600160383151198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_20
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 6
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 514c2823703f6ae10800000000000000
+      internalID: 2208719879509558293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_21
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 4
+        width: 35
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbbe12a52063c5b10800000000000000
+      internalID: 1971510120611441597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_22
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 2
+        width: 39
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b0dfa8f4b4d60210800000000000000
+      internalID: 1298959416274440373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_23
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 2
+        width: 40
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76ed4538411a2c3f0800000000000000
+      internalID: -881965467536400793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_24
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 3
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9efcdf12965199260800000000000000
+      internalID: 7104733428439699433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_25
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 1
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88ae54a4e80792b60800000000000000
+      internalID: 7721826792537189000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_26
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 2
+        width: 25
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eea76adbca556a980800000000000000
+      internalID: -8528034643974915346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton_flash_27
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 0
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccb52480d36cbaaa0800000000000000
+      internalID: -6148602900810409012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      skeleton_flash_0: -8639303318169809980
+      skeleton_flash_1: -6334722254214558165
+      skeleton_flash_10: -5264164146222382626
+      skeleton_flash_11: -4949754575653502776
+      skeleton_flash_12: 5118044090003626597
+      skeleton_flash_13: -4988229671904813293
+      skeleton_flash_14: 1637957248207524937
+      skeleton_flash_15: -5198441349008023052
+      skeleton_flash_16: -8564290726922606715
+      skeleton_flash_17: -7163805722188608144
+      skeleton_flash_18: -3520247212570504757
+      skeleton_flash_19: 3731600160383151198
+      skeleton_flash_2: -4570685163523493491
+      skeleton_flash_20: 2208719879509558293
+      skeleton_flash_21: 1971510120611441597
+      skeleton_flash_22: 1298959416274440373
+      skeleton_flash_23: -881965467536400793
+      skeleton_flash_24: 7104733428439699433
+      skeleton_flash_25: 7721826792537189000
+      skeleton_flash_26: -8528034643974915346
+      skeleton_flash_27: -6148602900810409012
+      skeleton_flash_3: -6394423641234603307
+      skeleton_flash_4: 8648896911497977416
+      skeleton_flash_5: 1017144790062607372
+      skeleton_flash_6: 8472221555284882679
+      skeleton_flash_7: 7564637565787730060
+      skeleton_flash_8: -1160536990035348113
+      skeleton_flash_9: 6654964290911193127
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -18,7 +18,7 @@ namespace Game.Tests
         private void Count(SimEvent e)
         {
             _events++;
-            if (e.Type == SimEventType.LevelUpOffer) _offers++;
+            if (e.Type == SimEventType.PerkOffer) _offers++;
         }
 
         [UnityTest]
@@ -48,7 +48,7 @@ namespace Game.Tests
                     foreach (var p in sim.Players)
                     {
                         p.InvulnerableTimer = 1f;
-                        if (p.PendingOffer != null) sim.ChooseUpgrade(p.ClientId, 0);
+                        if (p.PendingOffer != null) sim.ChoosePerk(p.ClientId, 0);
                     }
                     yield return null;
                 }

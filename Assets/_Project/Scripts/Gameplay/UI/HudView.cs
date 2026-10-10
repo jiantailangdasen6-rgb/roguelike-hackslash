@@ -6,77 +6,127 @@ using UnityEngine.UI;
 
 namespace Game.Gameplay
 {
-    /// <summary>In-run HUD: XP/level, room objective, HP, teammates, boss bar, banners and toasts.</summary>
+    /// <summary>In-run HUD: level/XP, room objective, own HP/shield and skill cooldowns, teammates, boss bar, banners.</summary>
     public sealed class HudView : MonoBehaviour
     {
         public static HudView Instance { get; private set; }
 
-        private static readonly string[] AreaNames = { "苔むした遺跡", "地下墓所", "溶岩の深淵" };
+        public static readonly string[] AreaNames = { "朽ちた納骨堂", "血塗られた礼拝堂", "奈落の玉座" };
+
+        private sealed class SkillSlot
+        {
+            public Text Key;
+            public Text Name;
+            public Image Shade;
+            public Text Time;
+        }
 
         private UIKit.Bar _xpBar;
         private Text _levelText;
         private Text _roomText;
         private Text _objectiveText;
+        private Text _classText;
         private UIKit.Bar _hpBar;
+        private UIKit.Bar _shieldBar;
         private Text _hpText;
         private Text _teamText;
         private Text _timeText;
         private UIKit.Bar _bossBar;
+        private GameObject _bossRoot;
         private Text _centerText;
         private Text _bannerText;
+        private Text _bannerSub;
         private float _bannerUntil;
         private Text _toastText;
+        private Text _hintText;
+        private readonly SkillSlot[] _skills = new SkillSlot[4];
         private readonly List<(string Text, float Until)> _toasts = new();
         private readonly StringBuilder _sb = new();
+        private ClassId? _shownClass;
 
         private void Awake()
         {
             Instance = this;
             var root = UIKit.CreateCanvas("HUD", 20, transform).transform;
 
-            _xpBar = UIKit.CreateBar(root, "XpBar", new Color(0.35f, 0.7f, 1f), new Color(0f, 0f, 0f, 0.6f));
+            _xpBar = UIKit.CreateBar(root, "XpBar", new Color(0.45f, 0.75f, 1f), new Color(0f, 0f, 0f, 0.7f));
             var xp = _xpBar.Root;
             xp.anchorMin = new Vector2(0f, 1f);
             xp.anchorMax = new Vector2(1f, 1f);
             xp.pivot = new Vector2(0.5f, 1f);
-            xp.sizeDelta = new Vector2(0f, 20f);
+            xp.sizeDelta = new Vector2(0f, 10f);
             xp.anchoredPosition = Vector2.zero;
 
-            _levelText = UIKit.Label(root, "Lv 1", 34, TextAnchor.UpperLeft);
-            _levelText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(200f, 50f), new Vector2(24f, -30f));
-
-            _roomText = UIKit.Label(root, "", 28, TextAnchor.UpperLeft);
-            _roomText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(600f, 40f), new Vector2(24f, -80f));
-            _objectiveText = UIKit.Label(root, "", 30, TextAnchor.UpperLeft, UIKit.AccentColor);
-            _objectiveText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(760f, 40f), new Vector2(24f, -120f));
-
-            _hpBar = UIKit.CreateBar(root, "HpBar", new Color(0.9f, 0.25f, 0.3f), new Color(0f, 0f, 0f, 0.6f));
-            _hpBar.Root.Place(new Vector2(0f, 1f), new Vector2(380f, 26f), new Vector2(24f, -170f));
+            // Top-left: player panel
+            var panel = UIKit.Framed(root, "PlayerPanel", new Color(0.04f, 0.03f, 0.05f, 0.85f));
+            panel.Outer().Place(new Vector2(0f, 1f), new Vector2(470f, 128f), new Vector2(20f, -24f));
+            _classText = UIKit.Title(panel.transform, "", 30, TextAnchor.UpperLeft);
+            _classText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 40f), new Vector2(16f, -8f));
+            _levelText = UIKit.Title(panel.transform, "Lv 1", 30, TextAnchor.UpperRight);
+            _levelText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(140f, 40f), new Vector2(-16f, -8f));
+            _hpBar = UIKit.CreateBar(panel.transform, "Hp", new Color(0.72f, 0.12f, 0.14f), new Color(0.12f, 0.03f, 0.04f));
+            _hpBar.Root.Place(new Vector2(0f, 1f), new Vector2(438f, 26f), new Vector2(16f, -56f));
+            _shieldBar = UIKit.CreateBar(_hpBar.Root, "Shield", new Color(0.85f, 0.75f, 0.4f, 0.75f), new Color(0f, 0f, 0f, 0f));
+            _shieldBar.Root.Stretch();
+            _shieldBar.Root.offsetMax = new Vector2(0f, -18f);
             _hpText = UIKit.Label(_hpBar.Root, "", 20, TextAnchor.MiddleCenter);
             _hpText.rectTransform.Stretch();
+            _teamText = UIKit.Label(panel.transform, "", 20, TextAnchor.UpperLeft, UIKit.MutedText);
+            _teamText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(438f, 40f), new Vector2(16f, -88f));
 
-            _teamText = UIKit.Label(root, "", 24, TextAnchor.UpperLeft);
-            _teamText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(420f, 120f), new Vector2(24f, -206f));
+            _roomText = UIKit.Title(root, "", 26, TextAnchor.UpperLeft, UIKit.MutedText);
+            _roomText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(700f, 40f), new Vector2(24f, -164f));
+            _objectiveText = UIKit.Label(root, "", 28, TextAnchor.UpperLeft, UIKit.AccentColor);
+            _objectiveText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(800f, 40f), new Vector2(24f, -200f));
 
-            _timeText = UIKit.Label(root, "", 30, TextAnchor.UpperCenter);
-            _timeText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(300f, 44f), new Vector2(0f, -30f));
+            _timeText = UIKit.Title(root, "", 30, TextAnchor.UpperRight, UIKit.MutedText);
+            _timeText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(240f, 44f), new Vector2(-28f, -24f));
 
-            _bossBar = UIKit.CreateBar(root, "BossBar", new Color(0.75f, 0.2f, 0.9f), new Color(0f, 0f, 0f, 0.7f));
-            _bossBar.Root.Place(new Vector2(0.5f, 1f), new Vector2(820f, 26f), new Vector2(0f, -80f));
-            var bossLabel = UIKit.Label(_bossBar.Root, "キングスライム", 20, TextAnchor.MiddleCenter);
-            bossLabel.rectTransform.Stretch();
+            // Boss bar
+            var boss = UIKit.Framed(root, "Boss", new Color(0.03f, 0.02f, 0.03f, 0.9f));
+            boss.Outer().Place(new Vector2(0.5f, 1f), new Vector2(900f, 58f), new Vector2(0f, -28f));
+            _bossRoot = boss.Outer().gameObject;
+            var bossName = UIKit.Title(boss.transform, "骸骨の騎士王", 24, TextAnchor.UpperCenter);
+            bossName.rectTransform.Stretch(2f);
+            _bossBar = UIKit.CreateBar(boss.transform, "BossHp", new Color(0.6f, 0.08f, 0.1f), new Color(0.1f, 0.02f, 0.03f));
+            _bossBar.Root.Place(new Vector2(0.5f, 0f), new Vector2(860f, 14f), new Vector2(0f, 8f));
 
-            var bag = UIKit.Button(root, "バッグ", 30, () => InventoryView.Instance?.Toggle());
-            bag.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(180f, 72f), new Vector2(-24f, -34f));
+            // Bottom: skills
+            string[] keys = { "左クリック", "Q", "E", "Space" };
+            for (int i = 0; i < 4; i++)
+            {
+                var slot = UIKit.Framed(root, "Skill" + i, new Color(0.05f, 0.04f, 0.05f, 0.9f));
+                slot.Outer().Place(new Vector2(0.5f, 0f), new Vector2(200f, 86f), new Vector2((i - 1.5f) * 214f, 22f));
+                var key = UIKit.Label(slot.transform, keys[i], 18, TextAnchor.UpperLeft, UIKit.MutedText);
+                key.rectTransform.Stretch(8f);
+                var name = UIKit.Label(slot.transform, "", 22, TextAnchor.LowerCenter);
+                name.rectTransform.Stretch(8f);
+                var shade = UIKit.Panel(slot.transform, "Shade", new Color(0f, 0f, 0f, 0.65f));
+                shade.rectTransform.anchorMin = Vector2.zero;
+                shade.rectTransform.anchorMax = new Vector2(1f, 0f);
+                shade.rectTransform.offsetMin = Vector2.zero;
+                shade.rectTransform.offsetMax = Vector2.zero;
+                var time = UIKit.Title(slot.transform, "", 32, TextAnchor.MiddleCenter, Color.white);
+                time.rectTransform.Stretch();
+                _skills[i] = new SkillSlot { Key = key, Name = name, Shade = shade, Time = time };
+            }
 
-            _centerText = UIKit.Label(root, "", 40, TextAnchor.MiddleCenter);
-            _centerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1200f, 200f), new Vector2(0f, 160f));
+            _centerText = UIKit.Title(root, "", 38, TextAnchor.MiddleCenter, new Color(0.9f, 0.85f, 0.8f));
+            _centerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1300f, 160f), new Vector2(0f, 170f));
 
-            _bannerText = UIKit.Label(root, "", 56, TextAnchor.MiddleCenter, UIKit.AccentColor);
-            _bannerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 100f), new Vector2(0f, 300f));
+            _bannerText = UIKit.Title(root, "", 64, TextAnchor.MiddleCenter, UIKit.AccentColor);
+            _bannerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1500f, 100f), new Vector2(0f, 300f));
+            _bannerSub = UIKit.Label(root, "", 28, TextAnchor.MiddleCenter, UIKit.MutedText);
+            _bannerSub.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1500f, 50f), new Vector2(0f, 240f));
 
-            _toastText = UIKit.Label(root, "", 28, TextAnchor.LowerCenter);
-            _toastText.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1100f, 200f), new Vector2(0f, 40f));
+            _toastText = UIKit.Label(root, "", 26, TextAnchor.LowerCenter);
+            _toastText.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1100f, 200f), new Vector2(0f, 130f));
+
+            _hintText = UIKit.Label(root,
+                "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　Esc メニュー\n" +
+                "<color=#9fd8ff>連携：凍った敵は強打で「砕ける」／印の敵は全員の攻撃が通りやすい／倒れた仲間のそばに立つと復活</color>",
+                22, TextAnchor.LowerLeft, UIKit.MutedText);
+            _hintText.rectTransform.Place(new Vector2(0f, 0f), new Vector2(1100f, 80f), new Vector2(24f, 120f));
 
             RunDirector.EventReceived += OnEvent;
         }
@@ -93,10 +143,18 @@ namespace Game.Gameplay
             if (_toasts.Count > 4) _toasts.RemoveAt(0);
         }
 
-        public void Banner(string text, float seconds = 2.5f)
+        public void Banner(string text, string sub = "", float seconds = 2.8f)
         {
             _bannerText.text = text;
+            _bannerSub.text = sub;
             _bannerUntil = Time.time + seconds;
+        }
+
+        public static string RoomTitle(int room)
+        {
+            int area = Mathf.Min(room / RunSimulation.RoomsPerArea, AreaNames.Length - 1);
+            bool boss = room % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1;
+            return boss ? $"{AreaNames[area]} ─ 王の間" : $"{AreaNames[area]} ─ 第{room % RunSimulation.RoomsPerArea + 1}の間";
         }
 
         private void OnEvent(SimEvent e)
@@ -104,18 +162,30 @@ namespace Game.Gameplay
             switch (e.Type)
             {
                 case SimEventType.RoomStarted:
-                    int area = e.Int / RunSimulation.RoomsPerArea;
-                    bool boss = e.Int % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1;
-                    Banner(boss ? "ボス部屋" : $"{AreaNames[Mathf.Min(area, AreaNames.Length - 1)]}  {e.Int % RunSimulation.RoomsPerArea + 1}部屋目");
+                {
+                    var objective = (e.Int % RunSimulation.RoomsPerArea) switch
+                    {
+                        1 => $"{RunSimulation.SurviveSeconds:0}秒間 生き延びよ",
+                        3 => "骸骨の騎士王を討て",
+                        _ => "すべての魔物を倒せ",
+                    };
+                    Banner(RoomTitle(e.Int), objective);
                     break;
+                }
                 case SimEventType.RoomCleared:
-                    Banner("クリア！ 全員で出口へ");
+                    Banner("部屋を制圧した", "全員で奥の門へ");
                     break;
                 case SimEventType.BossSpawned:
-                    Banner("キングスライムが現れた！");
+                    Banner("骸骨の騎士王", "王は眠らない", 3.5f);
+                    break;
+                case SimEventType.WaveStarted when e.Int > 1:
+                    Toast($"第{e.Int}波 襲来！");
                     break;
                 case SimEventType.PlayerDowned:
-                    if (NetPlayer.Local != null && e.ClientId != NetPlayer.Local.OwnerClientId) Toast("仲間がダウン！ 近くに立って助けよう");
+                    if (NetPlayer.Local != null && e.ClientId != NetPlayer.Local.OwnerClientId) Toast("仲間が倒れた！ そばに立って助け起こせ");
+                    break;
+                case SimEventType.AreaEffect when (AreaKind)e.Int == AreaKind.Shatter:
+                    Toast("<color=#9fd8ff>連携：砕き！</color>");
                     break;
             }
         }
@@ -129,33 +199,47 @@ namespace Game.Gameplay
             _xpBar.Fill = director.XpFraction.Value;
             _levelText.text = $"Lv {director.TeamLevel.Value}";
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
-
-            int room = director.RoomIndex.Value;
-            int areaIndex = Mathf.Min(room / RunSimulation.RoomsPerArea, AreaNames.Length - 1);
-            _roomText.text = $"{AreaNames[areaIndex]}  部屋 {room % RunSimulation.RoomsPerArea + 1}/{RunSimulation.RoomsPerArea}   （全{RunSimulation.TotalRooms}部屋中 {room + 1}）";
+            _roomText.text = RoomTitle(director.RoomIndex.Value) + $"   {director.RoomIndex.Value + 1}/{RunSimulation.TotalRooms}";
             _objectiveText.text = ObjectiveText(director);
 
             float boss = director.BossHealth.Value;
-            UIKit.Toggle(_bossBar.Root.gameObject, boss >= 0f);
+            UIKit.Toggle(_bossRoot, boss >= 0f);
             if (boss >= 0f) _bossBar.Fill = boss;
 
             if (local != null)
             {
-                _hpBar.Fill = local.MaxHp.Value > 0f ? local.Hp.Value / local.MaxHp.Value : 0f;
-                _hpText.text = $"{local.Hp.Value:0} / {local.MaxHp.Value:0}";
+                var def = local.ClassDef;
+                if (_shownClass != def.Id)
+                {
+                    _shownClass = def.Id;
+                    _classText.text = def.Name;
+                    _skills[0].Name.text = def.BasicName;
+                    _skills[1].Name.text = def.Skill1Name;
+                    _skills[2].Name.text = def.Skill2Name;
+                    _skills[3].Name.text = "回避";
+                }
+                float max = Mathf.Max(1f, local.MaxHp.Value);
+                _hpBar.Fill = local.Hp.Value / max;
+                _shieldBar.Fill = local.Shield.Value / max;
+                _hpText.text = local.Shield.Value > 0 ? $"{local.Hp.Value:0} / {max:0}  (+{local.Shield.Value:0})" : $"{local.Hp.Value:0} / {max:0}";
+                SetCooldown(_skills[1], local.Skill1Cooldown.Value, def.Skill1Cooldown);
+                SetCooldown(_skills[2], local.Skill2Cooldown.Value, def.Skill2Cooldown);
+                SetCooldown(_skills[3], local.DodgeCooldown.Value, ClassCatalog.DodgeCooldown);
+                SetCooldown(_skills[0], 0f, 1f);
             }
 
             _sb.Clear();
             foreach (var p in NetPlayer.All)
             {
                 if (p == local) continue;
-                string state = p.Downed.Value ? "<color=#FF6060>ダウン</color>" : $"{p.Hp.Value:0}/{p.MaxHp.Value:0}";
-                _sb.Append($"<color=#{ColorUtility.ToHtmlStringRGB(p.Color)}>{p.DisplayName}</color>  {state}\n");
+                string state = p.Downed.Value ? "<color=#ff6060>瀕死</color>" : $"{p.Hp.Value:0}/{p.MaxHp.Value:0}";
+                _sb.Append($"<color=#{ColorUtility.ToHtmlStringRGB(p.Color)}>{p.DisplayName} {p.ClassDef.Name}</color> {state}   ");
             }
             _teamText.text = _sb.ToString();
 
+            _hintText.enabled = director.RoomIndex.Value == 0 && director.Elapsed.Value < 30f;
             _centerText.text = CenterMessage(director, local);
-            _bannerText.enabled = Time.time < _bannerUntil;
+            _bannerText.enabled = _bannerSub.enabled = Time.time < _bannerUntil;
 
             _toasts.RemoveAll(t => t.Until < Time.time);
             _sb.Clear();
@@ -163,18 +247,25 @@ namespace Game.Gameplay
             _toastText.text = _sb.ToString();
         }
 
+        private static void SetCooldown(SkillSlot slot, float remaining, float max)
+        {
+            bool cooling = remaining > 0.05f;
+            slot.Shade.rectTransform.anchorMax = new Vector2(1f, cooling ? Mathf.Clamp01(remaining / Mathf.Max(0.1f, max)) : 0f);
+            slot.Time.text = cooling ? remaining.ToString(remaining < 1f ? "0.0" : "0") : "";
+        }
+
         private static string ObjectiveText(RunDirector d)
         {
             if (d.RoomCleared.Value)
             {
-                string hold = d.ExitHold.Value > 0f ? $"  移動中… {d.ExitHold.Value / RunSimulation.ExitHoldTime:P0}" : "";
-                return $"クリア！ 全員で上の出口に入ろう{hold}";
+                string hold = d.ExitHold.Value > 0f ? $"  …{d.ExitHold.Value / RunSimulation.ExitHoldTime:P0}" : "";
+                return $"奥の門へ全員で向かえ{hold}";
             }
             return d.Objective.Value switch
             {
-                RoomObjective.Survive => $"生き残れ  残り {UIKit.FormatTime(d.Target.Value - d.Progress.Value)}",
-                RoomObjective.Kill => $"敵を倒せ  {d.Progress.Value:0} / {d.Target.Value:0}",
-                _ => "ボスを倒せ",
+                RoomObjective.Survive => $"生き延びよ  残り {UIKit.FormatTime(d.Target.Value - d.Progress.Value)}",
+                RoomObjective.Waves => $"魔物の群れ  第{Mathf.Max(1, d.Wave.Value)}波 / {d.WaveCount.Value}",
+                _ => "骸骨の騎士王を討て",
             };
         }
 
@@ -182,9 +273,8 @@ namespace Game.Gameplay
         {
             if (d.Phase.Value != RunPhase.Playing) return "";
             if (local == null) return d.Started.Value ? "" : "仲間を待っています…";
-            if (local.Downed.Value)
-                return $"ダウン中… 仲間が近くにいると復活します  {local.ReviveProgress.Value:P0}";
-            if (d.Paused.Value && !LevelUpView.IsShowing) return "仲間がレベルアップの強化を選んでいます…";
+            if (local.Downed.Value) return $"倒れた… 仲間がそばに来れば立ち上がれる  {local.ReviveProgress.Value:P0}";
+            if (d.Paused.Value && !PerkView.IsShowing) return "仲間が力を選んでいる…";
             return "";
         }
     }

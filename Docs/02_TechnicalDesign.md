@@ -1,6 +1,6 @@
 # 技術設計書
 
-> ステータス: v0.2（2026-10-06）— バンサバ型・オンライン協力の試作（P1）に合わせて更新
+> ステータス: v0.3（2026-10-11）— 手動アクション版（P2）
 > 企画書: [01_GameDesign.md](01_GameDesign.md)
 
 ---
@@ -9,112 +9,95 @@
 
 | 項目 | 選定 | 備考 |
 |---|---|---|
-| Unity | 6000.6.2f1 | |
-| 描画 | URP 2D | 2D テンプレートから作成 |
-| 通信 | **Netcode for GameObjects 2.13.3** ＋ Unity Transport | 3.x は Unity 6.7 以降が必要なため 2.x 系 |
-| 入力 | Input System | PC / パッド / タッチ（On-Screen Controls が仮想ゲームパッドとして入力） |
-| カメラ | Cinemachine 3 | 自分のプレイヤーを追従、アリーナ境界で Confine |
-| UI | uGUI（コードで組み立て） | 日本語は OS フォントを動的に使用（フォント同梱なし） |
-| テスト | Unity Test Framework | EditMode（ロジック）/ PlayMode（ソロ実起動）/ ビルド版の 3 プロセス通信テスト |
+| Unity | 6000.6.2f1 / URP 2D | 2D ライト、Pixel Perfect Camera（480×270 を整数倍拡大）、ポストエフェクト（Bloom・Vignette・色調） |
+| 通信 | Netcode for GameObjects 2.13.3 ＋ Unity Transport | 3.x は Unity 6.7 以降が必要 |
+| 入力 | Input System | KB+M（マウス照準）/ ゲームパッド（右スティック照準）/ 将来のタッチ |
+| カメラ | Cinemachine 3 | 追従・境界・Pixel Perfect 拡張・画面揺れ（CameraOffset） |
+| UI | uGUI（コード生成） | 本文=OS のゴシック、見出し=OS の明朝（フォント同梱なし） |
+| テスト | Unity Test Framework | EditMode / PlayMode / ビルド版の 3 プロセス通信テスト |
 
 ---
 
 ## 2. 全体構成
 
 ```
-┌──────────────── ホスト（= サーバー兼プレイヤー）────────────────┐
-│  RunSimulation（純 C#・Unity 非依存）                              │
-│    部屋進行 / 敵の出現と移動 / 武器 / 被ダメ / 経験値 / レベルアップ / ドロップ │
-│        ▲ 各プレイヤーの位置                │ イベント列・敵の位置            │
-│  RunDirector（NetworkBehaviour, 30Hz）     ▼                              │
-└──────────────┬───────────────────────────────┬──────────────────┘
-               │ NetworkTransform（位置はオーナー権限）│ 名前付きメッセージ
-               ▼                                ▼
-┌──────────── 各クライアント（ホスト自身も含む）─────────────────────┐
-│  PlayerMover（自分の移動だけ計算）                                     │
-│  EnemyView / EventPresenter / LootSystem / HUD / LevelUpView …（表示のみ）│
-└──────────────────────────────────────────────────────────┘
+┌────────────── ホスト ─────────────────────────────────────┐
+│ RunSimulation（純 C#）                                       │
+│   RunSimulation.cs          部屋・ウェーブ・魂/経験値・パーク選択     │
+│   RunSimulation.Combat.cs   3クラスの技・弾・状態異常・連携（砕き等）  │
+│   RunSimulation.Enemies.cs  敵 AI（予兆→攻撃→硬直）・被ダメージ       │
+│        ▲ 位置（NetworkTransform）・入力（Unreliable RPC, 30Hz）      │
+│ RunDirector（30Hz）── NetworkVariable / イベント列 / 敵スナップショット │
+└─────────────────────────────────────────────────────────┘
+          ▼                                  ▼
+┌──────────── 全端末（ホスト含む）──────────────────────────────┐
+│ PlayerMover（自キャラの移動・回避・突進・照準）                   │
+│ NetPlayer / EnemyView / EventPresenter / HUD / PerkView …     │
+└─────────────────────────────────────────────────────────┘
 ```
 
-- **ゲームのロジックはすべてホストの `RunSimulation` で計算**する（チート耐性より実装の単純さと同期ズレの無さを優先）
-- `RunSimulation` は Unity にも通信にも依存しない純 C# → EditMode テストで高速に検証できる
-- プレイヤーの**移動だけはオーナー権限**（各自の端末で即座に反映 → 操作が遅延しない）。ホストは受け取った位置で当たり判定する
+- **ロジックはすべてホストの `RunSimulation`**。Unity 非依存なので EditMode テストで検証
+- **移動はオーナー権限**（回避・突進斬りの移動も自分の端末で即時）。ホストは届いた位置で判定
+- 入力（照準ベクトル・攻撃押しっぱなし・スキル/回避の押下カウンタ）を毎 tick 送る。押下はカウンタ方式なので、パケットが落ちても押下は失われない
 
-### 2.1 同期の方式
+### 同期
 
-| データ | 方式 | 理由 |
-|---|---|---|
-| プレイヤー位置 | `NetworkTransform`（Owner 権限・XY のみ） | 操作レスポンス重視 |
-| HP・ダウン・移動速度・オーラ半径 | `NetPlayer` の NetworkVariable | 変化した時だけ送られる |
-| 部屋・目標・チームLv・経験値・一時停止 | `RunDirector` の NetworkVariable | 同上 |
-| 敵の位置（最大 350 体） | **スナップショット**: 1体 7 バイトに量子化、100 体ずつ分割して Unreliable で 15Hz | 敵 1 体ずつを NetworkObject にすると重すぎるため |
-| 攻撃・被弾・撃破・ジェム・ドロップ・レベルアップ等 | **イベント列**（`SimEvent` を種類ごとに必要な項目だけ詰めて送る）Reliable で毎 tick | 表示は各端末で再現（斧の軌道などは開始位置と速度から計算） |
-| 装備の効果 | オーナー → ホストへ RPC（`SubmitEquipmentRpc`） | 装備は各自の端末に保存されているため |
-| レベルアップの選択 | クライアント → ホストへ RPC（`ChooseUpgradeRpc`） | |
-
-- 装備ドロップは**乱数シードだけ**を送り、受け取った本人の端末で `ItemGenerator` が同じアイテムを再生成する（各自に個別ドロップ）
-
-### 2.2 接続
-
-- ロビーで「ソロ / 部屋を作る / IP で参加」。最大 3 人、ゲーム開始後の途中参加は不可（接続承認で拒否）
-- ポート 7777（UDP）。試作は同じ Wi-Fi 内のみ。インターネット越しは P4 で Unity Relay ＋ ルームコード方式に切り替える予定
-
----
-
-## 3. フォルダ構成
-
-```
-Assets/
-├── _Project/
-│   ├── Art/            仮素材（ビルダーが生成）
-│   ├── Resources/      GameArt, NetPlayer.prefab, NetworkManager.prefab（実行時に読み込み）
-│   ├── Scenes/         Lobby, Game（ビルダーが生成）
-│   ├── Settings/       GameControls.inputactions, NetworkPrefabs
-│   └── Scripts/
-│       ├── Core/       Game.Core — 純 C#。Stats / Items / Run（武器・パッシブ・強化）/ Sim（RunSimulation 他）
-│       ├── Gameplay/   Game.Gameplay — Net（RunDirector, NetPlayer, 同期コーデック）/ View / UI / Session
-│       ├── UI/         Game.UI — MobileControls
-│       └── Editor/     Game.Editor — PrototypeBuilder（シーン・プレハブ生成）, PlayerBuild
-└── Tests/
-    ├── EditMode/       ロジックのテスト
-    └── PlayMode/       ソロで実際にランを起動するテスト
-```
-
-- シーン・プレハブ・仮素材は **`PrototypeBuilder` がコードから生成**する（手で YAML を編集しない）
-
----
-
-## 4. 主要クラス
-
-| クラス | 役割 |
+| データ | 方式 |
 |---|---|
-| `RunSimulation` | ラン全体。`Step(dt)` で 1 tick 進め、`Events` に起きたことを積む |
-| `EnemySimulation` | 敵の配列＋一様グリッドで近傍検索。Unity 物理を使わない |
-| `SimPlayer` | ホスト側のプレイヤー状態（HP・ステータス・武器・パッシブ） |
-| `StatSheet` | (基本値 + 加算) × (1 + %加算) × Π(1 + %乗算)。装備・パッシブ共通 |
-| `ItemGenerator` / `Stash` | シードからのアイテム生成 / 所持品と装備（JSON で端末に保存） |
-| `UpgradeRoller` | レベルアップ 3 択の抽選と適用 |
-| `RunDirector` | ホストでシミュレーションを回し、状態とイベントを配信。全端末でイベントを受信して `EventReceived` を発火 |
-| `NetPlayer` / `PlayerMover` | プレイヤーのアバター / オーナー側の移動・ダッシュ |
-| `GameSession` | ソロ・ホスト・参加・ロビー復帰 |
+| プレイヤー位置・向き | NetworkTransform（Owner）＋ Owner 書き込みの NetworkVariable（向き） |
+| HP・シールド・クールダウン・ダウン・バフ | NetPlayer の NetworkVariable（ホストが書く） |
+| 部屋・ウェーブ・チーム Lv・経験値・一時停止・討伐数 | RunDirector の NetworkVariable |
+| 敵（位置・アニメ状態・向き・状態異常・HP 割合） | スナップショット：1 体 9 バイト、100 体ごとに分割、Unreliable 15Hz |
+| 攻撃・弾・予兆・ヒット・撃破・範囲効果・魂・パーク提示など | イベント列（`SimEvent` を種類ごとに必要項目だけ詰める）Reliable 毎 tick |
+| クラス・熟練・お守り | 接続要求のペイロード（`Loadout` の JSON）でホストへ |
+| パーク選択 | クライアント → ホスト RPC |
 
 ---
 
-## 5. PC / スマホ両対応
+## 3. グラフィック（ドット絵の自動生成）
 
-| 項目 | 方針 |
+すべてのドット絵は **`Editor/Art/` のコードから生成**する（`ArtGenerator`）。
+
+| 種類 | 作り方 |
 |---|---|
-| 入力 | Input Actions（Keyboard&Mouse / Gamepad）。タッチは仮想ゲームパッドなのでゲーム側はタッチを意識しない |
-| 画面 | 横画面固定。CanvasScaler 基準 1920×1080。Safe Area は ugui 標準の `SafeArea` |
-| 性能 | 敵は物理なし・SpriteRenderer をプールで再利用。敵上限 350 |
-| バックグラウンド | `runInBackground = true`（ホストが裏に回っても進行を止めない） |
+| キャラ・敵 | 体をパーツ（頭・胴・腕・脚・武器・マント）に分けて ASCII で描く → パーツに角度と位置を与えたポーズを並べてアニメ化 → 自前のラスタライザで合成。陰影は左上光源で自動、輪郭線・パーツ境界の陰も自動。剣の軌跡（三日月）も生成 |
+| エフェクト | 手続き生成（ヒット、煙、魔弾、矢、魂、予兆の扇/円/線、範囲効果の輪、門、ろうそく） |
+| 床・壁・小物 | 手続き生成（石畳 4 種、煉瓦の壁、壁上面、柱、旗、骨） |
+
+- 出力：`Art/Characters/*.png`（＋白シルエットのヒットフラッシュ用）、`Resources/Sheets/*.asset`（`SpriteSheet`：クリップ名・行・フレーム数・fps）
+- 実行時：`PixelAnimator` がシートからスプライトを切り出して再生（idle/run/attack/attack2/skill1/skill2/dodge/hurt/death、敵は idle/walk/windup/strike/hurt/death）
+- 確認用の拡大プレビュー：`Logs/art/*.png`
+- 色：暗く彩度を抑えたランプ＋赤・金・魔法の光（`Palette`）
+
+### 光と画面
+- 環境光（青紫寄りで暗め）＋ろうそく（揺らぎ）＋プレイヤーの灯り＋魔法・矢・魂・精鋭/ボスの発光
+- Bloom・Vignette・コントラスト強め・彩度控えめ
+- 画面揺れ（強打、砕き、被弾、ボスの叩きつけ）
 
 ---
 
-## 6. テストと検証
+## 4. フォルダ
+
+```
+Assets/_Project/
+├── Art/           Characters / Effects / Environment（生成物）
+├── Resources/     Sheets/（SpriteSheet）, GameArt, NetPlayer.prefab, NetworkManager.prefab
+├── Scenes/        Lobby, Game（PrototypeBuilder が生成）
+├── Settings/      GameControls.inputactions, NetworkPrefabs, GamePost（ポストエフェクト）
+└── Scripts/
+    ├── Core/      純 C#：Stats, Items（保留中のハクスラ）, Run（クラス・パーク・熟練/お守り）, Sim（RunSimulation 他）
+    ├── Gameplay/  Net / View / UI / Session
+    ├── UI/        MobileControls
+    └── Editor/    PrototypeBuilder, PlayerBuild, Art/（ドット絵生成）
+```
+
+---
+
+## 5. テスト
 
 | 種類 | 内容 | 実行 |
 |---|---|---|
-| EditMode | ステータス計算・アイテム生成・所持品・強化抽選・敵 AI・ラン進行（部屋クリア、ダウン/蘇生、全滅、レベルアップ待ち） | `Tools/RunTests.ps1 -Platform EditMode` |
-| PlayMode | ロビーからソロ開始 → ラン開始・プレイヤー生成・敵表示・イベント受信 | `Tools/RunTests.ps1 -Platform PlayMode` |
-| 通信 | Windows ビルドをホスト＋クライアント 2 で起動、ボット操作で 1 分プレイし状態を照合・スクショ | `Tools/NetTest.ps1` |
+| EditMode（39 件） | ステータス、パーク抽選、熟練・お守り・プロフィール、各クラスの技、砕き・印・鬨の声、敵の予兆と回避、グールの突進、ウェーブ・部屋移動・ボス、レベルアップと一時停止、開始時パーク、蘇生（回復で加速）、全滅、不死鳥、ボット 3 人の通しプレイ | `Tools/RunTests.ps1 -Platform EditMode` |
+| PlayMode | 拠点からソロ開始 → 敵表示・イベント受信 | `Tools/RunTests.ps1 -Platform PlayMode` |
+| 通信 | ビルド版をホスト＋2 クライアント（戦士・魔法使い・狩人）でボット対戦 | `Tools/NetTest.ps1` |
+| 画面 | ビルド版のスクリーンショット | `Tools/Screenshots.ps1 -Class mage` |

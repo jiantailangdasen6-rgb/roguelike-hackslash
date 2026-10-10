@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 0336686e8bb3bef479e920bc06dee0f8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4720927614868412783
+    second: bone_king_0
+  - first:
+      213: 1908824738298521716
+    second: bone_king_1
+  - first:
+      213: 3584733501402528890
+    second: bone_king_2
+  - first:
+      213: -5261710670221289828
+    second: bone_king_3
+  - first:
+      213: 4005973402791560652
+    second: bone_king_4
+  - first:
+      213: -7909482922119466107
+    second: bone_king_5
+  - first:
+      213: -4532800898004031375
+    second: bone_king_6
+  - first:
+      213: 7349244063805763479
+    second: bone_king_7
+  - first:
+      213: 4522934563626318109
+    second: bone_king_8
+  - first:
+      213: -7461524076443970931
+    second: bone_king_9
+  - first:
+      213: 2402264684250716912
+    second: bone_king_10
+  - first:
+      213: -1657582603808095103
+    second: bone_king_11
+  - first:
+      213: 1886643573653642888
+    second: bone_king_12
+  - first:
+      213: 8263918779559008753
+    second: bone_king_13
+  - first:
+      213: 4970861869445538802
+    second: bone_king_14
+  - first:
+      213: 3971316615443593901
+    second: bone_king_15
+  - first:
+      213: -5562340674312880750
+    second: bone_king_16
+  - first:
+      213: -5968057487335048759
+    second: bone_king_17
+  - first:
+      213: 5791036254082515908
+    second: bone_king_18
+  - first:
+      213: 539319791643155002
+    second: bone_king_19
+  - first:
+      213: 4837129424518242708
+    second: bone_king_20
+  - first:
+      213: -6922223951916279696
+    second: bone_king_21
+  - first:
+      213: 2930059603313778935
+    second: bone_king_22
+  - first:
+      213: -1147244895589038276
+    second: bone_king_23
+  - first:
+      213: -7385511122381998144
+    second: bone_king_24
+  - first:
+      213: 4380407668867932340
+    second: bone_king_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bone_king_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 568
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f69509637aa148140800000000000000
+      internalID: 4720927614868412783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_1
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 568
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 478e2c07cf18d7a10800000000000000
+      internalID: 1908824738298521716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_2
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 567
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7c3a8570288fb130800000000000000
+      internalID: 3584733501402528890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_3
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 567
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c96d39ee506aaf6b0800000000000000
+      internalID: -5261710670221289828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_4
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 457
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc5cd05d593189730800000000000000
+      internalID: 4005973402791560652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_5
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 457
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 583fc06403fdb3290800000000000000
+      internalID: -7909482922119466107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_6
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 457
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 178e5ec59914811c0800000000000000
+      internalID: -4532800898004031375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_7
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 457
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79f6aceb982cdf560800000000000000
+      internalID: 7349244063805763479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_8
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 457
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d197847a501b4ce30800000000000000
+      internalID: 4522934563626318109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_9
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 457
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d825884a267537890800000000000000
+      internalID: -7461524076443970931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_10
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 344
+        width: 51
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fada39a00f865120800000000000000
+      internalID: 2402264684250716912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_11
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 345
+        width: 25
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 184c62277651ff8e0800000000000000
+      internalID: -1657582603808095103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_12
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 346
+        width: 26
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88e16699554be2a10800000000000000
+      internalID: 1886643573653642888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_13
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 223
+        width: 80
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f95b4c88565fa270800000000000000
+      internalID: 8263918779559008753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_14
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 223
+        width: 75
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f3e5d3988c0cf440800000000000000
+      internalID: 4970861869445538802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_15
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 223
+        width: 53
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daa3f1abb63fc1730800000000000000
+      internalID: 3971316615443593901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_16
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 223
+        width: 46
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29dbfd390a89ec2b0800000000000000
+      internalID: -5562340674312880750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_17
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 120
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c9b84cd5533d2da0800000000000000
+      internalID: -5968057487335048759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_18
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 120
+        width: 35
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c34ff57ac4ed5050800000000000000
+      internalID: 5791036254082515908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_19
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 8
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3a5a393e7c0c7700800000000000000
+      internalID: 539319791643155002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_20
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 7
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 491eff8559fe02340800000000000000
+      internalID: 4837129424518242708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_21
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 6
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0785452cdf15fef90800000000000000
+      internalID: -6922223951916279696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_22
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 5
+        width: 49
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f06d326fa9a9a820800000000000000
+      internalID: 2930059603313778935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_23
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 4
+        width: 53
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c37090888da2410f0800000000000000
+      internalID: -1147244895589038276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_24
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 0
+        width: 42
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c779b9a3c4618990800000000000000
+      internalID: -7385511122381998144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_king_25
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 0
+        width: 41
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b0254201955acc30800000000000000
+      internalID: 4380407668867932340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bone_king_0: 4720927614868412783
+      bone_king_1: 1908824738298521716
+      bone_king_10: 2402264684250716912
+      bone_king_11: -1657582603808095103
+      bone_king_12: 1886643573653642888
+      bone_king_13: 8263918779559008753
+      bone_king_14: 4970861869445538802
+      bone_king_15: 3971316615443593901
+      bone_king_16: -5562340674312880750
+      bone_king_17: -5968057487335048759
+      bone_king_18: 5791036254082515908
+      bone_king_19: 539319791643155002
+      bone_king_2: 3584733501402528890
+      bone_king_20: 4837129424518242708
+      bone_king_21: -6922223951916279696
+      bone_king_22: 2930059603313778935
+      bone_king_23: -1147244895589038276
+      bone_king_24: -7385511122381998144
+      bone_king_25: 4380407668867932340
+      bone_king_3: -5261710670221289828
+      bone_king_4: 4005973402791560652
+      bone_king_5: -7909482922119466107
+      bone_king_6: -4532800898004031375
+      bone_king_7: 7349244063805763479
+      bone_king_8: 4522934563626318109
+      bone_king_9: -7461524076443970931
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

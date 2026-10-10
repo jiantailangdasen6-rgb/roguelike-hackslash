@@ -5,7 +5,7 @@
 param([int]$Seconds = 70)
 
 $projectPath = Split-Path -Parent $PSScriptRoot
-$exe = "$projectPath\Builds\Windows\LabyrinthSurvivors.exe"
+$exe = "$projectPath\Builds\Windows\LabyrinthOfTheDead.exe"
 $out = "$projectPath\Logs\net"
 New-Item -ItemType Directory -Force $out | Out-Null
 Remove-Item "$out\*" -ErrorAction SilentlyContinue
@@ -14,14 +14,14 @@ $common = @('-botmove', '-localonly', '-screen-fullscreen', '0', '-screen-width'
 $shotAt = [Math]::Max(10, $Seconds - 25)
 
 $hostProc = Start-Process $exe -PassThru -ArgumentList ($common + @(
-    '-autohost', '3', '-profile', 'host', '-autoquit', "$Seconds",
+    '-autohost', '3', '-profile', 'host', '-class', 'warrior', '-autoquit', "$Seconds",
     '-screenshot', "`"$out\host.png`"", '-screenshotat', "$shotAt", '-logFile', "`"$out\host.log`""))
 Start-Sleep -Seconds 4
 $c1 = Start-Process $exe -PassThru -ArgumentList ($common + @(
-    '-autojoin', '127.0.0.1', '-profile', 'c1', '-autoquit', "$($Seconds - 3)",
+    '-autojoin', '127.0.0.1', '-profile', 'c1', '-class', 'mage', '-autoquit', "$($Seconds - 3)",
     '-screenshot', "`"$out\client1.png`"", '-screenshotat', "$($shotAt - 3)", '-logFile', "`"$out\client1.log`""))
 $c2 = Start-Process $exe -PassThru -ArgumentList @(
-    '-batchmode', '-nographics', '-botmove', '-autojoin', '127.0.0.1', '-profile', 'c2',
+    '-batchmode', '-nographics', '-botmove', '-autojoin', '127.0.0.1', '-profile', 'c2', '-class', 'ranger',
     '-autoquit', "$($Seconds - 4)", '-logFile', "`"$out\client2.log`"")
 
 foreach ($p in @($hostProc, $c1, $c2)) {

@@ -9,7 +9,7 @@ namespace Game.Gameplay
 {
     /// <summary>
     /// Scene-placed network object in the Game scene. On the host it owns the <see cref="RunSimulation"/>,
-    /// feeds it player positions, mirrors state into NetworkVariables and streams events/snapshots to clients.
+    /// feeds it player positions/inputs, mirrors state into NetworkVariables and streams events/snapshots.
     /// On every peer it decodes events and raises <see cref="EventReceived"/> for the presentation layer.
     /// </summary>
     public sealed class RunDirector : NetworkBehaviour
@@ -31,6 +31,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<float> XpFraction = new();
         public readonly NetworkVariable<int> RoomIndex = new();
         public readonly NetworkVariable<RoomObjective> Objective = new();
+        public readonly NetworkVariable<int> Wave = new();
+        public readonly NetworkVariable<int> WaveCount = new();
         public readonly NetworkVariable<float> Progress = new();
         public readonly NetworkVariable<float> Target = new();
         public readonly NetworkVariable<bool> RoomCleared = new();
@@ -41,11 +43,14 @@ namespace Game.Gameplay
         public readonly NetworkVariable<RunPhase> Phase = new();
         public readonly NetworkVariable<float> BossHealth = new(-1f);
         public readonly NetworkVariable<bool> Started = new();
+        public readonly NetworkVariable<int> Kills = new();
+        public readonly NetworkVariable<int> BossesKilled = new();
+        public readonly NetworkVariable<int> RoomsCleared = new();
 
         /// <summary>Host only.</summary>
         public RunSimulation Sim { get; private set; }
 
-        /// <summary>Client only: latest enemy positions from snapshots, keyed by enemy id.</summary>
+        /// <summary>Client only: latest enemy states from snapshots, keyed by enemy id.</summary>
         public readonly Dictionary<ushort, (EnemyRenderState State, float Time)> ClientEnemies = new();
 
         public bool IsRunning => Started.Value && Phase.Value == RunPhase.Playing;
@@ -102,34 +107,29 @@ namespace Game.Gameplay
             int slot = 0;
             foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
             {
-                var simPlayer = Sim.AddPlayer(clientId);
+                var loadout = GameSession.LoadoutFor(clientId);
+                var simPlayer = Sim.AddPlayer(clientId, loadout);
                 var instance = Instantiate(playerPrefab, simPlayer.Position, Quaternion.identity);
                 var netPlayer = instance.GetComponent<NetPlayer>();
                 netPlayer.Slot.Value = slot++;
+                netPlayer.Class.Value = simPlayer.ClassId;
                 netPlayer.Hp.Value = simPlayer.Hp;
                 netPlayer.MaxHp.Value = simPlayer.MaxHp;
+                netPlayer.MoveSpeed.Value = simPlayer.Stats.Get(StatType.MoveSpeed);
                 instance.SpawnAsPlayerObject(clientId, destroyWithScene: true);
             }
 
-            Sim.Start();
+            Sim.Start((int)CommandLine.GetFloat("-startroom", 0f));
             Started.Value = true;
             Debug.Log($"[RunDirector] Run started with {Sim.Players.Count} player(s)");
         }
 
-        private void OnClientDisconnected(ulong clientId)
-        {
-            Sim?.RemovePlayer(clientId);
-        }
-
-        public void ApplyEquipment(ulong clientId, IEnumerable<StatModifier> modifiers)
-        {
-            Sim?.GetPlayer(clientId)?.SetEquipment(modifiers);
-        }
+        private void OnClientDisconnected(ulong clientId) => Sim?.RemovePlayer(clientId);
 
         [Rpc(SendTo.Server)]
-        public void ChooseUpgradeRpc(int index, RpcParams rpcParams = default)
+        public void ChoosePerkRpc(int index, RpcParams rpcParams = default)
         {
-            Sim?.ChooseUpgrade(rpcParams.Receive.SenderClientId, index);
+            Sim?.ChoosePerk(rpcParams.Receive.SenderClientId, index);
         }
 
         // ------------------------------------------------------------------ Host: tick
@@ -140,7 +140,6 @@ namespace Game.Gameplay
 
             if (!Started.Value)
             {
-                // Safety net in case the load-complete event was missed.
                 if (Time.time - _spawnTime > StartFallbackSeconds) StartRun();
                 return;
             }
@@ -172,12 +171,16 @@ namespace Game.Gameplay
             {
                 var sp = Sim.GetPlayer(p.OwnerClientId);
                 if (sp == null) continue;
-                SetIfChanged(p.Hp, Mathf.Ceil(sp.Hp));
+                SetIfChanged(p.Hp, Mathf.Min(Mathf.Ceil(sp.Hp), Mathf.Round(sp.MaxHp)));
                 SetIfChanged(p.MaxHp, Mathf.Round(sp.MaxHp));
+                SetIfChanged(p.Shield, Mathf.Ceil(sp.Shield));
                 SetIfChanged(p.Downed, sp.Downed);
                 SetIfChanged(p.ReviveProgress, Quantize(sp.ReviveProgress));
                 SetIfChanged(p.MoveSpeed, sp.Stats.Get(StatType.MoveSpeed));
-                SetIfChanged(p.AuraRadius, RunSimulation.AuraRadius(sp));
+                SetIfChanged(p.Skill1Cooldown, Mathf.Max(0f, Quantize(sp.Skill1Cooldown)));
+                SetIfChanged(p.Skill2Cooldown, Mathf.Max(0f, Quantize(sp.Skill2Cooldown)));
+                SetIfChanged(p.DodgeCooldown, Mathf.Max(0f, Quantize(sp.DodgeCooldown)));
+                SetIfChanged(p.Valor, sp.ValorTimer > 0f);
             }
 
             var room = Sim.Room;
@@ -185,6 +188,8 @@ namespace Game.Gameplay
             SetIfChanged(XpFraction, Quantize(Sim.TeamXp / Sim.XpToNext));
             SetIfChanged(RoomIndex, room.Index);
             SetIfChanged(Objective, room.Objective);
+            SetIfChanged(Wave, room.Wave);
+            SetIfChanged(WaveCount, room.WaveCount);
             SetIfChanged(Progress, room.Objective == RoomObjective.Survive ? Mathf.Floor(room.Progress) : room.Progress);
             SetIfChanged(Target, room.Target);
             SetIfChanged(RoomCleared, room.Cleared);
@@ -194,6 +199,9 @@ namespace Game.Gameplay
             SetIfChanged(Elapsed, Mathf.Floor(Sim.Elapsed));
             SetIfChanged(Phase, Sim.Phase);
             SetIfChanged(BossHealth, BossHealthFraction());
+            SetIfChanged(Kills, Sim.Kills);
+            SetIfChanged(BossesKilled, Sim.BossesKilled);
+            SetIfChanged(RoomsCleared, Sim.RoomsCleared);
         }
 
         private float BossHealthFraction()
@@ -202,12 +210,12 @@ namespace Game.Gameplay
             for (int i = 0; i < Sim.Enemies.Count; i++)
             {
                 ref var e = ref Sim.Enemies[i];
-                if (e.Def.IsBoss && !e.Dead) return Quantize(e.Health / e.MaxHealth);
+                if (e.Def.Boss && !e.Dead) return Quantize(e.Health / e.MaxHealth);
             }
             return -1f;
         }
 
-        private static float Quantize(float v) => Mathf.Round(v * 100f) / 100f;
+        private static float Quantize(float v) => Mathf.Round(v * 20f) / 20f;
 
         private static void SetIfChanged<T>(NetworkVariable<T> variable, T value)
         {
@@ -222,12 +230,12 @@ namespace Game.Gameplay
             int i = 0;
             while (i < events.Count)
             {
-                var writer = new FastBufferWriter(EventChunkBytes + 64, Allocator.Temp);
+                var writer = new FastBufferWriter(EventChunkBytes + 96, Allocator.Temp);
                 try
                 {
                     while (i < events.Count && writer.Length < EventChunkBytes)
                         EventCodec.Write(writer, events[i++]);
-                    // Includes the host's own client, which is delivered locally without serialization overhead.
+                    // Includes the host's own client, which is delivered locally.
                     NetworkManager.CustomMessagingManager.SendNamedMessageToAll(NetMessageNames.Events, writer, NetworkDelivery.ReliableSequenced);
                 }
                 finally
@@ -250,7 +258,7 @@ namespace Game.Gameplay
             do
             {
                 int count = Mathf.Min(SnapshotCodec.EnemiesPerChunk, enemies.Count - sent);
-                var writer = new FastBufferWriter(SnapshotCodec.EnemiesPerChunk * 7 + 16, Allocator.Temp);
+                var writer = new FastBufferWriter(SnapshotCodec.EnemiesPerChunk * SnapshotCodec.BytesPerEnemy + 16, Allocator.Temp);
                 try
                 {
                     SnapshotCodec.WriteChunk(writer, enemies, sent, count);

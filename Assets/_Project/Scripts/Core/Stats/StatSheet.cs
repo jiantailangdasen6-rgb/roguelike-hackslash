@@ -9,7 +9,7 @@ namespace Game.Core
         MoveSpeed,
         /// <summary>Damage multiplier (base 1).</summary>
         Might,
-        /// <summary>Cooldown multiplier (base 1; lower is faster).</summary>
+        /// <summary>Skill cooldown multiplier (base 1; lower is faster).</summary>
         Cooldown,
         /// <summary>Area multiplier (base 1).</summary>
         Area,
@@ -20,6 +20,14 @@ namespace Game.Core
         Regen,
         /// <summary>Extra projectiles.</summary>
         Amount,
+        /// <summary>Basic attack speed multiplier (base 1; higher is faster).</summary>
+        AttackSpeed,
+        /// <summary>0..1 chance to deal double damage.</summary>
+        CritChance,
+        /// <summary>Revive speed multiplier when helping a downed ally (base 1).</summary>
+        ReviveSpeed,
+        /// <summary>Incoming damage multiplier (base 1; lower takes less).</summary>
+        DamageTaken,
     }
 
     public enum ModifierKind : byte
@@ -45,7 +53,7 @@ namespace Game.Core
     }
 
     /// <summary>
-    /// Base values plus modifiers from any source (equipment, passives, buffs).
+    /// Base values plus modifiers from any source (perks, trinkets, mastery, buffs, level growth).
     /// Final = (base + ΣFlat) × (1 + ΣPercentAdd) × Π(1 + PercentMult)
     /// </summary>
     public sealed class StatSheet

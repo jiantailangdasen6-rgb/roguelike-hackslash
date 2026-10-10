@@ -1,0 +1,782 @@
+fileFormatVersion: 2
+guid: 6b4746086faa6534298ea96d3ee3556e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6914712674957965745
+    second: ghoul_flash_0
+  - first:
+      213: -768271234677313275
+    second: ghoul_flash_1
+  - first:
+      213: -1959469466204968030
+    second: ghoul_flash_2
+  - first:
+      213: -4776211227735026867
+    second: ghoul_flash_3
+  - first:
+      213: -7869571153165280817
+    second: ghoul_flash_4
+  - first:
+      213: -8430317132587553999
+    second: ghoul_flash_5
+  - first:
+      213: 408699161745596201
+    second: ghoul_flash_6
+  - first:
+      213: -7401858531983605404
+    second: ghoul_flash_7
+  - first:
+      213: 750393793321195021
+    second: ghoul_flash_8
+  - first:
+      213: 3063169236651718696
+    second: ghoul_flash_9
+  - first:
+      213: 7612508904415623264
+    second: ghoul_flash_10
+  - first:
+      213: 5442325645829673263
+    second: ghoul_flash_11
+  - first:
+      213: 715026166967934951
+    second: ghoul_flash_12
+  - first:
+      213: 9018768111622980229
+    second: ghoul_flash_13
+  - first:
+      213: -7070703438943624784
+    second: ghoul_flash_14
+  - first:
+      213: 4634501109183528851
+    second: ghoul_flash_15
+  - first:
+      213: -7560348966926131983
+    second: ghoul_flash_16
+  - first:
+      213: 1367918723884897856
+    second: ghoul_flash_17
+  - first:
+      213: -2530337762305804413
+    second: ghoul_flash_18
+  - first:
+      213: 4698425822767519376
+    second: ghoul_flash_19
+  - first:
+      213: -5711232979618613375
+    second: ghoul_flash_20
+  - first:
+      213: -1552677406417313630
+    second: ghoul_flash_21
+  - first:
+      213: 6613250481629836058
+    second: ghoul_flash_22
+  - first:
+      213: 3795078069034320295
+    second: ghoul_flash_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ghoul_flash_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 327
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b9b2caca8ef5ff50800000000000000
+      internalID: 6914712674957965745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 327
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50178ede16d8655f0800000000000000
+      internalID: -768271234677313275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 326
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2abe0a6f6e09ec4e0800000000000000
+      internalID: -1959469466204968030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_3
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 326
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d431f9e913d77bdb0800000000000000
+      internalID: -4776211227735026867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_4
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 263
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc91ce02bbaa9c290800000000000000
+      internalID: -7869571153165280817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_5
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 265
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13baa30db3f710b80800000000000000
+      internalID: -8430317132587553999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_6
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 265
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92f98d3e8bdfba500800000000000000
+      internalID: 408699161745596201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_7
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 263
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4614c63c1e0574990800000000000000
+      internalID: -7401858531983605404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_8
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 265
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d065194ed2fe96a00800000000000000
+      internalID: 750393793321195021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_9
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 265
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 828b78df030928a20800000000000000
+      internalID: 3063169236651718696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_10
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 197
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 068f039048015a960800000000000000
+      internalID: 7612508904415623264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_11
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 197
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f211da71756078b40800000000000000
+      internalID: 5442325645829673263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_12
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 197
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ef9b3fa2884ce900800000000000000
+      internalID: 715026166967934951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_13
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 140
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58288e460d9192d70800000000000000
+      internalID: 9018768111622980229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_14
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 136
+        width: 33
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b1e1a93fa0dfdd90800000000000000
+      internalID: -7070703438943624784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_15
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 136
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39fb904443e015040800000000000000
+      internalID: 4634501109183528851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_16
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 71
+        width: 28
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc5068cbae341790800000000000000
+      internalID: -7560348966926131983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_17
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 71
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 046d3c2f4d2dbf210800000000000000
+      internalID: 1367918723884897856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_18
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 7
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3877104263f62ecd0800000000000000
+      internalID: -2530337762305804413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_19
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 7
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09694997469243140800000000000000
+      internalID: 4698425822767519376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_20
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 4
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 187365c4ddf9db0b0800000000000000
+      internalID: -5711232979618613375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_21
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a0a8b31028c37ae0800000000000000
+      internalID: -1552677406417313630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_22
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a133a38464cf6cb50800000000000000
+      internalID: 6613250481629836058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghoul_flash_23
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 0
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a18aa78563daa430800000000000000
+      internalID: 3795078069034320295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ghoul_flash_0: 6914712674957965745
+      ghoul_flash_1: -768271234677313275
+      ghoul_flash_10: 7612508904415623264
+      ghoul_flash_11: 5442325645829673263
+      ghoul_flash_12: 715026166967934951
+      ghoul_flash_13: 9018768111622980229
+      ghoul_flash_14: -7070703438943624784
+      ghoul_flash_15: 4634501109183528851
+      ghoul_flash_16: -7560348966926131983
+      ghoul_flash_17: 1367918723884897856
+      ghoul_flash_18: -2530337762305804413
+      ghoul_flash_19: 4698425822767519376
+      ghoul_flash_2: -1959469466204968030
+      ghoul_flash_20: -5711232979618613375
+      ghoul_flash_21: -1552677406417313630
+      ghoul_flash_22: 6613250481629836058
+      ghoul_flash_23: 3795078069034320295
+      ghoul_flash_3: -4776211227735026867
+      ghoul_flash_4: -7869571153165280817
+      ghoul_flash_5: -8430317132587553999
+      ghoul_flash_6: 408699161745596201
+      ghoul_flash_7: -7401858531983605404
+      ghoul_flash_8: 750393793321195021
+      ghoul_flash_9: 3063169236651718696
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

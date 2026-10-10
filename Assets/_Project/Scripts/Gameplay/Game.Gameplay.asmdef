@@ -7,6 +7,9 @@
         "Unity.InputSystem",
         "Unity.Netcode.Runtime",
         "Unity.Networking.Transport",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Universal.2D.Runtime",
+        "Unity.RenderPipelines.Core.Runtime",
         "Unity.Cinemachine",
         "UnityEngine.UI"
     ],

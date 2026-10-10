@@ -11,7 +11,7 @@ namespace Game.EditorTools
     /// </summary>
     public static class PlayerBuild
     {
-        public const string WindowsPath = "Builds/Windows/LabyrinthSurvivors.exe";
+        public const string WindowsPath = "Builds/Windows/LabyrinthOfTheDead.exe";
 
         [MenuItem("Tools/Game/Build Windows Player")]
         public static void BuildWindows()

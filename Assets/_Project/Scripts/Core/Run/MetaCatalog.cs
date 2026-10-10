@@ -1,0 +1,189 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+namespace Game.Core
+{
+    public enum MasteryKind : byte
+    {
+        UnlockPerk,
+        HealthGrowth,  // +Value max HP per level
+        MightGrowth,   // +Value damage per level
+        StartPerk,     // a free perk choice when the run starts
+        Stat,          // permanent stat modifier
+    }
+
+    /// <summary>Out-of-run growth for one class, bought with soul shards.</summary>
+    public sealed class MasteryNode
+    {
+        public string Id;
+        public ClassId Class;
+        public string Name;
+        public string Text;
+        public int Cost;
+        public MasteryKind Kind;
+        public float Value;
+        public PerkId Perk;
+        public StatModifier Modifier;
+    }
+
+    /// <summary>A fixed-effect charm chosen before a run (two slots).</summary>
+    public sealed class TrinketDef
+    {
+        public string Id;
+        public string Name;
+        public string Text;
+        public int Cost; // 0 = owned from the start
+        public StatModifier[] Modifiers = Array.Empty<StatModifier>();
+        public bool Phoenix;      // auto-revive once per run
+        public float HealOnKill;
+    }
+
+    public static class MetaCatalog
+    {
+        public const int TrinketSlots = 2;
+
+        private static StatModifier M(StatType s, ModifierKind k, float v) => new(s, k, v);
+
+        public static readonly MasteryNode[] Mastery =
+        {
+            // Warrior
+            new() { Id = "w_hp", Class = ClassId.Warrior, Name = "鍛えた肉体", Text = "レベルごとの最大HP成長 +4", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 4f },
+            new() { Id = "w_might", Class = ClassId.Warrior, Name = "剣技の研鑽", Text = "レベルごとの攻撃力成長 +1%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.01f },
+            new() { Id = "w_crusher", Class = ClassId.Warrior, Name = "技：粉砕", Text = "パーク「粉砕」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Crusher },
+            new() { Id = "w_armor", Class = ClassId.Warrior, Name = "不動", Text = "防御 +2", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Armor, ModifierKind.Flat, 2f) },
+            new() { Id = "w_blood", Class = ClassId.Warrior, Name = "技：血の渇き", Text = "パーク「血の渇き」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Bloodlust },
+            new() { Id = "w_start", Class = ClassId.Warrior, Name = "歴戦", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+
+            // Mage
+            new() { Id = "m_hp", Class = ClassId.Mage, Name = "魔力の護り", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "m_might", Class = ClassId.Mage, Name = "秘術の研鑽", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
+            new() { Id = "m_chain", Class = ClassId.Mage, Name = "技：連鎖する魔弾", Text = "パーク「連鎖する魔弾」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.ChainBolt },
+            new() { Id = "m_cd", Class = ClassId.Mage, Name = "高速詠唱", Text = "スキルのクールダウン −8%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Cooldown, ModifierKind.PercentAdd, -0.08f) },
+            new() { Id = "m_ignite", Class = ClassId.Mage, Name = "技：燃焼", Text = "パーク「燃焼」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Ignite },
+            new() { Id = "m_start", Class = ClassId.Mage, Name = "博識", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+
+            // Ranger
+            new() { Id = "r_hp", Class = ClassId.Ranger, Name = "野生の体", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "r_might", Class = ClassId.Ranger, Name = "弓術の研鑽", Text = "レベルごとの攻撃力成長 +1.2%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.012f },
+            new() { Id = "r_venom", Class = ClassId.Ranger, Name = "技：毒矢", Text = "パーク「毒矢」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Venom },
+            new() { Id = "r_speed", Class = ClassId.Ranger, Name = "俊足", Text = "移動速度 +6%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.06f) },
+            new() { Id = "r_evasive", Class = ClassId.Ranger, Name = "技：身軽", Text = "パーク「身軽」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Evasive },
+            new() { Id = "r_start", Class = ClassId.Ranger, Name = "狩りの心得", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+        };
+
+        public static readonly TrinketDef[] Trinkets =
+        {
+            new() { Id = "charm_hp", Name = "旅人のお守り", Text = "最大HP +15%", Cost = 0, Modifiers = new[] { M(StatType.MaxHealth, ModifierKind.PercentAdd, 0.15f) } },
+            new() { Id = "wolf_fang", Name = "狼の牙", Text = "与えるダメージ +10%", Cost = 0, Modifiers = new[] { M(StatType.Might, ModifierKind.PercentAdd, 0.1f) } },
+            new() { Id = "feather", Name = "風切り羽", Text = "移動速度 +10%", Cost = 40, Modifiers = new[] { M(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.1f) } },
+            new() { Id = "iron_oath", Name = "鉄の誓約", Text = "防御 +3", Cost = 50, Modifiers = new[] { M(StatType.Armor, ModifierKind.Flat, 3f) } },
+            new() { Id = "saint_ash", Name = "聖者の灰", Text = "仲間の復活速度 +60%", Cost = 60, Modifiers = new[] { M(StatType.ReviveSpeed, ModifierKind.PercentAdd, 0.6f) } },
+            new() { Id = "soul_ring", Name = "吸魂の指輪", Text = "敵を倒すとHPが2回復", Cost = 70, HealOnKill = 2f },
+            new() { Id = "hourglass", Name = "時の砂時計", Text = "スキルのクールダウン −12%", Cost = 80, Modifiers = new[] { M(StatType.Cooldown, ModifierKind.PercentAdd, -0.12f) } },
+            new() { Id = "phoenix", Name = "不死鳥の羽", Text = "ランごとに1回、倒れてもその場でHP50%で復活", Cost = 120, Phoenix = true },
+        };
+
+        public static MasteryNode GetNode(string id) => Mastery.FirstOrDefault(n => n.Id == id);
+        public static TrinketDef GetTrinket(string id) => Trinkets.FirstOrDefault(t => t.Id == id);
+        public static IEnumerable<MasteryNode> NodesFor(ClassId c) => Mastery.Where(n => n.Class == c);
+
+        /// <summary>Soul shards earned for a run.</summary>
+        public static int ShardsForRun(int roomsCleared, int bossesKilled, int kills, bool victory) =>
+            roomsCleared * 6 + bossesKilled * 20 + kills / 8 + (victory ? 40 : 0);
+    }
+
+    /// <summary>What a player brings into a run. Sent to the host when connecting.</summary>
+    [Serializable]
+    public sealed class Loadout
+    {
+        public ClassId classId;
+        public List<string> mastery = new();
+        public List<string> trinkets = new();
+
+        public string ToJson() => JsonUtility.ToJson(this);
+
+        public static Loadout FromJson(string json)
+        {
+            try
+            {
+                var l = string.IsNullOrEmpty(json) ? null : JsonUtility.FromJson<Loadout>(json);
+                if (l == null) return new Loadout();
+                l.mastery ??= new List<string>();
+                l.trinkets ??= new List<string>();
+                // Drop unknown ids and trinkets beyond the slot count.
+                l.mastery.RemoveAll(id => MetaCatalog.GetNode(id) == null);
+                l.trinkets.RemoveAll(id => MetaCatalog.GetTrinket(id) == null);
+                if (l.trinkets.Count > MetaCatalog.TrinketSlots) l.trinkets.RemoveRange(MetaCatalog.TrinketSlots, l.trinkets.Count - MetaCatalog.TrinketSlots);
+                if (!Enum.IsDefined(typeof(ClassId), l.classId)) l.classId = ClassId.Warrior;
+                return l;
+            }
+            catch (Exception)
+            {
+                return new Loadout();
+            }
+        }
+    }
+
+    /// <summary>This device's persistent progress.</summary>
+    [Serializable]
+    public sealed class ProfileData
+    {
+        public int version = 1;
+        public int shards;
+        public ClassId selectedClass;
+        public List<string> unlocked = new();
+        public List<string> equippedTrinkets = new();
+
+        public bool IsUnlocked(string id)
+        {
+            var trinket = MetaCatalog.GetTrinket(id);
+            if (trinket != null && trinket.Cost == 0) return true;
+            return unlocked.Contains(id);
+        }
+
+        public bool TryBuy(string id, int cost)
+        {
+            if (IsUnlocked(id) || shards < cost) return false;
+            shards -= cost;
+            unlocked.Add(id);
+            return true;
+        }
+
+        public void ToggleTrinket(string id)
+        {
+            if (!IsUnlocked(id)) return;
+            if (equippedTrinkets.Remove(id)) return;
+            if (equippedTrinkets.Count >= MetaCatalog.TrinketSlots) equippedTrinkets.RemoveAt(0);
+            equippedTrinkets.Add(id);
+        }
+
+        public Loadout ToLoadout() => new()
+        {
+            classId = selectedClass,
+            mastery = MetaCatalog.NodesFor(selectedClass).Where(n => IsUnlocked(n.Id)).Select(n => n.Id).ToList(),
+            trinkets = equippedTrinkets.Where(IsUnlocked).Take(MetaCatalog.TrinketSlots).ToList(),
+        };
+
+        public string ToJson() => JsonUtility.ToJson(this);
+
+        public static ProfileData FromJson(string json)
+        {
+            try
+            {
+                var p = string.IsNullOrEmpty(json) ? null : JsonUtility.FromJson<ProfileData>(json);
+                if (p == null) return Default();
+                p.unlocked ??= new List<string>();
+                p.equippedTrinkets ??= new List<string>();
+                return p;
+            }
+            catch (Exception)
+            {
+                return Default();
+            }
+        }
+
+        public static ProfileData Default() => new() { equippedTrinkets = new List<string> { "charm_hp" } };
+    }
+}

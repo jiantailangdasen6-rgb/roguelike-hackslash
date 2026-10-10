@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
+using Game.Core;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using Unity.Netcode;
@@ -25,6 +28,21 @@ namespace Game.Gameplay
 
         public static NetworkManager Network => EnsureNetworkManager();
 
+        /// <summary>Loadouts sent by clients in their connection request (host side).</summary>
+        private static readonly Dictionary<ulong, Loadout> Loadouts = new();
+
+        /// <summary>The class/mastery/trinkets a player brings. The host uses its own profile directly.</summary>
+        public static Loadout LoadoutFor(ulong clientId)
+        {
+            var nm = NetworkManager.Singleton;
+            if (nm != null && clientId == nm.LocalClientId) return ProfileStore.Current.ToLoadout();
+            return Loadouts.TryGetValue(clientId, out var l) ? l : new Loadout();
+        }
+
+        /// <summary>Puts this device's loadout into the connection request.</summary>
+        private static void PrepareConnectionData() =>
+            Network.NetworkConfig.ConnectionData = Encoding.UTF8.GetBytes(ProfileStore.Current.ToLoadout().ToJson());
+
         public static NetworkManager EnsureNetworkManager()
         {
             if (NetworkManager.Singleton != null) return NetworkManager.Singleton;
@@ -42,6 +60,7 @@ namespace Game.Gameplay
 
         public static bool StartSolo()
         {
+            PrepareConnectionData();
             Transport.SetConnectionData("127.0.0.1", SoloPort, "127.0.0.1");
             if (!Network.StartHost()) return false;
             StartGame();
@@ -53,6 +72,7 @@ namespace Game.Gameplay
             InGame = false;
             // -localonly (automated tests) avoids opening a LAN port and the firewall prompt that comes with it.
             string listen = CommandLine.Has("-localonly") ? "127.0.0.1" : "0.0.0.0";
+            PrepareConnectionData();
             Transport.SetConnectionData(listen, Port, listen);
             return Network.StartHost();
         }
@@ -60,6 +80,7 @@ namespace Game.Gameplay
         public static bool StartClient(string address)
         {
             InGame = false;
+            PrepareConnectionData();
             Transport.SetConnectionData(address.Trim(), Port);
             return Network.StartClient();
         }
@@ -88,6 +109,8 @@ namespace Game.Gameplay
             bool full = nm.ConnectedClientsIds.Count >= MaxPlayers;
             response.Approved = isHostItself || (!InGame && !full);
             response.CreatePlayerObject = false; // RunDirector spawns players when the run starts
+            if (response.Approved && request.Payload != null && request.Payload.Length > 0)
+                Loadouts[request.ClientNetworkId] = Loadout.FromJson(Encoding.UTF8.GetString(request.Payload));
             if (!response.Approved) response.Reason = InGame ? "ゲームはすでに始まっています" : "満員です（最大3人）";
         }
 

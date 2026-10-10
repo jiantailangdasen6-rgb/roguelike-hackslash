@@ -3,105 +3,247 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
-    /// <summary>Owner-side movement (enabled only on the owning client). The NetworkTransform replicates the result.</summary>
+    /// <summary>
+    /// Owner-side control (enabled only on the owning client): movement, dodge and dash-slash travel, aiming,
+    /// and sending input to the host at the network tick rate. The NetworkTransform replicates the position.
+    /// With -botmove an AI plays instead (automated tests).
+    /// </summary>
     public sealed class PlayerMover : MonoBehaviour
     {
-        private const float DashSpeed = 14f;
-        private const float DashDuration = 0.15f;
-        private const float DashCooldown = 1.2f;
+        private const float SendInterval = 1f / 30f;
 
         [SerializeField] private NetPlayer player;
         [SerializeField] private PlayerInputReader input;
 
-        private Vector2 _facing = Vector2.down;
+        private Camera _camera;
+        private Vector2 _lastMove = Vector2.right;
+        private Vector2 _aim = Vector2.right;
         private Vector2 _dashDirection;
-        private float _dashTime;
-        private float _dashReadyTime;
+        private float _dashSpeed;
+        private float _dashUntil;
+        private byte _skill1;
+        private byte _skill2;
+        private byte _dodge;
+        private float _sendTimer;
+        private bool _attackHeld;
         private bool _bot;
+        private Bot _botBrain;
 
-        public float DashCooldownRemaining => Mathf.Max(0f, _dashReadyTime - Time.time);
+        public Vector2 Aim => _aim;
 
-        private void Awake() => _bot = CommandLine.Has("-botmove");
+        private void Awake()
+        {
+            _bot = CommandLine.Has("-botmove");
+            if (_bot) _botBrain = new Bot(player);
+        }
 
-        private void OnEnable() => input.DashPressed += Dash;
-        private void OnDisable() => input.DashPressed -= Dash;
+        private void OnEnable()
+        {
+            input.Skill1Pressed += Skill1;
+            input.Skill2Pressed += Skill2;
+            input.DodgePressed += Dodge;
+        }
 
-        public void Teleport(Vector2 position) => transform.position = position;
+        private void OnDisable()
+        {
+            input.Skill1Pressed -= Skill1;
+            input.Skill2Pressed -= Skill2;
+            input.DodgePressed -= Dodge;
+        }
 
-        private bool CanMove
+        public void Teleport(Vector2 position)
+        {
+            transform.position = position;
+            _dashUntil = 0f;
+        }
+
+        private bool CanAct
         {
             get
             {
                 var director = RunDirector.Instance;
-                return director != null && director.IsRunning && !director.Paused.Value
-                       && !player.Downed.Value && !InventoryView.IsOpen;
+                return director != null && director.IsRunning && !director.Paused.Value && !player.Downed.Value && !PauseMenuView.IsOpen;
             }
         }
 
-        private void Dash()
+        // ------------------------------------------------------------------ Actions (also used by the bot)
+
+        public void Dodge()
         {
-            if (!CanMove || Time.time < _dashReadyTime) return;
-            _dashDirection = _facing;
-            _dashTime = Time.time + DashDuration;
-            _dashReadyTime = Time.time + DashCooldown;
+            if (!CanAct || player.DodgeCooldown.Value > 0.05f || Time.time < _dashUntil) return;
+            _dodge++;
+            Vector2 move = CurrentMove();
+            StartDash(move.sqrMagnitude > 0.01f ? move.normalized : _aim.normalized, ClassCatalog.DodgeSpeed, ClassCatalog.DodgeDuration);
+            SendInput(); // send the press right away
         }
+
+        public void Skill1()
+        {
+            if (!CanAct || player.Skill1Cooldown.Value > 0.05f) return;
+            _skill1++;
+            if (player.Class.Value == ClassId.Warrior)
+                StartDash(_aim.normalized, ClassCatalog.DashSlashDistance / ClassCatalog.DashSlashDuration, ClassCatalog.DashSlashDuration);
+            SendInput();
+        }
+
+        public void Skill2()
+        {
+            if (!CanAct || player.Skill2Cooldown.Value > 0.05f) return;
+            _skill2++;
+            SendInput();
+        }
+
+        private void StartDash(Vector2 direction, float speed, float duration)
+        {
+            _dashDirection = direction.sqrMagnitude > 0.0001f ? direction : Vector2.right;
+            _dashSpeed = speed;
+            _dashUntil = Time.time + duration;
+        }
+
+        // ------------------------------------------------------------------ Frame
+
+        private Vector2 CurrentMove() => _bot ? _botBrain.Move : Vector2.ClampMagnitude(input.Move, 1f);
 
         private void Update()
         {
-            if (!CanMove) return;
+            if (_camera == null) _camera = Camera.main;
+            if (_bot) _botBrain.Think(this);
 
-            Vector2 move = _bot ? BotInput() : Vector2.ClampMagnitude(input.Move, 1f);
-            if (move.sqrMagnitude > 0.01f) _facing = move.normalized;
+            UpdateAim();
+            _attackHeld = _bot ? _botBrain.Attack : input.AttackHeld;
 
-            Vector2 velocity = Time.time < _dashTime ? _dashDirection * DashSpeed : move * player.MoveSpeed.Value;
-            Vector2 pos = (Vector2)transform.position + velocity * Time.deltaTime;
+            if (CanAct)
+            {
+                Vector2 move = CurrentMove();
+                if (move.sqrMagnitude > 0.01f) _lastMove = move.normalized;
+                Vector2 velocity = Time.time < _dashUntil ? _dashDirection * _dashSpeed : move * player.MoveSpeed.Value * (_attackHeld ? 0.8f : 1f);
+                Vector2 pos = (Vector2)transform.position + velocity * Time.deltaTime;
 
-            var bounds = RunSimulation.DefaultBounds;
-            float r = SimPlayer.BodyRadius;
-            pos.x = Mathf.Clamp(pos.x, bounds.xMin + 1f + r, bounds.xMax - 1f - r);
-            pos.y = Mathf.Clamp(pos.y, bounds.yMin + 1f + r, bounds.yMax - 1f - r);
-            transform.position = pos;
+                var bounds = RunSimulation.DefaultBounds;
+                float r = SimPlayer.BodyRadius;
+                pos.x = Mathf.Clamp(pos.x, bounds.xMin + r, bounds.xMax - r);
+                pos.y = Mathf.Clamp(pos.y, bounds.yMin + r, bounds.yMax - r);
+                transform.position = pos;
+            }
+            else
+            {
+                _attackHeld = false;
+            }
+
+            bool left = _aim.x < -0.05f || (Mathf.Abs(_aim.x) <= 0.05f && player.FacingLeft.Value);
+            if (player.FacingLeft.Value != left) player.FacingLeft.Value = left;
+
+            _sendTimer -= Time.deltaTime;
+            if (_sendTimer <= 0f) SendInput();
         }
 
-        /// <summary>
-        /// Automated-test movement (-botmove): head for the exit once the room is cleared, otherwise kite away
-        /// from nearby enemies, drift toward downed teammates to revive them, and wander.
-        /// </summary>
-        private Vector2 BotInput()
+        private void UpdateAim()
         {
-            var director = RunDirector.Instance;
-            Vector2 pos = transform.position;
-            if (director.RoomCleared.Value)
+            if (_bot)
             {
-                Vector2 toExit = director.ExitPosition.Value - pos;
-                return toExit.sqrMagnitude > 0.25f ? toExit.normalized : Vector2.zero;
+                _aim = _botBrain.Aim;
+                return;
             }
-
-            Vector2 desire = Vector2.zero;
-            foreach (var other in NetPlayer.All)
+            if (input.UsingMouse && _camera != null)
             {
-                if (other == player || !other.Downed.Value) continue;
-                Vector2 toMate = (Vector2)other.transform.position - pos;
-                if (toMate.sqrMagnitude > 1f) desire += toMate.normalized * 1.5f;
+                Vector2 world = _camera.ScreenToWorldPoint(input.AimScreenPosition);
+                Vector2 offset = world - (Vector2)transform.position;
+                if (offset.sqrMagnitude > 0.01f) _aim = offset;
+                return;
             }
+            Vector2 stick = input.AimStick;
+            if (stick.sqrMagnitude > 0.09f) _aim = stick.normalized * 5f;
+            else if (input.Move.sqrMagnitude > 0.04f) _aim = input.Move.normalized * 5f;
+        }
 
-            var enemies = EnemyView.Instance;
-            if (enemies != null)
+        private void SendInput()
+        {
+            _sendTimer = SendInterval;
+            if (!player.IsSpawned) return;
+            player.SendInputRpc(_aim, _attackHeld && CanAct, _skill1, _skill2, _dodge);
+        }
+
+        // ------------------------------------------------------------------ Test bot
+
+        /// <summary>Simple AI used by automated tests (-botmove): fights the nearest enemy, sidesteps telegraphs, revives allies.</summary>
+        private sealed class Bot
+        {
+            private readonly NetPlayer _player;
+            private float _nextSkill1;
+            private float _nextSkill2;
+            private float _nextDodge;
+            public Vector2 Move;
+            public Vector2 Aim = Vector2.right;
+            public bool Attack;
+
+            public Bot(NetPlayer player) => _player = player;
+
+            public void Think(PlayerMover mover)
             {
-                // Keep enemies at sword's length: back off when crowded, close in when they are far.
-                Vector2 away = enemies.ThreatAvoidance(pos, 2.2f);
-                desire += away * 2.5f + new Vector2(-away.y, away.x) * 0.8f;
-                var nearest = enemies.Nearest(pos);
-                if (nearest.HasValue && away.sqrMagnitude < 0.05f)
+                var director = RunDirector.Instance;
+                Vector2 pos = mover.transform.position;
+                Move = Vector2.zero;
+                Attack = false;
+                if (director == null || !director.IsRunning) return;
+
+                if (director.RoomCleared.Value)
                 {
-                    Vector2 toEnemy = nearest.Value - pos;
-                    if (toEnemy.sqrMagnitude > 3.5f * 3.5f) desire += toEnemy.normalized * 0.8f;
+                    Vector2 toExit = director.ExitPosition.Value - pos;
+                    Move = toExit.sqrMagnitude > 0.2f ? toExit.normalized : Vector2.zero;
+                    return;
+                }
+
+                // Help downed allies first.
+                foreach (var other in NetPlayer.All)
+                {
+                    if (other == _player || !other.Downed.Value) continue;
+                    Vector2 toMate = (Vector2)other.transform.position - pos;
+                    if (toMate.magnitude > 1f)
+                    {
+                        Move = toMate.normalized;
+                        return;
+                    }
+                }
+
+                var view = EnemyView.Instance;
+                var nearest = view != null ? view.Nearest(pos) : null;
+                if (nearest.HasValue)
+                {
+                    Vector2 to = nearest.Value - pos;
+                    Aim = to;
+                    float want = _player.Class.Value == ClassId.Warrior ? 1.4f : 5.5f;
+                    float d = to.magnitude;
+                    Move = d > want + 0.5f ? to.normalized : d < want - 1f ? -to.normalized : new Vector2(-to.y, to.x).normalized * 0.4f;
+                    Attack = d < (_player.Class.Value == ClassId.Warrior ? 2.4f : 10f);
+                }
+                else
+                {
+                    Move = -pos.normalized * Mathf.Min(1f, pos.magnitude * 0.3f);
+                }
+
+                // Step away from danger zones.
+                var presenter = EventPresenter.Instance;
+                if (presenter != null && presenter.DangerAt(pos, out Vector2 away))
+                {
+                    Move = away;
+                    if (Time.time > _nextDodge)
+                    {
+                        _nextDodge = Time.time + 1.5f;
+                        mover.Dodge();
+                    }
+                }
+
+                if (Attack && Time.time > _nextSkill1)
+                {
+                    _nextSkill1 = Time.time + 2f;
+                    mover.Skill1();
+                }
+                if (Time.time > _nextSkill2 && (nearest.HasValue || _player.Class.Value == ClassId.Mage))
+                {
+                    _nextSkill2 = Time.time + 3f;
+                    mover.Skill2();
                 }
             }
-
-            float t = Time.time * 0.4f + player.Slot.Value * 2f;
-            desire += new Vector2(Mathf.Cos(t), Mathf.Sin(t)) * 0.3f - pos * 0.02f; // wander, stay central
-            return desire.sqrMagnitude > 0.0001f ? Vector2.ClampMagnitude(desire, 1f) : Vector2.zero;
         }
     }
 }

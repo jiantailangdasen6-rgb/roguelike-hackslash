@@ -240,9 +240,9 @@ namespace Game.Gameplay
                 }
                 case AreaKind.Mark:
                 {
-                    var fx = Spawn("fx_circle", e.Pos, 1f, 0.7f, r * 0.6f, r, new Color(1f, 0.25f, 0.2f, 0.9f), order: -300);
+                    var fx = Spawn("fx_circle", e.Pos, 1f, 0.7f, r * 0.6f, r, new Color(1f, 0.68f, 0.25f, 0.55f), order: -300);
                     fx.FadeOut = true;
-                    var icon = Spawn("fx_mark", e.Pos + Vector2.up * 0.5f, 1f, 0.7f, 2.5f, 1.2f, new Color(1f, 0.3f, 0.25f));
+                    var icon = Spawn("fx_mark", e.Pos + Vector2.up * 0.5f, 1f, 0.7f, 2.5f, 1.2f, new Color(1f, 0.7f, 0.3f));
                     icon.FadeOut = true;
                     break;
                 }

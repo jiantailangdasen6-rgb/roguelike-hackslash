@@ -469,7 +469,7 @@ namespace Game.Tests
             sim.AddPlayer(2, new Loadout { classId = ClassId.Ranger });
             sim.Start();
             byte press = 0;
-            Run(sim, 60f, s =>
+            Run(sim, 120f, s =>
             {
                 KeepAliveAndPick(s);
                 press++;

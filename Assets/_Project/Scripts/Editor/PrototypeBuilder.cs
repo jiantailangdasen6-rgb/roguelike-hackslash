@@ -338,6 +338,7 @@ namespace Game.EditorTools
             CreatePostVolume(post);
             CreateEventSystem();
             new GameObject("Lobby").AddComponent<LobbyView>();
+            new GameObject("Audio").AddComponent<SfxPlayer>();
             EditorSceneManager.SaveScene(scene, LobbyScenePath);
         }
 
@@ -368,6 +369,7 @@ namespace Game.EditorTools
             new GameObject("Perks").AddComponent<PerkView>();
             new GameObject("Result").AddComponent<ResultView>();
             new GameObject("PauseMenu").AddComponent<PauseMenuView>();
+            new GameObject("Audio").AddComponent<SfxPlayer>();
             CreateMobileControls();
             CreateEventSystem();
 

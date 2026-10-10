@@ -84,7 +84,7 @@ namespace Game.EditorTools.Art
             for (int i = 0; i < frames.Count; i++) tex.SetPixels32(i * w, 0, w, h, frames[i].Pixels);
             tex.Apply();
             Directory.CreateDirectory(Path.GetDirectoryName(path));
-            File.WriteAllBytes(path, tex.EncodeToPNG());
+            ArtIO.WriteBytes(path, tex.EncodeToPNG());
             UnityEngine.Object.DestroyImmediate(tex);
         }
     }

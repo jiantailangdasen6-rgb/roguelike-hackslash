@@ -300,7 +300,7 @@ namespace Game.EditorTools.Art
 
             tex.Apply();
             Directory.CreateDirectory(Path.GetDirectoryName(path));
-            File.WriteAllBytes(path, tex.EncodeToPNG());
+            ArtIO.WriteBytes(path, tex.EncodeToPNG());
             UnityEngine.Object.DestroyImmediate(tex);
         }
 
@@ -337,7 +337,7 @@ namespace Game.EditorTools.Art
             tex.SetPixels32(pixels);
             tex.Apply();
             Directory.CreateDirectory(Path.GetDirectoryName(path));
-            File.WriteAllBytes(path, tex.EncodeToPNG());
+            ArtIO.WriteBytes(path, tex.EncodeToPNG());
             UnityEngine.Object.DestroyImmediate(tex);
         }
     }

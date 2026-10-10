@@ -23,7 +23,7 @@ namespace Game.Core
         public const float HitInvulnerability = 0.35f;
         public const float SpawnWarningTime = 0.9f;
         public const float MinSpawnDistance = 5f;
-        public const float SurviveSeconds = 45f;
+        public const float SurviveSeconds = 50f;
 
         /// <summary>Walkable floor of the arena (inside the walls).</summary>
         public static readonly Rect DefaultBounds = new(-14f, -8f, 28f, 16f);
@@ -73,12 +73,12 @@ namespace Game.Core
         }
 
         public static float XpRequired(int level, int playerCount) =>
-            (10f + 6f * (level - 1)) * (1f + 0.5f * Mathf.Max(0, playerCount - 1));
+            (12f + 7f * (level - 1)) * (1f + 0.5f * Mathf.Max(0, playerCount - 1));
 
         public static float HealthMultiplier(int roomIndex, int playerCount) =>
             (1f + 0.18f * roomIndex) * (1f + 0.45f * Mathf.Max(0, playerCount - 1));
 
-        public static float DamageMultiplier(int roomIndex) => 1f + 0.08f * roomIndex;
+        public static float DamageMultiplier(int roomIndex) => 1f + 0.12f * roomIndex;
 
         // ------------------------------------------------------------------ Players
 
@@ -237,10 +237,10 @@ namespace Game.Core
                 case RoomObjective.Survive:
                 {
                     _spawnTimer -= dt;
-                    int target = Mathf.RoundToInt((5 + Room.Area * 2) * PlayerScale);
+                    int target = Mathf.RoundToInt((6 + Room.Area * 2) * PlayerScale);
                     if (_spawnTimer <= 0f && Enemies.Count + PendingSpawns.Count < target)
                     {
-                        _spawnTimer = 1.0f;
+                        _spawnTimer = 0.8f;
                         QueueSpawn(RandomEnemyType(), _spawnRng.Chance(0.06f));
                     }
                     break;
@@ -264,7 +264,7 @@ namespace Game.Core
         {
             Room.Wave++;
             _waveTimer = 20f;
-            int size = Mathf.RoundToInt((4.5f + Room.Index * 0.4f + Room.Area * 1.2f) * PlayerScale);
+            int size = Mathf.RoundToInt((5f + Room.Index * 0.5f + Room.Area * 1.5f) * PlayerScale);
             _lastWaveSize = size;
             bool eliteRoom = Room.Index % RoomsPerArea == 2;
             for (int i = 0; i < size; i++)
@@ -406,7 +406,7 @@ namespace Game.Core
                 case 0:
                 case 2:
                     Room.Objective = RoomObjective.Waves;
-                    Room.WaveCount = 3 + (Room.Area >= 1 ? 1 : 0);
+                    Room.WaveCount = 4 + (Room.Area >= 1 ? 1 : 0);
                     Room.Target = Room.WaveCount;
                     _waveTimer = 1.2f;
                     break;

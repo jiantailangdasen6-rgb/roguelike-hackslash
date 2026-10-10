@@ -212,7 +212,7 @@ namespace Game.Gameplay
             v.Icon.enabled = s.Marked || stunned;
             if (v.Icon.enabled)
             {
-                v.Icon.color = stunned ? new Color(1f, 0.9f, 0.4f) : new Color(1f, 0.25f, 0.2f);
+                v.Icon.color = stunned ? new Color(1f, 0.95f, 0.55f) : new Color(1f, 0.62f, 0.2f);
                 v.Icon.transform.localRotation = stunned ? Quaternion.Euler(0, 0, Time.time * 360f) : Quaternion.identity;
                 v.Icon.sortingOrder = r.sortingOrder + 2;
             }

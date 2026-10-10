@@ -66,31 +66,31 @@ namespace Game.Core
         {
             new()
             {
-                Type = EnemyType.Skeleton, Name = "スケルトン兵", Sheet = "skeleton", Health = 42f, Speed = 2.3f, Radius = 0.4f, Xp = 2,
+                Type = EnemyType.Skeleton, Name = "スケルトン兵", Sheet = "skeleton", Health = 62f, Speed = 2.3f, Radius = 0.4f, Xp = 2,
                 AttackCooldown = 1.4f,
                 Attacks = new[] { new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 1.8f, SizeB = 100f, Range = 1.5f, Windup = 0.6f, Recover = 0.45f, Damage = 14f } },
             },
             new()
             {
-                Type = EnemyType.SkeletonArcher, Name = "骸骨弓兵", Sheet = "skeleton_archer", Health = 28f, Speed = 2.1f, Radius = 0.4f, Xp = 3,
+                Type = EnemyType.SkeletonArcher, Name = "骸骨弓兵", Sheet = "skeleton_archer", Health = 42f, Speed = 2.1f, Radius = 0.4f, Xp = 3,
                 PreferredDistance = 6.5f, AttackCooldown = 2.2f,
                 Attacks = new[] { new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 11f, SizeB = 0.35f, Range = 10f, Windup = 0.8f, Recover = 0.4f, Damage = 12f, ProjectileSpeed = 13f } },
             },
             new()
             {
-                Type = EnemyType.Ghoul, Name = "グール", Sheet = "ghoul", Health = 34f, Speed = 3.4f, Radius = 0.42f, Xp = 3,
+                Type = EnemyType.Ghoul, Name = "グール", Sheet = "ghoul", Health = 50f, Speed = 3.4f, Radius = 0.42f, Xp = 3,
                 AttackCooldown = 2f,
                 Attacks = new[] { new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.8f, SizeB = 1.0f, Range = 4.2f, Windup = 0.55f, Recover = 0.6f, Damage = 16f, ProjectileSpeed = 19f } },
             },
             new()
             {
-                Type = EnemyType.Cultist, Name = "狂信者", Sheet = "cultist", Health = 36f, Speed = 1.9f, Radius = 0.4f, Xp = 4,
+                Type = EnemyType.Cultist, Name = "狂信者", Sheet = "cultist", Health = 54f, Speed = 1.9f, Radius = 0.4f, Xp = 4,
                 PreferredDistance = 7f, AttackCooldown = 3.2f,
                 Attacks = new[] { new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Circle, SizeA = 1.7f, Range = 10f, Windup = 1.1f, Recover = 0.5f, Damage = 22f } },
             },
             new()
             {
-                Type = EnemyType.BoneKing, Name = "骸骨の騎士王", Sheet = "bone_king", Health = 1100f, Speed = 1.8f, Radius = 0.9f, Xp = 40,
+                Type = EnemyType.BoneKing, Name = "骸骨の騎士王", Sheet = "bone_king", Health = 3200f, Speed = 1.8f, Radius = 0.9f, Xp = 40,
                 AttackCooldown = 0.9f, Boss = true,
                 Attacks = new[]
                 {

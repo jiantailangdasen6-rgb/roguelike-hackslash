@@ -22,6 +22,7 @@ namespace Game.Gameplay
         private Button _leave;
         private bool _victory;
         private int _shards = -1;
+        private float _shownAt;
 
         private void Awake()
         {
@@ -59,6 +60,7 @@ namespace Game.Gameplay
             _title.text = _victory ? "迷宮を踏破した" : "力尽きた…";
             _title.color = _victory ? UIKit.AccentColor : new Color(0.75f, 0.15f, 0.15f);
             _shards = -1;
+            _shownAt = Time.time;
             _panel.SetActive(true);
             _back.gameObject.SetActive(IsHost);
             _wait.enabled = !IsHost;
@@ -70,6 +72,14 @@ namespace Game.Gameplay
         {
             var d = RunDirector.Instance;
             if (!_panel.activeSelf || d == null) return;
+
+            // Automated runs (-autoreturn): the host takes the party back to the camp after a few seconds.
+            if (IsHost && CommandLine.Has("-autoreturn") && Time.time - _shownAt > 4f)
+            {
+                _shownAt = float.MaxValue;
+                GameSession.ReturnToCamp();
+                return;
+            }
 
             // NetworkVariables can land a frame after the event, so award shards once they settle.
             if (_shards < 0 && d.Phase.Value != RunPhase.Playing)

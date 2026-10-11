@@ -492,8 +492,9 @@ namespace Game.Gameplay
                 int held = d.HoldDoor.Value;
                 if (held >= 0 && held < doors.Length)
                     return $"「{RewardCatalog.Name(doors[held].Reward)}」の門へ…  {d.ExitHold.Value / RunSimulation.ExitHoldTime:P0}";
-                string rest = d.Objective.Value == RoomObjective.Rest ? "焚き火で休める　準備ができたら　" : "";
-                return rest + (NetPlayer.All.Count > 1 ? "門を選べ：全員で同じ門の前に立つ" : "門を選べ：進みたい門の前に立つ");
+                if (d.Objective.Value == RoomObjective.Rest)
+                    return NetPlayer.All.Count > 1 ? "焚き火で休み、全員で同じ門へ" : "焚き火で休み、進む門の前に立つ";
+                return NetPlayer.All.Count > 1 ? "門を選べ：全員で同じ門の前に立つ" : "門を選べ：進みたい門の前に立つ";
             }
             string objective = d.Objective.Value switch
             {

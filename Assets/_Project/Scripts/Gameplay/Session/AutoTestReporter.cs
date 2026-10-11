@@ -16,6 +16,7 @@ namespace Game.Gameplay
         private int _eventCount;
         private float _downAt;
         private float _dropAt;
+        private float _wipeAt;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Install()
@@ -27,6 +28,7 @@ namespace Game.Gameplay
             reporter._quitAt = Time.time + CommandLine.GetFloat("-autoquit", 60f);
             if (CommandLine.Has("-downat")) reporter._downAt = Time.time + CommandLine.GetFloat("-downat", 30f);
             if (CommandLine.Has("-dropat")) reporter._dropAt = Time.time + CommandLine.GetFloat("-dropat", 30f);
+            if (CommandLine.Has("-wipeat")) reporter._wipeAt = Time.time + CommandLine.GetFloat("-wipeat", 30f);
             if (CommandLine.GetValue("-screenshot") != null)
             {
                 string times = CommandLine.GetValue("-screenshotat") ?? "20";
@@ -63,6 +65,19 @@ namespace Game.Gameplay
                     Debug.Log($"[AutoTest] downed client {p.ClientId}");
                     break;
                 }
+            }
+            // -wipeat <s> (host): the whole party falls, to test the result screen and going back to the camp together.
+            if (_wipeAt > 0f && Time.time >= _wipeAt && RunDirector.Instance?.Sim != null && RunDirector.Instance.IsRunning)
+            {
+                _wipeAt = 0f;
+                var sim = RunDirector.Instance.Sim;
+                foreach (var p in sim.Players)
+                {
+                    p.InvulnerableTimer = 0f;
+                    p.PhoenixUsed = true;
+                    sim.HurtPlayer(p, 99999f);
+                }
+                Debug.Log("[AutoTest] wiped the party");
             }
             // -dropat <s> (client): leave the session once; -autojoin/-onlinejoinfile then bring it back (reconnect test).
             if (_dropAt > 0f && Time.time >= _dropAt && NetworkManager.Singleton != null && NetworkManager.Singleton.IsConnectedClient && !NetworkManager.Singleton.IsHost)

@@ -66,7 +66,7 @@ namespace Game.Gameplay
             ring.transform.position = Camp.Get(CampStation.Gate).Front;
             ring.transform.localScale = Vector3.one * Camp.GateRadius; // fx_circle is 2 units across
             _gateRing = ring.AddComponent<SpriteRenderer>();
-            _gateRing.sprite = SpriteSheet.Load("fx_circle")?.First;
+            _gateRing.sprite = SpriteSheet.Load("fx_revive_ring")?.First;
             _gateRing.sortingOrder = -400;
 
             // Corner card: shards, and for online rooms the code and the invite link.
@@ -109,7 +109,7 @@ namespace Game.Gameplay
             s.Name.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(300f, 32f), Vector2.zero);
 
             s.Prompt = UIKit.Button(s.Root, "", 22, () => OpenPanel(station.Id), new Color(0.12f, 0.07f, 0.05f, 0.92f));
-            s.Prompt.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0.5f), new Vector2(330f, 44f), new Vector2(0f, -26f));
+            s.Prompt.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0.5f), new Vector2(330f, 44f), new Vector2(0f, -40f));
             s.PromptText = s.Prompt.GetComponentInChildren<Text>();
             s.PromptText.text = $"<color=#e0b45a>[F]</color> {station.Action}";
             s.Prompt.gameObject.SetActive(false);
@@ -214,7 +214,7 @@ namespace Game.Gameplay
             {
                 float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * (departing > 0f ? 9f : 2.5f));
                 var col = Color.Lerp(new Color(1f, 0.72f, 0.35f), new Color(1f, 0.92f, 0.6f), departing);
-                col.a = 0.16f + 0.08f * pulse + (inGate > 0 ? 0.14f : 0f) + 0.3f * departing;
+                col.a = 0.3f + 0.15f * pulse + (inGate > 0 ? 0.2f : 0f) + 0.35f * departing;
                 _gateRing.color = col;
             }
 

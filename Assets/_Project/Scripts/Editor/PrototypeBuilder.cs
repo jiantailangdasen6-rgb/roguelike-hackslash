@@ -359,8 +359,8 @@ namespace Game.EditorTools
             CreatePostVolume(post);
             var global = new GameObject("Global Light 2D").AddComponent<Light2D>();
             global.lightType = Light2D.LightType.Global;
-            global.intensity = 0.5f;
-            global.color = new Color(0.62f, 0.66f, 0.92f); // moonlight
+            global.intensity = 0.62f;
+            global.color = new Color(0.74f, 0.72f, 0.9f); // moonlight
 
             var bounds = CreateCampGround();
             CreateFollowCamera(bounds);

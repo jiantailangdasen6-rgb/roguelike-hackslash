@@ -193,6 +193,7 @@ namespace Game.Gameplay
 
         public static void ReturnToLobby(string message = null)
         {
+            BagView.BankNow(); // gear found this run goes home first, however the run ends
             if (JoinCode != null) LastJoinCode = JoinCode;
             InGame = false;
             JoinCode = null;

@@ -64,6 +64,11 @@ namespace Game.Gameplay
                 if (GameSession.LobbyMessage != null && !GameSession.Refused) _status.text += "　―　「コードで参加」で戻れます";
             }
             GameSession.LobbyMessage = null;
+            if (BagView.LastBankSummary != null)
+            {
+                _status.text = string.IsNullOrEmpty(_status.text) ? BagView.LastBankSummary : _status.text + "　―　" + BagView.LastBankSummary;
+                BagView.LastBankSummary = null;
+            }
         }
 
         private System.Collections.IEnumerator Start()
@@ -153,6 +158,9 @@ namespace Game.Gameplay
             _detailBody.rectTransform.Place(new Vector2(0f, 1f), new Vector2(600f, 330f), new Vector2(22f, -206f));
             var masteryButton = UIKit.Button(detail.transform, "熟練（ラン外の成長）", 26, () => ToggleMastery(true), UIKit.BloodColor);
             masteryButton.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(300f, 56f), new Vector2(-16f, 14f));
+            // Gear kept between runs (the walkable camp will open this from its stash chest instead).
+            var vaultButton = UIKit.Button(detail.transform, "装備・倉庫", 26, VaultView.Open);
+            vaultButton.GetComponent<RectTransform>().Place(new Vector2(0f, 0f), new Vector2(260f, 56f), new Vector2(16f, 14f));
 
             // Skins: four looks per class, bought with soul shards.
             _skinRow = UIKit.Rect("Skins", detail.transform).Place(new Vector2(0f, 1f), new Vector2(400f, 80f), new Vector2(220f, -88f));

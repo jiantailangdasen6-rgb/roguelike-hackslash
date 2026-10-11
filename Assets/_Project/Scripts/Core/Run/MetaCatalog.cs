@@ -108,6 +108,8 @@ namespace Game.Core
         public List<string> trinkets = new();
         /// <summary>Stable per-profile id: lets a player who dropped out get their character back.</summary>
         public string playerKey = "";
+        /// <summary>Worn gear when setting out (packed hex, see GearVault).</summary>
+        public List<string> gear = new();
 
         public string ToJson() => JsonUtility.ToJson(this);
 
@@ -150,6 +152,8 @@ namespace Game.Core
         public int bestVictory = -1;
         /// <summary>Random id made once per profile (see Loadout.playerKey).</summary>
         public string playerKey = "";
+        /// <summary>Gear kept between runs: worn set and stash (see GearVault).</summary>
+        public GearVaultData gear = new();
 
         public bool IsUnlocked(string id)
         {
@@ -199,6 +203,7 @@ namespace Game.Core
             mastery = MetaCatalog.NodesFor(selectedClass).Where(n => IsUnlocked(n.Id)).Select(n => n.Id).ToList(),
             trinkets = equippedTrinkets.Where(IsUnlocked).Take(MetaCatalog.TrinketSlots).ToList(),
             playerKey = playerKey,
+            gear = GearVault.LoadoutGear(this.gear = GearVault.Normalize(this.gear)),
         };
 
         public string ToJson() => JsonUtility.ToJson(this);

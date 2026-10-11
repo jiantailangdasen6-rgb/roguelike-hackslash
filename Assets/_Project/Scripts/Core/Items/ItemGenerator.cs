@@ -13,12 +13,13 @@ namespace Game.Core
 
         /// <param name="rarityBoost">0 = normal enemy, 1 = elite, 3 = boss / treasure. Shifts weight toward higher rarities.</param>
         /// <param name="minRarity">Floor for guaranteed drops (treasure doors).</param>
-        public static ItemInstance Generate(ulong seed, int itemLevel, float rarityBoost = 0f, ClassId owner = ClassId.Warrior, Rarity minRarity = Rarity.Common)
+        public static ItemInstance Generate(ulong seed, int itemLevel, float rarityBoost = 0f, ClassId owner = ClassId.Warrior, Rarity minRarity = Rarity.Common, EquipSlot? slot = null)
         {
             var rng = new GameRandom(seed);
             var rarity = RollRarity(rng, rarityBoost);
             if (rarity < minRarity) rarity = minRarity;
-            var baseDef = ItemCatalog.Bases[rng.Range(0, ItemCatalog.Bases.Length)];
+            var bases = slot.HasValue ? System.Array.FindAll(ItemCatalog.Bases, b => b.Slot == slot.Value) : ItemCatalog.Bases;
+            var baseDef = bases[rng.Range(0, bases.Length)];
 
             var item = new ItemInstance
             {
@@ -88,7 +89,7 @@ namespace Game.Core
 
     /// <summary>
     /// One item in 64 bits, so a drop fits in a single event:
-    /// base 4 | rarity 2 | class 2 | legendary 3 | item level 5 | affix count 2 | 2 x (affix 5 + roll 7).
+    /// base 4 | rarity 2 | class 2 | legendary 3 | item level 5 | affix count 2 | 2 x (affix 5 + roll 7) | loaner 1.
     /// </summary>
     public static class ItemCodec
     {
@@ -117,6 +118,8 @@ namespace Game.Core
                 Put(ItemCatalog.AffixIndex(item.affixes[i].affixId), 5);
                 Put(item.affixes[i].roll, 7);
             }
+            for (int i = count; i < MaxAffixes; i++) Put(0, 12); // fixed layout: the loaner bit always sits at bit 42
+            Put(item.loaner ? 1 : 0, 1);
             return v;
         }
 
@@ -150,6 +153,8 @@ namespace Game.Core
                 int roll = Take(7);
                 if (affix < ItemCatalog.Affixes.Length) item.AddAffix(ItemCatalog.Affixes[affix], roll);
             }
+            for (int i = count; i < MaxAffixes; i++) Take(12);
+            item.loaner = Take(1) != 0;
             return item;
         }
     }

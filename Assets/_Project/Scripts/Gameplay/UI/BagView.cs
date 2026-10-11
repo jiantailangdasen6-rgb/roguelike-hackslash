@@ -42,6 +42,7 @@ namespace Game.Gameplay
 
         private void Awake()
         {
+            _instance = this;
             var root = UIKit.CreateCanvas("Bag", 38, transform).transform;
             BuildBadge(root);
 
@@ -102,6 +103,7 @@ namespace Game.Gameplay
         private void OnDestroy()
         {
             RunDirector.EventReceived -= OnEvent;
+            if (_instance == this) _instance = null;
             IsOpen = false;
         }
 
@@ -141,8 +143,12 @@ namespace Game.Gameplay
         {
             switch (e.Type)
             {
+                case SimEventType.RunEnded:
+                    Bank();
+                    break;
                 case SimEventType.GearSlot when IsMe(e.ClientId):
                 {
+                    _synced = true;
                     var item = ItemCodec.Unpack(e.Seed);
                     if (e.Int < SimPlayer.SlotCount) _equipped[e.Int] = item;
                     else if (e.Int - SimPlayer.SlotCount < _bag.Length) _bag[e.Int - SimPlayer.SlotCount] = item;
@@ -164,6 +170,34 @@ namespace Game.Gameplay
                     HudView.Instance?.Toast($"分解した：魂の欠片 +{e.Value:0}");
                     break;
             }
+        }
+
+        // ------------------------------------------------------------------ Taking gear home
+
+        private static BagView _instance;
+        private bool _synced;
+        private bool _banked;
+
+        /// <summary>What the last run brought home, for the camp to show once.</summary>
+        public static string LastBankSummary;
+
+        /// <summary>Leaving the run any way (end, abandon, lost connection): the gear goes into this device's stash.</summary>
+        public static void BankNow() => _instance?.Bank();
+
+        private void Bank()
+        {
+            // Only with a bag the host actually told us about - an empty view must not wipe the worn set at home.
+            if (_banked || !_synced) return;
+            _banked = true;
+            var profile = ProfileStore.Current;
+            profile.gear = GearVault.Normalize(profile.gear);
+            var result = GearVault.BankRun(profile.gear, _equipped, _bag);
+            profile.shards += result.OverflowShards;
+            ProfileStore.Save();
+            LastBankSummary = result.OverflowCount > 0
+                ? $"装備を {result.Kept} 個持ち帰った（倉庫があふれたので {result.OverflowCount} 個を分解：魂の欠片 +{result.OverflowShards}）"
+                : $"装備を {result.Kept} 個持ち帰った（拠点の倉庫で付け替えられる）";
+            HudView.Instance?.Toast(LastBankSummary);
         }
 
         private static string NameOf(ulong clientId)
@@ -263,6 +297,8 @@ namespace Game.Gameplay
             return -1;
         }
 
+        private static int GearCap => RunDirector.Instance != null ? RunDirector.Instance.RoomIndex.Value + 1 + RunSimulation.GearLevelGrace : int.MaxValue;
+
         private ItemInstance At(int index) => index < 0 ? null : index < SimPlayer.SlotCount ? _equipped[index] : _bag[index - SimPlayer.SlotCount];
 
         private void Select(int index)
@@ -297,10 +333,10 @@ namespace Game.Gameplay
             {
                 _detailTitle.text = ItemText.ColoredTitle(selected);
                 _detailBody.text = $"<color=#bfb6aa>{ItemText.SlotName(selected.Slot)}・Lv{selected.itemLevel}</color>\n" +
-                                   string.Join("\n", ItemText.PropertyLines(selected));
+                                   string.Join("\n", ItemText.PropertyLines(selected, GearCap));
                 var worn = _equipped[(int)selected.Slot];
                 _compareBody.text = _selected >= SimPlayer.SlotCount && worn != null
-                    ? $"いま装備中：{ItemText.ColoredTitle(worn)}\n" + string.Join("\n", ItemText.PropertyLines(worn))
+                    ? $"いま装備中：{ItemText.ColoredTitle(worn)}\n" + string.Join("\n", ItemText.PropertyLines(worn, GearCap))
                     : _selected >= SimPlayer.SlotCount ? "この枠はいま空いている" : "";
             }
             RefreshButtons();
@@ -318,13 +354,13 @@ namespace Game.Gameplay
             _equipButton.interactable = between;
 
             _salvageButton.gameObject.SetActive(selected != null && inBag);
-            if (selected != null) _salvageLabel.text = $"分解（魂の欠片 +{RunSimulation.SalvageValue(selected.rarity)}）";
+            if (selected != null) _salvageLabel.text = selected.loaner ? "返す（貸し出し品）" : $"分解（魂の欠片 +{RunSimulation.SalvageValue(selected.rarity)}）";
             _salvageButton.interactable = between;
 
             var mates = NetPlayer.All.Where(p => p != NetPlayer.Local).OrderBy(p => p.Slot.Value).ToList();
             for (int i = 0; i < _giveButtons.Count; i++)
             {
-                bool show = selected != null && inBag && i < mates.Count;
+                bool show = selected != null && inBag && i < mates.Count && !selected.loaner;
                 _giveButtons[i].gameObject.SetActive(show);
                 if (!show) continue;
                 _giveButtons[i].GetComponentInChildren<Text>().text = $"{mates[i].DisplayName}（{mates[i].ClassDef.Name}）に渡す";

@@ -134,6 +134,7 @@ namespace Game.Gameplay
             }
 
             Sim.Start((int)CommandLine.GetFloat("-startroom", 0f));
+            foreach (var sp in Sim.Players) Sim.SyncGear(sp); // the gear everyone set out with (and any loaners)
             Started.Value = true;
             _startTime = Time.time;
             Debug.Log($"[RunDirector] Run started with {Sim.Players.Count} player(s)");

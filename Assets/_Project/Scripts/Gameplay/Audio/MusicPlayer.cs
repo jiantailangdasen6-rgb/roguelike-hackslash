@@ -11,14 +11,22 @@ namespace Game.Gameplay
 
         public static float Music
         {
-            get => _music ??= PlayerPrefs.GetFloat("vol_music", 0.7f);
+            get => _music ??= PlayerPrefs.GetFloat("vol_music", 0.3f);
             set { _music = Mathf.Clamp01(value); PlayerPrefs.SetFloat("vol_music", _music.Value); }
         }
 
         public static float Sfx
         {
-            get => _sfx ??= PlayerPrefs.GetFloat("vol_sfx", 0.9f);
+            get => _sfx ??= PlayerPrefs.GetFloat("vol_sfx", 0.4f);
             set { _sfx = Mathf.Clamp01(value); PlayerPrefs.SetFloat("vol_sfx", _sfx.Value); }
+        }
+
+        /// <summary>Automated runs (bots, -autoquit, -mute; browser: ?botmove / ?mute) play silently.</summary>
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void MuteAutomatedRuns()
+        {
+            if (CommandLine.Has("-mute") || CommandLine.Has("-autoquit") || CommandLine.Has("-botmove"))
+                AudioListener.volume = 0f;
         }
     }
 

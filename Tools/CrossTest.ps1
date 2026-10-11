@@ -21,10 +21,10 @@ Write-Host "room code: $code"
 
 $profileDir = Join-Path $env:TEMP 'roguelike-crosstest-edge'
 $edge = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
-$page = "$($Url)?onlinejoin=$code&botmove&profile=web"
+$page = "$($Url)?onlinejoin=$code&botmove&profile=web&mute"
 $browser = Start-Process $edge -PassThru -ArgumentList @('--headless=new', "--user-data-dir=`"$profileDir`"",
     '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--autoplay-policy=no-user-gesture-required',
-    '--window-size=1280,720', '--enable-logging=stderr', '--v=0', "`"$page`"") -RedirectStandardError "$out\edge.log"
+    '--window-size=1280,720', '--mute-audio', '--enable-logging=stderr', '--v=0', "`"$page`"") -RedirectStandardError "$out\edge.log"
 
 $hostProc.WaitForExit(($Seconds + 30) * 1000) | Out-Null
 Get-Process msedge -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq $edge -and $_.StartTime -ge $browser.StartTime } | Stop-Process -Force -ErrorAction SilentlyContinue

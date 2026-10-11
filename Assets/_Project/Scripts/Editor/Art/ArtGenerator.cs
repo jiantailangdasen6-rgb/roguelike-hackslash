@@ -31,12 +31,18 @@ namespace Game.EditorTools.Art
             var warriorFlash = Character("warrior", HeroArt.Warrior(), HeroArt.FrameSize);
             var mageFlash = Character("mage", HeroArt.Mage(), HeroArt.FrameSize);
             var rangerFlash = Character("ranger", HeroArt.Ranger(), HeroArt.FrameSize);
+            var guardianFlash = Character("guardian", HeroArt.Guardian(), HeroArt.FrameSize);
+            var assassinFlash = Character("assassin", HeroArt.Assassin(), HeroArt.FrameSize);
+            var alchemistFlash = Character("alchemist", HeroArt.Alchemist(), HeroArt.FrameSize);
             // Skins are palette swaps: same silhouettes, so they share the class's white flash sheet.
             for (int skin = 1; skin < Game.Core.SkinCatalog.PerClass; skin++)
             {
                 Character($"warrior_s{skin}", HeroArt.Warrior(SkinArt.Palette(Game.Core.ClassId.Warrior, skin)), HeroArt.FrameSize, warriorFlash);
                 Character($"mage_s{skin}", HeroArt.Mage(SkinArt.Palette(Game.Core.ClassId.Mage, skin)), HeroArt.FrameSize, mageFlash);
                 Character($"ranger_s{skin}", HeroArt.Ranger(SkinArt.Palette(Game.Core.ClassId.Ranger, skin)), HeroArt.FrameSize, rangerFlash);
+                Character($"guardian_s{skin}", HeroArt.Guardian(SkinArt.Palette(Game.Core.ClassId.Guardian, skin)), HeroArt.FrameSize, guardianFlash);
+                Character($"assassin_s{skin}", HeroArt.Assassin(SkinArt.Palette(Game.Core.ClassId.Assassin, skin)), HeroArt.FrameSize, assassinFlash);
+                Character($"alchemist_s{skin}", HeroArt.Alchemist(SkinArt.Palette(Game.Core.ClassId.Alchemist, skin)), HeroArt.FrameSize, alchemistFlash);
             }
 
             Character("skeleton", EnemyArt.Skeleton(), EnemyArt.FrameSize);

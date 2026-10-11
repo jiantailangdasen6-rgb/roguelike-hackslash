@@ -444,6 +444,7 @@ namespace Game.Core
         {
             if (!p.Alive || p.InvulnerableTimer > 0f) return;
             float dealt = Mathf.Max(1f, damage - p.Stats.Get(StatType.Armor)) * Mathf.Max(0.2f, p.Stats.Get(StatType.DamageTaken));
+            dealt *= SanctuaryFactor(p); // a guardian's holy ground
             if (p.Hp < p.MaxHp * 0.5f) dealt *= 1f - Mathf.Min(0.6f, p.Stats.Get(StatType.LastStand)); // gear
 
             if (p.Shield > 0f)

@@ -120,6 +120,9 @@ namespace Game.EditorTools.Art
                 ClassId.Warrior => C("#b0302c"),
                 ClassId.Mage => C("#4a7cc8"),
                 ClassId.Ranger => C("#4f9a4a"),
+                ClassId.Guardian => C("#d8c070"),
+                ClassId.Assassin => C("#7a4ab0"),
+                ClassId.Alchemist => C("#c87a2a"),
                 _ => GoldDark,
             };
 
@@ -192,6 +195,24 @@ namespace Game.EditorTools.Art
                     c.Disc(11.5f, 14.5f, 1.8f, Amber); c.Set(11, 16, White); c.Set(13, 15, White);
                     Arrow(c, 12, 13, 18, 7);
                     break;
+                // Guardian
+                case PerkId.ShieldWall: Shield(c, Steel, SteelDark, Gold); c.Rect(4, 4, 16, 2, Gold); break;
+                case PerkId.Retribution: Shield(c, Steel, SteelDark, Gold); Streaks(c, Amber); break;
+                case PerkId.Steadfast: Armour(c, Steel, SteelDark, White, false); break;
+                case PerkId.HolyHammer: WarHammer(c, Wood, Steel, Gold); Sparks(c, Gold); break;
+                case PerkId.Aegis: Shield(c, C("#fff1c8"), Gold, White); Plus(c, 15, 15, White); break;
+                // Assassin
+                case PerkId.PoisonBlades: TwinBlades(c, Toxic, GreenDark); break;
+                case PerkId.ShadowDance: Spiral(c, C("#b48aff")); Streaks(c, C("#7a4ab0")); break;
+                case PerkId.Finisher: Skull(c); Sparks(c, Red); break;
+                case PerkId.SmokeVeil: c.Disc(8, 10, 4.2f, C("#8a8496")); c.Disc(15, 11, 4.6f, C("#a49eb0")); c.Disc(12, 15, 4f, C("#c2bccc")); break;
+                case PerkId.Twinfang: TwinBlades(c, Steel, White); Sparks(c, Red); break;
+                // Alchemist
+                case PerkId.VolatileMix: Vial(c, Toxic, White); Sparks(c, Toxic); break;
+                case PerkId.Napalm: Flames(c, 12, 5, Amber, big: true); break;
+                case PerkId.Remedy: Vial(c, Green, White); Plus(c, 16, 15, White); break;
+                case PerkId.Catalyst: Snowflake(c); Flames(c, 17, 3, Red); break;
+                case PerkId.TwinFlask: Vial(c, Amber, White); Plus(c, 17, 16, Gold); break;
             }
         }
 

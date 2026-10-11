@@ -160,22 +160,35 @@ namespace Game.Gameplay
             _title.text = "古い鏡　<size=28><color=#bfb6aa>クラスと見た目</color></size>";
             var current = ClassCatalog.Get(Profile.selectedClass);
 
+            if (!Profile.IsClassOpen(current.Id)) current = ClassCatalog.Get(ClassId.Warrior);
             for (int i = 0; i < ClassCatalog.All.Length; i++)
             {
                 var def = ClassCatalog.All[i];
+                bool open = Profile.IsClassOpen(def.Id);
                 bool selected = def.Id == current.Id;
                 var card = UIKit.Framed(_body, def.Name, selected ? new Color(0.17f, 0.11f, 0.06f, 1f) : new Color(0.06f, 0.05f, 0.07f, 1f),
-                    selected ? UIKit.AccentColor : UIKit.GoldTrim * 0.6f);
-                card.Outer().Place(new Vector2(0f, 1f), new Vector2(360f, 96f), new Vector2(0f, -i * 104f));
-                var preview = Preview(card.transform, SkinCatalog.Sheet(def.Id, Profile.SkinFor(def.Id)), "idle", 96f, new Vector2(0f, 0.5f), new Vector2(0f, 4f));
+                    selected ? UIKit.AccentColor : UIKit.GoldTrim * (open ? 0.6f : 0.3f));
+                card.Outer().Place(new Vector2(0f, 1f), new Vector2(360f, 92f), new Vector2(0f, -i * 99f));
+                var preview = Preview(card.transform, SkinCatalog.Sheet(def.Id, Profile.SkinFor(def.Id)), "idle", 92f, new Vector2(0f, 0.5f), new Vector2(0f, 4f));
                 preview.raycastTarget = false;
-                var name = UIKit.Title(card.transform, def.Name, 32, TextAnchor.UpperLeft, Color.white);
-                name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(250f, 44f), new Vector2(100f, -8f));
-                var role = UIKit.Label(card.transform, def.Role, 20, TextAnchor.UpperLeft, UIKit.MutedText);
-                role.rectTransform.Place(new Vector2(0f, 1f), new Vector2(250f, 40f), new Vector2(100f, -52f));
+                if (!open) preview.color = new Color(0.1f, 0.09f, 0.12f, 0.9f); // a silhouette until unlocked
+                var name = UIKit.Title(card.transform, def.Name, 30, TextAnchor.UpperLeft, open ? Color.white : new Color(1f, 1f, 1f, 0.45f));
+                name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(250f, 42f), new Vector2(100f, -8f));
+                var unlockQuest = UnlockingQuest(def.Id);
+                string roleText = open ? def.Role : unlockQuest != null ? $"依頼「{unlockQuest.Name}」で解放" : "まだ解放されていない";
+                var role = UIKit.Label(card.transform, roleText, 19, TextAnchor.UpperLeft, open ? UIKit.MutedText : new Color(0.9f, 0.75f, 0.45f, 0.8f));
+                role.rectTransform.Place(new Vector2(0f, 1f), new Vector2(256f, 40f), new Vector2(100f, -50f));
                 var id = def.Id;
                 AddButton(card.Outer(), () =>
                 {
+                    if (!Profile.IsClassOpen(id))
+                    {
+                        var q = UnlockingQuest(id);
+                        _status.text = q != null
+                            ? $"「{ClassCatalog.Get(id).Name}」は{QuestCatalog.GiverNames[(int)q.Giver]}の依頼「{q.Name}」（{q.Text}）で解放される"
+                            : "まだ解放されていない";
+                        return;
+                    }
                     Profile.selectedClass = id;
                     Save();
                 });
@@ -236,7 +249,7 @@ namespace Game.Gameplay
 
         private void BuildMastery()
         {
-            var def = ClassCatalog.Get(Profile.selectedClass);
+            var def = ClassCatalog.Get(Profile.IsClassOpen(Profile.selectedClass) ? Profile.selectedClass : ClassId.Warrior);
             _title.text = $"師範　<size=28><color=#bfb6aa>{def.Name}の熟練（解放した効果は毎回有効）</color></size>";
             int row = 0;
             foreach (var node in MetaCatalog.NodesFor(def.Id))
@@ -352,6 +365,15 @@ namespace Game.Gameplay
         }
 
         // ------------------------------------------------------------------ Helpers
+
+        private static QuestDef UnlockingQuest(ClassId id)
+        {
+            string unlock = ClassCatalog.UnlockId(id);
+            foreach (var chain in QuestCatalog.Chains)
+                foreach (var q in chain)
+                    if (q.Unlock == unlock) return q;
+            return null;
+        }
 
         private static Image Preview(Transform parent, string sheet, string clip, float size, Vector2 anchor, Vector2 offset)
         {

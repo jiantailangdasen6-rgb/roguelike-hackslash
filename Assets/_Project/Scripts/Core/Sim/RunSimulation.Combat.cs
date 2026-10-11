@@ -69,7 +69,12 @@ namespace Game.Core
                 }
                 if (p.Input.Attack && p.BasicTimer <= 0f) Basic(p);
 
-                if (p.DashSlashTimer > 0f) StepDashSlash(p, dt);
+                if (p.DashSlashTimer > 0f)
+                {
+                    if (p.BashStuns) StepShieldBash(p, dt);
+                    else StepDashSlash(p, dt);
+                }
+                if (p.ShadowStepTimer > 0f && (p.ShadowStepTimer -= dt) <= 0f) ShadowStrike(p);
             }
         }
 
@@ -155,6 +160,9 @@ namespace Game.Core
                     Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.BasicA, Pos = p.Position, Vec = dir });
                     break;
                 }
+                default:
+                    BasicNewClass(p, dir, might, area); // RunSimulation.Classes.cs
+                    break;
             }
         }
 
@@ -198,6 +206,9 @@ namespace Game.Core
                     }
                     break;
                 }
+                default:
+                    cd = Skill1NewClass(p, dir, cd); // RunSimulation.Classes.cs
+                    break;
             }
 
             p.Skill1Cooldown = cd;
@@ -290,6 +301,9 @@ namespace Game.Core
                     }
                     break;
                 }
+                default:
+                    Skill2NewClass(p, dir, area); // RunSimulation.Classes.cs
+                    break;
             }
 
             p.Skill2Cooldown = c.Skill2Cooldown * p.CooldownMultiplier;
@@ -440,7 +454,7 @@ namespace Game.Core
                         break;
                     }
                 }
-                else
+                else if (!FliesOver(proj.Kind))
                 {
                     var owner = GetPlayer(proj.Owner);
                     Enemies.QueryCircle(proj.Position, proj.Radius, _hits);
@@ -458,8 +472,11 @@ namespace Game.Core
                     }
                 }
 
-                if (spent || proj.Life <= 0f || !Bounds.Contains(proj.Position) || Arena.BlocksShot(Layout, proj.Position))
+                // Lobbed flasks sail over cover; everything else stops at it.
+                bool blocked = !FliesOver(proj.Kind) && Arena.BlocksShot(Layout, proj.Position);
+                if (spent || proj.Life <= 0f || !Bounds.Contains(proj.Position) || blocked)
                 {
+                    if (!proj.Hostile && IsFlask(proj.Kind)) BreakFlask(proj); // RunSimulation.Classes.cs
                     Events.Add(new SimEvent(SimEventType.ProjectileEnd) { Id = proj.Id, Pos = proj.Position });
                     Projectiles.RemoveAt(k);
                 }
@@ -469,6 +486,7 @@ namespace Game.Core
         private void OnProjectileHit(Projectile proj, SimPlayer owner, int index)
         {
             Vector2 dir = proj.Velocity.normalized;
+            if (proj.Kind == ProjectileKind.Flask) return; // it bursts instead (BreakFlask)
             DamageEnemy(index, proj.Damage, owner, proj.Flags, dir, proj.Kind == ProjectileKind.PierceArrow ? 5f : 1.5f);
             if (owner == null) return;
             ref var e = ref Enemies[index];
@@ -558,11 +576,13 @@ namespace Game.Core
             bool disabled = e.Frozen > 0f || e.Marked > 0f || e.Stunned > 0f;
             if (attacker != null)
             {
-                if ((flags & HitFlags.DamageOverTime) == 0 && _combatRng.Chance(attacker.Stats.Get(StatType.CritChance)))
+                if ((flags & HitFlags.DamageOverTime) == 0 && RollCrit(attacker, disabled))
                 {
-                    damage *= 2f;
+                    damage *= CritMultiplier(attacker);
                     flags |= HitFlags.Crit;
                 }
+                int catalyst = attacker.PerkLevel(PerkId.Catalyst);
+                if (catalyst > 0 && (e.Burning > 0f || e.Frozen > 0f)) damage *= 1f + 0.2f * catalyst;
                 int resonance = attacker.PerkLevel(PerkId.Resonance);
                 if (resonance > 0 && disabled) damage *= 1f + 0.25f * resonance;
                 int executioner = attacker.PerkLevel(PerkId.Executioner);

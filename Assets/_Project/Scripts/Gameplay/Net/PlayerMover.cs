@@ -1,4 +1,5 @@
 using Game.Core;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 namespace Game.Gameplay
@@ -90,6 +91,10 @@ namespace Game.Gameplay
             player.PredictAction(AttackAnim.Skill1);
             if (player.Class.Value == ClassId.Warrior)
                 StartDash(_aim.normalized, ClassCatalog.DashSlashDistance / ClassCatalog.DashSlashDuration, ClassCatalog.DashSlashDuration);
+            else if (player.Class.Value == ClassId.Guardian)
+                StartDash(_aim.normalized, ClassCatalog.ShieldBashDistance / ClassCatalog.ShieldBashDuration, ClassCatalog.ShieldBashDuration);
+            else if (player.Class.Value == ClassId.Assassin)
+                ShadowStep();
             SendInput();
         }
 
@@ -99,6 +104,23 @@ namespace Game.Gameplay
             _skill2++;
             player.PredictAction(AttackAnim.Skill2);
             SendInput();
+        }
+
+        /// <summary>Assassin: vanish and reappear at the cursor (within range, outside walls and obstacles).</summary>
+        private void ShadowStep()
+        {
+            Vector2 from = transform.position;
+            Vector2 to = from + Vector2.ClampMagnitude(_aim, ClassCatalog.ShadowStepRange);
+            var bounds = PlayArea.Bounds;
+            float r = SimPlayer.BodyRadius;
+            to = Arena.Resolve(CurrentLayout, to, r);
+            to.x = Mathf.Clamp(to.x, bounds.xMin + r, bounds.xMax - r);
+            to.y = Mathf.Clamp(to.y, bounds.yMin + r, bounds.yMax - r);
+            _dashUntil = 0f;
+            // Teleport (not a slide): the others see the jump instead of interpolating across the room.
+            var networkTransform = GetComponent<NetworkTransform>();
+            if (networkTransform != null && player.IsSpawned) networkTransform.Teleport(to, transform.rotation, transform.localScale);
+            else transform.position = to;
         }
 
         private void StartDash(Vector2 direction, float speed, float duration)
@@ -266,10 +288,11 @@ namespace Game.Gameplay
                 {
                     Vector2 to = nearest.Value - pos;
                     Aim = to;
-                    float want = _player.Class.Value == ClassId.Warrior ? 1.4f : 5.5f;
+                    bool melee = _player.Class.Value is ClassId.Warrior or ClassId.Guardian or ClassId.Assassin;
+                    float want = melee ? 1.4f : 5.5f;
                     float d = to.magnitude;
                     Move = d > want + 0.5f ? to.normalized : d < want - 1f ? -to.normalized : new Vector2(-to.y, to.x).normalized * 0.4f;
-                    Attack = d < (_player.Class.Value == ClassId.Warrior ? 2.4f : 10f);
+                    Attack = d < (melee ? 2.2f : _player.Class.Value == ClassId.Alchemist ? 8f : 10f);
                 }
                 else
                 {

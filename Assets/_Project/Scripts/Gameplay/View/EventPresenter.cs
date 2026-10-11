@@ -293,6 +293,70 @@ namespace Game.Gameplay
                     CameraShake.Add(0.5f);
                     break;
                 }
+                case AreaKind.Sanctuary:
+                {
+                    // Holy ground: a golden circle that stays as long as it protects, and a column of light.
+                    float life = Mathf.Max(0.5f, e.Size.x);
+                    var ground = Spawn("fx_circle", e.Pos, 0f, life, r, r, new Color(1f, 0.85f, 0.45f, 0.22f), order: -320);
+                    ground.FadeOut = true;
+                    var ring = Spawn("fx_revive_ring", e.Pos, 0f, life, r, r, new Color(1f, 0.9f, 0.55f, 0.75f), order: -319);
+                    ring.FadeOut = true;
+                    AddLight(ring, new Color(1f, 0.85f, 0.5f), 1.1f, r + 1.5f);
+                    var column = Spawn("fx_holy", e.Pos + Vector2.up * 0.6f, 12f, 0.9f, 1.4f, 2f, new Color(1f, 0.95f, 0.75f));
+                    column.FadeOut = true;
+                    break;
+                }
+                case AreaKind.Smoke:
+                {
+                    for (int i = 0; i < 9; i++)
+                    {
+                        Vector2 at = e.Pos + Random.insideUnitCircle * r * 0.7f;
+                        Burst("fx_puff", at + Vector2.up * 0.3f, Random.Range(7f, 11f), r * Random.Range(0.5f, 0.8f), new Color(0.45f, 0.42f, 0.5f, 0.9f));
+                    }
+                    var ring = Spawn("fx_circle", e.Pos, 1f, 0.5f, r * 0.4f, r, new Color(0.35f, 0.3f, 0.45f, 0.5f), order: -300);
+                    ring.FadeOut = true;
+                    break;
+                }
+                case AreaKind.ShadowStep:
+                {
+                    Burst("fx_puff", e.Pos + Vector2.up * 0.4f, 16f, 1.4f, new Color(0.45f, 0.3f, 0.7f));
+                    var slash = Spawn("fx_nova", e.Pos + Vector2.up * 0.3f, 1f, 0.3f, 0.3f, r, new Color(0.75f, 0.55f, 1f, 0.8f));
+                    slash.FadeOut = true;
+                    AddLight(slash, new Color(0.6f, 0.4f, 1f), 1.6f, r + 1.5f);
+                    break;
+                }
+                case AreaKind.FirePool:
+                {
+                    // Burning ground: scorched circle, a few licking flames, warm light, for as long as it burns.
+                    float life = Mathf.Max(0.5f, e.Size.x);
+                    var scorch = Spawn("fx_circle", e.Pos, 0f, life, r, r, new Color(1f, 0.4f, 0.12f, 0.3f), order: -320);
+                    scorch.FadeOut = true;
+                    AddLight(scorch, new Color(1f, 0.5f, 0.2f), 1.6f, r + 2f);
+                    int flames = 4 + Mathf.RoundToInt(r * 2f);
+                    for (int i = 0; i < flames; i++)
+                    {
+                        float a = i / (float)flames * Mathf.PI * 2f + Random.Range(-0.3f, 0.3f);
+                        Vector2 at = e.Pos + new Vector2(Mathf.Cos(a), Mathf.Sin(a) * 0.7f) * r * Random.Range(0.2f, 0.8f);
+                        var flame = Spawn("prop_campfire", at, Random.Range(9f, 12f), life, 0.45f, 0.3f, Color.white, order: EnemyView.SortOrder(at.y));
+                        flame.FadeOut = true;
+                    }
+                    break;
+                }
+                case AreaKind.Potion:
+                {
+                    var fx = Spawn("fx_heal", e.Pos + Vector2.up * 0.2f, 1f, 0.6f, r * 0.3f, r, Color.white);
+                    fx.FadeOut = true;
+                    AddLight(fx, new Color(0.5f, 1f, 0.6f), 1.4f, r + 1f);
+                    for (int i = 0; i < 6; i++) Shard(e.Pos + Vector2.up * 0.3f, i * 60f + 15f, new Color(0.6f, 1f, 0.65f));
+                    break;
+                }
+                case AreaKind.FlaskBurst:
+                {
+                    var boom = Spawn("fx_explosion", e.Pos + Vector2.up * 0.2f, 22f, 0.36f, r * 0.45f, r * 0.55f, new Color(0.85f, 1f, 0.55f));
+                    boom.Renderer.sortingOrder = 2700;
+                    AddLight(boom, new Color(0.7f, 1f, 0.4f), 1.4f, r + 1f);
+                    break;
+                }
                 case AreaKind.HolyLight:
                 {
                     var fx = Spawn("fx_holy", e.Pos + Vector2.up * 0.6f, 12f, 1.2f, 1.5f, 2.2f, Color.white);
@@ -393,6 +457,18 @@ namespace Game.Gameplay
                     fx = Spawn("fx_orb", e.Pos, 12f, e.Value + 0.05f, 1f, 1f, new Color(0.55f, 0.95f, 1f));
                     AddLight(fx, new Color(0.4f, 0.8f, 1f), 1f, 1.5f);
                     break;
+                case ProjectileKind.Flask:
+                case ProjectileKind.FireFlask:
+                case ProjectileKind.HealFlask:
+                {
+                    // A tumbling bottle (the sheet's frames spin it); lobbed ones are bigger.
+                    var tint = kind == ProjectileKind.FireFlask ? new Color(1f, 0.6f, 0.35f) : kind == ProjectileKind.HealFlask ? new Color(0.6f, 1f, 0.65f) : Color.white;
+                    float size = kind == ProjectileKind.Flask ? 1f : 1.25f;
+                    fx = Spawn("fx_flask", e.Pos, 16f, e.Value + 0.05f, size, size, tint);
+                    AddLight(fx, kind == ProjectileKind.FireFlask ? new Color(1f, 0.5f, 0.2f) : new Color(0.6f, 1f, 0.5f), 0.9f, 1.4f);
+                    angle = 0f;
+                    break;
+                }
                 default:
                     fx = Spawn("fx_bonearrow", e.Pos, 0f, e.Value + 0.05f, 1f, 1f, Color.white);
                     AddLight(fx, new Color(1f, 0.25f, 0.2f), 0.6f, 1f);

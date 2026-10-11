@@ -104,6 +104,9 @@ namespace Game.Gameplay
             ClassId.Warrior => new Color(0.75f, 0.15f, 0.15f),
             ClassId.Mage => new Color(0.35f, 0.55f, 1f),
             ClassId.Ranger => new Color(0.35f, 0.75f, 0.35f),
+            ClassId.Guardian => new Color(0.85f, 0.75f, 0.4f),
+            ClassId.Assassin => new Color(0.55f, 0.35f, 0.85f),
+            ClassId.Alchemist => new Color(0.85f, 0.5f, 0.2f),
             _ => new Color(0.7f, 0.6f, 0.4f),
         };
 

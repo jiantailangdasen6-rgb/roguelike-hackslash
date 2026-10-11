@@ -7,7 +7,7 @@ namespace Game.EditorTools.Art
     /// The three playable classes. Each returns its clips in a fixed order that the runtime animator reads by name:
     /// idle, run, attack, attack2, skill1, skill2, dodge, hurt, death.
     /// </summary>
-    public static class HeroArt
+    public static partial class HeroArt
     {
         public const int FrameSize = 64;
 

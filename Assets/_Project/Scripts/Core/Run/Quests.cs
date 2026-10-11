@@ -61,7 +61,7 @@ namespace Game.Core
             {
                 Q("m1", QuestGiver.Master, "骨を砕け", "骸骨（兵・弓兵）を倒す", QuestGoal.Kill, 30, 40, T(EnemyType.Skeleton, EnemyType.SkeletonArcher)),
                 Q("m2", QuestGiver.Master, "氷を割れ", "凍った敵を強打で砕く", QuestGoal.Shatter, 10, 50),
-                Q("m3", QuestGiver.Master, "納骨堂の主", "骸骨の騎士王を討つ", QuestGoal.KillBoss, 1, 70, T(EnemyType.BoneKing)),
+                Q("m3", QuestGiver.Master, "納骨堂の主", "骸骨の騎士王を討つ", QuestGoal.KillBoss, 1, 70, T(EnemyType.BoneKing), unlock: "class_guardian", unlockName: "新クラス「守護騎士」"),
                 Q("m4", QuestGiver.Master, "鎧を崩せ", "亡者の騎士を倒す", QuestGoal.Kill, 6, 70, T(EnemyType.DreadKnight)),
                 Q("m5", QuestGiver.Master, "血の司教", "血の司教を討つ", QuestGoal.KillBoss, 1, 100, T(EnemyType.BloodBishop)),
                 Q("m6", QuestGiver.Master, "冥王", "冥王リッチを討つ", QuestGoal.KillBoss, 1, 150, T(EnemyType.Lich)),
@@ -70,14 +70,14 @@ namespace Game.Core
             {
                 Q("c1", QuestGiver.Crone, "宝箱をあけて", "焚き火の間の宝箱を壊す", QuestGoal.BreakChest, 3, 30, unlock: "feather", unlockName: "お守り「風切り羽」"),
                 Q("c2", QuestGiver.Crone, "火遊び", "火薬樽を爆発させる", QuestGoal.ExplodeKeg, 6, 50),
-                Q("c3", QuestGiver.Crone, "膨れの毒袋", "腐れ膨れを倒す", QuestGoal.Kill, 10, 60, T(EnemyType.Bloater), unlock: "soul_lantern", unlockName: "お守り「魂の灯籠」"),
-                Q("c4", QuestGiver.Crone, "急所を突け", "会心の一撃を当てる", QuestGoal.Crit, 80, 70),
+                Q("c3", QuestGiver.Crone, "膨れの毒袋", "腐れ膨れを倒す", QuestGoal.Kill, 10, 60, T(EnemyType.Bloater), unlock: "class_alchemist", unlockName: "新クラス「錬金術師」"),
+                Q("c4", QuestGiver.Crone, "急所を突け", "会心の一撃を当てる", QuestGoal.Crit, 80, 70, unlock: "soul_lantern", unlockName: "お守り「魂の灯籠」"),
                 Q("c5", QuestGiver.Crone, "霊の残り香", "怨霊と死霊術師を倒す", QuestGoal.Kill, 12, 90, T(EnemyType.Wraith, EnemyType.Necromancer)),
             },
             new[]
             {
                 Q("g1", QuestGiver.Gravekeeper, "火の番", "焚き火の間にたどり着く", QuestGoal.Rest, 2, 30),
-                Q("g2", QuestGiver.Gravekeeper, "礼拝堂へ", "血塗られた礼拝堂にたどり着く", QuestGoal.ReachArea, 1, 50),
+                Q("g2", QuestGiver.Gravekeeper, "礼拝堂へ", "血塗られた礼拝堂にたどり着く", QuestGoal.ReachArea, 1, 50, unlock: "class_assassin", unlockName: "新クラス「暗殺者」"),
                 Q("g3", QuestGiver.Gravekeeper, "試練を越えて", "試練の門をくぐる", QuestGoal.Trial, 3, 60),
                 Q("g4", QuestGiver.Gravekeeper, "奈落へ", "奈落の玉座にたどり着く", QuestGoal.ReachArea, 2, 80),
                 Q("g5", QuestGiver.Gravekeeper, "迷宮の果て", "迷宮を踏破する", QuestGoal.Victory, 1, 150),

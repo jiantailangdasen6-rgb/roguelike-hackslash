@@ -130,6 +130,9 @@ namespace Game.Gameplay
                     else if (anim == AttackAnim.Skill2) break; // the area effect plays its own sound
                     else if (cls == ClassId.Mage) Play(anim == AttackAnim.Skill1 ? "nova" : "bolt", e.Pos, anim == AttackAnim.Skill1 ? 0.8f : 1f);
                     else if (cls == ClassId.Ranger) Play("arrow", e.Pos, anim == AttackAnim.Skill1 ? 0.75f : 1f, anim == AttackAnim.Skill1 ? 1.4f : 1f);
+                    else if (cls == ClassId.Alchemist) Play("swing", e.Pos, anim == AttackAnim.Skill1 ? 1.2f : 1.5f, 0.6f); // a flask whooshing off
+                    else if (cls == ClassId.Assassin) Play(anim == AttackAnim.Skill1 ? "blink" : "swing", e.Pos, anim == AttackAnim.Skill1 ? 1f : 1.35f, 0.8f);
+                    else if (cls == ClassId.Guardian) Play("swing", e.Pos, anim == AttackAnim.Skill1 ? 0.6f : 0.75f, 1.2f);
                     else Play("swing", e.Pos, anim == AttackAnim.Skill1 ? 0.75f : anim == AttackAnim.BasicB ? 1.1f : 1f, anim == AttackAnim.Skill1 ? 1.3f : 1f);
                     break;
                 }
@@ -176,6 +179,12 @@ namespace Game.Gameplay
                         case AreaKind.Slam: Play("slam", e.Pos); break;
                         case AreaKind.Explosion: Play("explosion", e.Pos); break;
                         case AreaKind.HolyLight: Play("heal", e.Pos, 0.8f, 1.3f); break;
+                        case AreaKind.Sanctuary: Play("heal", e.Pos, 0.7f, 1.2f); break;
+                        case AreaKind.Smoke: Play("explosion", e.Pos, 1.7f, 0.45f); break;
+                        case AreaKind.ShadowStep: Play("blink", e.Pos, 0.8f); break;
+                        case AreaKind.FirePool: Play("flame", e.Pos); break;
+                        case AreaKind.Potion: Play("heal", e.Pos, 1.2f); break;
+                        case AreaKind.FlaskBurst: Play("shatter", e.Pos, 1.5f, 0.45f); break;
                     }
                     break;
                 case SimEventType.HazardWarn:

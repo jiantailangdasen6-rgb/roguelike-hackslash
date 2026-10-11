@@ -5,6 +5,10 @@ namespace Game.Core
         Warrior,
         Mage,
         Ranger,
+        // Unlocked by requests (see QuestCatalog); keep appending (saves, sprites and gear index by id).
+        Guardian,
+        Assassin,
+        Alchemist,
     }
 
     public enum AbilitySlot : byte
@@ -83,6 +87,36 @@ namespace Game.Core
         public const float MarkDuration = 6f;
         public const float MarkDamageBonus = 0.35f;
 
+        // Guardian
+        public const float ShieldBashDistance = 3.2f;
+        public const float ShieldBashDuration = 0.16f;
+        public const float ShieldBashDamage = 18f;
+        public const float ShieldBashStun = 1.2f;
+        public const float SanctuaryRadius = 3.2f;
+        public const float SanctuaryDuration = 5f;
+        public const float SanctuaryDamageReduction = 0.4f;
+        public const float SanctuaryRegen = 4f; // HP per second
+
+        // Assassin
+        public const float ShadowStepRange = 6f;
+        public const float ShadowStepRadius = 1.8f;
+        public const float ShadowStepDamage = 26f;
+        public const float SmokeRadius = 3f;
+        public const float SmokeStun = 1.6f;
+        public const float SureCritDuration = 4f;
+
+        // Alchemist
+        public const float FlaskSpeed = 11f;
+        public const float FlaskBurstRadius = 1.3f;
+        public const float ThrowRange = 7f;
+        public const float ThrowSpeed = 13f;
+        public const float FirePoolRadius = 2.2f;
+        public const float FirePoolDuration = 4f;
+        public const float FirePoolTick = 0.5f;
+        public const float FirePoolDamage = 9f; // per tick
+        public const float PotionRadius = 2.6f;
+        public const float PotionHeal = 35f;
+
         // Synergy: heavy hits shatter frozen enemies.
         public const float ShatterMultiplier = 2.5f;
         public const float ShatterRadius = 1.6f;
@@ -113,9 +147,39 @@ namespace Game.Core
                 Skill1Name = "貫通の一矢", Skill1Text = "全ての敵を貫く強力な矢。凍った敵を砕ける", Skill1Cooldown = 7f,
                 Skill2Name = "狩人の印", Skill2Text = "照準地点の敵に印を付け、全員から受けるダメージを増やす", Skill2Cooldown = 12f,
             },
+            new()
+            {
+                Id = ClassId.Guardian, Name = "守護騎士", Role = "盾役・仲間を守る", Sheet = "guardian",
+                Health = 190f, MoveSpeed = 4.3f, Armor = 4f, HealthPerLevel = 9f, MightPerLevel = 0.028f,
+                BasicName = "鎚打ち", BasicDamage = 19f, BasicInterval = 0.55f, BasicRange = 1.9f, BasicArc = 110f,
+                Skill1Name = "盾の突進", Skill1Text = "盾を構えて短く突進し、ぶつかった敵を気絶させる（無敵）", Skill1Cooldown = 7f,
+                Skill2Name = "守りの陣", Skill2Text = "足元に5秒間の聖域を張る。中の仲間は受けるダメージが減り、傷が癒える", Skill2Cooldown = 16f,
+            },
+            new()
+            {
+                Id = ClassId.Assassin, Name = "暗殺者", Role = "素早い近接・崩れた敵を仕留める", Sheet = "assassin",
+                Health = 110f, MoveSpeed = 5.2f, Armor = 0f, HealthPerLevel = 5f, MightPerLevel = 0.04f,
+                BasicName = "双剣", BasicDamage = 8f, BasicInterval = 0.22f, BasicRange = 1.6f, BasicArc = 100f,
+                Skill1Name = "影渡り", Skill1Text = "照準地点へ瞬時に移り、周りの敵を斬る。凍結・気絶・印の敵には必ず会心", Skill1Cooldown = 6f,
+                Skill2Name = "煙玉", Skill2Text = "周りの敵を気絶させ、4秒間すべての攻撃が会心になる", Skill2Cooldown = 13f,
+            },
+            new()
+            {
+                Id = ClassId.Alchemist, Name = "錬金術師", Role = "燃やして守る・投げて癒す", Sheet = "alchemist",
+                Health = 115f, MoveSpeed = 4.6f, Armor = 0f, HealthPerLevel = 5.5f, MightPerLevel = 0.04f,
+                BasicName = "薬瓶投げ", BasicDamage = 12f, BasicInterval = 0.5f, BasicRange = 8f, BasicArc = 0f,
+                Skill1Name = "火炎瓶", Skill1Text = "照準地点に火炎瓶を投げ、4秒間燃える床を作る（火薬樽にも火がつく）", Skill1Cooldown = 9f,
+                Skill2Name = "回復薬", Skill2Text = "照準地点に回復薬を投げ、浴びた仲間を癒す。倒れた仲間の復活も早める", Skill2Cooldown = 14f,
+            },
         };
 
         public static ClassDef Get(ClassId id) => All[(int)id];
+
+        /// <summary>The three classes everyone starts with; the rest are unlocked by requests.</summary>
+        public static bool IsStarter(ClassId id) => id is ClassId.Warrior or ClassId.Mage or ClassId.Ranger;
+
+        /// <summary>Unlock id kept in the profile ("class_guardian" ...).</summary>
+        public static string UnlockId(ClassId id) => "class_" + id.ToString().ToLowerInvariant();
 
         public static string AbilityName(ClassId id, AbilitySlot slot)
         {

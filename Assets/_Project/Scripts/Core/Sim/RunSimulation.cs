@@ -229,6 +229,7 @@ namespace Game.Core
             StepEnemies(dt);
             StepPlayersCombat(dt);
             StepDelayedAreas(dt);
+            StepZones(dt);
             StepHazards(dt);
             StepProjectiles(dt);
             ProcessDeaths(giveXp: true);
@@ -726,6 +727,7 @@ namespace Game.Core
             foreach (var proj in Projectiles) Events.Add(new SimEvent(SimEventType.ProjectileEnd) { Id = proj.Id, Pos = proj.Position });
             Projectiles.Clear();
             _delayedAreas.Clear();
+            _zones.Clear();
             _rainTargets.Clear();
             StopHazards();
 
@@ -758,6 +760,7 @@ namespace Game.Core
             }
             Souls.Clear();
             SweepLoot();
+            _zones.Clear();
             // Whatever is left standing (unopened chests, kegs) stays behind.
             for (int i = 0; i < Enemies.Count; i++) Enemies[i].Dead = true;
             ProcessDeaths(giveXp: false);

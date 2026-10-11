@@ -71,6 +71,30 @@ namespace Game.Core
             new() { Id = "r_speed", Class = ClassId.Ranger, Name = "俊足", Text = "移動速度 +6%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.06f) },
             new() { Id = "r_evasive", Class = ClassId.Ranger, Name = "技：身軽", Text = "パーク「身軽」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Evasive },
             new() { Id = "r_start", Class = ClassId.Ranger, Name = "狩りの心得", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+
+            // Guardian
+            new() { Id = "g_hp", Class = ClassId.Guardian, Name = "鋼の骨", Text = "レベルごとの最大HP成長 +5", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 5f },
+            new() { Id = "g_might", Class = ClassId.Guardian, Name = "鎚の研鑽", Text = "レベルごとの攻撃力成長 +1%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.01f },
+            new() { Id = "g_hammer", Class = ClassId.Guardian, Name = "技：聖鎚", Text = "パーク「聖鎚」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.HolyHammer },
+            new() { Id = "g_armor", Class = ClassId.Guardian, Name = "城門の構え", Text = "防御 +3", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Armor, ModifierKind.Flat, 3f) },
+            new() { Id = "g_aegis", Class = ClassId.Guardian, Name = "技：聖盾", Text = "パーク「聖盾」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Aegis },
+            new() { Id = "g_start", Class = ClassId.Guardian, Name = "誓いの剣", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+
+            // Assassin
+            new() { Id = "a_hp", Class = ClassId.Assassin, Name = "しなやかな体", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "a_might", Class = ClassId.Assassin, Name = "刃の研鑽", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
+            new() { Id = "a_veil", Class = ClassId.Assassin, Name = "技：煙幕", Text = "パーク「煙幕」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.SmokeVeil },
+            new() { Id = "a_crit", Class = ClassId.Assassin, Name = "急所の心得", Text = "会心率 +8%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.CritChance, ModifierKind.Flat, 0.08f) },
+            new() { Id = "a_twin", Class = ClassId.Assassin, Name = "技：双牙", Text = "パーク「双牙」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Twinfang },
+            new() { Id = "a_start", Class = ClassId.Assassin, Name = "闇の作法", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+
+            // Alchemist
+            new() { Id = "x_hp", Class = ClassId.Alchemist, Name = "滋養の薬", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "x_might", Class = ClassId.Alchemist, Name = "調合の研鑽", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
+            new() { Id = "x_catalyst", Class = ClassId.Alchemist, Name = "技：触媒", Text = "パーク「触媒」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Catalyst },
+            new() { Id = "x_area", Class = ClassId.Alchemist, Name = "大きな瓶", Text = "スキルと攻撃の範囲 +10%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Area, ModifierKind.PercentAdd, 0.1f) },
+            new() { Id = "x_twin", Class = ClassId.Alchemist, Name = "技：二本投げ", Text = "パーク「二本投げ」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.TwinFlask },
+            new() { Id = "x_start", Class = ClassId.Alchemist, Name = "秘伝の書", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
         };
 
         public static readonly TrinketDef[] Trinkets =
@@ -166,6 +190,9 @@ namespace Game.Core
             return unlocked.Contains(id);
         }
 
+        /// <summary>Starter classes always; the others once a request has unlocked them.</summary>
+        public bool IsClassOpen(ClassId c) => ClassCatalog.IsStarter(c) || unlocked.Contains(ClassCatalog.UnlockId(c));
+
         public int SkinFor(ClassId c) => (int)c < skins.Count ? skins[(int)c] : 0;
 
         public void SetSkin(ClassId c, int index)
@@ -200,7 +227,7 @@ namespace Game.Core
 
         public Loadout ToLoadout() => new()
         {
-            classId = selectedClass,
+            classId = IsClassOpen(selectedClass) ? selectedClass : ClassId.Warrior,
             skin = IsUnlocked(SkinCatalog.Get(selectedClass, SkinFor(selectedClass)).Id) ? SkinFor(selectedClass) : 0,
             mastery = MetaCatalog.NodesFor(selectedClass).Where(n => IsUnlocked(n.Id)).Select(n => n.Id).ToList(),
             trinkets = equippedTrinkets.Where(IsUnlocked).Take(MetaCatalog.TrinketSlots).ToList(),

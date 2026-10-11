@@ -31,6 +31,21 @@ namespace Game.Core
             new() { Id = "ranger_1", Class = ClassId.Ranger, Index = 1, Name = "影の追跡者", Cost = 60 },
             new() { Id = "ranger_2", Class = ClassId.Ranger, Index = 2, Name = "秋の旅人", Cost = 90 },
             new() { Id = "ranger_3", Class = ClassId.Ranger, Index = 3, Name = "雪原の射手", Cost = 120 },
+
+            new() { Id = "guardian_0", Class = ClassId.Guardian, Index = 0, Name = "白銀の守護者", Cost = 0 },
+            new() { Id = "guardian_1", Class = ClassId.Guardian, Index = 1, Name = "黒鉄の門番", Cost = 60 },
+            new() { Id = "guardian_2", Class = ClassId.Guardian, Index = 2, Name = "黄金の聖堂騎士", Cost = 90 },
+            new() { Id = "guardian_3", Class = ClassId.Guardian, Index = 3, Name = "苔むした古兵", Cost = 120 },
+
+            new() { Id = "assassin_0", Class = ClassId.Assassin, Index = 0, Name = "夜の刃", Cost = 0 },
+            new() { Id = "assassin_1", Class = ClassId.Assassin, Index = 1, Name = "深紅の影", Cost = 60 },
+            new() { Id = "assassin_2", Class = ClassId.Assassin, Index = 2, Name = "灰の亡霊", Cost = 90 },
+            new() { Id = "assassin_3", Class = ClassId.Assassin, Index = 3, Name = "毒蛇", Cost = 120 },
+
+            new() { Id = "alchemist_0", Class = ClassId.Alchemist, Index = 0, Name = "煤けた錬金術師", Cost = 0 },
+            new() { Id = "alchemist_1", Class = ClassId.Alchemist, Index = 1, Name = "翡翠の薬師", Cost = 60 },
+            new() { Id = "alchemist_2", Class = ClassId.Alchemist, Index = 2, Name = "紫煙の調合師", Cost = 90 },
+            new() { Id = "alchemist_3", Class = ClassId.Alchemist, Index = 3, Name = "黄金の賢者", Cost = 120 },
         };
 
         public const int PerClass = 4;

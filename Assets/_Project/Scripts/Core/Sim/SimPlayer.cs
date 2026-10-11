@@ -62,6 +62,9 @@ namespace Game.Core
         public Vector2 DashSlashDir;
         public readonly List<int> DashSlashHits = new();
         public float EvasiveTimer;
+        public float ShadowStepTimer;  // assassin: >0 until the arrival slash lands (the owner moves itself)
+        public float SureCritTimer;    // assassin: smoke bomb, every blow is critical
+        public bool BashStuns;         // guardian: the dash in progress is a shield bash
 
         // Buffs
         public float ValorTimer;
@@ -337,6 +340,7 @@ namespace Game.Core
                 Stats.RemoveModifiersFrom(BloodlustSource);
             }
             EvasiveTimer -= dt;
+            if (SureCritTimer > 0f) SureCritTimer -= dt;
         }
 
         public float CooldownMultiplier => Mathf.Max(0.3f, Stats.Get(StatType.Cooldown));

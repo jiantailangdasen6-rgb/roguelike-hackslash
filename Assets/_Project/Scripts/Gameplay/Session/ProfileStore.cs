@@ -40,6 +40,10 @@ namespace Game.Gameplay
                 // Automated runs can pick a class: -class warrior|mage|ranger
                 string cls = CommandLine.GetValue("-class");
                 if (cls != null && Enum.TryParse(cls, true, out ClassId id)) p.selectedClass = id;
+                // -unlockall: every class open (automated runs and screenshots of the unlockable ones).
+                if (CommandLine.Has("-unlockall"))
+                    foreach (ClassId c in Enum.GetValues(typeof(ClassId)))
+                        if (!p.IsClassOpen(c)) p.unlocked.Add(ClassCatalog.UnlockId(c));
                 return p;
             }
             catch (Exception ex)

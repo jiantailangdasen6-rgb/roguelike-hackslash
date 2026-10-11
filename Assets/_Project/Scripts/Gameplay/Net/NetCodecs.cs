@@ -43,7 +43,7 @@ namespace Game.Gameplay
             Set(SimEventType.EnemyStrike, F.Id | F.Int | F.Pos | F.Vec);
             Set(SimEventType.SpawnWarning, F.Pos | F.Int | F.Value);
             Set(SimEventType.StatusApplied, F.Id | F.Int | F.Value);
-            Set(SimEventType.AreaEffect, F.Client | F.Int | F.Pos | F.Value);
+            Set(SimEventType.AreaEffect, F.Client | F.Int | F.Pos | F.Value | F.Size); // Size.x = how long a lasting zone stays
             Set(SimEventType.PlayerHealed, F.Client | F.Pos | F.Value);
             Set(SimEventType.SoulSpawn, F.Id | F.Pos | F.Int);
             Set(SimEventType.SoulCollected, F.Id | F.Client);

@@ -124,6 +124,9 @@ namespace Game.Core
         EnemyArrow,
         BloodOrb,
         SoulOrb,
+        Flask,       // alchemist basic: bursts where it lands or hits
+        FireFlask,   // thrown to a spot (no collision), becomes a fire pool
+        HealFlask,   // thrown to a spot (no collision), heals there
     }
 
     public enum AttackAnim : byte
@@ -146,6 +149,13 @@ namespace Game.Core
         Slam,
         Explosion,
         HolyLight,
+        // New classes. Size.x carries how long a lasting zone stays (seconds).
+        Sanctuary,   // guardian: holy ground
+        Smoke,       // assassin: smoke bomb
+        ShadowStep,  // assassin: arrival slash
+        FirePool,    // alchemist: burning ground
+        Potion,      // alchemist: healing splash
+        FlaskBurst,  // alchemist: basic flask bursting
     }
 
     /// <summary>Owner input sent to the host each network tick. Button presses are counters so a lost packet never loses a press.</summary>

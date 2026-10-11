@@ -11,6 +11,13 @@ namespace Game.EditorTools.Art
         private static readonly PixelMaterial Silver = R("#2a2c30", "#4a4e55", "#767c86", "#a4abb6", "#d6dce4");
         private static readonly PixelMaterial Bronze = R("#22140a", "#4a2c14", "#7a4a20", "#a86a32", "#d0945a");
 
+        /// <summary>A class's own base palette with some letters repainted.</summary>
+        private static Dictionary<char, PixelMaterial> Over(Dictionary<char, PixelMaterial> map, params (char Letter, PixelMaterial Material)[] swaps)
+        {
+            foreach (var (letter, material) in swaps) map[letter] = material;
+            return map;
+        }
+
         public static Dictionary<char, PixelMaterial> Palette(ClassId cls, int index)
         {
             switch (cls)
@@ -47,6 +54,56 @@ namespace Game.EditorTools.Art
                             ('f', new PixelMaterial("#b6ff4a")),
                             ('F', new PixelMaterial("#f0ffd0")),
                             ('g', Bronze)),
+                        _ => null,
+                    };
+                case ClassId.Guardian:
+                    return index switch
+                    {
+                        1 => Over(HeroArt.GuardianBase(), // 黒鉄の門番: blackened iron, dark red tabard, silver
+                            ('m', R("#0e0f13", "#1c1e25", "#2d3039", "#454a57", "#656c7c")),
+                            ('c', R("#1a0606", "#330c0e", "#521418", "#721f22", "#93302f")),
+                            ('g', Silver)),
+                        2 => Over(HeroArt.GuardianBase(), // 黄金の聖堂騎士: gilded plate, silver trim
+                            ('m', R("#3a2a0e", "#6a4e1a", "#9c7a2c", "#c9a648", "#efd98a")),
+                            ('g', R("#2a2c30", "#4a4e55", "#767c86", "#a4abb6", "#f0f4f8"))),
+                        3 => Over(HeroArt.GuardianBase(), // 苔むした古兵: verdigris plate, moss tabard, bronze
+                            ('m', R("#13201c", "#223a33", "#36574c", "#517a6a", "#76a08c")),
+                            ('c', Art.Palette.Grave),
+                            ('g', Bronze)),
+                        _ => null,
+                    };
+                case ClassId.Assassin:
+                    return index switch
+                    {
+                        1 => Over(HeroArt.AssassinBase(), // 深紅の影
+                            ('h', R("#1a0507", "#33090d", "#520f15", "#72161d", "#952229")),
+                            ('n', R("#0b090c", "#171318", "#241e26", "#332b36", "#463b4a"))),
+                        2 => Over(HeroArt.AssassinBase(), // 灰の亡霊
+                            ('h', R("#2a2a2e", "#47474d", "#6a6a72", "#9393a0", "#c0c0cc")),
+                            ('l', R("#1c1a1a", "#302d2c", "#47423f", "#615a55", "#7f7670"))),
+                        3 => Over(HeroArt.AssassinBase(), // 毒蛇
+                            ('h', R("#0a1a0c", "#123018", "#1c4a24", "#2a6834", "#3d8a48")),
+                            ('e', new PixelMaterial("#b6ff4a")),
+                            ('w', R("#1a2a12", "#2f4a20", "#4f7a34", "#7aaa4e", "#b6ff4a"))),
+                        _ => null,
+                    };
+                case ClassId.Alchemist:
+                    return index switch
+                    {
+                        1 => Over(HeroArt.AlchemistBase(), // 翡翠の薬師
+                            ('u', R("#0a1c16", "#123228", "#1c4e3e", "#2a6e58", "#3f9478")),
+                            ('f', new PixelMaterial("#6affd8")),
+                            ('F', new PixelMaterial("#e0fff6"))),
+                        2 => Over(HeroArt.AlchemistBase(), // 紫煙の調合師
+                            ('u', Art.Palette.Violet),
+                            ('l', R("#120d16", "#211826", "#33263a", "#47364f", "#5e4868")),
+                            ('f', new PixelMaterial("#d88aff")),
+                            ('F', new PixelMaterial("#f6e6ff"))),
+                        3 => Over(HeroArt.AlchemistBase(), // 黄金の賢者
+                            ('u', R("#2e1f0a", "#573d12", "#87641c", "#bb912f", "#e6c766")),
+                            ('l', R("#2a2c30", "#4a4e55", "#767c86", "#a4abb6", "#d6dce4")),
+                            ('f', new PixelMaterial("#ffd060")),
+                            ('F', new PixelMaterial("#fff6d0"))),
                         _ => null,
                     };
                 default:

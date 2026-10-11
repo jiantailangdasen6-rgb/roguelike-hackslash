@@ -49,6 +49,7 @@ namespace Game.EditorTools.Art
                 ["camp_stones"] = One(StoneRing(), new Vector2(0.5f, 0.5f)),
                 ["camp_chest"] = One(Chest()),
                 ["camp_board"] = One(Board()),
+                ["fx_flask"] = new() { Frames = Flask(), Pivot = new Vector2(0.5f, 0.5f) },
                 ["prop_campfire"] = new() { Frames = Campfire(), Pivot = new Vector2(0.5f, 0.1f) },
             };
         }
@@ -613,6 +614,38 @@ namespace Game.EditorTools.Art
             c.Set(32, 57, Fire[5]);
             c.Outline(Outline);
             return c;
+        }
+
+        /// <summary>The alchemist's tumbling flask (6 turning frames). Pale glass: the game tints it per brew.</summary>
+        private static List<PixelCanvas> Flask()
+        {
+            var frames = new List<PixelCanvas>();
+            var liquid = C("#e8f0d8");
+            var liquidDark = C("#a8b898");
+            var glass = C("#f4f8fc");
+            var cork = C("#9a7340");
+            for (int f = 0; f < 6; f++)
+            {
+                var c = new PixelCanvas(16, 16);
+                float a = f * 60f * Mathf.Deg2Rad, cos = Mathf.Cos(a), sin = Mathf.Sin(a);
+                for (int y = 0; y < 16; y++)
+                for (int x = 0; x < 16; x++)
+                {
+                    // Rotate the pixel back into the upright bottle's space (centre 8,8).
+                    float dx = x + 0.5f - 8f, dy = y + 0.5f - 8f;
+                    float u = dx * cos + dy * sin, v = -dx * sin + dy * cos;
+                    bool body = u * u + (v + 1.5f) * (v + 1.5f) <= 4.2f * 4.2f;
+                    bool neck = Mathf.Abs(u) <= 1.2f && v > 1.5f && v <= 4.6f;
+                    bool stopper = Mathf.Abs(u) <= 1.6f && v > 4.6f && v <= 6f;
+                    if (stopper) c.Set(x, y, cork);
+                    else if (neck) c.Set(x, y, glass);
+                    else if (body) c.Set(x, y, v < 0.3f ? (u < -1.5f ? liquid : liquidDark) : glass);
+                }
+                c.Set(6, 9, C("#ffffff"));
+                c.Outline(Outline);
+                frames.Add(c);
+            }
+            return frames;
         }
 
         private static PixelCanvas Log()

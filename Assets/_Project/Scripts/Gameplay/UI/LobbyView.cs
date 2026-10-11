@@ -80,12 +80,13 @@ namespace Game.Gameplay
             var sub = UIKit.Label(root, "ラビリンス・サバイバー　─　仲間と挑む、闇の迷宮", 30, TextAnchor.MiddleCenter, UIKit.MutedText);
             sub.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1200f, 50f), new Vector2(0f, -280f));
 
-            // The three heroes, idling side by side.
-            for (int i = 0; i < ClassCatalog.All.Length; i++)
+            // The heroes this player has, idling side by side.
+            var heroes = System.Array.FindAll(ClassCatalog.All, c => Profile.IsClassOpen(c.Id));
+            for (int i = 0; i < heroes.Length; i++)
             {
-                var def = ClassCatalog.All[i];
+                var def = heroes[i];
                 var rect = UIKit.Rect("Hero", root).Place(new Vector2(0.5f, 0.5f), new Vector2(220f, 220f),
-                    new Vector2((i - (ClassCatalog.All.Length - 1) * 0.5f) * 210f, 90f));
+                    new Vector2((i - (heroes.Length - 1) * 0.5f) * 190f, 90f));
                 var img = rect.gameObject.AddComponent<Image>();
                 img.preserveAspect = true;
                 img.raycastTarget = false;

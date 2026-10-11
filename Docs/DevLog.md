@@ -11,12 +11,12 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。感想反映1回目＋音量調整まで反映済み |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。部屋の分岐選択・パーク／お守り追加まで反映済み（版 8a2351c8） |
 | PC版 | `Builds/Windows/LabyrinthSurvivor.exe`（ローカルのみ、git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加） |
-| テスト | EditMode 54件・PlayMode 1件・3人LAN通信テスト・公開ページでのPCホスト＋ブラウザ参加テスト すべて合格 |
-| 最新コミット | `1d3144d` Mute automated runs, lower default volumes（その前 `02096f8` 感想反映1回目） |
+| テスト | EditMode 73件・PlayMode 1件・3人LAN通信テスト・公開ページでのPCホスト＋ブラウザ参加テスト すべて合格 |
+| 最新コミット | `f00912b` Room choice: reward doors and trials; 7 perks, 4 trinkets（その前 `71dd9fe` 協力開始時の参加側の画面崩れ修正）|
 
 ---
 

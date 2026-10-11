@@ -83,6 +83,10 @@ namespace Game.Core
             new() { Id = "soul_ring", Name = "吸魂の指輪", Text = "敵を倒すとHPが2回復", Cost = 70, HealOnKill = 2f },
             new() { Id = "hourglass", Name = "時の砂時計", Text = "スキルのクールダウン −12%", Cost = 80, Modifiers = new[] { M(StatType.Cooldown, ModifierKind.PercentAdd, -0.12f) } },
             new() { Id = "phoenix", Name = "不死鳥の羽", Text = "ランごとに1回、倒れてもその場でHP50%で復活", Cost = 120, Phoenix = true },
+            new() { Id = "soul_lantern", Name = "魂の灯籠", Text = "魂を拾う範囲 +60%", Cost = 40, Modifiers = new[] { M(StatType.PickupRange, ModifierKind.PercentAdd, 0.6f) } },
+            new() { Id = "bone_dice", Name = "骨のさいころ", Text = "会心率 +10%（会心はダメージ2倍）", Cost = 70, Modifiers = new[] { M(StatType.CritChance, ModifierKind.Flat, 0.1f) } },
+            new() { Id = "elder_tome", Name = "古の魔導書", Text = "スキルと攻撃の範囲 +15%", Cost = 90, Modifiers = new[] { M(StatType.Area, ModifierKind.PercentAdd, 0.15f) } },
+            new() { Id = "blood_chalice", Name = "血の聖杯", Text = "与えるダメージ +25%、ただし最大HP −15%", Cost = 100, Modifiers = new[] { M(StatType.Might, ModifierKind.PercentAdd, 0.25f), M(StatType.MaxHealth, ModifierKind.PercentAdd, -0.15f) } },
         };
 
         public static MasteryNode GetNode(string id) => Mastery.FirstOrDefault(n => n.Id == id);

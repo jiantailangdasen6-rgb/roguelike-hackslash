@@ -360,30 +360,43 @@ namespace Game.Gameplay
         private void RebuildTrinkets()
         {
             for (int i = _trinketList.childCount - 1; i >= 0; i--) Destroy(_trinketList.GetChild(i).gameObject);
-            int row = 0;
+            // Two columns of cards; clicking a card equips/unequips it, or buys it when locked.
+            const float cardW = 276f, cardH = 96f, gapX = 8f, gapY = 7f;
+            int slot = 0;
             foreach (var t in MetaCatalog.Trinkets)
             {
                 bool unlocked = Profile.IsUnlocked(t.Id);
                 bool equipped = unlocked && Profile.equippedTrinkets.Contains(t.Id);
-                var item = UIKit.Framed(_trinketList, t.Id, equipped ? new Color(0.16f, 0.1f, 0.06f, 1f) : new Color(0.06f, 0.05f, 0.06f, 1f),
+                bool affordable = unlocked || Profile.shards >= t.Cost;
+                var item = UIKit.Framed(_trinketList, t.Id, equipped ? new Color(0.2f, 0.13f, 0.06f, 1f) : new Color(0.06f, 0.05f, 0.06f, 1f),
                     equipped ? UIKit.AccentColor : UIKit.GoldTrim * 0.6f);
-                item.Outer().Place(new Vector2(0f, 1f), new Vector2(560f, 66f), new Vector2(0f, -row * 72f));
-                var label = UIKit.Label(item.transform, $"<b>{t.Name}</b>\n<size=20><color=#bfb6aa>{t.Text}</color></size>", 24, TextAnchor.MiddleLeft,
-                    unlocked ? Color.white : new Color(1f, 1f, 1f, 0.5f));
-                label.rectTransform.Stretch(10f);
-                label.rectTransform.offsetMin = new Vector2(70f, 4f);
-                label.rectTransform.offsetMax = new Vector2(-170f, -4f);
-                var icon = UIKit.Rect("Icon", item.transform).Place(new Vector2(0f, 0.5f), new Vector2(54f, 54f), new Vector2(8f, 0f)).gameObject.AddComponent<Image>();
+                var outer = item.Outer();
+                outer.Place(new Vector2(0f, 1f), new Vector2(cardW, cardH), new Vector2((slot % 2) * (cardW + gapX), -(slot / 2) * (cardH + gapY)));
+
+                var icon = UIKit.Rect("Icon", item.transform).Place(new Vector2(0f, 1f), new Vector2(48f, 48f), new Vector2(6f, -6f)).gameObject.AddComponent<Image>();
                 icon.sprite = GameIcons.Trinket(t.Id);
                 icon.enabled = icon.sprite != null;
                 icon.raycastTarget = false;
                 if (!unlocked) icon.color = new Color(0.4f, 0.4f, 0.45f, 0.8f);
 
-                string action = equipped ? "装備中" : unlocked ? "装備する" : $"解放 {t.Cost}";
-                var color = equipped ? new Color(0.35f, 0.25f, 0.1f) : unlocked ? UIKit.ButtonColor : new Color(0.1f, 0.15f, 0.25f);
+                var name = UIKit.Label(item.transform, $"<b>{t.Name}</b>", 21, TextAnchor.MiddleLeft, unlocked ? Color.white : new Color(1f, 1f, 1f, 0.55f));
+                name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(cardW - 64f, 30f), new Vector2(60f, -4f));
+                string state = equipped ? $"<color=#e6b85a>装備中</color>" : unlocked ? "<color=#8f877d>装備できる</color>"
+                    : affordable ? $"<color=#9fd8ff>解放 {t.Cost}</color>" : $"<color=#6f7f90>解放 {t.Cost}</color>";
+                var tag = UIKit.Label(item.transform, state, 17, TextAnchor.MiddleLeft);
+                tag.rectTransform.Place(new Vector2(0f, 1f), new Vector2(cardW - 64f, 22f), new Vector2(60f, -32f));
+                var text = UIKit.Label(item.transform, $"<color=#bfb6aa>{t.Text}</color>", 16, TextAnchor.UpperLeft);
+                text.rectTransform.Place(new Vector2(0f, 1f), new Vector2(cardW - 14f, 40f), new Vector2(8f, -55f));
+
                 var id = t.Id;
                 var cost = t.Cost;
-                var button = UIKit.Button(item.transform, action, 22, () =>
+                var button = outer.gameObject.AddComponent<Button>();
+                button.targetGraphic = outer.GetComponent<Image>();
+                var colors = button.colors;
+                colors.highlightedColor = new Color(1.6f, 1.5f, 1.2f);
+                colors.disabledColor = Color.white;
+                button.colors = colors;
+                button.onClick.AddListener(() =>
                 {
                     if (!Profile.IsUnlocked(id))
                     {
@@ -395,10 +408,9 @@ namespace Game.Gameplay
                     }
                     ProfileStore.Save();
                     Refresh();
-                }, color);
-                button.GetComponent<RectTransform>().Place(new Vector2(1f, 0.5f), new Vector2(150f, 52f), new Vector2(-8f, 0f));
-                button.interactable = unlocked || Profile.shards >= t.Cost;
-                row++;
+                });
+                button.interactable = affordable;
+                slot++;
             }
         }
 

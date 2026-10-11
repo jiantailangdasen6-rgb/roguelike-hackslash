@@ -14,6 +14,7 @@ namespace Game.Gameplay
 
         private GameObject _panel;
         private Text _timerText;
+        private Text _heading;
         private readonly Button[] _buttons = new Button[PerkRoller.OptionCount];
         private readonly Image[] _edges = new Image[PerkRoller.OptionCount];
         private readonly Text[] _tags = new Text[PerkRoller.OptionCount];
@@ -35,7 +36,7 @@ namespace Game.Gameplay
             dim.rectTransform.Stretch();
             _panel = dim.gameObject;
 
-            var title = UIKit.Title(dim.transform, "力を選べ", 64);
+            var title = _heading = UIKit.Title(dim.transform, "力を選べ", 64);
             title.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 90f), new Vector2(0f, 320f));
             _timerText = UIKit.Label(dim.transform, "", 24, TextAnchor.MiddleCenter, UIKit.MutedText);
             _timerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(900f, 40f), new Vector2(0f, 255f));
@@ -86,6 +87,13 @@ namespace Game.Gameplay
         {
             var local = NetPlayer.Local;
             if (e.Type != SimEventType.PerkOffer || local == null || e.ClientId != local.OwnerClientId) return;
+            _heading.text = (ChoiceKind)e.Int switch
+            {
+                ChoiceKind.Start => "旅立ちの力を選べ",
+                ChoiceKind.Boon => "<color=#ffcc5c>祝福</color>  力を選べ",
+                ChoiceKind.Upgrade => "<color=#8cd9ff>研磨</color>  強化する力を選べ",
+                _ => "力を選べ",
+            };
             Show(PerkOption.Unpack(e.Seed));
         }
 

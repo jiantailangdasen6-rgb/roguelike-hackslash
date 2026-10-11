@@ -13,6 +13,7 @@ namespace Game.Core
         private static readonly object ValorSource = new();
         private static readonly object MercySource = new();
         private static readonly object BloodlustSource = new();
+        private readonly object _vigorSource = new();
         private readonly object[] _perkSources = new object[PerkCatalog.Count];
 
         public readonly ulong ClientId;
@@ -27,6 +28,8 @@ namespace Game.Core
         public bool Phoenix { get; private set; }
         public float HealOnKill { get; private set; }
         public int Level { get; private set; } = 1;
+        /// <summary>Max HP boosts from "vigor" reward doors this run.</summary>
+        public int VigorStacks { get; private set; }
 
         public Vector2 Position;
         public Vector2 Aim = Vector2.right;
@@ -162,6 +165,14 @@ namespace Game.Core
             if (MaxHp > before && !Downed) Hp += MaxHp - before;
         }
 
+        public void AddVigor(int stacks)
+        {
+            VigorStacks += stacks;
+            Stats.RemoveModifiersFrom(_vigorSource);
+            Stats.AddModifier(new StatModifier(StatType.MaxHealth, ModifierKind.PercentAdd, RunSimulation.VigorPerStack * VigorStacks), _vigorSource);
+            Hp = Mathf.Min(Hp, MaxHp);
+        }
+
         public bool CanTakePerk(PerkDef def) =>
             (!def.Class.HasValue || def.Class.Value == Class.Id)
             && (!def.Locked || UnlockedPerks.Contains(def.Id))
@@ -291,6 +302,25 @@ namespace Game.Core
 
             if (result.Count == 0) result.Add(new PerkOption(PerkOption.HealId, 0));
             return result.ToArray();
+        }
+
+        /// <summary>Up to three perks the player already has, each one level higher. Null when none can grow.</summary>
+        public static PerkOption[] RollUpgrade(GameRandom rng, SimPlayer player)
+        {
+            var owned = new List<PerkOption>();
+            foreach (var def in PerkCatalog.All)
+            {
+                int level = player.PerkLevel(def.Id);
+                if (level > 0 && level < def.MaxLevel) owned.Add(new PerkOption((byte)def.Id, (byte)(level + 1)));
+            }
+            if (owned.Count == 0) return null;
+            for (int i = owned.Count - 1; i > 0; i--)
+            {
+                int j = rng.Range(0, i + 1);
+                (owned[i], owned[j]) = (owned[j], owned[i]);
+            }
+            if (owned.Count > OptionCount) owned.RemoveRange(OptionCount, owned.Count - OptionCount);
+            return owned.ToArray();
         }
 
         public static void Apply(SimPlayer player, PerkOption option)

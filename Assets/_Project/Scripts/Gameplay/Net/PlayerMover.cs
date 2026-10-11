@@ -177,6 +177,7 @@ namespace Game.Gameplay
             private float _nextSkill1;
             private float _nextSkill2;
             private float _nextDodge;
+            private float _doorsSeenAt = -1f;
             public Vector2 Move;
             public Vector2 Aim = Vector2.right;
             public bool Attack;
@@ -191,12 +192,25 @@ namespace Game.Gameplay
                 Attack = false;
                 if (director == null || !director.IsRunning) return;
 
-                if (director.RoomCleared.Value)
+                var doors = director.Doors;
+                if (doors.Length == 0) _doorsSeenAt = -1f;
+                else if (_doorsSeenAt < 0f) _doorsSeenAt = Time.time;
+                // -doorwait <s>: linger before choosing so screenshots can catch the open doors.
+                if (doors.Length > 0 && Time.time - _doorsSeenAt < CommandLine.GetFloat("-doorwait", 0f))
                 {
-                    Vector2 toExit = director.ExitPosition.Value - pos;
+                    Vector2 toView = new Vector2(0f, 3f) - pos; // close enough that the camera frames every door
+                    Move = toView.sqrMagnitude > 0.3f ? toView.normalized : Vector2.zero;
+                    return;
+                }
+                if (doors.Length > 0)
+                {
+                    // Every bot derives the same door from the room number, so they gather at one exit.
+                    int pick = director.RoomIndex.Value % doors.Length;
+                    Vector2 toExit = RunDirector.DoorPosition(pick, doors.Length) - pos;
                     Move = toExit.sqrMagnitude > 0.2f ? toExit.normalized : Vector2.zero;
                     return;
                 }
+                if (director.RoomCleared.Value) return;
 
                 // Help downed allies first.
                 foreach (var other in NetPlayer.All)

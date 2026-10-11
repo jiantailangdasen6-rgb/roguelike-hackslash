@@ -57,6 +57,7 @@ namespace Game.EditorTools.Art
             foreach (var (name, sheet) in PropArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             Effect("icons_perk", IconArt.Perks(), "icons_perk");
             Effect("icons_trinket", IconArt.Trinkets(), "icons_trinket");
+            Effect("icons_reward", IconArt.Rewards(), "icons_reward");
             WritePreview("props", PropArt.Sheets());
 
             var tiles = ProceduralArt.Tiles();

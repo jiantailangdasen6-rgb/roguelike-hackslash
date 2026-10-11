@@ -47,8 +47,9 @@
 | プレイヤー位置・向き | NetworkTransform（Owner）＋ Owner 書き込みの NetworkVariable（向き） |
 | HP・シールド・クールダウン・ダウン・バフ | NetPlayer の NetworkVariable（ホストが書く） |
 | 部屋・ウェーブ・チーム Lv・経験値・一時停止・討伐数 | RunDirector の NetworkVariable |
+| 報酬の門（種類・試練・全員が立っている門・進捗）、試練部屋、門の報酬の魂の欠片 | RunDirector の NetworkVariable（`DoorsPacked` は `Door.Pack` の int、門の位置は `RunSimulation.DoorPosition` で各自計算） |
 | 敵（位置・アニメ状態・向き・状態異常・HP 割合） | スナップショット：1 体 9 バイト、100 体ごとに分割、Unreliable 15Hz |
-| 攻撃・弾・予兆・ヒット・撃破・範囲効果・魂・パーク提示など | イベント列（`SimEvent` を種類ごとに必要項目だけ詰める）Reliable 毎 tick |
+| 攻撃・弾・予兆・ヒット・撃破・範囲効果・魂・パーク提示（`Int` = 提示の理由 `ChoiceKind`）・報酬受け取りなど | イベント列（`SimEvent` を種類ごとに必要項目だけ詰める）Reliable 毎 tick |
 | クラス・熟練・お守り | 接続要求のペイロード（`Loadout` の JSON）でホストへ |
 | パーク選択 | クライアント → ホスト RPC |
 

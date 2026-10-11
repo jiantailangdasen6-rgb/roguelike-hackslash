@@ -253,7 +253,9 @@ namespace Game.Gameplay
                         3 => $"{AreaBoss(e.Int).Name}を討て",
                         _ => "すべての魔物を倒せ",
                     };
-                    Banner(RoomTitle(e.Int), objective);
+                    bool trial = e.Value > 0.5f;
+                    Banner(trial ? $"{RoomTitle(e.Int)}  <color=#ff6a5a>試練</color>" : RoomTitle(e.Int),
+                        trial ? $"{objective}（魔物が手強い）" : objective);
                     var layout = Arena.Get(e.Id);
                     foreach (var g in layout.Gimmicks)
                     {
@@ -264,8 +266,25 @@ namespace Game.Gameplay
                     break;
                 }
                 case SimEventType.RoomCleared:
-                    Banner("部屋を制圧した", "全員で奥の門へ");
+                {
+                    Banner("部屋を制圧した", NetPlayer.All.Count > 1 ? "報酬の門を選び、全員でその前に立て" : "報酬の門を選び、その前に立て");
+                    Tip("doors", "門の上の印は、その先で得られる報酬。赤い「試練」の門は報酬2倍だが、次の部屋の魔物が手強い");
                     break;
+                }
+                case SimEventType.RewardGranted:
+                {
+                    var reward = (RoomReward)e.Int;
+                    string hex = ColorUtility.ToHtmlStringRGB(RewardCatalog.Color(reward));
+                    string text = reward switch
+                    {
+                        RoomReward.Vigor => $"最大HP +{e.Value:0}%、全員の傷が癒えた",
+                        RoomReward.Shards => $"魂の欠片 +{e.Value:0}（ラン後に受け取る）",
+                        RoomReward.Upgrade => "持っている力を強化する",
+                        _ => "新たな力を授かる",
+                    };
+                    Toast($"<color=#{hex}>{RewardCatalog.Name(reward)}</color>：{text}");
+                    break;
+                }
                 case SimEventType.BossSpawned:
                 {
                     var def = EnemyCatalog.Get((EnemyType)e.Int);
@@ -435,15 +454,20 @@ namespace Game.Gameplay
         {
             if (d.RoomCleared.Value)
             {
-                string hold = d.ExitHold.Value > 0f ? $"  …{d.ExitHold.Value / RunSimulation.ExitHoldTime:P0}" : "";
-                return $"奥の門へ全員で向かえ{hold}";
+                var doors = d.Doors;
+                if (doors.Length == 0) return "";
+                int held = d.HoldDoor.Value;
+                if (held >= 0 && held < doors.Length)
+                    return $"「{RewardCatalog.Name(doors[held].Reward)}」の門へ…  {d.ExitHold.Value / RunSimulation.ExitHoldTime:P0}";
+                return NetPlayer.All.Count > 1 ? "門を選べ：全員で同じ門の前に立つ" : "門を選べ：進みたい門の前に立つ";
             }
-            return d.Objective.Value switch
+            string objective = d.Objective.Value switch
             {
                 RoomObjective.Survive => $"生き延びよ  残り {UIKit.FormatTime(d.Target.Value - d.Progress.Value)}",
                 RoomObjective.Waves => $"魔物の群れ  第{Mathf.Max(1, d.Wave.Value)}波 / {d.WaveCount.Value}",
                 _ => $"{EnemyCatalog.Get(d.BossType.Value).Name}を討て",
             };
+            return d.RoomTrial.Value ? $"<color=#ff6a5a>試練</color>  {objective}" : objective;
         }
 
         private static string CenterMessage(RunDirector d, NetPlayer local)

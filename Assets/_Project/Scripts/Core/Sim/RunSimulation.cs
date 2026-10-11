@@ -49,7 +49,7 @@ namespace Game.Core
         private float _spawnTimer;
         private float _waveTimer;
         private float _choiceTimer;
-        private bool _levelUpChoices;
+        private ChoiceKind _choiceKind;
         private int _lastWaveSize;
 
         public readonly Difficulty Difficulty;
@@ -80,6 +80,7 @@ namespace Game.Core
             _combatRng = root.Fork(3);
             _aiRng = root.Fork(4);
             _layoutRng = root.Fork(5);
+            _doorRng = root.Fork(6);
         }
 
         private readonly GameRandom _layoutRng;
@@ -93,8 +94,9 @@ namespace Game.Core
         public static float DamageMultiplier(int roomIndex) => 1f + 0.12f * roomIndex;
 
         /// <summary>Monster health for the current room, players and difficulty.</summary>
-        public float EnemyHealthScale => HealthMultiplier(Room.Index, Players.Count) * DifficultyDef.EnemyHealth;
-        public float EnemyDamageScale => DamageMultiplier(Room.Index) * DifficultyDef.EnemyDamage;
+        public float EnemyHealthScale => HealthMultiplier(Room.Index, Players.Count) * DifficultyDef.EnemyHealth * (Room.Trial ? TrialHealth : 1f);
+        public float EnemyDamageScale => DamageMultiplier(Room.Index) * DifficultyDef.EnemyDamage * (Room.Trial ? TrialDamage : 1f);
+        public float EliteChance => DifficultyDef.EliteChance + (Room.Trial ? TrialEliteChance : 0f);
 
         /// <summary>The boss of the current area.</summary>
         public EnemyType AreaBoss => EnemyCatalog.AreaBosses[Mathf.Min(Room.Area, EnemyCatalog.AreaBosses.Length - 1)];
@@ -152,7 +154,7 @@ namespace Game.Core
             StartRoom(Mathf.Clamp(firstRoom, 0, TotalRooms - 1));
             var starters = new List<SimPlayer>();
             foreach (var p in Players) if (p.HasStartPerk) starters.Add(p);
-            if (starters.Count > 0) BeginChoices(starters, levelUp: false);
+            if (starters.Count > 0) BeginChoices(starters, ChoiceKind.Start);
         }
 
         public void Step(float dt)
@@ -266,7 +268,7 @@ namespace Game.Core
                     if (_spawnTimer <= 0f && hostile < target)
                     {
                         _spawnTimer = 0.8f;
-                        QueueSpawn(RandomEnemyType(), _spawnRng.Chance(DifficultyDef.EliteChance + 0.01f));
+                        QueueSpawn(RandomEnemyType(), _spawnRng.Chance(EliteChance + 0.01f));
                     }
                     break;
                 }
@@ -293,7 +295,7 @@ namespace Game.Core
             _lastWaveSize = size;
             bool eliteRoom = Room.Index % RoomsPerArea == 2;
             for (int i = 0; i < size; i++)
-                QueueSpawn(RandomEnemyType(), (eliteRoom && i == 0) || _spawnRng.Chance(DifficultyDef.EliteChance));
+                QueueSpawn(RandomEnemyType(), (eliteRoom && i == 0) || _spawnRng.Chance(EliteChance));
             Events.Add(new SimEvent(SimEventType.WaveStarted) { Int = Room.Wave, Value = Room.WaveCount });
         }
 
@@ -393,6 +395,8 @@ namespace Game.Core
                     float r = p.Stats.Get(StatType.PickupRange);
                     if ((p.Position - soul.Position).sqrMagnitude > r * r) continue;
                     TeamXp += soul.Value;
+                    int harvest = p.PerkLevel(PerkId.SoulHarvest);
+                    if (harvest > 0) p.Heal(harvest);
                     Events.Add(new SimEvent(SimEventType.SoulCollected) { Id = soul.Id, ClientId = p.ClientId });
                     Souls.RemoveAt(s);
                     break;
@@ -410,20 +414,34 @@ namespace Game.Core
                 PendingLevelUps++;
                 foreach (var p in Players) p.SetLevel(TeamLevel);
             }
-            if (PendingLevelUps > 0 && !AwaitingChoices) BeginChoices(Players, levelUp: true);
+            if (PendingLevelUps > 0) StartNextChoiceRound();
         }
 
         // ------------------------------------------------------------------ Perk choices
 
-        private void BeginChoices(IEnumerable<SimPlayer> who, bool levelUp)
+        /// <summary>Opens the next waiting choice: door rewards first (they were promised), then level-ups.</summary>
+        private void StartNextChoiceRound()
+        {
+            if (AwaitingChoices || Players.Count == 0) return;
+            if (_rewardRounds.Count > 0) BeginChoices(Players, _rewardRounds.Dequeue());
+            else if (PendingLevelUps > 0) BeginChoices(Players, ChoiceKind.LevelUp);
+        }
+
+        private void BeginChoices(IEnumerable<SimPlayer> who, ChoiceKind kind)
         {
             AwaitingChoices = true;
-            _levelUpChoices = levelUp;
+            _choiceKind = kind;
             _choiceTimer = ChoiceTimeout;
             foreach (var p in who)
             {
-                p.PendingOffer = PerkRoller.Roll(_perkRng, p);
-                Events.Add(new SimEvent(SimEventType.PerkOffer) { ClientId = p.ClientId, Seed = PerkOption.Pack(p.PendingOffer) });
+                var shown = kind;
+                p.PendingOffer = kind == ChoiceKind.Upgrade ? PerkRoller.RollUpgrade(_perkRng, p) : null;
+                if (p.PendingOffer == null)
+                {
+                    if (kind == ChoiceKind.Upgrade) shown = ChoiceKind.Boon; // nothing to upgrade yet: a new perk instead
+                    p.PendingOffer = PerkRoller.Roll(_perkRng, p);
+                }
+                Events.Add(new SimEvent(SimEventType.PerkOffer) { ClientId = p.ClientId, Seed = PerkOption.Pack(p.PendingOffer), Int = (int)shown });
             }
         }
 
@@ -441,8 +459,8 @@ namespace Game.Core
         {
             foreach (var p in Players) if (p.PendingOffer != null) return;
             AwaitingChoices = false;
-            if (_levelUpChoices) PendingLevelUps = Mathf.Max(0, PendingLevelUps - 1);
-            if (PendingLevelUps > 0) BeginChoices(Players, levelUp: true);
+            if (_choiceKind == ChoiceKind.LevelUp) PendingLevelUps = Mathf.Max(0, PendingLevelUps - 1);
+            StartNextChoiceRound();
         }
 
         private void AutoChooseRemaining()
@@ -460,10 +478,18 @@ namespace Game.Core
             Room.Progress = 0f;
             Room.Wave = 0;
             Room.Cleared = false;
+            Room.Trial = _enterTrial;
+            _enterTrial = false;
+            Room.Doors.Clear();
+            Room.HoldDoor = -1;
             Room.ExitHold = 0f;
-            Room.ExitPosition = new Vector2(0f, Bounds.yMax - 1.2f);
             _spawnTimer = 1.5f;
-            foreach (var p in Players) p.SecondWindUsed = false;
+            foreach (var p in Players)
+            {
+                p.SecondWindUsed = false;
+                int blessing = p.PerkLevel(PerkId.Blessing);
+                if (blessing > 0 && p.Alive) p.Shield = Mathf.Max(p.Shield, BlessingShield * blessing);
+            }
 
             Layout = Arena.Get(Bounds == DefaultBounds ? Arena.Pick(_layoutRng, index, Layout.Id) : 0);
             ResetHazards();
@@ -489,7 +515,7 @@ namespace Game.Core
                     Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = new Vector2(0f, 3f), Int = (int)AreaBoss, Value = 1.6f });
                     break;
             }
-            Events.Add(new SimEvent(SimEventType.RoomStarted) { Int = index, Id = Layout.Id });
+            Events.Add(new SimEvent(SimEventType.RoomStarted) { Int = index, Id = Layout.Id, Value = Room.Trial ? 1f : 0f });
             SpawnProps();
         }
 
@@ -518,16 +544,21 @@ namespace Game.Core
                 return;
             }
 
-            bool anyAlive = false;
-            bool allAtExit = true;
+            // Everyone standing (downed players are carried along) must agree on one door.
+            int chosen = -1;
+            bool first = true;
             foreach (var p in Players)
             {
                 if (!p.Alive) continue;
-                anyAlive = true;
-                if ((p.Position - Room.ExitPosition).sqrMagnitude > ExitRadius * ExitRadius) allAtExit = false;
+                int at = DoorAt(p.Position);
+                if (first) chosen = at;
+                else if (at != chosen) chosen = -1;
+                first = false;
             }
-            Room.ExitHold = anyAlive && allAtExit ? Room.ExitHold + dt : 0f;
-            if (Room.ExitHold >= ExitHoldTime) NextRoom();
+            if (chosen != Room.HoldDoor) Room.ExitHold = 0f;
+            Room.HoldDoor = chosen;
+            Room.ExitHold = chosen >= 0 ? Room.ExitHold + dt : 0f;
+            if (Room.ExitHold >= ExitHoldTime) NextRoom(chosen);
         }
 
         private void ClearRoom()
@@ -559,11 +590,13 @@ namespace Game.Core
                 Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 1 });
                 return;
             }
-            Events.Add(new SimEvent(SimEventType.RoomCleared) { Int = Room.Index, Pos = Room.ExitPosition });
+            RollDoors();
+            Events.Add(new SimEvent(SimEventType.RoomCleared) { Int = Room.Index, Seed = (ulong)Door.Pack(Room.Doors) });
         }
 
-        private void NextRoom()
+        private void NextRoom(int doorIndex)
         {
+            var door = Room.Doors[Mathf.Clamp(doorIndex, 0, Room.Doors.Count - 1)];
             foreach (var soul in Souls)
             {
                 TeamXp += soul.Value;
@@ -578,7 +611,9 @@ namespace Game.Core
                 if (p.Downed) Revive(p, 0.35f, guardian: false); // everyone who makes it through gets back up
                 Events.Add(new SimEvent(SimEventType.Teleport) { ClientId = p.ClientId, Pos = p.Position });
             }
+            _enterTrial = door.Trial;
             StartRoom(Room.Index + 1);
+            GrantReward(door.Reward, door.Trial ? 2 : 1);
         }
 
         private void CheckDefeat()

@@ -21,6 +21,6 @@ MonoBehaviour:
   Clips:
   - Name: default
     Row: 0
-    Frames: 8
+    Frames: 12
     Fps: 12
     Loop: 1

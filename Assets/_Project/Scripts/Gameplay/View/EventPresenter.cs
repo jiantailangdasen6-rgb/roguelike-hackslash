@@ -71,7 +71,6 @@ namespace Game.Gameplay
 
         private RectTransform _numberLayer;
         private Camera _camera;
-        private Fx _portal;
 
         private void Awake()
         {
@@ -647,29 +646,117 @@ namespace Game.Gameplay
                 n.Text.color = c;
             }
 
-            UpdatePortal();
+            UpdateDoors();
         }
 
-        private void UpdatePortal()
+        // ------------------------------------------------------------------ Reward doors
+
+        /// <summary>One open exit: a portal tinted by its reward, a gathering ring, the reward medallion and its name.</summary>
+        private sealed class DoorFx
+        {
+            public Fx Portal;
+            public Fx Ring;
+            public Fx Icon;
+            public Fx Skull;
+            public Text Label;
+            public Vector2 Position;
+            public Color Color;
+        }
+
+        private readonly List<DoorFx> _doors = new();
+        private int _doorsKey;
+
+        private Fx SpawnIcon(Sprite sprite, Vector2 at, float scale, int order)
+        {
+            var fx = Spawn("icons_reward", at, 0f, 99999f, scale, scale, Color.white, order);
+            if (sprite != null)
+            {
+                fx.Frames = new[] { sprite };
+                fx.Renderer.sprite = sprite;
+            }
+            return fx;
+        }
+
+        private void ClearDoors()
+        {
+            foreach (var d in _doors)
+            {
+                Release(d.Portal);
+                Release(d.Ring);
+                Release(d.Icon);
+                if (d.Skull != null) Release(d.Skull);
+                Destroy(d.Label.gameObject);
+            }
+            _doors.Clear();
+        }
+
+        private void UpdateDoors()
         {
             var director = RunDirector.Instance;
-            bool open = director != null && director.RoomCleared.Value && director.Phase.Value == RunPhase.Playing;
-            if (open && _portal == null)
+            bool open = director != null && director.Phase.Value == RunPhase.Playing;
+            var doors = open ? director.Doors : System.Array.Empty<Door>();
+            int key = doors.Length == 0 ? 0 : director.DoorsPacked.Value;
+            if (key != _doorsKey)
             {
-                _portal = Spawn("fx_portal", director.ExitPosition.Value, 8f, 99999f, 1.6f, 1.6f, Color.white, order: -350);
-                AddLight(_portal, new Color(1f, 0.3f, 0.25f), 1.6f, 3.5f);
+                ClearDoors();
+                _doorsKey = key;
+                int area = director != null ? (director.RoomIndex.Value + 1) / RunSimulation.RoomsPerArea : 0;
+                for (int i = 0; i < doors.Length; i++) _doors.Add(CreateDoor(doors[i], RunDirector.DoorPosition(i, doors.Length), area));
             }
-            else if (!open && _portal != null)
+            if (_doors.Count == 0) return;
+
+            int held = director.HoldDoor.Value;
+            float hold = Mathf.Clamp01(director.ExitHold.Value / RunSimulation.ExitHoldTime);
+            for (int i = 0; i < _doors.Count; i++)
             {
-                Release(_portal);
-                _portal = null;
+                var d = _doors[i];
+                bool chosen = i == held;
+                float pulse = 1.6f + 0.08f * Mathf.Sin(Time.time * 4f + i * 1.7f) + (chosen ? 0.25f * hold : 0f);
+                d.Portal.Go.transform.localScale = Vector3.one * pulse;
+                d.Portal.StartScale = d.Portal.EndScale = pulse;
+                if (d.Portal.Light != null) d.Portal.Light.intensity = chosen ? 1.8f + 1.6f * hold : 1.5f;
+
+                var ringColor = d.Color;
+                ringColor.a = chosen ? 0.45f + 0.4f * hold : 0.22f + 0.06f * Mathf.Sin(Time.time * 3f + i);
+                d.Ring.Renderer.color = ringColor;
+
+                Vector2 iconAt = d.Position + new Vector2(0f, 0.2f + 0.1f * Mathf.Sin(Time.time * 2.2f + i * 2f));
+                d.Icon.Go.transform.position = iconAt;
+                if (d.Skull != null) d.Skull.Go.transform.position = iconAt + new Vector2(0.55f, 0.45f);
+
+                if (_camera != null)
+                {
+                    d.Label.transform.position = _camera.WorldToScreenPoint(d.Position + new Vector2(0f, -1.75f));
+                    var c = d.Label.color;
+                    c.a = chosen ? 1f : 0.88f;
+                    d.Label.color = c;
+                }
             }
-            if (_portal != null)
-            {
-                float pulse = 1.6f + 0.08f * Mathf.Sin(Time.time * 4f);
-                _portal.Go.transform.localScale = Vector3.one * pulse;
-                _portal.StartScale = _portal.EndScale = pulse;
-            }
+        }
+
+        private DoorFx CreateDoor(Door door, Vector2 at, int area)
+        {
+            var color = RewardCatalog.Color(door.Reward);
+            if (door.Trial) color = Color.Lerp(color, RewardCatalog.TrialColor, 0.55f);
+            var d = new DoorFx { Position = at, Color = color };
+
+            d.Ring = Spawn("fx_circle", at, 1f, 99999f, RunSimulation.ExitRadius, RunSimulation.ExitRadius, color, order: -360);
+            d.Portal = Spawn("fx_portal", at, 8f, 99999f, 1.6f, 1.6f, Color.Lerp(Color.white, color, 0.6f), order: -350);
+            AddLight(d.Portal, color, 1.5f, 3.6f);
+            d.Icon = SpawnIcon(GameIcons.Reward(door.Reward), at + Vector2.up * 0.2f, 1.6f, 2600);
+            if (door.Trial) d.Skull = SpawnIcon(GameIcons.Trial, at + new Vector2(0.55f, 0.65f), 1f, 2601);
+
+            d.Label = UIKit.Label(_numberLayer, "", 32, TextAnchor.UpperCenter);
+            d.Label.font = UIKit.TitleFont;
+            d.Label.rectTransform.sizeDelta = new Vector2(380f, 110f);
+            d.Label.rectTransform.pivot = new Vector2(0.5f, 1f);
+            string trial = door.Trial ? "<color=#ff6a5a>試練 </color>" : "";
+            d.Label.text = $"{trial}{RewardCatalog.Name(door.Reward)}\n<size=22><color=#e8e0d4>{RewardCatalog.Describe(door.Reward, area, door.Trial)}</color></size>";
+            d.Label.color = color;
+            var shadow = d.Label.gameObject.AddComponent<Outline>();
+            shadow.effectColor = new Color(0f, 0f, 0f, 0.85f);
+            shadow.effectDistance = new Vector2(2f, -2f);
+            return d;
         }
     }
 }

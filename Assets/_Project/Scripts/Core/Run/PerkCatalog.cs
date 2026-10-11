@@ -38,6 +38,15 @@ namespace Game.Core
         Venom,
         DeepMark,
         Evasive,
+
+        // Added later (kept at the end: icons and saved offers index by id)
+        Executioner,
+        SoulHarvest,
+        Comradery,
+        Blessing,
+        Earthshaker,
+        FrostArmor,
+        Ricochet,
     }
 
     /// <summary>
@@ -75,6 +84,10 @@ namespace Game.Core
             new() { Id = PerkId.GuardianBond, Name = "守護の絆", MaxLevel = 2, PerLevel = Mod(StatType.ReviveSpeed, ModifierKind.PercentAdd, 0.6f), Text = "仲間の復活速度 +{0:0}%。復活させた仲間に短い無敵", Number = 60 },
             new() { Id = PerkId.Resonance, Name = "共鳴", MaxLevel = 2, Text = "凍結・印・気絶中の敵へのダメージ +{0:0}%（仲間との連携）", Number = 25 },
             new() { Id = PerkId.SecondWind, Name = "不屈", MaxLevel = 1, Text = "部屋ごとに1回、致命傷をHP1で耐える", Number = 0 },
+            new() { Id = PerkId.Executioner, Name = "処刑人", MaxLevel = 2, Text = "HPが35%以下の敵へのダメージ +{0:0}%", Number = 30 },
+            new() { Id = PerkId.SoulHarvest, Name = "魂喰らい", MaxLevel = 2, PerLevel = Mod(StatType.PickupRange, ModifierKind.PercentAdd, 0.4f), Text = "魂を拾う範囲 +{0:0}%。魂を拾うとHPが少し回復", Number = 40 },
+            new() { Id = PerkId.Comradery, Name = "戦友", MaxLevel = 2, Text = "近く（6m）にいる仲間1人につき与えるダメージ +{0:0}%", Number = 10 },
+            new() { Id = PerkId.Blessing, Name = "加護", MaxLevel = 2, Text = "部屋に入るたび {0:0} のシールドを得る", Number = 20 },
 
             // ---------------- Warrior
             new() { Id = PerkId.Whirlwind, Name = "旋風", Class = ClassId.Warrior, MaxLevel = 1, Text = "3撃目が周囲360°を斬る回転斬りになる", Number = 0 },
@@ -83,6 +96,7 @@ namespace Game.Core
             new() { Id = PerkId.Rush, Name = "猛進", Class = ClassId.Warrior, MaxLevel = 2, Text = "突進斬りのクールダウン −{0:0}%、威力 +{0:0}%", Number = 20 },
             new() { Id = PerkId.Crusher, Name = "粉砕", Class = ClassId.Warrior, MaxLevel = 2, Locked = true, Text = "凍った敵を砕いたときのダメージ +{0:0}%、破片が広がる", Number = 50 },
             new() { Id = PerkId.Bloodlust, Name = "血の渇き", Class = ClassId.Warrior, MaxLevel = 1, Locked = true, Text = "攻撃を当てるたび攻撃力 +3%（最大30%、3秒で切れる）", Number = 0 },
+            new() { Id = PerkId.Earthshaker, Name = "地割れ", Class = ClassId.Warrior, MaxLevel = 2, Text = "突進斬りの終わりに地面を叩き、周りの敵を気絶させる（威力 {0:0}）", Number = 12 },
 
             // ---------------- Mage
             new() { Id = PerkId.Multicast, Name = "多重詠唱", Class = ClassId.Mage, MaxLevel = 2, Text = "魔弾が +{0:0} 発", Number = 1 },
@@ -91,6 +105,7 @@ namespace Game.Core
             new() { Id = PerkId.Mercy, Name = "慈愛", Class = ClassId.Mage, MaxLevel = 2, Text = "癒しの光の回復量 +{0:0}%、回復した仲間の攻撃力も上がる", Number = 40 },
             new() { Id = PerkId.ChainBolt, Name = "連鎖する魔弾", Class = ClassId.Mage, MaxLevel = 2, Locked = true, Text = "魔弾が近くの敵 {0:0} 体に連鎖する", Number = 1 },
             new() { Id = PerkId.Ignite, Name = "燃焼", Class = ClassId.Mage, MaxLevel = 2, Locked = true, Text = "魔弾が敵を燃やす（毎秒 {0:0} ダメージ×3秒）", Number = 4 },
+            new() { Id = PerkId.FrostArmor, Name = "氷の鎧", Class = ClassId.Mage, MaxLevel = 2, Text = "凍結陣の中と周りにいる仲間に {0:0} のシールドを与える", Number = 15 },
 
             // ---------------- Ranger
             new() { Id = PerkId.Spread, Name = "散射", Class = ClassId.Ranger, MaxLevel = 2, Text = "通常攻撃の矢が +{0:0} 本（扇状）", Number = 2 },
@@ -99,6 +114,7 @@ namespace Game.Core
             new() { Id = PerkId.DeepMark, Name = "深い印", Class = ClassId.Ranger, MaxLevel = 2, Text = "印の効果 +{0:0}%、印の範囲 +25%", Number = 15 },
             new() { Id = PerkId.Venom, Name = "毒矢", Class = ClassId.Ranger, MaxLevel = 2, Locked = true, Text = "矢が毒を与える（毎秒 {0:0} ダメージ×4秒）", Number = 3 },
             new() { Id = PerkId.Evasive, Name = "身軽", Class = ClassId.Ranger, MaxLevel = 1, Locked = true, Text = "回避のクールダウン −40%、回避後0.5秒は攻撃速度2倍", Number = 0 },
+            new() { Id = PerkId.Ricochet, Name = "跳弾", Class = ClassId.Ranger, MaxLevel = 1, Text = "通常攻撃の矢が命中すると、近くの別の敵へ跳ね返る（威力70%）", Number = 0 },
         };
 
         private static Dictionary<PerkId, PerkDef> _byId;

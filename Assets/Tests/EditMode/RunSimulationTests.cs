@@ -344,7 +344,7 @@ namespace Game.Tests
             var events = Run(sim, RunSimulation.ExitHoldTime + 0.3f, s =>
             {
                 KeepAliveAndPick(s);
-                if (s.Room.Index == 0) s.SetPlayerPosition(0, s.Room.ExitPosition);
+                if (s.Room.Index == 0) s.SetPlayerPosition(0, RunSimulation.DoorPosition(0, s.Room.Doors.Count, s.Bounds));
             });
             Assert.AreEqual(1, sim.Room.Index);
             Assert.AreEqual(RoomObjective.Survive, sim.Room.Objective);

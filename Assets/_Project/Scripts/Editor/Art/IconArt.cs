@@ -64,6 +64,10 @@ namespace Game.EditorTools.Art
                     case "soul_ring": Ring(c); break;
                     case "hourglass": Hourglass(c); break;
                     case "phoenix": Feather(c, Amber, Red); Sparks(c, Gold); break;
+                    case "soul_lantern": Lantern(c); break;
+                    case "bone_dice": Dice(c); break;
+                    case "elder_tome": Tome(c); break;
+                    case "blood_chalice": Chalice(c); break;
                 }
                 Finish(c);
                 icons.Add(c);
@@ -71,24 +75,52 @@ namespace Game.EditorTools.Art
             return icons;
         }
 
+        /// <summary>Door reward medallions (RoomReward order from Boon), then the trial skull.</summary>
+        public static List<PixelCanvas> Rewards()
+        {
+            var icons = new List<PixelCanvas>();
+            void Add(Color32 rim, Action<PixelCanvas> draw)
+            {
+                var c = Medallion(null, rim: rim);
+                draw(c);
+                Finish(c);
+                icons.Add(c);
+            }
+            Add(Gold, Sunburst);
+            Add(C("#5aa8e0"), c =>
+            {
+                Sword(c, 4, 4, 14, 14, White, Steel);
+                // A bold upward arrow: "one level higher"
+                c.Rect(16, 6, 3, 8, Blue);
+                for (int k = 0; k < 4; k++) c.Rect(14 + k, 14 + k, 7 - k * 2, 1, k == 3 ? White : Blue);
+                Sparks(c, C("#bfe8ff"));
+            });
+            Add(C("#3e9a52"), c => { Heart(c, C("#e04848"), C("#ff9a9a")); Plus(c, 17, 16, Green); });
+            Add(C("#8a5ac8"), Crystals);
+            Add(C("#b0302c"), Skull);
+            return icons;
+        }
+
         // ------------------------------------------------------------------ Frame
 
-        private static PixelCanvas Medallion(ClassId? cls, bool trinket = false)
+        private static PixelCanvas Medallion(ClassId? cls, bool trinket = false, Color32? rim = null)
         {
             var c = new PixelCanvas(Size, Size);
-            Color32 rim = trinket ? C("#9a8a6a") : cls switch
+            c.Disc(12, 12, 11.5f, Ink);
+            c.Disc(12, 12, 10.5f, rim ?? RimFor(cls, trinket));
+            c.Disc(12, 12, 9.5f, C("#1a1419"));
+            c.Disc(11.5f, 12.5f, 7.5f, C("#221b22"));
+            return c;
+        }
+
+        private static Color32 RimFor(ClassId? cls, bool trinket) =>
+            trinket ? C("#9a8a6a") : cls switch
             {
                 ClassId.Warrior => C("#b0302c"),
                 ClassId.Mage => C("#4a7cc8"),
                 ClassId.Ranger => C("#4f9a4a"),
                 _ => GoldDark,
             };
-            c.Disc(12, 12, 11.5f, Ink);
-            c.Disc(12, 12, 10.5f, rim);
-            c.Disc(12, 12, 9.5f, C("#1a1419"));
-            c.Disc(11.5f, 12.5f, 7.5f, C("#221b22"));
-            return c;
-        }
 
         /// <summary>Outline the symbol inside the medallion so it pops.</summary>
         private static void Finish(PixelCanvas c)
@@ -147,7 +179,170 @@ namespace Game.EditorTools.Art
                 case PerkId.Venom: Drop(c, GreenDark, Toxic); c.Set(11, 10, Ink); c.Set(13, 10, Ink); break;
                 case PerkId.DeepMark: c.Ring(12, 12, 6f, 7.2f, Amber); c.Disc(12, 12, 2f, Amber); c.Rect(11, 3, 2, 4, Amber); c.Rect(11, 17, 2, 4, Amber); c.Rect(3, 11, 4, 2, Amber); c.Rect(17, 11, 4, 2, Amber); break;
                 case PerkId.Evasive: Feather(c, C("#dfe8f0"), C("#8fa8c2")); Streaks(c, Green); break;
+                case PerkId.Executioner: Axe(c); break;
+                case PerkId.SoulHarvest: Wisp(c); break;
+                case PerkId.Comradery: Comrades(c); break;
+                case PerkId.Blessing: Shield(c, C("#fff1c8"), Gold, White); Sparks(c, Gold); break;
+                case PerkId.Earthshaker: Stomp(c); break;
+                case PerkId.FrostArmor: Shield(c, Blue, BlueDark, White); c.Line(10, 9, 14, 13, White); c.Line(10, 13, 14, 9, White); break;
+                case PerkId.Ricochet:
+                    c.Line(3, 6, 11, 14, Wood);
+                    c.Set(3, 7, Red); c.Set(4, 6, Red); c.Set(3, 5, Red);
+                    c.Disc(11.5f, 14.5f, 1.8f, Amber); c.Set(11, 16, White); c.Set(13, 15, White);
+                    Arrow(c, 12, 13, 18, 7);
+                    break;
             }
+        }
+
+        // ------------------------------------------------------------------ Symbols (round 3)
+
+        private static void Axe(PixelCanvas c)
+        {
+            c.Line(5, 3, 14, 17, Wood);
+            c.Line(6, 3, 15, 17, C("#5a3e24"));
+            // Crescent blade on the upper end
+            for (int y = 9; y <= 21; y++)
+            {
+                int w = 7 - Mathf.Abs(y - 15) * 5 / 6;
+                if (w <= 0) continue;
+                c.Rect(13, y, w, 1, y > 15 ? Steel : SteelDark);
+                c.Set(13 + w, y, White);
+            }
+            c.Set(20, 13, Red); c.Set(20, 12, Red); c.Set(19, 11, RedDark);
+        }
+
+        private static void Wisp(PixelCanvas c)
+        {
+            var soul = C("#5fd0ff");
+            for (int i = 0; i < 7; i++) c.Disc(12 + Mathf.Sin(i * 0.9f) * 1.2f, 14 + i, 3.6f - i * 0.5f, soul);
+            c.Disc(12, 10, 5f, soul);
+            c.Disc(12, 10, 3.2f, C("#bff0ff"));
+            c.Set(10, 11, Ink); c.Set(14, 11, Ink);
+            c.Disc(5, 5, 1.3f, soul); c.Disc(19.5f, 6, 1.3f, soul); c.Set(4, 9, C("#bff0ff"));
+        }
+
+        private static void Comrades(PixelCanvas c)
+        {
+            var skin = C("#f0d2b0");
+            void Person(int x, int y, Color32 cloth, Color32 dark)
+            {
+                c.Disc(x, y + 1, 3.6f, Ink);
+                c.Disc(x, y + 1, 2.8f, cloth);
+                c.Rect(x - 3, y - 3, 7, 3, cloth);
+                c.Rect(x + 1, y - 3, 2, 4, dark);
+                c.Disc(x, y + 5.5f, 2.6f, Ink);
+                c.Disc(x, y + 5.5f, 1.9f, skin);
+            }
+            Person(12, 9, C("#6a8ad8"), C("#3a5ca0"));
+            Person(7, 6, C("#d04848"), C("#8a2020"));
+            Person(17, 6, C("#4aa85a"), C("#2a6a36"));
+            c.Set(12, 20, Gold); c.Set(11, 19, Gold); c.Set(13, 19, Gold);
+        }
+
+        private static void Stomp(PixelCanvas c)
+        {
+            // A blade driven into the floor, cracks running out from it
+            c.Rect(11, 8, 3, 9, Steel);
+            c.Rect(13, 8, 1, 9, SteelDark);
+            c.Set(12, 7, Steel);
+            c.Rect(8, 16, 9, 2, Gold);
+            c.Rect(11, 18, 3, 3, Wood);
+            c.Line(12, 6, 4, 8, Amber); c.Line(12, 6, 20, 9, Amber);
+            c.Line(12, 6, 7, 3, Amber); c.Line(12, 6, 17, 3, Amber);
+            c.Set(3, 10, Amber); c.Set(21, 11, Amber); c.Set(5, 12, C("#fff3c0"));
+        }
+
+        private static void Sunburst(PixelCanvas c)
+        {
+            for (int k = 0; k < 8; k++)
+            {
+                float a = k * Mathf.PI / 4f + 0.2f;
+                float len = k % 2 == 0 ? 7f : 5.2f;
+                c.Line(12 + Mathf.Cos(a) * 3f, 12 + Mathf.Sin(a) * 3f, 12 + Mathf.Cos(a) * len, 12 + Mathf.Sin(a) * len, k % 2 == 0 ? Gold : Amber);
+            }
+            c.Disc(12, 12, 4f, Gold);
+            c.Disc(12, 12, 2.6f, C("#fff3c0"));
+            c.Set(11, 13, White);
+        }
+
+        private static void Crystals(PixelCanvas c)
+        {
+            void Crystal(float cx, float bottom, float height, float half, Color32 light, Color32 dark)
+            {
+                int top = Mathf.RoundToInt(bottom + height);
+                for (int y = (int)bottom; y <= top; y++)
+                {
+                    float t = (y - bottom) / height;
+                    float w = t < 0.7f ? half * (0.55f + t * 0.65f) : half * (1f - (t - 0.7f) / 0.3f);
+                    for (int x = Mathf.RoundToInt(cx - w); x <= Mathf.RoundToInt(cx + w); x++) c.Set(x, y, x < cx ? light : dark);
+                }
+            }
+            Crystal(7, 5, 9, 2.5f, C("#c9a8ff"), C("#6a3ab0"));
+            Crystal(17, 5, 10, 2.5f, C("#c9a8ff"), C("#6a3ab0"));
+            Crystal(12, 4, 15, 3.6f, C("#e4d4ff"), C("#8a5ad8"));
+            c.Set(11, 14, White); c.Set(11, 15, White);
+        }
+
+        private static void Skull(PixelCanvas c)
+        {
+            var bone = C("#ece2cc");
+            var shade = C("#b8aa8c");
+            c.Disc(12, 13, 6.2f, bone);
+            c.Rect(8, 6, 9, 4, bone);
+            c.Rect(14, 6, 3, 4, shade);
+            c.Disc(9.5f, 12.5f, 2f, Ink);
+            c.Disc(14.5f, 12.5f, 2f, Ink);
+            c.Set(9, 12, Red); c.Set(14, 12, Red);
+            c.Set(12, 10, Ink); c.Set(12, 9, Ink);
+            for (int x = 9; x <= 15; x += 2) c.Set(x, 7, Ink);
+        }
+
+        private static void Lantern(PixelCanvas c)
+        {
+            var iron = C("#4a4650");
+            c.Ring(12, 19, 1.5f, 2.6f, iron);
+            c.Rect(7, 16, 11, 2, iron);
+            c.Rect(7, 5, 11, 2, iron);
+            c.Rect(8, 7, 9, 9, C("#1e3a4a"));
+            c.Rect(8, 7, 1, 9, iron); c.Rect(16, 7, 1, 9, iron); c.Rect(12, 7, 1, 9, C("#2c2a30"));
+            c.Disc(12, 10.5f, 2.6f, C("#5fd0ff"));
+            c.Disc(12, 10.5f, 1.4f, C("#dff8ff"));
+            c.Set(12, 13, C("#5fd0ff"));
+        }
+
+        private static void Dice(PixelCanvas c)
+        {
+            var bone = C("#ece2cc");
+            var shade = C("#b8aa8c");
+            c.Rect(4, 5, 8, 8, bone); c.Rect(4, 5, 8, 1, shade); c.Rect(11, 5, 1, 8, shade);
+            c.Set(6, 10, Ink); c.Set(9, 7, Ink); c.Set(7, 8, RedDark);
+            c.Rect(12, 11, 8, 8, bone); c.Rect(12, 11, 8, 1, shade); c.Rect(19, 11, 1, 8, shade);
+            c.Set(14, 17, Ink); c.Set(17, 17, Ink); c.Set(14, 13, Ink); c.Set(17, 13, Ink); c.Set(15, 15, Red);
+        }
+
+        private static void Tome(PixelCanvas c)
+        {
+            var cover = C("#5a2a4a");
+            c.Rect(5, 5, 13, 14, cover);
+            c.Rect(17, 6, 2, 12, C("#e8e0d0"));
+            c.Rect(5, 5, 2, 14, C("#3a1830"));
+            c.Ring(11.5f, 12, 2f, 3.2f, Gold);
+            c.Set(11, 12, C("#ff9ad8")); c.Set(12, 12, C("#ff9ad8"));
+            c.Rect(16, 11, 3, 2, Gold);
+        }
+
+        private static void Chalice(PixelCanvas c)
+        {
+            for (int y = 12; y <= 18; y++)
+            {
+                int half = 2 + (y - 12) * 4 / 6;
+                c.Rect(12 - half, y, half * 2 + 1, 1, y > 16 ? Gold : GoldDark);
+            }
+            c.Rect(8, 18, 9, 1, Red);
+            c.Rect(9, 19, 7, 1, C("#ff5a5a"));
+            c.Rect(11, 8, 3, 4, GoldDark);
+            c.Rect(8, 5, 9, 3, Gold);
+            c.Set(17, 17, Red); c.Set(17, 16, Red); c.Set(17, 14, RedDark);
         }
 
         // ------------------------------------------------------------------ Symbols

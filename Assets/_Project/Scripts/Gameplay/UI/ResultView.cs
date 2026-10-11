@@ -55,7 +55,7 @@ namespace Game.Gameplay
             // NetworkVariables can land a frame after the event, so award shards once they settle.
             if (_shards < 0 && d.Phase.Value != RunPhase.Playing)
             {
-                _shards = MetaCatalog.ShardsForRun(d.RoomsCleared.Value, d.BossesKilled.Value, d.Kills.Value, _victory, d.DifficultyLevel.Value);
+                _shards = MetaCatalog.ShardsForRun(d.RoomsCleared.Value, d.BossesKilled.Value, d.Kills.Value, _victory, d.DifficultyLevel.Value) + d.BonusShards.Value;
                 if (_victory) ProfileStore.Current.RecordVictory(d.DifficultyLevel.Value);
                 ProfileStore.Current.shards += _shards;
                 ProfileStore.Save();
@@ -64,7 +64,9 @@ namespace Game.Gameplay
             _body.text =
                 $"難易度：{DifficultyCatalog.Get(d.DifficultyLevel.Value).Name}　　到達：{HudView.RoomTitle(d.RoomIndex.Value)}（{d.RoomIndex.Value + 1}/{RunSimulation.TotalRooms}）\n" +
                 $"チームレベル：{d.TeamLevel.Value}　　討伐数：{d.Kills.Value}　　時間：{UIKit.FormatTime(d.Elapsed.Value)}\n\n" +
-                $"<color=#9fd8ff>魂の欠片 +{Mathf.Max(0, _shards)}</color>　（所持 {ProfileStore.Current.shards}）\n" +
+                $"<color=#9fd8ff>魂の欠片 +{Mathf.Max(0, _shards)}</color>" +
+                (d.BonusShards.Value > 0 ? $"<size=24>（うち門の報酬 {d.BonusShards.Value}）</size>" : "") +
+                $"　（所持 {ProfileStore.Current.shards}）\n" +
                 "<size=24>拠点で「熟練」と「お守り」に使えます</size>";
         }
     }

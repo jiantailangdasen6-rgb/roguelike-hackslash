@@ -17,6 +17,10 @@ namespace Game.Gameplay
             return null;
         }
 
+        public static Sprite Reward(RoomReward reward) => Frame("icons_reward", RewardCatalog.IconIndex(reward));
+
+        public static Sprite Trial => Frame("icons_reward", RewardCatalog.TrialIconIndex);
+
         private static Sprite Frame(string sheet, int index)
         {
             var s = SpriteSheet.Load(sheet, quiet: true);

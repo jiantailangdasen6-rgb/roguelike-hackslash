@@ -51,14 +51,15 @@ namespace Game.Gameplay
             Set(SimEventType.PlayerDowned, F.Client | F.Pos);
             Set(SimEventType.PlayerRevived, F.Client | F.Pos);
             Set(SimEventType.Teleport, F.Client | F.Pos);
-            Set(SimEventType.RoomStarted, F.Int | F.Id);
-            Set(SimEventType.RoomCleared, F.Int | F.Pos);
+            Set(SimEventType.RoomStarted, F.Int | F.Id | F.Value);
+            Set(SimEventType.RoomCleared, F.Int | F.Seed);
             Set(SimEventType.RunEnded, F.Int);
             Set(SimEventType.BossSpawned, F.Id | F.Pos | F.Int);
-            Set(SimEventType.PerkOffer, F.Client | F.Seed);
+            Set(SimEventType.PerkOffer, F.Client | F.Seed | F.Int);
             Set(SimEventType.WaveStarted, F.Int | F.Value);
             Set(SimEventType.HazardWarn, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
             Set(SimEventType.HazardFire, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
+            Set(SimEventType.RewardGranted, F.Id | F.Int | F.Value);
             return layout;
         }
 

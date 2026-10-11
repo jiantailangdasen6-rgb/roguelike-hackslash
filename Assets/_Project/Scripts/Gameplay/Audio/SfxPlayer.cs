@@ -193,6 +193,10 @@ namespace Game.Gameplay
                     if (IsLocal(e.ClientId)) Play("levelup");
                     break;
                 case SimEventType.RoomCleared: Play("clear"); break;
+                case SimEventType.RewardGranted:
+                    if ((RoomReward)e.Int == RoomReward.Vigor) Play("heal", null, 1f, 0.9f);
+                    else if ((RoomReward)e.Int == RoomReward.Shards) Play("soul", null, 0.75f);
+                    break;
                 case SimEventType.BossSpawned: Play("roar"); break;
                 case SimEventType.SpawnWarning: Play("telegraph", e.Pos, 0.6f, 0.6f); break;
             }

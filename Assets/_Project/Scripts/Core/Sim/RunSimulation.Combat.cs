@@ -143,11 +143,13 @@ namespace Game.Core
                 {
                     int count = 1 + 2 * p.PerkLevel(PerkId.Spread) + Mathf.RoundToInt(p.Stats.Get(StatType.Amount));
                     int pierce = p.PerkLevel(PerkId.Piercing);
+                    bool ricochet = p.PerkLevel(PerkId.Ricochet) > 0;
                     for (int k = 0; k < count; k++)
                     {
                         Vector2 d = Rotate(dir, (k - (count - 1) * 0.5f) * 7f);
-                        FireProjectile(p, ProjectileKind.Arrow, p.Position + d * 0.5f, d * ClassCatalog.ArrowSpeed,
+                        var arrow = FireProjectile(p, ProjectileKind.Arrow, p.Position + d * 0.5f, d * ClassCatalog.ArrowSpeed,
                             c.BasicRange / ClassCatalog.ArrowSpeed, 0.25f, c.BasicDamage * might, pierce, HitFlags.None);
+                        arrow.Ricochet = ricochet;
                     }
                     Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.BasicA, Pos = p.Position, Vec = dir });
                     break;
@@ -266,6 +268,7 @@ namespace Game.Core
         private void StepDashSlash(SimPlayer p, float dt)
         {
             p.DashSlashTimer -= dt;
+            if (p.DashSlashTimer <= 0f) Earthshake(p);
             float damage = ClassCatalog.DashSlashDamage * p.Stats.Get(StatType.Might) * (1f + 0.2f * p.PerkLevel(PerkId.Rush));
             // Sweep from the start point to where the player is now (they travel on their own client).
             Vector2 from = p.DashSlashFrom, to = p.Position;
@@ -282,6 +285,25 @@ namespace Game.Core
                 p.DashSlashHits.Add(e.Id);
                 DamageEnemy(i, damage, p, HitFlags.Heavy, p.DashSlashDir, 6f);
             }
+        }
+
+        /// <summary>"Earthshaker": the dash-slash ends with a stomp that stuns everything around.</summary>
+        private void Earthshake(SimPlayer p)
+        {
+            int level = p.PerkLevel(PerkId.Earthshaker);
+            if (level <= 0) return;
+            float radius = 2.4f * p.Stats.Get(StatType.Area);
+            float damage = 12f * level * p.Stats.Get(StatType.Might);
+            Enemies.QueryCircle(p.Position, radius, _hits);
+            foreach (int i in _hits.ToArray())
+            {
+                ref var e = ref Enemies[i];
+                if (e.Dead) continue;
+                Vector2 push = (e.Position - p.Position).normalized;
+                ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.3f : 0.9f);
+                DamageEnemy(i, damage, p, HitFlags.Heavy, push, 5f);
+            }
+            Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Slam, Pos = p.Position, Value = radius });
         }
 
         private void StepDelayedAreas(float dt)
@@ -307,6 +329,14 @@ namespace Game.Core
                         ref var e = ref Enemies[i];
                         DamageEnemy(i, ClassCatalog.FrostNovaDamage * p.Stats.Get(StatType.Might), p, HitFlags.None, Vector2.zero, 0f);
                         if (!e.Dead) ApplyStatus(i, e.Def.Boss ? StatusKind.Stunned : StatusKind.Frozen, e.Def.Boss ? 0.6f : duration);
+                    }
+                    int armor = p.PerkLevel(PerkId.FrostArmor);
+                    if (armor > 0)
+                    {
+                        float reach = area.Radius + 1.5f;
+                        foreach (var ally in Players)
+                            if (ally.Alive && (ally.Position - area.Position).sqrMagnitude <= reach * reach)
+                                ally.Shield = Mathf.Max(ally.Shield, 15f * armor);
                     }
                     Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.FrostNova, Pos = area.Position, Value = area.Radius });
                 }
@@ -423,6 +453,18 @@ namespace Game.Core
                 }
             }
 
+            if (proj.Ricochet)
+            {
+                proj.Ricochet = false;
+                int next = Enemies.FindNearest(proj.Position, 5f, e.Id);
+                if (next >= 0 && !proj.HitIds.Contains(Enemies[next].Id))
+                {
+                    Vector2 to = (Enemies[next].Position - proj.Position).normalized;
+                    var child = FireProjectile(owner, ProjectileKind.Arrow, proj.Position, to * ClassCatalog.ArrowSpeed, 0.4f, 0.25f, proj.Damage * 0.7f, 0, HitFlags.None);
+                    child.HitIds.AddRange(proj.HitIds);
+                }
+            }
+
             if (proj.Splits)
             {
                 proj.Splits = false;
@@ -473,6 +515,10 @@ namespace Game.Core
                 }
                 int resonance = attacker.PerkLevel(PerkId.Resonance);
                 if (resonance > 0 && disabled) damage *= 1f + 0.25f * resonance;
+                int executioner = attacker.PerkLevel(PerkId.Executioner);
+                if (executioner > 0 && e.Health < e.MaxHealth * 0.35f) damage *= 1f + 0.3f * executioner;
+                int comradery = attacker.PerkLevel(PerkId.Comradery);
+                if (comradery > 0) damage *= 1f + 0.1f * comradery * AlliesNear(attacker, 6f);
                 if (attacker.PerkLevel(PerkId.Bloodlust) > 0 && (flags & HitFlags.DamageOverTime) == 0) attacker.AddBloodlust();
             }
             if (e.Marked > 0f) damage *= 1f + e.MarkBonus;
@@ -524,6 +570,14 @@ namespace Game.Core
                     if (heal > 0f) attacker.Heal(heal);
                 }
             }
+        }
+
+        private int AlliesNear(SimPlayer p, float radius)
+        {
+            int count = 0;
+            foreach (var other in Players)
+                if (other != p && other.Alive && (other.Position - p.Position).sqrMagnitude <= radius * radius) count++;
+            return count;
         }
 
         private int MaxPerkInTeam(PerkId perk)

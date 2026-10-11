@@ -17,6 +17,62 @@ namespace Game.Core
         Boss,
     }
 
+    /// <summary>What a door promises: the team receives it on walking through (Hades-style room choice).</summary>
+    public enum RoomReward : byte
+    {
+        None,
+        Boon,     // an extra perk choice for everyone
+        Upgrade,  // raise one perk you already have by a level
+        Vigor,    // max HP up and a full heal
+        Shards,   // bonus soul shards at the end of the run
+    }
+
+    /// <summary>One of the exits that open when a room is cleared. A trial door doubles the reward but toughens the room behind it.</summary>
+    public struct Door
+    {
+        public RoomReward Reward;
+        public bool Trial;
+
+        public Door(RoomReward reward, bool trial)
+        {
+            Reward = reward;
+            Trial = trial;
+        }
+
+        public const int MaxCount = 3;
+
+        /// <summary>Count in the low 2 bits, then 4 bits per door (3 reward + 1 trial).</summary>
+        public static int Pack(IReadOnlyList<Door> doors)
+        {
+            int count = Mathf.Min(doors.Count, MaxCount);
+            int packed = count;
+            for (int i = 0; i < count; i++)
+                packed |= ((int)doors[i].Reward & 0x7 | (doors[i].Trial ? 0x8 : 0)) << (2 + i * 4);
+            return packed;
+        }
+
+        public static Door[] Unpack(int packed)
+        {
+            int count = Mathf.Min(packed & 0x3, MaxCount);
+            var doors = new Door[count];
+            for (int i = 0; i < count; i++)
+            {
+                int v = (packed >> (2 + i * 4)) & 0xF;
+                doors[i] = new Door((RoomReward)(v & 0x7), (v & 0x8) != 0);
+            }
+            return doors;
+        }
+    }
+
+    /// <summary>Why a perk offer appeared (sent with the offer so the card screen can say so).</summary>
+    public enum ChoiceKind : byte
+    {
+        LevelUp,
+        Start,
+        Boon,
+        Upgrade,
+    }
+
     public sealed class RoomState
     {
         public int Index;
@@ -26,8 +82,13 @@ namespace Game.Core
         public float Target;     // survive: seconds; waves: number of waves
         public float Progress;
         public bool Cleared;
+        /// <summary>Entered through a trial door: tougher monsters.</summary>
+        public bool Trial;
+        /// <summary>Exits offered once the room is cleared (empty after the final room).</summary>
+        public readonly List<Door> Doors = new();
+        /// <summary>The door everyone is standing at (-1 = none or split up).</summary>
+        public int HoldDoor = -1;
         public float ExitHold;
-        public Vector2 ExitPosition;
 
         public int Area => Index / RunSimulation.RoomsPerArea;
     }
@@ -109,6 +170,7 @@ namespace Game.Core
         public float Life;
         public HitFlags Flags;
         public bool Splits;
+        public bool Ricochet;
         public readonly List<int> HitIds = new(4);
     }
 
@@ -147,14 +209,15 @@ namespace Game.Core
         PlayerDowned,    // ClientId, Pos
         PlayerRevived,   // ClientId, Pos
         Teleport,        // ClientId, Pos
-        RoomStarted,     // Int = room index, Id = layout id
-        RoomCleared,     // Int = room index, Pos = exit
+        RoomStarted,     // Int = room index, Id = layout id, Value = 1 for a trial room
+        RoomCleared,     // Int = room index, Seed = packed doors
         RunEnded,        // Int = 1 victory / 0 defeat
         BossSpawned,     // Id, Pos
-        PerkOffer,       // ClientId, Seed = packed PerkOptions
+        PerkOffer,       // ClientId, Seed = packed PerkOptions, Int = ChoiceKind
         WaveStarted,     // Int = wave number (1-based), Value = wave count
         HazardWarn,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds until it fires
         HazardFire,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds it stays active
+        RewardGranted,   // Int = RoomReward, Value = amount (shards / max HP %), Id = 1 when doubled by a trial
     }
 
     /// <summary>Something that happened during a tick; the network layer sends these to clients for presentation.</summary>

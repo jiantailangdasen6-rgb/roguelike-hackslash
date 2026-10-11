@@ -36,8 +36,12 @@ namespace Game.Gameplay
         public readonly NetworkVariable<float> Progress = new();
         public readonly NetworkVariable<float> Target = new();
         public readonly NetworkVariable<bool> RoomCleared = new();
-        public readonly NetworkVariable<Vector2> ExitPosition = new();
+        /// <summary>Exits of the cleared room (<see cref="Door.Pack"/>); positions come from <see cref="RunSimulation.DoorPosition"/>.</summary>
+        public readonly NetworkVariable<int> DoorsPacked = new();
+        public readonly NetworkVariable<int> HoldDoor = new(-1);
         public readonly NetworkVariable<float> ExitHold = new();
+        public readonly NetworkVariable<bool> RoomTrial = new();
+        public readonly NetworkVariable<int> BonusShards = new();
         public readonly NetworkVariable<bool> Paused = new();
         public readonly NetworkVariable<float> Elapsed = new();
         public readonly NetworkVariable<RunPhase> Phase = new();
@@ -57,6 +61,11 @@ namespace Game.Gameplay
         public readonly Dictionary<ushort, (EnemyRenderState State, float Time)> ClientEnemies = new();
 
         public bool IsRunning => Started.Value && Phase.Value == RunPhase.Playing;
+
+        /// <summary>Exits currently open (none while the room is being fought).</summary>
+        public Door[] Doors => RoomCleared.Value ? Door.Unpack(DoorsPacked.Value) : System.Array.Empty<Door>();
+
+        public static Vector2 DoorPosition(int index, int count) => RunSimulation.DoorPosition(index, count, RunSimulation.DefaultBounds);
 
         private readonly List<EnemyRenderState> _snapshotBuffer = new();
         private readonly List<ulong> _remoteClients = new();
@@ -208,8 +217,11 @@ namespace Game.Gameplay
             SetIfChanged(Progress, room.Objective == RoomObjective.Survive ? Mathf.Floor(room.Progress) : room.Progress);
             SetIfChanged(Target, room.Target);
             SetIfChanged(RoomCleared, room.Cleared);
-            SetIfChanged(ExitPosition, room.ExitPosition);
+            SetIfChanged(DoorsPacked, room.Cleared ? Door.Pack(room.Doors) : 0);
+            SetIfChanged(HoldDoor, room.HoldDoor);
             SetIfChanged(ExitHold, Quantize(room.ExitHold));
+            SetIfChanged(RoomTrial, room.Trial);
+            SetIfChanged(BonusShards, Sim.BonusShards);
             SetIfChanged(Paused, Sim.AwaitingChoices);
             SetIfChanged(Elapsed, Mathf.Floor(Sim.Elapsed));
             SetIfChanged(Phase, Sim.Phase);

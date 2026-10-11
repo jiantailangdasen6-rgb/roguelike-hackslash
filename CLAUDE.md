@@ -12,7 +12,7 @@ without asking them to work in the Unity Editor. **Graphics/feel are the user's 
 automated run **silent** (-autoquit/-botmove/-mute mute the game; Edge gets --mute-audio) and default volumes low.
 
 ## Architecture in one paragraph
-All game logic runs on the host in `Game.Core.RunSimulation` (pure C#, partial: core/rooms, `.Combat` abilities & synergies,
+All game logic runs on the host in `Game.Core.RunSimulation` (pure C#, partial: core/rooms, `.Rewards` reward doors & trials, `.Combat` abilities & synergies,
 `.Enemies` telegraphed AI). `Game.Gameplay.RunDirector` (scene NetworkObject) ticks it at 30 Hz, mirrors state into
 NetworkVariables, sends `SimEvent`s (reliable named messages, `EventCodec`) and enemy snapshots (unreliable, `SnapshotCodec`).
 Every peer, host included, presents events via `RunDirector.EventReceived`. Player movement is owner-authoritative
@@ -55,7 +55,7 @@ without it the online buttons explain it's unavailable. Verified desktop<->deskt
 Solo uses NGO's `SinglePlayerTransport` (no sockets, works in browsers).
 
 Player flags: `-startroom <n>`, `-difficulty easy|normal|hard|nightmare`, `-downat <s>` (host knocks a teammate down), `-autosolo`, `-onlinehost <n> -codefile <path>`, `-onlinejoinfile <path>`, `-autohost <n>`, `-autojoin <ip>`, `-botmove`, `-class warrior|mage|ranger`, `-autoquit <s>`,
-`-screenshot <path> -screenshotat <s1,s2,..>`, `-profile <name>`, `-localonly`.
+`-screenshot <path> -screenshotat <s1,s2,..>`, `-profile <name>`, `-localonly`, `-doorwait <s>` (bots linger by the open doors for screenshots).
 
 ## Gotchas
 - **Japanese text uses bundled subset fonts** (`Resources/Fonts/Body.ttf`, `Title.ttf`, from `Tools/SubsetFonts.ps1`, full fonts

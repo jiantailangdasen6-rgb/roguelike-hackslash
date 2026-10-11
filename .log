@@ -1,0 +1,160 @@
+[21332:79212:1011/115023.850:WARNING:components\signin\internal\identity_manager\account_fetcher_service.cc:252] Edge does not support fetching account capabilities
+[21332:79212:1011/115023.851:WARNING:components\signin\internal\identity_manager\account_fetcher_service.cc:213] Should not execute: Tests depending on this function may fail
+[21332:79212:1011/115023.871:WARNING:chrome\browser\extensions\external_registry_loader_win.cc:283] Error observing HKLM: 5
+[21332:79380:1011/115023.950:WARNING:net\disk_cache\blockfile\backend_impl.cc:1904] Destroying invalid entry.
+[21332:79212:1011/115024.222:WARNING:chrome\browser\edge_pinned_sites\pinned_sites_cache.cc:304] Cache isn't initialized
+[21332:79212:1011/115024.765:WARNING:chrome\browser\edge_pinned_sites\pinned_sites_cache.cc:304] Cache isn't initialized
+[21332:79212:1011/115024.768:INFO:CONSOLE:1] "You can reduce startup time if you configure your web server to add "Content-Encoding: gzip" response header when serving "Build/WebGL.framework.js.unityweb" file.", source: https://jiantailangdasen6-rgb.github.io/roguelike-web/Build/WebGL.loader.js (1)
+[21332:79212:1011/115024.785:WARNING:chrome\browser\edge_pinned_sites\pinned_sites_cache.cc:304] Cache isn't initialized
+[21332:79212:1011/115024.809:INFO:CONSOLE:1] "You can reduce startup time if you configure your web server to add "Content-Encoding: gzip" response header when serving "Build/WebGL.wasm.unityweb" file.", source: https://jiantailangdasen6-rgb.github.io/roguelike-web/Build/WebGL.loader.js (1)
+[21332:79212:1011/115025.214:INFO:CONSOLE:1] "[UnityCache] 'https://jiantailangdasen6-rgb.github.io/roguelike-web/Build/WebGL.data.unityweb' successfully revalidated and served from the browser cache", source: https://jiantailangdasen6-rgb.github.io/roguelike-web/Build/WebGL.loader.js (1)
+[21332:79212:1011/115025.224:INFO:CONSOLE:1] "You can reduce startup time if you configure your web server to add "Content-Encoding: gzip" response header when serving "Build/WebGL.data.unityweb" file.", source: https://jiantailangdasen6-rgb.github.io/roguelike-web/Build/WebGL.loader.js (1)
+[21332:79212:1011/115026.206:WARNING:chrome\browser\media\prefs\capture_device_ranking.h:256] Can't initialize the value of media.audio_input.user_preference_ranking because media.default_audio_capture_device isn't registered or is empty
+[21332:79212:1011/115026.207:WARNING:chrome\browser\media\prefs\capture_device_ranking.h:256] Can't initialize the value of media.video_input.user_preference_ranking because media.default_video_capture_Device isn't registered or is empty
+[21332:79212:1011/115026.210:WARNING:chrome\browser\media\prefs\capture_device_ranking.h:256] Can't initialize the value of media.audio_input.user_preference_ranking because media.default_audio_capture_device isn't registered or is empty
+[21332:79212:1011/115026.210:WARNING:chrome\browser\media\prefs\capture_device_ranking.h:256] Can't initialize the value of media.video_input.user_preference_ranking because media.default_video_capture_Device isn't registered or is empty
+[21332:79212:1011/115026.330:INFO:CONSOLE:2] "[UnityMemory] Configuration Parameters - Can be set up in boot.config
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.331:INFO:CONSOLE:2] "    "memorysetup-bucket-allocator-granularity=16"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.331:INFO:CONSOLE:2] "    "memorysetup-bucket-allocator-bucket-count=8"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.332:INFO:CONSOLE:2] "    "memorysetup-bucket-allocator-block-size=4194304"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.332:INFO:CONSOLE:2] "    "memorysetup-bucket-allocator-block-count=1"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.333:INFO:CONSOLE:2] "    "memorysetup-main-allocator-block-size=16777216"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.334:INFO:CONSOLE:2] "    "memorysetup-thread-allocator-block-size=16777216"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.335:INFO:CONSOLE:2] "    "memorysetup-main-allocator-mimalloc-enabled=1"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.335:INFO:CONSOLE:2] "    "memorysetup-gfx-main-allocator-block-size=16777216"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.339:INFO:CONSOLE:2] "    "memorysetup-gfx-thread-allocator-block-size=16777216"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.340:INFO:CONSOLE:2] "    "memorysetup-cache-allocator-block-size=4194304"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.340:INFO:CONSOLE:2] "    "memorysetup-typetree-allocator-block-size=2097152"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.340:INFO:CONSOLE:2] "    "memorysetup-profiler-bucket-allocator-granularity=16"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.342:INFO:CONSOLE:2] "    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.342:INFO:CONSOLE:2] "    "memorysetup-profiler-bucket-allocator-block-size=4194304"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.343:INFO:CONSOLE:2] "    "memorysetup-profiler-bucket-allocator-block-count=1"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.343:INFO:CONSOLE:2] "    "memorysetup-profiler-allocator-block-size=16777216"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.344:INFO:CONSOLE:2] "    "memorysetup-profiler-editor-allocator-block-size=1048576"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.344:INFO:CONSOLE:2] "    "memorysetup-temp-allocator-size-main=4194304"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.345:INFO:CONSOLE:2] "    "memorysetup-job-temp-allocator-block-size=2097152"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.345:INFO:CONSOLE:2] "    "memorysetup-job-temp-allocator-block-size-background=1048576"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.346:INFO:CONSOLE:2] "    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.346:INFO:CONSOLE:2] "    "memorysetup-temp-allocator-size-background-worker=32768"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.347:INFO:CONSOLE:2] "    "memorysetup-allocator-temp-initial-block-size-main=262144"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.347:INFO:CONSOLE:2] "    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.349:INFO:CONSOLE:2] "    "memorysetup-temp-allocator-size-audio-worker=65536"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.351:INFO:CONSOLE:2] "    "memorysetup-remapper-allocator-initial-capacity=32768"
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.494:INFO:CONSOLE:2] "CodeReloadManager initialized
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.499:INFO:CONSOLE:2] "Input System module state changed to: Initialized.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.503:INFO:CONSOLE:2] "[Physics::Module] Initialized fallback backend.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.503:INFO:CONSOLE:2] "[Physics::Module] Id: 0xdecafbad
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.504:INFO:CONSOLE:2] "Loading player data from data.unity3d
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.517:INFO:CONSOLE:2] "Initialize engine version: 6000.6.2f1 (770e33f6875c)
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.518:INFO:CONSOLE:2] "[EntityIdStore] init: page-table path, blockCount=1048576, entitiesPerBlock=256, top-level=8388608 bytes, sizeof(Block)=4128 (lazily allocated per committed block)
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.519:INFO:CONSOLE:1] "Creating WebGL 2.0 context.", source: https://jiantailangdasen6-rgb.github.io/roguelike-web/Build/WebGL.loader.js (1)
+[21332:79212:1011/115026.551:INFO:CONSOLE:2] "Renderer: WebKit WebGL
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.551:INFO:CONSOLE:2] "Vendor:   WebKit
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.552:INFO:CONSOLE:2] "Version:  OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium))
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.552:INFO:CONSOLE:2] "GLES:     3
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.553:INFO:CONSOLE:2] " EXT_clip_control EXT_color_buffer_float EXT_color_buffer_half_float EXT_conservative_depth EXT_depth_clamp EXT_disjoint_timer_query_webgl2 EXT_float_blend EXT_polygon_offset_clamp EXT_texture_compression_bptc EXT_texture_compression_rgtc EXT_texture_filter_anisotropic NV_shader_noperspective_interpolation OES_texture_float_linear WEBGL_clip_cull_distance WEBGL_compressed_texture_astc WEBGL_compressed_texture_etc WEBGL_compressed_texture_etc1 WEBGL_compressed_texture_s3tc WEBGL_compressed_texture_s3tc_srgb WEBGL_debug_renderer_info WEBGL_debug_shaders WEBGL_lose_context WEBGL_multi_draw WEBGL_polygon_mode GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_conservative_depth GL_EXT_depth_clamp GL_EXT_disjoint_timer_query_webgl2 GL_EXT_float_blend GL_EXT_polygon_offset_clamp GL_EXT_texture_compression_bptc GL_EXT_texture_compression_rgtc GL_EXT_texture_filter_anisotropic GL_NV_shader_noperspective_interpolation GL_OES_texture_float_linear GL_WEBGL_clip_cull_distance GL_WEBGL_co
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.553:INFO:CONSOLE:2] "mpressed_texture_astc GL_WEBGL_compressed_texture_etc GL_WEBGL_compressed_texture_etc1 GL_WEBGL_compressed_texture_s3tc GL_WEBGL_compressed_texture_s3tc_srgb GL_WEBGL_debug_renderer_info GL_WEBGL_debug_shaders GL_WEBGL_lose_context GL_WEBGL_multi_draw GL_WEBGL_polygon_mode
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.566:INFO:CONSOLE:2] "OPENGL LOG: Creating OpenGL ES 3.0 graphics device ; Context level  <OpenGL ES 3.0> ; Context handle 1
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.725:INFO:CONSOLE:2] "[Physics::Module] Selected backend.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.726:INFO:CONSOLE:2] "[Physics::Module] Name: PhysX
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.726:INFO:CONSOLE:2] "[Physics::Module] Id: 0xf2b8ea05
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.727:INFO:CONSOLE:2] "[Physics::Module] SDK Version: 4.1.2
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.727:INFO:CONSOLE:2] "[Physics::Module] Integration Version: 1.0.0
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.728:INFO:CONSOLE:2] "[Physics::Module] Threading Mode: Single-Threaded
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115026.833:WARNING:chrome\browser\edge_underside\underside_helper.cc:1109] If test does not need FrontLoad, this may be expected. SetFrontLoadDecision: 3
+[21332:79212:1011/115026.844:ERROR:components\device_event_log\device_event_log_impl.cc:257] [11:50:26.844] USB: usb_service_win.cc:346 Failed to parse device interface GUID:
+[21332:79212:1011/115027.019:INFO:CONSOLE:2] "Input System initialize...
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115027.198:INFO:CONSOLE:2] "UnloadTime: 23.100000 ms
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115027.203:INFO:CONSOLE:2] "Manual synchronization of Unity Application.persistentDataPath via JS_FileSystem_Sync() is deprecated and will be later removed in a future Unity version. The persistent data directory will be automatically synchronized instead on file modification. Pass config.autoSyncPersistentDataPath = true; to configuration in createUnityInstance() to opt in to the new behavior.", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115027.518:INFO:CONSOLE:2] "Audio context resumed after 0.873 seconds.", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115027.813:INFO:CONSOLE:2] "Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'DepthOfFieldGaussianPostProcessPass'). PostProcessing render passes will not execute.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115027.814:INFO:CONSOLE:2] "Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'DepthOfFieldGaussianPostProcessPass'). PostProcessing render passes will not execute.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115027.814:INFO:CONSOLE:2] "Shader 'Hidden/Universal Render Pipeline/BokehDepthOfField' is not supported or has been stripped from the build (in 'DepthOfFieldBokehPostProcessPass'). PostProcessing render passes will not execute.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115027.815:INFO:CONSOLE:2] "Shader 'Hidden/Universal Render Pipeline/CameraMotionBlur' is not supported or has been stripped from the build (in 'MotionBlurPostProcessPass'). PostProcessing render passes will not execute.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115027.816:INFO:CONSOLE:2] "Shader 'Hidden/Universal Render Pipeline/PaniniProjection' is not supported or has been stripped from the build (in 'PaniniProjectionPostProcessPass'). PostProcessing render passes will not execute.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115027.818:INFO:CONSOLE:2] "Shader 'Hidden/Universal Render Pipeline/Edge Adaptive Spatial Upsampling' is not supported or has been stripped from the build (in 'Blit FSR Upscaling'). PostProcessing render passes will not execute.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115029.204:INFO:CONSOLE:1] "[UnityCache] Response is served without Content-Length header. Please reconfigure server to include valid Content-Length for better download performance.", source: https://jiantailangdasen6-rgb.github.io/roguelike-web/Build/WebGL.loader.js (1)
+[21332:79212:1011/115029.316:INFO:CONSOLE:2] "The header User-Agent is managed automatically, setting it may have no effect or result in unexpected behavior.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115029.921:INFO:CONSOLE:1] "[UnityCache] Response is served without Content-Length header. Please reconfigure server to include valid Content-Length for better download performance.", source: https://jiantailangdasen6-rgb.github.io/roguelike-web/Build/WebGL.loader.js (1)
+[21332:79212:1011/115030.173:INFO:CONSOLE:2] "Unity Transport: Connecting to wss://6318155396639498392.asia-northeast1.relay.uf.unity3d.com:37011/.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115034.118:INFO:CONSOLE:2] "UnloadTime: 8.000000 ms
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115034.591:INFO:CONSOLE:2] "Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115034.619:INFO:CONSOLE:2] "Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 3711.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115034.620:INFO:CONSOLE:2] "Total: 18.500000 ms (FindLiveObjects: 2.300000 ms CreateObjectMapping: 1.300000 ms MarkObjects: 14.100000 ms  DeleteObjects: 0.800000 ms)
+
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:80000:1011/115053.539:INFO:chrome\browser\extensions\extension_garbage_collector.cc:212] Garbage collection for extensions on file thread is complete. !!NOT ADDED TO EVENTLOG!!
+[21332:79212:1011/115132.097:INFO:CONSOLE:2] "UnloadTime: 11.500000 ms
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115132.275:INFO:CONSOLE:2] "Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115132.283:INFO:CONSOLE:2] "Unloading 70 unused Assets to reduce memory usage. Loaded Objects now: 3336.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115132.284:INFO:CONSOLE:2] "Total: 8.700000 ms (FindLiveObjects: 0.700000 ms CreateObjectMapping: 0.200000 ms MarkObjects: 6.500000 ms  DeleteObjects: 1.200000 ms)
+
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115132.295:INFO:CONSOLE:2] "The header User-Agent is managed automatically, setting it may have no effect or result in unexpected behavior.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)
+[21332:79212:1011/115132.752:INFO:CONSOLE:1] "[UnityCache] Response is served without Content-Length header. Please reconfigure server to include valid Content-Length for better download performance.", source: https://jiantailangdasen6-rgb.github.io/roguelike-web/Build/WebGL.loader.js (1)
+[21332:79212:1011/115132.887:INFO:CONSOLE:2] "Unity Transport: Connecting to wss://6318155396639498392.asia-northeast1.relay.uf.unity3d.com:37011/.
+", source: blob:https://jiantailangdasen6-rgb.github.io/faeca690-9df6-4dd5-b96d-33d9d78d3981 (2)

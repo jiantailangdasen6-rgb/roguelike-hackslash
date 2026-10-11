@@ -68,6 +68,7 @@ namespace Game.Gameplay
                 HostOnline();
             }
             else if (CommandLine.Has("-onlinejoinfile")) _autoJoinCodeFile = CommandLine.GetValue("-onlinejoinfile");
+            else if (CommandLine.GetValue("-onlinejoin") != null) JoinOnline(CommandLine.GetValue("-onlinejoin"));
         }
 
         // ------------------------------------------------------------------ Layout

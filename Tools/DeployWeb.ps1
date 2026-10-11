@@ -1,14 +1,14 @@
 # Publishes Builds/WebGL to GitHub Pages: public repo jiantailangdasen6-rgb/roguelike-web, branch gh-pages
 # (build output only - the source repo stays private/local). Creates the repo and enables Pages on first run.
 #   powershell -File Tools/DeployWeb.ps1
-$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Continue' # native stderr must not abort; exit codes are checked
 $repo = 'jiantailangdasen6-rgb/roguelike-web'
 $url = 'https://jiantailangdasen6-rgb.github.io/roguelike-web/'
 $project = Split-Path -Parent $PSScriptRoot
 $build = Join-Path $project 'Builds\WebGL'
 if (-not (Test-Path "$build\index.html")) { throw "No WebGL build in $build (run Tools/BuildWeb.ps1)" }
 
-gh repo view $repo *> $null
+gh repo view $repo 2>&1 | Out-Null
 if ($LASTEXITCODE -ne 0) {
     gh repo create $repo --public --description 'Labyrinth of the Dead (working title) - browser build only'
     if ($LASTEXITCODE -ne 0) { throw 'repo create failed' }
@@ -33,7 +33,7 @@ try {
     Pop-Location
 }
 
-gh api "repos/$repo/pages" *> $null
+gh api "repos/$repo/pages" 2>&1 | Out-Null
 if ($LASTEXITCODE -ne 0) {
     gh api -X POST "repos/$repo/pages" -f 'source[branch]=gh-pages' -f 'source[path]=/' | Out-Null
 }

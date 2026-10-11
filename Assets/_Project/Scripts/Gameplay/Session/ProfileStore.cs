@@ -71,15 +71,44 @@ namespace Game.Gameplay
         }
     }
 
+    /// <summary>
+    /// Test/automation flags. Desktop: command-line arguments ("-botmove", "-onlinejoin ABC123").
+    /// Browser: the page's query string ("?botmove&amp;onlinejoin=ABC123").
+    /// </summary>
     public static class CommandLine
     {
-        public static bool Has(string flag) => Array.IndexOf(Environment.GetCommandLineArgs(), flag) >= 0;
+        private static System.Collections.Generic.Dictionary<string, string> _query;
+
+        private static System.Collections.Generic.Dictionary<string, string> Query
+        {
+            get
+            {
+                if (_query != null) return _query;
+                _query = new System.Collections.Generic.Dictionary<string, string>();
+                if (Application.platform != RuntimePlatform.WebGLPlayer) return _query;
+                string url = Application.absoluteURL ?? "";
+                int q = url.IndexOf('?');
+                if (q < 0) return _query;
+                foreach (var part in url.Substring(q + 1).Split('&', '#'))
+                {
+                    if (part.Length == 0) continue;
+                    int eq = part.IndexOf('=');
+                    string key = Uri.UnescapeDataString(eq < 0 ? part : part.Substring(0, eq));
+                    _query[key] = eq < 0 ? "" : Uri.UnescapeDataString(part.Substring(eq + 1));
+                }
+                return _query;
+            }
+        }
+
+        public static bool Has(string flag) =>
+            Array.IndexOf(Environment.GetCommandLineArgs(), flag) >= 0 || Query.ContainsKey(flag.TrimStart('-'));
 
         public static string GetValue(string flag)
         {
             var args = Environment.GetCommandLineArgs();
             int i = Array.IndexOf(args, flag);
-            return i >= 0 && i + 1 < args.Length ? args[i + 1] : null;
+            if (i >= 0 && i + 1 < args.Length) return args[i + 1];
+            return Query.TryGetValue(flag.TrimStart('-'), out var v) && v.Length > 0 ? v : null;
         }
 
         public static float GetFloat(string flag, float fallback) =>

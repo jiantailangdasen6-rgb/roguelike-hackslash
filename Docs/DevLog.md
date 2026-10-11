@@ -11,12 +11,12 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。感想反映1回目＋音量調整まで反映済み |
 | PC版 | `Builds/Windows/LabyrinthSurvivor.exe`（ローカルのみ、git 管理外） |
 | ソース | ローカルの git（`D:\project\roguelike-hackslash`、リモートなし） |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加） |
-| テスト | EditMode 54件・PlayMode 1件・3人LAN通信テスト 合格 |
-| 最新コミット | `32a7134` Enable online co-op |
+| テスト | EditMode 54件・PlayMode 1件・3人LAN通信テスト・公開ページでのPCホスト＋ブラウザ参加テスト すべて合格 |
+| 最新コミット | `1d3144d` Mute automated runs, lower default volumes（その前 `02096f8` 感想反映1回目） |
 
 ---
 
@@ -63,7 +63,14 @@
 - 罠は魔物にも効く（誘い込みで助け合い・わいわい感を出すため）
 - 魔法使い等のスキル1は右クリックにも割り当て
 - 協力の参加方式：ルームコード（Relay）。PC版のみ LAN の IP 直結も残す
-- BGM・効果音は自作合成（外部素材のダウンロードはしていない）
+- BGM・効果音は自作合成（外部素材のダウンロードはしていない）。初期音量 BGM 30%・効果音 40%（ユーザーの「うるさい」を受けて下げた）
+
+
+### 作業の進め方（ユーザーの指示、2026-10-11）
+- **変更はすべてブラウザ版に反映する**（毎回の確認は不要）：検証が済んだら `Tools/BuildWeb.ps1` → `Tools/DeployWeb.ps1` → `Tools/CrossTest.ps1`
+- ソースのリポジトリをどこかへ push するときは事前に確認する
+- **テスト中は音を出さない**：`-autoquit`／`-botmove`／`-mute`（ブラウザは `?botmove`／`?mute`）で自動的に無音。Edge は `--mute-audio`。新しいテスト用スクリプトも必ずこれらを付ける
+- **ゲームの初期音量は小さめ**（BGM 30%、効果音 40%。`AudioPrefs`）。上げるときは相談する
 
 ---
 

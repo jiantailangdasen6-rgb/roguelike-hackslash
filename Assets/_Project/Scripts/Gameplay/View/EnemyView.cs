@@ -96,7 +96,7 @@ namespace Game.Gameplay
             switch (e.Type)
             {
                 case SimEventType.EnemyHit:
-                    if (_visuals.TryGetValue((ushort)e.Id, out var v)) v.Animator.Flash(0.07f);
+                    if (_visuals.TryGetValue((ushort)e.Id, out var v)) v.Animator.Flash(EnemyCatalog.Get(v.Type).Boss ? 0.035f : 0.07f); // bosses get hit constantly: keep the flash subtle
                     break;
                 case SimEventType.EnemyDied:
                     if (_visuals.Remove((ushort)e.Id, out var dead))
@@ -177,6 +177,7 @@ namespace Game.Gameplay
             v.SeenFrame = _frame;
             var t = v.Root.transform;
             Vector3 target = s.Position;
+            if ((t.position - target).sqrMagnitude > 2.5f * 2.5f) snap = true; // blinks/teleports shouldn't glide
             t.position = snap ? target : Vector3.Lerp(t.position, target, 1f - Mathf.Exp(-Smoothing * Time.deltaTime));
 
             var r = v.Animator.Renderer;
@@ -205,6 +206,8 @@ namespace Game.Gameplay
             else if (s.Burning) tint = new Color(1f, 0.72f, 0.55f);
             else if (s.Poisoned) tint = new Color(0.72f, 1f, 0.65f);
             else if (s.Elite) tint = new Color(1f, 0.82f, 0.7f);
+            // Wraiths are half-there, and nearly vanish while gathering for a blink.
+            if (s.Type == EnemyType.Wraith) tint.a = s.Anim == EnemyAnim.Windup ? 0.3f : 0.78f;
             r.color = tint;
 
             // Status icon over the head: red mark or spinning stun stars.
@@ -240,8 +243,9 @@ namespace Game.Gameplay
                 var animator = root.AddComponent<PixelAnimator>();
                 animator.SetSheet(SpriteSheet.Load(def.Sheet));
 
-                var shadow = Child(root.transform, "Shadow", SpriteSheet.Load("fx_shadow").First, -500, new Vector3(0f, 0.02f), def.Boss ? 2.2f : 1.1f);
-                var icon = Child(root.transform, "Icon", SpriteSheet.Load("fx_mark").First, 0, new Vector3(0f, def.Boss ? 2.1f : 1.25f), 1f);
+                float shadowSize = def.Boss ? 2.2f : def.Type == EnemyType.Bat ? 0.6f : def.Flying ? 0.85f : 1.1f;
+                var shadow = Child(root.transform, "Shadow", SpriteSheet.Load("fx_shadow").First, -500, new Vector3(0f, 0.02f), shadowSize);
+                var icon = Child(root.transform, "Icon", SpriteSheet.Load("fx_mark").First, 0, new Vector3(0f, def.Boss ? 2.6f : 1.25f), 1f);
                 var ice = Child(root.transform, "Ice", SpriteSheet.Load("fx_ice").First, 0, new Vector3(0f, 0.45f), def.Boss ? 2f : 1f);
                 v = new Visual { Root = root, Animator = animator, Shadow = shadow, Icon = icon, Ice = ice, Type = type };
             }
@@ -252,7 +256,7 @@ namespace Game.Gameplay
             v.Animator.Renderer.color = Color.white;
             v.Animator.Play("idle", force: true);
 
-            if (elite || def.Boss)
+            if (elite || def.Boss || def.Type == EnemyType.Wraith)
             {
                 if (v.Glow == null)
                 {
@@ -263,8 +267,8 @@ namespace Game.Gameplay
                     v.Glow.lightType = Light2D.LightType.Point;
                 }
                 v.Glow.enabled = true;
-                v.Glow.color = def.Boss ? new Color(1f, 0.25f, 0.2f) : new Color(1f, 0.55f, 0.2f);
-                v.Glow.intensity = def.Boss ? 1.4f : 0.9f;
+                v.Glow.color = def.Type is EnemyType.Lich or EnemyType.Wraith ? new Color(0.45f, 0.8f, 1f) : def.Boss ? new Color(1f, 0.25f, 0.2f) : new Color(1f, 0.55f, 0.2f);
+                v.Glow.intensity = def.Boss ? 1.4f : def.Type == EnemyType.Wraith && !elite ? 0.6f : 0.9f;
                 v.Glow.pointLightOuterRadius = def.Boss ? 4.5f : 2.2f;
                 v.Glow.pointLightInnerRadius = 0.2f;
             }

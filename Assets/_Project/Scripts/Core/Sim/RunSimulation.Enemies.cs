@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Core
@@ -5,10 +6,16 @@ namespace Game.Core
     /// <summary>
     /// Enemy AI: chase or keep distance, then a telegraphed attack (windup → strike → recover).
     /// Every attack is announced with an EnemyTelegraph event showing exactly where it will land.
+    /// Walkers slide around obstacles; flyers (bats, wraiths, the Lich) ignore them.
     /// </summary>
     public sealed partial class RunSimulation
     {
         private const float KnockbackDecay = 9f;
+        private const float PillarStun = 1.6f;
+        private const int SummonCap = 14;
+
+        /// <summary>Rain attacks drop several circles; their centres are kept here until the strike.</summary>
+        private readonly Dictionary<int, List<Vector2>> _rainTargets = new();
 
         private void StepEnemies(float dt)
         {
@@ -17,6 +24,7 @@ namespace Game.Core
                 ref var e = ref Enemies[i];
                 if (e.Dead) continue;
                 var def = e.Def;
+                if (def.Prop) continue;
 
                 TickStatuses(i, dt);
                 e = ref Enemies[i];
@@ -33,7 +41,7 @@ namespace Game.Core
 
                 if (e.Disabled)
                 {
-                    e.Position = Enemies.ClampToBounds(e.Position, e.Radius);
+                    e.Position = Confine(e.Position, e.Radius, def.Flying);
                     continue;
                 }
 
@@ -61,9 +69,16 @@ namespace Game.Core
                 }
 
                 e = ref Enemies[i];
+                if (e.Dead) continue;
                 if (e.State != EnemyState.Strike) e.Position += Enemies.Separation(i) * dt;
-                e.Position = Enemies.ClampToBounds(e.Position, e.Radius);
+                e.Position = Confine(e.Position, e.Radius, def.Flying);
             }
+        }
+
+        private Vector2 Confine(Vector2 p, float radius, bool flying)
+        {
+            p = Enemies.ClampToBounds(p, radius);
+            return flying ? p : Arena.Resolve(Layout, p, radius);
         }
 
         private static bool BossEnraged(in Enemy e) => e.Def.Boss && e.Health < e.MaxHealth * 0.5f;
@@ -106,7 +121,7 @@ namespace Game.Core
                 else if (distance < def.PreferredDistance - 1.2f) move = -dir;
                 else move = new Vector2(-dir.y, dir.x) * ((e.Id & 1) == 0 ? 0.5f : -0.5f);
             }
-            else if (distance > a.Range * 0.8f)
+            else if (distance > Mathf.Min(a.Range, 4f) * 0.8f)
             {
                 move = dir;
             }
@@ -114,6 +129,7 @@ namespace Game.Core
             float speed = def.Speed * (e.HitStun > 0f ? 0.25f : 1f);
             if (move != Vector2.zero)
             {
+                if (!def.Flying) move = Arena.Steer(Layout, e.Position, move, e.Radius, e.Id);
                 e.Position += move * speed * dt;
                 e.Moving = true;
             }
@@ -122,14 +138,44 @@ namespace Game.Core
                 BeginAttack(ref e, def, attack, target);
         }
 
-        /// <summary>Bosses rotate through their moves; others have one attack.</summary>
+        /// <summary>Which move comes next. Bosses run through patterns; others pick by distance.</summary>
         private int ChooseAttack(ref Enemy e, EnemyDef def, float distance)
         {
-            if (!def.Boss) return 0;
-            // 0 cleave, 1 slam, 2 charge, 3 summon
-            if (e.AttackCounter % 5 == 4 && Enemies.Count < 6) return 3;
-            if (distance > 4.5f) return 2;
-            return e.AttackCounter % 2 == 0 ? 0 : 1;
+            int n = e.AttackCounter;
+            bool roomForMinions = Enemies.HostileCount < 7;
+            switch (def.Type)
+            {
+                case EnemyType.BoneKing:
+                    // 0 cleave, 1 slam, 2 charge, 3 summon
+                    if (n % 5 == 4 && roomForMinions) return 3;
+                    if (distance > 4.5f) return 2;
+                    return n % 2 == 0 ? 0 : 1;
+                case EnemyType.BloodBishop:
+                    // 0 blood fan, 1 blood rain, 2 summon, 3 blink
+                    switch (n % 6)
+                    {
+                        case 1: case 4: return 1;
+                        case 3: return 3;
+                        case 5: return roomForMinions ? 2 : 0;
+                        default: return 0;
+                    }
+                case EnemyType.Lich:
+                    // 0 soul ring, 1 death cone, 2 soul rain, 3 summon, 4 nova
+                    if (distance < 3f && n % 2 == 0) return 4;
+                    switch (n % 5)
+                    {
+                        case 1: case 3: return 2;
+                        case 2: return distance < 6f ? 1 : 0;
+                        case 4: return roomForMinions ? 3 : 0;
+                        default: return 0;
+                    }
+                case EnemyType.DreadKnight:
+                    return distance > def.Attacks[0].Range + 0.3f && n % 2 == 1 ? 1 : 0;
+                case EnemyType.Necromancer:
+                    return n % 3 == 2 && Enemies.HostileCount < SummonCap ? 1 : 0;
+                default:
+                    return 0;
+            }
         }
 
         private void BeginAttack(ref Enemy e, EnemyDef def, int attackIndex, SimPlayer target)
@@ -143,18 +189,77 @@ namespace Game.Core
             e.AttackCounter++;
             if (Mathf.Abs(e.AimDirection.x) > 0.1f) e.Facing = Mathf.Sign(e.AimDirection.x);
 
+            switch (a.Kind)
+            {
+                case AttackKind.Rain:
+                {
+                    var spots = new List<Vector2>();
+                    foreach (var p in Players)
+                        if (p.Alive) spots.Add(p.Position);
+                    for (int k = 0; k < a.Extra; k++)
+                    {
+                        var near = spots.Count > 0 ? spots[_aiRng.Range(0, spots.Count)] : e.Position;
+                        spots.Add(Enemies.ClampToBounds(near + Rotate(Vector2.right, _aiRng.Range(0f, 360f)) * _aiRng.Range(2f, 4.5f), 1f));
+                    }
+                    _rainTargets[e.Id] = spots;
+                    foreach (var s in spots) Telegraph(e, AttackShape.Circle, s, e.AimDirection, a);
+                    return;
+                }
+                case AttackKind.Blink:
+                    // Wraiths appear right where the target stands; the bishop jumps to a spot away from the group.
+                    e.AimTarget = def.Boss ? BlinkSpot(target.Position) : target.Position;
+                    Telegraph(e, AttackShape.Circle, e.AimTarget, e.AimDirection, a);
+                    return;
+                case AttackKind.Projectile when a.Count > 1:
+                    if (a.Spread >= 360f)
+                    {
+                        Telegraph(e, AttackShape.SelfCircle, e.Position, e.AimDirection, a);
+                        return;
+                    }
+                    for (int k = 0; k < a.Count; k += a.Count > 4 ? 2 : 1)
+                        Telegraph(e, AttackShape.Line, e.Position, Rotate(e.AimDirection, FanAngle(a, k)), a);
+                    return;
+            }
+
             Vector2 origin = a.Shape == AttackShape.Circle ? e.AimTarget : e.Position;
+            Telegraph(e, a.Shape, origin, e.AimDirection, a);
+        }
+
+        private void Telegraph(in Enemy e, AttackShape shape, Vector2 origin, Vector2 direction, EnemyAttack a)
+        {
             Events.Add(new SimEvent(SimEventType.EnemyTelegraph)
             {
-                Id = e.Id, Int = (int)a.Shape, Pos = origin, Vec = e.AimDirection,
+                Id = e.Id, Int = (int)shape, Pos = origin, Vec = direction,
                 Size = new Vector2(a.SizeA, a.SizeB), Value = e.StateTimer,
             });
+        }
+
+        private static float FanAngle(EnemyAttack a, int k) =>
+            a.Spread >= 360f ? k * 360f / a.Count : a.Count <= 1 ? 0f : (k / (a.Count - 1f) - 0.5f) * a.Spread;
+
+        private Vector2 BlinkSpot(Vector2 near)
+        {
+            Vector2 best = near;
+            float bestScore = -1f;
+            for (int k = 0; k < 8; k++)
+            {
+                var p = Enemies.ClampToBounds(near + Rotate(Vector2.right, _aiRng.Range(0f, 360f)) * _aiRng.Range(4.5f, 7f), 1.5f);
+                if (Arena.Overlaps(Layout, p, 1f)) continue;
+                float score = (p - near).magnitude;
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    best = p;
+                }
+            }
+            return best;
         }
 
         private void CancelAttack(ref Enemy e)
         {
             e.State = EnemyState.Chase;
             e.Cooldown = 0.8f;
+            _rainTargets.Remove(e.Id);
         }
 
         private void Strike(int index, EnemyDef def)
@@ -164,7 +269,8 @@ namespace Game.Core
             float damage = a.Damage * e.DamageMultiplier;
             e.State = EnemyState.Recover;
             e.StateTimer = a.Recover;
-            Events.Add(new SimEvent(SimEventType.EnemyStrike) { Id = e.Id, Int = (int)a.Kind, Pos = a.Shape == AttackShape.Circle ? e.AimTarget : e.Position, Vec = e.AimDirection });
+            Vector2 strikeAt = a.Shape == AttackShape.Circle || a.Kind == AttackKind.Blink ? e.AimTarget : e.Position;
+            Events.Add(new SimEvent(SimEventType.EnemyStrike) { Id = e.Id, Int = (int)a.Kind, Pos = strikeAt, Vec = e.AimDirection });
 
             switch (a.Kind)
             {
@@ -172,10 +278,15 @@ namespace Game.Core
                     foreach (var p in Players)
                         if (p.Alive && InShape(a, e.Position, e.AimDirection, e.AimTarget, p.Position)) HurtPlayer(p, damage);
                     if (a.Shape != AttackShape.Cone)
-                        Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.Slam, Pos = a.Shape == AttackShape.Circle ? e.AimTarget : e.Position, Value = a.SizeA });
+                        Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.Slam, Pos = strikeAt, Value = a.SizeA });
                     break;
                 case AttackKind.Projectile:
-                    FireHostile(e.Position + e.AimDirection * 0.5f, e.AimDirection * a.ProjectileSpeed, a.SizeA / a.ProjectileSpeed, damage);
+                    for (int k = 0; k < a.Count; k++)
+                    {
+                        Vector2 d = Rotate(e.AimDirection, FanAngle(a, k));
+                        float life = (a.Spread >= 360f ? 12f : a.SizeA) / a.ProjectileSpeed;
+                        FireHostile(a.Projectile, e.Position + d * 0.5f, d * a.ProjectileSpeed, life, damage);
+                    }
                     break;
                 case AttackKind.Lunge:
                     e.State = EnemyState.Strike;
@@ -183,13 +294,54 @@ namespace Game.Core
                     e.HitPlayersMask = 0;
                     break;
                 case AttackKind.Summon:
+                {
                     Vector2 center = e.Position;
-                    for (int s = 0; s < a.SummonCount + Room.Area; s++)
+                    int count = a.SummonCount + (def.Boss ? Room.Area : 0);
+                    for (int s = 0; s < count; s++)
                     {
-                        Vector2 at = center + Rotate(Vector2.right, s * 360f / (a.SummonCount + Room.Area) + 30f) * 2.2f;
-                        QueueSpawn(s % 2 == 0 ? EnemyType.Skeleton : EnemyType.SkeletonArcher, false, Enemies.ClampToBounds(at, 0.5f));
+                        Vector2 at = center + Rotate(Vector2.right, s * 360f / count + 30f) * 2.2f;
+                        at = Arena.Resolve(Layout, Enemies.ClampToBounds(at, 0.5f), 0.5f);
+                        QueueSpawn(s % 2 == 0 ? a.Summon1 : a.Summon2, false, at);
                     }
                     break;
+                }
+                case AttackKind.Rain:
+                    if (_rainTargets.Remove(e.Id, out var spots))
+                        foreach (var s in spots)
+                        {
+                            foreach (var p in Players)
+                                if (p.Alive && (p.Position - s).sqrMagnitude <= (a.SizeA + SimPlayer.BodyRadius) * (a.SizeA + SimPlayer.BodyRadius))
+                                    HurtPlayer(p, damage);
+                            Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.Slam, Pos = s, Value = a.SizeA });
+                        }
+                    break;
+                case AttackKind.Blink:
+                    e.Position = Confine(e.AimTarget, e.Radius, def.Flying);
+                    foreach (var p in Players)
+                        if (p.Alive && (p.Position - e.AimTarget).sqrMagnitude <= (a.SizeA + SimPlayer.BodyRadius) * (a.SizeA + SimPlayer.BodyRadius))
+                            HurtPlayer(p, damage);
+                    Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.Slam, Pos = e.AimTarget, Value = a.SizeA });
+                    break;
+                case AttackKind.SelfDestruct:
+                {
+                    foreach (var p in Players)
+                        if (p.Alive && InShape(a, e.Position, e.AimDirection, e.AimTarget, p.Position)) HurtPlayer(p, damage);
+                    Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.Explosion, Pos = e.Position, Value = a.SizeA });
+                    Vector2 center = e.Position;
+                    int self = e.Id;
+                    e.Dead = true;
+                    if (a.HitsEnemies)
+                    {
+                        Enemies.QueryCircle(center, a.SizeA, _splash);
+                        foreach (int j in _splash.ToArray())
+                        {
+                            if (Enemies[j].Id == self) continue;
+                            Vector2 push = (Enemies[j].Position - center).sqrMagnitude > 0.0001f ? (Enemies[j].Position - center).normalized : Vector2.up;
+                            DamageEnemy(j, a.Damage * 2.5f * DifficultyDef.EnemyDamage, null, HitFlags.Heavy, push, 7f);
+                        }
+                    }
+                    break;
+                }
             }
         }
 
@@ -199,7 +351,9 @@ namespace Game.Core
             float step = Mathf.Min(e.LungeLeft, a.ProjectileSpeed * dt);
             e.LungeLeft -= step;
             Vector2 before = e.Position;
-            e.Position = Enemies.ClampToBounds(e.Position + e.AimDirection * step, e.Radius);
+            Vector2 next = Enemies.ClampToBounds(e.Position + e.AimDirection * step, e.Radius);
+            bool hitPillar = !def.Flying && Arena.Overlaps(Layout, next, e.Radius);
+            e.Position = def.Flying ? next : Arena.Resolve(Layout, next, e.Radius);
             e.Moving = true;
             bool blocked = (e.Position - before).sqrMagnitude < step * step * 0.25f;
 
@@ -217,6 +371,13 @@ namespace Game.Core
             {
                 e.State = EnemyState.Recover;
                 e.StateTimer = a.Recover;
+                // Charging into a pillar knocks the charger senseless — lure big ones into them.
+                if (hitPillar && blocked && e.Def.Boss)
+                {
+                    e.Stunned = Mathf.Max(e.Stunned, PillarStun);
+                    Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.Slam, Pos = e.Position + e.AimDirection * e.Radius, Value = 1.2f });
+                    Events.Add(new SimEvent(SimEventType.StatusApplied) { Id = e.Id, Int = (int)StatusKind.Stunned, Value = PillarStun });
+                }
             }
         }
 

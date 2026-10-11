@@ -29,6 +29,9 @@ namespace Game.EditorTools.Art
     public sealed class HumanoidRig
     {
         public PixelPart Head, Torso, LegFront, LegBack, ArmFront, ArmBack, Weapon, Cape;
+        /// <summary>Held in the back hand (shields), drawn between the back arm and the body.</summary>
+        public PixelPart Offhand;
+        public float OffhandTilt;
 
         public Vector2 Hip = new(32f, 20f);
         public float LegSpread = 1.5f;
@@ -63,6 +66,12 @@ namespace Game.EditorTools.Art
 
             Vector2 shoulderBack = OnTorso(ShoulderBack);
             frame.Add(ArmBack, shoulderBack, p.ArmBack, 1, -1);
+            if (Offhand != null)
+            {
+                Vector2 backHand = shoulderBack + Rotate(new Vector2(0f, -ArmLength), p.ArmBack);
+                // In front of the body when raised (blocking), behind it when hanging.
+                frame.Add(Offhand, backHand, p.Torso + OffhandTilt, p.ArmBack > 20f ? 7 : 4);
+            }
             if (Cape != null) frame.Add(Cape, OnTorso(CapeOnTorso), p.Torso + p.Cape, 0);
 
             Vector2 shoulder = OnTorso(ShoulderFront);

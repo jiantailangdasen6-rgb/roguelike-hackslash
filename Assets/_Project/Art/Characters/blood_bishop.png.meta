@@ -1,0 +1,886 @@
+fileFormatVersion: 2
+guid: 9c5e596eda262134a9b6bf7e382936d6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2070313017425129609
+    second: blood_bishop_0
+  - first:
+      213: 7236577186416264278
+    second: blood_bishop_1
+  - first:
+      213: -6075321262675754915
+    second: blood_bishop_2
+  - first:
+      213: -4271188333819795678
+    second: blood_bishop_3
+  - first:
+      213: -4469798352853276844
+    second: blood_bishop_4
+  - first:
+      213: 828885197794141409
+    second: blood_bishop_5
+  - first:
+      213: 1087914196566464497
+    second: blood_bishop_6
+  - first:
+      213: -8113472587250884811
+    second: blood_bishop_7
+  - first:
+      213: -3989340088246757064
+    second: blood_bishop_8
+  - first:
+      213: -7329800227972398167
+    second: blood_bishop_9
+  - first:
+      213: 7255177207584088863
+    second: blood_bishop_10
+  - first:
+      213: -6539883488268882344
+    second: blood_bishop_11
+  - first:
+      213: 5833905417969047696
+    second: blood_bishop_12
+  - first:
+      213: 5451659839007889671
+    second: blood_bishop_13
+  - first:
+      213: 6041606308308197319
+    second: blood_bishop_14
+  - first:
+      213: -809902026715267893
+    second: blood_bishop_15
+  - first:
+      213: 4462098001234579922
+    second: blood_bishop_16
+  - first:
+      213: 2436994602206774520
+    second: blood_bishop_17
+  - first:
+      213: 176013361036611663
+    second: blood_bishop_18
+  - first:
+      213: 9023841439975402862
+    second: blood_bishop_19
+  - first:
+      213: -7088382644087172963
+    second: blood_bishop_20
+  - first:
+      213: 4985827344439205953
+    second: blood_bishop_21
+  - first:
+      213: 8393808406485636611
+    second: blood_bishop_22
+  - first:
+      213: -3086861238694171290
+    second: blood_bishop_23
+  - first:
+      213: 1174215405383383745
+    second: blood_bishop_24
+  - first:
+      213: -6383174697424409888
+    second: blood_bishop_25
+  - first:
+      213: 7200683500941419761
+    second: blood_bishop_26
+  - first:
+      213: 6825909015770041783
+    second: blood_bishop_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: blood_bishop_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 567
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 980fd7968ba3bbc10800000000000000
+      internalID: 2070313017425129609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_1
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 568
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 654890a2c9c7d6460800000000000000
+      internalID: 7236577186416264278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_2
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 568
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5085d1008f10bba0800000000000000
+      internalID: -6075321262675754915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_3
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 567
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 227e0e117d0b9b4c0800000000000000
+      internalID: -4271188333819795678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_4
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 566
+        width: 36
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 457ed80841618f1c0800000000000000
+      internalID: -4469798352853276844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_5
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 566
+        width: 36
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e4691e12bac08b00800000000000000
+      internalID: 828885197794141409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_6
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 455
+        width: 42
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f7d270a23c091f00800000000000000
+      internalID: 1087914196566464497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_7
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 456
+        width: 43
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53f9a0e3ba7276f80800000000000000
+      internalID: -8113472587250884811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 456
+        width: 43
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83993df735403a8c0800000000000000
+      internalID: -3989340088246757064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_9
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 455
+        width: 42
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a3c0211781574a90800000000000000
+      internalID: -7329800227972398167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_10
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 453
+        width: 42
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f136f801b319fa460800000000000000
+      internalID: 7255177207584088863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_11
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 453
+        width: 42
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85e6a410e9aad35a0800000000000000
+      internalID: -6539883488268882344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_12
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 343
+        width: 39
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 098954b711236f050800000000000000
+      internalID: 5833905417969047696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_13
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 343
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 709145c4dbf28ab40800000000000000
+      internalID: 5451659839007889671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_14
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 344
+        width: 30
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cf18777de818d350800000000000000
+      internalID: 6041606308308197319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_15
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 230
+        width: 67
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcc74c2d566a2c4f0800000000000000
+      internalID: -809902026715267893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_16
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 228
+        width: 64
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d1519cad7e8ced30800000000000000
+      internalID: 4462098001234579922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_17
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 228
+        width: 62
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f44410dda1f1d120800000000000000
+      internalID: 2436994602206774520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_18
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 231
+        width: 44
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f405f442833517200800000000000000
+      internalID: 176013361036611663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_19
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 118
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6dee23baff1b3d70800000000000000
+      internalID: 9023841439975402862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_20
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 118
+        width: 34
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d90d3238a8101ad90800000000000000
+      internalID: -7088382644087172963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_21
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 7
+        width: 34
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1406ab0cd87313540800000000000000
+      internalID: 4985827344439205953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_22
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 6
+        width: 38
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 306934df54ccc7470800000000000000
+      internalID: 8393808406485636611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_23
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 4
+        width: 42
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66d26bcee044925d0800000000000000
+      internalID: -3086861238694171290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_24
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 3
+        width: 47
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cafaaf90b6ab4010800000000000000
+      internalID: 1174215405383383745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_25
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 2
+        width: 50
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eaa1c4ae686a67a0800000000000000
+      internalID: -6383174697424409888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_26
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 48
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f421a54e77fde360800000000000000
+      internalID: 7200683500941419761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood_bishop_27
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 0
+        width: 46
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bd0c1aa5108abe50800000000000000
+      internalID: 6825909015770041783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      blood_bishop_0: 2070313017425129609
+      blood_bishop_1: 7236577186416264278
+      blood_bishop_10: 7255177207584088863
+      blood_bishop_11: -6539883488268882344
+      blood_bishop_12: 5833905417969047696
+      blood_bishop_13: 5451659839007889671
+      blood_bishop_14: 6041606308308197319
+      blood_bishop_15: -809902026715267893
+      blood_bishop_16: 4462098001234579922
+      blood_bishop_17: 2436994602206774520
+      blood_bishop_18: 176013361036611663
+      blood_bishop_19: 9023841439975402862
+      blood_bishop_2: -6075321262675754915
+      blood_bishop_20: -7088382644087172963
+      blood_bishop_21: 4985827344439205953
+      blood_bishop_22: 8393808406485636611
+      blood_bishop_23: -3086861238694171290
+      blood_bishop_24: 1174215405383383745
+      blood_bishop_25: -6383174697424409888
+      blood_bishop_26: 7200683500941419761
+      blood_bishop_27: 6825909015770041783
+      blood_bishop_3: -4271188333819795678
+      blood_bishop_4: -4469798352853276844
+      blood_bishop_5: 828885197794141409
+      blood_bishop_6: 1087914196566464497
+      blood_bishop_7: -8113472587250884811
+      blood_bishop_8: -3989340088246757064
+      blood_bishop_9: -7329800227972398167
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

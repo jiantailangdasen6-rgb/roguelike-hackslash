@@ -4,7 +4,7 @@
 param([int]$Seconds = 90)
 
 $projectPath = Split-Path -Parent $PSScriptRoot
-$exe = "$projectPath\Builds\Windows\LabyrinthOfTheDead.exe"
+$exe = "$projectPath\Builds\Windows\LabyrinthSurvivor.exe"
 $out = "$projectPath\Logs\online"
 New-Item -ItemType Directory -Force $out | Out-Null
 Remove-Item "$out\*" -ErrorAction SilentlyContinue

@@ -10,7 +10,7 @@ $out = "$project\Logs\online"
 New-Item -ItemType Directory -Force $out | Out-Null
 Remove-Item "$out\xcode.txt", "$out\xhost.log" -ErrorAction SilentlyContinue
 
-$hostProc = Start-Process "$project\Builds\Windows\LabyrinthOfTheDead.exe" -PassThru -ArgumentList @(
+$hostProc = Start-Process "$project\Builds\Windows\LabyrinthSurvivor.exe" -PassThru -ArgumentList @(
     '-botmove', '-screen-fullscreen', '0', '-screen-width', '960', '-screen-height', '540',
     '-onlinehost', '2', '-codefile', "`"$out\xcode.txt`"", '-profile', 'xhost', '-class', 'warrior',
     '-autoquit', "$Seconds", '-logFile', "`"$out\xhost.log`"")

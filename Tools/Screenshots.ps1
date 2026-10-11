@@ -7,7 +7,7 @@ param(
     [string]$Extra = ''
 )
 $projectPath = Split-Path -Parent $PSScriptRoot
-$exe = "$projectPath\Builds\Windows\LabyrinthOfTheDead.exe"
+$exe = "$projectPath\Builds\Windows\LabyrinthSurvivor.exe"
 $out = "$projectPath\Logs\shots"
 New-Item -ItemType Directory -Force $out | Out-Null
 

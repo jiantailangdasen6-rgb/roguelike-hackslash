@@ -1,0 +1,1588 @@
+fileFormatVersion: 2
+guid: e507c39aa75210446a29eb3fc4e79e93
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6672862777873010450
+    second: bloater_0
+  - first:
+      213: 4593608437858978089
+    second: bloater_1
+  - first:
+      213: 8353613933582974346
+    second: bloater_2
+  - first:
+      213: 7830259205086456833
+    second: bloater_3
+  - first:
+      213: -63973207137327744
+    second: bloater_4
+  - first:
+      213: -8232172784371557151
+    second: bloater_5
+  - first:
+      213: 5737055291237284728
+    second: bloater_6
+  - first:
+      213: -826952484233818938
+    second: bloater_7
+  - first:
+      213: 9176358196297611108
+    second: bloater_8
+  - first:
+      213: 7367771188935406101
+    second: bloater_9
+  - first:
+      213: 2197113646481545411
+    second: bloater_10
+  - first:
+      213: 7592513069482467676
+    second: bloater_11
+  - first:
+      213: 8444056426081538197
+    second: bloater_12
+  - first:
+      213: -3491759221098505960
+    second: bloater_13
+  - first:
+      213: 1304127221297797196
+    second: bloater_14
+  - first:
+      213: 4099508961171530099
+    second: bloater_15
+  - first:
+      213: -93783943957122038
+    second: bloater_16
+  - first:
+      213: -6452039194709917835
+    second: bloater_17
+  - first:
+      213: 3362045056766197071
+    second: bloater_18
+  - first:
+      213: 6122992168076419478
+    second: bloater_19
+  - first:
+      213: -6302649984772340133
+    second: bloater_20
+  - first:
+      213: -1520506325536865265
+    second: bloater_21
+  - first:
+      213: -3298256412384368623
+    second: bloater_22
+  - first:
+      213: -7540397938708834500
+    second: bloater_23
+  - first:
+      213: 2189108806697153500
+    second: bloater_24
+  - first:
+      213: -1013160940898899410
+    second: bloater_25
+  - first:
+      213: 2608841413914997886
+    second: bloater_26
+  - first:
+      213: 8336520820263295650
+    second: bloater_27
+  - first:
+      213: 6978773463939288390
+    second: bloater_28
+  - first:
+      213: -875245733750526906
+    second: bloater_29
+  - first:
+      213: -3451132346862178900
+    second: bloater_30
+  - first:
+      213: 3346620545871864041
+    second: bloater_31
+  - first:
+      213: -2950693880102849737
+    second: bloater_32
+  - first:
+      213: -5331455457669689034
+    second: bloater_33
+  - first:
+      213: 3043545192130715600
+    second: bloater_34
+  - first:
+      213: -976974941683688404
+    second: bloater_35
+  - first:
+      213: -2032258313349695030
+    second: bloater_36
+  - first:
+      213: 5196672746298411784
+    second: bloater_37
+  - first:
+      213: 6165828708527253488
+    second: bloater_38
+  - first:
+      213: 7271952371562032015
+    second: bloater_39
+  - first:
+      213: 1617874790381946417
+    second: bloater_40
+  - first:
+      213: -2615768725949985513
+    second: bloater_41
+  - first:
+      213: -6933010316087236216
+    second: bloater_42
+  - first:
+      213: -4718276472127165765
+    second: bloater_43
+  - first:
+      213: 6864044297387839371
+    second: bloater_44
+  - first:
+      213: -3847611729712778028
+    second: bloater_45
+  - first:
+      213: -2000697022008284226
+    second: bloater_46
+  - first:
+      213: 8234496510826688408
+    second: bloater_47
+  - first:
+      213: -5985504148400736520
+    second: bloater_48
+  - first:
+      213: 1340434669988303954
+    second: bloater_49
+  - first:
+      213: 4495861999487049684
+    second: bloater_50
+  - first:
+      213: -3627249184361964909
+    second: bloater_51
+  - first:
+      213: 5578110584389163471
+    second: bloater_52
+  - first:
+      213: -5573686677843992603
+    second: bloater_53
+  - first:
+      213: 2394852095089439091
+    second: bloater_54
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bloater_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee0f3f968aa3563a0800000000000000
+      internalID: -6672862777873010450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 327
+        width: 23
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92942d74986cfbf30800000000000000
+      internalID: 4593608437858978089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 327
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8d77fdfc9ffde370800000000000000
+      internalID: 8353613933582974346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_3
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10c2962b24baaac60800000000000000
+      internalID: 7830259205086456833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_4
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 085ef6105b8bc1ff0800000000000000
+      internalID: -63973207137327744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_5
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 265
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ec15e1f77271cd80800000000000000
+      internalID: -8232172784371557151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_6
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 265
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87b39f2246d1e9f40800000000000000
+      internalID: 5737055291237284728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_7
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cccd13d8131684f0800000000000000
+      internalID: -826952484233818938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_8
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 265
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 467301e3929f85f70800000000000000
+      internalID: 9176358196297611108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_9
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 265
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5123ad63cd49f3660800000000000000
+      internalID: 7367771188935406101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 201
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c812bd7837bd7e10800000000000000
+      internalID: 2197113646481545411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_11
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 201
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c51630be8660e5960800000000000000
+      internalID: 7592513069482467676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_12
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 202
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 590d1fbb4905f2570800000000000000
+      internalID: 8444056426081538197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_13
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 202
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8199a311d77ca8fc0800000000000000
+      internalID: -3491759221098505960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_14
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 139
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c485f575cc0391210800000000000000
+      internalID: 1304127221297797196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_15
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 72
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 371e8281ea164e830800000000000000
+      internalID: 4099508961171530099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_16
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 72
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a04fcc6ffffc2bef0800000000000000
+      internalID: -93783943957122038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 11
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57ffa6a6980c576a0800000000000000
+      internalID: -6452039194709917835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_18
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 27
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4d386f8a2268ae20800000000000000
+      internalID: 3362045056766197071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_19
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 32
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691a1b49fec39f450800000000000000
+      internalID: 6122992168076419478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_20
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 33
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5606025b3d7888a0800000000000000
+      internalID: -6302649984772340133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_21
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 30
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0404ab8d8316eae0800000000000000
+      internalID: -1520506325536865265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_22
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 32
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 118eca1944d3a32d0800000000000000
+      internalID: -3298256412384368623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c371c2686002b5790800000000000000
+      internalID: -7540397938708834500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_24
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 29
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd3fcdd7cd6416e10800000000000000
+      internalID: 2189108806697153500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_25
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 28
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2aab610e7780f1f0800000000000000
+      internalID: -1013160940898899410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_26
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 28
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e743bb79177743420800000000000000
+      internalID: 2608841413914997886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_27
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 18
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aa117a648541b370800000000000000
+      internalID: 8336520820263295650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_28
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 22
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64d06068d7599d060800000000000000
+      internalID: 6978773463939288390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_29
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 25
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64caf9474a08ad3f0800000000000000
+      internalID: -875245733750526906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_30
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 19
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cad6b685a6d1b10d0800000000000000
+      internalID: -3451132346862178900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_31
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 21
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e067b2c7a5917e20800000000000000
+      internalID: 3346620545871864041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_32
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 25
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 733fc8bac870d07d0800000000000000
+      internalID: -2950693880102849737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_33
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 22
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 631d7cd228dd206b0800000000000000
+      internalID: -5331455457669689034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_34
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 22
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0df9cc21a38dc3a20800000000000000
+      internalID: 3043545192130715600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_35
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 8
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2c5c7e77761172f0800000000000000
+      internalID: -976974941683688404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_36
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 17
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac9f4f4d4d7fbc3e0800000000000000
+      internalID: -2032258313349695030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_37
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 14
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80b0211645a4e1840800000000000000
+      internalID: 5196672746298411784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_38
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 7
+        width: 18
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f72cadda8c619550800000000000000
+      internalID: 6165828708527253488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_39
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 13
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8ba38a472a2be460800000000000000
+      internalID: 7271952371562032015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_40
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 6
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13686cbcc88d37610800000000000000
+      internalID: 1617874790381946417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_41
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71dcc23e33ce2bbd0800000000000000
+      internalID: -2615768725949985513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_42
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 7
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8896085a9dff8cf90800000000000000
+      internalID: -6933010316087236216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_43
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 6
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbae6ce0c80558eb0800000000000000
+      internalID: -4718276472127165765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_44
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 18
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8f0954dbebf14f50800000000000000
+      internalID: 6864044297387839371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_45
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 13
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d4f7d074898a9ac0800000000000000
+      internalID: -3847611729712778028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_46
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 6
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebba30c98a81c34e0800000000000000
+      internalID: -2000697022008284226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_47
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 7
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89fa408c2fec64270800000000000000
+      internalID: 8234496510826688408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_48
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f672f880b73feca0800000000000000
+      internalID: -5985504148400736520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_49
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 254554dfa3e2a9210800000000000000
+      internalID: 1340434669988303954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_50
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 7
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4df5a9e1ba2846e30800000000000000
+      internalID: 4495861999487049684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_51
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 7
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39a9746b51c69adc0800000000000000
+      internalID: -3627249184361964909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_52
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 5
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc9dc5cb50e696d40800000000000000
+      internalID: 5578110584389163471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_53
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ef18c54f7946a2b0800000000000000
+      internalID: -5573686677843992603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloater_54
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 7
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 371f761ca493c3120800000000000000
+      internalID: 2394852095089439091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bloater_0: -6672862777873010450
+      bloater_1: 4593608437858978089
+      bloater_10: 2197113646481545411
+      bloater_11: 7592513069482467676
+      bloater_12: 8444056426081538197
+      bloater_13: -3491759221098505960
+      bloater_14: 1304127221297797196
+      bloater_15: 4099508961171530099
+      bloater_16: -93783943957122038
+      bloater_17: -6452039194709917835
+      bloater_18: 3362045056766197071
+      bloater_19: 6122992168076419478
+      bloater_2: 8353613933582974346
+      bloater_20: -6302649984772340133
+      bloater_21: -1520506325536865265
+      bloater_22: -3298256412384368623
+      bloater_23: -7540397938708834500
+      bloater_24: 2189108806697153500
+      bloater_25: -1013160940898899410
+      bloater_26: 2608841413914997886
+      bloater_27: 8336520820263295650
+      bloater_28: 6978773463939288390
+      bloater_29: -875245733750526906
+      bloater_3: 7830259205086456833
+      bloater_30: -3451132346862178900
+      bloater_31: 3346620545871864041
+      bloater_32: -2950693880102849737
+      bloater_33: -5331455457669689034
+      bloater_34: 3043545192130715600
+      bloater_35: -976974941683688404
+      bloater_36: -2032258313349695030
+      bloater_37: 5196672746298411784
+      bloater_38: 6165828708527253488
+      bloater_39: 7271952371562032015
+      bloater_4: -63973207137327744
+      bloater_40: 1617874790381946417
+      bloater_41: -2615768725949985513
+      bloater_42: -6933010316087236216
+      bloater_43: -4718276472127165765
+      bloater_44: 6864044297387839371
+      bloater_45: -3847611729712778028
+      bloater_46: -2000697022008284226
+      bloater_47: 8234496510826688408
+      bloater_48: -5985504148400736520
+      bloater_49: 1340434669988303954
+      bloater_5: -8232172784371557151
+      bloater_50: 4495861999487049684
+      bloater_51: -3627249184361964909
+      bloater_52: 5578110584389163471
+      bloater_53: -5573686677843992603
+      bloater_54: 2394852095089439091
+      bloater_6: 5737055291237284728
+      bloater_7: -826952484233818938
+      bloater_8: 9176358196297611108
+      bloater_9: 7367771188935406101
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,11 +19,17 @@ namespace Game.Gameplay
         private readonly Text[] _tags = new Text[PerkRoller.OptionCount];
         private readonly Text[] _titles = new Text[PerkRoller.OptionCount];
         private readonly Text[] _bodies = new Text[PerkRoller.OptionCount];
+        private readonly Image[] _icons = new Image[PerkRoller.OptionCount];
+        private PerkOption[] _options;
+
+        /// <summary>Perks this player has picked in the current run (for the HUD).</summary>
+        public static readonly List<PerkOption> Taken = new();
         private float _deadline;
         private int _count;
 
         private void Awake()
         {
+            Taken.Clear(); // a new Game scene is a new run
             var root = UIKit.CreateCanvas("Perks", 40, transform).transform;
             var dim = UIKit.Panel(root, "Dim", new Color(0f, 0f, 0f, 0.7f));
             dim.rectTransform.Stretch();
@@ -38,7 +45,7 @@ namespace Game.Gameplay
                 int index = i;
                 var card = UIKit.Framed(dim.transform, "Card" + i, new Color(0.06f, 0.045f, 0.06f, 1f));
                 var outer = card.Outer();
-                outer.Place(new Vector2(0.5f, 0.5f), new Vector2(460f, 420f), new Vector2((i - 1) * 500f, -40f));
+                outer.Place(new Vector2(0.5f, 0.5f), new Vector2(460f, 480f), new Vector2((i - 1) * 500f, -50f));
                 var button = outer.gameObject.AddComponent<Button>();
                 button.targetGraphic = outer.GetComponent<Image>();
                 var colors = button.colors;
@@ -55,9 +62,11 @@ namespace Game.Gameplay
                 _tags[i] = UIKit.Label(card.transform, "", 22, TextAnchor.UpperCenter, UIKit.MutedText);
                 _tags[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(420f, 34f), new Vector2(0f, -24f));
                 _titles[i] = UIKit.Title(card.transform, "", 40);
-                _titles[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(420f, 70f), new Vector2(0f, -60f));
+                _icons[i] = UIKit.Rect("Icon", card.transform).Place(new Vector2(0.5f, 1f), new Vector2(112f, 112f), new Vector2(0f, -58f)).gameObject.AddComponent<Image>();
+                _icons[i].raycastTarget = false;
+                _titles[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(420f, 70f), new Vector2(0f, -172f));
                 _bodies[i] = UIKit.Label(card.transform, "", 27, TextAnchor.UpperCenter);
-                _bodies[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(400f, 220f), new Vector2(0f, -150f));
+                _bodies[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(400f, 200f), new Vector2(0f, -248f));
                 var key = UIKit.Label(card.transform, $"[{i + 1}]", 22, TextAnchor.LowerCenter, UIKit.MutedText);
                 key.rectTransform.Stretch(14f);
                 _buttons[i] = button;
@@ -91,6 +100,7 @@ namespace Game.Gameplay
         private void Show(PerkOption[] options)
         {
             _count = options.Length;
+            _options = options;
             for (int i = 0; i < _buttons.Length; i++)
             {
                 bool used = i < options.Length;
@@ -102,6 +112,8 @@ namespace Game.Gameplay
                 _bodies[i].text = body;
                 _tags[i].text = cls.HasValue ? ClassCatalog.Get(cls.Value).Name + "の技" : "共通";
                 _edges[i].color = ClassColor(cls);
+                _icons[i].sprite = GameIcons.Perk(options[i]);
+                _icons[i].enabled = _icons[i].sprite != null;
             }
             _deadline = Time.time + RunSimulation.ChoiceTimeout;
             _panel.SetActive(true);
@@ -117,6 +129,8 @@ namespace Game.Gameplay
         {
             if (!IsShowing) return;
             RunDirector.Instance?.ChoosePerkRpc(index);
+            if (_options != null && index < _options.Length) Taken.Add(_options[index]);
+            _options = null;
             Hide();
         }
 
@@ -141,7 +155,13 @@ namespace Game.Gameplay
             float left = _deadline - Time.time;
             _timerText.text = $"残り {Mathf.CeilToInt(Mathf.Max(0f, left))} 秒（時間切れで左を選択）";
             var director = RunDirector.Instance;
-            if (left < -1f || (director != null && !director.Paused.Value && left < RunSimulation.ChoiceTimeout - 1f)) Hide();
+            if (left < -1f || (director != null && !director.Paused.Value && left < RunSimulation.ChoiceTimeout - 1f))
+            {
+                // Timed out: the host picked the first option.
+                if (_options != null && _options.Length > 0) Taken.Add(_options[0]);
+                _options = null;
+                Hide();
+            }
         }
     }
 }

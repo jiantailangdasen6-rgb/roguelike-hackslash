@@ -98,6 +98,18 @@ namespace Game.Core
 
         public int Count { get; private set; }
         public float MaxRadius { get; private set; } = 0.5f;
+
+        /// <summary>Living monsters (breakable props such as powder kegs don't count).</summary>
+        public int HostileCount
+        {
+            get
+            {
+                int n = 0;
+                for (int i = 0; i < Count; i++)
+                    if (!_enemies[i].Dead && !EnemyCatalog.Get(_enemies[i].Type).Prop) n++;
+                return n;
+            }
+        }
         public Rect Bounds => _bounds;
 
         public EnemySimulation(Rect bounds)

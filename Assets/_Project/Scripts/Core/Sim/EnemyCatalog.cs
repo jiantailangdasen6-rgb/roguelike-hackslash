@@ -7,6 +7,14 @@ namespace Game.Core
         Ghoul,
         Cultist,
         BoneKing,
+        Bat,
+        Bloater,
+        DreadKnight,
+        Necromancer,
+        Wraith,
+        BloodBishop,
+        Lich,
+        PowderKeg,
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -20,10 +28,13 @@ namespace Game.Core
 
     public enum AttackKind : byte
     {
-        Melee,       // instant hit in the shape
-        Projectile,  // fires along the line
-        Lunge,       // dashes along the line, hitting what it touches
-        Summon,      // calls skeletons
+        Melee,         // instant hit in the shape
+        Projectile,    // fires along the line (Count/Spread for fans; Spread 360 = all around)
+        Lunge,         // dashes along the line, hitting what it touches
+        Summon,        // calls minions
+        Rain,          // circles drop on every player (+Extra random spots)
+        Blink,         // vanishes and reappears inside the telegraphed circle, hitting there
+        SelfDestruct,  // bursts (SelfCircle) and dies
     }
 
     public sealed class EnemyAttack
@@ -37,7 +48,14 @@ namespace Game.Core
         public float Recover;
         public float Damage;
         public float ProjectileSpeed;
+        public ProjectileKind Projectile = ProjectileKind.EnemyArrow;
+        public int Count = 1;        // projectiles per volley
+        public float Spread;         // fan angle (degrees)
+        public int Extra;            // rain: extra random circles
         public int SummonCount;
+        public EnemyType Summon1 = EnemyType.Skeleton;
+        public EnemyType Summon2 = EnemyType.SkeletonArcher;
+        public bool HitsEnemies;     // explosions also hurt other monsters
     }
 
     public sealed class EnemyDef
@@ -52,6 +70,10 @@ namespace Game.Core
         public float PreferredDistance; // ranged enemies keep this distance
         public float AttackCooldown;
         public bool Boss;
+        public bool Flying;   // ignores obstacles, no ground shadow contact
+        public bool Armored;  // takes much less damage unless frozen, stunned or marked
+        public bool Prop;     // a breakable object, not a monster (no AI, no XP)
+        public string Title;  // boss subtitle
         public EnemyAttack[] Attacks;
     }
 
@@ -61,6 +83,10 @@ namespace Game.Core
         public const float EliteDamageMultiplier = 1.4f;
         public const float EliteRadiusMultiplier = 1.25f;
         public const int EliteXpMultiplier = 4;
+        public const float ArmorFactor = 0.4f;
+
+        /// <summary>The boss waiting at the end of each area.</summary>
+        public static readonly EnemyType[] AreaBosses = { EnemyType.BoneKing, EnemyType.BloodBishop, EnemyType.Lich };
 
         public static readonly EnemyDef[] All =
         {
@@ -90,7 +116,7 @@ namespace Game.Core
             },
             new()
             {
-                Type = EnemyType.BoneKing, Name = "骸骨の騎士王", Sheet = "bone_king", Health = 3200f, Speed = 1.8f, Radius = 0.9f, Xp = 40,
+                Type = EnemyType.BoneKing, Name = "骸骨の騎士王", Title = "朽ちた納骨堂の主", Sheet = "bone_king", Health = 3200f, Speed = 1.8f, Radius = 0.9f, Xp = 40,
                 AttackCooldown = 0.9f, Boss = true,
                 Attacks = new[]
                 {
@@ -99,6 +125,74 @@ namespace Game.Core
                     new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 9f, SizeB = 1.6f, Range = 9f, Windup = 1.0f, Recover = 1.0f, Damage = 24f, ProjectileSpeed = 18f },
                     new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 3 },
                 },
+            },
+            new()
+            {
+                Type = EnemyType.Bat, Name = "吸血蝙蝠", Sheet = "bat", Health = 22f, Speed = 4.3f, Radius = 0.32f, Xp = 1,
+                AttackCooldown = 1.3f, Flying = true,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 3.2f, SizeB = 0.7f, Range = 3.0f, Windup = 0.4f, Recover = 0.55f, Damage = 8f, ProjectileSpeed = 15f } },
+            },
+            new()
+            {
+                Type = EnemyType.Bloater, Name = "腐れ膨れ", Sheet = "bloater", Health = 75f, Speed = 1.55f, Radius = 0.5f, Xp = 3,
+                AttackCooldown = 0.4f,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.SelfDestruct, Shape = AttackShape.SelfCircle, SizeA = 2.5f, Range = 1.7f, Windup = 1.0f, Recover = 0.2f, Damage = 30f, HitsEnemies = true } },
+            },
+            new()
+            {
+                Type = EnemyType.DreadKnight, Name = "亡者の騎士", Sheet = "dread_knight", Health = 170f, Speed = 1.75f, Radius = 0.5f, Xp = 6,
+                AttackCooldown = 2.1f, Armored = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 2.5f, SizeB = 120f, Range = 2.1f, Windup = 0.9f, Recover = 0.7f, Damage = 26f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.5f, SizeB = 1.2f, Range = 5f, Windup = 0.9f, Recover = 0.9f, Damage = 22f, ProjectileSpeed = 14f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Necromancer, Name = "死霊術師", Sheet = "necromancer", Health = 62f, Speed = 1.8f, Radius = 0.42f, Xp = 6,
+                PreferredDistance = 7.5f, AttackCooldown = 2.6f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 10f, SizeB = 0.5f, Range = 11f, Windup = 0.9f, Recover = 0.5f, Damage = 13f, ProjectileSpeed = 7.5f, Projectile = ProjectileKind.SoulOrb, Count = 3, Spread = 24f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 1.6f, Range = 99f, Windup = 1.1f, Recover = 0.6f, SummonCount = 2 },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Wraith, Name = "怨霊", Sheet = "wraith", Health = 58f, Speed = 2.6f, Radius = 0.4f, Xp = 5,
+                AttackCooldown = 2.6f, Flying = true,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Blink, Shape = AttackShape.Circle, SizeA = 1.5f, Range = 8f, Windup = 0.85f, Recover = 0.6f, Damage = 20f } },
+            },
+            new()
+            {
+                Type = EnemyType.BloodBishop, Name = "血の司教", Title = "血塗られた礼拝堂の主", Sheet = "blood_bishop", Health = 3300f, Speed = 1.6f, Radius = 0.8f, Xp = 50,
+                PreferredDistance = 5.5f, AttackCooldown = 0.95f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 12f, SizeB = 0.5f, Range = 13f, Windup = 0.8f, Recover = 0.6f, Damage = 16f, ProjectileSpeed = 9f, Projectile = ProjectileKind.BloodOrb, Count = 7, Spread = 70f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.8f, Range = 99f, Windup = 1.2f, Recover = 0.7f, Damage = 26f, Extra = 2 },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.Cultist, Summon2 = EnemyType.Bloater },
+                    new EnemyAttack { Kind = AttackKind.Blink, Shape = AttackShape.Circle, SizeA = 2.6f, Range = 99f, Windup = 1.0f, Recover = 0.8f, Damage = 22f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Lich, Name = "冥王リッチ", Title = "奈落の玉座の主", Sheet = "lich", Health = 3700f, Speed = 1.45f, Radius = 0.85f, Xp = 60,
+                PreferredDistance = 4.5f, AttackCooldown = 0.9f, Boss = true, Flying = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.SelfCircle, SizeA = 2.4f, Range = 99f, Windup = 1.0f, Recover = 0.7f, Damage = 16f, ProjectileSpeed = 6.5f, Projectile = ProjectileKind.SoulOrb, Count = 16, Spread = 360f },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 6f, SizeB = 70f, Range = 6f, Windup = 1.1f, Recover = 0.8f, Damage = 32f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.6f, Range = 99f, Windup = 1.3f, Recover = 0.6f, Damage = 28f, Extra = 3 },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.1f, Recover = 0.6f, SummonCount = 3, Summon1 = EnemyType.Wraith, Summon2 = EnemyType.Skeleton },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 3.4f, Range = 3.2f, Windup = 1.15f, Recover = 0.9f, Damage = 34f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.PowderKeg, Name = "火薬樽", Sheet = "powder_keg", Health = 1f, Speed = 0f, Radius = 0.42f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };
 

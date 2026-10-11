@@ -40,3 +40,7 @@ crashlytics-build.properties
 # OS
 .DS_Store
 Thumbs.db
+
+# Rendered audio (regenerate: Tools/RunMethod.ps1 -Method Game.EditorTools.Audio.AudioGenerator.Generate)
+/Assets/_Project/Resources/Audio/
+/Assets/_Project/Resources/Audio.meta

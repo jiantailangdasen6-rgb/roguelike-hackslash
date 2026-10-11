@@ -18,6 +18,7 @@ namespace Game.Gameplay
 
         public readonly NetworkVariable<int> Slot = new();
         public readonly NetworkVariable<ClassId> Class = new();
+        public readonly NetworkVariable<byte> Skin = new();
         public readonly NetworkVariable<float> Hp = new();
         public readonly NetworkVariable<float> MaxHp = new();
         public readonly NetworkVariable<float> Shield = new();
@@ -51,11 +52,13 @@ namespace Game.Gameplay
         public override void OnNetworkSpawn()
         {
             All.Add(this);
-            animator.SetSheet(SpriteSheet.Load(ClassDef.Sheet));
-            Class.OnValueChanged += (_, c) => animator.SetSheet(SpriteSheet.Load(ClassCatalog.Get(c).Sheet));
+            ApplySheet();
+            Class.OnValueChanged += (_, _) => ApplySheet();
+            Skin.OnValueChanged += (_, _) => ApplySheet();
             shadow.sprite = SpriteSheet.Load("fx_shadow")?.First;
             marker.sprite = SpriteSheet.Load("fx_circle")?.First;
             marker.color = new Color(Color.r, Color.g, Color.b, 0.35f);
+            CreateDownedVisuals();
             _lastPosition = transform.position;
             RunDirector.EventReceived += OnEvent;
 
@@ -66,7 +69,83 @@ namespace Game.Gameplay
 
             Local = this;
             var follow = FindAnyObjectByType<CinemachineCamera>();
-            if (follow != null) follow.Follow = transform;
+            if (follow != null) follow.Follow = CameraTarget.Create(transform).transform;
+        }
+
+        private void ApplySheet() => animator.SetSheet(SpriteSheet.Load(SkinCatalog.Sheet(Class.Value, Skin.Value)) ?? SpriteSheet.Load(ClassDef.Sheet));
+
+        // ------------------------------------------------------------------ Downed: easy to find, clear how to help
+
+        private SpriteRenderer _reviveRing;
+        private SpriteRenderer _reviveFill;
+        private SpriteRenderer _downedIcon;
+        private Light2D _beacon;
+
+        private void CreateDownedVisuals()
+        {
+            SpriteRenderer Child(string name, string sheet, int order)
+            {
+                var go = new GameObject(name);
+                go.transform.SetParent(transform, false);
+                var r = go.AddComponent<SpriteRenderer>();
+                r.sprite = SpriteSheet.Load(sheet)?.First;
+                r.sortingOrder = order;
+                r.enabled = false;
+                return r;
+            }
+
+            // fx_circle is 2 units across: scale = radius.
+            _reviveRing = Child("ReviveRing", "fx_revive_ring", -480);
+            _reviveRing.transform.localScale = Vector3.one * RunSimulation.ReviveRadius;
+            _reviveFill = Child("ReviveFill", "fx_circle", -481);
+            _downedIcon = Child("DownedIcon", "fx_downed", 3500);
+
+            var lightGo = new GameObject("Beacon");
+            lightGo.transform.SetParent(transform, false);
+            lightGo.transform.localPosition = new Vector3(0f, 0.6f);
+            _beacon = lightGo.AddComponent<Light2D>();
+            _beacon.lightType = Light2D.LightType.Point;
+            _beacon.pointLightOuterRadius = 3.2f;
+            _beacon.pointLightInnerRadius = 0.2f;
+            _beacon.color = new Color(1f, 0.25f, 0.2f);
+            _beacon.enabled = false;
+        }
+
+        /// <summary>True while a living teammate stands close enough to help this downed player up.</summary>
+        public bool BeingRevived
+        {
+            get
+            {
+                foreach (var other in All)
+                    if (other != this && !other.Downed.Value &&
+                        ((Vector2)(other.transform.position - transform.position)).sqrMagnitude <= RunSimulation.ReviveRadius * RunSimulation.ReviveRadius)
+                        return true;
+                return false;
+            }
+        }
+
+        private float _shownProgress;
+
+        private void UpdateDownedVisuals(bool downed)
+        {
+            _reviveRing.enabled = _reviveFill.enabled = _downedIcon.enabled = _beacon.enabled = downed;
+            if (!downed)
+            {
+                _shownProgress = 0f;
+                return;
+            }
+            bool helped = BeingRevived;
+            float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * (helped ? 10f : 5f));
+            _shownProgress = Mathf.MoveTowards(_shownProgress, ReviveProgress.Value, Time.deltaTime * 1.5f);
+
+            // The ring marks where to stand; the inner disc grows with revive progress.
+            _reviveRing.color = helped ? new Color(0.55f, 1f, 0.6f, 0.55f) : new Color(1f, 0.35f, 0.3f, 0.4f + 0.3f * pulse);
+            _reviveFill.transform.localScale = Vector3.one * Mathf.Max(0.05f, _shownProgress) * RunSimulation.ReviveRadius;
+            _reviveFill.color = new Color(0.45f, 1f, 0.55f, 0.25f);
+            _downedIcon.transform.localPosition = new Vector3(0f, 1.45f + 0.08f * Mathf.Sin(Time.time * 4f));
+            _downedIcon.color = Color.Lerp(new Color(1f, 0.4f, 0.35f), Color.white, pulse * 0.6f);
+            _beacon.intensity = 0.7f + 0.8f * pulse;
+            _beacon.color = helped ? new Color(0.5f, 1f, 0.55f) : new Color(1f, 0.25f, 0.2f);
         }
 
         public override void OnNetworkDespawn()
@@ -142,6 +221,7 @@ namespace Game.Gameplay
             glow.color = Valor.Value ? new Color(1f, 0.8f, 0.4f) : new Color(1f, 0.75f, 0.55f);
             glow.intensity = Valor.Value ? 1.3f : 0.9f;
             shadow.enabled = !downed;
+            UpdateDownedVisuals(downed);
         }
     }
 }

@@ -109,9 +109,9 @@ namespace Game.EditorTools.Art
 
         // ------------------------------------------------------------------ Warrior
 
-        public static List<Clip> Warrior()
+        public static List<Clip> Warrior(Dictionary<char, PixelMaterial> palette = null)
         {
-            var m = Palette.Standard();
+            var m = palette ?? Palette.Standard();
             var rig = new HumanoidRig
             {
                 Head = new PixelPart("head", P(6.5f, 0.5f), m, 0,
@@ -341,9 +341,9 @@ namespace Game.EditorTools.Art
             ".sss.",
             ".ss..");
 
-        public static List<Clip> Mage()
+        public static List<Clip> Mage(Dictionary<char, PixelMaterial> palette = null)
         {
-            var rig = MageRig(Palette.Standard(), glowingEyes: false);
+            var rig = MageRig(palette ?? Palette.Standard(), glowingEyes: false);
             const float arm = 48f, staff = 4f; // staff held upright, in front of the body
             return new List<Clip>
             {
@@ -380,9 +380,9 @@ namespace Game.EditorTools.Art
 
         // ------------------------------------------------------------------ Ranger
 
-        public static List<Clip> Ranger()
+        public static List<Clip> Ranger(Dictionary<char, PixelMaterial> palette = null)
         {
-            var m = Palette.Standard();
+            var m = palette ?? Palette.Standard();
             var rig = new HumanoidRig
             {
                 Head = new PixelPart("hood", P(5.5f, 0.5f), m, 0,

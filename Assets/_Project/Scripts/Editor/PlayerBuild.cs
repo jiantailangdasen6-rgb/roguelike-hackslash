@@ -13,7 +13,7 @@ namespace Game.EditorTools
     /// </summary>
     public static class PlayerBuild
     {
-        public const string WindowsPath = "Builds/Windows/LabyrinthOfTheDead.exe";
+        public const string WindowsPath = "Builds/Windows/LabyrinthSurvivor.exe";
         public const string WebGLPath = "Builds/WebGL";
 
         [MenuItem("Tools/Game/Build Windows Player")]
@@ -34,6 +34,16 @@ namespace Game.EditorTools
             PlayerSettings.defaultWebScreenHeight = 720;
             PlayerSettings.runInBackground = true;
             Build(WebGLPath, BuildTarget.WebGL, BuildOptions.None);
+
+            // The page shows the readable title rather than the product id.
+            string index = System.IO.Path.Combine(WebGLPath, "index.html");
+            if (System.IO.File.Exists(index))
+            {
+                string html = System.IO.File.ReadAllText(index)
+                    .Replace("<title>Unity Web Player | LabyrinthSurvivor</title>", "<title>Labyrinth Survivor</title>")
+                    .Replace(">LabyrinthSurvivor</div>", ">Labyrinth Survivor</div>");
+                System.IO.File.WriteAllText(index, html);
+            }
         }
 
         private static void Build(string path, BuildTarget target, BuildOptions options)

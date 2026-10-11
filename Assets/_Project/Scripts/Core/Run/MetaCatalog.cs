@@ -90,8 +90,8 @@ namespace Game.Core
         public static IEnumerable<MasteryNode> NodesFor(ClassId c) => Mastery.Where(n => n.Class == c);
 
         /// <summary>Soul shards earned for a run.</summary>
-        public static int ShardsForRun(int roomsCleared, int bossesKilled, int kills, bool victory) =>
-            roomsCleared * 6 + bossesKilled * 20 + kills / 8 + (victory ? 40 : 0);
+        public static int ShardsForRun(int roomsCleared, int bossesKilled, int kills, bool victory, Difficulty difficulty = Difficulty.Normal) =>
+            Mathf.RoundToInt((roomsCleared * 6 + bossesKilled * 20 + kills / 8 + (victory ? 40 : 0)) * DifficultyCatalog.Get(difficulty).Shards);
     }
 
     /// <summary>What a player brings into a run. Sent to the host when connecting.</summary>
@@ -99,6 +99,7 @@ namespace Game.Core
     public sealed class Loadout
     {
         public ClassId classId;
+        public int skin;
         public List<string> mastery = new();
         public List<string> trinkets = new();
 
@@ -117,6 +118,7 @@ namespace Game.Core
                 l.trinkets.RemoveAll(id => MetaCatalog.GetTrinket(id) == null);
                 if (l.trinkets.Count > MetaCatalog.TrinketSlots) l.trinkets.RemoveRange(MetaCatalog.TrinketSlots, l.trinkets.Count - MetaCatalog.TrinketSlots);
                 if (!Enum.IsDefined(typeof(ClassId), l.classId)) l.classId = ClassId.Warrior;
+                if (l.skin < 0 || l.skin >= SkinCatalog.PerClass) l.skin = 0;
                 return l;
             }
             catch (Exception)
@@ -135,13 +137,36 @@ namespace Game.Core
         public ClassId selectedClass;
         public List<string> unlocked = new();
         public List<string> equippedTrinkets = new();
+        /// <summary>Selected skin index per class (indexed by ClassId).</summary>
+        public List<int> skins = new();
+        public Difficulty difficulty = Difficulty.Normal;
+        /// <summary>Highest difficulty won so far (-1 = none).</summary>
+        public int bestVictory = -1;
 
         public bool IsUnlocked(string id)
         {
             var trinket = MetaCatalog.GetTrinket(id);
             if (trinket != null && trinket.Cost == 0) return true;
+            var skin = SkinCatalog.GetById(id);
+            if (skin != null && skin.Cost == 0) return true;
             return unlocked.Contains(id);
         }
+
+        public int SkinFor(ClassId c) => (int)c < skins.Count ? skins[(int)c] : 0;
+
+        public void SetSkin(ClassId c, int index)
+        {
+            while (skins.Count <= (int)c) skins.Add(0);
+            skins[(int)c] = index;
+        }
+
+        public bool IsDifficultyOpen(Difficulty d)
+        {
+            var def = DifficultyCatalog.Get(d);
+            return !def.UnlockedBy.HasValue || bestVictory >= (int)def.UnlockedBy.Value;
+        }
+
+        public void RecordVictory(Difficulty d) => bestVictory = Math.Max(bestVictory, (int)d);
 
         public bool TryBuy(string id, int cost)
         {
@@ -162,6 +187,7 @@ namespace Game.Core
         public Loadout ToLoadout() => new()
         {
             classId = selectedClass,
+            skin = IsUnlocked(SkinCatalog.Get(selectedClass, SkinFor(selectedClass)).Id) ? SkinFor(selectedClass) : 0,
             mastery = MetaCatalog.NodesFor(selectedClass).Where(n => IsUnlocked(n.Id)).Select(n => n.Id).ToList(),
             trinkets = equippedTrinkets.Where(IsUnlocked).Take(MetaCatalog.TrinketSlots).ToList(),
         };
@@ -176,6 +202,8 @@ namespace Game.Core
                 if (p == null) return Default();
                 p.unlocked ??= new List<string>();
                 p.equippedTrinkets ??= new List<string>();
+                p.skins ??= new List<int>();
+                if (!Enum.IsDefined(typeof(Difficulty), p.difficulty)) p.difficulty = Difficulty.Normal;
                 return p;
             }
             catch (Exception)

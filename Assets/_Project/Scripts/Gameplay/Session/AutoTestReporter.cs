@@ -14,6 +14,7 @@ namespace Game.Gameplay
         private float _quitAt;
         private float _nextReport;
         private int _eventCount;
+        private float _downAt;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Install()
@@ -23,6 +24,7 @@ namespace Game.Gameplay
             DontDestroyOnLoad(go);
             var reporter = go.AddComponent<AutoTestReporter>();
             reporter._quitAt = Time.time + CommandLine.GetFloat("-autoquit", 60f);
+            if (CommandLine.Has("-downat")) reporter._downAt = Time.time + CommandLine.GetFloat("-downat", 30f);
             if (CommandLine.GetValue("-screenshot") != null)
             {
                 string times = CommandLine.GetValue("-screenshotat") ?? "20";
@@ -45,6 +47,20 @@ namespace Game.Gameplay
             {
                 _nextReport = Time.time + 5f;
                 Debug.Log("[AutoTest] " + Status());
+            }
+            // -downat <s> (host): knock a teammate down to check the downed/revive markers.
+            if (_downAt > 0f && Time.time >= _downAt && RunDirector.Instance?.Sim != null)
+            {
+                _downAt = 0f;
+                var sim = RunDirector.Instance.Sim;
+                foreach (var p in sim.Players)
+                {
+                    if (p.ClientId == NetworkManager.Singleton.LocalClientId) continue;
+                    p.InvulnerableTimer = 0f;
+                    sim.HurtPlayer(p, 99999f);
+                    Debug.Log($"[AutoTest] downed client {p.ClientId}");
+                    break;
+                }
             }
             if (_shotIndex < _shots.Count && Time.time >= _shots[_shotIndex])
             {

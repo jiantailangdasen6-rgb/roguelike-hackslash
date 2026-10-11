@@ -46,6 +46,9 @@ namespace Game.Gameplay
         public readonly NetworkVariable<int> Kills = new();
         public readonly NetworkVariable<int> BossesKilled = new();
         public readonly NetworkVariable<int> RoomsCleared = new();
+        public readonly NetworkVariable<int> LayoutId = new();
+        public readonly NetworkVariable<Difficulty> DifficultyLevel = new(Difficulty.Normal);
+        public readonly NetworkVariable<EnemyType> BossType = new();
 
         /// <summary>Host only.</summary>
         public RunSimulation Sim { get; private set; }
@@ -103,7 +106,8 @@ namespace Game.Gameplay
         {
             if (Started.Value) return;
 
-            Sim = new RunSimulation((ulong)DateTime.UtcNow.Ticks);
+            DifficultyLevel.Value = ChosenDifficulty();
+            Sim = new RunSimulation((ulong)DateTime.UtcNow.Ticks, null, DifficultyLevel.Value);
             int slot = 0;
             foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
             {
@@ -113,6 +117,7 @@ namespace Game.Gameplay
                 var netPlayer = instance.GetComponent<NetPlayer>();
                 netPlayer.Slot.Value = slot++;
                 netPlayer.Class.Value = simPlayer.ClassId;
+                netPlayer.Skin.Value = (byte)loadout.skin;
                 netPlayer.Hp.Value = simPlayer.Hp;
                 netPlayer.MaxHp.Value = simPlayer.MaxHp;
                 netPlayer.MoveSpeed.Value = simPlayer.Stats.Get(StatType.MoveSpeed);
@@ -122,6 +127,14 @@ namespace Game.Gameplay
             Sim.Start((int)CommandLine.GetFloat("-startroom", 0f));
             Started.Value = true;
             Debug.Log($"[RunDirector] Run started with {Sim.Players.Count} player(s)");
+        }
+
+        /// <summary>The host's pick in the camp (automated runs: -difficulty easy|normal|hard|nightmare).</summary>
+        private static Difficulty ChosenDifficulty()
+        {
+            string flag = CommandLine.GetValue("-difficulty");
+            if (flag != null && Enum.TryParse(flag, true, out Difficulty d)) return d;
+            return ProfileStore.Current.difficulty;
         }
 
         private void OnClientDisconnected(ulong clientId) => Sim?.RemovePlayer(clientId);
@@ -202,6 +215,8 @@ namespace Game.Gameplay
             SetIfChanged(Kills, Sim.Kills);
             SetIfChanged(BossesKilled, Sim.BossesKilled);
             SetIfChanged(RoomsCleared, Sim.RoomsCleared);
+            SetIfChanged(LayoutId, Sim.Layout.Id);
+            SetIfChanged(BossType, Sim.AreaBoss);
         }
 
         private float BossHealthFraction()

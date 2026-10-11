@@ -35,11 +35,12 @@ namespace Game.Gameplay
         [NonSerialized] private Dictionary<string, Sprite[]> _flashSprites;
         private static readonly Dictionary<string, SpriteSheet> Loaded = new();
 
-        public static SpriteSheet Load(string name)
+        /// <param name="quiet">Don't warn when it is missing (optional variants).</param>
+        public static SpriteSheet Load(string name, bool quiet = false)
         {
             if (Loaded.TryGetValue(name, out var sheet) && sheet != null) return sheet;
             sheet = Resources.Load<SpriteSheet>("Sheets/" + name);
-            if (sheet == null) Debug.LogWarning($"[SpriteSheet] Missing Resources/Sheets/{name}");
+            if (sheet == null && !quiet) Debug.LogWarning($"[SpriteSheet] Missing Resources/Sheets/{name}");
             Loaded[name] = sheet;
             return sheet;
         }

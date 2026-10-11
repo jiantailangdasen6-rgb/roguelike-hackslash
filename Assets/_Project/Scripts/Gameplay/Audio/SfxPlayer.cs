@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.Core;
 using UnityEngine;
@@ -5,13 +6,16 @@ using UnityEngine;
 namespace Game.Gameplay
 {
     /// <summary>
-    /// Plays the procedural sounds for simulation events, with distance falloff from the local player,
-    /// slight pitch variation and per-sound rate limits. Also loops the crypt ambience.
+    /// Plays sounds for simulation events, with distance falloff from the local player, slight pitch variation
+    /// and per-sound rate limits. Clips are rendered offline into Resources/Audio (Editor/Audio); if one is
+    /// missing the runtime synth stands in. Also loops a quiet crypt ambience under the music.
     /// </summary>
     public sealed class SfxPlayer : MonoBehaviour
     {
-        private const int Voices = 16;
+        private const int Voices = 20;
         private const float HearingRange = 16f;
+
+        public static SfxPlayer Instance { get; private set; }
 
         private sealed class Sound
         {
@@ -28,22 +32,35 @@ namespace Game.Gameplay
 
         private void Awake()
         {
-            Add("swing", SfxSynth.Swing(), 0.35f, 0.04f);
-            Add("hit", SfxSynth.Hit(), 0.45f, 0.03f);
-            Add("heavyhit", SfxSynth.HeavyHit(), 0.6f, 0.05f);
-            Add("bolt", SfxSynth.Bolt(), 0.3f, 0.05f);
-            Add("arrow", SfxSynth.Arrow(), 0.35f, 0.04f);
-            Add("shatter", SfxSynth.Shatter(), 0.8f, 0.08f);
-            Add("death", SfxSynth.Death(), 0.45f, 0.06f);
-            Add("hurt", SfxSynth.Hurt(), 0.6f, 0.1f);
-            Add("slam", SfxSynth.Slam(), 0.8f, 0.15f);
-            Add("telegraph", SfxSynth.Telegraph(), 0.22f, 0.12f);
-            Add("warcry", SfxSynth.WarCry(), 0.5f, 0.3f);
-            Add("nova", SfxSynth.Nova(), 0.5f, 0.2f);
-            Add("heal", SfxSynth.Chime("heal", new[] { 523f, 659f, 784f, 1046f }, 0.06f, 0.8f), 0.4f, 0.3f);
-            Add("levelup", SfxSynth.Chime("levelup", new[] { 392f, 523f, 659f, 784f }, 0.09f, 1f), 0.5f, 0.5f);
-            Add("clear", SfxSynth.Chime("clear", new[] { 262f, 330f, 392f, 523f, 659f }, 0.12f, 1.4f), 0.5f, 1f);
-            Add("soul", SfxSynth.Soul(), 0.12f, 0.05f);
+            Instance = this;
+            Add("swing", 0.4f, 0.04f, SfxSynth.Swing);
+            Add("hit", 0.5f, 0.03f, SfxSynth.Hit);
+            Add("heavyhit", 0.6f, 0.05f, SfxSynth.HeavyHit);
+            Add("bolt", 0.32f, 0.05f, SfxSynth.Bolt);
+            Add("arrow", 0.38f, 0.04f, SfxSynth.Arrow);
+            Add("shatter", 0.8f, 0.08f, SfxSynth.Shatter);
+            Add("death", 0.45f, 0.06f, SfxSynth.Death);
+            Add("hurt", 0.6f, 0.1f, SfxSynth.Hurt);
+            Add("slam", 0.75f, 0.15f, SfxSynth.Slam);
+            Add("telegraph", 0.25f, 0.12f, SfxSynth.Telegraph);
+            Add("warcry", 0.55f, 0.3f, SfxSynth.WarCry);
+            Add("nova", 0.5f, 0.2f, SfxSynth.Nova);
+            Add("heal", 0.45f, 0.3f, () => SfxSynth.Chime("heal", new[] { 523f, 659f, 784f, 1046f }, 0.06f, 0.8f));
+            Add("levelup", 0.5f, 0.5f, () => SfxSynth.Chime("levelup", new[] { 392f, 523f, 659f, 784f }, 0.09f, 1f));
+            Add("clear", 0.5f, 1f, () => SfxSynth.Chime("clear", new[] { 262f, 330f, 392f, 523f, 659f }, 0.12f, 1.4f));
+            Add("soul", 0.12f, 0.05f, SfxSynth.Soul);
+            Add("explosion", 0.85f, 0.1f, SfxSynth.Slam);
+            Add("spikes", 0.4f, 0.1f, SfxSynth.HeavyHit);
+            Add("flame", 0.45f, 0.3f, SfxSynth.Nova);
+            Add("clank", 0.35f, 0.06f, SfxSynth.Hit);
+            Add("blink", 0.45f, 0.15f, SfxSynth.Swing);
+            Add("orb", 0.3f, 0.08f, SfxSynth.Bolt);
+            Add("screech", 0.22f, 0.25f, SfxSynth.Bolt);
+            Add("roar", 0.8f, 1f, SfxSynth.WarCry);
+            Add("downed", 0.6f, 0.3f, SfxSynth.Slam);
+            Add("revive", 0.55f, 0.3f, () => SfxSynth.Chime("revive", new[] { 392f, 523f, 659f }, 0.08f, 0.9f));
+            Add("fuse", 0.4f, 0.2f, SfxSynth.Telegraph);
+            Add("click", 0.3f, 0.03f, SfxSynth.Hit);
 
             for (int i = 0; i < Voices; i++)
             {
@@ -55,19 +72,27 @@ namespace Game.Gameplay
             _ambient = gameObject.AddComponent<AudioSource>();
             _ambient.clip = SfxSynth.Ambient();
             _ambient.loop = true;
-            _ambient.volume = 0.22f;
+            _ambient.volume = 0.1f * AudioPrefs.Sfx;
             _ambient.Play();
         }
 
-        private void Add(string name, AudioClip clip, float volume, float minInterval) =>
+        private void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
+        }
+
+        private void Add(string name, float volume, float minInterval, Func<AudioClip> fallback)
+        {
+            var clip = Resources.Load<AudioClip>("Audio/sfx_" + name) ?? fallback();
             _sounds[name] = new Sound { Clip = clip, Volume = volume, MinInterval = minInterval };
+        }
 
         private void OnEnable() => RunDirector.EventReceived += OnEvent;
         private void OnDisable() => RunDirector.EventReceived -= OnEvent;
 
         public void Play(string name, Vector2? at = null, float pitch = 1f, float volume = 1f)
         {
-            if (!_sounds.TryGetValue(name, out var s)) return;
+            if (!_sounds.TryGetValue(name, out var s) || s.Clip == null) return;
             if (Time.unscaledTime - s.LastPlayed < s.MinInterval) return;
 
             float falloff = 1f;
@@ -79,8 +104,8 @@ namespace Game.Gameplay
             s.LastPlayed = Time.unscaledTime;
             var voice = _voices[_nextVoice];
             _nextVoice = (_nextVoice + 1) % Voices;
-            voice.pitch = pitch * Random.Range(0.93f, 1.07f);
-            voice.PlayOneShot(s.Clip, s.Volume * volume * falloff);
+            voice.pitch = pitch * UnityEngine.Random.Range(0.94f, 1.06f);
+            voice.PlayOneShot(s.Clip, s.Volume * volume * falloff * AudioPrefs.Sfx);
         }
 
         private static ClassId? ClassOf(ulong clientId)
@@ -88,6 +113,10 @@ namespace Game.Gameplay
             foreach (var p in NetPlayer.All) if (p.OwnerClientId == clientId) return p.Class.Value;
             return null;
         }
+
+        private static bool IsLocal(ulong clientId) => NetPlayer.Local != null && NetPlayer.Local.OwnerClientId == clientId;
+
+        private void Update() => _ambient.volume = 0.1f * AudioPrefs.Sfx;
 
         private void OnEvent(SimEvent e)
         {
@@ -109,14 +138,27 @@ namespace Game.Gameplay
                     var flags = (HitFlags)e.Int;
                     if ((flags & HitFlags.DamageOverTime) != 0) break;
                     if ((flags & HitFlags.Shatter) != 0) Play("shatter", e.Pos);
+                    else if ((flags & HitFlags.Blocked) != 0) Play("clank", e.Pos);
                     else Play((flags & HitFlags.Heavy) != 0 ? "heavyhit" : "hit", e.Pos, (flags & HitFlags.Crit) != 0 ? 1.25f : 1f);
                     break;
                 }
-                case SimEventType.EnemyDied: Play("death", e.Pos, e.Int == (int)EnemyType.BoneKing ? 0.5f : 1f); break;
+                case SimEventType.EnemyDied:
+                {
+                    var type = (EnemyType)e.Int;
+                    if (type == EnemyType.PowderKeg) break; // the explosion follows
+                    bool boss = EnemyCatalog.Get(type).Boss;
+                    Play(boss ? "roar" : "death", e.Pos, boss ? 0.7f : type is EnemyType.Bat ? 1.4f : 1f);
+                    break;
+                }
                 case SimEventType.EnemyTelegraph: Play("telegraph", e.Pos, e.Int == (int)AttackShape.Line ? 1.2f : 1f); break;
                 case SimEventType.EnemyStrike:
-                    if ((AttackKind)e.Int == AttackKind.Projectile) Play("arrow", e.Pos, 0.6f, 0.7f);
-                    else if ((AttackKind)e.Int == AttackKind.Melee) Play("swing", e.Pos, 0.6f);
+                    switch ((AttackKind)e.Int)
+                    {
+                        case AttackKind.Projectile: Play("orb", e.Pos, 1f, 0.8f); break;
+                        case AttackKind.Melee: Play("swing", e.Pos, 0.6f); break;
+                        case AttackKind.Blink: Play("blink", e.Pos); break;
+                        case AttackKind.Lunge: Play("screech", e.Pos, 1f, 0.6f); break;
+                    }
                     break;
                 case SimEventType.AreaEffect:
                     switch ((AreaKind)e.Int)
@@ -126,22 +168,32 @@ namespace Game.Gameplay
                         case AreaKind.WarCry: Play("warcry", e.Pos); break;
                         case AreaKind.Mark: Play("bolt", e.Pos, 0.5f); break;
                         case AreaKind.Slam: Play("slam", e.Pos); break;
+                        case AreaKind.Explosion: Play("explosion", e.Pos); break;
+                        case AreaKind.HolyLight: Play("heal", e.Pos, 0.8f, 1.3f); break;
                     }
                     break;
+                case SimEventType.HazardWarn:
+                    if ((GimmickKind)e.Int == GimmickKind.PowderKeg) Play("fuse", e.Pos);
+                    else Play("telegraph", e.Pos, 0.7f, 0.5f);
+                    break;
+                case SimEventType.HazardFire:
+                    if ((GimmickKind)e.Int == GimmickKind.SpikeTrap) Play("spikes", e.Pos);
+                    else if ((GimmickKind)e.Int == GimmickKind.FlameJet) Play("flame", e.Pos);
+                    break;
                 case SimEventType.PlayerHurt:
-                    if (NetPlayer.Local != null && e.ClientId == NetPlayer.Local.OwnerClientId) Play("hurt");
+                    if (IsLocal(e.ClientId)) Play("hurt");
                     else Play("hit", e.Pos, 0.7f);
                     break;
-                case SimEventType.PlayerDowned: Play("slam", e.Pos, 1.4f, 0.6f); break;
-                case SimEventType.PlayerRevived: Play("heal", e.Pos, 1.2f); break;
+                case SimEventType.PlayerDowned: Play("downed", e.Pos); break;
+                case SimEventType.PlayerRevived: Play("revive", e.Pos); break;
                 case SimEventType.SoulCollected:
-                    if (NetPlayer.Local != null && e.ClientId == NetPlayer.Local.OwnerClientId) Play("soul", null, 1f + Random.value * 0.3f);
+                    if (IsLocal(e.ClientId)) Play("soul", null, 1f + UnityEngine.Random.value * 0.3f);
                     break;
                 case SimEventType.PerkOffer:
-                    if (NetPlayer.Local != null && e.ClientId == NetPlayer.Local.OwnerClientId) Play("levelup");
+                    if (IsLocal(e.ClientId)) Play("levelup");
                     break;
                 case SimEventType.RoomCleared: Play("clear"); break;
-                case SimEventType.BossSpawned: Play("slam", null, 0.6f, 1.2f); break;
+                case SimEventType.BossSpawned: Play("roar"); break;
                 case SimEventType.SpawnWarning: Play("telegraph", e.Pos, 0.6f, 0.6f); break;
             }
         }

@@ -33,6 +33,7 @@ namespace Game.Gameplay
         {
             try
             {
+                if (!UsePrefs) MigrateFromOldName();
                 var p = UsePrefs
                     ? ProfileData.FromJson(PlayerPrefs.GetString(PrefsKey, ""))
                     : File.Exists(FilePath) ? ProfileData.FromJson(File.ReadAllText(FilePath)) : ProfileData.Default();
@@ -46,6 +47,18 @@ namespace Game.Gameplay
                 Debug.LogWarning($"[ProfileStore] Could not load profile, starting fresh: {ex.Message}");
                 return ProfileData.Default();
             }
+        }
+
+        /// <summary>The game used to be called "LabyrinthOfTheDead": bring saves over from that folder once.</summary>
+        private static void MigrateFromOldName()
+        {
+            if (File.Exists(FilePath)) return;
+            string dir = Path.GetDirectoryName(FilePath);
+            string old = Path.Combine(Path.GetDirectoryName(dir) ?? "", "LabyrinthOfTheDead", Path.GetFileName(FilePath));
+            if (!File.Exists(old)) return;
+            Directory.CreateDirectory(dir);
+            File.Copy(old, FilePath);
+            Debug.Log($"[ProfileStore] Migrated profile from {old}");
         }
 
         public static void Save()

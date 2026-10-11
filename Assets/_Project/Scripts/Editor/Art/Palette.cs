@@ -24,6 +24,21 @@ namespace Game.EditorTools.Art
         public static readonly PixelMaterial CultRobe = new(2, "#130507", "#280b0f", "#431219", "#631b23", "#86282e");
         public static readonly PixelMaterial DarkSteel = new(1, "#0f1015", "#1d1f27", "#30333f", "#4a4f5d", "#6c7383");
 
+        // Monsters added in round 2
+        public static readonly PixelMaterial Grave = new(2, "#0d120f", "#19221c", "#28352c", "#3a4b3e", "#526654");
+        public static readonly PixelMaterial Ghost = new(2, "#141a24", "#273244", "#3e4f66", "#5f7690", "#8fa8c2");
+        public static readonly PixelMaterial Crimson = new(2, "#25060a", "#4a0c13", "#76121d", "#a31d28", "#cf3a3a");
+        public static readonly PixelMaterial Ivory = new(2, "#3a3530", "#6b645a", "#9c958a", "#cbc5b8", "#efeadf");
+        public static readonly PixelMaterial Violet = new(2, "#120a1c", "#24133a", "#3a1f5c", "#55307f", "#7547a8");
+        public static readonly PixelMaterial Pallid = new(2, "#2e2624", "#5a4a45", "#8a7770", "#b8a59c", "#dccbc0");
+        public static readonly PixelMaterial Pustule = new(2, "#2a2a0e", "#4d4d17", "#77731f", "#a3a02f", "#d0cf5a");
+        public static readonly PixelMaterial Bat = new(2, "#120c10", "#22171e", "#36242f", "#4c3442", "#664656");
+        public static readonly PixelMaterial Membrane = new(1, "#1c0d12", "#2f141c", "#4a1e2a", "#68303e", "#8a4554");
+        public static readonly PixelMaterial Iron = new(2, "#141414", "#262626", "#3b3b3d", "#57585c", "#7c7e84");
+        public static readonly PixelMaterial Soul = new("#8ff5ff");
+        public static readonly PixelMaterial SoulCore = new("#e8ffff");
+        public static readonly PixelMaterial Toxic = new("#b6ff4a");
+
         public static readonly PixelMaterial Black = new("#100c11");
         public static readonly PixelMaterial EyeRed = new("#ff3b2f");
         public static readonly PixelMaterial EyeCore = new("#ffd2a6");
@@ -58,7 +73,31 @@ namespace Game.EditorTools.Art
             ['y'] = Gem,
             ['q'] = String,
             ['z'] = Ember,
+            ['a'] = Grave,
+            ['j'] = Ghost,
+            ['d'] = Crimson,
+            ['i'] = Ivory,
+            ['v'] = Violet,
+            ['p'] = Pallid,
+            // Symbols (uppercase letters are reserved for "highlight of the lowercase material").
+            ['%'] = Pustule,
+            ['@'] = Bat,
+            ['&'] = Membrane,
+            ['#'] = Iron,
+            ['*'] = Soul,
+            ['+'] = SoulCore,
+            ['!'] = Toxic,
         };
+
+        /// <summary>Standard letters with some replaced (palette swaps for skins and variants).</summary>
+        public static Dictionary<char, PixelMaterial> With(params (char Letter, PixelMaterial Material)[] swaps)
+        {
+            var map = Standard();
+            foreach (var (letter, material) in swaps) map[letter] = material;
+            return map;
+        }
+
+        public static PixelMaterial Ramp(int baseShade, params string[] hex) => new(baseShade, hex);
 
         /// <summary>Same letters, with the robe letter repainted (palette swap, e.g. mage → cultist).</summary>
         public static Dictionary<char, PixelMaterial> WithRobe(PixelMaterial robe)

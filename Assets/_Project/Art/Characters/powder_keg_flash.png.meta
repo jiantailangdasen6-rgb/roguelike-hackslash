@@ -1,0 +1,756 @@
+fileFormatVersion: 2
+guid: 7557312b5914b334aa8c88697f81f84e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 228999139712668475
+    second: powder_keg_flash_0
+  - first:
+      213: -8837612414031749716
+    second: powder_keg_flash_1
+  - first:
+      213: 5157950054903233081
+    second: powder_keg_flash_2
+  - first:
+      213: 1304995845922977908
+    second: powder_keg_flash_3
+  - first:
+      213: 6689150538576647848
+    second: powder_keg_flash_4
+  - first:
+      213: 2550582556739734786
+    second: powder_keg_flash_5
+  - first:
+      213: 8957076833449871354
+    second: powder_keg_flash_6
+  - first:
+      213: -8900493511208199390
+    second: powder_keg_flash_7
+  - first:
+      213: 4260085289141078606
+    second: powder_keg_flash_8
+  - first:
+      213: -1590764194279096423
+    second: powder_keg_flash_9
+  - first:
+      213: 6793506963815015909
+    second: powder_keg_flash_10
+  - first:
+      213: -1680460634269124539
+    second: powder_keg_flash_11
+  - first:
+      213: -3956053154618315256
+    second: powder_keg_flash_12
+  - first:
+      213: 955991816728675407
+    second: powder_keg_flash_13
+  - first:
+      213: -8007527015489856797
+    second: powder_keg_flash_14
+  - first:
+      213: 7528988936269451084
+    second: powder_keg_flash_15
+  - first:
+      213: -1678689041626486933
+    second: powder_keg_flash_16
+  - first:
+      213: 3061634333760788577
+    second: powder_keg_flash_17
+  - first:
+      213: 2522139802254356734
+    second: powder_keg_flash_18
+  - first:
+      213: -5861175420167072658
+    second: powder_keg_flash_19
+  - first:
+      213: 4349512288173451948
+    second: powder_keg_flash_20
+  - first:
+      213: 8539414775570161379
+    second: powder_keg_flash_21
+  - first:
+      213: 7047040553681371644
+    second: powder_keg_flash_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: powder_keg_flash_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 327
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b33917811819d2300800000000000000
+      internalID: 228999139712668475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_1
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 327
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cad1e07455e7a5580800000000000000
+      internalID: -8837612414031749716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_2
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 263
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93ab6b73f38b49740800000000000000
+      internalID: 5157950054903233081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_3
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 199
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4787995cec64c1210800000000000000
+      internalID: 1304995845922977908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_4
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 199
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a659f469f2a4dc50800000000000000
+      internalID: 6689150538576647848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_5
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 135
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20d87c0625d756320800000000000000
+      internalID: 2550582556739734786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_6
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 135
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af709a36ceded4c70800000000000000
+      internalID: 8957076833449871354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_7
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 71
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22b14c2fe481b7480800000000000000
+      internalID: -8900493511208199390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_8
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 71
+        width: 19
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4a0f14effcde1b30800000000000000
+      internalID: 4260085289141078606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_9
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 7
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99f759eb4687ce9e0800000000000000
+      internalID: -1590764194279096423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_10
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 8
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e5265d0792674e50800000000000000
+      internalID: 6793506963815015909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_11
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 14
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5487c53e4fdcda8e0800000000000000
+      internalID: -1680460634269124539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_12
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 16
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80e696ead964919c0800000000000000
+      internalID: -3956053154618315256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_13
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 19
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f440b440e7d544d00800000000000000
+      internalID: 955991816728675407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_14
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 6
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ea1268ea9c8fd090800000000000000
+      internalID: -8007527015489856797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_15
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 15
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4fcf281c875c7860800000000000000
+      internalID: 7528988936269451084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_16
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 19
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b672381f53914b8e0800000000000000
+      internalID: -1678689041626486933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_17
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 6
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16893ff843c1d7a20800000000000000
+      internalID: 3061634333760788577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_18
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 6
+        width: 20
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef0be3b89c0700320800000000000000
+      internalID: 2522139802254356734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_19
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 6
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e64d0ba520ce8aea0800000000000000
+      internalID: -5861175420167072658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_20
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 6
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caa66c2a1629c5c30800000000000000
+      internalID: 4349512288173451948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_21
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 7
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eed49f9e78128670800000000000000
+      internalID: 8539414775570161379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powder_keg_flash_22
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 5
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf143f7fb0e1cc160800000000000000
+      internalID: 7047040553681371644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      powder_keg_flash_0: 228999139712668475
+      powder_keg_flash_1: -8837612414031749716
+      powder_keg_flash_10: 6793506963815015909
+      powder_keg_flash_11: -1680460634269124539
+      powder_keg_flash_12: -3956053154618315256
+      powder_keg_flash_13: 955991816728675407
+      powder_keg_flash_14: -8007527015489856797
+      powder_keg_flash_15: 7528988936269451084
+      powder_keg_flash_16: -1678689041626486933
+      powder_keg_flash_17: 3061634333760788577
+      powder_keg_flash_18: 2522139802254356734
+      powder_keg_flash_19: -5861175420167072658
+      powder_keg_flash_2: 5157950054903233081
+      powder_keg_flash_20: 4349512288173451948
+      powder_keg_flash_21: 8539414775570161379
+      powder_keg_flash_22: 7047040553681371644
+      powder_keg_flash_3: 1304995845922977908
+      powder_keg_flash_4: 6689150538576647848
+      powder_keg_flash_5: 2550582556739734786
+      powder_keg_flash_6: 8957076833449871354
+      powder_keg_flash_7: -8900493511208199390
+      powder_keg_flash_8: 4260085289141078606
+      powder_keg_flash_9: -1590764194279096423
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

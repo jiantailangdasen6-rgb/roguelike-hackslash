@@ -7,7 +7,7 @@ namespace Game.EditorTools.Art
     /// Enemy sheets. Clip order/names read by the runtime: idle, walk, windup, strike, hurt, death.
     /// "windup" ends on the telegraph pose (held while the warning shows), "strike" is the release.
     /// </summary>
-    public static class EnemyArt
+    public static partial class EnemyArt
     {
         public const int FrameSize = 64;
         public const int BossFrameSize = 112;

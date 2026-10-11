@@ -46,7 +46,11 @@ namespace Game.Gameplay
             public float Duration;
             public float Age;
             public int EnemyId;
+            public bool Square;
         }
+
+        /// <summary>Telegraphs of room hazards use negative ids so enemy strikes never clear them.</summary>
+        private static int HazardKey(int hazardId) => -1 - hazardId;
 
         private sealed class Number
         {
@@ -87,7 +91,7 @@ namespace Game.Gameplay
             {
                 Vector2 o = t.Shape == AttackShape.SelfCircle && EnemyView.Instance != null && EnemyView.Instance.TryGetPosition(t.EnemyId, out var ep) ? ep : t.Origin;
                 Vector2 to = point - o;
-                bool inside = t.Shape switch
+                bool inside = t.Square ? Mathf.Abs(to.x) <= t.Size.x * 0.5f + 0.5f && Mathf.Abs(to.y) <= t.Size.y * 0.5f + 0.5f : t.Shape switch
                 {
                     AttackShape.Circle or AttackShape.SelfCircle => to.magnitude <= t.Size.x + 0.5f,
                     AttackShape.Cone => to.magnitude <= t.Size.x + 0.5f && Vector2.Angle(t.Direction, to) <= t.Size.y * 0.5f + 15f,
@@ -125,7 +129,10 @@ namespace Game.Gameplay
                 case SimEventType.EnemyStrike:
                     RemoveTelegraph(e.Id);
                     if ((AttackKind)e.Int == AttackKind.Melee) CameraShake.Add(0.08f);
+                    if ((AttackKind)e.Int == AttackKind.Blink) Burst("fx_puff", e.Pos + Vector2.up * 0.3f, 16f, 1.5f, new Color(0.7f, 0.85f, 1f));
                     break;
+                case SimEventType.HazardWarn: OnHazardWarn(e); break;
+                case SimEventType.HazardFire: OnHazardFire(e); break;
                 case SimEventType.SpawnWarning:
                 {
                     var fx = Spawn("fx_portal", e.Pos, 8f, e.Value + 0.2f, 0.4f, 0.75f, new Color(1f, 0.4f, 0.4f, 0.9f), order: -400);
@@ -202,6 +209,13 @@ namespace Game.Gameplay
 
             bool crit = (flags & HitFlags.Crit) != 0;
             bool shatter = (flags & HitFlags.Shatter) != 0;
+            if ((flags & HitFlags.Blocked) != 0 && !shatter)
+            {
+                // Armour: dull sparks and a grey number tell players to freeze/stun/mark it first.
+                Spark(at, 0.8f, new Color(0.7f, 0.75f, 0.85f));
+                ShowNumber(at + Vector2.up * 0.3f, Mathf.RoundToInt(e.Value).ToString(), new Color(0.62f, 0.64f, 0.7f), 20);
+                return;
+            }
             Spark(at, shatter ? 1.8f : crit ? 1.3f : 0.9f, shatter ? new Color(0.7f, 0.9f, 1f) : Color.white);
             var color = shatter ? new Color(0.55f, 0.9f, 1f) : crit ? new Color(1f, 0.85f, 0.3f) : Color.white;
             int size = shatter ? 40 : crit ? 32 : 24;
@@ -262,7 +276,84 @@ namespace Game.Gameplay
                     CameraShake.Add(0.3f);
                     break;
                 }
+                case AreaKind.Explosion:
+                {
+                    var s = SpriteSheet.Load("fx_explosion");
+                    int frames = s != null && s.Clips.Count > 0 ? s.Clips[0].Frames : 8;
+                    var boom = Spawn("fx_explosion", e.Pos + Vector2.up * 0.3f, 18f, frames / 18f, r * 0.75f, r * 0.75f, Color.white);
+                    boom.Renderer.sortingOrder = 2700;
+                    AddLight(boom, new Color(1f, 0.55f, 0.2f), 3f, r + 3f);
+                    var scorch = Spawn("fx_circle", e.Pos, 1f, 0.5f, r * 0.6f, r, new Color(1f, 0.45f, 0.15f, 0.7f), order: -300);
+                    scorch.FadeOut = true;
+                    for (int i = 0; i < 8; i++) Ember(e.Pos, i * 45f + Random.Range(0f, 30f));
+                    CameraShake.Add(0.5f);
+                    break;
+                }
+                case AreaKind.HolyLight:
+                {
+                    var fx = Spawn("fx_holy", e.Pos + Vector2.up * 0.6f, 12f, 1.2f, 1.5f, 2.2f, Color.white);
+                    fx.FadeOut = true;
+                    AddLight(fx, new Color(0.6f, 1f, 0.75f), 2.2f, r + 2f);
+                    var ring = Spawn("fx_heal", e.Pos, 1f, 0.8f, r * 0.3f, r, new Color(1f, 1f, 1f, 0.8f));
+                    ring.FadeOut = true;
+                    break;
+                }
             }
+        }
+
+        // ------------------------------------------------------------------ Room hazards
+
+        private void OnHazardWarn(in SimEvent e)
+        {
+            switch ((GimmickKind)e.Int)
+            {
+                case GimmickKind.SpikeTrap:
+                    AddTelegraph(new SimEvent { Id = HazardKey(e.Id), Int = (int)AttackShape.Circle, Pos = e.Pos, Size = e.Size, Value = e.Value }, square: true);
+                    break;
+                case GimmickKind.FlameJet:
+                    AddTelegraph(new SimEvent { Id = HazardKey(e.Id), Int = (int)AttackShape.Line, Pos = e.Pos, Vec = e.Vec, Size = e.Size, Value = e.Value });
+                    break;
+                case GimmickKind.PowderKeg:
+                {
+                    AddTelegraph(new SimEvent { Id = HazardKey(e.Id), Int = (int)AttackShape.Circle, Pos = e.Pos, Size = e.Size, Value = e.Value });
+                    // The fuse: a sputtering spark where the keg was.
+                    var fuse = Spawn("fx_hit", e.Pos + Vector2.up * 0.5f, 30f, e.Value, 0.7f, 0.4f, new Color(1f, 0.8f, 0.3f));
+                    fuse.Renderer.sortingOrder = 2800;
+                    AddLight(fuse, new Color(1f, 0.6f, 0.2f), 1.2f, 1.8f);
+                    break;
+                }
+            }
+        }
+
+        private void OnHazardFire(in SimEvent e)
+        {
+            RemoveTelegraph(HazardKey(e.Id));
+            switch ((GimmickKind)e.Int)
+            {
+                case GimmickKind.FlameJet:
+                {
+                    var fx = Spawn("fx_flame", e.Pos, 16f, e.Value, 1f, 1f, Color.white, order: EnemyView.SortOrder(e.Pos.y) + 10);
+                    fx.Go.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(e.Vec.y, e.Vec.x) * Mathf.Rad2Deg);
+                    fx.Go.transform.localScale = new Vector3(e.Size.x / 2f, e.Size.y / 0.5f, 1f);
+                    fx.StartScale = fx.EndScale = 0f; // keep the stretched scale
+                    AddLight(fx, new Color(1f, 0.55f, 0.2f), 2.2f, 3.5f);
+                    fx.Light.transform.localPosition = new Vector3(1f, 0f);
+                    break;
+                }
+                case GimmickKind.SpikeTrap:
+                    Burst("fx_puff", e.Pos, 20f, 0.8f, new Color(0.7f, 0.65f, 0.6f));
+                    break;
+            }
+        }
+
+        private void Ember(Vector2 at, float angle)
+        {
+            var fx = Spawn("fx_shard", at, 0f, 0.6f, 1f, 0.5f, new Color(1f, 0.6f, 0.2f));
+            Vector2 dir = Quaternion.Euler(0f, 0f, angle) * Vector2.right;
+            fx.Velocity = dir * Random.Range(4f, 8f);
+            fx.Go.transform.rotation = Quaternion.Euler(0f, 0f, angle - 45f);
+            fx.FadeOut = true;
+            fx.Renderer.sortingOrder = 2600;
         }
 
         // ------------------------------------------------------------------ Projectiles
@@ -290,6 +381,14 @@ namespace Game.Gameplay
                     fx.Renderer.sprite = GameArt.Instance.Arc;
                     angle -= 90f;
                     break;
+                case ProjectileKind.BloodOrb:
+                    fx = Spawn("fx_orb", e.Pos, 12f, e.Value + 0.05f, 1f, 1f, new Color(1f, 0.35f, 0.35f));
+                    AddLight(fx, new Color(1f, 0.15f, 0.15f), 1f, 1.5f);
+                    break;
+                case ProjectileKind.SoulOrb:
+                    fx = Spawn("fx_orb", e.Pos, 12f, e.Value + 0.05f, 1f, 1f, new Color(0.55f, 0.95f, 1f));
+                    AddLight(fx, new Color(0.4f, 0.8f, 1f), 1f, 1.5f);
+                    break;
                 default:
                     fx = Spawn("fx_bonearrow", e.Pos, 0f, e.Value + 0.05f, 1f, 1f, Color.white);
                     AddLight(fx, new Color(1f, 0.25f, 0.2f), 0.6f, 1f);
@@ -302,10 +401,10 @@ namespace Game.Gameplay
 
         // ------------------------------------------------------------------ Telegraphs
 
-        private void AddTelegraph(in SimEvent e)
+        private void AddTelegraph(in SimEvent e, bool square = false)
         {
             var shape = (AttackShape)e.Int;
-            string sheet = shape switch
+            string sheet = square ? "fx_square" : shape switch
             {
                 AttackShape.Cone => "fx_cone",
                 AttackShape.Line => "fx_line",
@@ -316,7 +415,7 @@ namespace Game.Gameplay
             var t = new Telegraph
             {
                 Outline = outline, Fill = fill, Shape = shape, Origin = e.Pos, Direction = e.Vec, Size = e.Size,
-                Duration = Mathf.Max(0.05f, e.Value), EnemyId = e.Id,
+                Duration = Mathf.Max(0.05f, e.Value), EnemyId = e.Id, Square = square,
             };
             _telegraphs.Add(t);
             LayoutTelegraph(t);
@@ -345,6 +444,13 @@ namespace Game.Gameplay
             {
                 var tr = fx.Go.transform;
                 tr.position = origin;
+                if (t.Square)
+                {
+                    // fx_square is one unit across.
+                    tr.rotation = Quaternion.identity;
+                    tr.localScale = new Vector3(t.Size.x, t.Size.y, 1f) * scaleK;
+                    return;
+                }
                 switch (t.Shape)
                 {
                     case AttackShape.Cone:

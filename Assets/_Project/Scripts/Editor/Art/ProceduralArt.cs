@@ -119,7 +119,180 @@ namespace Game.EditorTools.Art
             ["mark"] = () => new List<PixelCanvas> { Mark() },
             ["ice"] = () => new List<PixelCanvas> { IceBlock() },
             ["candle"] = Candle,
+            ["candle_red"] = () => CandleTinted(C("#ff5a3a"), C("#ffb08a"), C("#c8b0a5")),
+            ["candle_soul"] = () => CandleTinted(C("#a66bff"), C("#e6d0ff"), C("#8f8aa8")),
+            ["square"] = () => new List<PixelCanvas> { TelegraphSquare() },
+            ["flame"] = FlameJet,
+            ["explosion"] = Explosion,
+            ["holy"] = HolyColumn,
+            ["orb"] = Orb,
+            ["downed"] = () => new List<PixelCanvas> { DownedIcon() },
+            ["revive_ring"] = () => new List<PixelCanvas> { ReviveRing() },
         };
+
+        private static List<PixelCanvas> CandleTinted(Color32 flame, Color32 core, Color32 wax)
+        {
+            var frames = new List<PixelCanvas>();
+            for (int f = 0; f < 3; f++)
+            {
+                var c = new PixelCanvas(16, 16);
+                void Wax(int x, int h) { c.Rect(x, 1, 2, h, wax); c.Set(x, h, Color32.Lerp(wax, new Color32(255, 255, 255, 255), 0.3f)); }
+                Wax(4, 6); Wax(8, 9); Wax(11, 5);
+                c.Rect(2, 0, 12, 1, C("#3a3540"));
+                void Flame(int x, int y) { c.Set(x, y + 1, flame); c.Set(x, y + 2, core); if (f != 1) c.Set(x + (f == 2 ? 1 : 0), y + 3, flame); }
+                Flame(4, 6); Flame(8, 9); Flame(11, 5);
+                frames.Add(c);
+            }
+            return frames;
+        }
+
+        private static PixelCanvas TelegraphSquare()
+        {
+            var c = new PixelCanvas(32, 32);
+            c.Rect(0, 0, 32, 32, new Color32(255, 255, 255, 70));
+            c.Rect(0, 0, 32, 2, new Color32(255, 255, 255, 230));
+            c.Rect(0, 30, 32, 2, new Color32(255, 255, 255, 230));
+            c.Rect(0, 0, 2, 32, new Color32(255, 255, 255, 230));
+            c.Rect(30, 0, 2, 32, new Color32(255, 255, 255, 230));
+            return c;
+        }
+
+        /// <summary>A horizontal jet of fire (pivot at the left/nozzle end), 2 units long and half a unit tall.</summary>
+        private static List<PixelCanvas> FlameJet()
+        {
+            var frames = new List<PixelCanvas>();
+            var rng = new GameRandom(23);
+            Color32[] ramp = { C("#5f151d"), C("#a31d28"), C("#ff5a2a"), C("#ff9a3c"), C("#ffe08a"), C("#fff8e0") };
+            for (int f = 0; f < 4; f++)
+            {
+                var c = new PixelCanvas(64, 16);
+                for (int x = 0; x < 64; x++)
+                {
+                    float k = x / 63f;
+                    float half = Mathf.Lerp(2.5f, 7.5f, Mathf.Sqrt(k)) + Mathf.Sin(x * 0.45f + f * 1.7f) * 1.2f;
+                    for (int y = 0; y < 16; y++)
+                    {
+                        float d = Mathf.Abs(y + 0.5f - 8f) / half;
+                        if (d > 1f) continue;
+                        float heat = (1f - d) * (1f - k * 0.55f) + rng.Range(-0.12f, 0.12f);
+                        int shade = Mathf.Clamp(Mathf.FloorToInt(heat * ramp.Length), 0, ramp.Length - 1);
+                        if (k > 0.85f && rng.Chance(0.35f)) continue; // ragged tip
+                        c.Set(x, y, ramp[shade]);
+                    }
+                }
+                frames.Add(c);
+            }
+            return frames;
+        }
+
+        private static List<PixelCanvas> Explosion()
+        {
+            var frames = new List<PixelCanvas>();
+            var rng = new GameRandom(99);
+            Color32[] fire = { C("#fff8e0"), C("#ffe08a"), C("#ff9a3c"), C("#ff5a2a"), C("#a31d28") };
+            Color32[] smoke = { C("#3a3441"), C("#2a2430"), C("#1a161d") };
+            var blobs = new List<(float x, float y, float r)>();
+            for (int i = 0; i < 9; i++) blobs.Add((rng.Range(-9f, 9f), rng.Range(-6f, 9f), rng.Range(5f, 9f)));
+            for (int f = 0; f < 8; f++)
+            {
+                var c = new PixelCanvas(64, 64);
+                float k = f / 7f;
+                foreach (var b in blobs)
+                {
+                    float r = b.r * (0.5f + k * 1.1f);
+                    var col = f < 2 ? fire[0] : f < 3 ? fire[1] : f < 5 ? (b.r > 7f ? fire[2] : fire[3]) : smoke[Mathf.Min(2, f - 5)];
+                    c.Disc(32 + b.x * (0.6f + k), 30 + b.y * (0.6f + k) + k * 6f, r * (f >= 6 ? 0.8f : 1f), col);
+                }
+                if (f < 5) c.Disc(32, 31 + k * 4f, 10f * (1f - k * 0.6f), fire[Mathf.Min(f, 2)]);
+                if (f >= 5)
+                    for (int y = 0; y < 64; y++)
+                    for (int x = 0; x < 64; x++)
+                        if ((x + y + f) % (f == 5 ? 4 : 2) == 0) c.Set(x, y, default);
+                frames.Add(c);
+            }
+            return frames;
+        }
+
+        private static List<PixelCanvas> HolyColumn()
+        {
+            var frames = new List<PixelCanvas>();
+            for (int f = 0; f < 6; f++)
+            {
+                var c = new PixelCanvas(32, 48);
+                float k = f / 5f;
+                for (int y = 0; y < 48; y++)
+                {
+                    float half = (6f + 3f * Mathf.Sin(y * 0.3f + f)) * (1f - k * 0.5f);
+                    for (int x = 0; x < 32; x++)
+                    {
+                        float d = Mathf.Abs(x + 0.5f - 16f);
+                        if (d > half) continue;
+                        byte a = (byte)(Mathf.Clamp01(1f - d / half) * (1f - y / 60f) * 230f);
+                        c.Set(x, y, d < half * 0.35f ? new Color32(240, 255, 245, a) : new Color32(140, 255, 190, a));
+                    }
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    int sx = 6 + (i * 7 + f * 3) % 20, sy = (i * 9 + f * 8) % 46;
+                    c.Set(sx, sy, new Color32(255, 255, 255, 255));
+                    c.Set(sx, sy + 1, new Color32(200, 255, 220, 200));
+                }
+                frames.Add(c);
+            }
+            return frames;
+        }
+
+        /// <summary>Glowing orb drawn in near-white so it can be tinted (blood red, soul cyan).</summary>
+        private static List<PixelCanvas> Orb()
+        {
+            var frames = new List<PixelCanvas>();
+            for (int f = 0; f < 4; f++)
+            {
+                var c = new PixelCanvas(16, 16);
+                c.Disc(8, 8, 6.5f + (f % 2) * 0.4f, new Color32(150, 150, 150, 120));
+                c.Disc(8, 8, 5f, new Color32(200, 200, 200, 255));
+                c.Disc(8, 8, 3.5f, new Color32(235, 235, 235, 255));
+                c.Disc(7.5f, 8.5f, 1.8f, new Color32(255, 255, 255, 255));
+                c.Set(2 + f, 8, new Color32(200, 200, 200, 200));
+                c.Set(8, 13 - f, new Color32(200, 200, 200, 200));
+                frames.Add(c);
+            }
+            return frames;
+        }
+
+        /// <summary>Skull marker floating over a downed player (white, tinted at runtime).</summary>
+        private static PixelCanvas DownedIcon()
+        {
+            var c = new PixelCanvas(16, 18);
+            var w = new Color32(245, 240, 235, 255);
+            var dark = new Color32(40, 20, 24, 255);
+            c.Disc(8, 11, 5.5f, w);
+            c.Rect(5, 4, 7, 4, w);
+            c.Rect(5, 9, 2, 3, dark); c.Rect(10, 9, 2, 3, dark);
+            c.Set(8, 7, dark);
+            c.Set(6, 4, dark); c.Set(8, 4, dark); c.Set(10, 4, dark);
+            // Small cross-bones under it
+            c.Line(2, 0, 14, 3, w);
+            c.Line(2, 3, 14, 0, w);
+            c.Outline(Outline);
+            return c;
+        }
+
+        /// <summary>Dashed ring two units across: where to stand to help a downed teammate.</summary>
+        private static PixelCanvas ReviveRing()
+        {
+            var c = new PixelCanvas(64, 64);
+            for (int y = 0; y < 64; y++)
+            for (int x = 0; x < 64; x++)
+            {
+                float dx = x + 0.5f - 32f, dy = y + 0.5f - 32f;
+                float d = Mathf.Sqrt(dx * dx + dy * dy);
+                if (d < 28.5f || d > 31.5f) continue;
+                float a = Mathf.Atan2(dy, dx) * Mathf.Rad2Deg + 180f;
+                if ((int)(a / 15f) % 2 == 0) c.Set(x, y, new Color32(255, 255, 255, 235));
+            }
+            return c;
+        }
 
         private static List<PixelCanvas> Hit()
         {

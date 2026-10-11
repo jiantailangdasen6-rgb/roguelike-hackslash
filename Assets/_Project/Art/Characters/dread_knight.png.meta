@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 4a8634be4720f944f922848bdf664e6a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3382494273619524516
+    second: dread_knight_0
+  - first:
+      213: 4274616904960235902
+    second: dread_knight_1
+  - first:
+      213: -5046210722645901153
+    second: dread_knight_2
+  - first:
+      213: 5927616536774733676
+    second: dread_knight_3
+  - first:
+      213: -2600326998810287014
+    second: dread_knight_4
+  - first:
+      213: -469278050430310359
+    second: dread_knight_5
+  - first:
+      213: 2065073449517201477
+    second: dread_knight_6
+  - first:
+      213: 7098634073752351553
+    second: dread_knight_7
+  - first:
+      213: 3654238595115444055
+    second: dread_knight_8
+  - first:
+      213: -926101201772700055
+    second: dread_knight_9
+  - first:
+      213: -8421943973016063625
+    second: dread_knight_10
+  - first:
+      213: 8173362093071051109
+    second: dread_knight_11
+  - first:
+      213: -6089959726901108868
+    second: dread_knight_12
+  - first:
+      213: -2657390329733582305
+    second: dread_knight_13
+  - first:
+      213: 6426942961783160876
+    second: dread_knight_14
+  - first:
+      213: -6119430828314811704
+    second: dread_knight_15
+  - first:
+      213: -5108602538375177142
+    second: dread_knight_16
+  - first:
+      213: -4481827476188749650
+    second: dread_knight_17
+  - first:
+      213: -2733111989328970619
+    second: dread_knight_18
+  - first:
+      213: 6181914239227091397
+    second: dread_knight_19
+  - first:
+      213: 8867854179856161462
+    second: dread_knight_20
+  - first:
+      213: 2693095625602899813
+    second: dread_knight_21
+  - first:
+      213: -1382997632649398467
+    second: dread_knight_22
+  - first:
+      213: 4138665259970858634
+    second: dread_knight_23
+  - first:
+      213: -1753798825225978510
+    second: dread_knight_24
+  - first:
+      213: -5112367831773705781
+    second: dread_knight_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dread_knight_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 328
+        width: 27
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ab72e1ee9801fe20800000000000000
+      internalID: 3382494273619524516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 328
+        width: 27
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e79d80b5d6d725b30800000000000000
+      internalID: 4274616904960235902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 327
+        width: 27
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f908cee651248f9b0800000000000000
+      internalID: -5046210722645901153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 327
+        width: 28
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6f603795df134250800000000000000
+      internalID: 5927616536774733676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_4
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 264
+        width: 28
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a542e082f58c9ebd0800000000000000
+      internalID: -2600326998810287014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_5
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 263
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 928a637791acc79f0800000000000000
+      internalID: -469278050430310359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_6
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 263
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54830917c5d98ac10800000000000000
+      internalID: 2065073449517201477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_7
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 264
+        width: 28
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1433e74741a638260800000000000000
+      internalID: 7098634073752351553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_8
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 263
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 757e06a24a676b230800000000000000
+      internalID: 3654238595115444055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_9
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 263
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96e964a1dd3d523f0800000000000000
+      internalID: -926101201772700055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_10
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 200
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 771b222f39e3f1b80800000000000000
+      internalID: -8421943973016063625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_11
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 201
+        width: 23
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 569a422f48d9d6170800000000000000
+      internalID: 8173362093071051109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_12
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 201
+        width: 23
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7fdf95f4ed1c7ba0800000000000000
+      internalID: -6089959726901108868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_13
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 136
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f12fba6139d0f1bd0800000000000000
+      internalID: -2657390329733582305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_14
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 132
+        width: 44
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2048c48296113950800000000000000
+      internalID: 6426942961783160876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_15
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 130
+        width: 34
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c2a8b2751a631ba0800000000000000
+      internalID: -6119430828314811704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_16
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 133
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4c1d71de099a19b0800000000000000
+      internalID: -5108602538375177142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_17
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 72
+        width: 24
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea02f29f7a95dc1c0800000000000000
+      internalID: -4481827476188749650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_18
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 72
+        width: 25
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58c7fa85029021ad0800000000000000
+      internalID: -2733111989328970619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_19
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 8
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c95f055f329ac550800000000000000
+      internalID: 6181914239227091397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_20
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 8
+        width: 31
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ba1a468462f01b70800000000000000
+      internalID: 8867854179856161462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_21
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 8
+        width: 36
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56f183ee33ccf5520800000000000000
+      internalID: 2693095625602899813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_22
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 4
+        width: 35
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d37f9b40bfa9ecce0800000000000000
+      internalID: -1382997632649398467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_23
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 0
+        width: 31
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8e00d8502e7f6930800000000000000
+      internalID: 4138665259970858634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_24
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 0
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27d78eea24149a7e0800000000000000
+      internalID: -1753798825225978510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dread_knight_25
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 0
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc98ef12b883d09b0800000000000000
+      internalID: -5112367831773705781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dread_knight_0: 3382494273619524516
+      dread_knight_1: 4274616904960235902
+      dread_knight_10: -8421943973016063625
+      dread_knight_11: 8173362093071051109
+      dread_knight_12: -6089959726901108868
+      dread_knight_13: -2657390329733582305
+      dread_knight_14: 6426942961783160876
+      dread_knight_15: -6119430828314811704
+      dread_knight_16: -5108602538375177142
+      dread_knight_17: -4481827476188749650
+      dread_knight_18: -2733111989328970619
+      dread_knight_19: 6181914239227091397
+      dread_knight_2: -5046210722645901153
+      dread_knight_20: 8867854179856161462
+      dread_knight_21: 2693095625602899813
+      dread_knight_22: -1382997632649398467
+      dread_knight_23: 4138665259970858634
+      dread_knight_24: -1753798825225978510
+      dread_knight_25: -5112367831773705781
+      dread_knight_3: 5927616536774733676
+      dread_knight_4: -2600326998810287014
+      dread_knight_5: -469278050430310359
+      dread_knight_6: 2065073449517201477
+      dread_knight_7: 7098634073752351553
+      dread_knight_8: 3654238595115444055
+      dread_knight_9: -926101201772700055
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

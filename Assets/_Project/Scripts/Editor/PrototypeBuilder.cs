@@ -63,6 +63,7 @@ namespace Game.EditorTools
             AssetDatabase.Refresh();
 
             ArtGenerator.Generate();
+            if (!File.Exists(Audio.AudioGenerator.Dir + "/music_boss.wav")) Audio.AudioGenerator.Generate(); // slow: only when missing
             CreateGameArt();
             var actions = LoadOrCreateInputActions();
             var player = CreatePlayerPrefab(actions);
@@ -354,7 +355,7 @@ namespace Game.EditorTools
             global.intensity = 0.8f;
             global.color = new Color(0.9f, 0.82f, 0.8f);
 
-            var bounds = CreateArena();
+            var bounds = CreateArena(global);
             CreateFollowCamera(bounds);
 
             var motes = new GameObject("Embers").AddComponent<AmbientMotes>();
@@ -405,32 +406,71 @@ namespace Game.EditorTools
             if (withBrain) go.AddComponent<CinemachineBrain>();
         }
 
-        /// <summary>Dark crypt: flagstone floor, brick wall along the top, black wall tops around, pillars, banners, bones and candles.</summary>
-        private static Collider2D CreateArena()
+        /// <summary>
+        /// Three looks for the same arena, one per area (crypt, blood chapel, abyss throne): floor, back wall,
+        /// black wall tops, wall shading, decorations and candles. <see cref="ArenaView"/> shows the current one
+        /// and places each room's obstacles and traps at runtime.
+        /// </summary>
+        private static Collider2D CreateArena(Light2D globalLight)
         {
             AssetDatabase.SaveAssets();
             var b = RunSimulation.DefaultBounds;
             int xMin = (int)b.xMin, xMax = (int)b.xMax, yMin = (int)b.yMin, yMax = (int)b.yMax;
 
-            var floorTiles = new[] { EnvTile("floor0"), EnvTile("floor1"), EnvTile("floor2"), EnvTile("floor3") };
-            var wall = EnvTile("wall");
-            var wallAlt = EnvTile("wall_alt");
-            var wallTop = EnvTile("walltop");
-
             var grid = new GameObject("Arena");
             grid.AddComponent<Grid>();
-            var floor = CreateTilemap(grid.transform, "Floor", -1000);
-            var walls = CreateTilemap(grid.transform, "Walls", -990);
-            var tops = CreateTilemap(grid.transform, "WallTops", 900);
+            var roots = new Transform[3];
+            for (int area = 0; area < 3; area++)
+            {
+                var root = new GameObject("Area" + area).transform;
+                root.SetParent(grid.transform, false);
+                roots[area] = root;
+                BuildAreaLook(root, area, xMin, xMax, yMin, yMax);
+                root.gameObject.SetActive(area == 0);
+            }
 
-            var rng = new GameRandom(11);
+            var view = grid.AddComponent<ArenaView>();
+            var so = new SerializedObject(view);
+            var list = so.FindProperty("areaRoots");
+            list.arraySize = roots.Length;
+            for (int i = 0; i < roots.Length; i++) list.GetArrayElementAtIndex(i).objectReferenceValue = roots[i];
+            so.FindProperty("globalLight").objectReferenceValue = globalLight;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            var boundsGo = new GameObject("CameraBounds") { layer = 2 };
+            boundsGo.transform.SetParent(grid.transform, false);
+            var poly = boundsGo.AddComponent<PolygonCollider2D>();
+            poly.isTrigger = true;
+            poly.points = new[]
+            {
+                new Vector2(xMin - 1, yMin - 1), new Vector2(xMax + 1, yMin - 1),
+                new Vector2(xMax + 1, yMax + 3), new Vector2(xMin - 1, yMax + 3),
+            };
+            return poly;
+        }
+
+        private static void BuildAreaLook(Transform root, int area, int xMin, int xMax, int yMin, int yMax)
+        {
+            string suffix = area == 0 ? "" : "_" + area;
+            var floorTiles = new[] { EnvTile("floor0" + suffix), EnvTile("floor1" + suffix), EnvTile("floor2" + suffix), EnvTile("floor3" + suffix) };
+            var wall = EnvTile("wall" + suffix);
+            var wallAlt = EnvTile("wall_alt" + suffix);
+            var wallTop = EnvTile("walltop");
+
+            var floor = CreateTilemap(root, "Floor", -1000);
+            var walls = CreateTilemap(root, "Walls", -990);
+            var tops = CreateTilemap(root, "WallTops", 900);
+
+            var rng = new GameRandom((ulong)(11 + area * 17));
             for (int x = xMin; x < xMax; x++)
             for (int y = yMin; y < yMax; y++)
             {
                 float r = rng.Value();
-                floor.SetTile(new Vector3Int(x, y, 0), r < 0.62f ? floorTiles[0] : r < 0.8f ? floorTiles[1] : r < 0.92f ? floorTiles[2] : floorTiles[3]);
+                var tile = r < 0.62f ? floorTiles[0] : r < 0.8f ? floorTiles[1] : r < 0.92f ? floorTiles[2] : floorTiles[3];
+                // The chapel has a crimson carpet down the middle, from the entrance to the gate.
+                if (area == 1 && x >= -2 && x <= 1) tile = EnvTile(x == -2 || x == 1 ? "carpet_edge_1" : "carpet_1");
+                floor.SetTile(new Vector3Int(x, y, 0), tile);
             }
-            // Back wall: two rows of bricks, then the black top.
             for (int x = xMin - 1; x <= xMax; x++)
             {
                 walls.SetTile(new Vector3Int(x, yMax, 0), rng.Chance(0.3f) ? wallAlt : wall);
@@ -443,30 +483,48 @@ namespace Game.EditorTools
                 tops.SetTile(new Vector3Int(xMin - 1, y, 0), wallTop);
                 tops.SetTile(new Vector3Int(xMax, y, 0), wallTop);
             }
-            if (floor.GetUsedTilesCount() == 0) throw new InvalidOperationException("Arena floor is empty (tiles missing?)");
+            if (floor.GetUsedTilesCount() == 0) throw new InvalidOperationException($"Area {area} floor is empty (tiles missing?)");
 
             // Ambient occlusion along the walls.
-            var shade = CreateTilemap(grid.transform, "Shade", -980);
-            var shadeTop = EnvTile("shade_top");
-            var shadeLeft = EnvTile("shade_left");
-            var shadeRight = EnvTile("shade_right");
-            for (int x = xMin; x < xMax; x++) shade.SetTile(new Vector3Int(x, yMax - 1, 0), shadeTop);
+            var shade = CreateTilemap(root, "Shade", -980);
+            for (int x = xMin; x < xMax; x++) shade.SetTile(new Vector3Int(x, yMax - 1, 0), EnvTile("shade_top"));
             for (int y = yMin; y < yMax - 1; y++)
             {
-                shade.SetTile(new Vector3Int(xMin, y, 0), shadeLeft);
-                shade.SetTile(new Vector3Int(xMax - 1, y, 0), shadeRight);
+                shade.SetTile(new Vector3Int(xMin, y, 0), EnvTile("shade_left"));
+                shade.SetTile(new Vector3Int(xMax - 1, y, 0), EnvTile("shade_right"));
             }
 
-            var props = new GameObject("Props").transform;
-            props.SetParent(grid.transform, false);
+            var props = new GameObject("Decor").transform;
+            props.SetParent(root, false);
+            string pillar = area == 0 ? "pillar" : "pillar_" + area;
             foreach (float x in new[] { -10.5f, -4.5f, 4.5f, 10.5f })
-                Prop(props, "pillar", new Vector2(x, yMax - 0.2f), 0.8f);
-            foreach (float x in new[] { -7.5f, 7.5f })
-                Prop(props, "banner", new Vector2(x, yMax + 1.1f), 1f, order: -980);
-            for (int i = 0; i < 7; i++)
+                Prop(props, pillar, new Vector2(x, yMax - 0.2f), 0.8f);
+
+            string candleSheet;
+            Color candleLight;
+            switch (area)
             {
-                var p = new Vector2(rng.Range(xMin + 1f, xMax - 1f), rng.Chance(0.5f) ? rng.Range(yMin + 0.5f, yMin + 2.5f) : rng.Range(yMax - 3f, yMax - 1.5f));
-                Prop(props, "bones", p, 1f, order: -950);
+                case 0:
+                    foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner", new Vector2(x, yMax + 1.1f), 1f, order: -980);
+                    for (int i = 0; i < 7; i++) Prop(props, "bones", ScatterNearWalls(rng, xMin, xMax, yMin, yMax), 1f, order: -950);
+                    candleSheet = "fx_candle";
+                    candleLight = new Color(1f, 0.62f, 0.32f);
+                    break;
+                case 1:
+                    foreach (float x in new[] { -12.5f, -1.6f, 1.6f, 12.5f }) Prop(props, "window_1", new Vector2(x, yMax + 0.25f), 1f, order: -985);
+                    foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_1", new Vector2(x, yMax + 0.6f), 1f, order: -980);
+                    foreach (float x in new[] { -1.6f, 1.6f })
+                        Light(props, new Vector2(x, yMax - 1.2f), new Color(0.9f, 0.35f, 0.4f), 0.7f, 3.5f); // light through the glass
+                    candleSheet = "fx_candle_red";
+                    candleLight = new Color(1f, 0.35f, 0.28f);
+                    break;
+                default:
+                    foreach (float x in new[] { -12f, 12f }) Prop(props, "chains_2", new Vector2(x, yMax + 0.2f), 1f, order: -980);
+                    foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_2", new Vector2(x, yMax + 0.6f), 1f, order: -980);
+                    for (int i = 0; i < 6; i++) Prop(props, "bones_2", ScatterNearWalls(rng, xMin, xMax, yMin, yMax), 1f, order: -950);
+                    candleSheet = "fx_candle_soul";
+                    candleLight = new Color(0.72f, 0.48f, 1f);
+                    break;
             }
 
             foreach (var c in new[]
@@ -474,18 +532,23 @@ namespace Game.EditorTools
                          new Vector2(-13.2f, 7.2f), new Vector2(13.2f, 7.2f), new Vector2(-13.2f, -7.4f), new Vector2(13.2f, -7.4f),
                          new Vector2(-7.5f, 7.4f), new Vector2(7.5f, 7.4f), new Vector2(-13.3f, 0f), new Vector2(13.3f, 0f),
                      })
-                Candle(props, c);
+                Candle(props, c, candleSheet, candleLight);
+        }
 
-            var boundsGo = new GameObject("CameraBounds") { layer = 2 };
-            boundsGo.transform.SetParent(grid.transform, false);
-            var poly = boundsGo.AddComponent<PolygonCollider2D>();
-            poly.isTrigger = true;
-            poly.points = new[]
-            {
-                new Vector2(xMin - 1, yMin - 1), new Vector2(xMax + 1, yMin - 1),
-                new Vector2(xMax + 1, yMax + 3), new Vector2(xMin - 1, yMax + 3),
-            };
-            return poly;
+        private static Vector2 ScatterNearWalls(GameRandom rng, int xMin, int xMax, int yMin, int yMax) =>
+            new(rng.Range(xMin + 1f, xMax - 1f), rng.Chance(0.5f) ? rng.Range(yMin + 0.5f, yMin + 2.5f) : rng.Range(yMax - 3f, yMax - 1.5f));
+
+        private static void Light(Transform parent, Vector2 at, Color color, float intensity, float radius)
+        {
+            var go = new GameObject("Light");
+            go.transform.SetParent(parent, false);
+            go.transform.position = at;
+            var light = go.AddComponent<Light2D>();
+            light.lightType = Light2D.LightType.Point;
+            light.color = color;
+            light.intensity = intensity;
+            light.pointLightOuterRadius = radius;
+            light.pointLightInnerRadius = 0.2f;
         }
 
         private static Tilemap CreateTilemap(Transform parent, string name, int order)
@@ -508,7 +571,7 @@ namespace Game.EditorTools
             r.sortingOrder = order ?? EnemyView.SortOrder(position.y);
         }
 
-        private static void Candle(Transform parent, Vector2 position)
+        private static void Candle(Transform parent, Vector2 position, string sheet, Color color)
         {
             var go = new GameObject("Candle");
             go.transform.SetParent(parent, false);
@@ -517,7 +580,7 @@ namespace Game.EditorTools
             r.sortingOrder = EnemyView.SortOrder(position.y);
             var loop = go.AddComponent<SpriteLoop>();
             var so = new SerializedObject(loop);
-            so.FindProperty("sheet").stringValue = "fx_candle";
+            so.FindProperty("sheet").stringValue = sheet;
             so.FindProperty("fps").floatValue = 7f;
             so.ApplyModifiedPropertiesWithoutUndo();
 
@@ -526,7 +589,7 @@ namespace Game.EditorTools
             lightGo.transform.localPosition = new Vector3(0f, 0.4f);
             var light = lightGo.AddComponent<Light2D>();
             light.lightType = Light2D.LightType.Point;
-            light.color = new Color(1f, 0.62f, 0.32f);
+            light.color = color;
             light.pointLightOuterRadius = 4.2f;
             light.pointLightInnerRadius = 0.2f;
             light.falloffIntensity = 0.7f;
@@ -646,7 +709,7 @@ namespace Game.EditorTools
             PlayerSettings.allowedAutorotateToPortraitUpsideDown = false;
             PlayerSettings.allowedAutorotateToLandscapeLeft = true;
             PlayerSettings.allowedAutorotateToLandscapeRight = true;
-            PlayerSettings.productName = "LabyrinthOfTheDead";
+            PlayerSettings.productName = "LabyrinthSurvivor";
             PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
             PlayerSettings.defaultScreenWidth = 1280;
             PlayerSettings.defaultScreenHeight = 720;

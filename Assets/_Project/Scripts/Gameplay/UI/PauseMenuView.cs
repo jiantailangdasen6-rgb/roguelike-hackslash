@@ -26,7 +26,7 @@ namespace Game.Gameplay
             _panel = dim.gameObject;
 
             var panel = UIKit.Framed(dim.transform, "Menu");
-            panel.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(720f, 560f), Vector2.zero);
+            panel.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(720f, 640f), Vector2.zero);
             var title = UIKit.Title(panel.transform, "休息", 56);
             title.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(600f, 80f), new Vector2(0f, -30f));
 
@@ -35,6 +35,9 @@ namespace Game.Gameplay
                 "<size=20><color=#bfb6aa>凍った敵を強打で砕く・印の付いた敵を狙う・倒れた仲間のそばに立つ</color></size>",
                 24, TextAnchor.UpperCenter, UIKit.MutedText);
             controls.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(640f, 200f), new Vector2(0f, -120f));
+
+            VolumeRow(panel.transform, "音楽", 300f, () => AudioPrefs.Music, v => AudioPrefs.Music = v);
+            VolumeRow(panel.transform, "効果音", 244f, () => AudioPrefs.Sfx, v => AudioPrefs.Sfx = v);
 
             _resume = UIKit.Button(panel.transform, "続ける", 32, () => Toggle(false));
             _resume.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(360f, 72f), new Vector2(0f, 150f));
@@ -47,6 +50,21 @@ namespace Game.Gameplay
         }
 
         private void OnDestroy() => IsOpen = false;
+
+        /// <summary>"音楽  [−]  70%  [+]" in 10% steps.</summary>
+        private static void VolumeRow(Transform parent, string label, float y, System.Func<float> get, System.Action<float> set)
+        {
+            var name = UIKit.Label(parent, label, 26, TextAnchor.MiddleRight, UIKit.MutedText);
+            name.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(160f, 50f), new Vector2(-200f, y));
+            var value = UIKit.Title(parent, "", 28, TextAnchor.MiddleCenter, Color.white);
+            value.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(120f, 50f), new Vector2(20f, y));
+            void Refresh() => value.text = $"{Mathf.RoundToInt(get() * 100f)}%";
+            var minus = UIKit.Button(parent, "−", 30, () => { set(Mathf.Round(get() * 10f - 1f) / 10f); Refresh(); });
+            minus.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(60f, 50f), new Vector2(-70f, y));
+            var plus = UIKit.Button(parent, "+", 30, () => { set(Mathf.Round(get() * 10f + 1f) / 10f); Refresh(); });
+            plus.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(60f, 50f), new Vector2(110f, y));
+            Refresh();
+        }
 
         private void Toggle(bool open)
         {

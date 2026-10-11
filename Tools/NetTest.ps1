@@ -5,7 +5,7 @@
 param([int]$Seconds = 70)
 
 $projectPath = Split-Path -Parent $PSScriptRoot
-$exe = "$projectPath\Builds\Windows\LabyrinthOfTheDead.exe"
+$exe = "$projectPath\Builds\Windows\LabyrinthSurvivor.exe"
 $out = "$projectPath\Logs\net"
 New-Item -ItemType Directory -Force $out | Out-Null
 Remove-Item "$out\*" -ErrorAction SilentlyContinue
@@ -14,7 +14,7 @@ $common = @('-botmove', '-localonly', '-screen-fullscreen', '0', '-screen-width'
 $shotAt = [Math]::Max(10, $Seconds - 25)
 
 $hostProc = Start-Process $exe -PassThru -ArgumentList ($common + @(
-    '-autohost', '3', '-profile', 'host', '-class', 'warrior', '-autoquit', "$Seconds",
+    '-autohost', '3', '-profile', 'host', '-class', 'warrior', '-autoquit', "$Seconds", '-downat', "$($shotAt - 2)",
     '-screenshot', "`"$out\host.png`"", '-screenshotat', "$shotAt", '-logFile', "`"$out\host.log`""))
 Start-Sleep -Seconds 4
 $c1 = Start-Process $exe -PassThru -ArgumentList ($common + @(

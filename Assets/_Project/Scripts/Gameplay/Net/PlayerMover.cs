@@ -57,6 +57,8 @@ namespace Game.Gameplay
             _dashUntil = 0f;
         }
 
+        private static RoomLayout CurrentLayout => RunDirector.Instance != null ? Arena.Get(RunDirector.Instance.LayoutId.Value) : null;
+
         private bool CanAct
         {
             get
@@ -102,7 +104,9 @@ namespace Game.Gameplay
 
         // ------------------------------------------------------------------ Frame
 
-        private Vector2 CurrentMove() => _bot ? _botBrain.Move : Vector2.ClampMagnitude(input.Move, 1f);
+        private Vector2 CurrentMove() => _bot
+            ? Arena.Steer(CurrentLayout, transform.position, _botBrain.Move, SimPlayer.BodyRadius, player.Slot.Value)
+            : Vector2.ClampMagnitude(input.Move, 1f);
 
         private void Update()
         {
@@ -121,6 +125,7 @@ namespace Game.Gameplay
 
                 var bounds = RunSimulation.DefaultBounds;
                 float r = SimPlayer.BodyRadius;
+                pos = Arena.Resolve(CurrentLayout, pos, r);
                 pos.x = Mathf.Clamp(pos.x, bounds.xMin + r, bounds.xMax - r);
                 pos.y = Mathf.Clamp(pos.y, bounds.yMin + r, bounds.yMax - r);
                 transform.position = pos;

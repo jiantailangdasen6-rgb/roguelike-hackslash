@@ -49,6 +49,7 @@ namespace Game.Core
         Shatter = 2,
         Heavy = 4,
         DamageOverTime = 8,
+        Blocked = 16,     // armour soaked most of it
     }
 
     public enum ProjectileKind : byte
@@ -58,6 +59,8 @@ namespace Game.Core
         PierceArrow,
         SwordWave,
         EnemyArrow,
+        BloodOrb,
+        SoulOrb,
     }
 
     public enum AttackAnim : byte
@@ -78,6 +81,8 @@ namespace Game.Core
         Mark,
         Shatter,
         Slam,
+        Explosion,
+        HolyLight,
     }
 
     /// <summary>Owner input sent to the host each network tick. Button presses are counters so a lost packet never loses a press.</summary>
@@ -142,12 +147,14 @@ namespace Game.Core
         PlayerDowned,    // ClientId, Pos
         PlayerRevived,   // ClientId, Pos
         Teleport,        // ClientId, Pos
-        RoomStarted,     // Int = room index
+        RoomStarted,     // Int = room index, Id = layout id
         RoomCleared,     // Int = room index, Pos = exit
         RunEnded,        // Int = 1 victory / 0 defeat
         BossSpawned,     // Id, Pos
         PerkOffer,       // ClientId, Seed = packed PerkOptions
         WaveStarted,     // Int = wave number (1-based), Value = wave count
+        HazardWarn,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds until it fires
+        HazardFire,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds it stays active
     }
 
     /// <summary>Something that happened during a tick; the network layer sends these to clients for presentation.</summary>

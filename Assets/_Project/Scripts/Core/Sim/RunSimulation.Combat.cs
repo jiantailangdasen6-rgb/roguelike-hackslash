@@ -328,12 +328,12 @@ namespace Game.Core
             return proj;
         }
 
-        private void FireHostile(Vector2 pos, Vector2 velocity, float life, float damage)
+        private void FireHostile(ProjectileKind kind, Vector2 pos, Vector2 velocity, float life, float damage)
         {
             var proj = new Projectile
             {
-                Id = _nextProjectileId++, Kind = ProjectileKind.EnemyArrow, Hostile = true,
-                Position = pos, Velocity = velocity, Life = life, Radius = 0.2f, Damage = damage,
+                Id = _nextProjectileId++, Kind = kind, Hostile = true,
+                Position = pos, Velocity = velocity, Life = life, Radius = kind == ProjectileKind.EnemyArrow ? 0.2f : 0.3f, Damage = damage,
             };
             Projectiles.Add(proj);
             Events.Add(new SimEvent(SimEventType.ProjectileSpawn) { Id = proj.Id, Int = (int)proj.Kind, Pos = pos, Vec = velocity, Value = life });
@@ -378,7 +378,7 @@ namespace Game.Core
                     }
                 }
 
-                if (spent || proj.Life <= 0f || !Bounds.Contains(proj.Position))
+                if (spent || proj.Life <= 0f || !Bounds.Contains(proj.Position) || Arena.BlocksShot(Layout, proj.Position))
                 {
                     Events.Add(new SimEvent(SimEventType.ProjectileEnd) { Id = proj.Id, Pos = proj.Position });
                     Projectiles.RemoveAt(k);
@@ -439,7 +439,7 @@ namespace Game.Core
         public void ApplyStatus(int index, StatusKind status, float duration)
         {
             ref var e = ref Enemies[index];
-            if (e.Dead) return;
+            if (e.Dead || e.Def.Prop) return;
             switch (status)
             {
                 case StatusKind.Frozen:
@@ -476,6 +476,12 @@ namespace Game.Core
                 if (attacker.PerkLevel(PerkId.Bloodlust) > 0 && (flags & HitFlags.DamageOverTime) == 0) attacker.AddBloodlust();
             }
             if (e.Marked > 0f) damage *= 1f + e.MarkBonus;
+            // Armoured monsters shrug off blows until a teammate freezes, stuns or marks them.
+            if (e.Def.Armored && !disabled && (flags & HitFlags.DamageOverTime) == 0)
+            {
+                damage *= EnemyCatalog.ArmorFactor;
+                flags |= HitFlags.Blocked;
+            }
 
             if (e.Frozen > 0f)
             {
@@ -503,7 +509,7 @@ namespace Game.Core
             e.Health -= damage;
             Events.Add(new SimEvent(SimEventType.EnemyHit) { Id = e.Id, Pos = e.Position, Value = damage, Int = (int)flags });
 
-            if (!e.Def.Boss && knockback > 0f && e.State != EnemyState.Strike)
+            if (!e.Def.Boss && !e.Def.Prop && knockback > 0f && e.State != EnemyState.Strike)
             {
                 e.Knockback += pushDirection * knockback * (e.Elite ? 0.5f : 1f);
                 e.HitStun = 0.14f;
@@ -512,7 +518,7 @@ namespace Game.Core
             if (e.Health <= 0f)
             {
                 e.Dead = true;
-                if (attacker != null)
+                if (attacker != null && !e.Def.Prop)
                 {
                     float heal = 3f * attacker.PerkLevel(PerkId.Lifesteal) + attacker.HealOnKill;
                     if (heal > 0f) attacker.Heal(heal);
@@ -536,6 +542,11 @@ namespace Game.Core
                 var def = e.Def;
                 Events.Add(new SimEvent(SimEventType.EnemyDied) { Id = e.Id, Pos = e.Position, Int = (int)e.Type });
                 if (!giveXp) continue;
+                if (def.Prop)
+                {
+                    if (def.Type == EnemyType.PowderKeg) IgniteKeg(e);
+                    continue;
+                }
 
                 Kills++;
                 int xp = def.Xp * (e.Elite ? EnemyCatalog.EliteXpMultiplier : 1);

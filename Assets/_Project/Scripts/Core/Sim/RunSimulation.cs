@@ -50,6 +50,11 @@ namespace Game.Core
         private bool _levelUpChoices;
         private int _lastWaveSize;
 
+        public readonly Difficulty Difficulty;
+        public readonly DifficultyDef DifficultyDef;
+        /// <summary>Obstacles and gimmicks of the current room.</summary>
+        public RoomLayout Layout { get; private set; } = Arena.Get(0);
+
         public RunPhase Phase { get; private set; } = RunPhase.Playing;
         public float Elapsed { get; private set; }
         public int TeamLevel { get; private set; } = 1;
@@ -61,16 +66,21 @@ namespace Game.Core
         public int RoomsCleared { get; private set; }
         public float XpToNext => XpRequired(TeamLevel, Players.Count);
 
-        public RunSimulation(ulong seed, Rect? bounds = null)
+        public RunSimulation(ulong seed, Rect? bounds = null, Difficulty difficulty = Difficulty.Normal)
         {
             Bounds = bounds ?? DefaultBounds;
             Enemies = new EnemySimulation(Bounds);
+            Difficulty = difficulty;
+            DifficultyDef = DifficultyCatalog.Get(difficulty);
             var root = new GameRandom(seed);
             _spawnRng = root.Fork(1);
             _perkRng = root.Fork(2);
             _combatRng = root.Fork(3);
             _aiRng = root.Fork(4);
+            _layoutRng = root.Fork(5);
         }
+
+        private readonly GameRandom _layoutRng;
 
         public static float XpRequired(int level, int playerCount) =>
             (12f + 7f * (level - 1)) * (1f + 0.5f * Mathf.Max(0, playerCount - 1));
@@ -79,6 +89,13 @@ namespace Game.Core
             (1f + 0.18f * roomIndex) * (1f + 0.45f * Mathf.Max(0, playerCount - 1));
 
         public static float DamageMultiplier(int roomIndex) => 1f + 0.12f * roomIndex;
+
+        /// <summary>Monster health for the current room, players and difficulty.</summary>
+        public float EnemyHealthScale => HealthMultiplier(Room.Index, Players.Count) * DifficultyDef.EnemyHealth;
+        public float EnemyDamageScale => DamageMultiplier(Room.Index) * DifficultyDef.EnemyDamage;
+
+        /// <summary>The boss of the current area.</summary>
+        public EnemyType AreaBoss => EnemyCatalog.AreaBosses[Mathf.Min(Room.Area, EnemyCatalog.AreaBosses.Length - 1)];
 
         // ------------------------------------------------------------------ Players
 
@@ -154,6 +171,7 @@ namespace Game.Core
             StepEnemies(dt);
             StepPlayersCombat(dt);
             StepDelayedAreas(dt);
+            StepHazards(dt);
             StepProjectiles(dt);
             ProcessDeaths(giveXp: true);
             CollectSouls();
@@ -219,36 +237,38 @@ namespace Game.Core
                     continue;
                 }
                 PendingSpawns.RemoveAt(i);
-                int id = Enemies.Spawn(s.Type, s.Position, HealthMultiplier(Room.Index, Players.Count), DamageMultiplier(Room.Index), s.Elite);
-                if (EnemyCatalog.Get(s.Type).Boss) Events.Add(new SimEvent(SimEventType.BossSpawned) { Id = id, Pos = s.Position });
+                var def = EnemyCatalog.Get(s.Type);
+                Vector2 at = def.Flying ? s.Position : Arena.Resolve(Layout, s.Position, def.Radius);
+                int id = Enemies.Spawn(s.Type, at, EnemyHealthScale, EnemyDamageScale, s.Elite);
+                if (def.Boss) Events.Add(new SimEvent(SimEventType.BossSpawned) { Id = id, Pos = at, Int = (int)s.Type });
             }
 
             if (Room.Cleared) return;
+            int hostile = Enemies.HostileCount + PendingSpawns.Count;
             switch (Room.Objective)
             {
                 case RoomObjective.Waves:
                 {
                     _waveTimer -= dt;
-                    int alive = Enemies.Count + PendingSpawns.Count;
-                    bool waveDone = alive <= Mathf.Max(1, _lastWaveSize / 4) || _waveTimer <= 0f;
+                    bool waveDone = hostile <= Mathf.Max(1, _lastWaveSize / 4) || _waveTimer <= 0f;
                     if (waveDone && Room.Wave < Room.WaveCount) StartWave();
                     break;
                 }
                 case RoomObjective.Survive:
                 {
                     _spawnTimer -= dt;
-                    int target = Mathf.RoundToInt((6 + Room.Area * 2) * PlayerScale);
-                    if (_spawnTimer <= 0f && Enemies.Count + PendingSpawns.Count < target)
+                    int target = Mathf.RoundToInt((6 + Room.Area * 2) * PlayerScale * DifficultyDef.EnemyCount);
+                    if (_spawnTimer <= 0f && hostile < target)
                     {
                         _spawnTimer = 0.8f;
-                        QueueSpawn(RandomEnemyType(), _spawnRng.Chance(0.06f));
+                        QueueSpawn(RandomEnemyType(), _spawnRng.Chance(DifficultyDef.EliteChance + 0.01f));
                     }
                     break;
                 }
                 case RoomObjective.Boss:
                 {
                     _spawnTimer -= dt;
-                    if (_spawnTimer <= 0f && Enemies.Count + PendingSpawns.Count < 1 + 2 * Room.Area)
+                    if (_spawnTimer <= 0f && hostile < 1 + 2 * Room.Area)
                     {
                         _spawnTimer = 9f;
                         QueueSpawn(RandomEnemyType(), false);
@@ -264,21 +284,42 @@ namespace Game.Core
         {
             Room.Wave++;
             _waveTimer = 20f;
-            int size = Mathf.RoundToInt((5f + Room.Index * 0.5f + Room.Area * 1.5f) * PlayerScale);
+            int size = Mathf.RoundToInt((5f + Room.Index * 0.5f + Room.Area * 1.5f) * PlayerScale * DifficultyDef.EnemyCount);
             _lastWaveSize = size;
             bool eliteRoom = Room.Index % RoomsPerArea == 2;
             for (int i = 0; i < size; i++)
-                QueueSpawn(RandomEnemyType(), (eliteRoom && i == 0) || _spawnRng.Chance(0.05f));
+                QueueSpawn(RandomEnemyType(), (eliteRoom && i == 0) || _spawnRng.Chance(DifficultyDef.EliteChance));
             Events.Add(new SimEvent(SimEventType.WaveStarted) { Int = Room.Wave, Value = Room.WaveCount });
         }
 
+        // Spawn weights per area (index = EnemyType). Each area adds new monsters to the mix.
+        private static readonly (EnemyType Type, int Weight)[][] AreaPools =
+        {
+            new[] { (EnemyType.Skeleton, 40), (EnemyType.SkeletonArcher, 22), (EnemyType.Ghoul, 20), (EnemyType.Bat, 10) },
+            new[]
+            {
+                (EnemyType.Skeleton, 20), (EnemyType.SkeletonArcher, 15), (EnemyType.Ghoul, 14), (EnemyType.Cultist, 14),
+                (EnemyType.Bat, 7), (EnemyType.Bloater, 14), (EnemyType.DreadKnight, 11),
+            },
+            new[]
+            {
+                (EnemyType.Skeleton, 10), (EnemyType.SkeletonArcher, 12), (EnemyType.Ghoul, 12), (EnemyType.Cultist, 11), (EnemyType.Bat, 6),
+                (EnemyType.Bloater, 11), (EnemyType.DreadKnight, 12), (EnemyType.Necromancer, 9), (EnemyType.Wraith, 13),
+            },
+        };
+
         private EnemyType RandomEnemyType()
         {
-            int area = Room.Area;
-            float r = _spawnRng.Value();
-            if (area == 0) return r < 0.5f ? EnemyType.Skeleton : r < 0.75f ? EnemyType.SkeletonArcher : EnemyType.Ghoul;
-            if (area == 1) return r < 0.35f ? EnemyType.Skeleton : r < 0.55f ? EnemyType.SkeletonArcher : r < 0.8f ? EnemyType.Ghoul : EnemyType.Cultist;
-            return r < 0.25f ? EnemyType.Skeleton : r < 0.45f ? EnemyType.SkeletonArcher : r < 0.7f ? EnemyType.Ghoul : EnemyType.Cultist;
+            var pool = AreaPools[Mathf.Min(Room.Area, AreaPools.Length - 1)];
+            int total = 0;
+            foreach (var (_, w) in pool) total += w;
+            int pick = _spawnRng.Range(0, total);
+            foreach (var (type, w) in pool)
+            {
+                if (pick < w) return type;
+                pick -= w;
+            }
+            return EnemyType.Skeleton;
         }
 
         public void QueueSpawn(EnemyType type, bool elite, Vector2? at = null)
@@ -286,17 +327,35 @@ namespace Game.Core
             Vector2 pos = at ?? RandomSpawnPoint();
             PendingSpawns.Add(new PendingSpawn { Type = type, Position = pos, Timer = SpawnWarningTime, Elite = elite });
             Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = pos, Int = (int)type, Value = SpawnWarningTime });
+
+            // Bats come in flocks.
+            if (type == EnemyType.Bat && at == null)
+                for (int k = 0; k < 2; k++)
+                {
+                    Vector2 near = Enemies.ClampToBounds(pos + Rotate(Vector2.right, k * 140f + 30f) * 0.9f, 0.5f);
+                    PendingSpawns.Add(new PendingSpawn { Type = type, Position = near, Timer = SpawnWarningTime + 0.1f * (k + 1) });
+                    Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = near, Int = (int)type, Value = SpawnWarningTime + 0.1f * (k + 1) });
+                }
+        }
+
+        private bool SpawnBlocked(Vector2 p)
+        {
+            if (Arena.Overlaps(Layout, p, 0.9f)) return true;
+            foreach (var g in Layout.Gimmicks)
+                if (Arena.InGimmick(g, p, 0.4f)) return true;
+            return false;
         }
 
         private Vector2 RandomSpawnPoint()
         {
             Vector2 best = Vector2.zero;
             float bestDistance = -1f;
-            for (int attempt = 0; attempt < 10; attempt++)
+            for (int attempt = 0; attempt < 14; attempt++)
             {
                 var p = new Vector2(
                     _spawnRng.Range(Bounds.xMin + 1f, Bounds.xMax - 1f),
                     _spawnRng.Range(Bounds.yMin + 1f, Bounds.yMax - 1.5f));
+                if (SpawnBlocked(p)) continue;
                 float nearest = float.MaxValue;
                 foreach (var pl in Players) nearest = Mathf.Min(nearest, (pl.Position - p).magnitude);
                 if (nearest >= MinSpawnDistance) return p;
@@ -401,6 +460,9 @@ namespace Game.Core
             _spawnTimer = 1.5f;
             foreach (var p in Players) p.SecondWindUsed = false;
 
+            Layout = Arena.Get(Bounds == DefaultBounds ? Arena.Pick(_layoutRng, index, Layout.Id) : 0);
+            ResetHazards();
+
             switch (index % RoomsPerArea)
             {
                 case 0:
@@ -418,11 +480,12 @@ namespace Game.Core
                     Room.Objective = RoomObjective.Boss;
                     Room.Target = 1f;
                     _spawnTimer = 12f;
-                    PendingSpawns.Add(new PendingSpawn { Type = EnemyType.BoneKing, Position = new Vector2(0f, 3f), Timer = 1.6f });
-                    Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = new Vector2(0f, 3f), Int = (int)EnemyType.BoneKing, Value = 1.6f });
+                    PendingSpawns.Add(new PendingSpawn { Type = AreaBoss, Position = new Vector2(0f, 3f), Timer = 1.6f });
+                    Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = new Vector2(0f, 3f), Int = (int)AreaBoss, Value = 1.6f });
                     break;
             }
-            Events.Add(new SimEvent(SimEventType.RoomStarted) { Int = index });
+            Events.Add(new SimEvent(SimEventType.RoomStarted) { Int = index, Id = Layout.Id });
+            SpawnProps();
         }
 
         private void UpdateRoom(float dt)
@@ -437,7 +500,7 @@ namespace Game.Core
                         break;
                     case RoomObjective.Waves:
                         Room.Progress = Mathf.Max(0, Room.Wave - 1);
-                        if (Room.Wave >= Room.WaveCount && Enemies.Count == 0 && PendingSpawns.Count == 0)
+                        if (Room.Wave >= Room.WaveCount && Enemies.HostileCount == 0 && PendingSpawns.Count == 0)
                         {
                             Room.Progress = Room.WaveCount;
                             ClearRoom();
@@ -474,6 +537,8 @@ namespace Game.Core
             foreach (var proj in Projectiles) Events.Add(new SimEvent(SimEventType.ProjectileEnd) { Id = proj.Id, Pos = proj.Position });
             Projectiles.Clear();
             _delayedAreas.Clear();
+            _rainTargets.Clear();
+            StopHazards();
 
             foreach (var p in Players)
                 if (p.Alive)

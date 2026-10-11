@@ -36,6 +36,11 @@ namespace Game.Gameplay
         private RectTransform _masteryList;
         private Text _masteryTitle;
         private readonly List<(ClassId Id, Image Frame)> _classCards = new();
+        private readonly List<(ClassId Id, UISpriteAnimator Preview)> _classPreviews = new();
+        private readonly List<(Difficulty Id, Button Button)> _difficultyButtons = new();
+        private Text _difficultyText;
+        private RectTransform _skinRow;
+        private Text _skinName;
         private int _autoHostPlayers;
         private string _autoJoin;
         private float _nextAutoJoin;
@@ -79,9 +84,9 @@ namespace Game.Gameplay
             var bg = UIKit.Panel(root, "Background", new Color(0.035f, 0.03f, 0.04f));
             bg.rectTransform.Stretch();
 
-            var title = UIKit.Title(root, "冥府の迷宮", 104);
+            var title = UIKit.Title(root, "LABYRINTH SURVIVOR", 96);
             title.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1200f, 140f), new Vector2(0f, -36f));
-            var sub = UIKit.Label(root, "仲間と挑む、闇の迷宮（仮タイトル）", 28, TextAnchor.MiddleCenter, UIKit.MutedText);
+            var sub = UIKit.Label(root, "ラビリンス・サバイバー　─　仲間と挑む、闇の迷宮", 28, TextAnchor.MiddleCenter, UIKit.MutedText);
             sub.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1200f, 44f), new Vector2(0f, -170f));
 
             _menu = UIKit.Rect("Menu", root).Stretch().gameObject;
@@ -104,7 +109,9 @@ namespace Game.Gameplay
                 var img = preview.gameObject.AddComponent<Image>();
                 img.preserveAspect = true;
                 img.raycastTarget = false;
-                preview.gameObject.AddComponent<UISpriteAnimator>().Play(def.Sheet, "idle");
+                var anim = preview.gameObject.AddComponent<UISpriteAnimator>();
+                anim.Play(SkinCatalog.Sheet(def.Id, Profile.SkinFor(def.Id)), "idle");
+                _classPreviews.Add((def.Id, anim));
 
                 var name = UIKit.Title(card.transform, def.Name, 38, TextAnchor.UpperLeft, Color.white);
                 name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(340f, 50f), new Vector2(160f, -18f));
@@ -122,11 +129,16 @@ namespace Game.Gameplay
             dimg.raycastTarget = false;
             _detailPreview = detailPreview.gameObject.AddComponent<UISpriteAnimator>();
             _detailName = UIKit.Title(detail.transform, "", 54, TextAnchor.UpperLeft, Color.white);
-            _detailName.rectTransform.Place(new Vector2(0f, 1f), new Vector2(400f, 70f), new Vector2(220f, -30f));
+            _detailName.rectTransform.Place(new Vector2(0f, 1f), new Vector2(400f, 70f), new Vector2(220f, -20f));
             _detailBody = UIKit.Label(detail.transform, "", 24, TextAnchor.UpperLeft);
-            _detailBody.rectTransform.Place(new Vector2(0f, 1f), new Vector2(600f, 400f), new Vector2(22f, -200f));
-            var masteryButton = UIKit.Button(detail.transform, "熟練（ラン外の成長）", 28, () => ToggleMastery(true), UIKit.BloodColor);
-            masteryButton.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(330f, 64f), new Vector2(-20f, -110f));
+            _detailBody.rectTransform.Place(new Vector2(0f, 1f), new Vector2(600f, 330f), new Vector2(22f, -206f));
+            var masteryButton = UIKit.Button(detail.transform, "熟練（ラン外の成長）", 26, () => ToggleMastery(true), UIKit.BloodColor);
+            masteryButton.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(300f, 56f), new Vector2(-16f, 14f));
+
+            // Skins: four looks per class, bought with soul shards.
+            _skinRow = UIKit.Rect("Skins", detail.transform).Place(new Vector2(0f, 1f), new Vector2(400f, 80f), new Vector2(220f, -88f));
+            _skinName = UIKit.Label(detail.transform, "", 20, TextAnchor.UpperLeft, UIKit.MutedText);
+            _skinName.rectTransform.Place(new Vector2(0f, 1f), new Vector2(400f, 28f), new Vector2(222f, -170f));
 
             // Right: trinkets
             var trinketHeader = UIKit.Title(menu, "お守り（2つまで）", 36, TextAnchor.MiddleLeft);
@@ -158,8 +170,21 @@ namespace Game.Gameplay
                 join.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(160f, 50f), new Vector2(380f, 26f));
             }
 
+            // Difficulty (the host's choice applies to everyone in the room).
+            var diffLabel = UIKit.Title(menu, "難易度", 28, TextAnchor.MiddleLeft);
+            diffLabel.rectTransform.Place(new Vector2(0f, 0f), new Vector2(120f, 50f), new Vector2(70f, 252f));
+            for (int i = 0; i < DifficultyCatalog.All.Length; i++)
+            {
+                var d = DifficultyCatalog.All[i].Id;
+                var b = UIKit.Button(menu, DifficultyCatalog.All[i].Name, 24, () => SelectDifficulty(d));
+                b.GetComponent<RectTransform>().Place(new Vector2(0f, 0f), new Vector2(104f, 50f), new Vector2(180f + i * 110f, 252f));
+                _difficultyButtons.Add((d, b));
+            }
+            _difficultyText = UIKit.Label(menu, "", 20, TextAnchor.UpperLeft, UIKit.MutedText);
+            _difficultyText.rectTransform.Place(new Vector2(0f, 0f), new Vector2(560f, 56f), new Vector2(70f, 190f));
+
             _status = UIKit.Label(root, "", 26, TextAnchor.MiddleCenter, new Color(1f, 0.55f, 0.5f));
-            _status.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1400f, 30f), new Vector2(0f, 184f));
+            _status.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1400f, 30f), new Vector2(0f, -200f));
 
             BuildMastery(root);
             BuildWaiting(root);
@@ -228,7 +253,9 @@ namespace Game.Gameplay
             var def = ClassCatalog.Get(Profile.selectedClass);
             foreach (var (id, frame) in _classCards) frame.color = id == def.Id ? UIKit.AccentColor : UIKit.GoldTrim * 0.6f;
 
-            _detailPreview.Play(def.Sheet, "attack");
+            _detailPreview.Play(SkinCatalog.Sheet(def.Id, Profile.SkinFor(def.Id)), "attack");
+            RebuildSkins(def.Id);
+            RefreshDifficulty();
             _detailName.text = def.Name;
             var owned = MetaCatalog.NodesFor(def.Id).Where(n => Profile.IsUnlocked(n.Id)).ToList();
             _detailBody.text =
@@ -245,6 +272,79 @@ namespace Game.Gameplay
             if (_mastery.activeSelf) RebuildMastery();
         }
 
+        private void RebuildSkins(ClassId cls)
+        {
+            for (int i = _skinRow.childCount - 1; i >= 0; i--) Destroy(_skinRow.GetChild(i).gameObject);
+            int selected = Profile.SkinFor(cls);
+            foreach (var skin in SkinCatalog.For(cls))
+            {
+                bool owned = Profile.IsUnlocked(skin.Id);
+                bool current = skin.Index == selected;
+                var frame = UIKit.Framed(_skinRow, skin.Id, new Color(0.08f, 0.06f, 0.08f, 1f), current ? UIKit.AccentColor : UIKit.GoldTrim * 0.5f);
+                frame.Outer().Place(new Vector2(0f, 1f), new Vector2(76f, 76f), new Vector2(skin.Index * 84f, 0f));
+                var img = UIKit.Rect("Preview", frame.transform).Stretch(-6f).gameObject.AddComponent<Image>();
+                img.preserveAspect = true;
+                img.raycastTarget = false;
+                var anim = img.gameObject.AddComponent<UISpriteAnimator>();
+                anim.Play(SkinCatalog.Sheet(cls, skin.Index), "idle");
+                if (!owned)
+                {
+                    img.color = new Color(0.35f, 0.35f, 0.4f, 0.9f);
+                    var cost = UIKit.Label(frame.transform, $"{skin.Cost}", 20, TextAnchor.LowerCenter, new Color(0.6f, 0.85f, 1f));
+                    cost.rectTransform.Stretch(2f);
+                }
+                var button = frame.Outer().gameObject.AddComponent<Button>();
+                button.targetGraphic = frame.Outer().GetComponent<Image>();
+                var s = skin;
+                button.onClick.AddListener(() => ChooseSkin(s));
+            }
+            var cur = SkinCatalog.Get(cls, selected);
+            _skinName.text = $"見た目：{cur.Name}";
+        }
+
+        private void ChooseSkin(SkinDef skin)
+        {
+            if (!Profile.IsUnlocked(skin.Id))
+            {
+                if (!Profile.TryBuy(skin.Id, skin.Cost))
+                {
+                    _status.text = $"魂の欠片が足りない（「{skin.Name}」は {skin.Cost}）";
+                    return;
+                }
+                _status.text = $"「{skin.Name}」を手に入れた";
+            }
+            Profile.SetSkin(skin.Class, skin.Index);
+            ProfileStore.Save();
+            foreach (var (id, preview) in _classPreviews)
+                if (id == skin.Class) preview.Play(SkinCatalog.Sheet(id, skin.Index), "idle");
+            Refresh();
+        }
+
+        private void SelectDifficulty(Difficulty d)
+        {
+            if (!Profile.IsDifficultyOpen(d))
+            {
+                _status.text = $"「{DifficultyCatalog.Get(d).Name}」は熟練を踏破すると挑める";
+                return;
+            }
+            Profile.difficulty = d;
+            ProfileStore.Save();
+            RefreshDifficulty();
+        }
+
+        private void RefreshDifficulty()
+        {
+            if (!Profile.IsDifficultyOpen(Profile.difficulty)) Profile.difficulty = Difficulty.Normal;
+            foreach (var (id, button) in _difficultyButtons)
+            {
+                bool open = Profile.IsDifficultyOpen(id);
+                button.GetComponent<Image>().color = id == Profile.difficulty ? UIKit.BloodColor : open ? UIKit.ButtonColor : new Color(0.08f, 0.08f, 0.1f);
+                button.GetComponentInChildren<Text>().color = open ? Color.white : new Color(1f, 1f, 1f, 0.35f);
+            }
+            var def = DifficultyCatalog.Get(Profile.difficulty);
+            _difficultyText.text = $"{def.Text}\n<size=17>※ 仲間と遊ぶときは部屋を作った人の難易度になります</size>";
+        }
+
         private void RebuildTrinkets()
         {
             for (int i = _trinketList.childCount - 1; i >= 0; i--) Destroy(_trinketList.GetChild(i).gameObject);
@@ -259,7 +359,13 @@ namespace Game.Gameplay
                 var label = UIKit.Label(item.transform, $"<b>{t.Name}</b>\n<size=20><color=#bfb6aa>{t.Text}</color></size>", 24, TextAnchor.MiddleLeft,
                     unlocked ? Color.white : new Color(1f, 1f, 1f, 0.5f));
                 label.rectTransform.Stretch(10f);
+                label.rectTransform.offsetMin = new Vector2(70f, 4f);
                 label.rectTransform.offsetMax = new Vector2(-170f, -4f);
+                var icon = UIKit.Rect("Icon", item.transform).Place(new Vector2(0f, 0.5f), new Vector2(54f, 54f), new Vector2(8f, 0f)).gameObject.AddComponent<Image>();
+                icon.sprite = GameIcons.Trinket(t.Id);
+                icon.enabled = icon.sprite != null;
+                icon.raycastTarget = false;
+                if (!unlocked) icon.color = new Color(0.4f, 0.4f, 0.45f, 0.8f);
 
                 string action = equipped ? "装備中" : unlocked ? "装備する" : $"解放 {t.Cost}";
                 var color = equipped ? new Color(0.35f, 0.25f, 0.1f) : unlocked ? UIKit.ButtonColor : new Color(0.1f, 0.15f, 0.25f);

@@ -1,0 +1,886 @@
+fileFormatVersion: 2
+guid: 2df019d5214584640bdf896b1365b348
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1475682503898035538
+    second: lich_flash_0
+  - first:
+      213: -1877502020054642494
+    second: lich_flash_1
+  - first:
+      213: 2688395411954649798
+    second: lich_flash_2
+  - first:
+      213: 1214457816056245232
+    second: lich_flash_3
+  - first:
+      213: 4850465373937231412
+    second: lich_flash_4
+  - first:
+      213: 5035125618106546307
+    second: lich_flash_5
+  - first:
+      213: -4109408356042197318
+    second: lich_flash_6
+  - first:
+      213: -985724522931561463
+    second: lich_flash_7
+  - first:
+      213: 8041971554111122445
+    second: lich_flash_8
+  - first:
+      213: -4722239139632600987
+    second: lich_flash_9
+  - first:
+      213: -8123000701060649545
+    second: lich_flash_10
+  - first:
+      213: -5985226478065601602
+    second: lich_flash_11
+  - first:
+      213: 3703769206672270506
+    second: lich_flash_12
+  - first:
+      213: 1133899199905566902
+    second: lich_flash_13
+  - first:
+      213: -8790159365342200539
+    second: lich_flash_14
+  - first:
+      213: -7594016323841716937
+    second: lich_flash_15
+  - first:
+      213: -239513709195100206
+    second: lich_flash_16
+  - first:
+      213: -1780641743105681456
+    second: lich_flash_17
+  - first:
+      213: 4607350504977680706
+    second: lich_flash_18
+  - first:
+      213: 4899559409386842021
+    second: lich_flash_19
+  - first:
+      213: 880426753530019197
+    second: lich_flash_20
+  - first:
+      213: -2268947801508493387
+    second: lich_flash_21
+  - first:
+      213: 4817151457030697793
+    second: lich_flash_22
+  - first:
+      213: -8483868055179243883
+    second: lich_flash_23
+  - first:
+      213: -8799011953488359721
+    second: lich_flash_24
+  - first:
+      213: -1832945312011195315
+    second: lich_flash_25
+  - first:
+      213: -6752884026619298641
+    second: lich_flash_26
+  - first:
+      213: 6536100821412990079
+    second: lich_flash_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: lich_flash_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 573
+        width: 37
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaa06e9c492558be0800000000000000
+      internalID: -1475682503898035538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_1
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 575
+        width: 36
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c090953cd5c1f5e0800000000000000
+      internalID: -1877502020054642494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_2
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 575
+        width: 36
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cac85922691f4520800000000000000
+      internalID: 2688395411954649798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_3
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 573
+        width: 37
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fbaab003fe9ad010800000000000000
+      internalID: 1214457816056245232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_4
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 570
+        width: 36
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4366cd80f80505340800000000000000
+      internalID: 4850465373937231412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_5
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 570
+        width: 36
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 388b5ba821c50e540800000000000000
+      internalID: 5035125618106546307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_6
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 460
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab6351d6fd278f6c0800000000000000
+      internalID: -4109408356042197318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_7
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 462
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90cd54cd4c00252f0800000000000000
+      internalID: -985724522931561463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_8
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 462
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0ce6903582da9f60800000000000000
+      internalID: 8041971554111122445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_9
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 460
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 568a0c1a58c377eb0800000000000000
+      internalID: -4722239139632600987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_10
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 459
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bde70f56ed454f80800000000000000
+      internalID: -8123000701060649545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_11
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 459
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb333a2ba3430fca0800000000000000
+      internalID: -5985226478065601602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_12
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 351
+        width: 39
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa42bb5587e666330800000000000000
+      internalID: 3703769206672270506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_13
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 352
+        width: 29
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b0987d805b6cbf00800000000000000
+      internalID: 1133899199905566902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_14
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 353
+        width: 28
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52d74b521a4130680800000000000000
+      internalID: -8790159365342200539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_15
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 238
+        width: 67
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73d85e66362ac9690800000000000000
+      internalID: -7594016323841716937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_16
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 236
+        width: 61
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dff69cec831dacf0800000000000000
+      internalID: -239513709195100206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_17
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 237
+        width: 60
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d714f5d4c3e947e0800000000000000
+      internalID: -1780641743105681456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_18
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 238
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24949ec9fd890ff30800000000000000
+      internalID: 4607350504977680706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_19
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 125
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a7ec68e25bbef340800000000000000
+      internalID: 4899559409386842021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_20
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 126
+        width: 35
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7d38e6b777e73c00800000000000000
+      internalID: 880426753530019197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_21
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 13
+        width: 34
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b7ce25fef31380e0800000000000000
+      internalID: -2268947801508493387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_22
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 13
+        width: 38
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 143f1915ab5f9d240800000000000000
+      internalID: 4817151457030697793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_23
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 11
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59ec1c904fe334a80800000000000000
+      internalID: -8483868055179243883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_24
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 10
+        width: 45
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7de09e95f31a3e580800000000000000
+      internalID: -8799011953488359721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_25
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 9
+        width: 50
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4cead833f11096e0800000000000000
+      internalID: -1832945312011195315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_26
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 41
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fac72ff81cfe842a0800000000000000
+      internalID: -6752884026619298641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lich_flash_27
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 0
+        width: 39
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7cc57c3115e4ba50800000000000000
+      internalID: 6536100821412990079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      lich_flash_0: -1475682503898035538
+      lich_flash_1: -1877502020054642494
+      lich_flash_10: -8123000701060649545
+      lich_flash_11: -5985226478065601602
+      lich_flash_12: 3703769206672270506
+      lich_flash_13: 1133899199905566902
+      lich_flash_14: -8790159365342200539
+      lich_flash_15: -7594016323841716937
+      lich_flash_16: -239513709195100206
+      lich_flash_17: -1780641743105681456
+      lich_flash_18: 4607350504977680706
+      lich_flash_19: 4899559409386842021
+      lich_flash_2: 2688395411954649798
+      lich_flash_20: 880426753530019197
+      lich_flash_21: -2268947801508493387
+      lich_flash_22: 4817151457030697793
+      lich_flash_23: -8483868055179243883
+      lich_flash_24: -8799011953488359721
+      lich_flash_25: -1832945312011195315
+      lich_flash_26: -6752884026619298641
+      lich_flash_27: 6536100821412990079
+      lich_flash_3: 1214457816056245232
+      lich_flash_4: 4850465373937231412
+      lich_flash_5: 5035125618106546307
+      lich_flash_6: -4109408356042197318
+      lich_flash_7: -985724522931561463
+      lich_flash_8: 8041971554111122445
+      lich_flash_9: -4722239139632600987
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

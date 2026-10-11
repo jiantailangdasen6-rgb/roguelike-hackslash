@@ -186,6 +186,49 @@ namespace Game.Gameplay
             }
         }
 
+        // ------------------------------------------------------------------ Runtime-generated UI shapes
+
+        private static Sprite _ring;
+        private static Sprite _arrow;
+        private static Sprite _disc;
+
+        /// <summary>A thick ring (for radial progress with Image.Type.Filled).</summary>
+        public static Sprite RingSprite => _ring != null ? _ring : _ring = ShapeSprite(64, (x, y, h) =>
+        {
+            float d = Mathf.Sqrt(x * x + y * y);
+            return d <= h && d >= h * 0.68f;
+        });
+
+        /// <summary>A chevron pointing right (off-screen markers).</summary>
+        public static Sprite ArrowSprite => _arrow != null ? _arrow : _arrow = ShapeSprite(32, (x, y, h) =>
+        {
+            // Filled triangle with a notch at the back.
+            float u = (x + h) / (2f * h); // 0 back .. 1 tip
+            float halfWidth = (1f - u) * h * 0.9f;
+            return Mathf.Abs(y) <= halfWidth && !(u < 0.3f && Mathf.Abs(y) < (0.3f - u) * h * 2.5f);
+        });
+
+        public static Sprite DiscSprite => _disc != null ? _disc : _disc = ShapeSprite(32, (x, y, h) => x * x + y * y <= h * h);
+
+        private static Sprite ShapeSprite(int size, Func<float, float, float, bool> inside)
+        {
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false) { filterMode = FilterMode.Bilinear, wrapMode = TextureWrapMode.Clamp };
+            var pixels = new Color32[size * size];
+            float h = size / 2f;
+            for (int y = 0; y < size; y++)
+            for (int x = 0; x < size; x++)
+            {
+                // 4x supersampling for smooth edges.
+                int hits = 0;
+                for (int s = 0; s < 4; s++)
+                    if (inside(x + 0.25f + (s % 2) * 0.5f - h, y + 0.25f + (s / 2) * 0.5f - h, h)) hits++;
+                pixels[y * size + x] = new Color32(255, 255, 255, (byte)(hits * 255 / 4));
+            }
+            tex.SetPixels32(pixels);
+            tex.Apply();
+            return Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 100f);
+        }
+
         public static string FormatTime(float seconds)
         {
             int s = Mathf.Max(0, Mathf.FloorToInt(seconds));

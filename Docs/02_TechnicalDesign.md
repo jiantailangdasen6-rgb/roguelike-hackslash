@@ -101,3 +101,20 @@ Assets/_Project/
 | PlayMode | 拠点からソロ開始 → 敵表示・イベント受信 | `Tools/RunTests.ps1 -Platform PlayMode` |
 | 通信 | ビルド版をホスト＋2 クライアント（戦士・魔法使い・狩人）でボット対戦 | `Tools/NetTest.ps1` |
 | 画面 | ビルド版のスクリーンショット | `Tools/Screenshots.ps1 -Class mage` |
+
+## 6. 追加（v0.4）
+- **部屋レイアウト**：`Core/Sim/Arena.cs` に手作りの 11 レイアウト（障害物＝AABB、ギミック）。`Arena.Pick` で部屋ごとに選び、
+  `RoomStarted.Id` と `RunDirector.LayoutId` で全員に伝える。当たり判定 `Arena.Resolve/Steer/BlocksShot` はホストの敵 AI・弾と、
+  オーナー側の `PlayerMover`（＋ボット）で共通。見た目は `ArenaView`（エリアごとの床・壁の切替、障害物・罠のスプライト配置）
+- **ギミック**：`RunSimulation.Arena.cs`。トゲ罠・炎は周期で `HazardWarn`→`HazardFire`。火薬樽は「動かない敵（Prop）」として
+  シミュレーションに入れ、壊れると導火線→爆発。`EnemySimulation.HostileCount` は Prop を数えない
+- **敵の攻撃種別**：Rain（全員の足元に円）、Blink（円の中へ瞬間移動して攻撃）、SelfDestruct、扇・全方位の弾（Count/Spread）。
+  Armored（凍結・気絶・印がないと被ダメ×0.4）、Flying（地形無視）。エリアごとのボスは `EnemyCatalog.AreaBosses`
+- **難易度**：`DifficultyCatalog`。ホストのプロフィール（または `-difficulty`）→ `RunSimulation` → `RunDirector.DifficultyLevel`
+- **スキン**：`SkinCatalog`（Core）＋ `SkinArt`（色替えパレット）→ `warrior_s1` などのシート（被弾フラッシュはクラス共通）。
+  `Loadout.skin` → `NetPlayer.Skin`
+- **アイコン**：`IconArt` → `Resources/Sheets/icons_perk`（PerkId 順＋休息）、`icons_trinket`
+- **音**：`Editor/Audio`（`Dsp` 合成部品、`SfxDesign` 効果音、`Music`＋`Compositions` 作曲データ）→ `AudioGenerator` が
+  `Resources/Audio/*.wav` に書き出し（git 管理外、ビルダーが無ければ生成）。実行時は `SfxPlayer`（無ければ旧 `SfxSynth`）と
+  `MusicPlayer`（シーンをまたぐ BGM、クロスフェード、勝敗ジングル）。音量は `AudioPrefs`
+- **カメラ**：`CameraTarget` がプレイヤーを追い、画面が壁の外を映さないよう位置を制限（Confiner の代わり）

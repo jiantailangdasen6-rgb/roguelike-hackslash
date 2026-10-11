@@ -184,6 +184,9 @@ namespace Game.Gameplay
         /// <summary>Leaving the run any way (end, abandon, lost connection): the gear goes into this device's stash.</summary>
         public static void BankNow() => _instance?.Bank();
 
+        // Closing the game mid-run (desktop) keeps what was found too.
+        private void OnApplicationQuit() => Bank();
+
         private void Bank()
         {
             // Only with a bag the host actually told us about - an empty view must not wipe the worn set at home.

@@ -82,6 +82,7 @@ namespace Game.Gameplay
                 _code.text = invited.Trim().ToUpperInvariant();
                 if (string.IsNullOrEmpty(_status.text)) _status.text = $"招待されました（ルームコード {_code.text}）　クラスを選んで「コードで参加」を押そう";
             }
+            if (CommandLine.Has("-openvault")) VaultView.Open(); // screenshots of the stash
             // Failed connections retry (the host may not be up yet), but a refusal is final.
             if (GameSession.Refused) yield break;
             if (CommandLine.Has("-autosolo")) GameSession.StartSolo();

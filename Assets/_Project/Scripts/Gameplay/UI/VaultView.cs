@@ -119,7 +119,7 @@ namespace Game.Gameplay
             var sort = UIKit.Button(frame.transform, "並べ替え", 22, () => { GearVault.Sort(Data); Save(); });
             sort.GetComponent<RectTransform>().Place(new Vector2(0f, 0f), new Vector2(170f, 56f), new Vector2(604f, 24f));
             _expandButton = UIKit.Button(frame.transform, "", 22, Expand);
-            _expandButton.GetComponent<RectTransform>().Place(new Vector2(0f, 0f), new Vector2(300f, 56f), new Vector2(788f, 24f));
+            _expandButton.GetComponent<RectTransform>().Place(new Vector2(0f, 0f), new Vector2(380f, 56f), new Vector2(788f, 24f));
             _expandLabel = _expandButton.GetComponentInChildren<Text>();
             var close = UIKit.Button(frame.transform, "閉じる（Esc）", 24, () => Show(false));
             close.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(240f, 56f), new Vector2(-30f, 24f));

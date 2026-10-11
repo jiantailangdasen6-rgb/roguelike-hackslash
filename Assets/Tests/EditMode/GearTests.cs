@@ -57,6 +57,21 @@ namespace Game.Tests
         }
 
         [Test]
+        public void Codec_HighBits_CarrySixClassesAndMoreLegendaries_OldSavesReadTheSame()
+        {
+            var item = ItemGenerator.Generate(42, 7, 1f, ClassId.Ranger);
+            ulong packed = ItemCodec.Pack(item);
+            Assert.AreEqual(0ul, packed >> 43, "existing classes and legendaries leave the new high bits clear, so old saves are unchanged");
+
+            item.classId = (ClassId)5;
+            item.legendary = (LegendaryId)12;
+            var back = ItemCodec.Unpack(ItemCodec.Pack(item));
+            Assert.AreEqual((ClassId)5, back.classId);
+            Assert.AreEqual((LegendaryId)12, back.legendary);
+            Assert.AreEqual(item.affixes.Count, back.affixes.Count);
+        }
+
+        [Test]
         public void Legendary_CarriesAUniqueForTheOwnersClass()
         {
             int found = 0;

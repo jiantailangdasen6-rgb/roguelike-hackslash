@@ -299,12 +299,20 @@ namespace Game.EditorTools.Art
                 icons.Add(c);
             }
             var rust = C("#9a8f84");
+            // Worn weapon by ClassId: warrior, mage, ranger, guardian, assassin, alchemist.
             Add(c => Sword(c, 4, 4, 19, 19, rust, C("#c9c0b4")));                           // worn longsword
             Add(c => Staff(c, Wood, C("#7f9a7a"), C("#c4dcc0")));                           // worn staff
             Add(c => Bow(c, Wood, C("#5a3c22"), false));                                    // worn bow
+            Add(c => WarHammer(c, Wood, rust, C("#c9c0b4")));                               // worn war hammer
+            Add(c => TwinBlades(c, rust, C("#c9c0b4")));                                    // worn twin blades
+            Add(c => Vial(c, C("#7a8a5a"), C("#a8b878")));                                  // worn vial
+            // Keen weapon, same order.
             Add(c => { Sword(c, 4, 4, 17, 17, Steel, White); c.Disc(17, 17, 3.2f, SteelDark); c.Disc(16.5f, 17.5f, 2.2f, Steel); }); // keen axe
             Add(c => { Staff(c, C("#5a3c6e"), C("#5ab8ff"), C("#dff4ff")); Sparks(c, C("#bfe8ff")); }); // crystal staff
             Add(c => Bow(c, C("#4a2c18"), GoldDark, true));                                 // hunter's longbow
+            Add(c => { WarHammer(c, C("#5a3c22"), Steel, Gold); Sparks(c, C("#fff3c0")); });   // holy war hammer
+            Add(c => TwinBlades(c, C("#4a4a6a"), C("#b8a8ff")));                            // shadow blades
+            Add(c => { Vial(c, C("#7a3ac8"), C("#d8a8ff")); Sparks(c, C("#f0d8ff")); });     // sage's vial
             Add(c => Armour(c, C("#8a5a32"), C("#5a3a1e"), C("#b07a46"), false));          // leather armour
             Add(c => Armour(c, Steel, SteelDark, White, true));                             // chainmail
             Add(c => Necklace(c, C("#e8dcc4"), C("#9a8a6a")));                              // bone necklace
@@ -312,6 +320,45 @@ namespace Game.EditorTools.Art
             Add(c => GearRing(c, C("#c8783a"), C("#7a4018"), Red));                        // copper ring
             Add(c => GearRing(c, C("#dfe4ea"), C("#7a828c"), Blue));                       // silver ring
             return icons;
+        }
+
+        private static void WarHammer(PixelCanvas c, Color32 shaft, Color32 head, Color32 trim)
+        {
+            c.Line(5, 4, 14, 13, shaft);
+            c.Line(6, 4, 15, 13, shaft);
+            // A heavy block head across the top of the shaft.
+            for (int i = -4; i <= 4; i++)
+            {
+                c.Rect(14 + i - 2, 14 - i - 2, 4, 4, head);
+            }
+            c.Line(11, 19, 19, 11, trim);
+            c.Set(4, 3, trim);
+        }
+
+        private static void TwinBlades(PixelCanvas c, Color32 blade, Color32 edge)
+        {
+            // Two short blades crossed, grips at the bottom corners.
+            c.Line(6, 5, 17, 16, blade);
+            c.Line(7, 5, 18, 16, edge);
+            c.Line(18, 5, 7, 16, blade);
+            c.Line(17, 5, 6, 16, edge);
+            c.Line(3, 4, 6, 7, Wood);
+            c.Line(21, 4, 18, 7, Wood);
+            c.Rect(5, 6, 3, 1, Gold);
+            c.Rect(17, 6, 3, 1, Gold);
+        }
+
+        private static void Vial(PixelCanvas c, Color32 liquid, Color32 shine)
+        {
+            var glass = C("#cfe0e8");
+            c.Disc(12, 9, 6.2f, glass);
+            c.Disc(12, 9, 5.2f, liquid);
+            c.Rect(5, 9, 15, 6, new Color32(0, 0, 0, 0)); // the empty top half of the flask
+            c.Ring(12, 9, 5.2f, 6.2f, glass);
+            c.Rect(10, 14, 5, 5, glass);   // neck
+            c.Rect(11, 15, 3, 3, C("#e8f4f8"));
+            c.Rect(10, 19, 5, 2, Wood);    // cork
+            c.Set(9, 7, shine); c.Set(10, 6, shine);
         }
 
         private static void Staff(PixelCanvas c, Color32 shaft, Color32 gem, Color32 shine)

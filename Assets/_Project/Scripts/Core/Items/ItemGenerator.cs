@@ -89,7 +89,9 @@ namespace Game.Core
 
     /// <summary>
     /// One item in 64 bits, so a drop fits in a single event:
-    /// base 4 | rarity 2 | class 2 | legendary 3 | item level 5 | affix count 2 | 2 x (affix 5 + roll 7) | loaner 1.
+    /// base 4 | rarity 2 | class 2 | legendary 3 | item level 5 | affix count 2 | 2 x (affix 5 + roll 7) | loaner 1
+    /// | class high bit 1 | legendary high bit 1 | base high bit 1. The high bits were added later (six classes,
+    /// more legendaries and bases); old saves have them at 0, so they still read the same.
     /// </summary>
     public static class ItemCodec
     {
@@ -106,7 +108,8 @@ namespace Game.Core
                 shift += bits;
             }
 
-            Put(ItemCatalog.BaseIndex(item.baseId), 4);
+            int baseIndex = ItemCatalog.BaseIndex(item.baseId);
+            Put(baseIndex, 4);
             Put((int)item.rarity, 2);
             Put((int)item.classId, 2);
             Put((int)item.legendary, 3);
@@ -120,6 +123,9 @@ namespace Game.Core
             }
             for (int i = count; i < MaxAffixes; i++) Put(0, 12); // fixed layout: the loaner bit always sits at bit 42
             Put(item.loaner ? 1 : 0, 1);
+            Put((int)item.classId >> 2, 1);
+            Put((int)item.legendary >> 3, 1);
+            Put(baseIndex >> 4, 1);
             return v;
         }
 
@@ -135,26 +141,37 @@ namespace Game.Core
                 return value;
             }
 
-            int baseIndex = Take(4);
+            int baseLow = Take(4);
+            var rarity = (Rarity)Take(2);
+            int classLow = Take(2);
+            int legendaryLow = Take(3);
+            int itemLevel = Take(5);
+            var affixes = new List<(int Affix, int Roll)>();
+            int count = Take(2);
+            for (int i = 0; i < MaxAffixes; i++)
+            {
+                int affix = Take(5);
+                int roll = Take(7);
+                if (i < count) affixes.Add((affix, roll));
+            }
+            bool loaner = Take(1) != 0;
+            int classId = classLow | Take(1) << 2;
+            int legendary = legendaryLow | Take(1) << 3;
+            int baseIndex = baseLow | Take(1) << 4;
             if (baseIndex >= ItemCatalog.Bases.Length) return null;
+
             var item = new ItemInstance
             {
                 uid = uid ?? v.ToString("x16"),
                 baseId = ItemCatalog.Bases[baseIndex].Id,
-                rarity = (Rarity)Take(2),
-                classId = (ClassId)Take(2),
-                legendary = (LegendaryId)Take(3),
-                itemLevel = Take(5),
+                rarity = rarity,
+                classId = (ClassId)classId,
+                legendary = (LegendaryId)legendary,
+                itemLevel = itemLevel,
+                loaner = loaner,
             };
-            int count = Take(2);
-            for (int i = 0; i < count; i++)
-            {
-                int affix = Take(5);
-                int roll = Take(7);
+            foreach (var (affix, roll) in affixes)
                 if (affix < ItemCatalog.Affixes.Length) item.AddAffix(ItemCatalog.Affixes[affix], roll);
-            }
-            for (int i = count; i < MaxAffixes; i++) Take(12);
-            item.loaner = Take(1) != 0;
             return item;
         }
     }

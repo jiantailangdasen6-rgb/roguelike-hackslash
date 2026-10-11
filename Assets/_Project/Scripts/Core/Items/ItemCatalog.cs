@@ -111,8 +111,9 @@ namespace Game.Core
             new("dodgestrike", StatType.DodgeStrike, ModifierKind.Flat, 0.30f, 0.60f, 8),
         };
 
-        private static readonly string[] WornWeapon = { "古びた長剣", "古びた杖", "古びた弓" };
-        private static readonly string[] KeenWeapon = { "鋭い戦斧", "水晶の杖", "狩人の長弓" };
+        // By ClassId: warrior, mage, ranger, guardian, assassin, alchemist.
+        private static readonly string[] WornWeapon = { "古びた長剣", "古びた杖", "古びた弓", "古びた戦鎚", "古びた双剣", "使い古しの薬瓶" };
+        private static readonly string[] KeenWeapon = { "鋭い戦斧", "水晶の杖", "狩人の長弓", "聖なる戦鎚", "影の双剣", "賢者の薬瓶" };
 
         /// <summary>Two bases per slot. Order is part of the wire format.</summary>
         public static readonly ItemBaseDef[] Bases =

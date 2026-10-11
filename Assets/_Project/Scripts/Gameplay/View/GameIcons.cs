@@ -21,16 +21,20 @@ namespace Game.Gameplay
 
         public static Sprite Trial => Frame("icons_reward", RewardCatalog.TrialIconIndex);
 
+        /// <summary>Weapon pictures per base in IconArt.Items (one per class, six classes).</summary>
+        private const int WeaponLooks = 6;
+
         /// <summary>Gear: the two weapon bases have a picture per class (see IconArt.Items), the rest one each.</summary>
         public static Sprite Item(ItemInstance item)
         {
             if (item == null) return null;
             int b = ItemCatalog.BaseIndex(item.baseId);
+            int cls = Mathf.Clamp((int)item.classId, 0, WeaponLooks - 1);
             int frame = b switch
             {
-                0 => (int)item.classId,
-                1 => 3 + (int)item.classId,
-                _ => 6 + (b - 2),
+                0 => cls,
+                1 => WeaponLooks + cls,
+                _ => 2 * WeaponLooks + (b - 2),
             };
             return Frame("icons_item", frame);
         }

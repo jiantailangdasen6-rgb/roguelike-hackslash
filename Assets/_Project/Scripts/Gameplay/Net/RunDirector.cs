@@ -167,8 +167,10 @@ namespace Game.Gameplay
 
         private void Tick()
         {
+            // Downed players too: the owner keeps moving until the Downed flag reaches it (latency, dodge travel),
+            // so the body and its revive ring can settle away from where the sim knocked it down.
             foreach (var p in NetPlayer.All)
-                if (!p.Downed.Value) Sim.SetPlayerPosition(p.OwnerClientId, p.transform.position);
+                Sim.SetPlayerPosition(p.OwnerClientId, p.transform.position);
 
             Sim.Step(TickDt);
             _tick++;

@@ -167,6 +167,23 @@ namespace Game.Tests
             Assert.AreEqual(1, events.Count(x => x.Type == SimEventType.HazardFire && x.Int == (int)GimmickKind.HealingFont));
         }
 
+        [Test]
+        public void Revive_CountsAtTheRingEdge_ButNotFarAway()
+        {
+            var sim = new RunSimulation(28);
+            var a = sim.AddPlayer(0);
+            var b = sim.AddPlayer(1);
+            b.Downed = true;
+            b.Hp = 0f;
+            Vector2 edge = new Vector2(RunSimulation.ReviveRadius + 0.2f, 0f); // just outside the ring, as lag shows it
+            Run(sim, 0.5f, s => { Invulnerable(s); s.SetPlayerPosition(0, edge); s.SetPlayerPosition(1, Vector2.zero); });
+            Assert.Greater(b.ReviveProgress, 0.1f, "standing at the ring edge helps");
+
+            b.ReviveProgress = 0.5f;
+            Run(sim, 0.5f, s => { Invulnerable(s); s.SetPlayerPosition(0, new Vector2(4f, 0f)); s.SetPlayerPosition(1, Vector2.zero); });
+            Assert.Less(b.ReviveProgress, 0.5f, "progress decays when nobody is close");
+        }
+
         // ------------------------------------------------------------------ Monsters
 
         [Test]

@@ -20,6 +20,8 @@ namespace Game.Core
         public const float ExitHoldTime = 1.2f;
         public const float ReviveRadius = 1.8f;
         public const float ReviveTime = 3f;
+        /// <summary>Extra reach for the host-side revive check beyond the drawn ring (covers network lag).</summary>
+        public const float ReviveGrace = 0.4f;
         public const float HitInvulnerability = 0.35f;
         public const float SpawnWarningTime = 0.9f;
         public const float MinSpawnDistance = 5f;
@@ -192,9 +194,12 @@ namespace Game.Core
                     continue;
                 }
 
+                // The host sees remote players slightly behind (network interpolation), so the check is a bit wider
+                // than the drawn ring: standing anywhere inside it always counts.
                 float helpSpeed = 0f;
+                float helpRadius = ReviveRadius + ReviveGrace;
                 foreach (var other in Players)
-                    if (other != p && other.Alive && (other.Position - p.Position).sqrMagnitude <= ReviveRadius * ReviveRadius)
+                    if (other != p && other.Alive && (other.Position - p.Position).sqrMagnitude <= helpRadius * helpRadius)
                         helpSpeed = Mathf.Max(helpSpeed, other.Stats.Get(StatType.ReviveSpeed));
 
                 p.ReviveProgress = helpSpeed > 0f

@@ -14,10 +14,11 @@ namespace Game.Gameplay
     /// </summary>
     public sealed class CampView : MonoBehaviour
     {
-        public static bool PanelOpen => _instance != null && _instance._panels.Open != null;
+        /// <summary>A preparation screen is up (a station panel, or the gear vault): no walking.</summary>
+        public static bool PanelOpen => _instance != null && (_instance._panels.Open != null || VaultView.IsOpen);
 
         /// <summary>Esc closed a panel this frame: the pause menu must not open on the same press.</summary>
-        public static bool ConsumedEscape => _instance != null && _instance._escapeFrame == Time.frameCount;
+        public static bool ConsumedEscape => _instance != null && (_instance._escapeFrame == Time.frameCount || VaultView.ClosedFrame == Time.frameCount);
 
         private static CampView _instance;
 
@@ -44,6 +45,7 @@ namespace Game.Gameplay
         private Camera _camera;
         private int _escapeFrame = -1;
         private float _hintUntil;
+        private string _hintMessage;
         private SpriteRenderer _gateRing;
 
         private void Awake()
@@ -79,6 +81,13 @@ namespace Game.Gameplay
             _hint = UIKit.Label(_root, "", 24, TextAnchor.MiddleCenter, new Color(1f, 0.92f, 0.8f));
             _hint.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1200f, 50f), new Vector2(0f, 40f));
             _hintUntil = Time.time + 12f;
+            _hintMessage = "WASD で歩く　施設の前で F　準備ができたら全員で奥の門へ";
+            // What the last run brought home (gear kept in the vault).
+            if (BagView.LastBankSummary != null)
+            {
+                _hintMessage = BagView.LastBankSummary + "　―　右上の倉庫で付け替えられる";
+                BagView.LastBankSummary = null;
+            }
 
             _panels = new CampPanels(_root, ClosePanel);
             ProfileStore.Changed += OnProfileChanged;
@@ -111,9 +120,15 @@ namespace Game.Gameplay
 
         private void OpenPanel(CampStation station)
         {
-            if (PauseMenuView.IsOpen) return;
-            _panels.Show(station);
+            if (PauseMenuView.IsOpen || VaultView.IsOpen) return;
             SfxPlayer.Instance?.Play("click");
+            // The vault is the gear screen's own (VaultView); everything else is a camp panel.
+            if (station == CampStation.Vault)
+            {
+                VaultView.Open();
+                return;
+            }
+            _panels.Show(station);
         }
 
         private void ClosePanel()
@@ -149,7 +164,7 @@ namespace Game.Gameplay
                     ClosePanel();
                 }
             }
-            else if (here != null && !PauseMenuView.IsOpen && InteractPressed())
+            else if (here != null && !PauseMenuView.IsOpen && !VaultView.IsOpen && VaultView.ClosedFrame != Time.frameCount && InteractPressed())
             {
                 OpenPanel(here.Value.Id);
             }
@@ -161,7 +176,7 @@ namespace Game.Gameplay
 
             bool panel = _panels.Open != null;
             _hint.enabled = !panel && Time.time < _hintUntil;
-            _hint.text = "WASD で歩く　施設の前で F　準備ができたら全員で奥の門へ";
+            _hint.text = _hintMessage;
         }
 
         private static bool InteractPressed() =>

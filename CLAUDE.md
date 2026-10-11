@@ -6,7 +6,9 @@ Source: **public** repo `jiantailangdasen6-rgb/roguelike-hackslash` (remote `ori
 Anything committed is visible to everyone: never commit secrets, keys or personal data.
 **Start here when resuming: `Docs/DevLog.md`** (history, decisions, current status, known issues, next steps).
 Design docs: `Docs/01_GameDesign.md` (concept, classes, perks, meta), `Docs/02_TechnicalDesign.md` (architecture, sync, art pipeline).
-Communicate with the user in Japanese. The user directs from their phone; do implementation and verification end-to-end
+**Every line the user sees must be Japanese** — including one-line progress notes between tool calls, replies right
+after background-task notifications (they arrive in English; don't drift), and end-of-turn summaries. The user has had
+to point out English replies several times. The user directs from their phone; do implementation and verification end-to-end
 without asking them to work in the Unity Editor. **Graphics/feel are the user's top priority** — check screenshots after visual changes.
 **Always publish finished changes to the browser version** (BuildWeb → DeployWeb → CrossTest; no need to ask). Keep every
 automated run **silent** (-autoquit/-botmove/-mute mute the game; Edge gets --mute-audio) and default volumes low.

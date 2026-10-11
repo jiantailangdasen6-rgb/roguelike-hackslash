@@ -161,6 +161,8 @@ namespace Game.Core
                 player.Position = mate.Position + new Vector2(0.8f, -0.6f);
                 break;
             }
+            player.SetGearLevelCap(GearLevelCap);
+            if (!returning) GiveLoaners(player);
             Players.Add(player);
             OfferNext(player);
             return player;
@@ -200,6 +202,7 @@ namespace Game.Core
         public void Start(int firstRoom = 0)
         {
             StartRoom(Mathf.Clamp(firstRoom, 0, TotalRooms - 1));
+            foreach (var p in Players) GiveLoaners(p);
             foreach (var p in Players) if (p.HasStartPerk) p.StockedChoices.Enqueue(ChoiceKind.Start);
             HoldIfPicksLeft();
         }
@@ -570,6 +573,7 @@ namespace Game.Core
             foreach (var p in Players)
             {
                 p.SecondWindUsed = false;
+                p.SetGearLevelCap(GearLevelCap);
                 int blessing = p.PerkLevel(PerkId.Blessing);
                 if (blessing > 0 && p.Alive) p.Shield = Mathf.Max(p.Shield, BlessingShield * blessing);
             }

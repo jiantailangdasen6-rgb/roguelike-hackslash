@@ -125,6 +125,7 @@ namespace Game.Gameplay
 
             DifficultyLevel.Value = ChosenDifficulty();
             Sim = new RunSimulation((ulong)DateTime.UtcNow.Ticks, null, DifficultyLevel.Value);
+            Sim.DropChanceScale = CommandLine.GetFloat("-lootrate", 1f);
             int slot = 0;
             foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
             {
@@ -133,6 +134,7 @@ namespace Game.Gameplay
             }
 
             Sim.Start((int)CommandLine.GetFloat("-startroom", 0f));
+            foreach (var sp in Sim.Players) Sim.SyncGear(sp); // the gear everyone set out with (and any loaners)
             Started.Value = true;
             _startTime = Time.time;
             Debug.Log($"[RunDirector] Run started with {Sim.Players.Count} player(s)");
@@ -166,6 +168,7 @@ namespace Game.Gameplay
             var simPlayer = Sim.JoinMidRun(e.ClientId, loadout, out bool returning);
             int slot = returning && _slotByKey.TryGetValue(loadout.playerKey, out int old) && !SlotTaken(old) ? old : FreeSlot();
             SpawnPlayer(e.ClientId, simPlayer, loadout, slot);
+            Sim.SyncGear(simPlayer); // their bag, for a returning player
             Sim.Events.Add(new SimEvent(returning ? SimEventType.PlayerRejoined : SimEventType.PlayerJoined) { ClientId = e.ClientId, Pos = simPlayer.Position });
             Debug.Log($"[RunDirector] {(returning ? "Rejoined" : "Joined mid-run")}: client {e.ClientId} as P{slot + 1}");
         }
@@ -203,6 +206,19 @@ namespace Game.Gameplay
         {
             Sim?.ChoosePerk(rpcParams.Receive.SenderClientId, index);
         }
+
+        // Bag actions (the simulation only allows them between fights).
+        [Rpc(SendTo.Server)]
+        public void EquipRpc(int bagIndex, RpcParams rpcParams = default) => Sim?.EquipFromBag(rpcParams.Receive.SenderClientId, bagIndex);
+
+        [Rpc(SendTo.Server)]
+        public void UnequipRpc(int slot, RpcParams rpcParams = default) => Sim?.UnequipSlot(rpcParams.Receive.SenderClientId, (EquipSlot)slot);
+
+        [Rpc(SendTo.Server)]
+        public void GiveRpc(int bagIndex, ulong toClientId, RpcParams rpcParams = default) => Sim?.GiveItem(rpcParams.Receive.SenderClientId, bagIndex, toClientId);
+
+        [Rpc(SendTo.Server)]
+        public void SalvageRpc(int bagIndex, RpcParams rpcParams = default) => Sim?.SalvageItem(rpcParams.Receive.SenderClientId, bagIndex);
 
         // ------------------------------------------------------------------ Host: tick
 
@@ -274,6 +290,7 @@ namespace Game.Gameplay
                 SetIfChanged(p.DodgeCooldown, Mathf.Max(0f, Quantize(sp.DodgeCooldown)));
                 SetIfChanged(p.Valor, sp.ValorTimer > 0f);
                 SetIfChanged(p.Picks, sp.PicksLeft);
+                SetIfChanged(p.Legendary, sp.AnyLegendaryEquipped);
             }
 
             var room = Sim.Room;

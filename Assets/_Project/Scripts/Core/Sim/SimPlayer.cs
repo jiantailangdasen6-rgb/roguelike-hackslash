@@ -139,6 +139,18 @@ namespace Game.Core
                 HealOnKill += trinket.HealOnKill;
             }
 
+            // Gear brought from home (worn set). A weapon takes the shape of whatever class carries it.
+            for (int s = 0; s < SlotCount; s++) Equipped[s] = null;
+            if (loadout.gear != null)
+                foreach (var hex in loadout.gear)
+                {
+                    var item = GearVault.Unpack(hex);
+                    if (item == null || item.loaner || Equipped[(int)item.Slot] != null) continue;
+                    if (item.Slot == EquipSlot.Weapon) item.classId = Class.Id;
+                    Equipped[(int)item.Slot] = item;
+                }
+            for (int s = 0; s < SlotCount; s++) ApplyGear(s);
+
             SetLevel(Level);
             Hp = MaxHp;
         }
@@ -202,6 +214,17 @@ namespace Game.Core
             Stats.AddModifier(new StatModifier(StatType.DamageTaken, ModifierKind.PercentAdd, -ClassCatalog.ValorDamageReduction), ValorSource);
         }
 
+        private readonly object _drumSource = new();
+        public float DrumTimer;
+
+        /// <summary>Legendary "鬨の": allies who hear the war cry attack faster for a while.</summary>
+        public void GrantDrum(float duration)
+        {
+            DrumTimer = Mathf.Max(DrumTimer, duration);
+            Stats.RemoveModifiersFrom(_drumSource);
+            Stats.AddModifier(new StatModifier(StatType.AttackSpeed, ModifierKind.PercentAdd, 0.2f), _drumSource);
+        }
+
         public void GrantMercy(float duration, float bonus)
         {
             MercyTimer = Mathf.Max(MercyTimer, duration);
@@ -255,10 +278,19 @@ namespace Game.Core
             int slot = (int)item.Slot;
             var old = Equipped[slot];
             Bag.RemoveAt(bagIndex);
-            if (old != null) Bag.Insert(bagIndex, old);
+            if (old != null && !old.loaner) Bag.Insert(bagIndex, old); // a loaner is simply handed back
             Equipped[slot] = item;
             ApplyGear(slot);
             return true;
+        }
+
+        /// <summary>Puts an item straight into its (empty) slot - loaners at the start of a run.</summary>
+        public void Wear(ItemInstance item)
+        {
+            int slot = (int)item.Slot;
+            if (Equipped[slot] != null) return;
+            Equipped[slot] = item;
+            ApplyGear(slot);
         }
 
         public bool Unequip(EquipSlot slot)
@@ -271,13 +303,23 @@ namespace Game.Core
             return true;
         }
 
+        /// <summary>Gear above this item level works at this level (set per room; see RunSimulation.GearLevelCap).</summary>
+        public int GearLevelCap { get; private set; } = int.MaxValue;
+
+        public void SetGearLevelCap(int cap)
+        {
+            if (cap == GearLevelCap) return;
+            GearLevelCap = cap;
+            for (int s = 0; s < SlotCount; s++) ApplyGear(s);
+        }
+
         private void ApplyGear(int slot)
         {
             float before = MaxHp;
             Stats.RemoveModifiersFrom(_gearSources[slot]);
             var item = Equipped[slot];
             if (item != null)
-                foreach (var mod in item.GetModifiers()) Stats.AddModifier(mod, _gearSources[slot]);
+                foreach (var mod in item.GetModifiers(GearLevelCap)) Stats.AddModifier(mod, _gearSources[slot]);
             // More max HP heals by the difference (like levelling); less never kills.
             if (MaxHp > before && !Downed) Hp += MaxHp - before;
             Hp = Mathf.Clamp(Hp, Downed ? 0f : 1f, MaxHp);
@@ -286,6 +328,7 @@ namespace Game.Core
         public void TickBuffs(float dt)
         {
             if (DodgeStrikeTimer > 0f) DodgeStrikeTimer -= dt;
+            if (DrumTimer > 0f && (DrumTimer -= dt) <= 0f) Stats.RemoveModifiersFrom(_drumSource);
             if (ValorTimer > 0f && (ValorTimer -= dt) <= 0f) Stats.RemoveModifiersFrom(ValorSource);
             if (MercyTimer > 0f && (MercyTimer -= dt) <= 0f) Stats.RemoveModifiersFrom(MercySource);
             if (BloodlustTimer > 0f && (BloodlustTimer -= dt) <= 0f)

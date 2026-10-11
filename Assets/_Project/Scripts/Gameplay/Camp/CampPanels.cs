@@ -72,7 +72,6 @@ namespace Game.Gameplay
                 case CampStation.Master: BuildMastery(); break;
                 case CampStation.Charms: BuildCharms(); break;
                 case CampStation.Tablet: BuildDifficulty(); break;
-                case CampStation.Vault: BuildVault(); break;
                 case CampStation.Board: BuildQuests(); break;
             }
         }
@@ -146,13 +145,6 @@ namespace Game.Gameplay
             }
         }
 
-        /// <summary>Stand-in until the gear vault screen (VaultView) is merged in.</summary>
-        private void BuildVault()
-        {
-            _title.text = "倉庫　<size=28><color=#bfb6aa>持ち帰った装備</color></size>";
-            var note = UIKit.Label(_body, "装備の倉庫は準備中です", 30, TextAnchor.MiddleCenter, UIKit.MutedText);
-            note.rectTransform.Stretch();
-        }
 
         private void Save(string message = null)
         {

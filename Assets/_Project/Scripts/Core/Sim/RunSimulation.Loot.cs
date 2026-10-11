@@ -24,11 +24,40 @@ namespace Game.Core
         public const float LootPickupRadius = 1.1f;
 
         public readonly List<LootDrop> Loot = new();
+        /// <summary>Multiplies drop chances (automated screenshots: -lootrate).</summary>
+        public float DropChanceScale = 1f;
         private readonly GameRandom _lootRng;
         private int _nextLootId = 1;
 
         /// <summary>Slot numbers in GearSlot events: equipped 0..3, then the bag.</summary>
         public const int BagSlotOffset = SimPlayer.SlotCount;
+
+        /// <summary>Gear brought from home works at most this many levels above the current room.</summary>
+        public const int GearLevelGrace = 2;
+
+        /// <summary>Item level gear works at in this room (gear found here is never above it).</summary>
+        public int GearLevelCap => Room.Index + 1 + GearLevelGrace;
+
+        /// <summary>
+        /// Empty slots get a plain piece on loan for this run (common or fine, at the room's level), so a friend with
+        /// an empty stash isn't left far behind. Loaners are handed back when replaced and never go home.
+        /// </summary>
+        private void GiveLoaners(SimPlayer p)
+        {
+            for (int s = 0; s < SimPlayer.SlotCount; s++)
+            {
+                if (p.Equipped[s] != null) continue;
+                var item = ItemGenerator.Generate(_lootRng.NextULong() | 1ul, Room.Index + 1, 0f, p.ClassId, Rarity.Common, (EquipSlot)s);
+                if (item.rarity > Rarity.Magic)
+                {
+                    item.rarity = Rarity.Magic;
+                    item.legendary = LegendaryId.None;
+                    if (item.affixes.Count > 1) item.affixes.RemoveRange(1, item.affixes.Count - 1);
+                }
+                item.loaner = true;
+                p.Wear(item);
+            }
+        }
 
         private ItemInstance RollItem(SimPlayer owner, float boost, Rarity minRarity = Rarity.Common) =>
             ItemGenerator.Generate(_lootRng.NextULong() | 1ul, Room.Index + 1, boost, owner.ClassId, minRarity);
@@ -36,7 +65,7 @@ namespace Game.Core
         /// <summary>A monster died: each player rolls their own drop.</summary>
         private void RollLoot(in Enemy e)
         {
-            float chance = e.Def.Boss ? 1f : e.Elite ? EliteDropChance : NormalDropChance;
+            float chance = Mathf.Min(1f, (e.Def.Boss ? 1f : e.Elite ? EliteDropChance : NormalDropChance) * DropChanceScale);
             float boost = e.Def.Boss ? 3f : e.Elite ? 1f : 0f;
             for (int i = 0; i < Players.Count; i++)
             {
@@ -137,6 +166,7 @@ namespace Game.Core
             if (from == null || to == null || from == to || !OffersOpen) return false;
             if (bagIndex < 0 || bagIndex >= from.Bag.Count || to.BagFull) return false;
             var item = from.Bag[bagIndex];
+            if (item.loaner) return false; // lent to this player only
             from.Bag.RemoveAt(bagIndex);
             if (item.Slot == EquipSlot.Weapon) item.classId = to.ClassId;
             to.Bag.Add(item);
@@ -161,8 +191,9 @@ namespace Game.Core
             if (p == null || !OffersOpen || bagIndex < 0 || bagIndex >= p.Bag.Count) return false;
             var item = p.Bag[bagIndex];
             p.Bag.RemoveAt(bagIndex);
-            BonusShards += SalvageValue(item.rarity);
-            Events.Add(new SimEvent(SimEventType.ItemSalvaged) { ClientId = clientId, Value = SalvageValue(item.rarity) });
+            int shards = item.loaner ? 0 : SalvageValue(item.rarity);
+            BonusShards += shards;
+            Events.Add(new SimEvent(SimEventType.ItemSalvaged) { ClientId = clientId, Value = shards });
             SyncGear(p);
             return true;
         }

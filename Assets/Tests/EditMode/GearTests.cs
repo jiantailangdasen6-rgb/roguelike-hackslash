@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Game.Core;
 using NUnit.Framework;
@@ -180,6 +181,148 @@ namespace Game.Tests
                 Assert.AreEqual(1, p.Bag.Count);
                 Assert.GreaterOrEqual(p.Bag[0].rarity, Rarity.Rare);
             }
+        }
+
+        // ------------------------------------------------------------------ Keeping gear between runs
+
+        [Test]
+        public void Vault_BanksTheRun_LoanersStayBehind_OverflowBecomesShards()
+        {
+            var data = GearVault.Normalize(new GearVaultData());
+            var worn = new ItemInstance[SimPlayer.SlotCount];
+            worn[(int)EquipSlot.Ring] = ItemFor(EquipSlot.Ring, 1);
+            var loaner = ItemFor(EquipSlot.Armor, 1);
+            loaner.loaner = true;
+            worn[(int)EquipSlot.Armor] = loaner;
+            var bag = new List<ItemInstance> { ItemFor(EquipSlot.Weapon, 1), ItemFor(EquipSlot.Amulet, 1) };
+
+            var result = GearVault.BankRun(data, worn, bag);
+            Assert.AreEqual(3, result.Kept);
+            Assert.IsNotNull(GearVault.Equipped(data, EquipSlot.Ring));
+            Assert.IsNull(GearVault.Equipped(data, EquipSlot.Armor), "the loaner was handed back");
+            Assert.AreEqual(2, data.items.Count);
+
+            data.capacity = GearVault.BaseCapacity;
+            var many = Enumerable.Range(0, 35).Select(i => ItemFor(EquipSlot.Ring, (ulong)(100 + i * 50))).ToList();
+            var overflow = GearVault.BankRun(data, worn, many);
+            Assert.AreEqual(GearVault.BaseCapacity, data.items.Count);
+            Assert.AreEqual(7, overflow.OverflowCount);
+            Assert.Greater(overflow.OverflowShards, 0);
+        }
+
+        [Test]
+        public void Vault_EquipSwapsWithTheStash_AndSurvivesASaveRoundTrip()
+        {
+            var data = GearVault.Normalize(new GearVaultData());
+            data.items.Add(GearVault.Pack(ItemFor(EquipSlot.Armor, 1)));
+            data.items.Add(GearVault.Pack(ItemFor(EquipSlot.Armor, 900)));
+            Assert.IsTrue(GearVault.Equip(data, 0));
+            Assert.IsTrue(GearVault.Equip(data, 0)); // the second armour in, the first back to the stash
+            Assert.AreEqual(1, data.items.Count);
+            Assert.AreEqual(1, GearVault.LoadoutGear(data).Count);
+
+            var profile = new ProfileData { gear = data };
+            var back = ProfileData.FromJson(profile.ToJson());
+            back.gear = GearVault.Normalize(back.gear);
+            Assert.AreEqual(data.equipped[(int)EquipSlot.Armor], back.gear.equipped[(int)EquipSlot.Armor]);
+            Assert.AreEqual(1, back.ToLoadout().gear.Count);
+        }
+
+        [Test]
+        public void BroughtGear_IsWornAtTheStart_HeldBackEarly_EmptySlotsGetLoaners()
+        {
+            var strong = ItemFor(EquipSlot.Ring, 1);
+            strong.itemLevel = 12;
+            strong.affixes.Clear();
+            var sim = new RunSimulation(87);
+            var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Mage, gear = new List<string> { GearVault.Pack(strong) } });
+            sim.Start();
+
+            Assert.AreEqual(12, p.Equipped[(int)EquipSlot.Ring].itemLevel);
+            Assert.IsFalse(p.Equipped[(int)EquipSlot.Ring].loaner);
+            for (int s = 0; s < SimPlayer.SlotCount; s++)
+                if (s != (int)EquipSlot.Ring) Assert.IsTrue(p.Equipped[s].loaner, $"slot {s} gets a loaner");
+            Assert.AreEqual(1 + RunSimulation.GearLevelGrace, p.GearLevelCap);
+
+            float early = strong.GetModifiers(p.GearLevelCap).First().Value;
+            float full = strong.GetModifiers().First().Value;
+            Assert.Less(early, full, "held back in the first room");
+
+            // Replacing a loaner hands it back instead of filling the bag.
+            p.Bag.Add(ItemFor(EquipSlot.Weapon, 1, ClassId.Mage));
+            sim.Room.Cleared = true;
+            Assert.IsTrue(sim.EquipFromBag(0, 0));
+            Assert.AreEqual(0, p.Bag.Count);
+        }
+
+        private static void WearLegendary(SimPlayer p, LegendaryId id)
+        {
+            var item = ItemFor(EquipSlot.Ring, 1, p.ClassId);
+            item.rarity = Rarity.Legendary;
+            item.legendary = id;
+            p.Bag.Add(item);
+            p.Equip(p.Bag.Count - 1);
+            Assert.IsTrue(p.HasLegendary(id));
+            Assert.IsTrue(p.AnyLegendaryEquipped);
+        }
+
+        private static void PressSkill(RunSimulation sim, SimPlayer p, bool second)
+        {
+            var input = p.Input;
+            input.Aim = new Vector2(5f, 0f);
+            if (second) input.Skill2Count++;
+            else input.Skill1Count++;
+            sim.SetPlayerInput(p.ClientId, input);
+            sim.Step(Dt);
+        }
+
+        [Test]
+        public void ShadowQuiver_FiresAFanOfThree()
+        {
+            int Arrows(bool legendary)
+            {
+                var sim = new RunSimulation(84);
+                var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Ranger });
+                sim.Room.Cleared = true; // no waves
+                if (legendary) WearLegendary(p, LegendaryId.ShadowQuiver);
+                PressSkill(sim, p, false);
+                return sim.Projectiles.Count(pr => pr.Kind == ProjectileKind.PierceArrow);
+            }
+            Assert.AreEqual(1, Arrows(false));
+            Assert.AreEqual(3, Arrows(true));
+        }
+
+        [Test]
+        public void FrostCrown_FreezesAroundTheCaster()
+        {
+            var sim = new RunSimulation(85);
+            var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Mage });
+            sim.Room.Cleared = true;
+            WearLegendary(p, LegendaryId.FrostCrown);
+            sim.Enemies.Spawn(EnemyType.Skeleton, p.Position + new Vector2(0.8f, 0f), 50f, 1f, false);
+            PressSkill(sim, p, false);
+            for (int i = 0; i < 40; i++) sim.Step(Dt);
+            Assert.Greater(sim.Enemies[0].Frozen, 0f, "the enemy next to the mage is frozen though the aim was far away");
+        }
+
+        [Test]
+        public void HuntGodMark_MarksASecondMonster()
+        {
+            int Marked(bool legendary)
+            {
+                var sim = new RunSimulation(86);
+                var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Ranger });
+                sim.Room.Cleared = true;
+                if (legendary) WearLegendary(p, LegendaryId.HuntGodMark);
+                sim.Enemies.Spawn(EnemyType.Skeleton, p.Position + new Vector2(5f, 0f), 50f, 1f, false); // under the aimed circle
+                sim.Enemies.Spawn(EnemyType.Skeleton, p.Position + new Vector2(5f, 5f), 50f, 1f, false); // outside it, close by
+                PressSkill(sim, p, true);
+                int marked = 0;
+                for (int i = 0; i < sim.Enemies.Count; i++) if (sim.Enemies[i].Marked > 0f) marked++;
+                return marked;
+            }
+            Assert.AreEqual(1, Marked(false));
+            Assert.AreEqual(2, Marked(true));
         }
 
         [Test]

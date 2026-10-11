@@ -31,6 +31,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<bool> Valor = new();
         /// <summary>Perk picks earned and not made yet (banked during fights, chosen between rooms).</summary>
         public readonly NetworkVariable<int> Picks = new();
+        /// <summary>Wearing a legendary piece: the character glows.</summary>
+        public readonly NetworkVariable<bool> Legendary = new();
         public readonly NetworkVariable<bool> FacingLeft = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [SerializeField] private PixelAnimator animator;
@@ -251,6 +253,14 @@ namespace Game.Gameplay
             r.color = downed ? new Color(0.7f, 0.7f, 0.75f, 0.85f) : Color.white;
             glow.color = Valor.Value ? new Color(1f, 0.8f, 0.4f) : new Color(1f, 0.75f, 0.55f);
             glow.intensity = Valor.Value ? 1.3f : 0.9f;
+            if (Legendary.Value && !downed)
+            {
+                // Legendary gear: a slow orange pulse and a faint warm rim on the sprite.
+                float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 3f);
+                glow.color = Color.Lerp(glow.color, new Color(1f, 0.55f, 0.15f), 0.75f);
+                glow.intensity += 0.5f + 0.5f * pulse;
+                r.color = Color.Lerp(Color.white, new Color(1f, 0.88f, 0.7f), 0.35f * pulse);
+            }
             shadow.enabled = !downed;
             UpdateDownedVisuals(downed);
         }

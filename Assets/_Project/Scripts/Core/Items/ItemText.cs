@@ -83,11 +83,15 @@ namespace Game.Core
 
         /// <summary>"[希少] 鎖帷子" in the rarity's colour (uGUI rich text).</summary>
         public static string ColoredTitle(ItemInstance item) =>
-            $"<color={RarityColor(item.rarity)}>[{RarityName(item.rarity)}] {Name(item)}</color>";
+            $"<color={RarityColor(item.rarity)}>[{RarityName(item.rarity)}] {Name(item)}</color>" + (item.loaner ? "<color=#bfb6aa>（貸し出し）</color>" : "");
 
-        public static IEnumerable<string> PropertyLines(ItemInstance item)
+        /// <param name="levelCap">Show values as they work in the current room (gear from home is held back early on).</param>
+        public static IEnumerable<string> PropertyLines(ItemInstance item, int levelCap = int.MaxValue)
         {
-            foreach (var mod in item.GetModifiers()) yield return Describe(mod);
+            foreach (var mod in item.GetModifiers(levelCap)) yield return Describe(mod);
+            if (item.itemLevel > levelCap)
+                yield return $"<color=#bfb6aa>（この部屋ではLv{levelCap}相当の力。深く進むと本来の力に）</color>";
+            if (item.loaner) yield return "<color=#bfb6aa>空き枠の貸し出し品：持ち帰れない・渡せない</color>";
             var legendary = ItemCatalog.GetLegendary(item.legendary);
             if (legendary != null) yield return $"<color={RarityColor(Rarity.Legendary)}>◆ {legendary.Text}</color>";
         }

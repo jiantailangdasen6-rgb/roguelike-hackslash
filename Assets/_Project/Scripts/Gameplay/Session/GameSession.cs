@@ -204,6 +204,7 @@ namespace Game.Gameplay
         {
             var nm = NetworkManager.Singleton;
             if (nm == null || !nm.IsServer || !InGame) return;
+            BagView.BankNow();
             EnterCamp();
         }
 
@@ -215,6 +216,7 @@ namespace Game.Gameplay
 
         public static void ReturnToLobby(string message = null)
         {
+            BagView.BankNow(); // gear found this run goes home first, however the run ends
             if (JoinCode != null) LastJoinCode = JoinCode;
             InGame = false;
             JoinCode = null;

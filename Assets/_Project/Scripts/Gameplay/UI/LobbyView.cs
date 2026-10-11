@@ -38,6 +38,11 @@ namespace Game.Gameplay
                 if (GameSession.LobbyMessage != null && !GameSession.Refused) _status.text += "　―　「コードで参加」で戻れます";
             }
             GameSession.LobbyMessage = null;
+            if (BagView.LastBankSummary != null)
+            {
+                _status.text = string.IsNullOrEmpty(_status.text) ? BagView.LastBankSummary : _status.text + "　―　" + BagView.LastBankSummary;
+                BagView.LastBankSummary = null;
+            }
         }
 
         private System.Collections.IEnumerator Start()

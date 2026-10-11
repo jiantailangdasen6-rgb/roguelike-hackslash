@@ -182,14 +182,22 @@ namespace Game.Core
                     _delayedAreas.Add(new DelayedArea
                     {
                         Kind = AreaKind.FrostNova, Owner = p, Radius = radius, Timer = ClassCatalog.FrostNovaDelay,
-                        Position = AimPoint(p, ClassCatalog.FrostNovaRange),
+                        Position = p.HasLegendary(LegendaryId.FrostCrown) ? p.Position : AimPoint(p, ClassCatalog.FrostNovaRange),
                     });
                     break;
                 }
                 case ClassId.Ranger:
-                    FireProjectile(p, ProjectileKind.PierceArrow, p.Position + dir * 0.5f, dir * ClassCatalog.PierceArrowSpeed,
-                        0.6f, 0.45f, ClassCatalog.PierceArrowDamage * might, 99, HitFlags.Heavy);
+                {
+                    // Legendary "影の": a fan of three.
+                    int arrows = p.HasLegendary(LegendaryId.ShadowQuiver) ? 3 : 1;
+                    for (int k = 0; k < arrows; k++)
+                    {
+                        Vector2 d = Rotate(dir, (k - (arrows - 1) * 0.5f) * 12f);
+                        FireProjectile(p, ProjectileKind.PierceArrow, p.Position + d * 0.5f, d * ClassCatalog.PierceArrowSpeed,
+                            0.6f, 0.45f, ClassCatalog.PierceArrowDamage * might, 99, HitFlags.Heavy);
+                    }
                     break;
+                }
             }
 
             p.Skill1Cooldown = cd;
@@ -207,7 +215,9 @@ namespace Game.Core
             {
                 case ClassId.Warrior:
                 {
-                    float radius = ClassCatalog.WarCryRadius * area;
+                    bool drum = p.HasLegendary(LegendaryId.WarDrum);
+                    float radius = ClassCatalog.WarCryRadius * area * (drum ? 2f : 1f);
+                    float allyReach = ClassCatalog.WarCryAllyRadius * (drum ? 2f : 1f);
                     Enemies.QueryCircle(p.Position, radius, _hits);
                     foreach (int i in _hits.ToArray())
                     {
@@ -218,8 +228,9 @@ namespace Game.Core
                     int bulwark = p.PerkLevel(PerkId.Bulwark);
                     foreach (var ally in Players)
                     {
-                        if (!ally.Alive || (ally.Position - p.Position).sqrMagnitude > ClassCatalog.WarCryAllyRadius * ClassCatalog.WarCryAllyRadius) continue;
+                        if (!ally.Alive || (ally.Position - p.Position).sqrMagnitude > allyReach * allyReach) continue;
                         ally.GrantValor(ClassCatalog.ValorDuration);
+                        if (drum) ally.GrantDrum(ClassCatalog.ValorDuration);
                         if (bulwark > 0) ally.Shield = Mathf.Max(ally.Shield, 25f * bulwark);
                     }
                     Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.WarCry, Pos = p.Position, Value = radius });
@@ -258,6 +269,25 @@ namespace Game.Core
                         ApplyStatus(i, StatusKind.Marked, ClassCatalog.MarkDuration * (1f + p.Stats.Get(StatType.MarkDuration)));
                     }
                     Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Mark, Pos = at, Value = r });
+                    // Legendary "狩神の": the nearest unmarked monster outside the circle is marked too.
+                    if (p.HasLegendary(LegendaryId.HuntGodMark))
+                    {
+                        int best = -1;
+                        float bestDistance = 8f * 8f;
+                        for (int i = 0; i < Enemies.Count; i++)
+                        {
+                            ref var e = ref Enemies[i];
+                            if (e.Dead || e.Def.Prop || e.Marked > 0f) continue;
+                            float d = (e.Position - at).sqrMagnitude;
+                            if (d < bestDistance) { bestDistance = d; best = i; }
+                        }
+                        if (best >= 0)
+                        {
+                            Enemies[best].MarkBonus = ClassCatalog.MarkDamageBonus + 0.15f * deep;
+                            ApplyStatus(best, StatusKind.Marked, ClassCatalog.MarkDuration * (1f + p.Stats.Get(StatType.MarkDuration)));
+                            Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Mark, Pos = Enemies[best].Position, Value = 1.2f });
+                        }
+                    }
                     break;
                 }
             }
@@ -269,7 +299,11 @@ namespace Game.Core
         private void StepDashSlash(SimPlayer p, float dt)
         {
             p.DashSlashTimer -= dt;
-            if (p.DashSlashTimer <= 0f) Earthshake(p);
+            if (p.DashSlashTimer <= 0f)
+            {
+                Earthshake(p);
+                if (p.HasLegendary(LegendaryId.WhirlwindBlade)) WhirlwindFinish(p);
+            }
             float damage = ClassCatalog.DashSlashDamage * p.Stats.Get(StatType.Might) * (1f + 0.2f * p.PerkLevel(PerkId.Rush));
             // Sweep from the start point to where the player is now (they travel on their own client).
             Vector2 from = p.DashSlashFrom, to = p.Position;
@@ -286,6 +320,20 @@ namespace Game.Core
                 p.DashSlashHits.Add(e.Id);
                 DamageEnemy(i, damage, p, HitFlags.Heavy, p.DashSlashDir, 6f);
             }
+        }
+
+        /// <summary>Legendary "旋風の": the dash-slash ends in a full spin.</summary>
+        private void WhirlwindFinish(SimPlayer p)
+        {
+            float range = p.Class.BasicRange * 1.4f * p.Stats.Get(StatType.Area);
+            float damage = ClassCatalog.DashSlashDamage * 0.8f * p.Stats.Get(StatType.Might);
+            Enemies.QueryCircle(p.Position, range, _hits);
+            foreach (int i in _hits.ToArray())
+            {
+                if (Enemies[i].Dead) continue;
+                DamageEnemy(i, damage, p, HitFlags.Heavy, (Enemies[i].Position - p.Position).normalized, 6f);
+            }
+            Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Spin, Pos = p.Position, Vec = p.DashSlashDir, Value = range });
         }
 
         /// <summary>"Earthshaker": the dash-slash ends with a stomp that stuns everything around.</summary>
@@ -323,6 +371,7 @@ namespace Game.Core
                 if (area.Kind == AreaKind.FrostNova)
                 {
                     var p = area.Owner;
+                    if (p.HasLegendary(LegendaryId.FrostCrown)) area.Position = p.Position; // "霜の王の": the field moves with its caster
                     float duration = (ClassCatalog.FreezeDuration + p.PerkLevel(PerkId.Permafrost)) * (1f + p.Stats.Get(StatType.FreezeDuration));
                     Enemies.QueryCircle(area.Position, area.Radius, _hits);
                     foreach (int i in _hits.ToArray())
@@ -437,7 +486,7 @@ namespace Game.Core
                 ApplyStatus(index, StatusKind.Poisoned, 4f);
             }
 
-            int chain = owner.PerkLevel(PerkId.ChainBolt);
+            int chain = owner.PerkLevel(PerkId.ChainBolt) + (owner.HasLegendary(LegendaryId.ThunderStaff) ? 2 : 0);
             if (proj.Kind == ProjectileKind.Bolt && chain > 0)
             {
                 int lastId = e.Id;

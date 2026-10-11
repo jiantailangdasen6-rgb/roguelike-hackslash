@@ -82,3 +82,6 @@ Player flags: `-startroom <n>`, `-difficulty easy|normal|hard|nightmare`, `-down
 - Netcode registers message types after the first scene's Awake — never start a session from Awake (LobbyView waits a frame).
 - The builder reloads assets by path before using them; NGO's prefab processing can invalidate earlier references.
 - Named messages over ~1.2 KB need chunking (Unreliable/ReliableSequenced are not fragmented).
+- GitHub Pages takes up to a minute to serve a new deploy: run CrossTest only once the published `Build/*` sizes match
+  `Builds/WebGL/Build` (an older page has another build stamp and is refused: "browser never joined").
+- From the Bash tool, run scripts as `powershell -ExecutionPolicy Bypass -File Tools/xxx.ps1` (the default policy blocks them).

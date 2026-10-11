@@ -2,6 +2,7 @@
 
 Top-down 2D **manual-action** co-op roguelite (up to 3 players online), dark-fantasy mood in the style of Death Must Die.
 Unity 6000.6.2f1 (URP 2D), C#, Netcode for GameObjects 2.13.3. PC first, mobile later.
+Source: private repo `jiantailangdasen6-rgb/roguelike-hackslash` (remote `origin`, push `main` after committing).
 **Start here when resuming: `Docs/DevLog.md`** (history, decisions, current status, known issues, next steps).
 Design docs: `Docs/01_GameDesign.md` (concept, classes, perks, meta), `Docs/02_TechnicalDesign.md` (architecture, sync, art pipeline).
 Communicate with the user in Japanese. The user directs from their phone; do implementation and verification end-to-end

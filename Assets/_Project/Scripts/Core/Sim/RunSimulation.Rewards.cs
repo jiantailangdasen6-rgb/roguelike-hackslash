@@ -16,7 +16,6 @@ namespace Game.Core
         public const float VigorPerStack = 0.1f;
         public const float BlessingShield = 20f;
 
-        private readonly Queue<ChoiceKind> _rewardRounds = new();
         private readonly GameRandom _doorRng;
         private bool _enterTrial;
 
@@ -107,7 +106,7 @@ namespace Game.Core
             {
                 case RoomReward.Boon:
                 case RoomReward.Upgrade:
-                    for (int i = 0; i < times; i++) _rewardRounds.Enqueue(reward == RoomReward.Boon ? ChoiceKind.Boon : ChoiceKind.Upgrade);
+                    StockForAll(reward == RoomReward.Boon ? ChoiceKind.Boon : ChoiceKind.Upgrade, times);
                     amount = times;
                     break;
                 case RoomReward.Vigor:
@@ -129,7 +128,6 @@ namespace Game.Core
                     return;
             }
             Events.Add(new SimEvent(SimEventType.RewardGranted) { Int = (int)reward, Value = amount, Id = times > 1 ? 1 : 0 });
-            StartNextChoiceRound();
         }
     }
 }

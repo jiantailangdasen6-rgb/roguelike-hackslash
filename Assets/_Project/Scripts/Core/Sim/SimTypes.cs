@@ -213,7 +213,7 @@ namespace Game.Core
         RoomCleared,     // Int = room index, Seed = packed doors
         RunEnded,        // Int = 1 victory / 0 defeat
         BossSpawned,     // Id, Pos
-        PerkOffer,       // ClientId, Seed = packed PerkOptions, Int = ChoiceKind
+        PerkOffer,       // ClientId, Seed = packed PerkOptions, Int = ChoiceKind, Value = picks still waiting after this one
         WaveStarted,     // Int = wave number (1-based), Value = wave count
         HazardWarn,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds until it fires
         HazardFire,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds it stays active
@@ -221,6 +221,7 @@ namespace Game.Core
         PlayerJoined,    // ClientId, Pos (joined a run in progress)
         PlayerRejoined,  // ClientId, Pos (came back after dropping out)
         PlayerLeft,      // ClientId, Pos (dropped out; their character is kept for a while)
+        TeamLevelUp,     // Int = new team level (the pick is banked until the room is cleared)
     }
 
     /// <summary>Something that happened during a tick; the network layer sends these to clients for presentation.</summary>

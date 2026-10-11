@@ -55,7 +55,7 @@ namespace Game.Gameplay
             Set(SimEventType.RoomCleared, F.Int | F.Seed);
             Set(SimEventType.RunEnded, F.Int);
             Set(SimEventType.BossSpawned, F.Id | F.Pos | F.Int);
-            Set(SimEventType.PerkOffer, F.Client | F.Seed | F.Int);
+            Set(SimEventType.PerkOffer, F.Client | F.Seed | F.Int | F.Value);
             Set(SimEventType.WaveStarted, F.Int | F.Value);
             Set(SimEventType.HazardWarn, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
             Set(SimEventType.HazardFire, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
@@ -63,6 +63,7 @@ namespace Game.Gameplay
             Set(SimEventType.PlayerJoined, F.Client | F.Pos);
             Set(SimEventType.PlayerRejoined, F.Client | F.Pos);
             Set(SimEventType.PlayerLeft, F.Client | F.Pos);
+            Set(SimEventType.TeamLevelUp, F.Int);
             return layout;
         }
 

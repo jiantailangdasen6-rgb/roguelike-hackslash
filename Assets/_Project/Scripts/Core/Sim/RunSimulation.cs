@@ -48,8 +48,6 @@ namespace Game.Core
         private int _nextSoulId = 1;
         private float _spawnTimer;
         private float _waveTimer;
-        private float _choiceTimer;
-        private ChoiceKind _choiceKind;
         private int _lastWaveSize;
 
         public readonly Difficulty Difficulty;
@@ -61,8 +59,6 @@ namespace Game.Core
         public float Elapsed { get; private set; }
         public int TeamLevel { get; private set; } = 1;
         public float TeamXp { get; private set; }
-        public int PendingLevelUps { get; private set; }
-        public bool AwaitingChoices { get; private set; }
         public int Kills { get; private set; }
         public int BossesKilled { get; private set; }
         public int RoomsCleared { get; private set; }
@@ -115,7 +111,6 @@ namespace Game.Core
         public void RemovePlayer(ulong clientId)
         {
             Players.RemoveAll(p => p.ClientId == clientId);
-            if (AwaitingChoices) FinishChoicesIfDone();
         }
 
         private readonly Dictionary<string, SimPlayer> _departed = new();
@@ -125,6 +120,7 @@ namespace Game.Core
         {
             var p = GetPlayer(clientId);
             if (p == null) return;
+            if (p.PendingOffer != null) p.StockedChoices.Enqueue(p.OfferKind); // shown again when they return
             p.PendingOffer = null;
             p.Input = default;
             if (!string.IsNullOrEmpty(playerKey)) _departed[playerKey] = p;
@@ -154,11 +150,7 @@ namespace Game.Core
             {
                 player = new SimPlayer(clientId, StartPosition(Players.Count), loadout);
                 player.SetLevel(TeamLevel);
-                for (int level = 1; level < TeamLevel; level++)
-                {
-                    var offer = PerkRoller.Roll(_perkRng, player);
-                    if (offer.Length > 0) PerkRoller.Apply(player, offer[_perkRng.Range(0, offer.Length)]);
-                }
+                for (int level = 1; level < TeamLevel; level++) player.StockedChoices.Enqueue(ChoiceKind.LevelUp);
                 player.Hp = player.MaxHp;
             }
 
@@ -169,6 +161,7 @@ namespace Game.Core
                 break;
             }
             Players.Add(player);
+            OfferNext(player);
             return player;
         }
 
@@ -206,20 +199,23 @@ namespace Game.Core
         public void Start(int firstRoom = 0)
         {
             StartRoom(Mathf.Clamp(firstRoom, 0, TotalRooms - 1));
-            var starters = new List<SimPlayer>();
-            foreach (var p in Players) if (p.HasStartPerk) starters.Add(p);
-            if (starters.Count > 0) BeginChoices(starters, ChoiceKind.Start);
+            foreach (var p in Players) if (p.HasStartPerk) p.StockedChoices.Enqueue(ChoiceKind.Start);
+            HoldIfPicksLeft();
         }
 
         public void Step(float dt)
         {
             if (Phase != RunPhase.Playing) return;
 
-            if (AwaitingChoices)
+            TickOffers(dt);
+            if (HoldingForPicks)
             {
-                _choiceTimer -= dt;
-                if (_choiceTimer <= 0f) AutoChooseRemaining();
-                return;
+                if (AnyPicksLeft)
+                {
+                    UpdatePlayers(dt); // free to walk about; nothing spawns yet
+                    return;
+                }
+                HoldingForPicks = false;
             }
 
             Elapsed += dt;
@@ -465,38 +461,59 @@ namespace Game.Core
             {
                 TeamXp -= XpToNext;
                 TeamLevel++;
-                PendingLevelUps++;
-                foreach (var p in Players) p.SetLevel(TeamLevel);
+                foreach (var p in Players)
+                {
+                    p.SetLevel(TeamLevel);
+                    p.StockedChoices.Enqueue(ChoiceKind.LevelUp);
+                }
+                Events.Add(new SimEvent(SimEventType.TeamLevelUp) { Int = TeamLevel });
             }
-            if (PendingLevelUps > 0) StartNextChoiceRound();
+            OfferAll();
         }
 
         // ------------------------------------------------------------------ Perk choices
+        //
+        // Fighting and preparing are kept apart: picks earned in a fight (level-ups) are banked and offered once
+        // the room is cleared; door rewards are chosen on entering the next room, before its monsters come.
+        // Nobody's pick pauses anyone else - each player works through their own queue.
 
-        /// <summary>Opens the next waiting choice: door rewards first (they were promised), then level-ups.</summary>
-        private void StartNextChoiceRound()
+        /// <summary>Between fights: a cleared room, or a new room holding its monsters until everyone has picked.</summary>
+        public bool OffersOpen => Room.Cleared || HoldingForPicks;
+
+        /// <summary>A new room waits for the team's picks (door rewards, start perks) before spawning anything.</summary>
+        public bool HoldingForPicks { get; private set; }
+
+        public bool AnyPicksLeft
         {
-            if (AwaitingChoices || Players.Count == 0) return;
-            if (_rewardRounds.Count > 0) BeginChoices(Players, _rewardRounds.Dequeue());
-            else if (PendingLevelUps > 0) BeginChoices(Players, ChoiceKind.LevelUp);
+            get
+            {
+                foreach (var p in Players) if (p.PicksLeft > 0) return true;
+                return false;
+            }
         }
 
-        private void BeginChoices(IEnumerable<SimPlayer> who, ChoiceKind kind)
+        /// <summary>Someone is still choosing during a preparation window.</summary>
+        public bool AwaitingChoices => OffersOpen && AnyPicksLeft;
+
+        private void OfferAll()
         {
-            AwaitingChoices = true;
-            _choiceKind = kind;
-            _choiceTimer = ChoiceTimeout;
-            foreach (var p in who)
+            foreach (var p in Players) OfferNext(p);
+        }
+
+        private void OfferNext(SimPlayer p)
+        {
+            if (!OffersOpen || p.PendingOffer != null || p.StockedChoices.Count == 0) return;
+            var kind = p.StockedChoices.Dequeue();
+            var shown = kind;
+            p.PendingOffer = kind == ChoiceKind.Upgrade ? PerkRoller.RollUpgrade(_perkRng, p) : null;
+            if (p.PendingOffer == null)
             {
-                var shown = kind;
-                p.PendingOffer = kind == ChoiceKind.Upgrade ? PerkRoller.RollUpgrade(_perkRng, p) : null;
-                if (p.PendingOffer == null)
-                {
-                    if (kind == ChoiceKind.Upgrade) shown = ChoiceKind.Boon; // nothing to upgrade yet: a new perk instead
-                    p.PendingOffer = PerkRoller.Roll(_perkRng, p);
-                }
-                Events.Add(new SimEvent(SimEventType.PerkOffer) { ClientId = p.ClientId, Seed = PerkOption.Pack(p.PendingOffer), Int = (int)shown });
+                if (kind == ChoiceKind.Upgrade) shown = ChoiceKind.Boon; // nothing to upgrade yet: a new perk instead
+                p.PendingOffer = PerkRoller.Roll(_perkRng, p);
             }
+            p.OfferKind = shown;
+            p.OfferTimer = ChoiceTimeout;
+            Events.Add(new SimEvent(SimEventType.PerkOffer) { ClientId = p.ClientId, Seed = PerkOption.Pack(p.PendingOffer), Int = (int)shown, Value = p.StockedChoices.Count });
         }
 
         public void ChoosePerk(ulong clientId, int index)
@@ -506,22 +523,32 @@ namespace Game.Core
             var option = p.PendingOffer[Mathf.Clamp(index, 0, p.PendingOffer.Length - 1)];
             p.PendingOffer = null;
             PerkRoller.Apply(p, option);
-            FinishChoicesIfDone();
+            OfferNext(p);
         }
 
-        private void FinishChoicesIfDone()
+        /// <summary>Someone away from the keyboard can't hold the team up forever: the first option is taken for them.</summary>
+        private void TickOffers(float dt)
         {
-            foreach (var p in Players) if (p.PendingOffer != null) return;
-            AwaitingChoices = false;
-            if (_choiceKind == ChoiceKind.LevelUp) PendingLevelUps = Mathf.Max(0, PendingLevelUps - 1);
-            StartNextChoiceRound();
+            foreach (var p in Players)
+            {
+                if (p.PendingOffer == null) continue;
+                p.OfferTimer -= dt;
+                if (p.OfferTimer <= 0f) ChoosePerk(p.ClientId, 0);
+            }
         }
 
-        private void AutoChooseRemaining()
+        /// <summary>Promised picks for everyone (door rewards).</summary>
+        private void StockForAll(ChoiceKind kind, int times)
         {
-            var waiting = new List<ulong>();
-            foreach (var p in Players) if (p.PendingOffer != null) waiting.Add(p.ClientId);
-            foreach (var id in waiting) ChoosePerk(id, 0);
+            foreach (var p in Players)
+                for (int i = 0; i < times; i++) p.StockedChoices.Enqueue(kind);
+        }
+
+        /// <summary>After entering a room: wait for the team's picks before the fight starts.</summary>
+        private void HoldIfPicksLeft()
+        {
+            HoldingForPicks = AnyPicksLeft;
+            OfferAll();
         }
 
         // ------------------------------------------------------------------ Rooms
@@ -598,7 +625,13 @@ namespace Game.Core
                 return;
             }
 
-            // Everyone standing (downed players are carried along) must agree on one door.
+            // Everyone standing (downed players are carried along) must agree on one door, once all picks are made.
+            if (AnyPicksLeft)
+            {
+                Room.HoldDoor = -1;
+                Room.ExitHold = 0f;
+                return;
+            }
             int chosen = -1;
             bool first = true;
             foreach (var p in Players)
@@ -646,6 +679,7 @@ namespace Game.Core
             }
             RollDoors();
             Events.Add(new SimEvent(SimEventType.RoomCleared) { Int = Room.Index, Seed = (ulong)Door.Pack(Room.Doors) });
+            OfferAll(); // the banked level-ups
         }
 
         private void NextRoom(int doorIndex)
@@ -668,6 +702,8 @@ namespace Game.Core
             _enterTrial = door.Trial;
             StartRoom(Room.Index + 1);
             GrantReward(door.Reward, door.Trial ? 2 : 1);
+            CheckLevelUp(); // souls picked up on the way out
+            HoldIfPicksLeft();
         }
 
         private void CheckDefeat()

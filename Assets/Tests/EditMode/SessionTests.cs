@@ -47,9 +47,46 @@ namespace Game.Tests
             var ranger = sim.JoinMidRun(9, new Loadout { classId = ClassId.Ranger, playerKey = "late" }, out bool returning);
             Assert.IsFalse(returning);
             Assert.AreEqual(4, ranger.Level);
-            Assert.GreaterOrEqual(ranger.PerkLevels.Sum(), 3, "one perk per level gained before joining");
+            Assert.AreEqual(3, ranger.PicksLeft, "one pick per level gained before joining, chosen between rooms");
+            Assert.IsNull(ranger.PendingOffer, "not mid-fight");
             Assert.AreEqual(ranger.MaxHp, ranger.Hp, 0.01f);
             Assert.Less((ranger.Position - host.Position).magnitude, 2f);
+        }
+
+        [Test]
+        public void DoorReward_HoldsTheNextRoomUntilEveryoneHasPicked()
+        {
+            var sim = new RunSimulation(73);
+            sim.AddPlayer(0);
+            sim.AddPlayer(1);
+            sim.Start();
+            sim.Room.Cleared = true;
+            sim.Room.Doors.Clear();
+            sim.Room.Doors.Add(new Door(RoomReward.Boon, false));
+            sim.Room.Doors.Add(new Door(RoomReward.Shards, false));
+            for (int i = 0; i < 120 && sim.Room.Index == 0; i++)
+            {
+                foreach (var p in sim.Players)
+                {
+                    p.InvulnerableTimer = 1f;
+                    sim.SetPlayerPosition(p.ClientId, RunSimulation.DoorPosition(0, 2, sim.Bounds));
+                    if (p.PendingOffer != null) sim.ChoosePerk(p.ClientId, 0);
+                }
+                sim.Step(1f / 30f);
+            }
+            Assert.AreEqual(1, sim.Room.Index);
+            Assert.IsTrue(sim.HoldingForPicks, "the boon is chosen before the fight");
+            Assert.IsNotNull(sim.Players[0].PendingOffer);
+
+            float elapsed = sim.Elapsed;
+            for (int i = 0; i < 90; i++) sim.Step(1f / 30f);
+            Assert.AreEqual(elapsed, sim.Elapsed, 0.0001f, "the room waits");
+            Assert.AreEqual(0, sim.Enemies.HostileCount + sim.PendingSpawns.Count, "no monsters yet");
+
+            foreach (var p in sim.Players) while (p.PendingOffer != null) sim.ChoosePerk(p.ClientId, 0);
+            sim.Step(1f / 30f);
+            Assert.IsFalse(sim.HoldingForPicks);
+            Assert.Greater(sim.Elapsed, elapsed, "and then the fight starts");
         }
 
         [Test]

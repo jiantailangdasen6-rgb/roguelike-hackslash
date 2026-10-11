@@ -94,6 +94,8 @@ namespace Game.Gameplay
                 ChoiceKind.Upgrade => "<color=#8cd9ff>研磨</color>  強化する力を選べ",
                 _ => "力を選べ",
             };
+            int more = Mathf.RoundToInt(e.Value);
+            if (more > 0) _heading.text += $"  <size=28><color=#bfb6aa>（あと {more} 回）</color></size>";
             Show(PerkOption.Unpack(e.Seed));
         }
 

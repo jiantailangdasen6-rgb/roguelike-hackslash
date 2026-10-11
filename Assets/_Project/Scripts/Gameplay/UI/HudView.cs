@@ -265,9 +265,15 @@ namespace Game.Gameplay
                     }
                     break;
                 }
+                case SimEventType.TeamLevelUp:
+                    // Between rooms the pick comes right away, so the reminder is only for level-ups mid-fight.
+                    Toast(RunDirector.Instance != null && RunDirector.Instance.RoomCleared.Value
+                        ? $"<color=#e0b45a>レベル {e.Int}！</color>"
+                        : $"<color=#e0b45a>レベル {e.Int}！</color> 力は部屋を制圧した後に選べる");
+                    break;
                 case SimEventType.RoomCleared:
                 {
-                    Banner("部屋を制圧した", NetPlayer.All.Count > 1 ? "報酬の門を選び、全員でその前に立て" : "報酬の門を選び、その前に立て");
+                    Banner("部屋を制圧した", NetPlayer.All.Count > 1 ? "力を選んだら、報酬の門を選んで全員でその前に立て" : "力を選んだら、報酬の門を選んでその前に立て");
                     Tip("doors", "門の上の印は、その先で得られる報酬。赤い「試練」の門は報酬2倍だが、次の部屋の魔物が手強い");
                     break;
                 }
@@ -345,7 +351,11 @@ namespace Game.Gameplay
             if (director == null || !director.IsSpawned) return;
 
             _xpBar.Fill = director.XpFraction.Value;
-            _levelText.text = $"Lv {director.TeamLevel.Value}";
+            // Banked picks show as stars next to the level until the room is cleared.
+            int banked = local != null ? local.Picks.Value : 0;
+            _levelText.text = banked > 0 && !director.RoomCleared.Value
+                ? $"<size=24><color=#e0b45a>★{banked}</color></size>  Lv {director.TeamLevel.Value}"
+                : $"Lv {director.TeamLevel.Value}";
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
             _difficultyText.text = $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
             _roomText.text = RoomTitle(director.RoomIndex.Value) + $"   {director.RoomIndex.Value + 1}/{RunSimulation.TotalRooms}";
@@ -468,6 +478,7 @@ namespace Game.Gameplay
         {
             if (d.RoomCleared.Value)
             {
+                if (d.Paused.Value) return "全員が力を選び終えると門が開く";
                 var doors = d.Doors;
                 if (doors.Length == 0) return "";
                 int held = d.HoldDoor.Value;

@@ -67,8 +67,14 @@ namespace Game.Core
         public int BloodlustStacks;
         public float BloodlustTimer;
 
-        /// <summary>Perk choices waiting for this player (null when none).</summary>
+        /// <summary>The perk choice on this player's screen right now (null when none).</summary>
         public PerkOption[] PendingOffer;
+        /// <summary>What <see cref="PendingOffer"/> was given for, and how long until the host picks the first option.</summary>
+        public ChoiceKind OfferKind;
+        public float OfferTimer;
+        /// <summary>Picks earned but not shown yet: level-ups bank up during a fight and are chosen between rooms.</summary>
+        public readonly Queue<ChoiceKind> StockedChoices = new();
+        public int PicksLeft => StockedChoices.Count + (PendingOffer != null ? 1 : 0);
 
         public float MaxHp => Stats.Get(StatType.MaxHealth);
         public bool Alive => !Downed;

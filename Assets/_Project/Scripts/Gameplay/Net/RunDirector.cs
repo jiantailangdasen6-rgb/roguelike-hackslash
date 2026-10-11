@@ -273,6 +273,7 @@ namespace Game.Gameplay
                 SetIfChanged(p.Skill2Cooldown, Mathf.Max(0f, Quantize(sp.Skill2Cooldown)));
                 SetIfChanged(p.DodgeCooldown, Mathf.Max(0f, Quantize(sp.DodgeCooldown)));
                 SetIfChanged(p.Valor, sp.ValorTimer > 0f);
+                SetIfChanged(p.Picks, sp.PicksLeft);
             }
 
             var room = Sim.Room;

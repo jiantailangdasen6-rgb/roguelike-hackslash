@@ -189,8 +189,9 @@ namespace Game.Gameplay
                 case SimEventType.SoulCollected:
                     if (IsLocal(e.ClientId)) Play("soul", null, 1f + UnityEngine.Random.value * 0.3f);
                     break;
+                case SimEventType.TeamLevelUp: Play("levelup"); break;
                 case SimEventType.PerkOffer:
-                    if (IsLocal(e.ClientId)) Play("levelup");
+                    if (IsLocal(e.ClientId)) Play("soul", null, 0.8f);
                     break;
                 case SimEventType.RoomCleared: Play("clear"); break;
                 case SimEventType.RewardGranted:

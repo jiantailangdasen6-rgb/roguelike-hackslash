@@ -352,7 +352,7 @@ namespace Game.Tests
         }
 
         [Test]
-        public void LevelUp_OffersPerksToEveryone_AndPausesUntilChosen()
+        public void LevelUp_BanksPicksDuringTheFight_AndOffersThemOnceTheRoomIsCleared()
         {
             var sim = new RunSimulation(3);
             sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
@@ -360,25 +360,45 @@ namespace Game.Tests
             sim.Start();
             float hpBefore = sim.Players[0].MaxHp;
 
-            while (!sim.AwaitingChoices)
+            var events = new List<SimEvent>();
+            while (sim.TeamLevel < 2 && !sim.Room.Cleared)
             {
                 KillAll(sim);
-                Run(sim, 0.5f, s => { foreach (var p in s.Players) p.InvulnerableTimer = 1f; });
+                events.AddRange(Run(sim, 0.5f, s => { foreach (var p in s.Players) p.InvulnerableTimer = 1f; }));
                 foreach (var soul in sim.Souls.ToArray()) sim.SetPlayerPosition(0, soul.Position);
             }
-
-            Assert.IsNotNull(sim.Players[0].PendingOffer);
-            Assert.IsNotNull(sim.Players[1].PendingOffer);
+            Assert.Greater(sim.TeamLevel, 1, "leveled up during the fight");
             Assert.Greater(sim.Players[0].MaxHp, hpBefore, "growth curve raises max HP on level-up");
 
-            float elapsed = sim.Elapsed;
-            sim.Step(Dt);
-            Assert.AreEqual(elapsed, sim.Elapsed, "paused while choosing");
+            if (!sim.Room.Cleared)
+            {
+                Assert.That(events.Any(e => e.Type == SimEventType.TeamLevelUp));
+                Assert.IsNull(sim.Players[0].PendingOffer, "no pick screen mid-fight");
+                Assert.Greater(sim.Players[0].PicksLeft, 0, "the pick is banked");
+                Assert.IsFalse(sim.AwaitingChoices);
+                float elapsed = sim.Elapsed;
+                sim.Step(Dt);
+                Assert.Greater(sim.Elapsed, elapsed, "the fight goes on");
+            }
 
-            sim.ChoosePerk(0, 0);
+            for (int i = 0; i < 60 && !sim.Room.Cleared; i++)
+            {
+                KillAll(sim);
+                Run(sim, 1f, s => { foreach (var p in s.Players) p.InvulnerableTimer = 1f; });
+            }
+            Assert.IsTrue(sim.Room.Cleared);
+            Assert.IsNotNull(sim.Players[0].PendingOffer, "offered after the room");
+            Assert.IsNotNull(sim.Players[1].PendingOffer);
+            Assert.IsTrue(sim.AwaitingChoices);
+
+            // Each player works through their own picks; the door waits for everyone.
+            while (sim.Players[0].PendingOffer != null) sim.ChoosePerk(0, 0);
             Assert.IsTrue(sim.AwaitingChoices, "still waiting for player 1");
-            sim.ChoosePerk(1, 0);
-            Assert.IsTrue(!sim.AwaitingChoices || sim.PendingLevelUps > 0);
+            foreach (var p in sim.Players) sim.SetPlayerPosition(p.ClientId, RunSimulation.DoorPosition(0, sim.Room.Doors.Count, sim.Bounds));
+            Run(sim, 2f, s => { foreach (var p in s.Players) p.InvulnerableTimer = 1f; });
+            Assert.AreEqual(0, sim.Room.Index, "the door stays shut while someone is choosing");
+            while (sim.Players[1].PendingOffer != null) sim.ChoosePerk(1, 0);
+            Assert.IsFalse(sim.AwaitingChoices);
         }
 
         [Test]

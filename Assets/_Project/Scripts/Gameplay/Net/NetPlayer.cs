@@ -29,6 +29,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<float> Skill2Cooldown = new();
         public readonly NetworkVariable<float> DodgeCooldown = new();
         public readonly NetworkVariable<bool> Valor = new();
+        /// <summary>Perk picks earned and not made yet (banked during fights, chosen between rooms).</summary>
+        public readonly NetworkVariable<int> Picks = new();
         public readonly NetworkVariable<bool> FacingLeft = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [SerializeField] private PixelAnimator animator;

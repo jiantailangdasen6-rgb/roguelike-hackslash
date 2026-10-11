@@ -380,6 +380,20 @@ namespace Game.EditorTools
             EnsureGlobalObjectIdHash(directorObject);
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene, GameScenePath);
+            WriteBuildStamp(directorObject);
+        }
+
+        /// <summary>
+        /// The scene-placed RunDirector gets a new network id every time this scene is regenerated, so players from
+        /// different builder runs can't share a session (the joiner never sees the director: empty HUD, frozen run).
+        /// The id goes into Resources/BuildStamp.txt; joiners send it and the host refuses mismatches with a message.
+        /// </summary>
+        private static void WriteBuildStamp(NetworkObject director)
+        {
+            var hash = (uint)typeof(NetworkObject).GetField("GlobalObjectIdHash", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(director);
+            string path = ResourcesDir + "/BuildStamp.txt";
+            File.WriteAllText(path, hash.ToString("x8"));
+            AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
         }
 
         private static void CreateCamera(bool withBrain, bool pixelPerfect)
@@ -602,6 +616,8 @@ namespace Game.EditorTools
         private static void CreateFollowCamera(Collider2D bounds)
         {
             var go = new GameObject("CM Follow Camera");
+            // Until the local player spawns there is nothing to follow: look at the arena from the usual distance.
+            go.transform.position = new Vector3(0f, 0f, -10f);
             var vcam = go.AddComponent<CinemachineCamera>();
             var lens = vcam.Lens;
             lens.OrthographicSize = 4.21875f;

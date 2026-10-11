@@ -37,6 +37,9 @@ namespace Game.Gameplay
         /// <summary>Message to show in the lobby after returning (e.g. disconnected).</summary>
         public static string LobbyMessage;
 
+        /// <summary>True after the host turned us away with a reason (full, started, other version).</summary>
+        public static bool Refused { get; private set; }
+
         /// <summary>Room code of the current online session (host and clients), or null.</summary>
         public static string JoinCode { get; private set; }
 
@@ -86,9 +89,15 @@ namespace Game.Gameplay
             InGame = false;
             JoinCode = null;
             Loadouts.Clear();
-            // Put this device's loadout into the connection request.
-            Network.NetworkConfig.ConnectionData = Encoding.UTF8.GetBytes(ProfileStore.Current.ToLoadout().ToJson());
+            // Put this build's stamp and this device's loadout into the connection request.
+            Network.NetworkConfig.ConnectionData = Encoding.UTF8.GetBytes(BuildStamp + "\n" + ProfileStore.Current.ToLoadout().ToJson());
         }
+
+        private static string _buildStamp;
+
+        /// <summary>Identifies the builder run this build came from (see PrototypeBuilder.WriteBuildStamp).</summary>
+        /// <remarks>-stamp &lt;s&gt; overrides it (automated test of the version-mismatch refusal).</remarks>
+        public static string BuildStamp => _buildStamp ??= CommandLine.GetValue("-stamp") ?? Resources.Load<TextAsset>("BuildStamp")?.text.Trim() ?? "dev";
 
         // ------------------------------------------------------------------ Solo / LAN
 
@@ -184,11 +193,18 @@ namespace Game.Gameplay
             var nm = NetworkManager.Singleton;
             bool isHostItself = request.ClientNetworkId == nm.LocalClientId;
             bool full = nm.ConnectedClientsIds.Count >= MaxPlayers;
-            response.Approved = isHostItself || (!InGame && !full);
+            string payload = request.Payload != null ? Encoding.UTF8.GetString(request.Payload) : "";
+            int split = payload.IndexOf('\n');
+            string stamp = split >= 0 ? payload.Substring(0, split) : "";
+            // A different build can't play along (its copy of the game scene doesn't match ours).
+            bool sameBuild = isHostItself || stamp == BuildStamp;
+            response.Approved = isHostItself || (!InGame && !full && sameBuild);
             response.CreatePlayerObject = false; // RunDirector spawns players when the run starts
-            if (response.Approved && request.Payload != null && request.Payload.Length > 0)
-                Loadouts[request.ClientNetworkId] = Loadout.FromJson(Encoding.UTF8.GetString(request.Payload));
-            if (!response.Approved) response.Reason = InGame ? "ゲームはすでに始まっています" : "満員です（最大3人）";
+            if (response.Approved && split >= 0)
+                Loadouts[request.ClientNetworkId] = Loadout.FromJson(payload.Substring(split + 1));
+            if (!response.Approved)
+                response.Reason = !sameBuild ? "ゲームのバージョンが部屋と違います。全員ページを再読み込み（F5）してから、部屋を作り直してください"
+                    : InGame ? "ゲームはすでに始まっています" : "満員です（最大3人）";
         }
 
         private static void OnClientDisconnected(ulong clientId)
@@ -196,7 +212,8 @@ namespace Game.Gameplay
             var nm = NetworkManager.Singleton;
             if (nm == null || nm.IsServer) return;
             // We are a client and lost the host (or were refused).
-            string reason = string.IsNullOrEmpty(nm.DisconnectReason) ? "ホストとの接続が切れました" : nm.DisconnectReason;
+            Refused = !string.IsNullOrEmpty(nm.DisconnectReason);
+            string reason = Refused ? nm.DisconnectReason : "ホストとの接続が切れました";
             ReturnToLobby(reason);
         }
 

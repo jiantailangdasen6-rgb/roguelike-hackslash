@@ -61,6 +61,8 @@ namespace Game.Gameplay
         private readonly HashSet<string> _tipsShown = new();
         private readonly StringBuilder _sb = new();
         private ClassId? _shownClass;
+        private CanvasGroup _curtain;
+        private Text _curtainText;
 
         private void Awake()
         {
@@ -150,8 +152,36 @@ namespace Game.Gameplay
                 22, TextAnchor.LowerLeft, UIKit.MutedText);
             _hintText.rectTransform.Place(new Vector2(0f, 0f), new Vector2(1100f, 80f), new Vector2(24f, 120f));
 
+            BuildCurtain();
             gameObject.AddComponent<AllyOverlay>();
             RunDirector.EventReceived += OnEvent;
+        }
+
+        /// <summary>
+        /// Covers the screen from the scene load until the local player exists: the host waits for every peer
+        /// to finish loading before the run starts, and without a player the camera has nothing to follow.
+        /// </summary>
+        private void BuildCurtain()
+        {
+            var canvas = UIKit.CreateCanvas("StartCurtain", 50, transform);
+            _curtain = canvas.gameObject.AddComponent<CanvasGroup>();
+            _curtain.blocksRaycasts = false;
+            UIKit.Panel(canvas.transform, "Background", new Color(0.035f, 0.03f, 0.04f)).rectTransform.Stretch();
+            _curtainText = UIKit.Title(canvas.transform, "", 44, TextAnchor.MiddleCenter, UIKit.AccentColor);
+            _curtainText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 80f), new Vector2(0f, 20f));
+            var sub = UIKit.Label(_curtainText.transform, "全員の準備ができたら始まります", 26, TextAnchor.MiddleCenter, UIKit.MutedText);
+            sub.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 44f), new Vector2(0f, -64f));
+        }
+
+        private void UpdateCurtain(RunDirector director, NetPlayer local)
+        {
+            bool waiting = director == null || !director.IsSpawned || (local == null && director.Phase.Value == RunPhase.Playing);
+            float target = waiting ? 1f : 0f;
+            _curtain.alpha = waiting ? 1f : Mathf.MoveTowards(_curtain.alpha, target, Time.unscaledDeltaTime * 2.5f);
+            _curtain.gameObject.SetActive(_curtain.alpha > 0.001f);
+            // The words go at once; only the dark backdrop fades, so they never hang over the arena.
+            _curtainText.gameObject.SetActive(waiting);
+            if (waiting) _curtainText.text = "迷宮へ向かっています" + new string('・', 1 + (int)(Time.unscaledTime * 2f) % 3);
         }
 
         private TeamFrame CreateTeamFrame(Transform root, int index)
@@ -278,6 +308,7 @@ namespace Game.Gameplay
         {
             var director = RunDirector.Instance;
             var local = NetPlayer.Local;
+            UpdateCurtain(director, local);
             if (director == null || !director.IsSpawned) return;
 
             _xpBar.Fill = director.XpFraction.Value;
@@ -418,7 +449,7 @@ namespace Game.Gameplay
         private static string CenterMessage(RunDirector d, NetPlayer local)
         {
             if (d.Phase.Value != RunPhase.Playing) return "";
-            if (local == null) return d.Started.Value ? "" : "仲間を待っています…";
+            if (local == null) return ""; // the start curtain covers this
             if (local.Downed.Value)
                 return local.BeingRevived
                     ? $"仲間が助け起こしている…  {local.ReviveProgress.Value:P0}"

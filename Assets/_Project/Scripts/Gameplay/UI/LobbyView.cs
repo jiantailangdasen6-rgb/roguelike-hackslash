@@ -25,6 +25,7 @@ namespace Game.Gameplay
         private bool _busy;
         private string _autoJoinCodeFile;
         private Text _status;
+        private GameObject _statusBar;
         private Text _waitingText;
         private Button _startButton;
         private Button _soloButton;
@@ -60,6 +61,8 @@ namespace Game.Gameplay
         {
             // Netcode registers its message types after the first scene's Awake; starting a session earlier fails in builds.
             yield return null;
+            // Failed connections retry (the host may not be up yet), but a refusal is final.
+            if (GameSession.Refused) yield break;
             if (CommandLine.Has("-autosolo")) GameSession.StartSolo();
             else if (CommandLine.Has("-autohost"))
             {
@@ -183,8 +186,17 @@ namespace Game.Gameplay
             _difficultyText = UIKit.Label(menu, "", 20, TextAnchor.UpperLeft, UIKit.MutedText);
             _difficultyText.rectTransform.Place(new Vector2(0f, 0f), new Vector2(560f, 56f), new Vector2(70f, 190f));
 
-            _status = UIKit.Label(root, "", 26, TextAnchor.MiddleCenter, new Color(1f, 0.55f, 0.5f));
-            _status.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1400f, 30f), new Vector2(0f, -200f));
+            // Status line on a dark strip over the subtitle, so long messages (refusals) stay readable.
+            var statusBar = UIKit.Panel(root, "StatusBar", new Color(0.06f, 0.02f, 0.03f, 0.92f));
+            statusBar.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1500f, 46f), new Vector2(0f, -176f));
+            statusBar.raycastTarget = false;
+            _statusBar = statusBar.gameObject;
+            _status = UIKit.Label(statusBar.transform, "", 26, TextAnchor.MiddleCenter, new Color(1f, 0.6f, 0.55f));
+            _status.rectTransform.Stretch();
+
+            // Build stamp: friends can only play together on the same version.
+            var version = UIKit.Label(root, $"ver {GameSession.BuildStamp}", 18, TextAnchor.LowerRight, new Color(1f, 1f, 1f, 0.25f));
+            version.rectTransform.Place(new Vector2(1f, 0f), new Vector2(300f, 30f), new Vector2(-16f, 8f));
 
             BuildMastery(root);
             BuildWaiting(root);
@@ -214,7 +226,7 @@ namespace Game.Gameplay
             dim.rectTransform.Stretch();
             _waiting = dim.gameObject;
             var panel = UIKit.Framed(dim.transform, "Waiting");
-            panel.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(1000f, 560f), Vector2.zero);
+            panel.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(1000f, 640f), Vector2.zero);
             _waitingText = UIKit.Label(panel.transform, "", 32, TextAnchor.UpperCenter);
             _waitingText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(940f, 330f), new Vector2(0f, -30f));
             _startButton = UIKit.Button(panel.transform, "出発する", 38, GameSession.StartGame, UIKit.BloodColor);
@@ -514,6 +526,7 @@ namespace Game.Gameplay
             }
             if (_state == State.Joining && !nm.IsClient && !nm.ShutdownInProgress) _state = State.Menu;
 
+            _statusBar.SetActive(!string.IsNullOrEmpty(_status.text));
             _menu.SetActive(_state == State.Menu);
             _waiting.SetActive(_state != State.Menu);
             _startButton.gameObject.SetActive(_state == State.Hosting);
@@ -525,7 +538,7 @@ namespace Game.Gameplay
                     var names = nm.ConnectedClientsIds.Select(id => ClassCatalog.Get(GameSession.LoadoutFor(id).classId).Name);
                     int count = nm.ConnectedClientsIds.Count;
                     string invite = GameSession.JoinCode != null
-                        ? $"ルームコード：<size=56><color=#e0b45a>{GameSession.JoinCode}</color></size>\n<size=24><color=#bfb6aa>仲間にこのコードを伝えて「コードで参加」してもらおう（PC・ブラウザどちらでも）</color></size>"
+                        ? $"ルームコード：<size=56><color=#e0b45a>{GameSession.JoinCode}</color></size>\n<size=24><color=#bfb6aa>仲間に伝えて「コードで参加」してもらおう（PC・ブラウザ可）</color></size>"
                         : $"あなたのIP：<color=#e0b45a>{GameSession.LocalAddress()}</color>\n<size=24><color=#bfb6aa>同じWi-Fiの仲間はこのIPで参加できます</color></size>";
                     _waitingText.text = $"部屋を作りました\n\n{invite}\n\n仲間 {count} / {GameSession.MaxPlayers}：{string.Join("・", names)}";
                     if (_autoHostPlayers > 0 && count >= _autoHostPlayers && !GameSession.InGame) GameSession.StartGame();

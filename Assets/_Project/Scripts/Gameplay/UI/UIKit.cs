@@ -85,7 +85,9 @@ namespace Game.Gameplay
             var scaler = go.AddComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920, 1080);
-            scaler.matchWidthOrHeight = 0.5f;
+            // Expand: the whole 1920x1080 layout always fits (wide browser windows only add room at the sides,
+            // tall ones at the top/bottom) instead of spilling off-screen and overlapping.
+            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
             go.AddComponent<GraphicRaycaster>();
             return canvas;
         }

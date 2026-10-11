@@ -2,7 +2,8 @@
 
 Top-down 2D **manual-action** co-op roguelite (up to 3 players online), dark-fantasy mood in the style of Death Must Die.
 Unity 6000.6.2f1 (URP 2D), C#, Netcode for GameObjects 2.13.3. PC first, mobile later.
-Source: private repo `jiantailangdasen6-rgb/roguelike-hackslash` (remote `origin`, push `main` after committing).
+Source: **public** repo `jiantailangdasen6-rgb/roguelike-hackslash` (remote `origin`, push `main` after committing).
+Anything committed is visible to everyone: never commit secrets, keys or personal data.
 **Start here when resuming: `Docs/DevLog.md`** (history, decisions, current status, known issues, next steps).
 Design docs: `Docs/01_GameDesign.md` (concept, classes, perks, meta), `Docs/02_TechnicalDesign.md` (architecture, sync, art pipeline).
 Communicate with the user in Japanese. The user directs from their phone; do implementation and verification end-to-end
@@ -67,6 +68,10 @@ Player flags: `-startroom <n>`, `-difficulty easy|normal|hard|nightmare`, `-down
 - `UnityEngine.UI.SafeArea` exists in ugui 2.6 — don't create a same-named class.
 - Engine modules aren't listed by default in this template; add `com.unity.modules.*` when an API is missing.
 - NetworkObject ids (`GlobalObjectIdHash`) are only computed in `OnValidate`; the builder forces it via reflection.
+  Every builder run gives the scene-placed RunDirector a **new** id, written to `Resources/BuildStamp.txt`; hosts refuse
+  joiners with another stamp. So a Windows build used with the web build (CrossTest) must come from the same builder run:
+  BuildWeb -> BuildWindows (no builder in between) -> DeployWeb -> CrossTest. `-stamp <s>` fakes a mismatch.
+- The web page is our own template `Assets/WebGLTemplates/Labyrinth` (fills the window); UI canvases use Expand scaling.
 - Netcode registers message types after the first scene's Awake — never start a session from Awake (LobbyView waits a frame).
 - The builder reloads assets by path before using them; NGO's prefab processing can invalidate earlier references.
 - Named messages over ~1.2 KB need chunking (Unreliable/ReliableSequenced are not fragmented).

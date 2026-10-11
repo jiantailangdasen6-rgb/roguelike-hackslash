@@ -33,17 +33,10 @@ namespace Game.EditorTools
             PlayerSettings.defaultWebScreenWidth = 1280;
             PlayerSettings.defaultWebScreenHeight = 720;
             PlayerSettings.runInBackground = true;
+            // Our own page (Assets/WebGLTemplates/Labyrinth): the game fills the window at any size. Unity's default
+            // page is a fixed 1280x720 box that gets cut off (HUD, skill bar) on laptop-sized windows.
+            PlayerSettings.WebGL.template = "PROJECT:Labyrinth";
             Build(WebGLPath, BuildTarget.WebGL, BuildOptions.None);
-
-            // The page shows the readable title rather than the product id.
-            string index = System.IO.Path.Combine(WebGLPath, "index.html");
-            if (System.IO.File.Exists(index))
-            {
-                string html = System.IO.File.ReadAllText(index)
-                    .Replace("<title>Unity Web Player | LabyrinthSurvivor</title>", "<title>Labyrinth Survivor</title>")
-                    .Replace(">LabyrinthSurvivor</div>", ">Labyrinth Survivor</div>");
-                System.IO.File.WriteAllText(index, html);
-            }
         }
 
         private static void Build(string path, BuildTarget target, BuildOptions options)

@@ -20,6 +20,8 @@ $code = (Get-Content "$out\xcode.txt").Trim()
 Write-Host "room code: $code"
 
 $profileDir = Join-Path $env:TEMP 'roguelike-crosstest-edge'
+# Fresh profile every run: a cached older build has another build stamp and the host would refuse it.
+if (Test-Path $profileDir) { Remove-Item $profileDir -Recurse -Force }
 $edge = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 $page = "$($Url)?onlinejoin=$code&botmove&profile=web&mute"
 $browser = Start-Process $edge -PassThru -ArgumentList @('--headless=new', "--user-data-dir=`"$profileDir`"",

@@ -21,14 +21,12 @@ namespace Game.Tests
         }
 
         [Test]
-        public void Catalog_HasTwentyAffixes_AndSixLegendaries()
+        public void Catalog_HasTwentyAffixes_AndTwoLegendariesPerClass()
         {
             Assert.AreEqual(20, ItemCatalog.Affixes.Length);
             Assert.AreEqual(20, ItemCatalog.Affixes.Select(a => a.Id).Distinct().Count());
-            Assert.AreEqual(6, ItemCatalog.Legendaries.Length);
-            // TEMPORARY (hub session): the request-unlocked classes get their legendaries next; then check every class again.
+            Assert.AreEqual(12, ItemCatalog.Legendaries.Length);
             foreach (ClassId c in System.Enum.GetValues(typeof(ClassId)))
-                if (ClassCatalog.IsStarter(c))
                 Assert.AreEqual(2, ItemCatalog.Legendaries.Count(l => l.Class == c), $"{c} has two legendaries");
             foreach (var a in ItemCatalog.Affixes)
                 Assert.That(ItemText.StatName(a.Stat), Does.Not.Contain(a.Stat.ToString()), $"{a.Id} needs a Japanese name");
@@ -360,6 +358,40 @@ namespace Game.Tests
             }
             Assert.AreEqual(1, Marked(false));
             Assert.AreEqual(2, Marked(true));
+        }
+
+        [Test]
+        public void Mist_LengthensSureCrits_BlackBlade_CutsTwice()
+        {
+            float SureCrit(bool legendary)
+            {
+                var sim = new RunSimulation(89);
+                var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Assassin });
+                sim.Room.Cleared = true;
+                if (legendary) WearLegendary(p, LegendaryId.Mist);
+                PressSkill(sim, p, true);
+                return p.SureCritTimer;
+            }
+            Assert.AreEqual(SureCrit(false) + 2f, SureCrit(true), 0.05f);
+
+            int Cuts(bool legendary)
+            {
+                var sim = new RunSimulation(90);
+                var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Assassin });
+                sim.Room.Cleared = true;
+                if (legendary) WearLegendary(p, LegendaryId.BlackBlade);
+                PressSkill(sim, p, false);
+                int cuts = 0;
+                for (int i = 0; i < 15; i++)
+                {
+                    sim.Step(Dt);
+                    cuts += sim.Events.Count(e => e.Type == SimEventType.AreaEffect && e.Int == (int)AreaKind.ShadowStep);
+                    sim.Events.Clear();
+                }
+                return cuts;
+            }
+            Assert.AreEqual(1, Cuts(false));
+            Assert.AreEqual(2, Cuts(true));
         }
 
         [Test]

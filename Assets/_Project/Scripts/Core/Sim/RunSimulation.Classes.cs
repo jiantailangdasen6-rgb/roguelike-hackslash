@@ -17,6 +17,8 @@ namespace Game.Core
             public float Radius;
             public float Timer;
             public float Tick;
+            /// <summary>Healing multiplier (sanctuary; legendary "聖域の").</summary>
+            public float Boost;
         }
 
         private readonly List<Zone> _zones = new();
@@ -132,7 +134,11 @@ namespace Game.Core
         private void StepShieldBash(SimPlayer p, float dt)
         {
             p.DashSlashTimer -= dt;
-            if (p.DashSlashTimer <= 0f) p.BashStuns = false;
+            if (p.DashSlashTimer <= 0f)
+            {
+                p.BashStuns = false;
+                if (p.HasLegendary(LegendaryId.Unbreakable)) BashShockwave(p);
+            }
             int retribution = p.PerkLevel(PerkId.Retribution);
             float damage = ClassCatalog.ShieldBashDamage * p.Stats.Get(StatType.Might) * (1f + 0.4f * retribution);
             Vector2 from = p.DashSlashFrom, to = p.Position;
@@ -151,6 +157,22 @@ namespace Game.Core
             }
         }
 
+        /// <summary>Legendary "不落の": the shield charge ends in a shockwave that stuns everything around.</summary>
+        private void BashShockwave(SimPlayer p)
+        {
+            float radius = 2.6f * p.Stats.Get(StatType.Area);
+            float damage = ClassCatalog.ShieldBashDamage * 0.5f * p.Stats.Get(StatType.Might);
+            Enemies.QueryCircle(p.Position, radius, _hits);
+            foreach (int i in _hits.ToArray())
+            {
+                ref var e = ref Enemies[i];
+                if (e.Dead) continue;
+                ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.4f : 1.1f);
+                DamageEnemy(i, damage, p, HitFlags.Heavy, (e.Position - p.Position).normalized, 5f);
+            }
+            Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Slam, Pos = p.Position, Value = radius });
+        }
+
         /// <summary>The assassin has arrived: cut everything around.</summary>
         private void ShadowStrike(SimPlayer p)
         {
@@ -160,6 +182,15 @@ namespace Game.Core
             foreach (int i in _hits.ToArray())
                 if (!Enemies[i].Dead) DamageEnemy(i, damage, p, HitFlags.Heavy, (Enemies[i].Position - p.Position).normalized, 3f);
             Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.ShadowStep, Pos = p.Position, Value = r });
+            // Legendary "黒刃の": a second, wider cut.
+            if (p.HasLegendary(LegendaryId.BlackBlade))
+            {
+                float r2 = r * 1.25f;
+                Enemies.QueryCircle(p.Position, r2, _hits);
+                foreach (int i in _hits.ToArray())
+                    if (!Enemies[i].Dead) DamageEnemy(i, damage * 0.7f, p, HitFlags.Heavy, (Enemies[i].Position - p.Position).normalized, 2f);
+                Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.ShadowStep, Pos = p.Position, Value = r2 });
+            }
         }
 
         // ------------------------------------------------------------------ Skill 2
@@ -170,8 +201,10 @@ namespace Game.Core
             {
                 case ClassId.Guardian:
                 {
-                    float r = ClassCatalog.SanctuaryRadius * area * (1f + 0.2f * p.PerkLevel(PerkId.ShieldWall));
-                    _zones.Add(new Zone { Kind = AreaKind.Sanctuary, Owner = p, Position = p.Position, Radius = r, Timer = ClassCatalog.SanctuaryDuration });
+                    bool hallowed = p.HasLegendary(LegendaryId.Hallowed);
+                    float r = ClassCatalog.SanctuaryRadius * area * (1f + 0.2f * p.PerkLevel(PerkId.ShieldWall)) * (hallowed ? 1.4f : 1f);
+                    float lasts = ClassCatalog.SanctuaryDuration + (hallowed ? 3f : 0f);
+                    _zones.Add(new Zone { Kind = AreaKind.Sanctuary, Owner = p, Position = p.Position, Radius = r, Timer = lasts, Boost = hallowed ? 1.5f : 1f });
                     int aegis = p.PerkLevel(PerkId.Aegis);
                     if (aegis > 0)
                         foreach (var ally in Players)
@@ -179,21 +212,22 @@ namespace Game.Core
                                 ally.Shield = Mathf.Max(ally.Shield, 20f * aegis);
                     Events.Add(new SimEvent(SimEventType.AreaEffect)
                     {
-                        ClientId = p.ClientId, Int = (int)AreaKind.Sanctuary, Pos = p.Position, Value = r, Size = new Vector2(ClassCatalog.SanctuaryDuration, 0f),
+                        ClientId = p.ClientId, Int = (int)AreaKind.Sanctuary, Pos = p.Position, Value = r, Size = new Vector2(lasts, 0f),
                     });
                     break;
                 }
                 case ClassId.Assassin:
                 {
                     bool veil = p.PerkLevel(PerkId.SmokeVeil) > 0;
-                    float r = ClassCatalog.SmokeRadius * area * (veil ? 1.4f : 1f);
+                    bool mist = p.HasLegendary(LegendaryId.Mist);
+                    float r = ClassCatalog.SmokeRadius * area * (veil ? 1.4f : 1f) * (mist ? 2f : 1f);
                     Enemies.QueryCircle(p.Position, r, _hits);
                     foreach (int i in _hits.ToArray())
                     {
                         ref var e = ref Enemies[i];
                         ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.4f : ClassCatalog.SmokeStun);
                     }
-                    p.SureCritTimer = ClassCatalog.SureCritDuration;
+                    p.SureCritTimer = ClassCatalog.SureCritDuration + (mist ? 2f : 0f);
                     if (veil)
                         foreach (var ally in Players)
                             if (ally.Alive && (ally.Position - p.Position).sqrMagnitude <= r * r)
@@ -229,8 +263,9 @@ namespace Game.Core
                 case ProjectileKind.FireFlask:
                 {
                     int napalm = owner.PerkLevel(PerkId.Napalm);
-                    float r = ClassCatalog.FirePoolRadius * area * (1f + 0.15f * napalm);
-                    float duration = ClassCatalog.FirePoolDuration + 1.5f * napalm;
+                    bool inferno = owner.HasLegendary(LegendaryId.Inferno);
+                    float r = ClassCatalog.FirePoolRadius * area * (1f + 0.15f * napalm) * (inferno ? 1.6f : 1f);
+                    float duration = ClassCatalog.FirePoolDuration + 1.5f * napalm + (inferno ? 2f : 0f);
                     _zones.Add(new Zone { Kind = AreaKind.FirePool, Owner = owner, Position = proj.Position, Radius = r, Timer = duration });
                     Events.Add(new SimEvent(SimEventType.AreaEffect)
                     {
@@ -254,6 +289,7 @@ namespace Game.Core
                         float before = ally.Hp;
                         ally.Heal(amount);
                         if (remedy > 0) ally.Shield = Mathf.Max(ally.Shield, 10f * remedy);
+                        if (owner.HasLegendary(LegendaryId.BlessedRain)) ally.Shield = Mathf.Max(ally.Shield, 25f);
                         Events.Add(new SimEvent(SimEventType.PlayerHealed) { ClientId = ally.ClientId, Pos = ally.Position, Value = ally.Hp - before });
                     }
                     Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = owner.ClientId, Int = (int)AreaKind.Potion, Pos = proj.Position, Value = r });
@@ -280,7 +316,7 @@ namespace Game.Core
                     case AreaKind.Sanctuary:
                         foreach (var ally in Players)
                             if (ally.Alive && (ally.Position - zone.Position).sqrMagnitude <= zone.Radius * zone.Radius)
-                                ally.Heal(ClassCatalog.SanctuaryRegen * dt);
+                                ally.Heal(ClassCatalog.SanctuaryRegen * Mathf.Max(1f, zone.Boost) * dt);
                         break;
                     case AreaKind.FirePool:
                         zone.Tick -= dt;

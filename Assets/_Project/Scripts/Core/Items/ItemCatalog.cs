@@ -28,6 +28,12 @@ namespace Game.Core
         ThunderStaff,   // mage: bolts chain to another enemy
         ShadowQuiver,   // ranger: piercing shot fires three arrows
         HuntGodMark,    // ranger: hunter's mark lands on two enemies
+        Unbreakable,    // guardian: the shield charge ends in a stunning shockwave
+        Hallowed,       // guardian: a wider, longer, stronger sanctuary
+        BlackBlade,     // assassin: shadow step cuts twice
+        Mist,           // assassin: smoke twice as wide, sure crits last longer
+        Inferno,        // alchemist: a bigger, longer fire pool
+        BlessedRain,    // alchemist: the healing potion also shields
     }
 
     /// <summary>A random property an item can roll. Values scale up with item level.</summary>
@@ -136,6 +142,12 @@ namespace Game.Core
             new() { Id = LegendaryId.ThunderStaff, Class = ClassId.Mage, Name = "雷鳴の", Text = "魔弾が当たると近くの敵へ連鎖する" },
             new() { Id = LegendaryId.ShadowQuiver, Class = ClassId.Ranger, Name = "影の", Text = "貫通の一矢が扇状に3本になる" },
             new() { Id = LegendaryId.HuntGodMark, Class = ClassId.Ranger, Name = "狩神の", Text = "狩人の印が近くのもう1体にも付く" },
+            new() { Id = LegendaryId.Unbreakable, Class = ClassId.Guardian, Name = "不落の", Text = "盾の突進の終わりに衝撃波を放ち、周りの敵も気絶させる" },
+            new() { Id = LegendaryId.Hallowed, Class = ClassId.Guardian, Name = "聖域の", Text = "守りの陣が1.4倍の広さになり、3秒長く続き、回復も1.5倍" },
+            new() { Id = LegendaryId.BlackBlade, Class = ClassId.Assassin, Name = "黒刃の", Text = "影渡りの斬撃が2回になる" },
+            new() { Id = LegendaryId.Mist, Class = ClassId.Assassin, Name = "霧の", Text = "煙玉の範囲が2倍、必中会心の時間+2秒" },
+            new() { Id = LegendaryId.Inferno, Class = ClassId.Alchemist, Name = "業火の", Text = "火炎瓶の燃える床が1.6倍の広さになり、2秒長く燃える" },
+            new() { Id = LegendaryId.BlessedRain, Class = ClassId.Alchemist, Name = "慈雨の", Text = "回復薬を浴びた仲間に25のシールドも与える" },
         };
 
         public static LegendaryDef GetLegendary(LegendaryId id)

@@ -340,9 +340,9 @@ namespace Game.Gameplay
                 _detailBody.text = $"<color=#bfb6aa>{ItemText.SlotName(selected.Slot)}・Lv{selected.itemLevel}</color>\n" +
                                    string.Join("\n", ItemText.PropertyLines(selected, GearCap));
                 var worn = _equipped[(int)selected.Slot];
-                _compareBody.text = _selected >= SimPlayer.SlotCount && worn != null
-                    ? $"いま装備中：{ItemText.ColoredTitle(worn)}\n" + string.Join("\n", ItemText.PropertyLines(worn, GearCap))
-                    : _selected >= SimPlayer.SlotCount ? "この枠はいま空いている" : "";
+                _compareBody.text = _selected < SimPlayer.SlotCount ? ""
+                    : (worn != null ? $"いま装備中：{ItemText.ColoredTitle(worn)}\n" : "この枠はいま空いている\n") +
+                      "<color=#e0b45a>装備すると：</color>\n" + string.Join("\n", ItemText.CompareLines(selected, worn, GearCap));
             }
             RefreshButtons();
         }

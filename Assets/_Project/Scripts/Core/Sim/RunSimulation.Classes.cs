@@ -137,7 +137,11 @@ namespace Game.Core
             if (p.DashSlashTimer <= 0f)
             {
                 p.BashStuns = false;
-                if (p.HasLegendary(LegendaryId.Unbreakable)) BashShockwave(p);
+                if (p.HasLegendary(LegendaryId.Unbreakable))
+                {
+                    BashShockwave(p);
+                    Proc(p, LegendaryId.Unbreakable, p.Position);
+                }
             }
             int retribution = p.PerkLevel(PerkId.Retribution);
             float damage = ClassCatalog.ShieldBashDamage * p.Stats.Get(StatType.Might) * (1f + 0.4f * retribution);
@@ -190,6 +194,7 @@ namespace Game.Core
                 foreach (int i in _hits.ToArray())
                     if (!Enemies[i].Dead) DamageEnemy(i, damage * 0.7f, p, HitFlags.Heavy, (Enemies[i].Position - p.Position).normalized, 2f);
                 Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.ShadowStep, Pos = p.Position, Value = r2 });
+                Proc(p, LegendaryId.BlackBlade, p.Position);
             }
         }
 
@@ -204,6 +209,7 @@ namespace Game.Core
                     bool hallowed = p.HasLegendary(LegendaryId.Hallowed);
                     float r = ClassCatalog.SanctuaryRadius * area * (1f + 0.2f * p.PerkLevel(PerkId.ShieldWall)) * (hallowed ? 1.4f : 1f);
                     float lasts = ClassCatalog.SanctuaryDuration + (hallowed ? 3f : 0f);
+                    if (hallowed) Proc(p, LegendaryId.Hallowed, p.Position);
                     _zones.Add(new Zone { Kind = AreaKind.Sanctuary, Owner = p, Position = p.Position, Radius = r, Timer = lasts, Boost = hallowed ? 1.5f : 1f });
                     int aegis = p.PerkLevel(PerkId.Aegis);
                     if (aegis > 0)
@@ -221,6 +227,7 @@ namespace Game.Core
                     bool veil = p.PerkLevel(PerkId.SmokeVeil) > 0;
                     bool mist = p.HasLegendary(LegendaryId.Mist);
                     float r = ClassCatalog.SmokeRadius * area * (veil ? 1.4f : 1f) * (mist ? 2f : 1f);
+                    if (mist) Proc(p, LegendaryId.Mist, p.Position);
                     Enemies.QueryCircle(p.Position, r, _hits);
                     foreach (int i in _hits.ToArray())
                     {
@@ -266,6 +273,7 @@ namespace Game.Core
                     bool inferno = owner.HasLegendary(LegendaryId.Inferno);
                     float r = ClassCatalog.FirePoolRadius * area * (1f + 0.15f * napalm) * (inferno ? 1.6f : 1f);
                     float duration = ClassCatalog.FirePoolDuration + 1.5f * napalm + (inferno ? 2f : 0f);
+                    if (inferno) Proc(owner, LegendaryId.Inferno, proj.Position);
                     _zones.Add(new Zone { Kind = AreaKind.FirePool, Owner = owner, Position = proj.Position, Radius = r, Timer = duration });
                     Events.Add(new SimEvent(SimEventType.AreaEffect)
                     {
@@ -278,6 +286,7 @@ namespace Game.Core
                     int remedy = owner.PerkLevel(PerkId.Remedy);
                     float r = ClassCatalog.PotionRadius * area;
                     float amount = ClassCatalog.PotionHeal * (1f + 0.4f * remedy);
+                    if (owner.HasLegendary(LegendaryId.BlessedRain)) Proc(owner, LegendaryId.BlessedRain, proj.Position);
                     foreach (var ally in Players)
                     {
                         if ((ally.Position - proj.Position).sqrMagnitude > r * r) continue;

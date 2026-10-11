@@ -32,6 +32,10 @@ namespace Game.Core
         /// <summary>Slot numbers in GearSlot events: equipped 0..3, then the bag.</summary>
         public const int BagSlotOffset = SimPlayer.SlotCount;
 
+        /// <summary>A legendary effect fired (clients flash, play a sting, and draw chains from <paramref name="at"/> to <paramref name="to"/>).</summary>
+        private void Proc(SimPlayer p, LegendaryId id, Vector2 at, Vector2 to = default) =>
+            Events.Add(new SimEvent(SimEventType.LegendaryProc) { ClientId = p.ClientId, Int = (int)id, Pos = at, Vec = to });
+
         /// <summary>Gear brought from home works at most this many levels above the current room.</summary>
         public const int GearLevelGrace = 2;
 

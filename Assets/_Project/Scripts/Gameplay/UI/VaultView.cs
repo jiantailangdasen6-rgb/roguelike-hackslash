@@ -238,8 +238,8 @@ namespace Game.Gameplay
                 _detailBody.text = $"<color=#bfb6aa>{ItemText.SlotName(selected.Slot)}・Lv{selected.itemLevel}</color>\n" + string.Join("\n", ItemText.PropertyLines(selected));
                 var worn = inStash ? ForDisplay(GearVault.Equipped(data, selected.Slot)) : null;
                 _compareBody.text = !inStash ? "出発時に装備している"
-                    : worn != null ? $"いま装備中：{ItemText.ColoredTitle(worn)}\n" + string.Join("\n", ItemText.PropertyLines(worn))
-                    : "この枠はいま空いている（冒険中は貸し出し品が入る）";
+                    : (worn != null ? $"いま装備中：{ItemText.ColoredTitle(worn)}\n" : "この枠はいま空いている（冒険中は貸し出し品が入る）\n") +
+                      "<color=#e0b45a>装備すると：</color>\n" + string.Join("\n", ItemText.CompareLines(selected, worn));
             }
 
             _equipButton.gameObject.SetActive(selected != null);

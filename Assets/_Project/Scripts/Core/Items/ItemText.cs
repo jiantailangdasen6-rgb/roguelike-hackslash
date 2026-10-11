@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Game.Core
 {
@@ -94,6 +95,49 @@ namespace Game.Core
             if (item.loaner) yield return "<color=#bfb6aa>空き枠の貸し出し品：持ち帰れない・渡せない</color>";
             var legendary = ItemCatalog.GetLegendary(item.legendary);
             if (legendary != null) yield return $"<color={RarityColor(Rarity.Legendary)}>◆ {legendary.Text}</color>";
+        }
+
+        public const string BetterColor = "#7dff9a";
+        public const string WorseColor = "#ff7a6a";
+
+        /// <summary>Which way is good for a stat (shorter cooldowns are better; everything else, more is better).</summary>
+        private static bool HigherIsBetter(StatType stat) => stat != StatType.Cooldown;
+
+        /// <summary>
+        /// What changes if <paramref name="candidate"/> replaces <paramref name="worn"/> (null = empty slot): one line per
+        /// stat that moves, green for better and red for worse, plus legendary effects gained or lost.
+        /// </summary>
+        public static List<string> CompareLines(ItemInstance candidate, ItemInstance worn, int levelCap = int.MaxValue)
+        {
+            var totals = new Dictionary<(StatType Stat, ModifierKind Kind), float>();
+            void Add(ItemInstance item, float sign)
+            {
+                if (item == null) return;
+                foreach (var mod in item.GetModifiers(levelCap))
+                {
+                    var key = (mod.Stat, mod.Kind);
+                    totals[key] = (totals.TryGetValue(key, out float v) ? v : 0f) + sign * mod.Value;
+                }
+            }
+            Add(candidate, 1f);
+            Add(worn, -1f);
+
+            var lines = new List<(bool Better, string Text)>();
+            foreach (var ((stat, kind), delta) in totals)
+            {
+                if (System.Math.Abs(delta) < 0.0005f) continue;
+                bool better = HigherIsBetter(stat) ? delta > 0f : delta < 0f;
+                string text = Describe(new StatModifier(stat, kind, delta));
+                lines.Add((better, $"<color={(better ? BetterColor : WorseColor)}>{(better ? "▲" : "▼")} {text}</color>"));
+            }
+            var result = lines.OrderByDescending(l => l.Better).Select(l => l.Text).ToList();
+
+            var gained = ItemCatalog.GetLegendary(candidate?.legendary ?? LegendaryId.None);
+            var lost = ItemCatalog.GetLegendary(worn?.legendary ?? LegendaryId.None);
+            if (gained != null && gained != lost) result.Add($"<color={BetterColor}>▲ ◆ {gained.Text}</color>");
+            if (lost != null && lost != gained) result.Add($"<color={WorseColor}>▼ ◆ {lost.Text}（失う）</color>");
+            if (result.Count == 0) result.Add("<color=#bfb6aa>性能は変わらない</color>");
+            return result;
         }
     }
 }

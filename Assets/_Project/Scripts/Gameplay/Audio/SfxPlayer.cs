@@ -205,6 +205,10 @@ namespace Game.Gameplay
                     if (IsLocal(e.ClientId)) Play("soul", null, 1f + UnityEngine.Random.value * 0.3f);
                     break;
                 case SimEventType.TeamLevelUp: Play("levelup"); break;
+                case SimEventType.LegendaryProc:
+                    if (e.Int == (int)LegendaryId.None) Play("bolt", e.Pos, 1.6f, 0.6f);
+                    else Play("blink", e.Pos, 0.7f);
+                    break;
                 case SimEventType.LootDropped:
                     if (IsLocal(e.ClientId) && e.Int >= (int)Rarity.Rare) Play("blink", e.Pos, 1.3f);
                     break;

@@ -69,6 +69,7 @@ namespace Game.Gameplay
             Set(SimEventType.GearSlot, F.Client | F.Int | F.Seed);
             Set(SimEventType.ItemGiven, F.Client | F.Id | F.Int);
             Set(SimEventType.ItemSalvaged, F.Client | F.Value);
+            Set(SimEventType.LegendaryProc, F.Client | F.Int | F.Pos | F.Vec);
             return layout;
         }
 

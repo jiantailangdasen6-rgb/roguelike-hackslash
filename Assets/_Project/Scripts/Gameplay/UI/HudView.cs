@@ -156,6 +156,7 @@ namespace Game.Gameplay
             gameObject.AddComponent<AllyOverlay>();
             gameObject.AddComponent<BagView>();
             gameObject.AddComponent<LootView>();
+            gameObject.AddComponent<LegendaryFxView>();
             RunDirector.EventReceived += OnEvent;
         }
 

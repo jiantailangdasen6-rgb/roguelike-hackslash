@@ -43,7 +43,19 @@ namespace Game.Gameplay
 
         private void OnEnable() => RunDirector.EventReceived += Count;
         private void OnDisable() => RunDirector.EventReceived -= Count;
-        private void Count(Game.Core.SimEvent _) => _eventCount++;
+        /// <summary>Gear this player got, by rarity (balance runs read it from the FINAL line).</summary>
+        private readonly int[] _loot = new int[4];
+        private int _legendaryProcs;
+
+        private void Count(Game.Core.SimEvent e)
+        {
+            _eventCount++;
+            bool mine = NetworkManager.Singleton != null && e.ClientId == NetworkManager.Singleton.LocalClientId;
+            if (!mine) return;
+            if (e.Type == Game.Core.SimEventType.LootDropped && e.Int >= 0 && e.Int < 4) _loot[e.Int]++;
+            else if (e.Type == Game.Core.SimEventType.LootPicked && e.Id == 0 && e.Int >= 0 && e.Int < 4) _loot[e.Int]++; // treasure door, straight into the bag
+            else if (e.Type == Game.Core.SimEventType.LegendaryProc && e.Int != 0) _legendaryProcs++;
+        }
 
         private void Update()
         {
@@ -113,7 +125,7 @@ namespace Game.Gameplay
                 ? "run=none"
                 : $"started={d.Started.Value} phase={d.Phase.Value} room={d.RoomIndex.Value} level={d.TeamLevel.Value} paused={d.Paused.Value} elapsed={d.Elapsed.Value}";
             string player = local == null ? "local=none" : $"local=P{local.Slot.Value + 1}:{local.Class.Value} hp={local.Hp.Value}/{local.MaxHp.Value} downed={local.Downed.Value} pos={(Vector2)local.transform.position}";
-            return $"role={role} peers={peers} players={NetPlayer.All.Count} {run} enemiesVisible={enemyView?.VisibleCount ?? 0} events={_eventCount} {player} kills={(d != null && d.IsSpawned ? d.Kills.Value : 0)} shards={ProfileStore.Current.shards}";
+            return $"role={role} peers={peers} players={NetPlayer.All.Count} {run} enemiesVisible={enemyView?.VisibleCount ?? 0} events={_eventCount} {player} kills={(d != null && d.IsSpawned ? d.Kills.Value : 0)} shards={ProfileStore.Current.shards} loot={_loot[0]}/{_loot[1]}/{_loot[2]}/{_loot[3]} procs={_legendaryProcs}";
         }
     }
 }

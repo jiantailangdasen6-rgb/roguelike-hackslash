@@ -72,6 +72,26 @@ namespace Game.Tests
         }
 
         [Test]
+        public void CompareLines_ShowBetterInGreen_WorseInRed_AndLegendariesGainedOrLost()
+        {
+            var weak = ItemFor(EquipSlot.Ring, 1);
+            weak.baseId = "copper_ring";
+            weak.affixes.Clear();
+            weak.itemLevel = 1;
+            var strong = ItemCodec.Unpack(ItemCodec.Pack(weak));
+            strong.itemLevel = 10;
+            strong.legendary = LegendaryId.WhirlwindBlade;
+
+            var up = ItemText.CompareLines(strong, weak);
+            Assert.That(up.Any(l => l.Contains(ItemText.BetterColor) && l.Contains("与えるダメージ")));
+            Assert.That(up.Any(l => l.Contains("◆")), "the legendary effect is listed as gained");
+            var down = ItemText.CompareLines(weak, strong);
+            Assert.That(down.Any(l => l.Contains(ItemText.WorseColor) && l.Contains("与えるダメージ")));
+            Assert.That(down.Any(l => l.Contains("失う")));
+            Assert.That(ItemText.CompareLines(weak, weak).Single(), Does.Contain("変わらない"));
+        }
+
+        [Test]
         public void Legendary_CarriesAUniqueForTheOwnersClass()
         {
             int found = 0;

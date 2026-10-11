@@ -239,6 +239,7 @@ namespace Game.Core
         GearSlot,        // ClientId, Int = slot (0..3 equipped, 4.. bag), Seed = packed item or 0 when empty
         ItemGiven,       // ClientId = giver, Id = receiver client, Int = Rarity
         ItemSalvaged,    // ClientId, Value = soul shards
+        LegendaryProc,   // ClientId, Int = LegendaryId (None = a plain chain bolt), Pos, Vec = chain target (zero = none)
     }
 
     /// <summary>Something that happened during a tick; the network layer sends these to clients for presentation.</summary>

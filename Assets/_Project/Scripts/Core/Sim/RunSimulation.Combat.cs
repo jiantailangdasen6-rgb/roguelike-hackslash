@@ -198,6 +198,7 @@ namespace Game.Core
                 {
                     // Legendary "影の": a fan of three.
                     int arrows = p.HasLegendary(LegendaryId.ShadowQuiver) ? 3 : 1;
+                    if (arrows > 1) Proc(p, LegendaryId.ShadowQuiver, p.Position);
                     for (int k = 0; k < arrows; k++)
                     {
                         Vector2 d = Rotate(dir, (k - (arrows - 1) * 0.5f) * 12f);
@@ -229,6 +230,7 @@ namespace Game.Core
                     bool drum = p.HasLegendary(LegendaryId.WarDrum);
                     float radius = ClassCatalog.WarCryRadius * area * (drum ? 2f : 1f);
                     float allyReach = ClassCatalog.WarCryAllyRadius * (drum ? 2f : 1f);
+                    if (drum) Proc(p, LegendaryId.WarDrum, p.Position);
                     Enemies.QueryCircle(p.Position, radius, _hits);
                     foreach (int i in _hits.ToArray())
                     {
@@ -297,6 +299,7 @@ namespace Game.Core
                             Enemies[best].MarkBonus = ClassCatalog.MarkDamageBonus + 0.15f * deep;
                             ApplyStatus(best, StatusKind.Marked, ClassCatalog.MarkDuration * (1f + p.Stats.Get(StatType.MarkDuration)));
                             Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Mark, Pos = Enemies[best].Position, Value = 1.2f });
+                            Proc(p, LegendaryId.HuntGodMark, at, Enemies[best].Position);
                         }
                     }
                     break;
@@ -316,7 +319,11 @@ namespace Game.Core
             if (p.DashSlashTimer <= 0f)
             {
                 Earthshake(p);
-                if (p.HasLegendary(LegendaryId.WhirlwindBlade)) WhirlwindFinish(p);
+                if (p.HasLegendary(LegendaryId.WhirlwindBlade))
+                {
+                    WhirlwindFinish(p);
+                    Proc(p, LegendaryId.WhirlwindBlade, p.Position);
+                }
             }
             float damage = ClassCatalog.DashSlashDamage * p.Stats.Get(StatType.Might) * (1f + 0.2f * p.PerkLevel(PerkId.Rush));
             // Sweep from the start point to where the player is now (they travel on their own client).
@@ -385,7 +392,11 @@ namespace Game.Core
                 if (area.Kind == AreaKind.FrostNova)
                 {
                     var p = area.Owner;
-                    if (p.HasLegendary(LegendaryId.FrostCrown)) area.Position = p.Position; // "霜の王の": the field moves with its caster
+                    if (p.HasLegendary(LegendaryId.FrostCrown))
+                    {
+                        area.Position = p.Position; // "霜の王の": the field moves with its caster
+                        Proc(p, LegendaryId.FrostCrown, p.Position);
+                    }
                     float duration = (ClassCatalog.FreezeDuration + p.PerkLevel(PerkId.Permafrost)) * (1f + p.Stats.Get(StatType.FreezeDuration));
                     Enemies.QueryCircle(area.Position, area.Radius, _hits);
                     foreach (int i in _hits.ToArray())
@@ -516,6 +527,7 @@ namespace Game.Core
                     proj.HitIds.Add(Enemies[next].Id);
                     Vector2 to = Enemies[next].Position;
                     DamageEnemy(next, proj.Damage * 0.6f, owner, HitFlags.None, (to - from).normalized, 1f);
+                    Proc(owner, owner.HasLegendary(LegendaryId.ThunderStaff) ? LegendaryId.ThunderStaff : LegendaryId.None, from, to);
                     lastId = Enemies[next].Id;
                     from = to;
                 }

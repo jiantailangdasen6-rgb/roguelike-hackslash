@@ -21,6 +21,9 @@ namespace Game.Gameplay
         private GameObject _waiting;
         private GameObject _mastery;
         private InputField _address;
+        private InputField _code;
+        private bool _busy;
+        private string _autoJoinCodeFile;
         private Text _status;
         private Text _waitingText;
         private Button _startButton;
@@ -56,9 +59,15 @@ namespace Game.Gameplay
             else if (CommandLine.Has("-autohost"))
             {
                 _autoHostPlayers = Mathf.Clamp((int)CommandLine.GetFloat("-autohost", 2), 1, GameSession.MaxPlayers);
-                Host();
+                HostLan();
             }
             else if (CommandLine.Has("-autojoin")) _autoJoin = CommandLine.GetValue("-autojoin");
+            else if (CommandLine.Has("-onlinehost"))
+            {
+                _autoHostPlayers = Mathf.Clamp((int)CommandLine.GetFloat("-onlinehost", 2), 1, GameSession.MaxPlayers);
+                HostOnline();
+            }
+            else if (CommandLine.Has("-onlinejoinfile")) _autoJoinCodeFile = CommandLine.GetValue("-onlinejoinfile");
         }
 
         // ------------------------------------------------------------------ Layout
@@ -125,18 +134,31 @@ namespace Game.Gameplay
             _shardsText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(560f, 40f), new Vector2(-70f, -236f));
             _trinketList = UIKit.Rect("Trinkets", menu).Place(new Vector2(1f, 1f), new Vector2(560f, 620f), new Vector2(-70f, -290f));
 
-            // Bottom: play
+            // Bottom: play. Online = Unity Relay with a room code (works in browsers); LAN = direct IP (desktop only).
             _soloButton = UIKit.Button(menu, "ひとりで挑む", 34, () => GameSession.StartSolo(), UIKit.BloodColor);
-            _soloButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(360f, 86f), new Vector2(-560f, 60f));
-            var host = UIKit.Button(menu, "部屋を作る（ホスト）", 32, Host);
-            host.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(380f, 86f), new Vector2(-160f, 60f));
-            _address = CreateInputField(menu, PlayerPrefs.GetString("lastAddress", "192.168."));
-            _address.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(320f, 86f), new Vector2(210f, 60f));
-            var join = UIKit.Button(menu, "参加する", 32, () => Join(_address.text));
-            join.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(220f, 86f), new Vector2(500f, 60f));
+            _soloButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(340f, 86f), new Vector2(-570f, 96f));
+            var hostOnline = UIKit.Button(menu, "仲間を誘う（部屋を作る）", 30, HostOnline);
+            hostOnline.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(420f, 86f), new Vector2(-160f, 96f));
+            _code = CreateInputField(menu, "", "ルームコード");
+            _code.characterLimit = 8;
+            _code.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(270f, 86f), new Vector2(210f, 96f));
+            var joinOnline = UIKit.Button(menu, "コードで参加", 30, () => JoinOnline(_code.text));
+            joinOnline.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(260f, 86f), new Vector2(490f, 96f));
+
+            if (!GameSession.IsBrowser)
+            {
+                var lan = UIKit.Label(menu, "同じWi-Fi（LAN）：", 22, TextAnchor.MiddleRight, UIKit.MutedText);
+                lan.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(260f, 50f), new Vector2(-330f, 26f));
+                var host = UIKit.Button(menu, "LANで部屋を作る", 22, HostLan);
+                host.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(230f, 50f), new Vector2(-80f, 26f));
+                _address = CreateInputField(menu, PlayerPrefs.GetString("lastAddress", "192.168."), "ホストのIP");
+                _address.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(240f, 50f), new Vector2(170f, 26f));
+                var join = UIKit.Button(menu, "IPで参加", 22, () => JoinLan(_address.text));
+                join.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(160f, 50f), new Vector2(380f, 26f));
+            }
 
             _status = UIKit.Label(root, "", 26, TextAnchor.MiddleCenter, new Color(1f, 0.55f, 0.5f));
-            _status.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1400f, 40f), new Vector2(0f, 10f));
+            _status.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1400f, 30f), new Vector2(0f, 184f));
 
             BuildMastery(root);
             BuildWaiting(root);
@@ -176,13 +198,13 @@ namespace Game.Gameplay
             _waiting.SetActive(false);
         }
 
-        private static InputField CreateInputField(Transform parent, string initial)
+        private static InputField CreateInputField(Transform parent, string initial, string hint)
         {
             var bg = UIKit.Framed(parent, "Address", new Color(0.12f, 0.1f, 0.1f, 1f));
             var text = UIKit.Label(bg.transform, "", 30, TextAnchor.MiddleLeft, Color.white);
             text.supportRichText = false;
             text.rectTransform.Stretch(14f);
-            var placeholder = UIKit.Label(bg.transform, "ホストのIP", 30, TextAnchor.MiddleLeft, new Color(1f, 1f, 1f, 0.35f));
+            var placeholder = UIKit.Label(bg.transform, hint, 26, TextAnchor.MiddleLeft, new Color(1f, 1f, 1f, 0.35f));
             placeholder.rectTransform.Stretch(14f);
             var field = bg.Outer().gameObject.AddComponent<InputField>();
             field.textComponent = text;
@@ -232,7 +254,7 @@ namespace Game.Gameplay
                 bool equipped = unlocked && Profile.equippedTrinkets.Contains(t.Id);
                 var item = UIKit.Framed(_trinketList, t.Id, equipped ? new Color(0.16f, 0.1f, 0.06f, 1f) : new Color(0.06f, 0.05f, 0.06f, 1f),
                     equipped ? UIKit.AccentColor : UIKit.GoldTrim * 0.6f);
-                item.Outer().Place(new Vector2(0f, 1f), new Vector2(560f, 70f), new Vector2(0f, -row * 76f));
+                item.Outer().Place(new Vector2(0f, 1f), new Vector2(560f, 66f), new Vector2(0f, -row * 72f));
                 var label = UIKit.Label(item.transform, $"<b>{t.Name}</b>\n<size=20><color=#bfb6aa>{t.Text}</color></size>", 24, TextAnchor.MiddleLeft,
                     unlocked ? Color.white : new Color(1f, 1f, 1f, 0.5f));
                 label.rectTransform.Stretch(10f);
@@ -298,9 +320,9 @@ namespace Game.Gameplay
 
         // ------------------------------------------------------------------ Session
 
-        private void Host()
+        private void HostLan()
         {
-            if (!GameSession.StartHost())
+            if (!GameSession.StartLanHost())
             {
                 _status.text = "部屋を作れませんでした（ポート7777が使用中かもしれません）";
                 return;
@@ -308,16 +330,64 @@ namespace Game.Gameplay
             _state = State.Hosting;
         }
 
-        private void Join(string address)
+        private void JoinLan(string address)
         {
             if (string.IsNullOrWhiteSpace(address)) return;
             PlayerPrefs.SetString("lastAddress", address);
-            if (!GameSession.StartClient(address))
+            if (!GameSession.StartLanClient(address))
             {
                 _status.text = "接続を開始できませんでした";
                 return;
             }
             _state = State.Joining;
+        }
+
+        private async void HostOnline()
+        {
+            if (_busy) return;
+            _busy = true;
+            _status.text = "部屋を準備しています…";
+            try
+            {
+                string code = await GameSession.StartOnlineHostAsync();
+                _status.text = "";
+                _state = State.Hosting;
+                string codeFile = CommandLine.GetValue("-codefile");
+                if (codeFile != null) System.IO.File.WriteAllText(codeFile, code);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogWarning($"[Lobby] Online host failed: {ex}");
+                _status.text = $"部屋を作れませんでした：{ex.Message}";
+                if (GameSession.Network.IsListening) GameSession.Network.Shutdown();
+            }
+            finally
+            {
+                _busy = false;
+            }
+        }
+
+        private async void JoinOnline(string code)
+        {
+            if (_busy || string.IsNullOrWhiteSpace(code)) return;
+            _busy = true;
+            _status.text = "接続しています…";
+            try
+            {
+                await GameSession.StartOnlineClientAsync(code);
+                _status.text = "";
+                _state = State.Joining;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogWarning($"[Lobby] Online join failed: {ex}");
+                _status.text = "参加できませんでした。コードを確かめてください";
+                if (GameSession.Network.IsClient) GameSession.Network.Shutdown();
+            }
+            finally
+            {
+                _busy = false;
+            }
         }
 
         private void Update()
@@ -327,7 +397,13 @@ namespace Game.Gameplay
             if (_autoJoin != null && _state == State.Menu && Time.time >= _nextAutoJoin && !nm.ShutdownInProgress)
             {
                 _nextAutoJoin = Time.time + 2f;
-                Join(_autoJoin);
+                JoinLan(_autoJoin);
+            }
+            // Automated online test: join with the code the host instance wrote to a file.
+            if (_autoJoinCodeFile != null && _state == State.Menu && !_busy && Time.time >= _nextAutoJoin && !nm.ShutdownInProgress)
+            {
+                _nextAutoJoin = Time.time + 3f;
+                if (System.IO.File.Exists(_autoJoinCodeFile)) JoinOnline(System.IO.File.ReadAllText(_autoJoinCodeFile));
             }
             if (_state == State.Joining && !nm.IsClient && !nm.ShutdownInProgress) _state = State.Menu;
 
@@ -341,9 +417,10 @@ namespace Game.Gameplay
                 {
                     var names = nm.ConnectedClientsIds.Select(id => ClassCatalog.Get(GameSession.LoadoutFor(id).classId).Name);
                     int count = nm.ConnectedClientsIds.Count;
-                    _waitingText.text = $"部屋を作りました\n\nあなたのIP：<color=#e0b45a>{GameSession.LocalAddress()}</color>\n" +
-                                        $"<size=24><color=#bfb6aa>同じWi-Fiの仲間はこのIPで参加できます</color></size>\n\n" +
-                                        $"仲間 {count} / {GameSession.MaxPlayers}：{string.Join("・", names)}";
+                    string invite = GameSession.JoinCode != null
+                        ? $"ルームコード：<size=56><color=#e0b45a>{GameSession.JoinCode}</color></size>\n<size=24><color=#bfb6aa>仲間にこのコードを伝えて「コードで参加」してもらおう（PC・ブラウザどちらでも）</color></size>"
+                        : $"あなたのIP：<color=#e0b45a>{GameSession.LocalAddress()}</color>\n<size=24><color=#bfb6aa>同じWi-Fiの仲間はこのIPで参加できます</color></size>";
+                    _waitingText.text = $"部屋を作りました\n\n{invite}\n\n仲間 {count} / {GameSession.MaxPlayers}：{string.Join("・", names)}";
                     if (_autoHostPlayers > 0 && count >= _autoHostPlayers && !GameSession.InGame) GameSession.StartGame();
                     break;
                 }

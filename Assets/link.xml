@@ -1,0 +1,10 @@
+<!-- Keep code that is reached through reflection/serialization when managed code stripping is on (WebGL). -->
+<linker>
+  <assembly fullname="Game.Core" preserve="all" />
+  <assembly fullname="Game.Gameplay" preserve="all" />
+  <assembly fullname="Game.UI" preserve="all" />
+  <assembly fullname="Unity.Netcode.Runtime" preserve="all" />
+  <assembly fullname="Unity.Services.Core" preserve="all" />
+  <assembly fullname="Unity.Services.Authentication" preserve="all" />
+  <assembly fullname="Unity.Services.Multiplayer" preserve="all" />
+</linker>

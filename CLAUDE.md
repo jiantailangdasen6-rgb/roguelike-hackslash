@@ -30,10 +30,26 @@ powershell -File Tools/RunMethod.ps1 -Method Game.EditorTools.PlayerBuild.BuildW
 powershell -File Tools/NetTest.ps1              # host(warrior)+2 clients(mage, ranger), bots, Logs/net/
 powershell -File Tools/Screenshots.ps1 -Class mage -Times "10,22,34"   # Logs/shots/
 ```
-Player flags: `-autosolo`, `-autohost <n>`, `-autojoin <ip>`, `-botmove`, `-class warrior|mage|ranger`, `-autoquit <s>`,
+Browser version (GitHub Pages, public repo `jiantailangdasen6-rgb/roguelike-web`, branch `gh-pages`, build output only):
+```
+powershell -File Tools/BuildWeb.ps1             # fonts subset + builder + tests + WebGL build (Builds/WebGL)
+powershell -File Tools/ServeWeb.ps1             # local test at http://localhost:8099/
+powershell -File Tools/DeployWeb.ps1            # publish to https://jiantailangdasen6-rgb.github.io/roguelike-web/
+```
+Online co-op uses Unity Relay over secure WebSockets (room codes; browsers can't host LAN). It needs the Unity Cloud
+project id in `ProjectSettings/ProjectSettings.asset` (`cloudProjectId`); without it the online buttons explain it's unavailable.
+Solo uses NGO's `SinglePlayerTransport` (no sockets, works in browsers).
+
+Player flags: `-autosolo`, `-onlinehost <n> -codefile <path>`, `-onlinejoinfile <path>`, `-autohost <n>`, `-autojoin <ip>`, `-botmove`, `-class warrior|mage|ranger`, `-autoquit <s>`,
 `-screenshot <path> -screenshotat <s1,s2,..>`, `-profile <name>`, `-localonly`.
 
 ## Gotchas
+- **Japanese text uses bundled subset fonts** (`Resources/Fonts/Body.ttf`, `Title.ttf`, from `Tools/SubsetFonts.ps1`, full fonts
+  in `Tools/FontSubset/cache/`, not in git). Browsers have no OS fonts: after adding new Japanese text, re-run the subset or
+  the new characters won't render. Credits in `Docs/credits.md`.
+- Tools/*.ps1 run under Windows PowerShell 5.1, which reads BOM-less UTF-8 as the ANSI code page: keep scripts ASCII-only.
+- WebGL: Gzip + decompression fallback (Brotli failed on Pages for the card game), Medium stripping with `Assets/link.xml`;
+  profiles are saved in PlayerPrefs there (no file system).
 - MonoBehaviours must live in a file named after the class (Unity can't attach them otherwise).
 - `UnityEngine.UI.SafeArea` exists in ugui 2.6 — don't create a same-named class.
 - Engine modules aren't listed by default in this template; add `com.unity.modules.*` when an API is missing.

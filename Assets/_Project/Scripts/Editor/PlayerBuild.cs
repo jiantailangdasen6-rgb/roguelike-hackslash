@@ -1,31 +1,52 @@
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 namespace Game.EditorTools
 {
     /// <summary>
-    /// Builds a Windows development player to Builds/Windows/ for multi-instance network tests.
-    ///   Unity.exe -batchmode -quit -projectPath . -executeMethod Game.EditorTools.PlayerBuild.BuildWindows
+    /// Player builds.
+    ///   Unity.exe -batchmode -quit -projectPath . -executeMethod Game.EditorTools.PlayerBuild.BuildWindows   (Builds/Windows/)
+    ///   Unity.exe -batchmode -quit -projectPath . -executeMethod Game.EditorTools.PlayerBuild.BuildWebGL     (Builds/WebGL/)
     /// </summary>
     public static class PlayerBuild
     {
         public const string WindowsPath = "Builds/Windows/LabyrinthOfTheDead.exe";
+        public const string WebGLPath = "Builds/WebGL";
 
         [MenuItem("Tools/Game/Build Windows Player")]
-        public static void BuildWindows()
+        public static void BuildWindows() => Build(WindowsPath, BuildTarget.StandaloneWindows64, BuildOptions.Development);
+
+        [MenuItem("Tools/Game/Build WebGL Player")]
+        public static void BuildWebGL()
         {
-            var options = new BuildPlayerOptions
+            // Lessons from the card game's browser build: Gzip + decompression fallback (Brotli failed on GitHub Pages),
+            // Medium stripping with link.xml, no splash screen.
+            PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
+            PlayerSettings.WebGL.decompressionFallback = true;
+            PlayerSettings.WebGL.exceptionSupport = WebGLExceptionSupport.ExplicitlyThrownExceptionsOnly;
+            PlayerSettings.WebGL.dataCaching = true;
+            PlayerSettings.SetManagedStrippingLevel(NamedBuildTarget.WebGL, ManagedStrippingLevel.Medium);
+            PlayerSettings.SplashScreen.show = false;
+            PlayerSettings.defaultWebScreenWidth = 1280;
+            PlayerSettings.defaultWebScreenHeight = 720;
+            PlayerSettings.runInBackground = true;
+            Build(WebGLPath, BuildTarget.WebGL, BuildOptions.None);
+        }
+
+        private static void Build(string path, BuildTarget target, BuildOptions options)
+        {
+            var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
             {
                 scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray(),
-                locationPathName = WindowsPath,
-                target = BuildTarget.StandaloneWindows64,
-                options = BuildOptions.Development,
-            };
-            var report = BuildPipeline.BuildPlayer(options);
+                locationPathName = path,
+                target = target,
+                options = options,
+            });
             var summary = report.summary;
-            Debug.Log($"[PlayerBuild] {summary.result} in {summary.totalTime.TotalSeconds:0}s, {summary.totalErrors} error(s) -> {WindowsPath}");
+            Debug.Log($"[PlayerBuild] {target} {summary.result} in {summary.totalTime.TotalSeconds:0}s, {summary.totalErrors} error(s), {summary.totalSize / 1048576f:0.0} MB -> {path}");
             if (summary.result != BuildResult.Succeeded) EditorApplication.Exit(1);
         }
     }

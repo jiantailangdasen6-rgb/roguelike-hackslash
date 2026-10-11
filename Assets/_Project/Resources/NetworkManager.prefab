@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 318912923653873935}
   - component: {fileID: 4047889197086346672}
+  - component: {fileID: 4109034399446949128}
   - component: {fileID: 6806209571158422163}
   m_Layer: 0
   m_Name: NetworkManager
@@ -64,6 +65,18 @@ MonoBehaviour:
     PacketDelayMS: 0
     PacketJitterMS: 0
     PacketDropRate: 0
+--- !u!114 &4109034399446949128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5918955315027081434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fd89dc549847f4096c58273ff2e979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Transports.SinglePlayer.SinglePlayerTransport
 --- !u!114 &6806209571158422163
 MonoBehaviour:
   m_ObjectHideFlags: 0

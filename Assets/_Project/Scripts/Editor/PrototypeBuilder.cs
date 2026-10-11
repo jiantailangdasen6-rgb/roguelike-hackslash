@@ -9,6 +9,7 @@ using Game.UI;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+using Unity.Netcode.Transports.SinglePlayer;
 using Unity.Netcode.Transports.UTP;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -258,6 +259,7 @@ namespace Game.EditorTools
 
             var go = new GameObject("NetworkManager");
             var transport = go.AddComponent<UnityTransport>();
+            go.AddComponent<SinglePlayerTransport>(); // solo play without sockets (works in browsers)
             var nm = go.AddComponent<NetworkManager>();
             nm.NetworkConfig.NetworkTransport = transport;
             nm.NetworkConfig.PlayerPrefab = null;

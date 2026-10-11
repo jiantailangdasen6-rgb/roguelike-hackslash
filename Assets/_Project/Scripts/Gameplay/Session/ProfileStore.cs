@@ -25,11 +25,17 @@ namespace Game.Gameplay
             }
         }
 
+        // Browsers have no real file system; PlayerPrefs is persisted to IndexedDB by Unity.
+        private static bool UsePrefs => Application.platform == RuntimePlatform.WebGLPlayer;
+        private const string PrefsKey = "profile";
+
         private static ProfileData Load()
         {
             try
             {
-                var p = File.Exists(FilePath) ? ProfileData.FromJson(File.ReadAllText(FilePath)) : ProfileData.Default();
+                var p = UsePrefs
+                    ? ProfileData.FromJson(PlayerPrefs.GetString(PrefsKey, ""))
+                    : File.Exists(FilePath) ? ProfileData.FromJson(File.ReadAllText(FilePath)) : ProfileData.Default();
                 // Automated runs can pick a class: -class warrior|mage|ranger
                 string cls = CommandLine.GetValue("-class");
                 if (cls != null && Enum.TryParse(cls, true, out ClassId id)) p.selectedClass = id;
@@ -47,7 +53,15 @@ namespace Game.Gameplay
             if (_current == null) return;
             try
             {
-                File.WriteAllText(FilePath, _current.ToJson());
+                if (UsePrefs)
+                {
+                    PlayerPrefs.SetString(PrefsKey, _current.ToJson());
+                    PlayerPrefs.Save();
+                }
+                else
+                {
+                    File.WriteAllText(FilePath, _current.ToJson());
+                }
             }
             catch (Exception ex)
             {

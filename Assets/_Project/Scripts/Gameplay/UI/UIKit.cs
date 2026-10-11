@@ -27,6 +27,9 @@ namespace Game.Gameplay
             get
             {
                 if (_font != null) return _font;
+                // Bundled subset fonts (Tools/SubsetFonts.ps1) — browsers have no OS fonts to fall back on.
+                _font = Resources.Load<Font>("Fonts/Body");
+                if (_font != null) return _font;
                 _font = Font.CreateDynamicFontFromOSFont(new[]
                 {
                     "Yu Gothic UI", "Meiryo UI", "Meiryo", "MS Gothic",
@@ -42,6 +45,8 @@ namespace Game.Gameplay
         {
             get
             {
+                if (_titleFont != null) return _titleFont;
+                _titleFont = Resources.Load<Font>("Fonts/Title");
                 if (_titleFont != null) return _titleFont;
                 _titleFont = Font.CreateDynamicFontFromOSFont(new[]
                 {

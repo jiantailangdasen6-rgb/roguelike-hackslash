@@ -25,6 +25,7 @@ namespace Game.Core
         Upgrade,  // raise one perk you already have by a level
         Vigor,    // max HP up and a full heal
         Shards,   // bonus soul shards at the end of the run
+        Treasure, // a piece of gear (rare or better) for everyone
     }
 
     /// <summary>One of the exits that open when a room is cleared. A trial door doubles the reward but toughens the room behind it.</summary>
@@ -222,6 +223,11 @@ namespace Game.Core
         PlayerRejoined,  // ClientId, Pos (came back after dropping out)
         PlayerLeft,      // ClientId, Pos (dropped out; their character is kept for a while)
         TeamLevelUp,     // Int = new team level (the pick is banked until the room is cleared)
+        LootDropped,     // Id, ClientId = owner, Pos, Seed = packed item, Int = Rarity (only the owner sees it)
+        LootPicked,      // Id (0 = straight into the bag), ClientId, Int = Rarity (-1 = lost: bag full on leaving)
+        GearSlot,        // ClientId, Int = slot (0..3 equipped, 4.. bag), Seed = packed item or 0 when empty
+        ItemGiven,       // ClientId = giver, Id = receiver client, Int = Rarity
+        ItemSalvaged,    // ClientId, Value = soul shards
     }
 
     /// <summary>Something that happened during a tick; the network layer sends these to clients for presentation.</summary>

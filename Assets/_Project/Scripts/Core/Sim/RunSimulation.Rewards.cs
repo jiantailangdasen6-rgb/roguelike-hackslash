@@ -47,7 +47,7 @@ namespace Game.Core
             bool nextIsBoss = next % RoomsPerArea == RoomsPerArea - 1;
             int count = Room.Area >= 1 && !nextIsBoss && _doorRng.Chance(0.35f) ? 3 : 2;
 
-            var pool = new List<(RoomReward Reward, int Weight)> { (RoomReward.Boon, 40), (RoomReward.Vigor, 20), (RoomReward.Shards, 16) };
+            var pool = new List<(RoomReward Reward, int Weight)> { (RoomReward.Boon, 40), (RoomReward.Vigor, 20), (RoomReward.Shards, 14), (RoomReward.Treasure, 22) };
             if (AnyUpgradeable()) pool.Add((RoomReward.Upgrade, 28));
 
             // Before a boss the team can always choose to heal up instead of growing stronger.
@@ -118,6 +118,10 @@ namespace Game.Core
                         if (p.Hp > before) Events.Add(new SimEvent(SimEventType.PlayerHealed) { ClientId = p.ClientId, Pos = p.Position, Value = p.Hp - before });
                     }
                     amount = VigorPerStack * 100f * times;
+                    break;
+                case RoomReward.Treasure:
+                    GrantTreasure(times);
+                    amount = times;
                     break;
                 case RoomReward.Shards:
                     int shards = ShardReward(Room.Area) * times;

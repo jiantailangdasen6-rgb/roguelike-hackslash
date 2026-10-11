@@ -1,0 +1,203 @@
+using System.Linq;
+using Game.Core;
+using NUnit.Framework;
+using UnityEngine;
+
+namespace Game.Tests
+{
+    /// <summary>Gear: item rolls, the 64-bit wire format, equipping, personal drops and the bag actions.</summary>
+    public class GearTests
+    {
+        private const float Dt = 1f / 30f;
+
+        private static ItemInstance ItemFor(EquipSlot slot, ulong startSeed, ClassId cls = ClassId.Warrior)
+        {
+            for (ulong seed = startSeed; ; seed++)
+            {
+                var item = ItemGenerator.Generate(seed, 3, 1f, cls);
+                if (item.Slot == slot) return item;
+            }
+        }
+
+        [Test]
+        public void Catalog_HasTwentyAffixes_AndSixLegendaries()
+        {
+            Assert.AreEqual(20, ItemCatalog.Affixes.Length);
+            Assert.AreEqual(20, ItemCatalog.Affixes.Select(a => a.Id).Distinct().Count());
+            Assert.AreEqual(6, ItemCatalog.Legendaries.Length);
+            foreach (ClassId c in System.Enum.GetValues(typeof(ClassId)))
+                Assert.AreEqual(2, ItemCatalog.Legendaries.Count(l => l.Class == c), $"{c} has two legendaries");
+            foreach (var a in ItemCatalog.Affixes)
+                Assert.That(ItemText.StatName(a.Stat), Does.Not.Contain(a.Stat.ToString()), $"{a.Id} needs a Japanese name");
+        }
+
+        [Test]
+        public void Codec_RoundTripsEveryRoll()
+        {
+            for (ulong seed = 1; seed < 3000; seed++)
+            {
+                var item = ItemGenerator.Generate(seed, (int)(seed % 12) + 1, (seed % 4), (ClassId)(seed % 3));
+                ulong packed = ItemCodec.Pack(item);
+                Assert.AreNotEqual(0ul, packed);
+                var back = ItemCodec.Unpack(packed);
+                Assert.AreEqual(item.baseId, back.baseId);
+                Assert.AreEqual(item.rarity, back.rarity);
+                Assert.AreEqual(item.classId, back.classId);
+                Assert.AreEqual(item.legendary, back.legendary);
+                Assert.AreEqual(item.itemLevel, back.itemLevel);
+                Assert.AreEqual(item.affixes.Count, back.affixes.Count);
+                for (int i = 0; i < item.affixes.Count; i++)
+                {
+                    Assert.AreEqual(item.affixes[i].affixId, back.affixes[i].affixId);
+                    Assert.AreEqual(item.affixes[i].value, back.affixes[i].value, 1e-5f);
+                }
+            }
+            Assert.IsNull(ItemCodec.Unpack(0));
+        }
+
+        [Test]
+        public void Legendary_CarriesAUniqueForTheOwnersClass()
+        {
+            int found = 0;
+            for (ulong seed = 1; seed < 4000 && found < 20; seed++)
+            {
+                var item = ItemGenerator.Generate(seed, 5, 3f, ClassId.Mage);
+                if (item.rarity != Rarity.Legendary) continue;
+                found++;
+                Assert.AreEqual(ClassId.Mage, ItemCatalog.GetLegendary(item.legendary).Class);
+                Assert.That(ItemText.Name(item), Does.StartWith(ItemCatalog.GetLegendary(item.legendary).Name));
+            }
+            Assert.Greater(found, 0);
+        }
+
+        [Test]
+        public void Equip_AppliesStats_AndSwapsTheOldPieceBackIntoTheBag()
+        {
+            var p = new SimPlayer(0, Vector2.zero, new Loadout { classId = ClassId.Warrior });
+            float hp = p.MaxHp;
+            float armor = p.Stats.Get(StatType.Armor);
+            var armor1 = ItemFor(EquipSlot.Armor, 1);
+            var armor2 = ItemFor(EquipSlot.Armor, 5000);
+            p.Bag.Add(armor1);
+            p.Bag.Add(armor2);
+
+            Assert.IsTrue(p.Equip(0));
+            Assert.AreSame(armor1, p.Equipped[(int)EquipSlot.Armor]);
+            Assert.AreEqual(1, p.Bag.Count);
+            Assert.IsTrue(p.MaxHp > hp || p.Stats.Get(StatType.Armor) > armor, "the armour's implicit (HP or armour) applies");
+
+            Assert.IsTrue(p.Equip(0)); // armor2 in, armor1 back to the bag
+            Assert.AreSame(armor2, p.Equipped[(int)EquipSlot.Armor]);
+            Assert.AreSame(armor1, p.Bag[0]);
+
+            Assert.IsTrue(p.Unequip(EquipSlot.Armor));
+            Assert.IsNull(p.Equipped[(int)EquipSlot.Armor]);
+            Assert.AreEqual(2, p.Bag.Count);
+            Assert.AreEqual(hp, p.MaxHp, 0.01f, "taking everything off restores the base stats");
+        }
+
+        [Test]
+        public void Drops_ArePersonal_AndPickedUpByWalkingOver()
+        {
+            var sim = new RunSimulation(80);
+            var a = sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
+            var b = sim.AddPlayer(1, new Loadout { classId = ClassId.Mage });
+            sim.Start();
+            var item = ItemGenerator.Generate(7, 1, 0f, ClassId.Warrior);
+            sim.Loot.Add(new LootDrop { Id = 99, Owner = 0, Item = item, Position = new Vector2(3f, 0f) });
+
+            b.Position = new Vector2(3f, 0f);
+            a.Position = new Vector2(-5f, 0f);
+            for (int i = 0; i < 5; i++)
+            {
+                sim.SetPlayerPosition(1, new Vector2(3f, 0f));
+                sim.SetPlayerPosition(0, new Vector2(-5f, 0f));
+                foreach (var p in sim.Players) p.InvulnerableTimer = 1f;
+                sim.Step(Dt);
+            }
+            Assert.AreEqual(0, b.Bag.Count, "someone else's drop can't be taken");
+            Assert.AreEqual(1, sim.Loot.Count);
+
+            sim.SetPlayerPosition(0, new Vector2(3f, 0f));
+            sim.Step(Dt);
+            Assert.AreEqual(1, a.Bag.Count);
+            Assert.AreEqual(0, sim.Loot.Count);
+            Assert.That(sim.Events.Any(e => e.Type == SimEventType.GearSlot && e.ClientId == 0 && e.Int == RunSimulation.BagSlotOffset && e.Seed == ItemCodec.Pack(item)));
+        }
+
+        [Test]
+        public void BagActions_OnlyBetweenFights()
+        {
+            var sim = new RunSimulation(81);
+            var a = sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
+            var b = sim.AddPlayer(1, new Loadout { classId = ClassId.Ranger });
+            sim.Start();
+            a.Bag.Add(ItemFor(EquipSlot.Weapon, 1));
+            a.Bag.Add(ItemFor(EquipSlot.Ring, 1));
+            a.Bag.Add(ItemFor(EquipSlot.Amulet, 1));
+
+            Assert.IsFalse(sim.EquipFromBag(0, 0), "not mid-fight");
+            sim.Room.Cleared = true;
+            Assert.IsTrue(sim.EquipFromBag(0, 1));
+            Assert.IsNotNull(a.Equipped[(int)EquipSlot.Ring]);
+
+            Assert.IsTrue(sim.GiveItem(0, 0, 1));
+            Assert.AreEqual(1, b.Bag.Count);
+            Assert.AreEqual(ClassId.Ranger, b.Bag[0].classId, "a weapon reshapes for its new owner");
+            Assert.That(ItemText.Name(b.Bag[0]), Does.Contain("弓"));
+
+            int shards = sim.BonusShards;
+            var amulet = a.Bag[0];
+            Assert.IsTrue(sim.SalvageItem(0, 0));
+            Assert.AreEqual(shards + RunSimulation.SalvageValue(amulet.rarity), sim.BonusShards);
+            Assert.AreEqual(0, a.Bag.Count);
+        }
+
+        [Test]
+        public void TreasureDoor_GivesEveryoneRareOrBetter()
+        {
+            var sim = new RunSimulation(82);
+            sim.AddPlayer(0);
+            sim.AddPlayer(1, new Loadout { classId = ClassId.Mage });
+            sim.Start();
+            sim.Room.Cleared = true;
+            sim.Room.Doors.Clear();
+            sim.Room.Doors.Add(new Door(RoomReward.Treasure, false));
+            sim.Room.Doors.Add(new Door(RoomReward.Vigor, false));
+            for (int i = 0; i < 120 && sim.Room.Index == 0; i++)
+            {
+                foreach (var p in sim.Players)
+                {
+                    p.InvulnerableTimer = 1f;
+                    sim.SetPlayerPosition(p.ClientId, RunSimulation.DoorPosition(0, 2, sim.Bounds));
+                    if (p.PendingOffer != null) sim.ChoosePerk(p.ClientId, 0);
+                }
+                sim.Step(Dt);
+            }
+            Assert.AreEqual(1, sim.Room.Index);
+            foreach (var p in sim.Players)
+            {
+                Assert.AreEqual(1, p.Bag.Count);
+                Assert.GreaterOrEqual(p.Bag[0].rarity, Rarity.Rare);
+            }
+        }
+
+        [Test]
+        public void FrozenDamageGear_HitsFrozenEnemiesHarder()
+        {
+            float Hit(float frozenBonus)
+            {
+                var sim = new RunSimulation(83);
+                var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Mage });
+                if (frozenBonus > 0f) p.Stats.AddModifier(new StatModifier(StatType.FrozenDamage, ModifierKind.Flat, frozenBonus), new object());
+                p.Stats.SetBase(StatType.CritChance, 0f);
+                sim.Enemies.Spawn(EnemyType.Skeleton, new Vector2(3f, 0f), 100f, 1f, false);
+                sim.ApplyStatus(0, StatusKind.Frozen, 5f);
+                float before = sim.Enemies[0].Health;
+                sim.DamageEnemy(0, 10f, p, HitFlags.None, Vector2.zero, 0f);
+                return before - sim.Enemies[0].Health;
+            }
+            Assert.AreEqual(Hit(0f) * 1.5f, Hit(0.5f), 0.01f);
+        }
+    }
+}

@@ -3,19 +3,21 @@ using System.Collections.Generic;
 namespace Game.Core
 {
     /// <summary>
-    /// Rolls items deterministically from a seed, so the host only has to send
-    /// (seed, item level, rarity boost) and each client rebuilds the same item.
+    /// Rolls loot: base (any slot), rarity, affixes (common 0, fine 1, rare 2, legendary 2 + a unique effect for the
+    /// owner's class). Deterministic for a seed.
     /// </summary>
     public static class ItemGenerator
     {
-        // Weights for Common / Magic / Rare. Legendary is not implemented yet.
-        private static readonly float[] BaseRarityWeights = { 60f, 30f, 10f };
+        // Common / Magic / Rare / Legendary.
+        private static readonly float[] BaseRarityWeights = { 58f, 30f, 10f, 2f };
 
-        /// <param name="rarityBoost">0 = normal enemy, 1 = elite, 3 = boss. Shifts weight toward higher rarities.</param>
-        public static ItemInstance Generate(ulong seed, int itemLevel, float rarityBoost = 0f)
+        /// <param name="rarityBoost">0 = normal enemy, 1 = elite, 3 = boss / treasure. Shifts weight toward higher rarities.</param>
+        /// <param name="minRarity">Floor for guaranteed drops (treasure doors).</param>
+        public static ItemInstance Generate(ulong seed, int itemLevel, float rarityBoost = 0f, ClassId owner = ClassId.Warrior, Rarity minRarity = Rarity.Common)
         {
             var rng = new GameRandom(seed);
             var rarity = RollRarity(rng, rarityBoost);
+            if (rarity < minRarity) rarity = minRarity;
             var baseDef = ItemCatalog.Bases[rng.Range(0, ItemCatalog.Bases.Length)];
 
             var item = new ItemInstance
@@ -23,16 +25,24 @@ namespace Game.Core
                 uid = seed.ToString("x16"),
                 baseId = baseDef.Id,
                 rarity = rarity,
-                itemLevel = itemLevel,
+                itemLevel = UnityEngine.Mathf.Clamp(itemLevel, 1, ItemCodec.MaxItemLevel),
+                classId = owner,
             };
 
             int affixCount = rarity switch
             {
-                Rarity.Common => rng.Range(0, 2),
-                Rarity.Magic => rng.Range(1, 3),
-                _ => rng.Range(3, 5),
+                Rarity.Common => 0,
+                Rarity.Magic => 1,
+                _ => 2,
             };
             RollAffixes(rng, item, affixCount);
+
+            if (rarity == Rarity.Legendary)
+            {
+                var options = new List<LegendaryDef>();
+                foreach (var def in ItemCatalog.Legendaries) if (def.Class == owner) options.Add(def);
+                if (options.Count > 0) item.legendary = options[rng.Range(0, options.Count)].Id;
+            }
             return item;
         }
 
@@ -41,16 +51,20 @@ namespace Game.Core
             float common = BaseRarityWeights[0] / (1f + boost);
             float magic = BaseRarityWeights[1] * (1f + boost * 0.5f);
             float rare = BaseRarityWeights[2] * (1f + boost * 1.5f);
-            float roll = rng.Value() * (common + magic + rare);
+            float legendary = BaseRarityWeights[3] * (1f + boost * 2f);
+            float roll = rng.Value() * (common + magic + rare + legendary);
             if (roll < common) return Rarity.Common;
             if (roll < common + magic) return Rarity.Magic;
-            return Rarity.Rare;
+            if (roll < common + magic + rare) return Rarity.Rare;
+            return Rarity.Legendary;
         }
 
         private static void RollAffixes(GameRandom rng, ItemInstance item, int count)
         {
             var pool = new List<AffixDef>(ItemCatalog.Affixes);
-            float scale = ItemCatalog.LevelScale(item.itemLevel);
+            // The implicit property isn't rolled again as an affix.
+            var implicitStat = item.Base.Implicit.Stat;
+            pool.RemoveAll(a => a.Stat == implicitStat);
 
             for (int n = 0; n < count && pool.Count > 0; n++)
             {
@@ -67,9 +81,76 @@ namespace Game.Core
 
                 var affix = pool[index];
                 pool.RemoveAt(index);
-                float value = (affix.Min + (affix.Max - affix.Min) * rng.Value()) * scale;
-                item.affixes.Add(new RolledAffix { affixId = affix.Id, value = value });
+                item.AddAffix(affix, rng.Range(0, ItemInstance.MaxRoll + 1));
             }
+        }
+    }
+
+    /// <summary>
+    /// One item in 64 bits, so a drop fits in a single event:
+    /// base 4 | rarity 2 | class 2 | legendary 3 | item level 5 | affix count 2 | 2 x (affix 5 + roll 7).
+    /// </summary>
+    public static class ItemCodec
+    {
+        public const int MaxItemLevel = 31;
+        public const int MaxAffixes = 2;
+
+        public static ulong Pack(ItemInstance item)
+        {
+            ulong v = 0;
+            int shift = 0;
+            void Put(int value, int bits)
+            {
+                v |= ((ulong)value & ((1ul << bits) - 1)) << shift;
+                shift += bits;
+            }
+
+            Put(ItemCatalog.BaseIndex(item.baseId), 4);
+            Put((int)item.rarity, 2);
+            Put((int)item.classId, 2);
+            Put((int)item.legendary, 3);
+            Put(item.itemLevel, 5);
+            int count = System.Math.Min(item.affixes.Count, MaxAffixes);
+            Put(count, 2);
+            for (int i = 0; i < count; i++)
+            {
+                Put(ItemCatalog.AffixIndex(item.affixes[i].affixId), 5);
+                Put(item.affixes[i].roll, 7);
+            }
+            return v;
+        }
+
+        /// <summary>The item, or null if the bits don't describe one (empty slot = 0).</summary>
+        public static ItemInstance Unpack(ulong v, string uid = null)
+        {
+            if (v == 0) return null;
+            int shift = 0;
+            int Take(int bits)
+            {
+                int value = (int)((v >> shift) & ((1ul << bits) - 1));
+                shift += bits;
+                return value;
+            }
+
+            int baseIndex = Take(4);
+            if (baseIndex >= ItemCatalog.Bases.Length) return null;
+            var item = new ItemInstance
+            {
+                uid = uid ?? v.ToString("x16"),
+                baseId = ItemCatalog.Bases[baseIndex].Id,
+                rarity = (Rarity)Take(2),
+                classId = (ClassId)Take(2),
+                legendary = (LegendaryId)Take(3),
+                itemLevel = Take(5),
+            };
+            int count = Take(2);
+            for (int i = 0; i < count; i++)
+            {
+                int affix = Take(5);
+                int roll = Take(7);
+                if (affix < ItemCatalog.Affixes.Length) item.AddAffix(ItemCatalog.Affixes[affix], roll);
+            }
+            return item;
         }
     }
 }

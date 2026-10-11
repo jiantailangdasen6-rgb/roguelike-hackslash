@@ -79,6 +79,7 @@ namespace Game.Core
             p.DodgeCooldown = ClassCatalog.DodgeCooldown * (evasive ? 0.6f : 1f);
             p.InvulnerableTimer = Mathf.Max(p.InvulnerableTimer, ClassCatalog.DodgeInvulnerability);
             if (evasive) p.EvasiveTimer = 0.5f;
+            if (p.Stats.Get(StatType.DodgeStrike) > 0f) p.DodgeStrikeTimer = 2f; // gear: the next blow lands harder
             Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Dodge, Pos = p.Position, Vec = AimDirection(p) });
         }
 
@@ -254,7 +255,7 @@ namespace Game.Core
                     {
                         ref var e = ref Enemies[i];
                         e.MarkBonus = ClassCatalog.MarkDamageBonus + 0.15f * deep;
-                        ApplyStatus(i, StatusKind.Marked, ClassCatalog.MarkDuration);
+                        ApplyStatus(i, StatusKind.Marked, ClassCatalog.MarkDuration * (1f + p.Stats.Get(StatType.MarkDuration)));
                     }
                     Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Mark, Pos = at, Value = r });
                     break;
@@ -322,7 +323,7 @@ namespace Game.Core
                 if (area.Kind == AreaKind.FrostNova)
                 {
                     var p = area.Owner;
-                    float duration = ClassCatalog.FreezeDuration + p.PerkLevel(PerkId.Permafrost);
+                    float duration = (ClassCatalog.FreezeDuration + p.PerkLevel(PerkId.Permafrost)) * (1f + p.Stats.Get(StatType.FreezeDuration));
                     Enemies.QueryCircle(area.Position, area.Radius, _hits);
                     foreach (int i in _hits.ToArray())
                     {
@@ -520,6 +521,16 @@ namespace Game.Core
                 int comradery = attacker.PerkLevel(PerkId.Comradery);
                 if (comradery > 0) damage *= 1f + 0.1f * comradery * AlliesNear(attacker, 6f);
                 if (attacker.PerkLevel(PerkId.Bloodlust) > 0 && (flags & HitFlags.DamageOverTime) == 0) attacker.AddBloodlust();
+                // Gear effects that ride on the class synergies.
+                if (e.Frozen > 0f) damage *= 1f + attacker.Stats.Get(StatType.FrozenDamage);
+                if (e.Marked > 0f) damage *= 1f + attacker.Stats.Get(StatType.MarkedDamage);
+                float allyBonus = attacker.Stats.Get(StatType.AllyDamage);
+                if (allyBonus > 0f) damage *= 1f + allyBonus * AlliesNear(attacker, 6f);
+                if (attacker.DodgeStrikeTimer > 0f && (flags & HitFlags.DamageOverTime) == 0)
+                {
+                    damage *= 1f + attacker.Stats.Get(StatType.DodgeStrike);
+                    attacker.DodgeStrikeTimer = 0f;
+                }
             }
             if (e.Marked > 0f) damage *= 1f + e.MarkBonus;
             // Armoured monsters shrug off blows until a teammate freezes, stuns or marks them.
@@ -566,8 +577,10 @@ namespace Game.Core
                 e.Dead = true;
                 if (attacker != null && !e.Def.Prop)
                 {
-                    float heal = 3f * attacker.PerkLevel(PerkId.Lifesteal) + attacker.HealOnKill;
+                    float heal = 3f * attacker.PerkLevel(PerkId.Lifesteal) + attacker.HealOnKill + attacker.Stats.Get(StatType.KillHeal);
                     if (heal > 0f) attacker.Heal(heal);
+                    float killShield = attacker.Stats.Get(StatType.KillShield);
+                    if (killShield > 0f && attacker.Alive) attacker.Shield = Mathf.Min(attacker.Shield + killShield, attacker.MaxHp * 0.3f);
                 }
             }
         }
@@ -603,6 +616,7 @@ namespace Game.Core
                 }
 
                 Kills++;
+                RollLoot(e);
                 int xp = def.Xp * (e.Elite ? EnemyCatalog.EliteXpMultiplier : 1);
                 if (def.Boss)
                 {

@@ -52,9 +52,9 @@ namespace Game.Tests
                 int count = item.affixes.Count;
                 switch (item.rarity)
                 {
-                    case Rarity.Common: Assert.That(count, Is.InRange(0, 1)); break;
-                    case Rarity.Magic: Assert.That(count, Is.InRange(1, 2)); break;
-                    case Rarity.Rare: Assert.That(count, Is.InRange(3, 4)); break;
+                    case Rarity.Common: Assert.AreEqual(0, count); break;
+                    case Rarity.Magic: Assert.AreEqual(1, count); break;
+                    default: Assert.AreEqual(2, count); break;
                 }
                 Assert.AreEqual(count, item.affixes.Select(a => a.affixId).Distinct().Count());
             }
@@ -64,7 +64,7 @@ namespace Game.Tests
         public void RarityBoost_RaisesRareRate()
         {
             int RareCount(float boost) => Enumerable.Range(1, 2000)
-                .Count(s => ItemGenerator.Generate((ulong)s, 1, boost).rarity == Rarity.Rare);
+                .Count(s => ItemGenerator.Generate((ulong)s, 1, boost).rarity >= Rarity.Rare);
 
             Assert.Greater(RareCount(3f), RareCount(0f) * 2);
         }
@@ -107,15 +107,15 @@ namespace Game.Tests
         public void Equip_ReplacesItemInSameSlot()
         {
             var stash = new Stash();
-            var first = ItemFor(EquipSlot.Helm, 1);
-            var second = ItemFor(EquipSlot.Helm, 1000);
+            var first = ItemFor(EquipSlot.Weapon, 1);
+            var second = ItemFor(EquipSlot.Weapon, 1000);
             stash.Add(first);
             stash.Add(second);
 
             stash.Equip(second.uid);
 
             Assert.IsFalse(stash.IsEquipped(first.uid));
-            Assert.AreSame(second, stash.GetEquipped(EquipSlot.Helm));
+            Assert.AreSame(second, stash.GetEquipped(EquipSlot.Weapon));
         }
 
         [Test]

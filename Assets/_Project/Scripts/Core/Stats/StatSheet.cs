@@ -28,6 +28,26 @@ namespace Game.Core
         ReviveSpeed,
         /// <summary>Incoming damage multiplier (base 1; lower takes less).</summary>
         DamageTaken,
+
+        // Gear effects that work with the class synergies (all start at 0; affixes add fractions or points).
+        /// <summary>Extra damage to frozen enemies (0.2 = +20%).</summary>
+        FrozenDamage,
+        /// <summary>Extra damage to marked enemies.</summary>
+        MarkedDamage,
+        /// <summary>Freezes this player causes last longer (0.25 = +25%).</summary>
+        FreezeDuration,
+        /// <summary>Marks this player places last longer.</summary>
+        MarkDuration,
+        /// <summary>HP regained per kill.</summary>
+        KillHeal,
+        /// <summary>Shield gained per kill.</summary>
+        KillShield,
+        /// <summary>Extra damage per teammate standing close by.</summary>
+        AllyDamage,
+        /// <summary>Damage reduction while below half HP.</summary>
+        LastStand,
+        /// <summary>Extra damage on the first hit after a dodge.</summary>
+        DodgeStrike,
     }
 
     public enum ModifierKind : byte

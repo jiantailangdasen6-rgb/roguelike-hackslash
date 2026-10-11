@@ -77,6 +77,7 @@ namespace Game.Core
             _aiRng = root.Fork(4);
             _layoutRng = root.Fork(5);
             _doorRng = root.Fork(6);
+            _lootRng = root.Fork(7);
         }
 
         private readonly GameRandom _layoutRng;
@@ -229,6 +230,7 @@ namespace Game.Core
             StepProjectiles(dt);
             ProcessDeaths(giveXp: true);
             CollectSouls();
+            CollectLoot();
             UpdateRoom(dt);
             CheckDefeat();
             CheckLevelUp();
@@ -691,6 +693,7 @@ namespace Game.Core
                 Events.Add(new SimEvent(SimEventType.SoulCollected) { Id = soul.Id, ClientId = Players.Count > 0 ? Players[0].ClientId : 0 });
             }
             Souls.Clear();
+            SweepLoot();
 
             for (int i = 0; i < Players.Count; i++)
             {

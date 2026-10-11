@@ -215,8 +215,75 @@ namespace Game.Core
             Stats.AddModifier(new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.03f * BloodlustStacks), BloodlustSource);
         }
 
+        // ------------------------------------------------------------------ Gear (personal loot)
+
+        public const int BagSize = 12;
+        public const int SlotCount = 4;
+
+        /// <summary>Picked-up items waiting to be equipped (between rooms) or given to a teammate.</summary>
+        public readonly List<ItemInstance> Bag = new();
+        /// <summary>Indexed by <see cref="EquipSlot"/>.</summary>
+        public readonly ItemInstance[] Equipped = new ItemInstance[SlotCount];
+        private readonly object[] _gearSources = { new(), new(), new(), new() };
+        /// <summary>Gear "迅雷": the first hit within this window after a dodge deals extra damage.</summary>
+        public float DodgeStrikeTimer;
+
+        public bool BagFull => Bag.Count >= BagSize;
+
+        public bool HasLegendary(LegendaryId id)
+        {
+            foreach (var item in Equipped) if (item != null && item.legendary == id) return true;
+            return false;
+        }
+
+        public bool AnyLegendaryEquipped
+        {
+            get
+            {
+                foreach (var item in Equipped) if (item != null && item.rarity == Rarity.Legendary) return true;
+                return false;
+            }
+        }
+
+        /// <summary>Puts the bag item on; whatever was in that slot goes back into the bag in its place.</summary>
+        public bool Equip(int bagIndex)
+        {
+            if (bagIndex < 0 || bagIndex >= Bag.Count) return false;
+            var item = Bag[bagIndex];
+            int slot = (int)item.Slot;
+            var old = Equipped[slot];
+            Bag.RemoveAt(bagIndex);
+            if (old != null) Bag.Insert(bagIndex, old);
+            Equipped[slot] = item;
+            ApplyGear(slot);
+            return true;
+        }
+
+        public bool Unequip(EquipSlot slot)
+        {
+            var item = Equipped[(int)slot];
+            if (item == null || BagFull) return false;
+            Equipped[(int)slot] = null;
+            Bag.Add(item);
+            ApplyGear((int)slot);
+            return true;
+        }
+
+        private void ApplyGear(int slot)
+        {
+            float before = MaxHp;
+            Stats.RemoveModifiersFrom(_gearSources[slot]);
+            var item = Equipped[slot];
+            if (item != null)
+                foreach (var mod in item.GetModifiers()) Stats.AddModifier(mod, _gearSources[slot]);
+            // More max HP heals by the difference (like levelling); less never kills.
+            if (MaxHp > before && !Downed) Hp += MaxHp - before;
+            Hp = Mathf.Clamp(Hp, Downed ? 0f : 1f, MaxHp);
+        }
+
         public void TickBuffs(float dt)
         {
+            if (DodgeStrikeTimer > 0f) DodgeStrikeTimer -= dt;
             if (ValorTimer > 0f && (ValorTimer -= dt) <= 0f) Stats.RemoveModifiersFrom(ValorSource);
             if (MercyTimer > 0f && (MercyTimer -= dt) <= 0f) Stats.RemoveModifiersFrom(MercySource);
             if (BloodlustTimer > 0f && (BloodlustTimer -= dt) <= 0f)

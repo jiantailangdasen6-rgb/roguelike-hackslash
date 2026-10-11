@@ -97,6 +97,7 @@ namespace Game.EditorTools.Art
             });
             Add(C("#3e9a52"), c => { Heart(c, C("#e04848"), C("#ff9a9a")); Plus(c, 17, 16, Green); });
             Add(C("#8a5ac8"), Crystals);
+            Add(C("#c8902c"), Chest);
             Add(C("#b0302c"), Skull);
             return icons;
         }
@@ -281,6 +282,25 @@ namespace Game.EditorTools.Art
             Crystal(17, 5, 10, 2.5f, C("#c9a8ff"), C("#6a3ab0"));
             Crystal(12, 4, 15, 3.6f, C("#e4d4ff"), C("#8a5ad8"));
             c.Set(11, 14, White); c.Set(11, 15, White);
+        }
+
+        /// <summary>Treasure door: a banded chest with a gold lock and a glint.</summary>
+        private static void Chest(PixelCanvas c)
+        {
+            var wood = C("#8a4e24");
+            var woodDark = C("#5a3014");
+            var woodLight = C("#b06a34");
+            c.Rect(5, 5, 15, 7, wood);                      // body
+            c.Rect(5, 5, 15, 1, woodDark);
+            c.Rect(6, 12, 13, 4, woodLight);                // lid
+            c.Rect(5, 13, 15, 2, woodLight);
+            c.Rect(7, 16, 11, 1, woodLight);
+            c.Rect(5, 12, 15, 1, GoldDark);                 // seam
+            c.Rect(8, 5, 2, 12, Gold);                      // bands
+            c.Rect(15, 5, 2, 12, Gold);
+            c.Rect(11, 9, 3, 4, Gold);                      // lock
+            c.Set(12, 10, Ink);
+            c.Set(19, 18, White); c.Set(18, 19, White); c.Set(20, 19, White); c.Set(19, 20, White); // glint
         }
 
         private static void Skull(PixelCanvas c)

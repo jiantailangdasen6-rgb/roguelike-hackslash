@@ -13,6 +13,7 @@ namespace Game.Core
             RoomReward.Upgrade => "研磨",
             RoomReward.Vigor => "生命",
             RoomReward.Shards => "魂の欠片",
+            RoomReward.Treasure => "宝物",
             _ => "",
         };
 
@@ -26,6 +27,7 @@ namespace Game.Core
                 RoomReward.Upgrade => times > 1 ? "持っている力を2回強化" : "持っている力を1段階強化",
                 RoomReward.Vigor => $"最大HP +{RunSimulation.VigorPerStack * 100f * times:0}%・全回復",
                 RoomReward.Shards => $"魂の欠片 +{RunSimulation.ShardReward(area) * times}",
+                RoomReward.Treasure => times > 1 ? "希少以上の装備を2つ" : "希少以上の装備を1つ",
                 _ => "",
             };
         }
@@ -36,11 +38,12 @@ namespace Game.Core
             RoomReward.Upgrade => new Color(0.55f, 0.85f, 1f),
             RoomReward.Vigor => new Color(0.45f, 1f, 0.55f),
             RoomReward.Shards => new Color(0.78f, 0.58f, 1f),
+            RoomReward.Treasure => new Color(1f, 0.65f, 0.25f),
             _ => UnityEngine.Color.white,
         };
 
         /// <summary>Icon frame in the "icons_reward" sheet: rewards in enum order (Boon = 0), then the trial skull.</summary>
         public static int IconIndex(RoomReward r) => Mathf.Max(0, (int)r - 1);
-        public const int TrialIconIndex = 4;
+        public const int TrialIconIndex = 5;
     }
 }

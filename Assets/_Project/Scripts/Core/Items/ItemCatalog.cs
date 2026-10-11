@@ -4,18 +4,30 @@ namespace Game.Core
 {
     public enum Rarity : byte
     {
-        Common,
-        Magic,
-        Rare,
-        Legendary,
+        Common,     // 並
+        Magic,      // 上質
+        Rare,       // 希少
+        Legendary,  // 伝説
     }
 
     public enum EquipSlot : byte
     {
-        Helm,
+        Weapon,
         Armor,
-        Ring,
         Amulet,
+        Ring,
+    }
+
+    /// <summary>Unique effects of legendary gear: each changes one class skill.</summary>
+    public enum LegendaryId : byte
+    {
+        None,
+        WhirlwindBlade, // warrior: dash slash ends in a spin
+        WarDrum,        // warrior: war cry twice as wide, allies attack faster
+        FrostCrown,     // mage: the freeze field follows you
+        ThunderStaff,   // mage: bolts chain to another enemy
+        ShadowQuiver,   // ranger: piercing shot fires three arrows
+        HuntGodMark,    // ranger: hunter's mark lands on two enemies
     }
 
     /// <summary>A random property an item can roll. Values scale up with item level.</summary>
@@ -39,53 +51,97 @@ namespace Game.Core
         }
     }
 
-    /// <summary>An item type (e.g. "Iron Helm"), with a fixed implicit property.</summary>
+    /// <summary>An item type (e.g. "鎖帷子"), with a fixed implicit property. Weapons are named after the owner's class.</summary>
     public sealed class ItemBaseDef
     {
         public readonly string Id;
         public readonly string Name;
         public readonly EquipSlot Slot;
         public readonly StatModifier Implicit;
+        /// <summary>Weapon names per class (warrior, mage, ranger); null for other slots.</summary>
+        public readonly string[] ClassNames;
 
-        public ItemBaseDef(string id, string name, EquipSlot slot, StatModifier @implicit)
+        public ItemBaseDef(string id, string name, EquipSlot slot, StatModifier @implicit, string[] classNames = null)
         {
             Id = id;
             Name = name;
             Slot = slot;
             Implicit = @implicit;
+            ClassNames = classNames;
         }
+    }
+
+    public sealed class LegendaryDef
+    {
+        public LegendaryId Id;
+        public ClassId Class;
+        public string Name;
+        public string Text;
     }
 
     public static class ItemCatalog
     {
-        /// <summary>Item values grow by this fraction per item level.</summary>
-        public const float ScalingPerItemLevel = 0.06f;
+        /// <summary>Item values grow by this fraction per item level (one level per room).</summary>
+        public const float ScalingPerItemLevel = 0.05f;
 
         public static float LevelScale(int itemLevel) => 1f + (itemLevel - 1) * ScalingPerItemLevel;
 
+        /// <summary>Random properties. 11 plain stats, then 9 that feed the class synergies. Order is part of the wire format.</summary>
         public static readonly AffixDef[] Affixes =
         {
-            new("might", StatType.Might, ModifierKind.PercentAdd, 0.04f, 0.08f),
-            new("maxhp", StatType.MaxHealth, ModifierKind.Flat, 8f, 16f),
-            new("speed", StatType.MoveSpeed, ModifierKind.PercentAdd, 0.03f, 0.06f),
-            new("cooldown", StatType.Cooldown, ModifierKind.PercentAdd, -0.06f, -0.03f),
-            new("area", StatType.Area, ModifierKind.PercentAdd, 0.04f, 0.08f),
-            new("pickup", StatType.PickupRange, ModifierKind.PercentAdd, 0.10f, 0.20f),
-            new("armor", StatType.Armor, ModifierKind.Flat, 0.5f, 1.5f, 6),
-            new("regen", StatType.Regen, ModifierKind.Flat, 0.2f, 0.5f, 6),
+            new("might", StatType.Might, ModifierKind.PercentAdd, 0.05f, 0.10f),
+            new("maxhp", StatType.MaxHealth, ModifierKind.Flat, 10f, 22f),
+            new("speed", StatType.MoveSpeed, ModifierKind.PercentAdd, 0.04f, 0.08f),
+            new("haste", StatType.AttackSpeed, ModifierKind.PercentAdd, 0.05f, 0.10f),
+            new("crit", StatType.CritChance, ModifierKind.Flat, 0.03f, 0.06f),
+            new("cooldown", StatType.Cooldown, ModifierKind.PercentAdd, -0.08f, -0.04f),
+            new("area", StatType.Area, ModifierKind.PercentAdd, 0.06f, 0.12f),
+            new("armor", StatType.Armor, ModifierKind.Flat, 1f, 2.5f, 8),
+            new("regen", StatType.Regen, ModifierKind.Flat, 0.3f, 0.8f, 8),
+            new("pickup", StatType.PickupRange, ModifierKind.PercentAdd, 0.15f, 0.30f, 6),
+            new("revive", StatType.ReviveSpeed, ModifierKind.PercentAdd, 0.20f, 0.40f, 6),
+            new("frozendmg", StatType.FrozenDamage, ModifierKind.Flat, 0.15f, 0.30f),
+            new("markeddmg", StatType.MarkedDamage, ModifierKind.Flat, 0.15f, 0.30f),
+            new("freezetime", StatType.FreezeDuration, ModifierKind.Flat, 0.15f, 0.35f, 8),
+            new("marktime", StatType.MarkDuration, ModifierKind.Flat, 0.20f, 0.40f, 8),
+            new("killheal", StatType.KillHeal, ModifierKind.Flat, 1f, 3f),
+            new("killshield", StatType.KillShield, ModifierKind.Flat, 2f, 5f),
+            new("allydmg", StatType.AllyDamage, ModifierKind.Flat, 0.06f, 0.12f),
+            new("laststand", StatType.LastStand, ModifierKind.Flat, 0.15f, 0.30f, 8),
+            new("dodgestrike", StatType.DodgeStrike, ModifierKind.Flat, 0.30f, 0.60f, 8),
         };
 
+        private static readonly string[] WornWeapon = { "古びた長剣", "古びた杖", "古びた弓" };
+        private static readonly string[] KeenWeapon = { "鋭い戦斧", "水晶の杖", "狩人の長弓" };
+
+        /// <summary>Two bases per slot. Order is part of the wire format.</summary>
         public static readonly ItemBaseDef[] Bases =
         {
-            new("leather_cap", "革の帽子", EquipSlot.Helm, new StatModifier(StatType.MaxHealth, ModifierKind.Flat, 10f)),
-            new("iron_helm", "鉄の兜", EquipSlot.Helm, new StatModifier(StatType.Armor, ModifierKind.Flat, 1f)),
-            new("cloth_tunic", "布の服", EquipSlot.Armor, new StatModifier(StatType.MaxHealth, ModifierKind.Flat, 15f)),
-            new("chainmail", "鎖帷子", EquipSlot.Armor, new StatModifier(StatType.Armor, ModifierKind.Flat, 2f)),
-            new("copper_ring", "銅の指輪", EquipSlot.Ring, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.05f)),
-            new("silver_ring", "銀の指輪", EquipSlot.Ring, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.04f)),
-            new("wood_charm", "木の護符", EquipSlot.Amulet, new StatModifier(StatType.PickupRange, ModifierKind.PercentAdd, 0.15f)),
-            new("bone_necklace", "骨の首飾り", EquipSlot.Amulet, new StatModifier(StatType.Regen, ModifierKind.Flat, 0.3f)),
+            new("weapon_worn", "古びた武器", EquipSlot.Weapon, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.06f), WornWeapon),
+            new("weapon_keen", "鋭い武器", EquipSlot.Weapon, new StatModifier(StatType.CritChance, ModifierKind.Flat, 0.04f), KeenWeapon),
+            new("leather_armor", "革の鎧", EquipSlot.Armor, new StatModifier(StatType.MaxHealth, ModifierKind.Flat, 15f)),
+            new("chainmail", "鎖帷子", EquipSlot.Armor, new StatModifier(StatType.Armor, ModifierKind.Flat, 1.5f)),
+            new("bone_necklace", "骨の首飾り", EquipSlot.Amulet, new StatModifier(StatType.Regen, ModifierKind.Flat, 0.4f)),
+            new("moon_charm", "月の護符", EquipSlot.Amulet, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.05f)),
+            new("copper_ring", "銅の指輪", EquipSlot.Ring, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.04f)),
+            new("silver_ring", "銀の指輪", EquipSlot.Ring, new StatModifier(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.04f)),
         };
+
+        public static readonly LegendaryDef[] Legendaries =
+        {
+            new() { Id = LegendaryId.WhirlwindBlade, Class = ClassId.Warrior, Name = "旋風の", Text = "突進斬りの終わりに回転斬りを放つ" },
+            new() { Id = LegendaryId.WarDrum, Class = ClassId.Warrior, Name = "鬨の", Text = "闘の声の範囲が2倍、聞いた仲間の攻撃速度+20%" },
+            new() { Id = LegendaryId.FrostCrown, Class = ClassId.Mage, Name = "霜の王の", Text = "氷結陣が自分についてくる" },
+            new() { Id = LegendaryId.ThunderStaff, Class = ClassId.Mage, Name = "雷鳴の", Text = "魔弾が当たると近くの敵へ連鎖する" },
+            new() { Id = LegendaryId.ShadowQuiver, Class = ClassId.Ranger, Name = "影の", Text = "貫通の一矢が扇状に3本になる" },
+            new() { Id = LegendaryId.HuntGodMark, Class = ClassId.Ranger, Name = "狩神の", Text = "狩人の印が近くのもう1体にも付く" },
+        };
+
+        public static LegendaryDef GetLegendary(LegendaryId id)
+        {
+            foreach (var def in Legendaries) if (def.Id == id) return def;
+            return null;
+        }
 
         private static Dictionary<string, AffixDef> _affixById;
         private static Dictionary<string, ItemBaseDef> _baseById;
@@ -93,14 +149,17 @@ namespace Game.Core
         public static AffixDef GetAffix(string id)
         {
             _affixById ??= BuildIndex(Affixes, a => a.Id);
-            return _affixById.TryGetValue(id, out var def) ? def : null;
+            return id != null && _affixById.TryGetValue(id, out var def) ? def : null;
         }
 
         public static ItemBaseDef GetBase(string id)
         {
             _baseById ??= BuildIndex(Bases, b => b.Id);
-            return _baseById.TryGetValue(id, out var def) ? def : null;
+            return id != null && _baseById.TryGetValue(id, out var def) ? def : null;
         }
+
+        public static int AffixIndex(string id) => System.Array.FindIndex(Affixes, a => a.Id == id);
+        public static int BaseIndex(string id) => System.Array.FindIndex(Bases, b => b.Id == id);
 
         private static Dictionary<string, T> BuildIndex<T>(T[] defs, System.Func<T, string> key)
         {

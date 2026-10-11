@@ -64,6 +64,11 @@ namespace Game.Gameplay
             Set(SimEventType.PlayerRejoined, F.Client | F.Pos);
             Set(SimEventType.PlayerLeft, F.Client | F.Pos);
             Set(SimEventType.TeamLevelUp, F.Int);
+            Set(SimEventType.LootDropped, F.Id | F.Client | F.Pos | F.Seed | F.Int);
+            Set(SimEventType.LootPicked, F.Id | F.Client | F.Int);
+            Set(SimEventType.GearSlot, F.Client | F.Int | F.Seed);
+            Set(SimEventType.ItemGiven, F.Client | F.Id | F.Int);
+            Set(SimEventType.ItemSalvaged, F.Client | F.Value);
             return layout;
         }
 

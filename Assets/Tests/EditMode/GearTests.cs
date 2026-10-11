@@ -172,6 +172,26 @@ namespace Game.Tests
         }
 
         [Test]
+        public void RestRoomChest_DropsFineOrBetterGearForEachPlayer()
+        {
+            var sim = new RunSimulation(88);
+            var a = sim.AddPlayer(0);
+            sim.AddPlayer(1, new Loadout { classId = ClassId.Mage });
+            sim.Enemies.Spawn(EnemyType.TreasureChest, new Vector2(2f, 2f), 1f, 1f, false);
+            sim.DamageEnemy(0, 999f, a, HitFlags.None, Vector2.zero, 0f);
+            for (int i = 0; i < 2; i++)
+            {
+                foreach (var p in sim.Players) p.InvulnerableTimer = 1f;
+                sim.SetPlayerPosition(0, new Vector2(-12f, -6f));
+                sim.SetPlayerPosition(1, new Vector2(12f, -6f));
+                sim.Step(Dt);
+            }
+            Assert.AreEqual(2, sim.Loot.Count, "one personal drop per player");
+            Assert.That(sim.Loot.Select(l => l.Owner).Distinct().Count(), Is.EqualTo(2));
+            Assert.That(sim.Loot.All(l => l.Item.rarity >= Rarity.Magic));
+        }
+
+        [Test]
         public void TreasureDoor_GivesEveryoneRareOrBetter()
         {
             var sim = new RunSimulation(82);

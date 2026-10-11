@@ -618,6 +618,13 @@ namespace Game.Core
             const int pieces = 6;
             for (int s = 0; s < pieces; s++)
                 DropSoul(chest.Position + Rotate(Vector2.right, s * 60f + 30f) * 0.9f, Mathf.Max(1, total / pieces));
+            // And a piece of gear for each player (personal loot, fine or better).
+            for (int i = 0; i < Players.Count; i++)
+            {
+                var p = Players[i];
+                float angle = (i - (Players.Count - 1) * 0.5f) * 40f - 90f;
+                DropFor(p, RollItem(p, 1f, Rarity.Magic), chest.Position + Rotate(Vector2.right, angle) * 1.3f);
+            }
         }
 
         /// <summary>

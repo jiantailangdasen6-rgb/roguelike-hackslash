@@ -200,6 +200,17 @@ namespace Game.Core
             Stats.AddModifier(new StatModifier(StatType.DamageTaken, ModifierKind.PercentAdd, -ClassCatalog.ValorDamageReduction), ValorSource);
         }
 
+        private readonly object _drumSource = new();
+        public float DrumTimer;
+
+        /// <summary>Legendary "鬨の": allies who hear the war cry attack faster for a while.</summary>
+        public void GrantDrum(float duration)
+        {
+            DrumTimer = Mathf.Max(DrumTimer, duration);
+            Stats.RemoveModifiersFrom(_drumSource);
+            Stats.AddModifier(new StatModifier(StatType.AttackSpeed, ModifierKind.PercentAdd, 0.2f), _drumSource);
+        }
+
         public void GrantMercy(float duration, float bonus)
         {
             MercyTimer = Mathf.Max(MercyTimer, duration);
@@ -284,6 +295,7 @@ namespace Game.Core
         public void TickBuffs(float dt)
         {
             if (DodgeStrikeTimer > 0f) DodgeStrikeTimer -= dt;
+            if (DrumTimer > 0f && (DrumTimer -= dt) <= 0f) Stats.RemoveModifiersFrom(_drumSource);
             if (ValorTimer > 0f && (ValorTimer -= dt) <= 0f) Stats.RemoveModifiersFrom(ValorSource);
             if (MercyTimer > 0f && (MercyTimer -= dt) <= 0f) Stats.RemoveModifiersFrom(MercySource);
             if (BloodlustTimer > 0f && (BloodlustTimer -= dt) <= 0f)

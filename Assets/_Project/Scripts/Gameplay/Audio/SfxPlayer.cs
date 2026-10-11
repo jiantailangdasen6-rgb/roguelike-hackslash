@@ -190,6 +190,12 @@ namespace Game.Gameplay
                     if (IsLocal(e.ClientId)) Play("soul", null, 1f + UnityEngine.Random.value * 0.3f);
                     break;
                 case SimEventType.TeamLevelUp: Play("levelup"); break;
+                case SimEventType.LootDropped:
+                    if (IsLocal(e.ClientId) && e.Int >= (int)Rarity.Rare) Play("blink", e.Pos, 1.3f);
+                    break;
+                case SimEventType.LootPicked:
+                    if (IsLocal(e.ClientId) && e.Int >= 0) Play("soul", null, 1.25f);
+                    break;
                 case SimEventType.PerkOffer:
                     if (IsLocal(e.ClientId)) Play("soul", null, 0.8f);
                     break;

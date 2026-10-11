@@ -182,6 +182,76 @@ namespace Game.Tests
             }
         }
 
+        private static void WearLegendary(SimPlayer p, LegendaryId id)
+        {
+            var item = ItemFor(EquipSlot.Ring, 1, p.ClassId);
+            item.rarity = Rarity.Legendary;
+            item.legendary = id;
+            p.Bag.Add(item);
+            p.Equip(p.Bag.Count - 1);
+            Assert.IsTrue(p.HasLegendary(id));
+            Assert.IsTrue(p.AnyLegendaryEquipped);
+        }
+
+        private static void PressSkill(RunSimulation sim, SimPlayer p, bool second)
+        {
+            var input = p.Input;
+            input.Aim = new Vector2(5f, 0f);
+            if (second) input.Skill2Count++;
+            else input.Skill1Count++;
+            sim.SetPlayerInput(p.ClientId, input);
+            sim.Step(Dt);
+        }
+
+        [Test]
+        public void ShadowQuiver_FiresAFanOfThree()
+        {
+            int Arrows(bool legendary)
+            {
+                var sim = new RunSimulation(84);
+                var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Ranger });
+                sim.Room.Cleared = true; // no waves
+                if (legendary) WearLegendary(p, LegendaryId.ShadowQuiver);
+                PressSkill(sim, p, false);
+                return sim.Projectiles.Count(pr => pr.Kind == ProjectileKind.PierceArrow);
+            }
+            Assert.AreEqual(1, Arrows(false));
+            Assert.AreEqual(3, Arrows(true));
+        }
+
+        [Test]
+        public void FrostCrown_FreezesAroundTheCaster()
+        {
+            var sim = new RunSimulation(85);
+            var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Mage });
+            sim.Room.Cleared = true;
+            WearLegendary(p, LegendaryId.FrostCrown);
+            sim.Enemies.Spawn(EnemyType.Skeleton, p.Position + new Vector2(0.8f, 0f), 50f, 1f, false);
+            PressSkill(sim, p, false);
+            for (int i = 0; i < 40; i++) sim.Step(Dt);
+            Assert.Greater(sim.Enemies[0].Frozen, 0f, "the enemy next to the mage is frozen though the aim was far away");
+        }
+
+        [Test]
+        public void HuntGodMark_MarksASecondMonster()
+        {
+            int Marked(bool legendary)
+            {
+                var sim = new RunSimulation(86);
+                var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Ranger });
+                sim.Room.Cleared = true;
+                if (legendary) WearLegendary(p, LegendaryId.HuntGodMark);
+                sim.Enemies.Spawn(EnemyType.Skeleton, p.Position + new Vector2(5f, 0f), 50f, 1f, false); // under the aimed circle
+                sim.Enemies.Spawn(EnemyType.Skeleton, p.Position + new Vector2(5f, 5f), 50f, 1f, false); // outside it, close by
+                PressSkill(sim, p, true);
+                int marked = 0;
+                for (int i = 0; i < sim.Enemies.Count; i++) if (sim.Enemies[i].Marked > 0f) marked++;
+                return marked;
+            }
+            Assert.AreEqual(1, Marked(false));
+            Assert.AreEqual(2, Marked(true));
+        }
+
         [Test]
         public void FrozenDamageGear_HitsFrozenEnemiesHarder()
         {

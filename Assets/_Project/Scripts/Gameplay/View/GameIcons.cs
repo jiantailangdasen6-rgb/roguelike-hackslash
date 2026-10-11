@@ -21,6 +21,28 @@ namespace Game.Gameplay
 
         public static Sprite Trial => Frame("icons_reward", RewardCatalog.TrialIconIndex);
 
+        /// <summary>Gear: the two weapon bases have a picture per class (see IconArt.Items), the rest one each.</summary>
+        public static Sprite Item(ItemInstance item)
+        {
+            if (item == null) return null;
+            int b = ItemCatalog.BaseIndex(item.baseId);
+            int frame = b switch
+            {
+                0 => (int)item.classId,
+                1 => 3 + (int)item.classId,
+                _ => 6 + (b - 2),
+            };
+            return Frame("icons_item", frame);
+        }
+
+        public static Color RarityColor(Rarity r) => r switch
+        {
+            Rarity.Common => new Color(0.82f, 0.8f, 0.76f),
+            Rarity.Magic => new Color(0.44f, 0.66f, 1f),
+            Rarity.Rare => new Color(1f, 0.85f, 0.29f),
+            _ => new Color(1f, 0.6f, 0.24f),
+        };
+
         private static Sprite Frame(string sheet, int index)
         {
             var s = SpriteSheet.Load(sheet, quiet: true);

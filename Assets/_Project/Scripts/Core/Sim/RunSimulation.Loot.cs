@@ -24,6 +24,8 @@ namespace Game.Core
         public const float LootPickupRadius = 1.1f;
 
         public readonly List<LootDrop> Loot = new();
+        /// <summary>Multiplies drop chances (automated screenshots: -lootrate).</summary>
+        public float DropChanceScale = 1f;
         private readonly GameRandom _lootRng;
         private int _nextLootId = 1;
 
@@ -36,7 +38,7 @@ namespace Game.Core
         /// <summary>A monster died: each player rolls their own drop.</summary>
         private void RollLoot(in Enemy e)
         {
-            float chance = e.Def.Boss ? 1f : e.Elite ? EliteDropChance : NormalDropChance;
+            float chance = Mathf.Min(1f, (e.Def.Boss ? 1f : e.Elite ? EliteDropChance : NormalDropChance) * DropChanceScale);
             float boost = e.Def.Boss ? 3f : e.Elite ? 1f : 0f;
             for (int i = 0; i < Players.Count; i++)
             {

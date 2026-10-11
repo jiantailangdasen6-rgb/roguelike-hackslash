@@ -33,7 +33,7 @@ namespace Game.Gameplay
             title.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(600f, 80f), new Vector2(0f, -30f));
 
             var controls = UIKit.Label(panel.transform,
-                "WASD：移動　マウス：照準\n左クリック：通常攻撃（押しっぱなし）\nQ / 右クリック：スキル1　E：スキル2\nSpace / Shift：回避（無敵）\n" +
+                "WASD：移動　マウス：照準\n左クリック：通常攻撃（押しっぱなし）\nQ / 右クリック：スキル1　E：スキル2\nSpace / Shift：回避（無敵）　I / Tab：袋（装備）\n" +
                 "<size=20><color=#bfb6aa>凍った敵を強打で砕く・印の付いた敵を狙う・倒れた仲間のそばに立つ</color></size>",
                 24, TextAnchor.UpperCenter, UIKit.MutedText);
             controls.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(640f, 200f), new Vector2(0f, -120f));
@@ -97,7 +97,7 @@ namespace Game.Gameplay
         {
             bool pressed = (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
                            || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
-            if (pressed && !PerkView.IsShowing) Toggle(!IsOpen);
+            if (pressed && !PerkView.IsShowing && !BagView.IsOpen && BagView.ClosedFrame != Time.frameCount) Toggle(!IsOpen);
         }
     }
 }

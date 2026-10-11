@@ -284,6 +284,101 @@ namespace Game.EditorTools.Art
             c.Set(11, 14, White); c.Set(11, 15, White);
         }
 
+        /// <summary>
+        /// Gear icons on a clear background (the bag cell supplies the rarity frame). Order matches GameIcons.Item:
+        /// worn weapon per class, keen weapon per class, then the armour, amulet and ring bases in catalog order.
+        /// </summary>
+        public static List<PixelCanvas> Items()
+        {
+            var icons = new List<PixelCanvas>();
+            void Add(Action<PixelCanvas> draw)
+            {
+                var c = new PixelCanvas(Size, Size);
+                draw(c);
+                c.Outline(Ink);
+                icons.Add(c);
+            }
+            var rust = C("#9a8f84");
+            Add(c => Sword(c, 4, 4, 19, 19, rust, C("#c9c0b4")));                           // worn longsword
+            Add(c => Staff(c, Wood, C("#7f9a7a"), C("#c4dcc0")));                           // worn staff
+            Add(c => Bow(c, Wood, C("#5a3c22"), false));                                    // worn bow
+            Add(c => { Sword(c, 4, 4, 17, 17, Steel, White); c.Disc(17, 17, 3.2f, SteelDark); c.Disc(16.5f, 17.5f, 2.2f, Steel); }); // keen axe
+            Add(c => { Staff(c, C("#5a3c6e"), C("#5ab8ff"), C("#dff4ff")); Sparks(c, C("#bfe8ff")); }); // crystal staff
+            Add(c => Bow(c, C("#4a2c18"), GoldDark, true));                                 // hunter's longbow
+            Add(c => Armour(c, C("#8a5a32"), C("#5a3a1e"), C("#b07a46"), false));          // leather armour
+            Add(c => Armour(c, Steel, SteelDark, White, true));                             // chainmail
+            Add(c => Necklace(c, C("#e8dcc4"), C("#9a8a6a")));                              // bone necklace
+            Add(c => { Necklace(c, Gold, GoldDark); c.Disc(12, 8, 3.4f, C("#dfe8ff")); c.Disc(13.6f, 9f, 2.8f, new Color32(0, 0, 0, 0)); }); // moon charm
+            Add(c => GearRing(c, C("#c8783a"), C("#7a4018"), Red));                        // copper ring
+            Add(c => GearRing(c, C("#dfe4ea"), C("#7a828c"), Blue));                       // silver ring
+            return icons;
+        }
+
+        private static void Staff(PixelCanvas c, Color32 shaft, Color32 gem, Color32 shine)
+        {
+            c.Line(5, 3, 16, 16, shaft);
+            c.Line(6, 3, 17, 16, shaft);
+            c.Disc(17.5f, 17.5f, 3f, gem);
+            c.Set(16, 19, shine);
+            c.Set(17, 19, shine);
+        }
+
+        private static void Bow(PixelCanvas c, Color32 wood, Color32 tips, bool longbow)
+        {
+            float r = longbow ? 9.5f : 8f;
+            for (int a = -75; a <= 75; a += 3)
+            {
+                float rad = a * Mathf.Deg2Rad;
+                int x = Mathf.RoundToInt(8 + Mathf.Cos(rad) * r * 0.55f);
+                int y = Mathf.RoundToInt(12 + Mathf.Sin(rad) * r);
+                c.Set(x, y, wood);
+                c.Set(x + 1, y, wood);
+            }
+            c.Line(8, Mathf.RoundToInt(12 - r * 0.97f), 8, Mathf.RoundToInt(12 + r * 0.97f), White);
+            c.Set(9, Mathf.RoundToInt(12 + r * 0.97f), tips);
+            c.Set(9, Mathf.RoundToInt(12 - r * 0.97f), tips);
+            Arrow(c, 6, 12, 19, 12);
+        }
+
+        private static void Armour(PixelCanvas c, Color32 body, Color32 dark, Color32 light, bool mail)
+        {
+            c.Rect(7, 4, 10, 12, body);      // torso
+            c.Rect(4, 13, 4, 5, body);       // shoulders
+            c.Rect(16, 13, 4, 5, body);
+            c.Rect(10, 15, 4, 4, new Color32(0, 0, 0, 0)); // neck opening
+            c.Rect(7, 4, 10, 1, dark);
+            c.Rect(11, 5, 2, 9, dark);
+            if (mail)
+                for (int y = 6; y < 16; y += 2)
+                for (int x = 7 + (y / 2) % 2; x < 17; x += 2) c.Set(x, y, light);
+            else
+            {
+                c.Rect(8, 9, 8, 1, dark);    // belt
+                c.Set(12, 9, Gold);
+                c.Set(5, 16, light); c.Set(17, 16, light);
+            }
+        }
+
+        private static void Necklace(PixelCanvas c, Color32 pendant, Color32 chain)
+        {
+            for (int a = 200; a <= 340; a += 6)
+            {
+                float rad = a * Mathf.Deg2Rad;
+                c.Set(Mathf.RoundToInt(12 + Mathf.Cos(rad) * 8f), Mathf.RoundToInt(19 + Mathf.Sin(rad) * 8f), chain);
+            }
+            c.Rect(11, 7, 3, 5, pendant);
+            c.Rect(10, 10, 5, 1, pendant);
+            c.Set(12, 6, pendant);
+        }
+
+        private static void GearRing(PixelCanvas c, Color32 band, Color32 dark, Color32 gem)
+        {
+            c.Ring(12, 9, 4.2f, 6.2f, band);
+            c.Ring(12, 9, 4.2f, 4.9f, dark);
+            c.Disc(12, 16, 2.6f, gem);
+            c.Set(11, 17, White);
+        }
+
         /// <summary>Treasure door: a banded chest with a gold lock and a glint.</summary>
         private static void Chest(PixelCanvas c)
         {

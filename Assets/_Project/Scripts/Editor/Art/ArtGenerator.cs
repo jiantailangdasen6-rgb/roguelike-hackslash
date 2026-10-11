@@ -58,6 +58,7 @@ namespace Game.EditorTools.Art
             Effect("icons_perk", IconArt.Perks(), "icons_perk");
             Effect("icons_trinket", IconArt.Trinkets(), "icons_trinket");
             Effect("icons_reward", IconArt.Rewards(), "icons_reward");
+            Effect("icons_item", IconArt.Items(), "icons_item");
             WritePreview("props", PropArt.Sheets());
 
             var tiles = ProceduralArt.Tiles();

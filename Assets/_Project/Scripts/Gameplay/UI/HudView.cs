@@ -147,13 +147,15 @@ namespace Game.Gameplay
             _toastText.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1300f, 220f), new Vector2(0f, 130f));
 
             _hintText = UIKit.Label(root,
-                "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　Esc メニュー\n" +
+                "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　I 袋　Esc メニュー\n" +
                 "<color=#9fd8ff>連携：凍った敵は強打で「砕ける」／印の敵は全員の攻撃が通りやすい／倒れた仲間のそばに立つと復活</color>",
                 22, TextAnchor.LowerLeft, UIKit.MutedText);
             _hintText.rectTransform.Place(new Vector2(0f, 0f), new Vector2(1100f, 80f), new Vector2(24f, 120f));
 
             BuildCurtain();
             gameObject.AddComponent<AllyOverlay>();
+            gameObject.AddComponent<BagView>();
+            gameObject.AddComponent<LootView>();
             RunDirector.EventReceived += OnEvent;
         }
 
@@ -285,6 +287,7 @@ namespace Game.Gameplay
                     {
                         RoomReward.Vigor => $"最大HP +{e.Value:0}%、全員の傷が癒えた",
                         RoomReward.Shards => $"魂の欠片 +{e.Value:0}（ラン後に受け取る）",
+                        RoomReward.Treasure => "全員が希少以上の装備を手に入れた（I で袋を開く）",
                         RoomReward.Upgrade => "持っている力を強化する",
                         _ => "新たな力を授かる",
                     };

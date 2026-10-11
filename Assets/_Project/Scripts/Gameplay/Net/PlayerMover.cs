@@ -64,7 +64,7 @@ namespace Game.Gameplay
             get
             {
                 var director = RunDirector.Instance;
-                return director != null && director.IsRunning && !director.Halted && !player.Downed.Value && !PauseMenuView.IsOpen && !PerkView.IsShowing;
+                return director != null && director.IsRunning && !director.Halted && !player.Downed.Value && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen;
             }
         }
 

@@ -311,11 +311,25 @@ namespace Game.Gameplay
                 case SimEventType.PlayerRevived:
                     if (NetPlayer.Local != null && e.ClientId != NetPlayer.Local.OwnerClientId) Toast($"<color=#9fff9f>{NameOf(e.ClientId)}が立ち上がった</color>");
                     break;
+                case SimEventType.PlayerJoined:
+                    Toast(IsMe(e.ClientId)
+                        ? "<color=#e0b45a>◆</color> 途中参加：これまでのレベルの分だけ力を授かった"
+                        : "<color=#9fd8ff>仲間が加わった！</color>");
+                    break;
+                case SimEventType.PlayerRejoined:
+                    Toast(IsMe(e.ClientId) ? "<color=#9fd8ff>冒険に戻った</color>" : "<color=#9fd8ff>仲間が戻ってきた！</color>");
+                    break;
+                case SimEventType.PlayerLeft:
+                    Toast($"<color=#ff9a80>{NameOf(e.ClientId)}が抜けた</color>（同じルームコードで戻ってこられる）");
+                    break;
                 case SimEventType.AreaEffect when (AreaKind)e.Int == AreaKind.Shatter:
                     Toast("<color=#9fd8ff>連携：砕き！</color>");
                     break;
             }
         }
+
+        private static bool IsMe(ulong clientId) =>
+            Unity.Netcode.NetworkManager.Singleton != null && Unity.Netcode.NetworkManager.Singleton.LocalClientId == clientId;
 
         private static string NameOf(ulong clientId)
         {
@@ -474,6 +488,8 @@ namespace Game.Gameplay
         {
             if (d.Phase.Value != RunPhase.Playing) return "";
             if (local == null) return ""; // the start curtain covers this
+            if (d.HostAway.Value) return "ホストが画面を離れています\n<size=26>戻ってくるまで一時停止中</size>";
+            if (d.HostStalled) return "ホストの応答を待っています…";
             if (local.Downed.Value)
                 return local.BeingRevived
                     ? $"仲間が助け起こしている…  {local.ReviveProgress.Value:P0}"

@@ -106,6 +106,8 @@ namespace Game.Core
         public int skin;
         public List<string> mastery = new();
         public List<string> trinkets = new();
+        /// <summary>Stable per-profile id: lets a player who dropped out get their character back.</summary>
+        public string playerKey = "";
 
         public string ToJson() => JsonUtility.ToJson(this);
 
@@ -146,6 +148,8 @@ namespace Game.Core
         public Difficulty difficulty = Difficulty.Normal;
         /// <summary>Highest difficulty won so far (-1 = none).</summary>
         public int bestVictory = -1;
+        /// <summary>Random id made once per profile (see Loadout.playerKey).</summary>
+        public string playerKey = "";
 
         public bool IsUnlocked(string id)
         {
@@ -194,6 +198,7 @@ namespace Game.Core
             skin = IsUnlocked(SkinCatalog.Get(selectedClass, SkinFor(selectedClass)).Id) ? SkinFor(selectedClass) : 0,
             mastery = MetaCatalog.NodesFor(selectedClass).Where(n => IsUnlocked(n.Id)).Select(n => n.Id).ToList(),
             trinkets = equippedTrinkets.Where(IsUnlocked).Take(MetaCatalog.TrinketSlots).ToList(),
+            playerKey = playerKey,
         };
 
         public string ToJson() => JsonUtility.ToJson(this);

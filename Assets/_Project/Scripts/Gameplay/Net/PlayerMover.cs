@@ -64,7 +64,7 @@ namespace Game.Gameplay
             get
             {
                 var director = RunDirector.Instance;
-                return director != null && director.IsRunning && !director.Paused.Value && !player.Downed.Value && !PauseMenuView.IsOpen;
+                return director != null && director.IsRunning && !director.Paused.Value && !director.Halted && !player.Downed.Value && !PauseMenuView.IsOpen;
             }
         }
 
@@ -74,6 +74,7 @@ namespace Game.Gameplay
         {
             if (!CanAct || player.DodgeCooldown.Value > 0.05f || Time.time < _dashUntil) return;
             _dodge++;
+            player.PredictAction(AttackAnim.Dodge);
             Vector2 move = CurrentMove();
             StartDash(move.sqrMagnitude > 0.01f ? move.normalized : _aim.normalized, ClassCatalog.DodgeSpeed, ClassCatalog.DodgeDuration);
             SendInput(); // send the press right away
@@ -83,6 +84,7 @@ namespace Game.Gameplay
         {
             if (!CanAct || player.Skill1Cooldown.Value > 0.05f) return;
             _skill1++;
+            player.PredictAction(AttackAnim.Skill1);
             if (player.Class.Value == ClassId.Warrior)
                 StartDash(_aim.normalized, ClassCatalog.DashSlashDistance / ClassCatalog.DashSlashDuration, ClassCatalog.DashSlashDuration);
             SendInput();
@@ -92,6 +94,7 @@ namespace Game.Gameplay
         {
             if (!CanAct || player.Skill2Cooldown.Value > 0.05f) return;
             _skill2++;
+            player.PredictAction(AttackAnim.Skill2);
             SendInput();
         }
 
@@ -114,7 +117,9 @@ namespace Game.Gameplay
             if (_bot) _botBrain.Think(this);
 
             UpdateAim();
+            bool wasHeld = _attackHeld;
             _attackHeld = _bot ? _botBrain.Attack : input.AttackHeld;
+            if (_attackHeld && !wasHeld && CanAct) player.PredictAction(AttackAnim.BasicA);
 
             if (CanAct)
             {

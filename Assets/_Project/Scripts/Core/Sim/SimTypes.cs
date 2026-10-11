@@ -218,6 +218,9 @@ namespace Game.Core
         HazardWarn,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds until it fires
         HazardFire,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds it stays active
         RewardGranted,   // Int = RoomReward, Value = amount (shards / max HP %), Id = 1 when doubled by a trial
+        PlayerJoined,    // ClientId, Pos (joined a run in progress)
+        PlayerRejoined,  // ClientId, Pos (came back after dropping out)
+        PlayerLeft,      // ClientId, Pos (dropped out; their character is kept for a while)
     }
 
     /// <summary>Something that happened during a tick; the network layer sends these to clients for presentation.</summary>

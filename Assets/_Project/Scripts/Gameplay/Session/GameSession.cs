@@ -40,6 +40,8 @@ namespace Game.Gameplay
         /// <summary>True after the host turned us away with a reason (full, started, other version).</summary>
         public static bool Refused { get; private set; }
 
+        private static bool _leaving;
+
         /// <summary>Room code of the current online session (host and clients), or null.</summary>
         public static string JoinCode { get; private set; }
 
@@ -89,6 +91,14 @@ namespace Game.Gameplay
             InGame = false;
             JoinCode = null;
             Loadouts.Clear();
+            Refused = false;
+            _leaving = false;
+            var profile = ProfileStore.Current;
+            if (string.IsNullOrEmpty(profile.playerKey))
+            {
+                profile.playerKey = Guid.NewGuid().ToString("N").Substring(0, 16);
+                ProfileStore.Save();
+            }
             // Put this build's stamp and this device's loadout into the connection request.
             Network.NetworkConfig.ConnectionData = Encoding.UTF8.GetBytes(BuildStamp + "\n" + ProfileStore.Current.ToLoadout().ToJson());
         }
@@ -178,12 +188,19 @@ namespace Game.Gameplay
             Network.SceneManager.LoadScene(GameScene, LoadSceneMode.Single);
         }
 
+        /// <summary>Room code of the last online session this device was in (offered for rejoining).</summary>
+        public static string LastJoinCode { get; private set; }
+
         public static void ReturnToLobby(string message = null)
         {
+            if (JoinCode != null) LastJoinCode = JoinCode;
             InGame = false;
             JoinCode = null;
             LobbyMessage = message;
             var nm = NetworkManager.Singleton;
+            // Our own shutdown also raises the disconnect callback (a frame later): ignore it until the next session
+            // starts, or it would reload the camp a second time and look like a refusal.
+            _leaving = true;
             if (nm != null && (nm.IsListening || nm.IsClient)) nm.Shutdown();
             SceneManager.LoadScene(LobbyScene);
         }
@@ -198,19 +215,22 @@ namespace Game.Gameplay
             string stamp = split >= 0 ? payload.Substring(0, split) : "";
             // A different build can't play along (its copy of the game scene doesn't match ours).
             bool sameBuild = isHostItself || stamp == BuildStamp;
-            response.Approved = isHostItself || (!InGame && !full && sameBuild);
+            // Joining a run in progress is fine (RunDirector adds them once their scene is in sync), but not after it ended.
+            var director = RunDirector.Instance;
+            bool closed = InGame && director != null && director.Started.Value && director.Phase.Value != RunPhase.Playing;
+            response.Approved = isHostItself || (!closed && !full && sameBuild);
             response.CreatePlayerObject = false; // RunDirector spawns players when the run starts
             if (response.Approved && split >= 0)
                 Loadouts[request.ClientNetworkId] = Loadout.FromJson(payload.Substring(split + 1));
             if (!response.Approved)
                 response.Reason = !sameBuild ? "ゲームのバージョンが部屋と違います。全員ページを再読み込み（F5）してから、部屋を作り直してください"
-                    : InGame ? "ゲームはすでに始まっています" : "満員です（最大3人）";
+                    : closed ? "この冒険はもう終わっています" : "満員です（最大3人）";
         }
 
         private static void OnClientDisconnected(ulong clientId)
         {
             var nm = NetworkManager.Singleton;
-            if (nm == null || nm.IsServer) return;
+            if (nm == null || nm.IsServer || _leaving) return;
             // We are a client and lost the host (or were refused).
             Refused = !string.IsNullOrEmpty(nm.DisconnectReason);
             string reason = Refused ? nm.DisconnectReason : "ホストとの接続が切れました";

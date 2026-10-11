@@ -25,7 +25,16 @@ namespace Game.Gameplay
             public EnemyType Type;
             public EnemyAnim Anim = (EnemyAnim)255;
             public int SeenFrame;
+            // Client: last snapshot and the speed between the last two, to draw where the host has it now.
+            public float SnapTime = -1f;
+            public Vector2 SnapPos;
+            public Vector2 Velocity;
         }
+
+        /// <summary>How far ahead of the last snapshot clients draw enemies (covers snapshot spacing and half the ping).</summary>
+        private const float MaxExtrapolation = 0.12f;
+
+        private float _halfPing;
 
         private sealed class Corpse
         {
@@ -132,9 +141,15 @@ namespace Game.Gameplay
             }
             else
             {
-                float now = Time.time;
+                // Stale = missing from recent snapshots (dead/removed), judged against the newest snapshot so a
+                // paused or briefly silent host doesn't make every enemy vanish.
+                float newest = director.LastSnapshotTime;
+                var nm = Unity.Netcode.NetworkManager.Singleton;
+                _halfPing = nm != null && nm.NetworkConfig.NetworkTransport != null
+                    ? nm.NetworkConfig.NetworkTransport.GetCurrentRtt(Unity.Netcode.NetworkManager.ServerClientId) * 0.0005f
+                    : 0f;
                 foreach (var (_, entry) in director.ClientEnemies)
-                    if (now - entry.Time <= StaleAfterSeconds) Show(entry.State, snap: false);
+                    if (newest - entry.Time <= StaleAfterSeconds) Show(entry.State, snap: false, entry.Time, director.Halted);
             }
 
             _remove.Clear();
@@ -165,18 +180,31 @@ namespace Game.Gameplay
             }
         }
 
-        private void Show(in EnemyRenderState s, bool snap)
+        private void Show(in EnemyRenderState s, bool snap, float snapTime = -1f, bool hostHalted = false)
         {
             if (!_visuals.TryGetValue(s.Id, out var v))
             {
                 v = Acquire(s.Type, s.Elite);
                 _visuals.Add(s.Id, v);
+                v.SnapTime = -1f;
                 snap = true;
             }
 
             v.SeenFrame = _frame;
             var t = v.Root.transform;
             Vector3 target = s.Position;
+            if (snapTime >= 0f)
+            {
+                if (snapTime != v.SnapTime)
+                {
+                    float dt = snapTime - v.SnapTime;
+                    Vector2 moved = s.Position - v.SnapPos;
+                    v.Velocity = v.SnapTime >= 0f && dt > 0.01f && moved.sqrMagnitude < 2.5f * 2.5f ? moved / dt : Vector2.zero;
+                    v.SnapTime = snapTime;
+                    v.SnapPos = s.Position;
+                }
+                if (!hostHalted) target += (Vector3)(v.Velocity * Mathf.Min(Time.time - snapTime + _halfPing, MaxExtrapolation));
+            }
             if ((t.position - target).sqrMagnitude > 2.5f * 2.5f) snap = true; // blinks/teleports shouldn't glide
             t.position = snap ? target : Vector3.Lerp(t.position, target, 1f - Mathf.Exp(-Smoothing * Time.deltaTime));
 

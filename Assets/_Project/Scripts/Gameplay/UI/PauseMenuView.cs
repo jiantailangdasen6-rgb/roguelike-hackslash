@@ -17,6 +17,8 @@ namespace Game.Gameplay
         private GameObject _panel;
         private Text _note;
         private Button _resume;
+        private Button _invite;
+        private Text _inviteLabel;
 
         private void Awake()
         {
@@ -26,7 +28,7 @@ namespace Game.Gameplay
             _panel = dim.gameObject;
 
             var panel = UIKit.Framed(dim.transform, "Menu");
-            panel.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(720f, 640f), Vector2.zero);
+            panel.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(720f, 720f), Vector2.zero);
             var title = UIKit.Title(panel.transform, "休息", 56);
             title.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(600f, 80f), new Vector2(0f, -30f));
 
@@ -43,6 +45,10 @@ namespace Game.Gameplay
             _resume.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(360f, 72f), new Vector2(0f, 150f));
             var leave = UIKit.Button(panel.transform, "拠点へ戻る（ランを放棄）", 28, () => GameSession.ReturnToLobby(), UIKit.BloodColor);
             leave.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(460f, 72f), new Vector2(0f, 60f));
+            // Online rooms take late joiners: share the link from here too.
+            _invite = UIKit.Button(panel.transform, "招待リンクをコピー（途中参加OK）", 24, CopyInvite);
+            _invite.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(460f, 56f), new Vector2(0f, 372f));
+            _inviteLabel = _invite.GetComponentInChildren<Text>();
             _note = UIKit.Label(panel.transform, "", 20, TextAnchor.LowerCenter, UIKit.MutedText);
             _note.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(640f, 40f), new Vector2(0f, 14f));
 
@@ -75,7 +81,16 @@ namespace Game.Gameplay
             _note.text = nm != null && nm.IsHost && nm.ConnectedClientsIds.Count > 1
                 ? "※ あなたはホストです。戻ると全員のランが終わります"
                 : "※ ゲームは止まりません（オンラインのため）";
+            _invite.gameObject.SetActive(GameSession.JoinCode != null);
+            _inviteLabel.text = "招待リンクをコピー（途中参加OK）";
             EventSystem.current?.SetSelectedGameObject(_resume.gameObject);
+        }
+
+        private void CopyInvite()
+        {
+            if (GameSession.JoinCode == null) return;
+            BrowserBridge.CopyText(BrowserBridge.InviteLink(GameSession.JoinCode));
+            _inviteLabel.text = $"コピーしました（ルームコード {GameSession.JoinCode}）";
         }
 
         private void Update()

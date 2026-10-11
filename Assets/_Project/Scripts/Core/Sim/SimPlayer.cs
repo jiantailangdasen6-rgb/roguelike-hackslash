@@ -16,7 +16,8 @@ namespace Game.Core
         private readonly object _vigorSource = new();
         private readonly object[] _perkSources = new object[PerkCatalog.Count];
 
-        public readonly ulong ClientId;
+        /// <summary>Network id; changes when the same player reconnects (see RunSimulation.JoinMidRun).</summary>
+        public ulong ClientId { get; internal set; }
         public readonly StatSheet Stats = new();
         public readonly int[] PerkLevels = new int[PerkCatalog.Count];
         public readonly HashSet<PerkId> UnlockedPerks = new();

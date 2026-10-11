@@ -118,6 +118,60 @@ namespace Game.Core
             if (AwaitingChoices) FinishChoicesIfDone();
         }
 
+        private readonly Dictionary<string, SimPlayer> _departed = new();
+
+        /// <summary>A player dropped out mid-run: keep their character (perks, HP) so they can come back.</summary>
+        public void DetachPlayer(ulong clientId, string playerKey)
+        {
+            var p = GetPlayer(clientId);
+            if (p == null) return;
+            p.PendingOffer = null;
+            p.Input = default;
+            if (!string.IsNullOrEmpty(playerKey)) _departed[playerKey] = p;
+            RemovePlayer(clientId);
+        }
+
+        /// <summary>
+        /// Someone joins a run in progress. A returning player gets their old character back; a newcomer starts at
+        /// the team level with one random perk per level so far (catch-up), placed next to a teammate.
+        /// </summary>
+        public SimPlayer JoinMidRun(ulong clientId, Loadout loadout, out bool returning)
+        {
+            returning = false;
+            var existing = GetPlayer(clientId);
+            if (existing != null) return existing;
+
+            string key = loadout?.playerKey;
+            SimPlayer player;
+            if (!string.IsNullOrEmpty(key) && _departed.TryGetValue(key, out player))
+            {
+                _departed.Remove(key);
+                player.ClientId = clientId;
+                player.SetLevel(TeamLevel);
+                returning = true;
+            }
+            else
+            {
+                player = new SimPlayer(clientId, StartPosition(Players.Count), loadout);
+                player.SetLevel(TeamLevel);
+                for (int level = 1; level < TeamLevel; level++)
+                {
+                    var offer = PerkRoller.Roll(_perkRng, player);
+                    if (offer.Length > 0) PerkRoller.Apply(player, offer[_perkRng.Range(0, offer.Length)]);
+                }
+                player.Hp = player.MaxHp;
+            }
+
+            foreach (var mate in Players)
+            {
+                if (!mate.Alive) continue;
+                player.Position = mate.Position + new Vector2(0.8f, -0.6f);
+                break;
+            }
+            Players.Add(player);
+            return player;
+        }
+
         public SimPlayer GetPlayer(ulong clientId)
         {
             foreach (var p in Players) if (p.ClientId == clientId) return p;

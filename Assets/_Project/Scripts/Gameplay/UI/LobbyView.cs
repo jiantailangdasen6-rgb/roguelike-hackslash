@@ -28,6 +28,9 @@ namespace Game.Gameplay
         private GameObject _statusBar;
         private Text _waitingText;
         private Button _startButton;
+        private Button _inviteButton;
+        private Text _inviteLabel;
+        private float _inviteCopiedUntil;
         private Button _soloButton;
         private Text _shardsText;
         private Text _detailName;
@@ -54,6 +57,12 @@ namespace Game.Gameplay
             BuildUi();
             Refresh();
             _status.text = GameSession.LobbyMessage ?? "";
+            // Dropped out of a room: its code is ready, so "コードで参加" puts them back in (with their character).
+            if (!string.IsNullOrEmpty(GameSession.LastJoinCode))
+            {
+                _code.text = GameSession.LastJoinCode;
+                if (GameSession.LobbyMessage != null && !GameSession.Refused) _status.text += "　―　「コードで参加」で戻れます";
+            }
             GameSession.LobbyMessage = null;
         }
 
@@ -61,6 +70,13 @@ namespace Game.Gameplay
         {
             // Netcode registers its message types after the first scene's Awake; starting a session earlier fails in builds.
             yield return null;
+            // Opened from an invite link (?join=CODE): fill in the code, let them pick a class, then join.
+            string invited = CommandLine.GetValue("-join");
+            if (!string.IsNullOrEmpty(invited))
+            {
+                _code.text = invited.Trim().ToUpperInvariant();
+                if (string.IsNullOrEmpty(_status.text)) _status.text = $"招待されました（ルームコード {_code.text}）　クラスを選んで「コードで参加」を押そう";
+            }
             // Failed connections retry (the host may not be up yet), but a refusal is final.
             if (GameSession.Refused) yield break;
             if (CommandLine.Has("-autosolo")) GameSession.StartSolo();
@@ -229,6 +245,9 @@ namespace Game.Gameplay
             panel.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(1000f, 640f), Vector2.zero);
             _waitingText = UIKit.Label(panel.transform, "", 32, TextAnchor.UpperCenter);
             _waitingText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(940f, 330f), new Vector2(0f, -30f));
+            _inviteButton = UIKit.Button(panel.transform, "招待リンクをコピー", 28, CopyInvite);
+            _inviteButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(460f, 62f), new Vector2(0f, 216f));
+            _inviteLabel = _inviteButton.GetComponentInChildren<Text>();
             _startButton = UIKit.Button(panel.transform, "出発する", 38, GameSession.StartGame, UIKit.BloodColor);
             _startButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(400f, 86f), new Vector2(0f, 120f));
             var cancel = UIKit.Button(panel.transform, "やめる", 30, () => GameSession.ReturnToLobby());
@@ -464,6 +483,7 @@ namespace Game.Gameplay
         private void JoinLan(string address)
         {
             if (string.IsNullOrWhiteSpace(address)) return;
+            Debug.Log($"[Lobby] Joining {address}");
             PlayerPrefs.SetString("lastAddress", address);
             if (!GameSession.StartLanClient(address))
             {
@@ -496,6 +516,13 @@ namespace Game.Gameplay
             {
                 _busy = false;
             }
+        }
+
+        private void CopyInvite()
+        {
+            if (GameSession.JoinCode == null) return;
+            BrowserBridge.CopyText(BrowserBridge.InviteLink(GameSession.JoinCode));
+            _inviteCopiedUntil = Time.time + 3f;
         }
 
         private async void JoinOnline(string code)
@@ -542,6 +569,8 @@ namespace Game.Gameplay
             _menu.SetActive(_state == State.Menu);
             _waiting.SetActive(_state != State.Menu);
             _startButton.gameObject.SetActive(_state == State.Hosting);
+            _inviteButton.gameObject.SetActive(_state == State.Hosting && GameSession.JoinCode != null);
+            _inviteLabel.text = Time.time < _inviteCopiedUntil ? "コピーしました！ 仲間に送ろう" : "招待リンクをコピー";
 
             switch (_state)
             {
@@ -550,7 +579,8 @@ namespace Game.Gameplay
                     var names = nm.ConnectedClientsIds.Select(id => ClassCatalog.Get(GameSession.LoadoutFor(id).classId).Name);
                     int count = nm.ConnectedClientsIds.Count;
                     string invite = GameSession.JoinCode != null
-                        ? $"ルームコード：<size=56><color=#e0b45a>{GameSession.JoinCode}</color></size>\n<size=24><color=#bfb6aa>仲間に伝えて「コードで参加」してもらおう（PC・ブラウザ可）</color></size>"
+                        ? $"ルームコード：<size=56><color=#e0b45a>{GameSession.JoinCode}</color></size>\n<size=24><color=#bfb6aa>招待リンクを送るか、コードを伝えて「コードで参加」してもらおう</color></size>" +
+                          (GameSession.IsBrowser ? "\n<size=22><color=#ff9a80>※ 遊んでいる間はこのタブを前面に（裏に回すと全員が一時停止します）</color></size>" : "")
                         : $"あなたのIP：<color=#e0b45a>{GameSession.LocalAddress()}</color>\n<size=24><color=#bfb6aa>同じWi-Fiの仲間はこのIPで参加できます</color></size>";
                     _waitingText.text = $"部屋を作りました\n\n{invite}\n\n仲間 {count} / {GameSession.MaxPlayers}：{string.Join("・", names)}";
                     if (_autoHostPlayers > 0 && count >= _autoHostPlayers && !GameSession.InGame) GameSession.StartGame();

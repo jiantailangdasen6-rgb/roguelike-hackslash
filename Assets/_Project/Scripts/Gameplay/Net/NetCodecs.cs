@@ -60,6 +60,9 @@ namespace Game.Gameplay
             Set(SimEventType.HazardWarn, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
             Set(SimEventType.HazardFire, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
             Set(SimEventType.RewardGranted, F.Id | F.Int | F.Value);
+            Set(SimEventType.PlayerJoined, F.Client | F.Pos);
+            Set(SimEventType.PlayerRejoined, F.Client | F.Pos);
+            Set(SimEventType.PlayerLeft, F.Client | F.Pos);
             return layout;
         }
 

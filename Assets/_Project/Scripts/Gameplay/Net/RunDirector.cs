@@ -43,6 +43,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<bool> RoomTrial = new();
         public readonly NetworkVariable<int> BonusShards = new();
         public readonly NetworkVariable<bool> Paused = new();
+        /// <summary>The host's browser tab is in the background: the run is on hold until it comes back.</summary>
+        public readonly NetworkVariable<bool> HostAway = new();
         public readonly NetworkVariable<float> Elapsed = new();
         public readonly NetworkVariable<RunPhase> Phase = new();
         public readonly NetworkVariable<float> BossHealth = new(-1f);
@@ -72,6 +74,7 @@ namespace Game.Gameplay
         private float _accumulator;
         private int _tick;
         private float _spawnTime;
+        private float _startTime;
 
         public override void OnNetworkSpawn()
         {
@@ -85,6 +88,7 @@ namespace Game.Gameplay
 
             _spawnTime = Time.time;
             NetworkManager.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
+            NetworkManager.SceneManager.OnSceneEvent += OnSceneEvent;
             NetworkManager.OnClientDisconnectCallback += OnClientDisconnected;
         }
 
@@ -97,7 +101,11 @@ namespace Game.Gameplay
             }
             if (IsServer && NetworkManager != null)
             {
-                if (NetworkManager.SceneManager != null) NetworkManager.SceneManager.OnLoadEventCompleted -= OnLoadEventCompleted;
+                if (NetworkManager.SceneManager != null)
+                {
+                    NetworkManager.SceneManager.OnLoadEventCompleted -= OnLoadEventCompleted;
+                    NetworkManager.SceneManager.OnSceneEvent -= OnSceneEvent;
+                }
                 NetworkManager.OnClientDisconnectCallback -= OnClientDisconnected;
             }
             if (Instance == this) Instance = null;
@@ -121,21 +129,57 @@ namespace Game.Gameplay
             foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
             {
                 var loadout = GameSession.LoadoutFor(clientId);
-                var simPlayer = Sim.AddPlayer(clientId, loadout);
-                var instance = Instantiate(playerPrefab, simPlayer.Position, Quaternion.identity);
-                var netPlayer = instance.GetComponent<NetPlayer>();
-                netPlayer.Slot.Value = slot++;
-                netPlayer.Class.Value = simPlayer.ClassId;
-                netPlayer.Skin.Value = (byte)loadout.skin;
-                netPlayer.Hp.Value = simPlayer.Hp;
-                netPlayer.MaxHp.Value = simPlayer.MaxHp;
-                netPlayer.MoveSpeed.Value = simPlayer.Stats.Get(StatType.MoveSpeed);
-                instance.SpawnAsPlayerObject(clientId, destroyWithScene: true);
+                SpawnPlayer(clientId, Sim.AddPlayer(clientId, loadout), loadout, slot++);
             }
 
             Sim.Start((int)CommandLine.GetFloat("-startroom", 0f));
             Started.Value = true;
+            _startTime = Time.time;
             Debug.Log($"[RunDirector] Run started with {Sim.Players.Count} player(s)");
+        }
+
+        private readonly Dictionary<string, int> _slotByKey = new();
+
+        private void SpawnPlayer(ulong clientId, SimPlayer simPlayer, Loadout loadout, int slot)
+        {
+            if (!string.IsNullOrEmpty(loadout.playerKey)) _slotByKey[loadout.playerKey] = slot;
+            var instance = Instantiate(playerPrefab, simPlayer.Position, Quaternion.identity);
+            var netPlayer = instance.GetComponent<NetPlayer>();
+            netPlayer.Slot.Value = slot;
+            netPlayer.Class.Value = simPlayer.ClassId;
+            netPlayer.Skin.Value = (byte)loadout.skin;
+            netPlayer.Hp.Value = simPlayer.Hp;
+            netPlayer.MaxHp.Value = simPlayer.MaxHp;
+            netPlayer.Downed.Value = simPlayer.Downed;
+            netPlayer.MoveSpeed.Value = simPlayer.Stats.Get(StatType.MoveSpeed);
+            instance.SpawnAsPlayerObject(clientId, destroyWithScene: true);
+        }
+
+        /// <summary>A client finished syncing the game scene after the run began: a late joiner or someone coming back.</summary>
+        private void OnSceneEvent(SceneEvent e)
+        {
+            if (e.SceneEventType != SceneEventType.SynchronizeComplete || !Started.Value || Sim == null) return;
+            if (e.ClientId == NetworkManager.LocalClientId || Sim.GetPlayer(e.ClientId) != null) return;
+            if (Phase.Value != RunPhase.Playing) return;
+
+            var loadout = GameSession.LoadoutFor(e.ClientId);
+            var simPlayer = Sim.JoinMidRun(e.ClientId, loadout, out bool returning);
+            int slot = returning && _slotByKey.TryGetValue(loadout.playerKey, out int old) && !SlotTaken(old) ? old : FreeSlot();
+            SpawnPlayer(e.ClientId, simPlayer, loadout, slot);
+            Sim.Events.Add(new SimEvent(returning ? SimEventType.PlayerRejoined : SimEventType.PlayerJoined) { ClientId = e.ClientId, Pos = simPlayer.Position });
+            Debug.Log($"[RunDirector] {(returning ? "Rejoined" : "Joined mid-run")}: client {e.ClientId} as P{slot + 1}");
+        }
+
+        private static bool SlotTaken(int slot)
+        {
+            foreach (var p in NetPlayer.All) if (p.Slot.Value == slot) return true;
+            return false;
+        }
+
+        private static int FreeSlot()
+        {
+            for (int s = 0; s < GameSession.MaxPlayers; s++) if (!SlotTaken(s)) return s;
+            return 0;
         }
 
         /// <summary>The host's pick in the camp (automated runs: -difficulty easy|normal|hard|nightmare).</summary>
@@ -146,7 +190,13 @@ namespace Game.Gameplay
             return ProfileStore.Current.difficulty;
         }
 
-        private void OnClientDisconnected(ulong clientId) => Sim?.RemovePlayer(clientId);
+        private void OnClientDisconnected(ulong clientId)
+        {
+            if (Sim == null || Sim.GetPlayer(clientId) == null) return;
+            var p = Sim.GetPlayer(clientId);
+            Sim.Events.Add(new SimEvent(SimEventType.PlayerLeft) { ClientId = clientId, Pos = p.Position });
+            Sim.DetachPlayer(clientId, GameSession.LoadoutFor(clientId).playerKey);
+        }
 
         [Rpc(SendTo.Server)]
         public void ChoosePerkRpc(int index, RpcParams rpcParams = default)
@@ -166,12 +216,30 @@ namespace Game.Gameplay
                 return;
             }
 
+            // A background browser tab runs at a crawl: hold the run for everyone instead of slow motion.
+            bool away = HostIsAway();
+            SetIfChanged(HostAway, away);
+            if (away)
+            {
+                _accumulator = 0f;
+                return;
+            }
+
             _accumulator = Mathf.Min(_accumulator + Time.deltaTime, TickDt * 4);
             while (_accumulator >= TickDt)
             {
                 _accumulator -= TickDt;
                 Tick();
             }
+        }
+
+        /// <summary>Background tab, or the test window -awayat &lt;s&gt; -awayfor &lt;s&gt; (seconds after the run starts).</summary>
+        private bool HostIsAway()
+        {
+            if (BrowserBridge.PageHidden) return true;
+            if (!CommandLine.Has("-awayat")) return false;
+            float t = Time.time - _startTime - CommandLine.GetFloat("-awayat", 0f);
+            return t >= 0f && t < CommandLine.GetFloat("-awayfor", 8f);
         }
 
         private void Tick()
@@ -326,7 +394,17 @@ namespace Game.Gameplay
             if (senderClientId != NetworkManager.ServerClientId) return;
             SnapshotCodec.ReadChunk(reader, _snapshotBuffer);
             float now = Time.time;
+            LastSnapshotTime = now;
             foreach (var state in _snapshotBuffer) ClientEnemies[state.Id] = (state, now);
         }
+
+        /// <summary>Client only: when the last enemy snapshot arrived (the host sends them even with no enemies).</summary>
+        public float LastSnapshotTime { get; private set; }
+
+        /// <summary>Client only: the host has gone quiet mid-run (frozen tab, network hiccup).</summary>
+        public bool HostStalled => !IsServer && IsRunning && LastSnapshotTime > 0f && Time.time - LastSnapshotTime > 1.5f;
+
+        /// <summary>Nobody should act: the host is away or not answering.</summary>
+        public bool Halted => HostAway.Value || HostStalled;
     }
 }

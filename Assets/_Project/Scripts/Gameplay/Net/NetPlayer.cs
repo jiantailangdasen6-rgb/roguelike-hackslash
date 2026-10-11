@@ -166,6 +166,43 @@ namespace Game.Gameplay
             });
         }
 
+        private void PlayAction(AttackAnim anim)
+        {
+            string clip = anim switch
+            {
+                AttackAnim.BasicA or AttackAnim.Spin => "attack",
+                AttackAnim.BasicB => "attack2",
+                AttackAnim.Skill1 => "skill1",
+                AttackAnim.Skill2 => "skill2",
+                _ => "dodge",
+            };
+            animator.Play(clip, force: true, speed: anim == AttackAnim.Dodge ? 1.2f : 1f);
+            _actionUntil = Time.time + 0.35f;
+        }
+
+        // Clients see their own actions a round trip late; the owner starts the animation on the press instead
+        // and the host's confirmation then doesn't restart it. (The host itself has no delay to hide.)
+        private AttackAnim _predicted;
+        private float _predictedAt = -10f;
+        private const float PredictionWindow = 0.6f;
+
+        public void PredictAction(AttackAnim anim)
+        {
+            if (!IsOwner || IsServer) return;
+            PlayAction(anim);
+            _predicted = anim;
+            _predictedAt = Time.time;
+        }
+
+        private bool ConsumePrediction(AttackAnim confirmed)
+        {
+            if (!IsOwner || Time.time - _predictedAt > PredictionWindow) return false;
+            bool basic(AttackAnim a) => a is AttackAnim.BasicA or AttackAnim.BasicB or AttackAnim.Spin;
+            bool same = confirmed == _predicted || (basic(confirmed) && basic(_predicted));
+            if (same) _predictedAt = -10f;
+            return same;
+        }
+
         private void OnEvent(SimEvent e)
         {
             if (e.ClientId != OwnerClientId) return;
@@ -174,16 +211,8 @@ namespace Game.Gameplay
                 case SimEventType.PlayerAttack:
                 {
                     var anim = (AttackAnim)e.Int;
-                    string clip = anim switch
-                    {
-                        AttackAnim.BasicA or AttackAnim.Spin => "attack",
-                        AttackAnim.BasicB => "attack2",
-                        AttackAnim.Skill1 => "skill1",
-                        AttackAnim.Skill2 => "skill2",
-                        _ => "dodge",
-                    };
-                    animator.Play(clip, force: true, speed: anim == AttackAnim.Dodge ? 1.2f : 1f);
-                    _actionUntil = Time.time + 0.35f;
+                    if (ConsumePrediction(anim)) break; // already playing since the button press
+                    PlayAction(anim);
                     if (Mathf.Abs(e.Vec.x) > 0.05f && !IsOwner) animator.Renderer.flipX = e.Vec.x < 0f;
                     break;
                 }

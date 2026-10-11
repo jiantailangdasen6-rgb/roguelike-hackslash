@@ -15,6 +15,7 @@ namespace Game.Gameplay
         private float _nextReport;
         private int _eventCount;
         private float _downAt;
+        private float _dropAt;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Install()
@@ -25,6 +26,7 @@ namespace Game.Gameplay
             var reporter = go.AddComponent<AutoTestReporter>();
             reporter._quitAt = Time.time + CommandLine.GetFloat("-autoquit", 60f);
             if (CommandLine.Has("-downat")) reporter._downAt = Time.time + CommandLine.GetFloat("-downat", 30f);
+            if (CommandLine.Has("-dropat")) reporter._dropAt = Time.time + CommandLine.GetFloat("-dropat", 30f);
             if (CommandLine.GetValue("-screenshot") != null)
             {
                 string times = CommandLine.GetValue("-screenshotat") ?? "20";
@@ -61,6 +63,13 @@ namespace Game.Gameplay
                     Debug.Log($"[AutoTest] downed client {p.ClientId}");
                     break;
                 }
+            }
+            // -dropat <s> (client): leave the session once; -autojoin/-onlinejoinfile then bring it back (reconnect test).
+            if (_dropAt > 0f && Time.time >= _dropAt && NetworkManager.Singleton != null && NetworkManager.Singleton.IsConnectedClient && !NetworkManager.Singleton.IsHost)
+            {
+                _dropAt = 0f;
+                Debug.Log("[AutoTest] dropping out to test reconnecting");
+                GameSession.ReturnToLobby("（テスト）接続を切りました");
             }
             if (_shotIndex < _shots.Count && Time.time >= _shots[_shotIndex])
             {

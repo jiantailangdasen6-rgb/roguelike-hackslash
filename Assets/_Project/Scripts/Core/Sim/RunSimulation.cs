@@ -25,7 +25,7 @@ namespace Game.Core
         public const float HitInvulnerability = 0.35f;
         public const float SpawnWarningTime = 0.9f;
         public const float MinSpawnDistance = 5f;
-        public const float SurviveSeconds = 50f;
+        public const float SurviveSeconds = 40f;
 
         /// <summary>Walkable floor of the arena (inside the walls).</summary>
         public static readonly Rect DefaultBounds = new(-14f, -8f, 28f, 16f);
@@ -345,7 +345,7 @@ namespace Game.Core
             _waveTimer = 20f;
             int size = Mathf.RoundToInt((5f + Room.Index * 0.5f + Room.Area * 1.5f) * PlayerScale * DifficultyDef.EnemyCount);
             _lastWaveSize = size;
-            bool eliteRoom = Room.Index % RoomsPerArea == 2;
+            bool eliteRoom = IsEliteRoom(Room.Index);
             for (int i = 0; i < size; i++)
                 QueueSpawn(RandomEnemyType(), (eliteRoom && i == 0) || _spawnRng.Chance(EliteChance));
             Events.Add(new SimEvent(SimEventType.WaveStarted) { Int = Room.Wave, Value = Room.WaveCount });
@@ -577,18 +577,21 @@ namespace Game.Core
             Layout = Arena.Get(Bounds == DefaultBounds ? Arena.Pick(_layoutRng, index, Layout.Id) : 0);
             ResetHazards();
 
-            switch (index % RoomsPerArea)
+            Room.Objective = ObjectiveOf(index);
+            switch (Room.Objective)
             {
-                case 0:
-                case 2:
-                    Room.Objective = RoomObjective.Waves;
+                case RoomObjective.Waves:
                     Room.WaveCount = 4 + (Room.Area >= 1 ? 1 : 0);
                     Room.Target = Room.WaveCount;
                     _waveTimer = 1.2f;
                     break;
-                case 1:
-                    Room.Objective = RoomObjective.Survive;
+                case RoomObjective.Survive:
                     Room.Target = SurviveSeconds;
+                    break;
+                case RoomObjective.Rest:
+                    Layout = Arena.Get(Arena.RestLayout);
+                    ResetHazards();
+                    Room.Target = 0f;
                     break;
                 default:
                     Room.Objective = RoomObjective.Boss;
@@ -599,7 +602,62 @@ namespace Game.Core
                     break;
             }
             Events.Add(new SimEvent(SimEventType.RoomStarted) { Int = index, Id = Layout.Id, Value = Room.Trial ? 1f : 0f });
+            if (Room.Objective == RoomObjective.Rest) ClearRoom(); // nothing to fight: the doors are open from the start
             SpawnProps();
+        }
+
+        /// <summary>A rest room chest broke open: a ring of souls (about a wave's worth of XP for the team).</summary>
+        private void SpillChest(in Enemy chest)
+        {
+            int total = Mathf.RoundToInt((10f + 6f * Room.Area) * (1f + 0.5f * Mathf.Max(0, Players.Count - 1)));
+            const int pieces = 6;
+            for (int s = 0; s < pieces; s++)
+                DropSoul(chest.Position + Rotate(Vector2.right, s * 60f + 30f) * 0.9f, Mathf.Max(1, total / pieces));
+        }
+
+        /// <summary>
+        /// The pace of an area: a fight, a harder fight (a 40 s stand in the crypt, elite packs deeper down),
+        /// a breather by a campfire, then the area's lord.
+        /// </summary>
+        public static RoomObjective ObjectiveOf(int roomIndex) => (roomIndex % RoomsPerArea) switch
+        {
+            0 => RoomObjective.Waves,
+            1 => roomIndex / RoomsPerArea == 0 ? RoomObjective.Survive : RoomObjective.Waves,
+            2 => RoomObjective.Rest,
+            _ => RoomObjective.Boss,
+        };
+
+        /// <summary>Rooms whose every wave is led by an elite.</summary>
+        public static bool IsEliteRoom(int roomIndex) => roomIndex % RoomsPerArea == 1 && ObjectiveOf(roomIndex) == RoomObjective.Waves;
+
+        public const float RestHealRadius = 3.4f;
+        /// <summary>Share of max HP restored per second while sitting by the rest room's fire.</summary>
+        public const float RestHealPerSecond = 0.12f;
+        private float _restHealPulse;
+
+        /// <summary>Rest room: the campfire heals everyone close to it (and gets the fallen back up).</summary>
+        private void WarmByTheFire(float dt)
+        {
+            _restHealPulse -= dt;
+            bool pulse = _restHealPulse <= 0f;
+            if (pulse) _restHealPulse = 1f;
+            foreach (var p in Players)
+            {
+                if ((p.Position - Arena.RestFire).sqrMagnitude > RestHealRadius * RestHealRadius) continue;
+                if (!p.Alive)
+                {
+                    Revive(p, 0.35f, guardian: false);
+                    continue;
+                }
+                float before = p.Hp;
+                p.Heal(p.MaxHp * RestHealPerSecond * dt);
+                p.HealedByFire += p.Hp - before;
+                if (pulse && p.HealedByFire > 0.5f)
+                {
+                    Events.Add(new SimEvent(SimEventType.PlayerHealed) { ClientId = p.ClientId, Pos = p.Position, Value = p.HealedByFire });
+                    p.HealedByFire = 0f;
+                }
+            }
         }
 
         private void UpdateRoom(float dt)
@@ -626,6 +684,8 @@ namespace Game.Core
                 }
                 return;
             }
+
+            if (Room.Objective == RoomObjective.Rest) WarmByTheFire(dt);
 
             // Everyone standing (downed players are carried along) must agree on one door, once all picks are made.
             if (AnyPicksLeft)
@@ -694,6 +754,9 @@ namespace Game.Core
             }
             Souls.Clear();
             SweepLoot();
+            // Whatever is left standing (unopened chests, kegs) stays behind.
+            for (int i = 0; i < Enemies.Count; i++) Enemies[i].Dead = true;
+            ProcessDeaths(giveXp: false);
 
             for (int i = 0; i < Players.Count; i++)
             {

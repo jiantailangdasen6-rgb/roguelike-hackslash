@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
+  m_Name: camp_mirror
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
+  Texture: {fileID: 2800000, guid: bf94216e88862eb49a945f0df6c5808c, type: 3}
+  FlashTexture: {fileID: 0}
+  FrameWidth: 44
+  FrameHeight: 84
+  Pivot: {x: 0.5, y: 0.04}
+  PixelsPerUnit: 32
+  Clips:
+  - Name: default
+    Row: 0
+    Frames: 6
+    Fps: 12
+    Loop: 1

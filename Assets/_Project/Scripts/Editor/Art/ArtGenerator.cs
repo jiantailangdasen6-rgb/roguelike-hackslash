@@ -52,16 +52,24 @@ namespace Game.EditorTools.Art
             Character("powder_keg", EnemyArt.PowderKeg(), EnemyArt.FrameSize);
             Character("blood_bishop", EnemyArt.BloodBishop(), EnemyArt.BossFrameSize);
             Character("lich", EnemyArt.Lich(), EnemyArt.BossFrameSize);
+            // The camp's residents (idle only).
+            Character("npc_master", CampArt.Master(), HeroArt.FrameSize);
+            Character("npc_crone", CampArt.Crone(), HeroArt.FrameSize);
+            Character("npc_keeper", CampArt.Gravekeeper(), HeroArt.FrameSize);
+            Character("treasure_chest", CampArt.TreasureChest(), EnemyArt.FrameSize);
 
             foreach (var (name, gen) in ProceduralArt.Effects) Effect(name, gen());
             foreach (var (name, sheet) in PropArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
+            foreach (var (name, sheet) in CampArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             Effect("icons_perk", IconArt.Perks(), "icons_perk");
             Effect("icons_trinket", IconArt.Trinkets(), "icons_trinket");
             Effect("icons_reward", IconArt.Rewards(), "icons_reward");
             WritePreview("props", PropArt.Sheets());
+            WritePreview("camp", CampArt.Sheets());
 
             var tiles = ProceduralArt.Tiles();
             foreach (var (name, canvas) in PropArt.AreaTiles()) tiles[name] = canvas;
+            foreach (var (name, canvas) in CampArt.Tiles()) tiles[name] = canvas;
             foreach (var (name, canvas) in tiles)
             {
                 string path = $"{TileDir}/{name}.png";

@@ -123,6 +123,11 @@ namespace Game.Gameplay
                 case SimEventType.EnemyHit: OnEnemyHit(e); break;
                 case SimEventType.EnemyDied:
                     Burst("fx_puff", e.Pos + Vector2.up * 0.4f, 14f, 1.4f, Color.white);
+                    if ((EnemyType)e.Int == EnemyType.TreasureChest && e.Value < 0.5f)
+                    {
+                        var glint = Spawn("fx_holy", e.Pos, 14f, 0.6f, 0.6f, 1.1f, new Color(1f, 0.85f, 0.45f), order: 2400);
+                        AddLight(glint, new Color(1f, 0.8f, 0.4f), 1.6f, 3f);
+                    }
                     break;
                 case SimEventType.EnemyTelegraph: AddTelegraph(e); break;
                 case SimEventType.EnemyStrike:

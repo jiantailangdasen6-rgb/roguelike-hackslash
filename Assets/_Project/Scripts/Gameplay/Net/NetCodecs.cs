@@ -38,7 +38,7 @@ namespace Game.Gameplay
             Set(SimEventType.ProjectileSpawn, F.Id | F.Int | F.Pos | F.Vec | F.Value);
             Set(SimEventType.ProjectileEnd, F.Id | F.Pos);
             Set(SimEventType.EnemyHit, F.Id | F.Pos | F.Value | F.Int);
-            Set(SimEventType.EnemyDied, F.Id | F.Pos | F.Int);
+            Set(SimEventType.EnemyDied, F.Id | F.Pos | F.Int | F.Value); // Value 1 = crumbled with the room (no reward)
             Set(SimEventType.EnemyTelegraph, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
             Set(SimEventType.EnemyStrike, F.Id | F.Int | F.Pos | F.Vec);
             Set(SimEventType.SpawnWarning, F.Pos | F.Int | F.Value);

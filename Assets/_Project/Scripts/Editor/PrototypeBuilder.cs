@@ -51,6 +51,7 @@ namespace Game.EditorTools
         private const string NetworkManagerPath = ResourcesDir + "/NetworkManager.prefab";
         private const string LobbyScenePath = ScenesDir + "/Lobby.unity";
         private const string GameScenePath = ScenesDir + "/Game.unity";
+        private const string CampScenePath = ScenesDir + "/Camp.unity";
 
         private const string KeyboardMouse = "Keyboard&Mouse";
         private const string GamepadScheme = "Gamepad";
@@ -71,11 +72,13 @@ namespace Game.EditorTools
             var post = CreatePostProfile();
 
             BuildLobbyScene(post);
+            BuildCampScene(player, post);
             BuildGameScene(player, post);
 
             EditorBuildSettings.scenes = new[]
             {
                 new EditorBuildSettingsScene(LobbyScenePath, true),
+                new EditorBuildSettingsScene(CampScenePath, true),
                 new EditorBuildSettingsScene(GameScenePath, true),
             };
             ConfigurePlayerSettings();
@@ -343,6 +346,178 @@ namespace Game.EditorTools
             new GameObject("Lobby").AddComponent<LobbyView>();
             new GameObject("Audio").AddComponent<SfxPlayer>();
             EditorSceneManager.SaveScene(scene, LobbyScenePath);
+        }
+
+        /// <summary>
+        /// The camp between runs: a night courtyard in front of a ruined chapel wall, lit by a big campfire. The gate
+        /// into the labyrinth stands in the wall; the stations (<see cref="Camp.Stations"/>) are props around the fire.
+        /// </summary>
+        private static void BuildCampScene(NetworkObject playerPrefab, VolumeProfile post)
+        {
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            CreateCamera(withBrain: true, pixelPerfect: true);
+            CreatePostVolume(post);
+            var global = new GameObject("Global Light 2D").AddComponent<Light2D>();
+            global.lightType = Light2D.LightType.Global;
+            global.intensity = 0.5f;
+            global.color = new Color(0.62f, 0.66f, 0.92f); // moonlight
+
+            var bounds = CreateCampGround();
+            CreateFollowCamera(bounds);
+
+            var motes = new GameObject("Embers").AddComponent<AmbientMotes>();
+            SetRef(motes, "sprite", EnvSprite("mote"));
+            SetRef(motes, "unlit", UnlitMaterial());
+
+            var directorGo = new GameObject("CampDirector");
+            var directorObject = directorGo.AddComponent<NetworkObject>();
+            SetRef(directorGo.AddComponent<CampDirector>(), "playerPrefab", playerPrefab);
+
+            new GameObject("CampView").AddComponent<CampView>();
+            new GameObject("PauseMenu").AddComponent<PauseMenuView>();
+            new GameObject("Audio").AddComponent<SfxPlayer>();
+            CreateEventSystem();
+
+            EditorSceneManager.SaveScene(scene, CampScenePath);
+            EnsureGlobalObjectIdHash(directorObject);
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene, CampScenePath);
+        }
+
+        private static Collider2D CreateCampGround()
+        {
+            AssetDatabase.SaveAssets();
+            var b = Camp.Bounds;
+            int xMin = (int)b.xMin, xMax = (int)b.xMax, yMin = (int)b.yMin, yMax = (int)b.yMax;
+            var root = new GameObject("Camp").transform;
+            root.gameObject.AddComponent<Grid>();
+
+            var ground = new[] { EnvTile("camp_ground0"), EnvTile("camp_ground1"), EnvTile("camp_ground2"), EnvTile("camp_ground3") };
+            var flags = new[] { EnvTile("floor0"), EnvTile("floor1"), EnvTile("floor2"), EnvTile("floor3") };
+            var floor = CreateTilemap(root, "Floor", -1000);
+            var walls = CreateTilemap(root, "Walls", -990);
+            var tops = CreateTilemap(root, "WallTops", 900);
+            var rng = new GameRandom(2026);
+            for (int x = xMin; x < xMax; x++)
+            for (int y = yMin; y < yMax; y++)
+            {
+                float r = rng.Value();
+                // Old flagstones: a path from the fire to the gate and a landing before it; earth elsewhere.
+                bool path = (x >= -2 && x <= 1 && y >= 0) || (x >= -4 && x <= 3 && y >= 4);
+                bool worn = path && rng.Chance(x == -2 || x == 1 ? 0.35f : 0.1f); // ragged edges
+                var tile = path && !worn
+                    ? (r < 0.6f ? flags[0] : r < 0.8f ? flags[1] : r < 0.92f ? flags[2] : flags[3])
+                    : (r < 0.55f ? ground[0] : r < 0.78f ? ground[1] : r < 0.93f ? ground[2] : ground[3]);
+                floor.SetTile(new Vector3Int(x, y, 0), tile);
+            }
+            var wall = EnvTile("wall");
+            var wallAlt = EnvTile("wall_alt");
+            var wallTop = EnvTile("walltop");
+            for (int x = xMin - 1; x <= xMax; x++)
+            {
+                walls.SetTile(new Vector3Int(x, yMax, 0), rng.Chance(0.3f) ? wallAlt : wall);
+                walls.SetTile(new Vector3Int(x, yMax + 1, 0), rng.Chance(0.3f) ? wallAlt : wall);
+                tops.SetTile(new Vector3Int(x, yMax + 2, 0), wallTop);
+                tops.SetTile(new Vector3Int(x, yMin - 1, 0), wallTop);
+            }
+            for (int y = yMin - 1; y <= yMax + 2; y++)
+            {
+                tops.SetTile(new Vector3Int(xMin - 1, y, 0), wallTop);
+                tops.SetTile(new Vector3Int(xMax, y, 0), wallTop);
+            }
+            var shade = CreateTilemap(root, "Shade", -980);
+            for (int x = xMin; x < xMax; x++) shade.SetTile(new Vector3Int(x, yMax - 1, 0), EnvTile("shade_top"));
+            for (int y = yMin; y < yMax - 1; y++)
+            {
+                shade.SetTile(new Vector3Int(xMin, y, 0), EnvTile("shade_left"));
+                shade.SetTile(new Vector3Int(xMax - 1, y, 0), EnvTile("shade_right"));
+            }
+
+            var props = new GameObject("Props").transform;
+            props.SetParent(root, false);
+            Vector2 fire = Camp.FirePosition;
+
+            // The fire: scorched stone ring, flames, and the light the whole camp lives in.
+            Loop(props, "camp_stones", fire + new Vector2(0f, 0.1f), 2f, order: -900);
+            Loop(props, "camp_fire", fire, 10f);
+            var fireLight = new GameObject("FireLight");
+            fireLight.transform.SetParent(props, false);
+            fireLight.transform.position = fire + new Vector2(0f, 0.8f);
+            var light = fireLight.AddComponent<Light2D>();
+            light.lightType = Light2D.LightType.Point;
+            light.color = new Color(1f, 0.6f, 0.3f);
+            light.pointLightOuterRadius = 11f;
+            light.pointLightInnerRadius = 0.6f;
+            light.falloffIntensity = 0.6f;
+            var flicker = fireLight.AddComponent<LightFlicker>();
+            var fso = new SerializedObject(flicker);
+            fso.FindProperty("baseIntensity").floatValue = 1.45f;
+            fso.FindProperty("amount").floatValue = 0.22f;
+            fso.ApplyModifiedPropertiesWithoutUndo();
+            Loop(props, "camp_log", new Vector2(-3.2f, -2.6f), 1f);
+            Loop(props, "camp_log", new Vector2(3.2f, -2.6f), 1f, flip: true);
+
+            // The gate into the labyrinth, with a slow portal in its arch and candles at its feet.
+            var gate = Camp.Get(CampStation.Gate);
+            Vector2 gateBase = new(gate.Position.x, 6.15f);
+            Loop(props, "camp_gate", gateBase, 1f);
+            var portal = Loop(props, "fx_portal", gateBase + new Vector2(0f, 1.62f), 6f, order: EnemyView.SortOrder(gateBase.y) + 1);
+            portal.transform.localScale = Vector3.one * 2.15f;
+            portal.GetComponent<SpriteRenderer>().color = new Color(1f, 0.82f, 0.62f);
+            Light(props, gateBase + new Vector2(0f, 1.6f), new Color(1f, 0.42f, 0.3f), 1.3f, 4.5f);
+            foreach (float x in new[] { -3.4f, 3.0f }) Candle(props, new Vector2(x, 5.5f), "fx_candle", new Color(1f, 0.62f, 0.32f));
+            foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner", new Vector2(x, yMax + 1.1f), 1f, order: -980);
+
+            // Stations.
+            Loop(props, "camp_tablet", Camp.Get(CampStation.Tablet).Position + new Vector2(0f, -0.3f), 4f);
+            Loop(props, "camp_mirror", Camp.Get(CampStation.Mirror).Position + new Vector2(0f, -0.3f), 5f);
+            Candle(props, new Vector2(-8.1f, 3.3f), "fx_candle_soul", new Color(0.6f, 0.7f, 1f));
+            Loop(props, "camp_chest", Camp.Get(CampStation.Vault).Position + new Vector2(0f, -0.1f), 1f);
+            Candle(props, new Vector2(10.9f, 3.4f), "fx_candle", new Color(1f, 0.62f, 0.32f));
+            Loop(props, "npc_master", Camp.Get(CampStation.Master).Position + new Vector2(0f, -0.2f), 5f);
+            Loop(props, "camp_rack", new Vector2(-11.4f, -3.6f), 1f);
+            Loop(props, "camp_dummy", new Vector2(-6.6f, -2.0f), 1f);
+            Loop(props, "npc_crone", new Vector2(9.7f, -2.9f), 5f, flip: true);
+            Loop(props, "camp_table", new Vector2(9.6f, -3.95f), 1f);
+            Light(props, new Vector2(9.0f, -3.2f), new Color(0.75f, 0.55f, 1f), 0.9f, 3.2f);
+            Loop(props, "camp_board", Camp.Get(CampStation.Board).Position + new Vector2(0f, -0.25f), 1f);
+            Loop(props, "npc_keeper", new Vector2(7.0f, -5.2f), 4f, flip: true);
+            Light(props, Camp.Get(CampStation.Board).Position + new Vector2(0f, 1.6f), new Color(1f, 0.7f, 0.4f), 0.8f, 2.6f);
+
+            // Tents, dead trees, crates and bones round the edges.
+            Loop(props, "camp_tent", new Vector2(-11.2f, 4.95f), 1f);
+            Loop(props, "camp_tent", new Vector2(11.2f, 4.95f), 1f, flip: true);
+            Loop(props, "camp_tree", new Vector2(-12.4f, 0.4f), 1f);
+            Loop(props, "camp_tree2", new Vector2(12.5f, -0.6f), 1f, flip: true);
+            Loop(props, "camp_tree2", new Vector2(-6.5f, -7.3f), 1f);
+            Loop(props, "prop_crates", new Vector2(-11.6f, -6.95f), 1f);
+            Loop(props, "prop_crates", new Vector2(11.6f, -6.95f), 1f, flip: true);
+            for (int i = 0; i < 5; i++)
+                Prop(props, "bones", new Vector2(rng.Range(xMin + 1f, xMax - 1f), rng.Chance(0.5f) ? rng.Range(yMin + 0.4f, yMin + 1.6f) : rng.Range(yMax - 2.6f, yMax - 1.6f)), 1f, order: -950);
+
+            var boundsGo = new GameObject("CameraBounds") { layer = 2 };
+            boundsGo.transform.SetParent(root, false);
+            var poly = boundsGo.AddComponent<PolygonCollider2D>();
+            poly.isTrigger = true;
+            poly.points = new[]
+            {
+                new Vector2(xMin - 1, yMin - 1), new Vector2(xMax + 1, yMin - 1),
+                new Vector2(xMax + 1, yMax + 3), new Vector2(xMin - 1, yMax + 3),
+            };
+            return poly;
+        }
+
+        /// <summary>A sprite sheet played in a loop (one frame = a still prop), sorted by its feet.</summary>
+        private static GameObject Loop(Transform parent, string sheet, Vector2 position, float fps, int? order = null, bool flip = false)
+        {
+            var go = new GameObject(sheet);
+            go.transform.SetParent(parent, false);
+            go.transform.position = position;
+            var r = go.AddComponent<SpriteRenderer>();
+            r.sortingOrder = order ?? EnemyView.SortOrder(position.y);
+            r.flipX = flip;
+            go.AddComponent<SpriteLoop>().Configure(sheet, fps);
+            return go;
         }
 
         private static void BuildGameScene(NetworkObject playerPrefab, VolumeProfile post)

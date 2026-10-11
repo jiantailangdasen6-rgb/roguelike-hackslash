@@ -43,7 +43,7 @@ namespace Game.Core
             for (int i = 0; i < Layout.Gimmicks.Length; i++)
             {
                 var g = Layout.Gimmicks[i];
-                if (g.Kind == GimmickKind.PowderKeg) continue;
+                if (g.Kind is GimmickKind.PowderKeg or GimmickKind.TreasureChest) continue;
                 float period = g.Kind == GimmickKind.FlameJet ? Arena.FlamePeriod : Arena.SpikePeriod;
                 _hazards.Add(new Hazard { Id = i, Def = g, Clock = g.Phase * period - HazardGrace });
             }
@@ -61,6 +61,8 @@ namespace Game.Core
             foreach (var g in Layout.Gimmicks)
                 if (g.Kind == GimmickKind.PowderKeg)
                     Enemies.Spawn(EnemyType.PowderKeg, g.Position, 1f, 1f, false);
+                else if (g.Kind == GimmickKind.TreasureChest)
+                    Enemies.Spawn(EnemyType.TreasureChest, g.Position, 1f, 1f, false);
         }
 
         /// <summary>A keg was broken: it hisses briefly, then explodes.</summary>

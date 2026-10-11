@@ -12,6 +12,13 @@ namespace Game.Gameplay
         private Light2D _light;
         private float _seed;
 
+        /// <summary>For lights made at runtime.</summary>
+        public void Configure(float intensity, float flicker)
+        {
+            baseIntensity = intensity;
+            amount = flicker;
+        }
+
         private void Awake()
         {
             _light = GetComponent<Light2D>();

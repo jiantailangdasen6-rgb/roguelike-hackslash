@@ -30,8 +30,9 @@ namespace Game.Gameplay
         public const int MaxPlayers = 3;
         public const string LobbyScene = "Lobby";
         public const string GameScene = "Game";
+        public const string CampScene = "Camp";
 
-        /// <summary>True once the host has started the run; new connections are refused.</summary>
+        /// <summary>True while the party is in a run (Game scene) rather than in the camp.</summary>
         public static bool InGame { get; private set; }
 
         /// <summary>Message to show in the lobby after returning (e.g. disconnected).</summary>
@@ -116,7 +117,7 @@ namespace Game.Gameplay
             Prepare();
             Network.NetworkConfig.NetworkTransport = Network.GetComponent<SinglePlayerTransport>();
             if (!Network.StartHost()) return false;
-            StartGame();
+            EnterCamp();
             return true;
         }
 
@@ -126,7 +127,9 @@ namespace Game.Gameplay
             // -localonly (automated tests) avoids opening a LAN port and the firewall prompt that comes with it.
             string listen = CommandLine.Has("-localonly") ? "127.0.0.1" : "0.0.0.0";
             Udp(false).SetConnectionData(listen, Port, listen);
-            return Network.StartHost();
+            if (!Network.StartHost()) return false;
+            EnterCamp();
+            return true;
         }
 
         public static bool StartLanClient(string address)
@@ -163,6 +166,7 @@ namespace Game.Gameplay
             Udp(true).SetRelayServerData(allocation.ToRelayServerData("wss"));
             if (!Network.StartHost()) throw new InvalidOperationException("部屋を作れませんでした");
             JoinCode = code;
+            EnterCamp();
             return code;
         }
 
@@ -180,13 +184,31 @@ namespace Game.Gameplay
 
         // ------------------------------------------------------------------ Flow
 
-        /// <summary>Host only: move everyone into the game scene.</summary>
+        /// <summary>Host only: take the party to the camp (after starting a session, and after each run).</summary>
+        private static void EnterCamp()
+        {
+            InGame = false;
+            Network.SceneManager.LoadScene(CampScene, LoadSceneMode.Single);
+        }
+
+        /// <summary>Host only: everyone sets out from the camp into a run.</summary>
         public static void StartGame()
         {
             if (!Network.IsServer || InGame) return;
             InGame = true;
             Network.SceneManager.LoadScene(GameScene, LoadSceneMode.Single);
         }
+
+        /// <summary>Host only: after a run (or abandoning it) the party goes back to the camp together.</summary>
+        public static void ReturnToCamp()
+        {
+            var nm = NetworkManager.Singleton;
+            if (nm == null || !nm.IsServer || !InGame) return;
+            EnterCamp();
+        }
+
+        /// <summary>A player changed class, mastery or trinkets in the camp.</summary>
+        public static void SetLoadout(ulong clientId, Loadout loadout) => Loadouts[clientId] = loadout;
 
         /// <summary>Room code of the last online session this device was in (offered for rejoining).</summary>
         public static string LastJoinCode { get; private set; }
@@ -224,7 +246,7 @@ namespace Game.Gameplay
                 Loadouts[request.ClientNetworkId] = Loadout.FromJson(payload.Substring(split + 1));
             if (!response.Approved)
                 response.Reason = !sameBuild ? "ゲームのバージョンが部屋と違います。全員ページを再読み込み（F5）してから、部屋を作り直してください"
-                    : closed ? "この冒険はもう終わっています" : "満員です（最大3人）";
+                    : closed ? "仲間は冒険を終えたところです。拠点に戻ってから、もう一度参加してください" : "満員です（最大3人）";
         }
 
         private static void OnClientDisconnected(ulong clientId)

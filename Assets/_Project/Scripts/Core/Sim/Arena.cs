@@ -13,6 +13,7 @@ namespace Game.Core
         Pew,
         Crates,
         Crystal,
+        Campfire,   // the rest room's fire (heals, see RunSimulation.WarmByTheFire)
     }
 
     /// <summary>Room gimmicks. Traps hurt players and monsters alike, so luring enemies into them pays off.</summary>
@@ -22,6 +23,7 @@ namespace Game.Core
         FlameJet,    // a vent in the wall breathes fire along a line
         HealingFont, // stand on it to heal everyone nearby (once per room)
         PowderKeg,   // a breakable barrel (spawned as a static "enemy"), explodes when hit
+        TreasureChest, // rest rooms: a breakable chest (static "enemy") full of souls
     }
 
     public struct Obstacle
@@ -93,6 +95,7 @@ namespace Game.Core
                 ObstacleKind.Altar => new Vector2(2.4f, 1.0f),
                 ObstacleKind.Pew => new Vector2(3.2f, 0.6f),
                 ObstacleKind.Crates => new Vector2(1.3f, 0.9f),
+                ObstacleKind.Campfire => new Vector2(1.5f, 0.8f),
                 _ => new Vector2(1.0f, 0.8f),
             },
         };
@@ -105,6 +108,10 @@ namespace Game.Core
         private const GimmickKind Flame = GimmickKind.FlameJet;
         private const GimmickKind Keg = GimmickKind.PowderKeg;
         private const GimmickKind Font = GimmickKind.HealingFont;
+        private const GimmickKind Chest = GimmickKind.TreasureChest;
+
+        public const int RestLayout = 11;
+        public static readonly Vector2 RestFire = Vector2.zero;
 
         public static readonly RoomLayout[] Layouts =
         {
@@ -194,6 +201,13 @@ namespace Game.Core
                 Id = 10, Name = "throne_room", Boss = true,
                 Obstacles = new[] { O(P, -9f, 3.5f), O(P, 9f, 3.5f), O(P, -9f, -3.5f), O(P, 9f, -3.5f) },
                 Gimmicks = new[] { G(Keg, -12.5f, 0f), G(Keg, 12.5f, 0f), G(Font, 12f, -6.2f), G(Font, -12f, -6.2f) },
+            },
+            new()
+            {
+                // A breather: a campfire in the middle, chests along the walls, no traps.
+                Id = 11, Name = "rest",
+                Obstacles = new[] { O(ObstacleKind.Campfire, 0f, 0f), O(ObstacleKind.Crates, -12f, 5.8f), O(ObstacleKind.Crates, 12f, -6f) },
+                Gimmicks = new[] { G(Chest, -11.5f, 1.2f), G(Chest, 11.5f, -1.8f), G(Chest, -6.5f, -6.2f) },
             },
         };
 

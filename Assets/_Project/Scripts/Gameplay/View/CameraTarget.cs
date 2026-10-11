@@ -32,7 +32,7 @@ namespace Game.Gameplay
             Vector2 p = _player.position;
             if (_camera != null)
             {
-                var b = RunSimulation.DefaultBounds;
+                var b = PlayArea.Bounds;
                 float halfH = _camera.orthographicSize, halfW = halfH * _camera.aspect;
                 // The black wall tops are one tile wide around the floor; the back wall is three tiles tall.
                 float xMin = b.xMin - 1f + halfW, xMax = b.xMax + 1f - halfW;

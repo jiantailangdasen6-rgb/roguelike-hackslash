@@ -40,6 +40,8 @@ namespace Game.Core
         public float ReviveProgress;
         public float InvulnerableTimer;
         public bool SecondWindUsed;
+        /// <summary>Healing from the rest room's fire not yet shown as a number.</summary>
+        public float HealedByFire;
         public bool PhoenixUsed;
 
         // Input edge detection

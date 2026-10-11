@@ -30,7 +30,16 @@ namespace Game.Tests
                 yield return SceneManager.LoadSceneAsync(GameSession.LobbyScene);
                 Assert.IsTrue(GameSession.StartSolo(), "host failed to start");
 
+                // Solo play starts in the camp: the player appears by the fire, then sets out.
                 float deadline = Time.realtimeSinceStartup + 15f;
+                while ((CampDirector.Instance == null || NetPlayer.Local == null) && Time.realtimeSinceStartup < deadline)
+                    yield return null;
+                Assert.IsNotNull(CampDirector.Instance, "Camp scene did not load");
+                Assert.IsNotNull(NetPlayer.Local, "no avatar in the camp");
+                Assert.IsTrue(PlayArea.InCamp);
+                GameSession.StartGame();
+
+                deadline = Time.realtimeSinceStartup + 15f;
                 while ((RunDirector.Instance == null || !RunDirector.Instance.Started.Value) && Time.realtimeSinceStartup < deadline)
                     yield return null;
                 Assert.IsNotNull(RunDirector.Instance, "Game scene did not load");

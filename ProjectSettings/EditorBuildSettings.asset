@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/Lobby.unity
     guid: 214800c6d8a80ca43b10e6d5daa0221b
   - enabled: 1
+    path: Assets/_Project/Scenes/Camp.unity
+    guid: 37123e952aa784f419617fa63d6f35fa
+  - enabled: 1
     path: Assets/_Project/Scenes/Game.unity
     guid: 34622e8d60fde2542b85aca86b8d228a
   m_configObjects:

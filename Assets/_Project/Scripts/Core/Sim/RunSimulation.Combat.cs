@@ -607,11 +607,12 @@ namespace Game.Core
                 ref var e = ref Enemies[i];
                 if (!e.Dead) continue;
                 var def = e.Def;
-                Events.Add(new SimEvent(SimEventType.EnemyDied) { Id = e.Id, Pos = e.Position, Int = (int)e.Type });
+                Events.Add(new SimEvent(SimEventType.EnemyDied) { Id = e.Id, Pos = e.Position, Int = (int)e.Type, Value = giveXp ? 0f : 1f });
                 if (!giveXp) continue;
                 if (def.Prop)
                 {
                     if (def.Type == EnemyType.PowderKeg) IgniteKeg(e);
+                    else if (def.Type == EnemyType.TreasureChest) SpillChest(e);
                     continue;
                 }
 

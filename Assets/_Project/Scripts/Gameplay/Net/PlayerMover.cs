@@ -57,7 +57,7 @@ namespace Game.Gameplay
             _dashUntil = 0f;
         }
 
-        private static RoomLayout CurrentLayout => RunDirector.Instance != null ? Arena.Get(RunDirector.Instance.LayoutId.Value) : null;
+        private static RoomLayout CurrentLayout => PlayArea.Layout;
 
         private bool CanAct
         {
@@ -67,6 +67,9 @@ namespace Game.Gameplay
                 return director != null && director.IsRunning && !director.Halted && !player.Downed.Value && !PauseMenuView.IsOpen && !PerkView.IsShowing;
             }
         }
+
+        /// <summary>In the camp nobody fights: walking around is all, while no preparation panel is open.</summary>
+        private static bool CanWalkInCamp => PlayArea.InCamp && !PauseMenuView.IsOpen && !CampView.PanelOpen;
 
         // ------------------------------------------------------------------ Actions (also used by the bot)
 
@@ -121,14 +124,14 @@ namespace Game.Gameplay
             _attackHeld = _bot ? _botBrain.Attack : input.AttackHeld;
             if (_attackHeld && !wasHeld && CanAct) player.PredictAction(AttackAnim.BasicA);
 
-            if (CanAct)
+            if (CanAct || CanWalkInCamp)
             {
                 Vector2 move = CurrentMove();
                 if (move.sqrMagnitude > 0.01f) _lastMove = move.normalized;
                 Vector2 velocity = Time.time < _dashUntil ? _dashDirection * _dashSpeed : move * player.MoveSpeed.Value * (_attackHeld ? 0.8f : 1f);
                 Vector2 pos = (Vector2)transform.position + velocity * Time.deltaTime;
 
-                var bounds = RunSimulation.DefaultBounds;
+                var bounds = PlayArea.Bounds;
                 float r = SimPlayer.BodyRadius;
                 pos = Arena.Resolve(CurrentLayout, pos, r);
                 pos.x = Mathf.Clamp(pos.x, bounds.xMin + r, bounds.xMax - r);
@@ -189,12 +192,40 @@ namespace Game.Gameplay
 
             public Bot(NetPlayer player) => _player = player;
 
+            private int _campStop;
+            private float _campStopUntil;
+
+            /// <summary>Visits a few stations (for camp screenshots), then waits in the gate.</summary>
+            private void WanderCamp(Vector2 pos)
+            {
+                var stops = new[] { CampStation.Mirror, CampStation.Master, CampStation.Charms, CampStation.Tablet };
+                int offset = _player.Slot.Value;
+                Vector2 target = _campStop < stops.Length
+                    ? Camp.Get(stops[(_campStop + offset) % stops.Length]).Front
+                    : Camp.Get(CampStation.Gate).Front + new Vector2((offset - 1) * 0.8f, 0f);
+                Vector2 to = target - pos;
+                if (to.sqrMagnitude > 0.25f)
+                {
+                    Move = to.normalized;
+                    _campStopUntil = Time.time + 1.5f;
+                }
+                else if (Time.time > _campStopUntil && _campStop < stops.Length)
+                {
+                    _campStop++;
+                }
+            }
+
             public void Think(PlayerMover mover)
             {
                 var director = RunDirector.Instance;
                 Vector2 pos = mover.transform.position;
                 Move = Vector2.zero;
                 Attack = false;
+                if (PlayArea.InCamp)
+                {
+                    WanderCamp(pos);
+                    return;
+                }
                 if (director == null || !director.IsRunning) return;
 
                 var doors = director.Doors;

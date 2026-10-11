@@ -104,6 +104,16 @@ namespace Game.Gameplay
                 string kind = o.Kind.ToString().ToLowerInvariant();
                 var sheet = SpriteSheet.Load($"prop_{kind}_{Mathf.Max(0, _area)}", quiet: true) ?? SpriteSheet.Load($"prop_{kind}");
                 var r = Sprite("Obstacle", sheet?.First, o.Position, EnemyView.SortOrder(o.Position.y));
+                if (o.Kind == ObstacleKind.Campfire)
+                {
+                    // The rest room's fire: flickering flames over a ring of stones, and a big warm light.
+                    r.gameObject.AddComponent<SpriteLoop>().Configure("prop_campfire", 10f);
+                    Sprite("Stones", SpriteSheet.Load("camp_stones")?.First, o.Position + new Vector2(0f, 0.1f), -900);
+                    var light = AddLight(r.gameObject, new Color(1f, 0.6f, 0.3f), 1.5f, 9f);
+                    light.transform.localPosition = new Vector3(0f, 0.8f);
+                    light.gameObject.AddComponent<LightFlicker>().Configure(1.5f, 0.2f);
+                    continue;
+                }
                 r.gameObject.AddComponent<PropFader>();
             }
 

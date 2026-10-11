@@ -150,6 +150,8 @@ namespace Game.Core
         public int bestVictory = -1;
         /// <summary>Random id made once per profile (see Loadout.playerKey).</summary>
         public string playerKey = "";
+        /// <summary>Requests from the camp's people (Quests.cs).</summary>
+        public QuestLog quests = new();
 
         public bool IsUnlocked(string id)
         {
@@ -212,6 +214,8 @@ namespace Game.Core
                 p.unlocked ??= new List<string>();
                 p.equippedTrinkets ??= new List<string>();
                 p.skins ??= new List<int>();
+                p.quests ??= new QuestLog();
+                p.quests.Repair();
                 if (!Enum.IsDefined(typeof(Difficulty), p.difficulty)) p.difficulty = Difficulty.Normal;
                 return p;
             }

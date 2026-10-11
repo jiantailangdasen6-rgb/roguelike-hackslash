@@ -15,6 +15,7 @@ namespace Game.Core
         BloodBishop,
         Lich,
         PowderKeg,
+        TreasureChest,
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -192,6 +193,12 @@ namespace Game.Core
             new()
             {
                 Type = EnemyType.PowderKeg, Name = "火薬樽", Sheet = "powder_keg", Health = 1f, Speed = 0f, Radius = 0.42f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // Rest rooms: a few hits break it open and souls spill out (the team's XP).
+                Type = EnemyType.TreasureChest, Name = "宝箱", Sheet = "treasure_chest", Health = 30f, Speed = 0f, Radius = 0.55f, Xp = 0, Prop = true,
                 Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };

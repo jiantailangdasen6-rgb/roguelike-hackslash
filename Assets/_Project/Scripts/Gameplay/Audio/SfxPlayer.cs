@@ -146,6 +146,12 @@ namespace Game.Gameplay
                 {
                     var type = (EnemyType)e.Int;
                     if (type == EnemyType.PowderKeg) break; // the explosion follows
+                    if (type == EnemyType.TreasureChest && e.Value < 0.5f)
+                    {
+                        Play("levelup", e.Pos, 1.3f, 0.7f);
+                        Play("clank", e.Pos, 0.8f);
+                        break;
+                    }
                     bool boss = EnemyCatalog.Get(type).Boss;
                     Play(boss ? "roar" : "death", e.Pos, boss ? 0.7f : type is EnemyType.Bat ? 1.4f : 1f);
                     break;

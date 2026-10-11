@@ -234,8 +234,12 @@ namespace Game.Gameplay
         public static string RoomTitle(int room)
         {
             int area = Mathf.Min(room / RunSimulation.RoomsPerArea, AreaNames.Length - 1);
-            bool boss = room % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1;
-            return boss ? $"{AreaNames[area]} ─ 主の間" : $"{AreaNames[area]} ─ 第{room % RunSimulation.RoomsPerArea + 1}の間";
+            return RunSimulation.ObjectiveOf(room) switch
+            {
+                RoomObjective.Boss => $"{AreaNames[area]} ─ 主の間",
+                RoomObjective.Rest => $"{AreaNames[area]} ─ 焚き火の間",
+                _ => $"{AreaNames[area]} ─ 第{room % RunSimulation.RoomsPerArea + 1}の間",
+            };
         }
 
         private static EnemyDef AreaBoss(int room) =>
@@ -247,11 +251,12 @@ namespace Game.Gameplay
             {
                 case SimEventType.RoomStarted:
                 {
-                    var objective = (e.Int % RunSimulation.RoomsPerArea) switch
+                    var objective = RunSimulation.ObjectiveOf(e.Int) switch
                     {
-                        1 => $"{RunSimulation.SurviveSeconds:0}秒間 生き延びよ",
-                        3 => $"{AreaBoss(e.Int).Name}を討て",
-                        _ => "すべての魔物を倒せ",
+                        RoomObjective.Survive => $"{RunSimulation.SurviveSeconds:0}秒間 生き延びよ",
+                        RoomObjective.Boss => $"{AreaBoss(e.Int).Name}を討て",
+                        RoomObjective.Rest => "ひと息つこう　火のそばで傷が癒える・宝箱を壊すと魂",
+                        _ => RunSimulation.IsEliteRoom(e.Int) ? "精鋭が率いる群れを倒せ" : "すべての魔物を倒せ",
                     };
                     bool trial = e.Value > 0.5f;
                     Banner(trial ? $"{RoomTitle(e.Int)}  <color=#ff6a5a>試練</color>" : RoomTitle(e.Int),
@@ -484,7 +489,8 @@ namespace Game.Gameplay
                 int held = d.HoldDoor.Value;
                 if (held >= 0 && held < doors.Length)
                     return $"「{RewardCatalog.Name(doors[held].Reward)}」の門へ…  {d.ExitHold.Value / RunSimulation.ExitHoldTime:P0}";
-                return NetPlayer.All.Count > 1 ? "門を選べ：全員で同じ門の前に立つ" : "門を選べ：進みたい門の前に立つ";
+                string rest = d.Objective.Value == RoomObjective.Rest ? "焚き火で休める　準備ができたら　" : "";
+                return rest + (NetPlayer.All.Count > 1 ? "門を選べ：全員で同じ門の前に立つ" : "門を選べ：進みたい門の前に立つ");
             }
             string objective = d.Objective.Value switch
             {

@@ -15,6 +15,7 @@ namespace Game.Core
         Waves,
         Survive,
         Boss,
+        Rest, // no fighting: a campfire that heals, treasure chests, doors open from the start
     }
 
     /// <summary>What a door promises: the team receives it on walking through (Hades-style room choice).</summary>

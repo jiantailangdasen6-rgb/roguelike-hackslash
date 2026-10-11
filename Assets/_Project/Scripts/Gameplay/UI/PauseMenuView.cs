@@ -19,6 +19,22 @@ namespace Game.Gameplay
         private Button _resume;
         private Button _invite;
         private Text _inviteLabel;
+        private Text _leaveLabel;
+        private Text _controls;
+        private string _runControls;
+
+        private static bool IsHost => NetworkManager.Singleton != null && NetworkManager.Singleton.IsHost;
+
+        /// <summary>
+        /// In a run the host (and a solo player) takes the party back to the camp; a joiner can only leave the party.
+        /// In the camp, leaving goes back to the title screen (for the host that closes the room).
+        /// </summary>
+        private void Leave()
+        {
+            if (!PlayArea.InCamp && IsHost) GameSession.ReturnToCamp();
+            else GameSession.ReturnToLobby();
+            Toggle(false);
+        }
 
         private void Awake()
         {
@@ -43,8 +59,10 @@ namespace Game.Gameplay
 
             _resume = UIKit.Button(panel.transform, "続ける", 32, () => Toggle(false));
             _resume.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(360f, 72f), new Vector2(0f, 150f));
-            var leave = UIKit.Button(panel.transform, "拠点へ戻る（ランを放棄）", 28, () => GameSession.ReturnToLobby(), UIKit.BloodColor);
+            var leave = UIKit.Button(panel.transform, "", 28, Leave, UIKit.BloodColor);
             leave.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(460f, 72f), new Vector2(0f, 60f));
+            _leaveLabel = leave.GetComponentInChildren<Text>();
+            _controls = controls;
             // Online rooms take late joiners: share the link from here too.
             _invite = UIKit.Button(panel.transform, "招待リンクをコピー（途中参加OK）", 24, CopyInvite);
             _invite.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(460f, 56f), new Vector2(0f, 372f));
@@ -78,9 +96,17 @@ namespace Game.Gameplay
             IsOpen = open;
             if (!open) return;
             var nm = NetworkManager.Singleton;
-            _note.text = nm != null && nm.IsHost && nm.ConnectedClientsIds.Count > 1
-                ? "※ あなたはホストです。戻ると全員のランが終わります"
-                : "※ ゲームは止まりません（オンラインのため）";
+            bool party = nm != null && nm.IsHost && nm.ConnectedClientsIds.Count > 1;
+            bool camp = PlayArea.InCamp;
+            _runControls ??= _controls.text;
+            _controls.text = camp
+                ? "WASD：移動\n施設の前で F / Enter：準備をする\n全員で奥の門に立つと出発"
+                : _runControls;
+            _leaveLabel.text = camp ? (IsHost ? (party ? "タイトルへ（部屋を閉じる）" : "タイトルへ戻る") : "パーティを抜ける（タイトルへ）")
+                : IsHost ? "拠点へ戻る（ランを放棄）" : "パーティを抜ける（タイトルへ）";
+            _note.text = camp ? (party ? "※ 部屋を閉じると仲間もタイトルへ戻ります" : "")
+                : party ? "※ あなたはホストです。戻ると全員が拠点へ戻ります"
+                : IsHost ? "" : "※ ゲームは止まりません（オンラインのため）";
             _invite.gameObject.SetActive(GameSession.JoinCode != null);
             _inviteLabel.text = "招待リンクをコピー（途中参加OK）";
             EventSystem.current?.SetSelectedGameObject(_resume.gameObject);
@@ -97,7 +123,7 @@ namespace Game.Gameplay
         {
             bool pressed = (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
                            || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
-            if (pressed && !PerkView.IsShowing) Toggle(!IsOpen);
+            if (pressed && !PerkView.IsShowing && !CampView.PanelOpen && !CampView.ConsumedEscape) Toggle(!IsOpen);
         }
     }
 }

@@ -201,6 +201,25 @@ namespace Game.Tests
             Assert.AreEqual(SimEventType.EnemyHit, shatter.Type, "a heavy hit on a frozen enemy shatters it");
             Assert.Greater(shatter.Value, ClassCatalog.Get(ClassId.Warrior).BasicDamage * 2f);
             Assert.That(events.Any(e => e.Type == SimEventType.AreaEffect && e.Int == (int)AreaKind.Shatter));
+            Assert.That((HitInfo.Flags(shatter.Int) & HitFlags.Teamwork) != 0, "the mage froze it, the warrior cashed in: teamwork");
+            Assert.That(HitInfo.TryAttacker(shatter.Int, out ulong attacker) && attacker == 1, "the hit carries who dealt it");
+        }
+
+        [Test]
+        public void OwnStatus_IsNotTeamwork()
+        {
+            var sim = new RunSimulation(5);
+            var mage = sim.AddPlayer(0, new Loadout { classId = ClassId.Mage });
+            mage.Position = new Vector2(-1.5f, 0f);
+            int enemy = Spawn(sim, EnemyType.Skeleton, new Vector2(0f, 0f), 200f);
+            sim.ApplyStatus(enemy, StatusKind.Frozen, 5f, mage);
+            sim.DamageEnemy(enemy, 1f, mage, HitFlags.None, Vector2.zero, 0f);
+            var hit = sim.Events.Last(e => e.Type == SimEventType.EnemyHit);
+            Assert.That((HitInfo.Flags(hit.Int) & HitFlags.Teamwork) == 0, "freezing and hitting it yourself is not teamwork");
+            Assert.That(HitInfo.TryAttacker(hit.Int, out ulong attacker) && attacker == 0);
+
+            sim.DamageEnemy(enemy, 1f, null, HitFlags.None, Vector2.zero, 0f);
+            Assert.IsFalse(HitInfo.TryAttacker(sim.Events.Last(e => e.Type == SimEventType.EnemyHit).Int, out _), "traps have no attacker");
         }
 
         [Test]

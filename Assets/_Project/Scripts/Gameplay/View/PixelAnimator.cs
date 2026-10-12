@@ -58,8 +58,9 @@ namespace Game.Gameplay
         private void Update()
         {
             if (_sheet == null) return;
-            if (!Frozen) _time += Time.deltaTime * _speed;
-            _flash -= Time.deltaTime;
+            float dt = HitStop.DeltaTime; // hit stop holds the pose and the white flash
+            if (!Frozen) _time += dt * _speed;
+            _flash -= dt;
 
             if (!_info.Loop && _time * _info.Fps >= _info.Frames && !_hold)
             {

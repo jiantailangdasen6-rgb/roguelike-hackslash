@@ -70,6 +70,12 @@ namespace Game.Gameplay
             _note = UIKit.Label(panel.transform, "", 20, TextAnchor.LowerCenter, UIKit.MutedText);
             _note.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(640f, 40f), new Vector2(0f, 14f));
 
+            // Attribution for the recorded music and sounds (Docs/credits.md has the full list).
+            var credits = UIKit.Label(dim.transform,
+                "音楽：Of Far Different Nature、ProjectHelmet（CC-BY 4.0）　効果音：JC Sounds、leohpaz（CC-BY 4.0）、Kenney、artisticdude、StarNinjas、qubodup（CC0）",
+                18, TextAnchor.LowerCenter, UIKit.MutedText);
+            credits.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1600f, 40f), new Vector2(0f, 16f));
+
             _panel.SetActive(false);
         }
 

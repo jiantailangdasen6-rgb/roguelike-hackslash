@@ -65,6 +65,7 @@ namespace Game.EditorTools
 
             ArtGenerator.Generate();
             if (!File.Exists(Audio.AudioGenerator.Dir + "/music_boss.wav")) Audio.AudioGenerator.Generate(); // slow: only when missing
+            else if (!File.Exists(Audio.AudioGenerator.Dir + "/" + Audio.SoundPack.Marker)) Audio.SoundPack.Build();
             CreateGameArt();
             var actions = LoadOrCreateInputActions();
             var player = CreatePlayerPrefab(actions);

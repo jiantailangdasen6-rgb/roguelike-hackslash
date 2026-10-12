@@ -156,7 +156,7 @@ namespace Game.Core
                 float t = len > 0.01f ? Mathf.Clamp01(Vector2.Dot(e.Position - from, seg) / (len * len)) : 0f;
                 if ((from + seg * t - e.Position).sqrMagnitude > (1.1f + e.Radius) * (1.1f + e.Radius)) continue;
                 p.DashSlashHits.Add(e.Id);
-                ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.4f : ClassCatalog.ShieldBashStun + 0.5f * retribution);
+                ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.4f : ClassCatalog.ShieldBashStun + 0.5f * retribution, p);
                 DamageEnemy(i, damage, p, HitFlags.Heavy, p.DashSlashDir, 7f);
             }
         }
@@ -171,7 +171,7 @@ namespace Game.Core
             {
                 ref var e = ref Enemies[i];
                 if (e.Dead) continue;
-                ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.4f : 1.1f);
+                ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.4f : 1.1f, p);
                 DamageEnemy(i, damage, p, HitFlags.Heavy, (e.Position - p.Position).normalized, 5f);
             }
             Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Slam, Pos = p.Position, Value = radius });
@@ -232,7 +232,7 @@ namespace Game.Core
                     foreach (int i in _hits.ToArray())
                     {
                         ref var e = ref Enemies[i];
-                        ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.4f : ClassCatalog.SmokeStun);
+                        ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.4f : ClassCatalog.SmokeStun, p);
                     }
                     p.SureCritTimer = ClassCatalog.SureCritDuration + (mist ? 2f : 0f);
                     if (veil)

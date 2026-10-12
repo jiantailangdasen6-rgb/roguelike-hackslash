@@ -235,7 +235,7 @@ namespace Game.Core
                     foreach (int i in _hits.ToArray())
                     {
                         ref var e = ref Enemies[i];
-                        ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.35f : 1.1f);
+                        ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.35f : 1.1f, p);
                         DamageEnemy(i, 8f * might, p, HitFlags.None, (e.Position - p.Position).normalized, 9f);
                     }
                     int bulwark = p.PerkLevel(PerkId.Bulwark);
@@ -279,7 +279,7 @@ namespace Game.Core
                     {
                         ref var e = ref Enemies[i];
                         e.MarkBonus = ClassCatalog.MarkDamageBonus + 0.15f * deep;
-                        ApplyStatus(i, StatusKind.Marked, ClassCatalog.MarkDuration * (1f + p.Stats.Get(StatType.MarkDuration)));
+                        ApplyStatus(i, StatusKind.Marked, ClassCatalog.MarkDuration * (1f + p.Stats.Get(StatType.MarkDuration)), p);
                     }
                     Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Mark, Pos = at, Value = r });
                     // Legendary "狩神の": the nearest unmarked monster outside the circle is marked too.
@@ -297,7 +297,7 @@ namespace Game.Core
                         if (best >= 0)
                         {
                             Enemies[best].MarkBonus = ClassCatalog.MarkDamageBonus + 0.15f * deep;
-                            ApplyStatus(best, StatusKind.Marked, ClassCatalog.MarkDuration * (1f + p.Stats.Get(StatType.MarkDuration)));
+                            ApplyStatus(best, StatusKind.Marked, ClassCatalog.MarkDuration * (1f + p.Stats.Get(StatType.MarkDuration)), p);
                             Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Mark, Pos = Enemies[best].Position, Value = 1.2f });
                             Proc(p, LegendaryId.HuntGodMark, at, Enemies[best].Position);
                         }
@@ -370,7 +370,7 @@ namespace Game.Core
                 ref var e = ref Enemies[i];
                 if (e.Dead) continue;
                 Vector2 push = (e.Position - p.Position).normalized;
-                ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.3f : 0.9f);
+                ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.3f : 0.9f, p);
                 DamageEnemy(i, damage, p, HitFlags.Heavy, push, 5f);
             }
             Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.Slam, Pos = p.Position, Value = radius });
@@ -403,7 +403,7 @@ namespace Game.Core
                     {
                         ref var e = ref Enemies[i];
                         DamageEnemy(i, ClassCatalog.FrostNovaDamage * p.Stats.Get(StatType.Might), p, HitFlags.None, Vector2.zero, 0f);
-                        if (!e.Dead) ApplyStatus(i, e.Def.Boss ? StatusKind.Stunned : StatusKind.Frozen, e.Def.Boss ? 0.6f : duration);
+                        if (!e.Dead) ApplyStatus(i, e.Def.Boss ? StatusKind.Stunned : StatusKind.Frozen, e.Def.Boss ? 0.6f : duration, p);
                     }
                     int armor = p.PerkLevel(PerkId.FrostArmor);
                     if (armor > 0)
@@ -558,10 +558,12 @@ namespace Game.Core
 
         // ------------------------------------------------------------------ Damage & statuses
 
-        public void ApplyStatus(int index, StatusKind status, float duration)
+        /// <param name="by">The player who caused it (remembered for freeze, stun and mark so a teammate's follow-up counts as teamwork).</param>
+        public void ApplyStatus(int index, StatusKind status, float duration, SimPlayer by = null)
         {
             ref var e = ref Enemies[index];
             if (e.Dead || e.Def.Prop) return;
+            if (by != null && status is StatusKind.Frozen or StatusKind.Stunned or StatusKind.Marked) e.StatusBy = by.ClientId + 1;
             switch (status)
             {
                 case StatusKind.Frozen:
@@ -588,6 +590,9 @@ namespace Game.Core
             bool disabled = e.Frozen > 0f || e.Marked > 0f || e.Stunned > 0f;
             if (attacker != null)
             {
+                bool direct = (flags & HitFlags.DamageOverTime) == 0;
+                if (direct && disabled && e.StatusBy != 0 && e.StatusBy != attacker.ClientId + 1) flags |= HitFlags.Teamwork;
+                if (direct && disabled && e.Def.Armored) flags |= HitFlags.ArmorBreak;
                 if ((flags & HitFlags.DamageOverTime) == 0 && RollCrit(attacker, disabled))
                 {
                     damage *= CritMultiplier(attacker);
@@ -645,7 +650,7 @@ namespace Game.Core
             }
 
             e.Health -= damage;
-            Events.Add(new SimEvent(SimEventType.EnemyHit) { Id = e.Id, Pos = e.Position, Value = damage, Int = (int)flags });
+            Events.Add(new SimEvent(SimEventType.EnemyHit) { Id = e.Id, Pos = e.Position, Value = damage, Int = HitInfo.Pack(flags, attacker) });
 
             if (!e.Def.Boss && !e.Def.Prop && knockback > 0f && e.State != EnemyState.Strike)
             {

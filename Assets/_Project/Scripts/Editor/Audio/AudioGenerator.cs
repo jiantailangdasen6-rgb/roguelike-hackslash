@@ -35,6 +35,7 @@ namespace Game.EditorTools.Audio
             }
             AssetDatabase.SaveAssets();
             Debug.Log("[AudioGenerator] Done");
+            SoundPack.Build(); // recorded sounds and music replace the synthesized ones (which stay as the fallback)
         }
 
         private static void Import(string path, bool music)

@@ -62,6 +62,8 @@ namespace Game.Core
         public float PoisonDps;
         public float MarkBonus;
         public float DotAccumulator;
+        /// <summary>Client id + 1 of whoever last froze, stunned or marked it (0 = nobody): hits by a teammate count as teamwork.</summary>
+        public ulong StatusBy;
 
         public EnemyDef Def => EnemyCatalog.Get(Type);
         public bool Disabled => Frozen > 0f || Stunned > 0f;

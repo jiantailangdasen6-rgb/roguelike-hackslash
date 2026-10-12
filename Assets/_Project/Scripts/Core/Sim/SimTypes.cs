@@ -113,6 +113,25 @@ namespace Game.Core
         Heavy = 4,
         DamageOverTime = 8,
         Blocked = 16,     // armour soaked most of it
+        Teamwork = 32,    // landed on an enemy a teammate froze, stunned or marked
+        ArmorBreak = 64,  // an armoured enemy hit while its guard was broken
+    }
+
+    /// <summary>EnemyHit's Int: the hit flags in the low byte, the attacker's client id + 1 above them (0 = traps, enemies).</summary>
+    public static class HitInfo
+    {
+        public static int Pack(HitFlags flags, SimPlayer attacker) =>
+            (int)flags | (attacker != null ? (int)((attacker.ClientId + 1) & 0xFFFFFF) << 8 : 0);
+
+        public static HitFlags Flags(int packed) => (HitFlags)(packed & 0xFF);
+
+        /// <summary>False for hits nobody dealt (traps, exploding monsters).</summary>
+        public static bool TryAttacker(int packed, out ulong clientId)
+        {
+            int raw = (packed >> 8) & 0xFFFFFF;
+            clientId = raw > 0 ? (ulong)(raw - 1) : 0;
+            return raw > 0;
+        }
     }
 
     public enum ProjectileKind : byte
@@ -207,7 +226,7 @@ namespace Game.Core
         PlayerAttack,    // ClientId, Int = AttackAnim, Pos, Vec = aim, Value = reach
         ProjectileSpawn, // Id, Int = ProjectileKind, Pos, Vec = velocity, Value = lifetime
         ProjectileEnd,   // Id, Pos
-        EnemyHit,        // Id, Pos, Value = damage, Int = HitFlags
+        EnemyHit,        // Id, Pos, Value = damage, Int = HitInfo (HitFlags + attacker)
         EnemyDied,       // Id, Pos, Int = EnemyType
         EnemyTelegraph,  // Id, Int = AttackShape, Pos, Vec = direction, Size, Value = duration
         EnemyStrike,     // Id, Int = AttackKind, Pos, Vec = direction

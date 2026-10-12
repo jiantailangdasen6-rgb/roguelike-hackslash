@@ -29,6 +29,7 @@ namespace Game.Gameplay
             public float SnapTime = -1f;
             public Vector2 SnapPos;
             public Vector2 Velocity;
+            public Vector3 RestPos; // where it was drawn when a hit stop began
         }
 
         /// <summary>How far ahead of the last snapshot clients draw enemies (covers snapshot spacing and half the ping).</summary>
@@ -164,7 +165,7 @@ namespace Game.Gameplay
             for (int i = _corpses.Count - 1; i >= 0; i--)
             {
                 var c = _corpses[i];
-                c.Age += Time.deltaTime;
+                c.Age += HitStop.DeltaTime;
                 if (c.Age > 1.6f)
                 {
                     var color = c.Visual.Animator.Renderer.color;
@@ -182,12 +183,14 @@ namespace Game.Gameplay
 
         private void Show(in EnemyRenderState s, bool snap, float snapTime = -1f, bool hostHalted = false)
         {
+            bool fresh = false;
             if (!_visuals.TryGetValue(s.Id, out var v))
             {
                 v = Acquire(s.Type, s.Elite);
                 _visuals.Add(s.Id, v);
                 v.SnapTime = -1f;
                 snap = true;
+                fresh = true;
             }
 
             v.SeenFrame = _frame;
@@ -205,8 +208,21 @@ namespace Game.Gameplay
                 }
                 if (!hostHalted) target += (Vector3)(v.Velocity * Mathf.Min(Time.time - snapTime + _halfPing, MaxExtrapolation));
             }
-            if ((t.position - target).sqrMagnitude > 2.5f * 2.5f) snap = true; // blinks/teleports shouldn't glide
-            t.position = snap ? target : Vector3.Lerp(t.position, target, 1f - Mathf.Exp(-Smoothing * Time.deltaTime));
+            bool jump = (t.position - target).sqrMagnitude > 2.5f * 2.5f; // blinks/teleports shouldn't glide
+            if (jump) snap = true;
+            if (HitStop.Frozen && !fresh && !jump)
+            {
+                // Hit stop: everyone holds still and the one that took the blow shudders; afterwards they catch up,
+                // which snaps the knockback in.
+                t.position = s.Id == HitStop.Victim
+                    ? v.RestPos + new Vector3(Random.Range(-0.07f, 0.07f), Random.Range(-0.04f, 0.04f))
+                    : v.RestPos;
+            }
+            else
+            {
+                t.position = snap ? target : Vector3.Lerp(t.position, target, 1f - Mathf.Exp(-Smoothing * Time.deltaTime));
+                v.RestPos = t.position;
+            }
 
             var r = v.Animator.Renderer;
             r.flipX = s.FacingLeft;

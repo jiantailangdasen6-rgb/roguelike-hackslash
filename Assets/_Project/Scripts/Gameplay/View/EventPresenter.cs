@@ -58,6 +58,7 @@ namespace Game.Gameplay
             public Vector3 World;
             public float Age;
             public float Life;
+            public bool Pop; // callouts: burst in large, settle, drift up slowly
         }
 
         private readonly List<Fx> _effects = new();
@@ -123,6 +124,7 @@ namespace Game.Gameplay
                 case SimEventType.EnemyHit: OnEnemyHit(e); break;
                 case SimEventType.EnemyDied:
                     Burst("fx_puff", e.Pos + Vector2.up * 0.4f, 14f, 1.4f, Color.white);
+                    if (e.Value < 0.5f && EnemyCatalog.Get((EnemyType)e.Int).Boss) BossFell(e.Pos);
                     if ((EnemyType)e.Int == EnemyType.TreasureChest && e.Value < 0.5f)
                     {
                         var glint = Spawn("fx_holy", e.Pos, 14f, 0.6f, 0.6f, 1.1f, new Color(1f, 0.85f, 0.45f), order: 2400);
@@ -150,7 +152,11 @@ namespace Game.Gameplay
                     break;
                 case SimEventType.PlayerHurt:
                     ShowNumber(e.Pos + Vector2.up * 1.2f, Mathf.RoundToInt(e.Value).ToString(), new Color(1f, 0.3f, 0.3f), 28);
-                    if (NetPlayer.Local != null && NetPlayer.Local.OwnerClientId == e.ClientId) CameraShake.Add(0.35f);
+                    if (IsLocal(e.ClientId))
+                    {
+                        CameraShake.Add(0.35f);
+                        HitStop.Freeze(0.04f);
+                    }
                     break;
                 case SimEventType.PlayerDowned:
                     Burst("fx_puff", e.Pos + Vector2.up * 0.4f, 12f, 1.8f, new Color(1f, 0.6f, 0.6f));
@@ -189,6 +195,8 @@ namespace Game.Gameplay
                     CameraShake.Add(0.6f);
                     break;
                 case SimEventType.RoomStarted:
+                    HitStop.Reset();
+                    _calloutAt.Clear();
                     foreach (var t in _telegraphs) { Release(t.Outline); Release(t.Fill); }
                     _telegraphs.Clear();
                     break;
@@ -201,9 +209,28 @@ namespace Game.Gameplay
             return null;
         }
 
+        private static readonly Color ShatterColor = new(0.55f, 0.9f, 1f);
+        private static readonly Color TeamworkColor = new(1f, 0.78f, 0.3f);
+        private static readonly Color ArmorBreakColor = new(1f, 0.55f, 0.25f);
+
+        // Callouts are throttled so a busy fight never fills the screen with words.
+        private readonly Dictionary<int, float> _calloutAt = new();
+        private float _lastTeamworkCallout = -9f;
+
+        private static bool IsLocal(ulong clientId) => NetPlayer.Local != null && NetPlayer.Local.OwnerClientId == clientId;
+
+        private bool CalloutReady(int enemyId, float spacing)
+        {
+            if (_calloutAt.TryGetValue(enemyId, out float last) && Time.time - last < spacing) return false;
+            _calloutAt[enemyId] = Time.time;
+            if (_calloutAt.Count > 64) _calloutAt.Clear();
+            return true;
+        }
+
         private void OnEnemyHit(in SimEvent e)
         {
-            var flags = (HitFlags)e.Int;
+            var flags = HitInfo.Flags(e.Int);
+            bool mine = HitInfo.TryAttacker(e.Int, out ulong attacker) && IsLocal(attacker);
             Vector2 at = e.Pos + Vector2.up * 0.45f + new Vector2(Random.Range(-0.15f, 0.15f), Random.Range(-0.1f, 0.15f));
             if ((flags & HitFlags.DamageOverTime) != 0)
             {
@@ -213,19 +240,70 @@ namespace Game.Gameplay
 
             bool crit = (flags & HitFlags.Crit) != 0;
             bool shatter = (flags & HitFlags.Shatter) != 0;
+            bool heavy = (flags & HitFlags.Heavy) != 0;
+            bool teamwork = (flags & HitFlags.Teamwork) != 0;
+            bool armorBreak = (flags & HitFlags.ArmorBreak) != 0;
             if ((flags & HitFlags.Blocked) != 0 && !shatter)
             {
                 // Armour: dull sparks and a grey number tell players to freeze/stun/mark it first.
                 Spark(at, 0.8f, new Color(0.7f, 0.75f, 0.85f));
                 ShowNumber(at + Vector2.up * 0.3f, Mathf.RoundToInt(e.Value).ToString(), new Color(0.62f, 0.64f, 0.7f), 20);
+                if (mine && heavy) HitStop.Freeze(0.03f, e.Id);
                 return;
             }
-            Spark(at, shatter ? 1.8f : crit ? 1.3f : 0.9f, shatter ? new Color(0.7f, 0.9f, 1f) : Color.white);
-            var color = shatter ? new Color(0.55f, 0.9f, 1f) : crit ? new Color(1f, 0.85f, 0.3f) : Color.white;
-            int size = shatter ? 40 : crit ? 32 : 24;
-            ShowNumber(at + Vector2.up * 0.3f, shatter ? $"砕! {Mathf.RoundToInt(e.Value)}" : Mathf.RoundToInt(e.Value) + (crit ? "!" : ""), color, size);
-            if (shatter) CameraShake.Add(0.25f);
-            else if ((flags & HitFlags.Heavy) != 0) CameraShake.Add(0.04f);
+
+            if (shatter)
+            {
+                // The signature combo: everyone's screen holds for a beat, ice bursts and the word pops.
+                Spark(at, 2.2f, new Color(0.7f, 0.9f, 1f));
+                var flash = Spawn("fx_nova", e.Pos + Vector2.up * 0.4f, 1f, 0.22f, 0.4f, 2.6f, new Color(0.85f, 0.95f, 1f, 0.9f));
+                flash.FadeOut = true;
+                AddLight(flash, new Color(0.6f, 0.9f, 1f), 3.2f, 5f);
+                if (CalloutReady(e.Id, 0.6f)) ShowCallout(e.Pos + Vector2.up * 1.6f, "砕き！", ShatterColor, 46);
+                ShowNumber(at + Vector2.up * 0.2f, Mathf.RoundToInt(e.Value).ToString(), ShatterColor, 30);
+                HitStop.Freeze(mine ? 0.1f : 0.07f, e.Id, major: true);
+                CameraShake.Add(0.3f);
+                return;
+            }
+
+            Color sparkColor = armorBreak ? ArmorBreakColor : teamwork ? TeamworkColor : Color.white;
+            Spark(at, crit ? 1.3f : heavy ? 1.1f : 0.9f, sparkColor);
+            var color = crit ? new Color(1f, 0.85f, 0.3f) : Color.white;
+            int size = crit ? 32 : 24;
+            ShowNumber(at + Vector2.up * 0.3f, Mathf.RoundToInt(e.Value) + (crit ? "!" : ""), color, size);
+
+            if (armorBreak && CalloutReady(e.Id, 3f))
+            {
+                // Someone broke the knight's guard: tell the whole team the window is open.
+                ShowCallout(e.Pos + Vector2.up * 1.7f, "鎧崩し！", ArmorBreakColor, 38);
+                for (int i = 0; i < 6; i++) Shard(e.Pos + Vector2.up * 0.5f, i * 60f + Random.Range(0f, 25f), ArmorBreakColor);
+                HitStop.Freeze(0.06f, e.Id, major: true);
+                CameraShake.Add(0.15f);
+            }
+            else if (teamwork && mine && Time.time - _lastTeamworkCallout > 0.5f && CalloutReady(e.Id, 2.5f))
+            {
+                // You cashed in a teammate's freeze, stun or mark.
+                _lastTeamworkCallout = Time.time;
+                ShowCallout(e.Pos + Vector2.up * 1.5f, "連携！", TeamworkColor, 32);
+            }
+
+            if (mine && heavy) HitStop.Freeze(crit ? 0.065f : 0.045f, e.Id);
+            if (heavy) CameraShake.Add(mine ? 0.07f : 0.03f);
+        }
+
+        /// <summary>The final blow on a boss: a long hold, slow motion, a burst of light and souls.</summary>
+        private void BossFell(Vector2 at)
+        {
+            HitStop.Freeze(0.16f, -1, major: true);
+            HitStop.Slow(1.1f, 0.25f);
+            CameraShake.Add(1f);
+            var flash = Spawn("fx_nova", at + Vector2.up * 0.8f, 1f, 0.9f, 0.5f, 9f, new Color(1f, 0.95f, 0.85f, 0.85f));
+            flash.FadeOut = true;
+            AddLight(flash, new Color(1f, 0.85f, 0.6f), 6f, 14f);
+            var holy = Spawn("fx_holy", at + Vector2.up * 1f, 10f, 1.4f, 2f, 3.4f, new Color(1f, 0.9f, 0.7f));
+            holy.FadeOut = true;
+            for (int i = 0; i < 16; i++) Ember(at + Vector2.up * 0.8f, i * 22.5f + Random.Range(0f, 15f));
+            for (int i = 0; i < 12; i++) Shard(at + Vector2.up * 0.8f, i * 30f + Random.Range(0f, 20f), new Color(1f, 0.9f, 0.6f));
         }
 
         private void OnArea(in SimEvent e)
@@ -647,7 +725,28 @@ namespace Game.Gameplay
             label.text = text;
             label.fontSize = size;
             label.color = color;
+            label.transform.localScale = Vector3.one;
             _numbers.Add(new Number { Text = label, World = world, Life = size > 30 ? 0.9f : 0.65f });
+        }
+
+        /// <summary>A word for a team play ("砕き！", "連携！"): always shown, even when the numbers are capped.</summary>
+        private void ShowCallout(Vector2 world, string text, Color color, int size)
+        {
+            var label = _freeTexts.Count > 0 ? _freeTexts.Pop() : UIKit.Label(_numberLayer, "", 24, TextAnchor.MiddleCenter);
+            label.gameObject.SetActive(true);
+            label.transform.SetAsLastSibling();
+            label.font = UIKit.TitleFont;
+            label.rectTransform.sizeDelta = new Vector2(320f, 80f);
+            label.text = text;
+            label.fontSize = size;
+            label.color = color;
+            if (label.GetComponent<Outline>() == null)
+            {
+                var outline = label.gameObject.AddComponent<Outline>();
+                outline.effectColor = new Color(0f, 0f, 0f, 0.9f);
+                outline.effectDistance = new Vector2(2f, -2f);
+            }
+            _numbers.Add(new Number { Text = label, World = world, Life = 1.1f, Pop = true });
         }
 
         // ------------------------------------------------------------------ Frame
@@ -671,10 +770,11 @@ namespace Game.Gameplay
                 LayoutTelegraph(t);
             }
 
+            float fxDt = HitStop.DeltaTime; // effects hold during a hit stop; telegraphs above keep real time
             for (int i = _effects.Count - 1; i >= 0; i--)
             {
                 var fx = _effects[i];
-                fx.Age += dt;
+                fx.Age += fxDt;
                 if (fx.Life < 0f || fx.Age >= fx.Life)
                 {
                     fx.Go.SetActive(false);
@@ -691,7 +791,7 @@ namespace Game.Gameplay
                 }
                 else
                 {
-                    tr.position += (Vector3)(fx.Velocity * dt);
+                    tr.position += (Vector3)(fx.Velocity * fxDt);
                     if (fx.StartScale != fx.EndScale) tr.localScale = Vector3.one * Mathf.Lerp(fx.StartScale, fx.EndScale, Mathf.Sqrt(k));
                 }
 
@@ -705,7 +805,7 @@ namespace Game.Gameplay
                     var c = fx.Color;
                     c.a *= 1f - k;
                     fx.Renderer.color = c;
-                    if (fx.Light != null && fx.Light.enabled) fx.Light.intensity *= 1f - dt * 3f;
+                    if (fx.Light != null && fx.Light.enabled) fx.Light.intensity *= 1f - fxDt * 3f;
                 }
             }
 
@@ -720,8 +820,13 @@ namespace Game.Gameplay
                     _numbers.RemoveAt(i);
                     continue;
                 }
-                float rise = 0.9f * (1f - Mathf.Pow(1f - n.Age / n.Life, 2f));
+                float rise = (n.Pop ? 0.35f : 0.9f) * (1f - Mathf.Pow(1f - n.Age / n.Life, 2f));
                 n.Text.transform.position = _camera.WorldToScreenPoint(n.World + Vector3.up * rise);
+                if (n.Pop)
+                {
+                    float k = Mathf.Clamp01(n.Age / 0.14f);
+                    n.Text.transform.localScale = Vector3.one * Mathf.Lerp(1.8f, 1f, 1f - (1f - k) * (1f - k));
+                }
                 var c = n.Text.color;
                 c.a = n.Age < n.Life * 0.6f ? 1f : 1f - (n.Age - n.Life * 0.6f) / (n.Life * 0.4f);
                 n.Text.color = c;

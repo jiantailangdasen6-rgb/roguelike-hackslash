@@ -19,7 +19,8 @@ namespace Game.Gameplay
 
         private sealed class Sound
         {
-            public AudioClip Clip;
+            public AudioClip[] Clips; // variants (sfx_name, sfx_name_2 ...): a different one each time
+            public int Last;
             public float Volume;
             public float MinInterval;
             public float LastPlayed = -10f;
@@ -83,8 +84,24 @@ namespace Game.Gameplay
 
         private void Add(string name, float volume, float minInterval, Func<AudioClip> fallback)
         {
-            var clip = Resources.Load<AudioClip>("Audio/sfx_" + name) ?? fallback();
-            _sounds[name] = new Sound { Clip = clip, Volume = volume, MinInterval = minInterval };
+            var clips = new List<AudioClip>();
+            var first = Resources.Load<AudioClip>("Audio/sfx_" + name);
+            if (first != null)
+            {
+                clips.Add(first);
+                for (int i = 2; i <= 8; i++)
+                {
+                    var variant = Resources.Load<AudioClip>($"Audio/sfx_{name}_{i}");
+                    if (variant == null) break;
+                    clips.Add(variant);
+                }
+            }
+            else
+            {
+                var synth = fallback();
+                if (synth != null) clips.Add(synth);
+            }
+            _sounds[name] = new Sound { Clips = clips.ToArray(), Volume = volume, MinInterval = minInterval };
         }
 
         private void OnEnable() => RunDirector.EventReceived += OnEvent;
@@ -92,7 +109,7 @@ namespace Game.Gameplay
 
         public void Play(string name, Vector2? at = null, float pitch = 1f, float volume = 1f)
         {
-            if (!_sounds.TryGetValue(name, out var s) || s.Clip == null) return;
+            if (!_sounds.TryGetValue(name, out var s) || s.Clips.Length == 0) return;
             if (Time.unscaledTime - s.LastPlayed < s.MinInterval) return;
 
             float falloff = 1f;
@@ -105,7 +122,9 @@ namespace Game.Gameplay
             var voice = _voices[_nextVoice];
             _nextVoice = (_nextVoice + 1) % Voices;
             voice.pitch = pitch * UnityEngine.Random.Range(0.94f, 1.06f);
-            voice.PlayOneShot(s.Clip, s.Volume * volume * falloff * AudioPrefs.Sfx);
+            int pick = s.Clips.Length == 1 ? 0 : (s.Last + UnityEngine.Random.Range(1, s.Clips.Length)) % s.Clips.Length; // never the same twice
+            s.Last = pick;
+            voice.PlayOneShot(s.Clips[pick], s.Volume * volume * falloff * AudioPrefs.Sfx);
         }
 
         private static ClassId? ClassOf(ulong clientId)
@@ -138,7 +157,7 @@ namespace Game.Gameplay
                 }
                 case SimEventType.EnemyHit:
                 {
-                    var flags = (HitFlags)e.Int;
+                    var flags = HitInfo.Flags(e.Int);
                     if ((flags & HitFlags.DamageOverTime) != 0) break;
                     if ((flags & HitFlags.Shatter) != 0) Play("shatter", e.Pos);
                     else if ((flags & HitFlags.Blocked) != 0) Play("clank", e.Pos);

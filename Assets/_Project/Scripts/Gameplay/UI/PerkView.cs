@@ -167,6 +167,7 @@ namespace Game.Gameplay
             }
             _skip.gameObject.SetActive(_shop);
             _shownAt = Time.unscaledTime;
+            UiSound.Play(UiCue.Open);
             _deadline = Time.time + RunSimulation.ChoiceTimeout;
             _panel.SetActive(true);
             IsShowing = true;

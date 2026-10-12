@@ -302,6 +302,7 @@ namespace Game.Gameplay
         private void Toggle(bool open)
         {
             if (open && (PerkView.IsShowing || PauseMenuView.IsOpen)) return;
+            if (open != IsOpen) UiSound.Play(open ? UiCue.Open : UiCue.Close);
             IsOpen = open;
             _panel.SetActive(open);
             if (!open) return;

@@ -193,9 +193,23 @@ namespace Game.Gameplay
             colors.selectedColor = new Color(1.35f, 1.3f, 1.1f);
             colors.pressedColor = new Color(0.8f, 0.8f, 0.8f);
             button.colors = colors;
+            AddSounds(button);
             button.onClick.AddListener(onClick);
             Label(image.transform, text, fontSize, TextAnchor.MiddleCenter).rectTransform.Stretch(8f);
             return button;
+        }
+
+        /// <summary>Hover and click sounds on a button (pointer or selection).</summary>
+        public static void AddSounds(Button button)
+        {
+            button.onClick.AddListener(() => UiSound.Play(UiCue.Click));
+            var trigger = button.gameObject.GetComponent<UnityEngine.EventSystems.EventTrigger>() ?? button.gameObject.AddComponent<UnityEngine.EventSystems.EventTrigger>();
+            foreach (var id in new[] { UnityEngine.EventSystems.EventTriggerType.PointerEnter, UnityEngine.EventSystems.EventTriggerType.Select })
+            {
+                var entry = new UnityEngine.EventSystems.EventTrigger.Entry { eventID = id };
+                entry.callback.AddListener(_ => { if (button.interactable) UiSound.Play(UiCue.Hover); });
+                trigger.triggers.Add(entry);
+            }
         }
 
         /// <summary>A small key cap (a bevelled dark key with a thin metal rim) with its label; returns its rect.</summary>

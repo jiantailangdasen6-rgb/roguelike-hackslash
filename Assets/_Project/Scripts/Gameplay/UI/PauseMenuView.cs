@@ -95,6 +95,7 @@ namespace Game.Gameplay
 
         private void Toggle(bool open)
         {
+            if (open != IsOpen) UiSound.Play(open ? UiCue.Open : UiCue.Close);
             _panel.SetActive(open);
             IsOpen = open;
             if (!open) return;

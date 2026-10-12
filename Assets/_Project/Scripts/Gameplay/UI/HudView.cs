@@ -875,7 +875,11 @@ namespace Game.Gameplay
             var kb = UnityEngine.InputSystem.Keyboard.current;
             var pad = UnityEngine.InputSystem.Gamepad.current;
             bool toggle = GameSettings.Pressed(KeyAction.Map) || pad != null && pad.selectButton.wasPressedThisFrame;
-            if (toggle && !PerkView.IsShowing && !PauseMenuView.IsOpen && !BagView.IsOpen) _mapRoot.SetActive(!_mapRoot.activeSelf);
+            if (toggle && !PerkView.IsShowing && !PauseMenuView.IsOpen && !BagView.IsOpen && !CodexView.IsOpen && !SettingsView.IsOpen)
+            {
+                _mapRoot.SetActive(!_mapRoot.activeSelf);
+                UiSound.Play(UiCue.Page);
+            }
             if (PerkView.IsShowing || PauseMenuView.IsOpen || BagView.IsOpen) _mapRoot.SetActive(false);
             if (_mapRoot.activeSelf)
             {

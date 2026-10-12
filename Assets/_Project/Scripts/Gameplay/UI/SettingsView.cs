@@ -25,6 +25,7 @@ namespace Game.Gameplay
         public static void Open()
         {
             if (_instance == null) return;
+            UiSound.Play(UiCue.Open);
             _instance._root.SetActive(true);
             IsOpen = true;
             _instance.Refresh();
@@ -163,6 +164,7 @@ namespace Game.Gameplay
 
         private void Close()
         {
+            UiSound.Play(UiCue.Close);
             _capturing = null;
             _root.SetActive(false);
             IsOpen = false;

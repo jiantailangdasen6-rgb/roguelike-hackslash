@@ -43,6 +43,17 @@ namespace Game.Gameplay
         private string _track;
         private string _stinger;
         private float _stingerUntil;
+        private AudioLowPassFilter _lowPass;
+        private float _intensity = 1f;
+
+        /// <summary>1 in a fight (your room fighting, or a lord alive), 0 in a quiet room; the camp and title count as 1.</summary>
+        private static float WantedIntensity()
+        {
+            if (SceneManager.GetActiveScene().name != GameSession.GameScene) return 1f;
+            var d = RunDirector.Instance;
+            if (d == null || !d.IsSpawned || !d.IsRunning) return 1f;
+            return d.LocalFighting || d.BossHealth.Value >= 0f ? 1f : 0f;
+        }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Install()
@@ -63,6 +74,8 @@ namespace Game.Gameplay
                 s.playOnAwake = false;
                 s.volume = 0f;
             }
+            // Browsers have no audio filters: there the music only gets quieter between fights.
+            if (Application.platform != RuntimePlatform.WebGLPlayer) _lowPass = gameObject.AddComponent<AudioLowPassFilter>();
             _current = _a;
             RunDirector.EventReceived += OnEvent;
         }
@@ -131,7 +144,10 @@ namespace Game.Gameplay
                 }
             }
 
-            float target = AudioPrefs.Music;
+            // Between fights the music sinks back and goes muffled; it opens up when a fight starts.
+            _intensity = Mathf.MoveTowards(_intensity, WantedIntensity(), Time.unscaledDeltaTime / 1.4f);
+            if (_lowPass != null) _lowPass.cutoffFrequency = Mathf.Lerp(2200f, 22000f, _intensity * _intensity);
+            float target = AudioPrefs.Music * Mathf.Lerp(0.7f, 1f, _intensity);
             float step = Time.unscaledDeltaTime / FadeSeconds;
             foreach (var s in new[] { _a, _b })
             {

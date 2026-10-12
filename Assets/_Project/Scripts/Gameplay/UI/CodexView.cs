@@ -151,6 +151,7 @@ namespace Game.Gameplay
 
         private void Show(CodexSection section)
         {
+            UiSound.Play(IsOpen ? UiCue.Page : UiCue.Open);
             _section = section;
             _root.SetActive(true);
             IsOpen = true;
@@ -259,6 +260,7 @@ namespace Game.Gameplay
 
         private void Hide()
         {
+            UiSound.Play(UiCue.Close);
             _root.SetActive(false);
             IsOpen = false;
             ClosedFrame = Time.frameCount;

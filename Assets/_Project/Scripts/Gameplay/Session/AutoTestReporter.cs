@@ -59,12 +59,20 @@ namespace Game.Gameplay
             else if (e.Type == Game.Core.SimEventType.LegendaryProc && e.Int != 0) _legendaryProcs++;
         }
 
+        private float _longestFrame;
+
         private void Update()
         {
+            // Hitches: the longest frame of each report period, and every frame over a quarter second on its own.
+            float frame = Time.unscaledDeltaTime;
+            _longestFrame = Mathf.Max(_longestFrame, frame);
+            if (frame > 0.25f && Time.frameCount > 10)
+                Debug.Log($"[AutoTest] long frame {frame * 1000f:0}ms local={(NetPlayer.Local != null ? (Vector2)NetPlayer.Local.transform.position : Vector2.zero)}");
             if (Time.time >= _nextReport)
             {
                 _nextReport = Time.time + 5f;
-                Debug.Log("[AutoTest] " + Status());
+                Debug.Log("[AutoTest] " + Status() + $" longest={_longestFrame * 1000f:0}ms ping={(NetPlayer.Local != null ? NetPlayer.Local.Ping.Value : 0)}");
+                _longestFrame = 0f;
             }
             // -downat <s> (host): knock a teammate down to check the downed/revive markers.
             if (_downAt > 0f && Time.time >= _downAt && RunDirector.Instance?.Sim != null)

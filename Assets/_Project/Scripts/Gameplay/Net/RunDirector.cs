@@ -150,6 +150,7 @@ namespace Game.Gameplay
         public override void OnNetworkSpawn()
         {
             Instance = this;
+            SpriteSheet.PreloadAll(); // behind the "on the way" curtain, not when a new room or monster first shows
             NetworkManager.CustomMessagingManager.RegisterNamedMessageHandler(NetMessageNames.Events, OnEventsMessage);
             if (!IsServer)
             {
@@ -388,6 +389,7 @@ namespace Game.Gameplay
                 SetIfChanged(p.Caged, sp.CagedBy != 0);
                 SetIfChanged(p.Curses, RewardCatalog.PackCurses(sp.CurseStacks));
                 SetIfChanged(p.UsedPedestals, Sim.PedestalsUsedBy(sp));
+                if (_tick % (int)TickRate == 0) SetIfChanged(p.Ping, PingOf(p.OwnerClientId));
             }
 
             SetIfChanged(TeamLevel, Sim.TeamLevel);
@@ -439,6 +441,20 @@ namespace Game.Gameplay
             SetIfChanged(TrialTimer, Mathf.Ceil(Mathf.Max(0f, Sim.TrialTimer)));
             SetIfChanged(TrialProgress, Sim.TrialDone | Sim.TrialTotal << 8);
             SetIfChanged(CollapseStage, Sim.CollapseStage);
+        }
+
+        /// <summary>Round trip to a player in milliseconds (0 for the host's own player and in solo).</summary>
+        private ushort PingOf(ulong clientId)
+        {
+            if (clientId == NetworkManager.LocalClientId) return 0;
+            try
+            {
+                return (ushort)Mathf.Min(NetworkManager.NetworkConfig.NetworkTransport.GetCurrentRtt(clientId), ushort.MaxValue);
+            }
+            catch (Exception)
+            {
+                return 0; // a client that is just leaving
+            }
         }
 
         private float BossHealthFraction()

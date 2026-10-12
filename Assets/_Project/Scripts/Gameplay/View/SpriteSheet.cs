@@ -45,6 +45,15 @@ namespace Game.Gameplay
             return sheet;
         }
 
+        /// <summary>Loads every sheet at once (a slow device would otherwise stall the first time each one is used).</summary>
+        public static void PreloadAll()
+        {
+            if (_preloaded) return;
+            _preloaded = true;
+            foreach (var sheet in Resources.LoadAll<SpriteSheet>("Sheets")) Loaded[sheet.name] = sheet;
+        }
+        private static bool _preloaded;
+
         public bool TryGetClip(string name, out ClipInfo clip)
         {
             foreach (var c in Clips)

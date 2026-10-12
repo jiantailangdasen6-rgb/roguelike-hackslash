@@ -32,3 +32,14 @@ foreach ($name in 'host', 'client1', 'client2') {
     Select-String -Path $log -Pattern '\[AutoTest\] FINAL' | ForEach-Object { $_.Line }
     Select-String -Path $log -Pattern 'Exception|\[Lobby\]|Relay|Authentication|queue is full|Transport failure|freezing' | Select-Object -First 8 | ForEach-Object { '  ! ' + $_.Line }
 }
+
+# Pass/fail: every instance still in the run at the end, and no transport queue overflow anywhere.
+$failed = $false
+foreach ($name in 'host', 'client1', 'client2') {
+    $log = "$out\$name.log"
+    $final = Select-String -Path $log -Pattern '\[AutoTest\] FINAL' | Select-Object -Last 1
+    if ($final -eq $null -or $final.Line -notmatch 'started=True') { Write-Host "FAIL: $name not in the run at the end"; $failed = $true }
+    if (Select-String -Path $log -Pattern 'queue full|queue is full|Transport failure|pipeline failed' -Quiet) { Write-Host "FAIL: $name transport queue overflow"; $failed = $true }
+}
+if ($failed) { exit 1 }
+Write-Host 'ONLINE OK'

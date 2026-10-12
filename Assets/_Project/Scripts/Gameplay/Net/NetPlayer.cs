@@ -39,6 +39,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<int> Curses = new();
         /// <summary>Rooms (by bit) whose pedestal this player has used: it goes dark for them.</summary>
         public readonly NetworkVariable<int> UsedPedestals = new();
+        /// <summary>Round trip to the host in milliseconds, measured by the host (0 for the host itself).</summary>
+        public readonly NetworkVariable<ushort> Ping = new();
         public readonly NetworkVariable<bool> FacingLeft = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [SerializeField] private PixelAnimator animator;

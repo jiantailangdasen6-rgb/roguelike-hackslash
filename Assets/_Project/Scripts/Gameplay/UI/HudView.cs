@@ -32,6 +32,7 @@ namespace Game.Gameplay
             public UIKit.Bar Hp;
             public UIKit.Bar Shield;
             public Text HpText;
+            public Text Ping;
         }
 
         private UIKit.Bar _xpBar;
@@ -222,8 +223,10 @@ namespace Game.Gameplay
             shield.Root.offsetMax = new Vector2(0f, -12f);
             var text = UIKit.Label(hp.Root, "", 16, TextAnchor.MiddleCenter);
             text.rectTransform.Stretch();
+            var ping = UIKit.Label(frame.transform, "", 16, TextAnchor.UpperRight, UIKit.MutedText);
+            ping.rectTransform.Place(new Vector2(1f, 1f), new Vector2(120f, 24f), new Vector2(-12f, -5f));
             frame.Outer().gameObject.SetActive(false);
-            return new TeamFrame { Root = frame.Outer().gameObject, Edge = edge, Name = name, Hp = hp, Shield = shield, HpText = text };
+            return new TeamFrame { Root = frame.Outer().gameObject, Edge = edge, Name = name, Hp = hp, Shield = shield, HpText = text, Ping = ping };
         }
 
         private void OnDestroy()
@@ -440,7 +443,8 @@ namespace Game.Gameplay
                 ? $"<size=24><color=#e0b45a>★{banked}</color></size>  Lv {director.TeamLevel.Value}"
                 : $"Lv {director.TeamLevel.Value}";
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
-            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
+            string ping = local != null && !director.IsServer && local.Ping.Value > 0 ? $"通信 {PingText(local.Ping.Value)}　" : "";
+            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
             var here = director.LocalRoom;
             _roomText.text = RoomTitle(here) + (director.Keys.Value > 0 ? $"　<color=#e6c766>鍵 ×{director.Keys.Value}</color>" : "");
             _objectiveText.text = ObjectiveText(director, here);
@@ -497,6 +501,14 @@ namespace Game.Gameplay
             _toastText.text = _sb.ToString();
         }
 
+        /// <summary>Round trip to the host, coloured by how it will feel (green fine, yellow a little late, red heavy).</summary>
+        private static string PingText(ushort ms)
+        {
+            if (ms == 0) return "";
+            string color = ms < 120 ? "8fd68f" : ms < 250 ? "e6c766" : "ff6050";
+            return $"<color=#{color}>{ms}ms</color>";
+        }
+
         private void UpdateTeam(NetPlayer local)
         {
             int slot = 0;
@@ -506,6 +518,7 @@ namespace Game.Gameplay
                 var f = _team[slot++];
                 UIKit.Toggle(f.Root, true);
                 f.Edge.color = p.Color;
+                f.Ping.text = p.OwnerClientId == Unity.Netcode.NetworkManager.ServerClientId ? "ホスト" : PingText(p.Ping.Value);
                 float max = Mathf.Max(1f, p.MaxHp.Value);
                 if (p.Downed.Value)
                 {

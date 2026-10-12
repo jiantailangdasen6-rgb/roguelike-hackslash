@@ -268,7 +268,7 @@ namespace Game.Gameplay
         {
             var kb = Keyboard.current;
             var pad = Gamepad.current;
-            bool toggle = kb != null && kb.bKey.wasPressedThisFrame;
+            bool toggle = GameSettings.Pressed(KeyAction.Codex);
             bool back = kb != null && kb.escapeKey.wasPressedThisFrame || pad != null && pad.buttonEast.wasPressedThisFrame;
             if (IsOpen)
             {
@@ -283,7 +283,7 @@ namespace Game.Gameplay
                 }
                 return;
             }
-            if (toggle && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen && !CampView.PanelOpen && !LobbyTyping()) Show(_section);
+            if (toggle && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen && !CampView.PanelOpen && !SettingsView.IsOpen && !LobbyTyping()) Show(_section);
         }
 
         private static bool LobbyTyping()

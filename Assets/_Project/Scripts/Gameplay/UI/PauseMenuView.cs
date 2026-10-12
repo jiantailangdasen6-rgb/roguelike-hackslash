@@ -51,8 +51,9 @@ namespace Game.Gameplay
             codex.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(560f, 76f), new Vector2(0f, -140f));
             gameObject.AddComponent<CodexView>();
 
-            VolumeRow(panel.transform, "音楽", 300f, () => AudioPrefs.Music, v => AudioPrefs.Music = v);
-            VolumeRow(panel.transform, "効果音", 244f, () => AudioPrefs.Sfx, v => AudioPrefs.Sfx = v);
+            var settings = UIKit.Button(panel.transform, "設定　<size=20><color=#bfb6aa>音量・揺れ・表示・キー</color></size>", 30, () => { Toggle(false); SettingsView.Open(); });
+            settings.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(560f, 76f), new Vector2(0f, -232f));
+            gameObject.AddComponent<SettingsView>();
 
             _resume = UIKit.Button(panel.transform, "続ける", 32, () => Toggle(false));
             _resume.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(360f, 72f), new Vector2(0f, 150f));
@@ -122,7 +123,7 @@ namespace Game.Gameplay
             bool pressed = (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
                            || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
             if (pressed && !PerkView.IsShowing && !BagView.IsOpen && BagView.ClosedFrame != Time.frameCount
-                && !CampView.PanelOpen && !CampView.ConsumedEscape && !CodexView.IsOpen && CodexView.ClosedFrame != Time.frameCount) Toggle(!IsOpen);
+                && !CampView.PanelOpen && !CampView.ConsumedEscape && !CodexView.IsOpen && CodexView.ClosedFrame != Time.frameCount && !SettingsView.IsOpen && SettingsView.ClosedFrame != Time.frameCount) Toggle(!IsOpen);
         }
     }
 }

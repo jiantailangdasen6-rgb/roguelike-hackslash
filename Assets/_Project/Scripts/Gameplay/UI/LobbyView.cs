@@ -175,6 +175,9 @@ namespace Game.Gameplay
             gameObject.AddComponent<CodexView>();
             var codex = UIKit.Button(root, "図鑑（B）", 26, () => CodexView.Open());
             codex.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(220f, 60f), new Vector2(-28f, -28f));
+            gameObject.AddComponent<SettingsView>();
+            var settings = UIKit.Button(root, "設定", 26, SettingsView.Open);
+            settings.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(220f, 60f), new Vector2(-28f, -98f));
 
             // Build stamp: friends can only play together on the same version.
             var version = UIKit.Label(root, $"ver {GameSession.BuildStamp}", 18, TextAnchor.LowerRight, new Color(1f, 1f, 1f, 0.25f));

@@ -74,7 +74,7 @@ namespace Game.Gameplay
         // ------------------------------------------------------------------ Sending
 
         private static bool CanPing(RunDirector d, NetPlayer local) =>
-            d != null && d.IsRunning && local != null && !PlayArea.InCamp && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen && !CodexView.IsOpen;
+            d != null && d.IsRunning && local != null && !PlayArea.InCamp && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen && !CodexView.IsOpen && !SettingsView.IsOpen;
 
         private void Update()
         {
@@ -90,7 +90,7 @@ namespace Game.Gameplay
             var kb = Keyboard.current;
             var mouse = Mouse.current;
             var pad = Gamepad.current;
-            bool key = kb != null && kb.fKey.wasPressedThisFrame || mouse != null && mouse.middleButton.wasPressedThisFrame
+            bool key = GameSettings.Pressed(KeyAction.Ping) || mouse != null && mouse.middleButton.wasPressedThisFrame
                        || pad != null && pad.dpad.up.wasPressedThisFrame;
             var hud = HudView.Instance;
             bool onMap = hud != null && hud.BigMapOpen;

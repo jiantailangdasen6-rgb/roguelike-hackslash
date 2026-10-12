@@ -884,6 +884,8 @@ namespace Game.Gameplay
             fx.Go.transform.SetPositionAndRotation(at, Quaternion.identity);
             fx.Go.transform.localScale = Vector3.one * startScale;
             fx.Renderer.sprite = fx.Frames != null && fx.Frames.Length > 0 ? fx.Frames[0] : null;
+            // Fewer flashes (settings): the big bright bursts are drawn faint.
+            if (sheet is "fx_nova" or "fx_holy" or "fx_explosion") { color.a *= GameSettings.FlashScale; fx.Color = color; }
             fx.Renderer.color = color;
             fx.Renderer.sortingOrder = order;
             if (fx.Light != null) fx.Light.enabled = false;

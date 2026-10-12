@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -92,6 +93,9 @@ namespace Game.Gameplay
             return label;
         }
 
+        private static readonly List<CanvasScaler> Scalers = new();
+        private static bool _scaleHooked;
+
         public static Canvas CreateCanvas(string name, int sortingOrder, Transform parent = null)
         {
             var go = new GameObject(name, typeof(RectTransform));
@@ -101,7 +105,17 @@ namespace Game.Gameplay
             canvas.sortingOrder = sortingOrder;
             var scaler = go.AddComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1920, 1080);
+            scaler.referenceResolution = new Vector2(1920, 1080) / GameSettings.UiScale;
+            Scalers.Add(scaler);
+            if (!_scaleHooked)
+            {
+                _scaleHooked = true;
+                GameSettings.Changed += () =>
+                {
+                    Scalers.RemoveAll(s => s == null);
+                    foreach (var s in Scalers) s.referenceResolution = new Vector2(1920, 1080) / GameSettings.UiScale;
+                };
+            }
             // Expand: the whole 1920x1080 layout always fits (wide browser windows only add room at the sides,
             // tall ones at the top/bottom) instead of spilling off-screen and overlapping.
             scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;

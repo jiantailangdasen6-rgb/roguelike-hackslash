@@ -253,7 +253,7 @@ namespace Game.Gameplay
 
             var kb = Keyboard.current;
             if (kb == null) return;
-            if ((kb.iKey.wasPressedThisFrame || kb.tabKey.wasPressedThisFrame) && !CodexView.IsOpen) Toggle(!IsOpen);
+            if ((GameSettings.Pressed(KeyAction.Bag) || kb.tabKey.wasPressedThisFrame) && !CodexView.IsOpen && !SettingsView.IsOpen) Toggle(!IsOpen);
             else if (IsOpen && kb.escapeKey.wasPressedThisFrame)
             {
                 Toggle(false);

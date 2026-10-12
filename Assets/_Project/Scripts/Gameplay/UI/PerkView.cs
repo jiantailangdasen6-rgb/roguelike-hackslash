@@ -21,6 +21,9 @@ namespace Game.Gameplay
         private readonly Text[] _titles = new Text[PerkRoller.OptionCount];
         private readonly Text[] _bodies = new Text[PerkRoller.OptionCount];
         private readonly Image[] _icons = new Image[PerkRoller.OptionCount];
+        private readonly RectTransform[] _cards = new RectTransform[PerkRoller.OptionCount];
+        private readonly Image[] _halos = new Image[PerkRoller.OptionCount];
+        private float _shownAt;
         private PerkOption[] _options;
         private Button _skip;
         private bool _shop;
@@ -40,16 +43,19 @@ namespace Game.Gameplay
             _panel = dim.gameObject;
 
             var title = _heading = UIKit.Title(dim.transform, "力を選べ", 64);
-            title.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 90f), new Vector2(0f, 320f));
+            title.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 90f), new Vector2(0f, 385f));
             _timerText = UIKit.Label(dim.transform, "", 24, TextAnchor.MiddleCenter, UIKit.MutedText);
-            _timerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(900f, 40f), new Vector2(0f, 255f));
+            _timerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(900f, 40f), new Vector2(0f, 322f));
 
             for (int i = 0; i < _buttons.Length; i++)
             {
                 int index = i;
-                var card = UIKit.Framed(dim.transform, "Card" + i, new Color(0.06f, 0.045f, 0.06f, 1f));
+                // A tall card: a coloured banner with whose skill it is, the icon on a glowing medallion, the name, what it does,
+                // and its key on a cap at the bottom.
+                var card = UIKit.Framed(dim.transform, "Card" + i, new Color(0.065f, 0.05f, 0.06f, 1f));
                 var outer = card.Outer();
-                outer.Place(new Vector2(0.5f, 0.5f), new Vector2(460f, 480f), new Vector2((i - 1) * 500f, -50f));
+                outer.Place(new Vector2(0.5f, 0.5f), new Vector2(440f, 560f), new Vector2((i - 1) * 480f, -40f));
+                _cards[i] = outer;
                 var button = outer.gameObject.AddComponent<Button>();
                 button.targetGraphic = outer.GetComponent<Image>();
                 var colors = button.colors;
@@ -58,21 +64,33 @@ namespace Game.Gameplay
                 button.colors = colors;
                 button.onClick.AddListener(() => Choose(index));
 
-                _edges[i] = UIKit.Panel(card.transform, "Edge", Color.gray);
+                _edges[i] = UIKit.Panel(card.transform, "Banner", Color.gray);
+                _edges[i].sprite = UIKit.GlossSprite;
                 _edges[i].rectTransform.anchorMin = new Vector2(0f, 1f);
                 _edges[i].rectTransform.anchorMax = new Vector2(1f, 1f);
                 _edges[i].rectTransform.pivot = new Vector2(0.5f, 1f);
-                _edges[i].rectTransform.sizeDelta = new Vector2(0f, 8f);
-                _tags[i] = UIKit.Label(card.transform, "", 22, TextAnchor.UpperCenter, UIKit.MutedText);
-                _tags[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(420f, 34f), new Vector2(0f, -24f));
-                _titles[i] = UIKit.Title(card.transform, "", 40);
-                _icons[i] = UIKit.Rect("Icon", card.transform).Place(new Vector2(0.5f, 1f), new Vector2(112f, 112f), new Vector2(0f, -58f)).gameObject.AddComponent<Image>();
+                _edges[i].rectTransform.sizeDelta = new Vector2(0f, 46f);
+                _tags[i] = UIKit.Title(_edges[i].transform, "", 24, TextAnchor.MiddleCenter, Color.white);
+                _tags[i].rectTransform.Stretch();
+                var halo = UIKit.Panel(card.transform, "Halo", new Color(1f, 0.8f, 0.45f, 0.35f));
+                halo.sprite = UIKit.GlowSprite;
+                halo.raycastTarget = false;
+                halo.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(260f, 260f), new Vector2(0f, -30f));
+                _halos[i] = halo;
+                var medal = UIKit.Panel(card.transform, "Medal", new Color(0.86f, 0.68f, 0.32f));
+                medal.sprite = UIKit.ThinRingSprite;
+                medal.raycastTarget = false;
+                medal.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(164f, 164f), new Vector2(0f, -78f));
+                _icons[i] = UIKit.Rect("Icon", card.transform).Place(new Vector2(0.5f, 1f), new Vector2(132f, 132f), new Vector2(0f, -94f)).gameObject.AddComponent<Image>();
                 _icons[i].raycastTarget = false;
-                _titles[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(420f, 70f), new Vector2(0f, -172f));
-                _bodies[i] = UIKit.Label(card.transform, "", 27, TextAnchor.UpperCenter);
-                _bodies[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(400f, 200f), new Vector2(0f, -248f));
-                var key = UIKit.Label(card.transform, $"[{i + 1}]", 22, TextAnchor.LowerCenter, UIKit.MutedText);
-                key.rectTransform.Stretch(14f);
+                _titles[i] = UIKit.Title(card.transform, "", 40);
+                _titles[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(410f, 64f), new Vector2(0f, -254f));
+                var rule = UIKit.Panel(card.transform, "Rule", UIKit.GoldTrim);
+                rule.raycastTarget = false;
+                rule.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(240f, 2f), new Vector2(0f, -320f));
+                _bodies[i] = UIKit.Label(card.transform, "", 26, TextAnchor.UpperCenter);
+                _bodies[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(390f, 170f), new Vector2(0f, -334f));
+                UIKit.KeyCap(outer, (i + 1).ToString(), 22, out _).Place(new Vector2(0.5f, 0f), new Vector2(46f, 36f), new Vector2(0f, -18f));
                 _buttons[i] = button;
             }
 
@@ -143,10 +161,12 @@ namespace Game.Gameplay
                 _bodies[i].text = body;
                 _tags[i].text = cls.HasValue ? ClassCatalog.Get(cls.Value).Name + "の技" : "共通";
                 _edges[i].color = ClassColor(cls);
+                _halos[i].color = Color.Lerp(ClassColor(cls), new Color(1f, 0.85f, 0.5f), 0.5f) * new Color(1f, 1f, 1f, 0.4f);
                 _icons[i].sprite = GameIcons.Perk(options[i]);
                 _icons[i].enabled = _icons[i].sprite != null;
             }
             _skip.gameObject.SetActive(_shop);
+            _shownAt = Time.unscaledTime;
             _deadline = Time.time + RunSimulation.ChoiceTimeout;
             _panel.SetActive(true);
             IsShowing = true;
@@ -198,6 +218,18 @@ namespace Game.Gameplay
                 else if (kb.digit4Key.wasPressedThisFrame && _shop) Choose(RunSimulation.ShopSkip);
             }
             if (!IsShowing) return;
+
+            // Cards turn over one after another, then the one under the cursor or selection lifts a little.
+            var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
+            for (int i = 0; i < _count; i++)
+            {
+                float t = Mathf.Clamp01((Time.unscaledTime - _shownAt - i * 0.09f) / 0.22f);
+                float flip = 1f - (1f - t) * (1f - t);
+                bool lifted = selected == _cards[i].gameObject;
+                float s = lifted ? 1.05f : 1f;
+                _cards[i].localScale = new Vector3(flip * s, s, 1f);
+                _cards[i].anchoredPosition = new Vector2((i - (_count - 1) * 0.5f) * 480f, -40f + (lifted ? 16f : 0f) - (1f - flip) * 40f);
+            }
 
             float left = _deadline - Time.time;
             _timerText.text = $"残り {Mathf.CeilToInt(Mathf.Max(0f, left))} 秒（{(_shop ? "時間切れで何も買わない" : "時間切れで左を選択")}）";

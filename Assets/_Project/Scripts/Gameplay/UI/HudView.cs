@@ -30,7 +30,8 @@ namespace Game.Gameplay
             public float FlashAt = -10f;
         }
 
-        private static readonly string[] MouseKeys = { "クリック", "Q", "E", "Space" };
+        private static string[] MouseKeys => new[] { "クリック", GameSettings.Label(KeyAction.Skill1), GameSettings.Label(KeyAction.Skill2), GameSettings.Label(KeyAction.Dodge) };
+        private string[] _mouseKeys = MouseKeys;
         private static readonly string[] PadKeys = { "RT", "RB", "LB", "A" };
 
         private UIKit.Bar _hpTrail;
@@ -267,6 +268,7 @@ namespace Game.Gameplay
             gameObject.AddComponent<LootView>();
             gameObject.AddComponent<LegendaryFxView>();
             Codex.Recorded += OnCodexRecorded;
+            GameSettings.Changed += OnSettingsChanged;
             RunDirector.EventReceived += OnEvent;
         }
 
@@ -339,6 +341,7 @@ namespace Game.Gameplay
         {
             RunDirector.EventReceived -= OnEvent;
             Codex.Recorded -= OnCodexRecorded;
+            GameSettings.Changed -= OnSettingsChanged;
             if (Instance == this) Instance = null;
         }
 
@@ -576,16 +579,26 @@ namespace Game.Gameplay
             }
         }
 
+        private void OnSettingsChanged()
+        {
+            _mouseKeys = MouseKeys;
+            if (_legend != null) BuildKeyLegend(_legend.parent);
+        }
+
         private void OnCodexRecorded(CodexCatalog.Entry e) => _codexQueue.Enqueue(e);
 
         /// <summary>Key caps for the panels you can open (how to play lives in the codex).</summary>
-        private static void BuildKeyLegend(Transform root)
+        private RectTransform _legend;
+
+        private void BuildKeyLegend(Transform root)
         {
-            var row = UIKit.Rect("Keys", root).Place(new Vector2(0f, 0f), new Vector2(700f, 34f), new Vector2(24f, 22f));
+            _legend ??= UIKit.Rect("Keys", root).Place(new Vector2(0f, 0f), new Vector2(700f, 34f), new Vector2(24f, 22f));
+            var row = _legend;
+            for (int i = row.childCount - 1; i >= 0; i--) Destroy(row.GetChild(i).gameObject);
             float x = 0f;
-            foreach (var (key, label) in new[] { ("I", "袋"), ("M", "地図"), ("F", "合図"), ("B", "図鑑"), ("Esc", "メニュー") })
+            foreach (var (key, label) in new[] { (GameSettings.Label(KeyAction.Bag), "袋"), (GameSettings.Label(KeyAction.Map), "地図"), (GameSettings.Label(KeyAction.Ping), "合図"), (GameSettings.Label(KeyAction.Codex), "図鑑"), ("Esc", "メニュー") })
             {
-                float w = key.Length > 1 ? 50f : 32f;
+                float w = Mathf.Max(32f, 18f + key.Length * 11f);
                 UIKit.KeyCap(row, key, 17, out _).Place(new Vector2(0f, 0.5f), new Vector2(w, 30f), new Vector2(x, 0f));
                 var text = UIKit.Label(row, label, 19, TextAnchor.MiddleLeft, UIKit.MutedText);
                 text.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(90f, 30f), new Vector2(x + w + 6f, 0f));
@@ -671,8 +684,13 @@ namespace Game.Gameplay
                 SetCooldown(_skills[0], 0f, 1f);
                 // The key caps follow the device in use.
                 var reader = local.GetComponent<PlayerInputReader>();
-                var keys = reader != null && !reader.UsingMouse ? PadKeys : MouseKeys;
-                for (int s = 0; s < 4; s++) if (_skills[s].Key.text != keys[s]) _skills[s].Key.text = keys[s];
+                var keys = reader != null && !reader.UsingMouse ? PadKeys : _mouseKeys;
+                for (int s = 0; s < 4; s++)
+                {
+                    if (_skills[s].Key.text == keys[s]) continue;
+                    _skills[s].Key.text = keys[s];
+                    _skills[s].KeyCap.sizeDelta = new Vector2(keys[s].Length > 2 ? 86f : keys[s].Length == 2 ? 56f : 44f, 30f);
+                }
             }
 
             UpdatePerkRow();
@@ -852,7 +870,7 @@ namespace Game.Gameplay
         {
             var kb = UnityEngine.InputSystem.Keyboard.current;
             var pad = UnityEngine.InputSystem.Gamepad.current;
-            bool toggle = kb != null && kb.mKey.wasPressedThisFrame || pad != null && pad.selectButton.wasPressedThisFrame;
+            bool toggle = GameSettings.Pressed(KeyAction.Map) || pad != null && pad.selectButton.wasPressedThisFrame;
             if (toggle && !PerkView.IsShowing && !PauseMenuView.IsOpen && !BagView.IsOpen) _mapRoot.SetActive(!_mapRoot.activeSelf);
             if (PerkView.IsShowing || PauseMenuView.IsOpen || BagView.IsOpen) _mapRoot.SetActive(false);
             if (_mapRoot.activeSelf)
@@ -864,7 +882,7 @@ namespace Game.Gameplay
                 _mapTitle.text = AreaNames[area] + keys + boss;
             }
             float k = (Time.time - _fadeStart) / FadeTime;
-            _fade.color = new Color(0f, 0f, 0f, k >= 1f ? 0f : 1f - k * k);
+            _fade.color = new Color(0f, 0f, 0f, (k >= 1f ? 0f : 1f - k * k) * GameSettings.FlashScale);
         }
 
         /// <summary>The first time you step into a room of this area: its name.</summary>

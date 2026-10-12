@@ -63,12 +63,12 @@ namespace Game.Gameplay
             get
             {
                 var director = RunDirector.Instance;
-                return director != null && director.IsRunning && !director.Halted && !player.Downed.Value && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen && !CodexView.IsOpen;
+                return director != null && director.IsRunning && !director.Halted && !player.Downed.Value && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen && !CodexView.IsOpen && !SettingsView.IsOpen;
             }
         }
 
         /// <summary>In the camp nobody fights: walking around is all, while no preparation panel is open.</summary>
-        private static bool CanWalkInCamp => PlayArea.InCamp && !PauseMenuView.IsOpen && !CampView.PanelOpen && !CodexView.IsOpen;
+        private static bool CanWalkInCamp => PlayArea.InCamp && !PauseMenuView.IsOpen && !CampView.PanelOpen && !CodexView.IsOpen && !SettingsView.IsOpen;
 
         // ------------------------------------------------------------------ Actions (also used by the bot)
 

@@ -46,10 +46,30 @@ namespace Game.Gameplay
             _skill1 = _map.FindAction("Skill1", true);
             _skill2 = _map.FindAction("Skill2", true);
             _dodge = _map.FindAction("Dodge", true);
+            ApplyKeys();
+        }
+
+        /// <summary>The keyboard keys chosen in the settings replace the first keyboard binding of each skill / the dodge.</summary>
+        private void ApplyKeys()
+        {
+            Rebind(_skill1, KeyAction.Skill1);
+            Rebind(_skill2, KeyAction.Skill2);
+            Rebind(_dodge, KeyAction.Dodge);
+        }
+
+        private static void Rebind(InputAction action, KeyAction key)
+        {
+            for (int i = 0; i < action.bindings.Count; i++)
+            {
+                if (!action.bindings[i].path.StartsWith("<Keyboard>")) continue;
+                action.ApplyBindingOverride(i, GameSettings.Path(GameSettings.KeyFor(key)));
+                return;
+            }
         }
 
         private void OnEnable()
         {
+            GameSettings.Changed += ApplyKeys;
             _map.actionTriggered += OnAny;
             _skill1.performed += OnSkill1;
             _skill2.performed += OnSkill2;
@@ -59,6 +79,7 @@ namespace Game.Gameplay
 
         private void OnDisable()
         {
+            GameSettings.Changed -= ApplyKeys;
             _map.Disable();
             _map.actionTriggered -= OnAny;
             _skill1.performed -= OnSkill1;

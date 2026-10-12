@@ -14,7 +14,7 @@ namespace Game.Gameplay
 
         public static void Add(float amount)
         {
-            if (_instance != null) _instance._trauma = Mathf.Min(1f, _instance._trauma + amount);
+            if (_instance != null) _instance._trauma = Mathf.Min(1f, _instance._trauma + amount * GameSettings.Shake);
         }
 
         private void LateUpdate()

@@ -182,6 +182,8 @@ namespace Game.Core
         public GearVaultData gear = new();
         /// <summary>First-run hints already learnt (GuideHints): they stop showing.</summary>
         public List<string> guideSeen = new();
+        /// <summary>Codex entries met so far (CodexCatalog ids).</summary>
+        public List<string> codexSeen = new();
 
         public bool IsUnlocked(string id)
         {

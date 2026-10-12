@@ -15,13 +15,96 @@ namespace Game.Gameplay
         public static HudView Instance { get; private set; }
 
         public static readonly string[] AreaNames = { "朽ちた納骨堂", "血塗られた礼拝堂", "奈落の玉座" };
+        private static readonly string[] LayerNames = { "第一層", "第二層", "第三層" };
 
         private sealed class SkillSlot
         {
-            public Text Key;
-            public Text Name;
-            public Image Shade;
+            public RectTransform Root;
+            public Image Icon;
+            public Image Cool;
+            public Image Flash;
             public Text Time;
+            public Text Key;
+            public RectTransform KeyCap;
+            public float Last;
+            public float FlashAt = -10f;
+        }
+
+        private static readonly string[] MouseKeys = { "クリック", "Q", "E", "Space" };
+        private static readonly string[] PadKeys = { "RT", "RB", "LB", "A" };
+
+        private UIKit.Bar _hpTrail;
+        private float _trailValue = 1f, _trailHoldUntil, _lastHp = 1f;
+        private Image _portrait;
+        private UISpriteAnimator _portraitAnim;
+        private string _portraitSheet;
+
+        /// <summary>Bar fills get a glossy band on top.</summary>
+        private static void Gloss(RectTransform bar)
+        {
+            var fill = bar.Find("Fill")?.GetComponent<Image>();
+            if (fill != null) fill.sprite = UIKit.GlossSprite;
+        }
+
+        /// <summary>The hero in a round gold frame, the level on a tag under it.</summary>
+        private void BuildPortrait(Transform root)
+        {
+            var holder = UIKit.Rect("Portrait", root).Place(new Vector2(0f, 1f), new Vector2(140f, 140f), new Vector2(14f, -18f));
+            // The face: a bust cut out by a round mask (the sprite is scaled up so head and shoulders fill it).
+            var disc = UIKit.Panel(holder, "Disc", new Color(0.1f, 0.075f, 0.09f, 1f));
+            disc.sprite = UIKit.DiscSprite;
+            disc.rectTransform.Stretch(4f);
+            disc.gameObject.AddComponent<Mask>().showMaskGraphic = true;
+            var glow = UIKit.Panel(disc.transform, "Glow", new Color(1f, 0.68f, 0.32f, 0.3f));
+            glow.sprite = UIKit.GlowSprite;
+            glow.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(110f, 110f), new Vector2(0f, 6f));
+            _portrait = UIKit.Panel(disc.transform, "Hero", Color.white);
+            _portrait.preserveAspect = true;
+            _portrait.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(230f, 230f), new Vector2(10f, -6f));
+            _portraitAnim = _portrait.gameObject.AddComponent<UISpriteAnimator>();
+            var dark = UIKit.Panel(holder, "RimShadow", new Color(0.03f, 0.02f, 0.02f, 1f));
+            dark.sprite = UIKit.ThinRingSprite;
+            dark.rectTransform.Stretch(-2f);
+            var ring = UIKit.Panel(holder, "Rim", new Color(0.88f, 0.7f, 0.34f, 1f));
+            ring.sprite = UIKit.ThinRingSprite;
+            ring.rectTransform.Stretch(2f);
+            foreach (var img in new[] { disc, glow, _portrait, dark, ring }) img.raycastTarget = false;
+            var tag = UIKit.Framed(holder, "Level", new Color(0.32f, 0.08f, 0.08f, 1f));
+            tag.Outer().Place(new Vector2(0.5f, 0f), new Vector2(84f, 36f), new Vector2(0f, -12f));
+            _levelText = UIKit.Title(tag.transform, "Lv 1", 24, TextAnchor.MiddleCenter, new Color(1f, 0.9f, 0.7f));
+            _levelText.rectTransform.Stretch();
+        }
+
+        private SkillSlot CreateSkillSlot(Transform root, int i)
+        {
+            var slot = UIKit.Framed(root, "Skill" + i, new Color(0.03f, 0.025f, 0.03f, 0.95f));
+            var rect = slot.Outer();
+            rect.Place(new Vector2(0.5f, 0f), new Vector2(104f, 104f), new Vector2((i - 1.5f) * 126f, 40f));
+            var icon = UIKit.Panel(slot.transform, "Icon", Color.white);
+            icon.rectTransform.Stretch(4f);
+            icon.raycastTarget = false;
+            // The wait drains clockwise from the top like a clock hand.
+            var cool = UIKit.Panel(slot.transform, "Cool", new Color(0f, 0f, 0f, 0.68f));
+            cool.sprite = UIKit.WhiteSprite;
+            cool.type = Image.Type.Filled;
+            cool.fillMethod = Image.FillMethod.Radial360;
+            cool.fillOrigin = (int)Image.Origin360.Top;
+            cool.fillClockwise = false;
+            cool.fillAmount = 0f;
+            cool.rectTransform.Stretch(4f);
+            cool.raycastTarget = false;
+            var flash = UIKit.Panel(slot.transform, "Flash", new Color(1f, 0.92f, 0.6f, 0f));
+            flash.rectTransform.Stretch(2f);
+            flash.raycastTarget = false;
+            var time = UIKit.Title(slot.transform, "", 40, TextAnchor.MiddleCenter, Color.white);
+            time.rectTransform.Stretch();
+            var outline = time.gameObject.AddComponent<Outline>();
+            outline.effectColor = new Color(0f, 0f, 0f, 0.9f);
+            outline.effectDistance = new Vector2(2f, -2f);
+            // A key cap sitting on the bottom edge.
+            var capRect = UIKit.KeyCap(rect, MouseKeys[i], i == 0 || i == 3 ? 17 : 20, out var key);
+            capRect.Place(new Vector2(0.5f, 0f), new Vector2(i == 0 || i == 3 ? 86f : 44f, 30f), new Vector2(0f, -18f));
+            return new SkillSlot { Root = rect, Icon = icon, Cool = cool, Flash = flash, Time = time, Key = key, KeyCap = capRect };
         }
 
         private sealed class TeamFrame
@@ -33,6 +116,8 @@ namespace Game.Gameplay
             public UIKit.Bar Shield;
             public Text HpText;
             public Text Ping;
+            public UISpriteAnimator Face;
+            public string FaceSheet;
         }
 
         private UIKit.Bar _xpBar;
@@ -64,14 +149,13 @@ namespace Game.Gameplay
         private Text _bannerText;
         private Text _bannerSub;
         private float _bannerUntil;
-        private Text _toastText;
-        private Text _hintText;
+        private readonly (RectTransform Root, Text Text, CanvasGroup Group)[] _toastPlates = new (RectTransform, Text, CanvasGroup)[4];
+        private bool _toastsHidden;
         private RectTransform _perkRow;
         private int _perksShown = -1;
         private readonly SkillSlot[] _skills = new SkillSlot[4];
         private readonly TeamFrame[] _team = new TeamFrame[GameSession.MaxPlayers - 1];
         private readonly List<(string Text, float Until)> _toasts = new();
-        private readonly HashSet<string> _tipsShown = new();
         private GuideHints _guide;
         private readonly StringBuilder _sb = new();
         private ClassId? _shownClass;
@@ -92,21 +176,29 @@ namespace Game.Gameplay
             xp.sizeDelta = new Vector2(0f, 10f);
             xp.anchoredPosition = Vector2.zero;
 
-            // Top-left: own panel (class, level, HP, perks)
-            var panel = UIKit.Framed(root, "PlayerPanel", new Color(0.04f, 0.03f, 0.05f, 0.85f));
-            panel.Outer().Place(new Vector2(0f, 1f), new Vector2(470f, 132f), new Vector2(20f, -24f));
-            _classText = UIKit.Title(panel.transform, "", 30, TextAnchor.UpperLeft);
-            _classText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 40f), new Vector2(16f, -8f));
-            _levelText = UIKit.Title(panel.transform, "Lv 1", 30, TextAnchor.UpperRight);
-            _levelText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(140f, 40f), new Vector2(-16f, -8f));
-            _hpBar = UIKit.CreateBar(panel.transform, "Hp", new Color(0.72f, 0.12f, 0.14f), new Color(0.12f, 0.03f, 0.04f));
-            _hpBar.Root.Place(new Vector2(0f, 1f), new Vector2(438f, 26f), new Vector2(16f, -54f));
-            _shieldBar = UIKit.CreateBar(_hpBar.Root, "Shield", new Color(0.85f, 0.75f, 0.4f, 0.75f), new Color(0f, 0f, 0f, 0f));
+            // Top-left: own panel. A round portrait of the hero with the level on a tag, the class name, a glossy HP bar
+            // (lost health trails off behind it) and the perks taken.
+            var panel = UIKit.Framed(root, "PlayerPanel", new Color(0.04f, 0.03f, 0.05f, 0.88f));
+            panel.Outer().Place(new Vector2(0f, 1f), new Vector2(430f, 118f), new Vector2(96f, -30f));
+            _classText = UIKit.Title(panel.transform, "", 28, TextAnchor.UpperLeft);
+            _classText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 38f), new Vector2(64f, -6f));
+            _hpTrail = UIKit.CreateBar(panel.transform, "HpTrail", new Color(1f, 0.85f, 0.6f, 0.9f), new Color(0.1f, 0.025f, 0.035f));
+            _hpTrail.Root.Place(new Vector2(0f, 1f), new Vector2(350f, 28f), new Vector2(64f, -46f));
+            _hpBar = UIKit.CreateBar(_hpTrail.Root, "Hp", new Color(0.82f, 0.14f, 0.16f), Color.clear);
+            _hpBar.Root.Stretch();
+            Gloss(_hpBar.Root);
+            _shieldBar = UIKit.CreateBar(_hpTrail.Root, "Shield", new Color(0.95f, 0.82f, 0.45f, 0.8f), new Color(0f, 0f, 0f, 0f));
             _shieldBar.Root.Stretch();
-            _shieldBar.Root.offsetMax = new Vector2(0f, -18f);
-            _hpText = UIKit.Label(_hpBar.Root, "", 20, TextAnchor.MiddleCenter);
+            _shieldBar.Root.offsetMax = new Vector2(0f, -20f);
+            var hpRim = UIKit.Panel(_hpTrail.Root, "Rim", UIKit.GoldTrim);
+            hpRim.sprite = UIKit.RimSprite;
+            hpRim.type = Image.Type.Sliced;
+            hpRim.raycastTarget = false;
+            hpRim.rectTransform.Stretch(-2f);
+            _hpText = UIKit.Label(_hpTrail.Root, "", 20, TextAnchor.MiddleCenter);
             _hpText.rectTransform.Stretch();
-            _perkRow = UIKit.Rect("Perks", panel.transform).Place(new Vector2(0f, 1f), new Vector2(438f, 36f), new Vector2(16f, -88f));
+            _perkRow = UIKit.Rect("Perks", panel.transform).Place(new Vector2(0f, 1f), new Vector2(350f, 34f), new Vector2(64f, -80f));
+            BuildPortrait(root);
 
             // Teammates under it
             for (int i = 0; i < _team.Length; i++) _team[i] = CreateTeamFrame(root, i);
@@ -119,10 +211,14 @@ namespace Game.Gameplay
             _minimap = new MinimapView(root, new Vector2(-24f, -98f));
             BuildBigMap();
             float below = -98f - _minimap.Root.sizeDelta.y - 10f;
-            _roomText = UIKit.Title(root, "", 26, TextAnchor.UpperRight, UIKit.MutedText);
-            _roomText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(700f, 40f), new Vector2(-28f, below));
-            _objectiveText = UIKit.Label(root, "", 26, TextAnchor.UpperRight, UIKit.AccentColor);
-            _objectiveText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(760f, 80f), new Vector2(-28f, below - 38f));
+            // The room you stand in and what to do there, on a plate under the map.
+            var plate = UIKit.Framed(root, "RoomPlate", new Color(0.04f, 0.03f, 0.04f, 0.88f));
+            plate.Outer().Place(new Vector2(1f, 1f), new Vector2(460f, 96f), new Vector2(-24f, below));
+            _roomText = UIKit.Title(plate.transform, "", 25, TextAnchor.UpperRight, new Color(0.95f, 0.88f, 0.76f));
+            _roomText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(430f, 36f), new Vector2(-16f, -8f));
+            _objectiveText = UIKit.Label(plate.transform, "", 22, TextAnchor.UpperRight, UIKit.AccentColor);
+            _objectiveText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(430f, 52f), new Vector2(-16f, -44f));
+            _codexNotice = BuildCodexNotice(root, below - 110f);
 
             // Boss bar
             var boss = UIKit.Framed(root, "Boss", new Color(0.03f, 0.02f, 0.03f, 0.9f));
@@ -136,27 +232,8 @@ namespace Game.Gameplay
             _trialText = UIKit.Title(root, "", 34, TextAnchor.UpperCenter, new Color(1f, 0.86f, 0.55f));
             _trialText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1200f, 50f), new Vector2(0f, -100f));
 
-            // Bottom: skills
-            string[] keys = { "左クリック", "Q", "E", "Space" };
-            for (int i = 0; i < 4; i++)
-            {
-                var slot = UIKit.Framed(root, "Skill" + i, new Color(0.05f, 0.04f, 0.05f, 0.9f));
-                slot.Outer().Place(new Vector2(0.5f, 0f), new Vector2(200f, 86f), new Vector2((i - 1.5f) * 214f, 22f));
-                var key = UIKit.Label(slot.transform, keys[i], 18, TextAnchor.UpperLeft, UIKit.MutedText);
-                key.rectTransform.Stretch(8f);
-                var name = UIKit.Label(slot.transform, "", 22, TextAnchor.LowerCenter);
-                name.rectTransform.Stretch(8f);
-                var shade = UIKit.Panel(slot.transform, "Shade", new Color(0f, 0f, 0f, 0.65f));
-                shade.rectTransform.anchorMin = Vector2.zero;
-                shade.rectTransform.anchorMax = new Vector2(1f, 0f);
-                shade.rectTransform.offsetMin = Vector2.zero;
-                shade.rectTransform.offsetMax = Vector2.zero;
-                // Seconds left sit in the top-right corner, clear of the skill's name.
-                var time = UIKit.Title(slot.transform, "", 28, TextAnchor.UpperRight, new Color(1f, 0.92f, 0.75f));
-                time.rectTransform.Stretch(8f);
-                time.rectTransform.offsetMax = new Vector2(-10f, -2f);
-                _skills[i] = new SkillSlot { Key = key, Name = name, Shade = shade, Time = time };
-            }
+            // Bottom: the skill bar, icon slots with their key under them.
+            for (int i = 0; i < 4; i++) _skills[i] = CreateSkillSlot(root, i);
 
             _centerText = UIKit.Title(root, "", 38, TextAnchor.MiddleCenter, new Color(0.9f, 0.85f, 0.8f));
             _centerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1300f, 160f), new Vector2(0f, 170f));
@@ -166,18 +243,30 @@ namespace Game.Gameplay
             _bannerSub = UIKit.Label(root, "", 28, TextAnchor.MiddleCenter, UIKit.MutedText);
             _bannerSub.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1500f, 50f), new Vector2(0f, 240f));
 
-            _toastText = UIKit.Label(root, "", 26, TextAnchor.LowerCenter);
-            _toastText.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1300f, 220f), new Vector2(0f, 130f));
+            // Toasts: small plates stacked above the skill bar, newest at the bottom.
+            for (int i = 0; i < _toastPlates.Length; i++)
+            {
+                var t = UIKit.Framed(root, "Toast", new Color(0.04f, 0.03f, 0.04f, 0.85f));
+                var r = t.Outer();
+                r.Place(new Vector2(0.5f, 0f), new Vector2(600f, 44f), new Vector2(0f, 180f + i * 50f));
+                var g = r.gameObject.AddComponent<CanvasGroup>();
+                g.blocksRaycasts = false;
+                var text = UIKit.Label(t.transform, "", 24, TextAnchor.MiddleCenter);
+                text.horizontalOverflow = HorizontalWrapMode.Overflow;
+                text.rectTransform.Stretch(6f);
+                _toastPlates[i] = (r, text, g);
+                r.gameObject.SetActive(false);
+            }
             _guide = new GuideHints(root);
 
-            _hintText = UIKit.Label(root, "", 22, TextAnchor.LowerLeft, UIKit.MutedText);
-            _hintText.rectTransform.Place(new Vector2(0f, 0f), new Vector2(1100f, 110f), new Vector2(24f, 120f));
+            BuildKeyLegend(root);
 
             BuildCurtain();
             gameObject.AddComponent<AllyOverlay>();
             gameObject.AddComponent<BagView>();
             gameObject.AddComponent<LootView>();
             gameObject.AddComponent<LegendaryFxView>();
+            Codex.Recorded += OnCodexRecorded;
             RunDirector.EventReceived += OnEvent;
         }
 
@@ -211,16 +300,30 @@ namespace Game.Gameplay
         private TeamFrame CreateTeamFrame(Transform root, int index)
         {
             var frame = UIKit.Framed(root, "Ally" + index, new Color(0.04f, 0.03f, 0.05f, 0.82f));
-            frame.Outer().Place(new Vector2(0f, 1f), new Vector2(360f, 58f), new Vector2(20f, -166f - index * 66f));
+            frame.Outer().Place(new Vector2(0f, 1f), new Vector2(390f, 62f), new Vector2(20f, -196f - index * 72f));
             var edge = UIKit.Panel(frame.transform, "Edge", Color.white);
             edge.rectTransform.anchorMin = Vector2.zero;
             edge.rectTransform.anchorMax = new Vector2(0f, 1f);
             edge.rectTransform.pivot = new Vector2(0f, 0.5f);
             edge.rectTransform.sizeDelta = new Vector2(6f, 0f);
+            // A small round portrait of the teammate.
+            var face = UIKit.Panel(frame.transform, "Face", new Color(0.1f, 0.08f, 0.1f, 1f));
+            face.sprite = UIKit.DiscSprite;
+            face.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(54f, 54f), new Vector2(10f, 0f));
+            face.gameObject.AddComponent<Mask>().showMaskGraphic = true;
+            var hero = UIKit.Panel(face.transform, "Hero", Color.white);
+            hero.preserveAspect = true;
+            hero.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(92f, 92f), new Vector2(4f, -2f));
+            var faceRim = UIKit.Panel(face.transform.parent, "Rim", new Color(0.86f, 0.68f, 0.32f));
+            faceRim.sprite = UIKit.ThinRingSprite;
+            faceRim.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(58f, 58f), new Vector2(8f, 0f));
+            foreach (var img in new[] { face, hero, faceRim }) img.raycastTarget = false;
+            var anim = hero.gameObject.AddComponent<UISpriteAnimator>();
             var name = UIKit.Label(frame.transform, "", 20, TextAnchor.UpperLeft);
-            name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(330f, 26f), new Vector2(16f, -3f));
-            var hp = UIKit.CreateBar(frame.transform, "Hp", new Color(0.72f, 0.12f, 0.14f), new Color(0.12f, 0.03f, 0.04f));
-            hp.Root.Place(new Vector2(0f, 0f), new Vector2(330f, 18f), new Vector2(16f, 7f));
+            name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 26f), new Vector2(72f, -4f));
+            var hp = UIKit.CreateBar(frame.transform, "Hp", new Color(0.82f, 0.14f, 0.16f), new Color(0.12f, 0.03f, 0.04f));
+            hp.Root.Place(new Vector2(0f, 0f), new Vector2(300f, 20f), new Vector2(72f, 8f));
+            Gloss(hp.Root);
             var shield = UIKit.CreateBar(hp.Root, "Shield", new Color(0.85f, 0.75f, 0.4f, 0.75f), new Color(0f, 0f, 0f, 0f));
             shield.Root.Stretch();
             shield.Root.offsetMax = new Vector2(0f, -12f);
@@ -229,12 +332,13 @@ namespace Game.Gameplay
             var ping = UIKit.Label(frame.transform, "", 16, TextAnchor.UpperRight, UIKit.MutedText);
             ping.rectTransform.Place(new Vector2(1f, 1f), new Vector2(120f, 24f), new Vector2(-12f, -5f));
             frame.Outer().gameObject.SetActive(false);
-            return new TeamFrame { Root = frame.Outer().gameObject, Edge = edge, Name = name, Hp = hp, Shield = shield, HpText = text, Ping = ping };
+            return new TeamFrame { Root = frame.Outer().gameObject, Edge = edge, Name = name, Hp = hp, Shield = shield, HpText = text, Ping = ping, Face = anim };
         }
 
         private void OnDestroy()
         {
             RunDirector.EventReceived -= OnEvent;
+            Codex.Recorded -= OnCodexRecorded;
             if (Instance == this) Instance = null;
         }
 
@@ -242,12 +346,6 @@ namespace Game.Gameplay
         {
             _toasts.Add((text, Time.time + 4.5f));
             if (_toasts.Count > 4) _toasts.RemoveAt(0);
-        }
-
-        /// <summary>A short explanation the first time something new shows up in a run.</summary>
-        private void Tip(string key, string text)
-        {
-            if (_tipsShown.Add(key)) Toast($"<color=#e0b45a>◆</color> {text}");
         }
 
         public void Banner(string text, string sub = "", float seconds = 2.8f)
@@ -294,10 +392,7 @@ namespace Game.Gameplay
                 {
                     // A new area: its name, then the map takes over.
                     int area = Mathf.Clamp(e.Int / RunSimulation.RoomsPerArea, 0, AreaNames.Length - 1);
-                    Banner(AreaNames[area], "扉をくぐって迷宮を探索しよう　主の間は焚き火の間の奥", 3.2f);
-                    Tip("map", "右上は地図（M で大きく開く）。入った部屋とその隣が見える。寄り道（祠・泉・精鋭）をするほど強くなる");
-                    if (NetPlayer.All.Count > 1) Tip("split", "仲間とは別の部屋を探索できる。倒れた仲間は地図で赤く点滅する。主の扉は全員がそろうと開く");
-                    if (NetPlayer.All.Count > 1) Tip("ping", "F キー（中クリック）で合図：敵なら「危ない」、祭壇や扉なら「ここ」、ほかは「来て」。M の地図で部屋をクリックすると「集合」");
+                    Banner(AreaNames[area], LayerNames[area], 3.2f);
                     break;
                 }
                 case SimEventType.TeamLevelUp:
@@ -309,7 +404,7 @@ namespace Game.Gameplay
                 case SimEventType.RoomCleared:
                 {
                     var director = RunDirector.Instance;
-                    if (director != null && director.LocalRoom.Id == e.Id) Banner("部屋を制圧した", "扉から次の部屋へ", 2f);
+                    if (director != null && director.LocalRoom.Id == e.Id) Banner("制圧", "", 1.8f);
                     else Toast($"仲間が{RoomCatalog.Name(director != null ? director.Map[e.Id]?.Kind ?? RoomKind.Combat : RoomKind.Combat)}を制圧した");
                     break;
                 }
@@ -347,10 +442,10 @@ namespace Game.Gameplay
                     if (e.Int == 0) Banner("主の扉が開いた", "覚悟はいいか", 2.4f);
                     else if (e.Int == 2) Banner("宝物庫の扉が開いた", "", 2f);
                     else if (e.Int == 3) Banner("隠し部屋を見つけた", "", 2.4f);
-                    else Banner("奥への道が開いた", NetPlayer.All.Count > 1 ? "全員で光の上に立つと次のエリアへ" : "光の上に立つと次のエリアへ", 3f);
+                    else Banner("奥への道が開いた", "", 2.6f);
                     break;
                 case SimEventType.KeyGained:
-                    Banner("鍵を手に入れた", "宝物庫（地図の「錠」）の扉の前に立つと開く", 2.8f);
+                    Banner("鍵を手に入れた", "", 2.4f);
                     break;
                 case SimEventType.PuzzleEnded:
                     if (RunDirector.Instance != null && RunDirector.Instance.LocalRoom.Id == e.Id)
@@ -360,18 +455,8 @@ namespace Game.Gameplay
                 {
                     var def = EnemyCatalog.Get((EnemyType)e.Int);
                     Banner(def.Name, def.Title ?? "", 3.5f);
-                    if (def.Type == EnemyType.BoneKing) Tip("pillar", "王の突進を柱にぶつけると、しばらくよろめく");
                     break;
                 }
-                case SimEventType.SpawnWarning:
-                    switch ((EnemyType)e.Int)
-                    {
-                        case EnemyType.DreadKnight: Tip("armor", "亡者の騎士は鎧で攻撃を防ぐ。凍結・気絶・印で鎧を崩してから叩け"); break;
-                        case EnemyType.Bloater: Tip("bloater", "腐れ膨れは近づくと破裂する。離れて倒すか、魔物の群れの中で破裂させろ"); break;
-                        case EnemyType.Wraith: Tip("wraith", "怨霊は姿を消して足元に現れる。光る円から離れろ"); break;
-                        case EnemyType.Necromancer: Tip("necro", "死霊術師は骸骨を呼び続ける。先に仕留めろ"); break;
-                    }
-                    break;
                 case SimEventType.WaveStarted when e.Int > 1 && RunDirector.Instance != null && RunDirector.Instance.LocalRoom.Id == e.Id:
                     Toast($"第{e.Int}波 襲来！");
                     break;
@@ -413,23 +498,99 @@ namespace Game.Gameplay
             return $"<color=#d88cff>呪い：{string.Join("・", parts)}</color>　";
         }
 
-        private readonly List<ClassId> _party = new();
-        private string _hintKey;
-
-        /// <summary>Controls and teamwork tips at the start of a run, with the combination techniques this party can do.</summary>
-        private void UpdateHint()
+        private sealed class CodexCard
         {
-            _party.Clear();
-            foreach (var p in NetPlayer.All) _party.Add(p.Class.Value);
-            string key = string.Join(",", _party);
-            if (key == _hintKey) return;
-            _hintKey = key;
-            var text = "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　I 袋　M 地図　F 合図　Esc メニュー\n" +
-                       "<color=#9fd8ff>連携：凍った敵は強打で「砕ける」／印の敵は全員の攻撃が通りやすい／倒れた仲間のそばに立つと復活</color>";
-            var combos = ComboCatalog.Available(_party);
-            for (int i = 0; i < combos.Count && i < 2; i++)
-                text += $"\n<color=#ffd27a>連携技「{combos[i].Name}」：{combos[i].How}</color>";
-            _hintText.text = text;
+            public RectTransform Root;
+            public CanvasGroup Group;
+            public Image Icon;
+            public Text Mark;
+            public Text Name;
+        }
+
+        private CodexCard _codexNotice;
+        private readonly Queue<CodexCatalog.Entry> _codexQueue = new();
+        private float _codexShownAt = -10f;
+        private const float CodexCardTime = 3.2f;
+
+        /// <summary>"図鑑に記録" card that slides in under the room plate when something new is met.</summary>
+        private static CodexCard BuildCodexNotice(Transform root, float y)
+        {
+            var card = UIKit.Framed(root, "CodexNotice", new Color(0.08f, 0.05f, 0.04f, 0.94f), UIKit.AccentColor);
+            var rect = card.Outer();
+            rect.Place(new Vector2(1f, 1f), new Vector2(360f, 84f), new Vector2(-24f, y));
+            var group = rect.gameObject.AddComponent<CanvasGroup>();
+            group.blocksRaycasts = false;
+            group.alpha = 0f;
+            var box = UIKit.Panel(card.transform, "IconBack", new Color(0f, 0f, 0f, 0.45f));
+            box.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(64f, 64f), new Vector2(10f, 0f));
+            var icon = UIKit.Panel(box.transform, "Icon", Color.white);
+            icon.preserveAspect = true;
+            icon.rectTransform.Stretch(4f);
+            var mark = UIKit.Title(box.transform, "", 40);
+            mark.rectTransform.Stretch();
+            var head = UIKit.Label(card.transform, "図鑑に記録", 18, TextAnchor.UpperLeft, UIKit.AccentColor);
+            head.rectTransform.Place(new Vector2(0f, 1f), new Vector2(200f, 26f), new Vector2(86f, -8f));
+            var keyHint = UIKit.Label(card.transform, "B で開く", 16, TextAnchor.UpperRight, UIKit.MutedText);
+            keyHint.rectTransform.Place(new Vector2(1f, 1f), new Vector2(120f, 24f), new Vector2(-12f, -9f));
+            var name = UIKit.Title(card.transform, "", 28, TextAnchor.LowerLeft, Color.white);
+            name.rectTransform.Place(new Vector2(0f, 0f), new Vector2(260f, 44f), new Vector2(86f, 8f));
+            return new CodexCard { Root = rect, Group = group, Icon = icon, Mark = mark, Name = name };
+        }
+
+        private void UpdateCodexNotice()
+        {
+            float t = Time.time - _codexShownAt;
+            if (t > CodexCardTime && _codexQueue.Count > 0)
+            {
+                var e = _codexQueue.Dequeue();
+                var sprite = Codex.Picture(e);
+                _codexNotice.Icon.enabled = sprite != null;
+                _codexNotice.Icon.sprite = sprite;
+                _codexNotice.Mark.text = sprite == null ? e.Mark ?? "" : "";
+                _codexNotice.Name.text = e.Name;
+                _codexShownAt = Time.time;
+                t = 0f;
+                SfxPlayer.Instance?.Play("ping", null, 1.5f, 0.5f);
+            }
+            float alpha = t < 0.25f ? t / 0.25f : t > CodexCardTime - 0.4f ? Mathf.Clamp01((CodexCardTime - t) / 0.4f) : 1f;
+            _codexNotice.Group.alpha = alpha;
+            _codexNotice.Root.anchoredPosition = new Vector2(-24f + (1f - Mathf.Clamp01(t / 0.25f)) * 60f, _codexNotice.Root.anchoredPosition.y);
+        }
+
+        private void UpdateToasts()
+        {
+            for (int i = 0; i < _toastPlates.Length; i++)
+            {
+                var (root, text, group) = _toastPlates[i];
+                int index = _toasts.Count - 1 - i; // newest at the bottom
+                bool on = index >= 0 && !_toastsHidden;
+                root.gameObject.SetActive(on);
+                if (!on) continue;
+                var t = _toasts[index];
+                if (text.text != t.Text)
+                {
+                    text.text = t.Text;
+                    root.sizeDelta = new Vector2(Mathf.Clamp(text.preferredWidth + 48f, 220f, 1500f), 44f);
+                }
+                group.alpha = Mathf.Clamp01((t.Until - Time.time) / 0.6f);
+            }
+        }
+
+        private void OnCodexRecorded(CodexCatalog.Entry e) => _codexQueue.Enqueue(e);
+
+        /// <summary>Key caps for the panels you can open (how to play lives in the codex).</summary>
+        private static void BuildKeyLegend(Transform root)
+        {
+            var row = UIKit.Rect("Keys", root).Place(new Vector2(0f, 0f), new Vector2(700f, 34f), new Vector2(24f, 22f));
+            float x = 0f;
+            foreach (var (key, label) in new[] { ("I", "袋"), ("M", "地図"), ("F", "合図"), ("B", "図鑑"), ("Esc", "メニュー") })
+            {
+                float w = key.Length > 1 ? 50f : 32f;
+                UIKit.KeyCap(row, key, 17, out _).Place(new Vector2(0f, 0.5f), new Vector2(w, 30f), new Vector2(x, 0f));
+                var text = UIKit.Label(row, label, 19, TextAnchor.MiddleLeft, UIKit.MutedText);
+                text.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(90f, 30f), new Vector2(x + w + 6f, 0f));
+                x += w + 6f + label.Length * 20f + 18f;
+            }
         }
 
         private static bool IsMe(ulong clientId) =>
@@ -451,9 +612,9 @@ namespace Game.Gameplay
             _xpBar.Fill = director.XpFraction.Value;
             // Banked picks show as stars next to the level until the room is cleared.
             int banked = local != null ? local.Picks.Value : 0;
-            _levelText.text = banked > 0 && director.LocalFighting
-                ? $"<size=24><color=#e0b45a>★{banked}</color></size>  Lv {director.TeamLevel.Value}"
-                : $"Lv {director.TeamLevel.Value}";
+            _levelText.text = $"Lv {director.TeamLevel.Value}";
+            if (local != null)
+                _classText.text = local.ClassDef.Name + (banked > 0 && director.LocalFighting ? $"　<size=22><color=#e0b45a>★{banked}</color></size>" : "");
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
             string ping = local != null && !director.IsServer && local.Ping.Value > 0 ? $"通信 {PingText(local.Ping.Value)}　" : "";
             _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
@@ -480,38 +641,54 @@ namespace Game.Gameplay
                 if (_shownClass != def.Id)
                 {
                     _shownClass = def.Id;
-                    _classText.text = def.Name;
-                    _skills[0].Name.text = def.BasicName;
-                    _skills[1].Name.text = def.Skill1Name;
-                    _skills[2].Name.text = def.Skill2Name;
-                    _skills[3].Name.text = "回避";
+                    var icons = SpriteSheet.Load("icons_skill")?.Sprites("default");
+                    if (icons != null)
+                    {
+                        for (int s = 0; s < 3; s++) _skills[s].Icon.sprite = icons[Mathf.Min((int)def.Id * 3 + s, icons.Length - 1)];
+                        _skills[3].Icon.sprite = icons[Mathf.Min(18, icons.Length - 1)];
+                    }
                 }
                 float max = Mathf.Max(1f, local.MaxHp.Value);
                 _hpBar.Fill = local.Hp.Value / max;
+                // Lost health lingers as a pale trail for a moment, then drains after it.
+                float hp = local.Hp.Value / max;
+                if (hp >= _trailValue) _trailValue = hp;
+                else if (Time.time >= _trailHoldUntil) _trailValue = Mathf.MoveTowards(_trailValue, hp, Time.deltaTime * 0.6f);
+                if (hp < _lastHp - 0.001f) _trailHoldUntil = Time.time + 0.45f;
+                _lastHp = hp;
+                _hpTrail.Fill = _trailValue;
+                string sheet = SkinCatalog.Sheet(def.Id, local.Skin.Value);
+                if (sheet != _portraitSheet)
+                {
+                    _portraitSheet = sheet;
+                    _portraitAnim.Play(sheet, "idle");
+                }
                 _shieldBar.Fill = local.Shield.Value / max;
                 _hpText.text = local.Shield.Value > 0 ? $"{local.Hp.Value:0} / {max:0}  (+{local.Shield.Value:0})" : $"{local.Hp.Value:0} / {max:0}";
                 SetCooldown(_skills[1], local.Skill1Cooldown.Value, def.Skill1Cooldown);
                 SetCooldown(_skills[2], local.Skill2Cooldown.Value, def.Skill2Cooldown);
                 SetCooldown(_skills[3], local.DodgeCooldown.Value, ClassCatalog.DodgeCooldown);
                 SetCooldown(_skills[0], 0f, 1f);
+                // The key caps follow the device in use.
+                var reader = local.GetComponent<PlayerInputReader>();
+                var keys = reader != null && !reader.UsingMouse ? PadKeys : MouseKeys;
+                for (int s = 0; s < 4; s++) if (_skills[s].Key.text != keys[s]) _skills[s].Key.text = keys[s];
             }
 
             UpdatePerkRow();
             UpdateTeam(local);
 
-            _hintText.enabled = director.RoomIndex.Value == 0 && director.Elapsed.Value < 30f;
-            if (_hintText.enabled) UpdateHint();
             _centerText.text = CenterMessage(director, local);
             // While a choice is on screen, only the cards speak (banners and toasts wait behind them).
             bool choosing = PerkView.IsShowing || (_mapRoot != null && _mapRoot.activeSelf); // the big map hides them too
             _bannerText.enabled = _bannerSub.enabled = !choosing && Time.time < _bannerUntil;
-            _toastText.enabled = _centerText.enabled = !choosing;
+            _centerText.enabled = !choosing;
+            _toastsHidden = choosing;
             _guide.Update(director, local, choosing);
+            UpdateCodexNotice();
 
             _toasts.RemoveAll(t => t.Until < Time.time);
-            _sb.Clear();
-            foreach (var t in _toasts) _sb.Append(t.Text).Append('\n');
-            _toastText.text = _sb.ToString();
+            UpdateToasts();
         }
 
         /// <summary>Round trip to the host, coloured by how it will feel (green fine, yellow a little late, red heavy).</summary>
@@ -531,6 +708,12 @@ namespace Game.Gameplay
                 var f = _team[slot++];
                 UIKit.Toggle(f.Root, true);
                 f.Edge.color = p.Color;
+                string faceSheet = SkinCatalog.Sheet(p.Class.Value, p.Skin.Value);
+                if (f.FaceSheet != faceSheet)
+                {
+                    f.FaceSheet = faceSheet;
+                    f.Face.Play(faceSheet, "idle");
+                }
                 f.Ping.text = p.OwnerClientId == Unity.Netcode.NetworkManager.ServerClientId ? "ホスト" : PingText(p.Ping.Value);
                 float max = Mathf.Max(1f, p.MaxHp.Value);
                 if (p.Downed.Value)
@@ -588,9 +771,15 @@ namespace Game.Gameplay
         private static void SetCooldown(SkillSlot slot, float remaining, float max)
         {
             bool cooling = remaining > 0.05f;
-            slot.Shade.rectTransform.anchorMax = new Vector2(1f, cooling ? Mathf.Clamp01(remaining / Mathf.Max(0.1f, max)) : 0f);
+            slot.Cool.fillAmount = cooling ? Mathf.Clamp01(remaining / Mathf.Max(0.1f, max)) : 0f;
             slot.Time.text = cooling ? remaining.ToString(remaining < 1f ? "0.0" : "0") : "";
-            slot.Name.color = cooling ? new Color(0.62f, 0.6f, 0.58f) : Color.white;
+            slot.Icon.color = cooling ? new Color(0.55f, 0.55f, 0.6f) : Color.white;
+            // Ready again: a flash and a little pop.
+            if (!cooling && slot.Last > 0.05f) slot.FlashAt = Time.time;
+            slot.Last = remaining;
+            float k = Mathf.Clamp01((Time.time - slot.FlashAt) / 0.35f);
+            slot.Flash.color = new Color(1f, 0.92f, 0.6f, (1f - k) * 0.7f);
+            slot.Root.localScale = Vector3.one * (1f + (1f - k) * 0.08f);
         }
 
         /// <summary>What to do in the room you stand in.</summary>
@@ -605,31 +794,31 @@ namespace Game.Gameplay
                 case RoomKind.Elite:
                     if (d.IsFighting(room.Id))
                         return $"{(room.Kind == RoomKind.Elite ? "精鋭の群れ" : "魔物の群れ")}  第{Mathf.Max(1, d.WaveOf(room.Id))}波 / {RunSimulation.WaveCountFor(room.Kind, d.Area.Value)}";
-                    return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み　扉から次の部屋へ</color>" : "";
+                    return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み</color>" : "";
                 case RoomKind.Boss:
-                    if (d.ExitOpen.Value) return Gather(team ? "奥への道（光）の上に全員で立つ" : "奥への道（光）の上に立つ");
+                    if (d.ExitOpen.Value) return Gather(team ? "全員で奥への道へ" : "奥への道へ");
                     return d.IsFighting(room.Id) ? $"{EnemyCatalog.Get(d.BossType.Value).Name}を討て" : "";
                 case RoomKind.MiniBoss:
-                    if (d.IsFighting(room.Id)) return "精鋭の主を倒せ　<color=#e6c766>鍵を落とす</color>";
+                    if (d.IsFighting(room.Id)) return "精鋭の主を倒せ";
                     return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み</color>" : "";
                 case RoomKind.Puzzle:
                     if (d.IsFighting(room.Id))
                         return room.Puzzle switch
                         {
-                            PuzzleKind.Plates => $"押し板をすべて光らせろ　<color=#ffffff>{Mathf.RoundToInt(d.PuzzleValue.Value)}/{RunSimulation.PlateSpots.Length}</color>　<size=20>（踏むとしばらく光る）</size>",
-                            PuzzleKind.Thief => $"宝を抱えた小鬼を捕まえろ　<color=#ffffff>残り {Mathf.RoundToInt(d.PuzzleTime.Value)}秒</color>",
-                            PuzzleKind.Gauntlet => "罠をくぐり抜けて、中央の押し板を踏め",
+                            PuzzleKind.Plates => $"押し板を灯せ　<color=#ffffff>{Mathf.RoundToInt(d.PuzzleValue.Value)}/{RunSimulation.PlateSpots.Length}</color>",
+                            PuzzleKind.Thief => $"小鬼を捕まえろ　<color=#ffffff>残り {Mathf.RoundToInt(d.PuzzleTime.Value)}秒</color>",
+                            PuzzleKind.Gauntlet => "中央の押し板を踏め",
                             _ => $"結晶を守れ　<color=#ffffff>残り {Mathf.RoundToInt(d.PuzzleTime.Value)}秒　結晶 {d.PuzzleValue.Value:P0}</color>",
                         };
                     return d.IsCleared(room.Id) ? "<color=#bfb6aa>仕掛けは終わった</color>" : "";
                 case RoomKind.Campfire:
                     if (d.BossDoorOpen.Value) return "主の間へ";
-                    return Gather(team ? "焚き火で休み、全員で主の扉の前に立つ" : "焚き火で休み、主の扉の前に立つ");
+                    return Gather(team ? "全員で主の扉へ" : "主の扉へ");
                 case RoomKind.Start:
-                    return "<color=#bfb6aa>扉をくぐって探索しよう</color>";
+                    return "<color=#bfb6aa>探索せよ</color>";
                 default:
                     bool used = NetPlayer.Local != null && (NetPlayer.Local.UsedPedestals.Value & (1 << room.Id)) != 0;
-                    return used ? "<color=#bfb6aa>もう使った</color>" : RoomCatalog.PedestalText(room.Kind);
+                    return used ? "<color=#bfb6aa>使用済み</color>" : RoomCatalog.ShortText(room.Kind);
             }
         }
 
@@ -686,30 +875,15 @@ namespace Game.Gameplay
             if (map == _shownMap && _shownRoom >= 0) _fadeStart = Time.time; // through a door: a blink of darkness
             _shownRoom = room.Id;
             _shownMap = map;
+            // The codex records rooms, their traps and (in co-op) the campfire bell; it holds what they do.
+            Codex.EnterRoom(room.Kind);
+            foreach (var g in room.Layout.Gimmicks) Codex.Record(CodexCatalog.GimmickEntry(g.Kind));
+            if (room.Kind == RoomKind.Campfire && NetPlayer.All.Count > 1) Codex.Record(CodexCatalog.GimmickId("Bell"));
             if (room.Kind == RoomKind.Start || !_roomsBannered.Add((d.Area.Value, room.Id))) return;
-            string sub = room.Kind switch
-            {
-                RoomKind.Combat => "魔物が来る",
-                RoomKind.Elite => "精鋭が率いる群れ。倒すと良い装備が出やすい",
-                RoomKind.MiniBoss => "精鋭の主とお供。倒すと鍵を落とす",
-                RoomKind.Puzzle => room.Puzzle switch
-                {
-                    PuzzleKind.Plates => "押し板をすべて同時に光らせると鍵が手に入る",
-                    PuzzleKind.Thief => "逃げる小鬼を捕まえると鍵と宝が手に入る",
-                    PuzzleKind.Gauntlet => "罠の中央の押し板を踏むと鍵が手に入る",
-                    _ => "結晶を守り抜くと鍵が手に入る",
-                },
-                RoomKind.Campfire => "火のそばで傷が癒える・宝箱を壊すと魂",
-                RoomKind.Boss => "",
-                _ => RoomCatalog.PedestalText(room.Kind),
-            };
+            string sub = room.Kind == RoomKind.Puzzle
+                ? room.Puzzle switch { PuzzleKind.Plates => "押し板の仕掛け", PuzzleKind.Thief => "逃げる宝の小鬼", PuzzleKind.Gauntlet => "罠の通路", _ => "結晶を守れ" }
+                : CodexCatalog.Get(CodexCatalog.RoomId(room.Kind))?.Sub ?? "";
             if (room.Kind != RoomKind.Boss) Banner(RoomCatalog.Name(room.Kind), sub, 2f);
-            foreach (var g in room.Layout.Gimmicks)
-            {
-                if (g.Kind == GimmickKind.PowderKeg) Tip("keg", "火薬樽は攻撃すると爆発する。魔物の群れを巻き込め（味方も巻き込むので注意）");
-                if (g.Kind is GimmickKind.SpikeTrap or GimmickKind.FlameJet) Tip("trap", "罠は魔物にも効く。誘い込んで一網打尽に");
-                if (g.Kind == GimmickKind.HealingFont) Tip("font", "癒しの泉：上に立つと周りの仲間ごと回復（部屋に1回）");
-            }
         }
 
         private static string CenterMessage(RunDirector d, NetPlayer local)
@@ -721,7 +895,7 @@ namespace Game.Gameplay
             if (local.Downed.Value)
                 return local.BeingRevived
                     ? $"仲間が助け起こしている…  {local.ReviveProgress.Value:P0}"
-                    : NetPlayer.All.Count > 1 ? "倒れた… 仲間がそばに来れば立ち上がれる" : "倒れた…";
+                    : "倒れた…";
             return "";
         }
     }

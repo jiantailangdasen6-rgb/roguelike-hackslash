@@ -83,10 +83,13 @@ namespace Game.EditorTools.Art
             Effect("icons_trinket", IconArt.Trinkets(), "icons_trinket");
             Effect("icons_reward", IconArt.Rewards(), "icons_reward");
             Effect("icons_item", IconArt.Items(), "icons_item");
+            var skills = SkillArt.Icons();
+            Effect("icons_skill", skills, "icons_skill");
             WritePreview("props", PropArt.Sheets());
             WritePreview("doors", DoorArt.Sheets());
             WritePreview("decor", DecorArt.Sheets());
             WritePreview("pings", PingArt.Sheets());
+            WritePreview("skills", new Dictionary<string, PropArt.Sheet> { ["icons_skill"] = new() { Frames = skills, Pivot = new Vector2(0.5f, 0.5f) } });
             WritePreview("camp", CampArt.Sheets());
 
             var tiles = ProceduralArt.Tiles();

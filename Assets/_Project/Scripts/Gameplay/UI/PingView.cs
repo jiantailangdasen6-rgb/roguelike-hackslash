@@ -74,7 +74,7 @@ namespace Game.Gameplay
         // ------------------------------------------------------------------ Sending
 
         private static bool CanPing(RunDirector d, NetPlayer local) =>
-            d != null && d.IsRunning && local != null && !PlayArea.InCamp && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen;
+            d != null && d.IsRunning && local != null && !PlayArea.InCamp && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen && !CodexView.IsOpen;
 
         private void Update()
         {

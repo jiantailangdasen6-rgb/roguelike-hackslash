@@ -64,10 +64,11 @@ namespace Game.Gameplay
         public static Image Framed(Transform parent, string name, Color? fill = null, Color? border = null)
         {
             var outer = Panel(parent, name, border ?? GoldTrim);
+            outer.sprite = FrameSprite;
+            outer.type = Image.Type.Sliced;
             var inner = Panel(outer.transform, "Inner", fill ?? PanelColor);
             inner.sprite = ShadeSprite;
-            inner.rectTransform.Stretch(2f);
-            AddTrim(outer.transform, GoldTrim);
+            inner.rectTransform.Stretch(10f);
             return inner;
         }
 
@@ -183,6 +184,23 @@ namespace Game.Gameplay
             return button;
         }
 
+        /// <summary>A small key cap (a bevelled dark key with a thin metal rim) with its label; returns its rect.</summary>
+        public static RectTransform KeyCap(Transform parent, string key, int fontSize, out Text label)
+        {
+            var image = Panel(parent, "Key", new Color(0.22f, 0.18f, 0.17f, 1f));
+            image.sprite = BevelSprite;
+            image.type = Image.Type.Sliced;
+            image.raycastTarget = false;
+            var rim = Panel(image.transform, "Rim", GoldTrim);
+            rim.sprite = RimSprite;
+            rim.type = Image.Type.Sliced;
+            rim.raycastTarget = false;
+            rim.rectTransform.Stretch();
+            label = Label(image.transform, key, fontSize, TextAnchor.MiddleCenter, new Color(0.96f, 0.92f, 0.84f));
+            label.rectTransform.Stretch();
+            return image.rectTransform;
+        }
+
         /// <summary>A horizontal bar; set <see cref="Bar.Fill"/> to 0..1.</summary>
         public static Bar CreateBar(Transform parent, string name, Color fill, Color background)
         {
@@ -224,6 +242,32 @@ namespace Game.Gameplay
         {
             float v = Mathf.Lerp(0.8f, 1f, y / (h - 1f));
             return new Color(v, v, v, 1f);
+        });
+
+        private static Sprite _frame;
+
+        /// <summary>
+        /// Panel border (tinted by the border colour): a dark outline, a bevelled double metal line lit from the top-left,
+        /// an inner shadow, and a diamond stud with a little bracket in each corner. The centre is clear for the fill.
+        /// </summary>
+        public static Sprite FrameSprite => _frame != null ? _frame : _frame = PixelSprite(24, 24, 8, (x, y, w, h) =>
+        {
+            int dx = Mathf.Min(x, w - 1 - x), dy = Mathf.Min(y, h - 1 - y), d = Mathf.Min(dx, dy);
+            bool topLeft = (x <= w / 2 && dx == d) || (y >= h / 2 && dy == d);
+            if (dx <= 6 && dy <= 6)
+            {
+                int cx = Mathf.Abs(dx - 3), cy = Mathf.Abs(dy - 3);
+                if (cx + cy == 0) return Color.white;
+                if (cx + cy == 1) return new Color(1.15f, 1.1f, 0.95f, 1f);
+                if (cx + cy == 2) return new Color(0.02f, 0.01f, 0.01f, 1f);
+            }
+            if (d == 0) return new Color(0.02f, 0.01f, 0.01f, 1f);
+            if (d == 1) return topLeft ? new Color(1.1f, 1.05f, 0.95f, 1f) : new Color(0.62f, 0.58f, 0.55f, 1f);
+            if (d == 2) return new Color(0.82f, 0.8f, 0.78f, 1f);
+            if (d == 3) return new Color(0.08f, 0.05f, 0.04f, 1f);
+            if (d == 4) return topLeft ? new Color(0.7f, 0.66f, 0.6f, 1f) : new Color(0.45f, 0.42f, 0.4f, 1f);
+            if (d == 5) return new Color(0.02f, 0.01f, 0.01f, 0.9f);
+            return Color.clear;
         });
 
         /// <summary>Panel overlay: transparent centre, inner shadow and bevel, studded corners (tinted gold).</summary>
@@ -279,6 +323,18 @@ namespace Game.Gameplay
             return Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(0.5f, 0.5f), FramePixelsPerUnit, 0, SpriteMeshType.FullRect, new Vector4(border, border, border, border));
         }
 
+        private static Sprite _white;
+        /// <summary>Plain white (filled images: radial cooldowns, bars).</summary>
+        public static Sprite WhiteSprite => _white != null ? _white : _white = PixelSprite(4, 4, 1, (x, y, w, h) => Color.white);
+
+        /// <summary>A bar fill with a glossy top band and a darker bottom (tinted by the bar colour).</summary>
+        public static Sprite GlossSprite => _gloss != null ? _gloss : _gloss = PixelSprite(4, 16, 0, (x, y, w, h) =>
+        {
+            float v = y >= h - 3 ? 1f : y >= h - 5 ? 0.92f : Mathf.Lerp(0.55f, 0.8f, y / (h - 5f));
+            return new Color(v, v, v, 1f);
+        });
+        private static Sprite _gloss;
+
         private static Sprite _ring;
         private static Sprite _arrow;
         private static Sprite _disc;
@@ -298,6 +354,37 @@ namespace Game.Gameplay
             float halfWidth = (1f - u) * h * 0.9f;
             return Mathf.Abs(y) <= halfWidth && !(u < 0.3f && Mathf.Abs(y) < (0.3f - u) * h * 2.5f);
         });
+
+        private static Sprite _thinRing;
+        /// <summary>A thin ring (portrait frames).</summary>
+        public static Sprite ThinRingSprite => _thinRing != null ? _thinRing : _thinRing = ShapeSprite(128, (x, y, h) =>
+        {
+            float d = Mathf.Sqrt(x * x + y * y);
+            return d <= h && d >= h * 0.9f;
+        });
+
+        private static Sprite _glow;
+        /// <summary>A soft round glow: full in the middle, fading smoothly to nothing at the edge.</summary>
+        public static Sprite GlowSprite
+        {
+            get
+            {
+                if (_glow != null) return _glow;
+                const int size = 128;
+                var tex = new Texture2D(size, size, TextureFormat.RGBA32, false) { filterMode = FilterMode.Bilinear, wrapMode = TextureWrapMode.Clamp };
+                var pixels = new Color32[size * size];
+                for (int y = 0; y < size; y++)
+                for (int x = 0; x < size; x++)
+                {
+                    float d = Mathf.Clamp01(Vector2.Distance(new Vector2(x + 0.5f, y + 0.5f), new Vector2(size / 2f, size / 2f)) / (size / 2f));
+                    float a = (1f - d) * (1f - d);
+                    pixels[y * size + x] = new Color32(255, 255, 255, (byte)(a * 255));
+                }
+                tex.SetPixels32(pixels);
+                tex.Apply();
+                return _glow = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 100f);
+            }
+        }
 
         public static Sprite DiscSprite => _disc != null ? _disc : _disc = ShapeSprite(32, (x, y, h) => x * x + y * y <= h * h);
 

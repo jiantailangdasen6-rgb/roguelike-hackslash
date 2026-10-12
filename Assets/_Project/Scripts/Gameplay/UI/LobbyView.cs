@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -79,16 +80,50 @@ namespace Game.Gameplay
 
             var title = UIKit.Title(root, "LABYRINTH SURVIVOR", 110);
             title.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1400f, 160f), new Vector2(0f, -120f));
+            var titleShadow = title.gameObject.AddComponent<Outline>();
+            titleShadow.effectColor = new Color(0.25f, 0.06f, 0.02f, 0.9f);
+            titleShadow.effectDistance = new Vector2(4f, -4f);
             var sub = UIKit.Label(root, "ラビリンス・サバイバー　─　仲間と挑む、闇の迷宮", 30, TextAnchor.MiddleCenter, UIKit.MutedText);
             sub.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1200f, 50f), new Vector2(0f, -280f));
+            // Gold rules ending in diamonds on both sides of the subtitle.
+            foreach (float side in new[] { -1f, 1f })
+            {
+                var rule = UIKit.Panel(root, "Rule", UIKit.GoldTrim);
+                rule.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(200f, 3f), new Vector2(side * 400f, -304f));
+                rule.raycastTarget = false;
+                var gem = UIKit.Panel(root, "Gem", UIKit.AccentColor);
+                gem.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(12f, 12f), new Vector2(side * 292f, -299f));
+                gem.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 45f);
+                gem.raycastTarget = false;
+            }
 
-            // The heroes this player has, idling side by side.
+            // A campfire in the dark with its warm glow; the heroes this player has gather round it, embers rise.
+            var warm = UIKit.Panel(root, "Glow", new Color(1f, 0.45f, 0.15f, 0.35f));
+            warm.sprite = UIKit.GlowSprite;
+            warm.raycastTarget = false;
+            warm.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1500f, 900f), new Vector2(0f, 40f));
+            var core = UIKit.Panel(root, "GlowCore", new Color(1f, 0.62f, 0.25f, 0.4f));
+            core.sprite = UIKit.GlowSprite;
+            core.raycastTarget = false;
+            core.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(620f, 380f), new Vector2(0f, 50f));
+            _fireGlow = core;
+            var fire = UIKit.Rect("Fire", root).Place(new Vector2(0.5f, 0.5f), new Vector2(170f, 170f), new Vector2(0f, 80f));
+            var fireImg = fire.gameObject.AddComponent<Image>();
+            fireImg.preserveAspect = true;
+            fireImg.raycastTarget = false;
+            fire.gameObject.AddComponent<UISpriteAnimator>().Play("camp_fire", "default");
+            BuildEmbers(root);
             var heroes = System.Array.FindAll(ClassCatalog.All, c => Profile.IsClassOpen(c.Id));
             for (int i = 0; i < heroes.Length; i++)
             {
                 var def = heroes[i];
-                var rect = UIKit.Rect("Hero", root).Place(new Vector2(0.5f, 0.5f), new Vector2(220f, 220f),
-                    new Vector2((i - (heroes.Length - 1) * 0.5f) * 190f, 90f));
+                // Half on each side of the fire, facing it.
+                int half = (heroes.Length + 1) / 2;
+                bool left = i < half;
+                int k = left ? half - 1 - i : i - half;
+                float x = (left ? -1f : 1f) * (170f + k * 175f);
+                var rect = UIKit.Rect("Hero", root).Place(new Vector2(0.5f, 0.5f), new Vector2(220f, 220f), new Vector2(x, 90f));
+                if (!left) rect.localScale = new Vector3(-1f, 1f, 1f);
                 var img = rect.gameObject.AddComponent<Image>();
                 img.preserveAspect = true;
                 img.raycastTarget = false;
@@ -136,11 +171,53 @@ namespace Game.Gameplay
             _status = UIKit.Label(statusBar.transform, "", 26, TextAnchor.MiddleCenter, new Color(1f, 0.6f, 0.55f));
             _status.rectTransform.Stretch();
 
+            // The codex is open from the title too (what you have met so far).
+            gameObject.AddComponent<CodexView>();
+            var codex = UIKit.Button(root, "図鑑（B）", 26, () => CodexView.Open());
+            codex.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(220f, 60f), new Vector2(-28f, -28f));
+
             // Build stamp: friends can only play together on the same version.
             var version = UIKit.Label(root, $"ver {GameSession.BuildStamp}", 18, TextAnchor.LowerRight, new Color(1f, 1f, 1f, 0.25f));
             version.rectTransform.Place(new Vector2(1f, 0f), new Vector2(300f, 30f), new Vector2(-16f, 8f));
 
             EventSystem.current?.SetSelectedGameObject((_resumeButton != null ? _resumeButton : _soloButton).gameObject);
+        }
+
+        private Image _fireGlow;
+        private readonly List<(RectTransform Rect, Image Image, float Speed, float Phase)> _embers = new();
+
+        /// <summary>Sparks drifting up from the fire (respawn at its base when they fade).</summary>
+        private void BuildEmbers(Transform root)
+        {
+            for (int i = 0; i < 26; i++)
+            {
+                var img = UIKit.Panel(root, "Ember", new Color(1f, 0.7f, 0.3f, 0f));
+                img.raycastTarget = false;
+                var rect = img.rectTransform;
+                rect.Place(new Vector2(0.5f, 0.5f), new Vector2(5f, 5f), Vector2.zero);
+                _embers.Add((rect, img, Random.Range(40f, 110f), Random.value * 10f));
+                Respawn(_embers.Count - 1, Random.value);
+            }
+        }
+
+        private void Respawn(int i, float age)
+        {
+            var e = _embers[i];
+            e.Rect.anchoredPosition = new Vector2(Random.Range(-50f, 50f), 70f + age * 420f);
+        }
+
+        private void UpdateFire()
+        {
+            if (_fireGlow != null) _fireGlow.color = new Color(1f, 0.62f, 0.25f, 0.32f + 0.14f * Mathf.PerlinNoise(Time.time * 3f, 0.3f));
+            for (int i = 0; i < _embers.Count; i++)
+            {
+                var (rect, img, speed, phase) = _embers[i];
+                var p = rect.anchoredPosition + new Vector2(Mathf.Sin(Time.time * 1.7f + phase) * 18f * Time.deltaTime, speed * Time.deltaTime);
+                rect.anchoredPosition = p;
+                float life = Mathf.InverseLerp(70f, 520f, p.y);
+                img.color = new Color(1f, Mathf.Lerp(0.8f, 0.35f, life), 0.25f, (1f - life) * 0.85f * (0.6f + 0.4f * Mathf.Sin(Time.time * 9f + phase)));
+                if (life >= 1f) Respawn(i, 0f);
+            }
         }
 
         private static InputField CreateInputField(Transform parent, string initial, string hint)
@@ -259,6 +336,7 @@ namespace Game.Gameplay
 
         private void Update()
         {
+            UpdateFire();
             var nm = GameSession.Network;
             bool idle = !_joining && !_busy && !nm.IsListening && !nm.ShutdownInProgress;
 

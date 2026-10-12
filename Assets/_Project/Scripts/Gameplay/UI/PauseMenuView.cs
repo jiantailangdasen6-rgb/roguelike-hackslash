@@ -20,8 +20,6 @@ namespace Game.Gameplay
         private Button _invite;
         private Text _inviteLabel;
         private Text _leaveLabel;
-        private Text _controls;
-        private string _runControls;
 
         private static bool IsHost => NetworkManager.Singleton != null && NetworkManager.Singleton.IsHost;
 
@@ -48,11 +46,10 @@ namespace Game.Gameplay
             var title = UIKit.Title(panel.transform, "休息", 56);
             title.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(600f, 80f), new Vector2(0f, -30f));
 
-            var controls = UIKit.Label(panel.transform,
-                "WASD：移動　マウス：照準\n左クリック：通常攻撃（押しっぱなし）\nQ / 右クリック：スキル1　E：スキル2\nSpace / Shift：回避（無敵）　I / Tab：袋（装備）\n" +
-                "<size=20><color=#bfb6aa>凍った敵を強打で砕く・印の付いた敵を狙う・倒れた仲間のそばに立つ</color></size>",
-                24, TextAnchor.UpperCenter, UIKit.MutedText);
-            controls.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(640f, 200f), new Vector2(0f, -120f));
+            // How to play, the monsters, rooms and teamwork live in the codex.
+            var codex = UIKit.Button(panel.transform, "図鑑　<size=20><color=#bfb6aa>操作・魔物・部屋・連携（B）</color></size>", 30, () => { Toggle(false); CodexView.Open(); });
+            codex.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(560f, 76f), new Vector2(0f, -140f));
+            gameObject.AddComponent<CodexView>();
 
             VolumeRow(panel.transform, "音楽", 300f, () => AudioPrefs.Music, v => AudioPrefs.Music = v);
             VolumeRow(panel.transform, "効果音", 244f, () => AudioPrefs.Sfx, v => AudioPrefs.Sfx = v);
@@ -62,7 +59,6 @@ namespace Game.Gameplay
             var leave = UIKit.Button(panel.transform, "", 28, Leave, UIKit.BloodColor);
             leave.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(460f, 72f), new Vector2(0f, 60f));
             _leaveLabel = leave.GetComponentInChildren<Text>();
-            _controls = controls;
             // Online rooms take late joiners: share the link from here too.
             _invite = UIKit.Button(panel.transform, "招待リンクをコピー（途中参加OK）", 24, CopyInvite);
             _invite.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(460f, 56f), new Vector2(0f, 372f));
@@ -104,10 +100,6 @@ namespace Game.Gameplay
             var nm = NetworkManager.Singleton;
             bool party = nm != null && nm.IsHost && nm.ConnectedClientsIds.Count > 1;
             bool camp = PlayArea.InCamp;
-            _runControls ??= _controls.text;
-            _controls.text = camp
-                ? "WASD：移動\n施設の前で F / Enter：準備をする\n全員で奥の門に立つと出発"
-                : _runControls;
             _leaveLabel.text = camp ? (IsHost ? (party ? "タイトルへ（部屋を閉じる）" : "タイトルへ戻る") : "パーティを抜ける（タイトルへ）")
                 : IsHost ? "拠点へ戻る（ランを放棄）" : "パーティを抜ける（タイトルへ）";
             _note.text = camp ? (party ? "※ 部屋を閉じると仲間もタイトルへ戻ります" : "")
@@ -130,7 +122,7 @@ namespace Game.Gameplay
             bool pressed = (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
                            || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
             if (pressed && !PerkView.IsShowing && !BagView.IsOpen && BagView.ClosedFrame != Time.frameCount
-                && !CampView.PanelOpen && !CampView.ConsumedEscape) Toggle(!IsOpen);
+                && !CampView.PanelOpen && !CampView.ConsumedEscape && !CodexView.IsOpen && CodexView.ClosedFrame != Time.frameCount) Toggle(!IsOpen);
         }
     }
 }

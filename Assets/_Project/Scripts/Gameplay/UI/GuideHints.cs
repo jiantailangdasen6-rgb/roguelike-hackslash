@@ -26,7 +26,7 @@ namespace Game.Gameplay
         {
             var frame = UIKit.Framed(parent, "Guide", new Color(0.05f, 0.04f, 0.06f, 0.9f));
             var outer = frame.Outer();
-            outer.Place(new Vector2(0.5f, 0f), new Vector2(1000f, 70f), new Vector2(0f, 372f));
+            outer.Place(new Vector2(0.5f, 0f), new Vector2(1000f, 70f), new Vector2(0f, 420f));
             _group = outer.gameObject.AddComponent<CanvasGroup>();
             _group.blocksRaycasts = false;
             _text = UIKit.Label(frame.transform, "", 27, TextAnchor.MiddleCenter);

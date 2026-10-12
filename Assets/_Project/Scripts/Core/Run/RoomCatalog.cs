@@ -71,6 +71,19 @@ namespace Game.Core
         };
 
         /// <summary>What standing on the pedestal does (shown under it and on the HUD).</summary>
+        /// <summary>A few words for the label on the pedestal (the codex has the rest).</summary>
+        public static string ShortText(RoomKind k) => k switch
+        {
+            RoomKind.Shrine => "力をひとつ授かる",
+            RoomKind.Whetstone => "力をひとつ研ぐ",
+            RoomKind.Spring => $"最大HP +{RunSimulation.VigorPerStack * 100f:0}%・全回復",
+            RoomKind.CurseAltar => "力を2つ　代償に呪い",
+            RoomKind.Merchant => "魂の欠片で買う",
+            RoomKind.Treasure => "希少な装備",
+            RoomKind.Secret => "古い地図と装備",
+            _ => "",
+        };
+
         public static string PedestalText(RoomKind k) => k switch
         {
             RoomKind.Shrine => "上に立つと、新しい力を1つ選べる",

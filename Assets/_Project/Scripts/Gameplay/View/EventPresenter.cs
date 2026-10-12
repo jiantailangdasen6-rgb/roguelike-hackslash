@@ -1138,7 +1138,7 @@ namespace Game.Gameplay
             if (RoomCatalog.HasPedestal(room.Kind))
             {
                 var reward = RoomCatalog.Reward(room.Kind);
-                string text = used ? "<color=#bfb6aa>もう使った</color>" : RoomCatalog.PedestalText(room.Kind);
+                string text = used ? "<color=#bfb6aa>使用済み</color>" : RoomCatalog.ShortText(room.Kind);
                 var mark = CreateMark(RunSimulation.PedestalPosition(room.Bounds), RoomCatalog.Color(room.Kind), GameIcons.Reward(reward), RunSimulation.PedestalRadius,
                     $"{RoomCatalog.Name(room.Kind)}\n<size=22><color=#e8e0d4>{text}</color></size>", used);
                 _doors.Add(mark);
@@ -1150,14 +1150,14 @@ namespace Game.Gameplay
                 if (next == null || next.Kind != RoomKind.Treasure || director.IsUnlocked(next.Id)) continue;
                 int keys = director.Keys.Value;
                 var mark = CreateMark(DungeonMap.EntryPoint(room, d), new Color(0.9f, 0.75f, 0.35f), GameIcons.Reward(RoomReward.Treasure), RunSimulation.UnlockRadius * 0.7f,
-                    keys > 0 ? "宝物庫の扉\n<size=22><color=#e8e0d4>ここに立つと鍵で開く</color></size>" : "宝物庫の扉\n<size=22><color=#e8e0d4>鍵がかかっている（精鋭の主・仕掛けの間で手に入る）</color></size>", keys <= 0);
+                    keys > 0 ? "宝物庫の扉\n<size=22><color=#e8e0d4>立つと鍵で開く</color></size>" : "宝物庫の扉\n<size=22><color=#e8e0d4>鍵が必要</color></size>", keys <= 0);
                 mark.LabelBelow = d == Dir.S ? 1.6f : -1.4f;
                 _doors.Add(mark);
             }
             if (room.Kind == RoomKind.Campfire && NetPlayer.All.Count > 1)
             {
                 var bell = CreateMark(room.Bounds.center + RunSimulation.BellSpot, new Color(1f, 0.78f, 0.4f), null, RunSimulation.BellRadius,
-                    "集合の鐘\n<size=22><color=#e8e0d4>下に立つと仲間を焚き火へ呼ぶ（戦闘中の人は残る）</color></size>", true);
+                    "集合の鐘\n<size=22><color=#e8e0d4>仲間を呼ぶ</color></size>", true);
                 bell.LabelBelow = -0.9f;
                 _doors.Add(bell);
             }

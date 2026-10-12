@@ -66,6 +66,7 @@ Player flags: `-startroom <n>`, `-difficulty easy|normal|hard|nightmare`, `-down
 `-screenshot <path> -screenshotat <s1,s2,..>`, `-profile <name>`, `-localonly`, `-doorwait <s>` (bots linger by the open doors for screenshots),
 `-freezeat <s> -freezefor <s>` (stall the main thread once: transport robustness), `-pingat <s1,..>` / `-pingroomat <s1,..>` (co-op pings, seconds after the run scene loads).
 `-failat <s>` (host acts as if its connection broke; the run is kept) + `-autoresume` (reopen a room straight into it): `Tools/ResumeTest.ps1`.
+`-opencodex <section> [-opencodexat <s>]` (screenshots of the codex). Explanations (enemy traits, traps, rooms, controls) belong in the codex (`CodexCatalog`), not in HUD toasts.
 Online co-op over Relay: always re-check with `OnlineTest.ps1 -HostExtra "-freezeat 50 -freezefor 4"` after network changes (LAN NetTest never shows queue overflows).
 
 ## Gotchas

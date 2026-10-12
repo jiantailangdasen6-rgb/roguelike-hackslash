@@ -109,12 +109,27 @@ namespace Game.Gameplay
             IsOpen = false;
         }
 
+        private Image _newSeal;
+
         private void BuildBadge(Transform root)
         {
-            var badge = UIKit.Framed(root, "BagBadge", new Color(0.05f, 0.04f, 0.05f, 0.9f));
-            badge.Outer().Place(new Vector2(1f, 0f), new Vector2(210f, 50f), new Vector2(-24f, 128f));
-            _badge = UIKit.Label(badge.transform, "", 22, TextAnchor.MiddleCenter);
-            _badge.rectTransform.Stretch(4f);
+            // An icon slot like the skills: the pouch, how full it is, its key, and a "新" seal for unseen gear.
+            var badge = UIKit.Framed(root, "BagBadge", new Color(0.03f, 0.025f, 0.03f, 0.95f));
+            badge.Outer().Place(new Vector2(1f, 0f), new Vector2(88f, 88f), new Vector2(-30f, 48f));
+            var icon = UIKit.Panel(badge.transform, "Icon", Color.white);
+            icon.sprite = SpriteSheet.Load("icons_skill")?.Sprites("default") is { Length: > 19 } frames ? frames[19] : null;
+            icon.rectTransform.Stretch(4f);
+            icon.raycastTarget = false;
+            _badge = UIKit.Label(badge.transform, "", 19, TextAnchor.LowerRight, Color.white);
+            _badge.rectTransform.Stretch(6f);
+            var outline = _badge.gameObject.AddComponent<Outline>();
+            outline.effectColor = new Color(0f, 0f, 0f, 0.9f);
+            UIKit.KeyCap(badge.Outer(), "I", 18, out _).Place(new Vector2(0.5f, 0f), new Vector2(40f, 28f), new Vector2(0f, -16f));
+            _newSeal = UIKit.Panel(badge.Outer(), "New", new Color(0.78f, 0.14f, 0.12f));
+            _newSeal.sprite = UIKit.DiscSprite;
+            _newSeal.rectTransform.Place(new Vector2(1f, 1f), new Vector2(34f, 34f), new Vector2(10f, 10f));
+            _newSeal.raycastTarget = false;
+            UIKit.Title(_newSeal.transform, "新", 20, TextAnchor.MiddleCenter, Color.white).rectTransform.Stretch();
         }
 
         private void AddCell(Transform parent, int index, Vector2 at, string caption)
@@ -228,9 +243,9 @@ namespace Game.Gameplay
             bool running = director != null && director.IsSpawned && director.Started.Value && NetPlayer.Local != null;
             int count = _bag.Count(i => i != null);
             _badge.transform.parent.parent.gameObject.SetActive(running && !IsOpen); // the framed outer panel
-            _badge.text = _unseen > 0 && Mathf.Repeat(Time.time, 1f) < 0.6f
-                ? $"<color=#e0b45a>新しい装備！</color> [I]"
-                : $"袋 {count}/{SimPlayer.BagSize}  <color=#bfb6aa>[I]</color>";
+            _badge.text = $"{count}/{SimPlayer.BagSize}";
+            _newSeal.gameObject.SetActive(_unseen > 0);
+            if (_unseen > 0) _newSeal.rectTransform.localScale = Vector3.one * (1f + 0.12f * Mathf.Sin(Time.time * 6f));
 
             if (!running) return;
             if (IsOpen && PerkView.IsShowing) Toggle(false); // a pick takes over the screen
@@ -238,7 +253,7 @@ namespace Game.Gameplay
 
             var kb = Keyboard.current;
             if (kb == null) return;
-            if (kb.iKey.wasPressedThisFrame || kb.tabKey.wasPressedThisFrame) Toggle(!IsOpen);
+            if ((kb.iKey.wasPressedThisFrame || kb.tabKey.wasPressedThisFrame) && !CodexView.IsOpen) Toggle(!IsOpen);
             else if (IsOpen && kb.escapeKey.wasPressedThisFrame)
             {
                 Toggle(false);

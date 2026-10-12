@@ -216,6 +216,7 @@ namespace Game.Gameplay
             }
 
             v.SeenFrame = _frame;
+            Codex.SeeEnemy(s.Type, s.Elite, s.Position);
             var t = v.Root.transform;
             Vector3 target = s.Position;
             if (snapTime >= 0f)

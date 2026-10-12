@@ -22,6 +22,9 @@ namespace Game.Gameplay
             Apply();
         }
 
+        /// <summary>Stops animating (the Image keeps whatever sprite is set on it).</summary>
+        public void Stop() => _frames = null;
+
         private void Update()
         {
             _time += Time.unscaledDeltaTime;

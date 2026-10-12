@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 4ee89e23（迷宮探索・合図・通信の修正まで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 5acdf570（迷宮探索・合図・集合の鐘・切断後の再開まで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | `Builds/Windows/LabyrinthSurvivor.exe`（ローカルのみ、git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加）。ラン後は解散せず拠点へ戻る |
@@ -276,6 +276,26 @@
   - 通信はシミュレーションを通さない（持ち主 → 全員の RPC）。テスト用 `-pingat`（近く→敵→遠く→扉の順）・`-pingroomat`（焚き火の間に集合）
   - 協力で始めると「F キーで合図」の案内が1回出る。操作の説明に「F 合図」を追加
 - **公開**：ブラウザ版・Windows版をそろえて ver 4ee89e23 で公開（BuildWeb → BuildWindows → BuildWindowsRelease → DeployWeb → CrossTest 合格 → Releases）
+- 続き：残りの改善案（計測・初回案内・集合の鐘・切断後の再開）をブラウザ版・Windows版 ver 5acdf570 で公開（CrossTest・ResumeTest 合格）
+
+### 残りの改善案（2026-10-12、ユーザー「残りの作業をしてください」：改善案の 1・6・7・8）
+- **1回の長さの計測**（`RunSimulation.Stats.cs`）：エリアごとに入った時刻・主が起きた／倒れた時刻・抜けた時刻と、倒れた回数を記録。
+  `RunDirector.RunSplits`（FixedString、変わったときだけ）で全員へ。リザルト画面に「エリア1 4:32（主 1:05）／エリア2 …　倒れた回数 2」、
+  ログに `[RunStats] victory difficulty=... splits=...`（ユーザーの PC の Player.log から実際のペースを読める）
+- **最初の1回の案内**（`UI/GuideHints.cs`、プロフィールの `guideSeen`）：トーストの上に1つずつ。扉の近く（最初の部屋を出るまで）・
+  祭壇の部屋（どれかを使うまで）・鍵のかかった宝物庫の隣（鍵の手に入れ方／鍵があれば開け方）・焚き火の間（協力時、主の扉と集合の鐘）。
+  できたら、または14秒表示したら覚えたことにして二度と出ない
+- **集合の鐘**（`RunSimulation.Bell.cs`、絵 `decor_bell`）：焚き火の間の右上（中心から +6.5, +4.2）。協力時に0.8秒その下に立つと鳴り、
+  戦闘中でない生きている仲間を焚き火のまわりへ呼ぶ（戦闘中の人・倒れている人は残る）。15秒に1回。イベント `BellRung`、音 `bell`、音の輪と「カーン！」、
+  通知「P1（戦士）が集合の鐘を鳴らした：1人が焚き火の間へ」。ボットは焚き火の間で仲間が別の部屋にいれば鳴らしに行く
+  - ホストが動かした瞬間移動（エリア移動・鐘）は NetworkTransform.Teleport に（ほかの人の画面で地図を横切って滑らない）
+- **通信が切れても続きから**：ホストの通信が切れたら、その時点の迷宮をホストの PC に残す（`RunDirector.SuspendForResume`：仲間は「抜けた人」として
+  プロフィールの鍵で預かる → `GameSession.Suspended`）。タイトルに「続きから部屋を作る（エリア1・1:02）」ボタン（前と同じオンライン／LAN）。
+  押すと拠点を通らず同じ迷宮へ（`RunDirector.ResumeRun`）、仲間は新しいコードで参加すると元のキャラクター・元の枠で戻る。ほかの部屋を作るか参加すると預かりは消える
+  - 仲間側：一度つながってから切れたときは「断られた」扱いにしない（以前はホストが部屋を閉じたときの理由まで拒否とみなして自動の再参加も止まっていた）。
+    Netcode の通信エラー（`[Disconnect Event]...`）も拒否ではなく「接続できませんでした」（日本語）
+  - テスト：`Tools/ResumeTest.ps1`（`-failat` で通信切れのふり → `-autoresume` → 仲間が新しいコードで戻る。Relay で合格）、`VerifyAll` にも追加
+- テスト：`BellAndStatsTests`（鐘が静かな部屋の仲間だけ呼ぶ・ソロでは鳴らない・区間の記録と読み戻し）
 
 ### Claude が自分の判断で決めたこと（ユーザーが変更可）
 - 迷宮：部屋数（9〜10）、部屋の間隔、祭壇の部屋の数と種類、戦闘部屋の波の数（2〜3）、扉は押し込みで瞬間移動、戦闘中の部屋から出られる（主の間だけは閉じる）、呪いを個人に変更

@@ -77,6 +77,7 @@ namespace Game.Gameplay
             Set(SimEventType.DoorOpened, F.Int | F.Pos | F.Id);
             Set(SimEventType.KeyGained, F.Int | F.Pos | F.Id);
             Set(SimEventType.PuzzleEnded, F.Int | F.Pos | F.Id);
+            Set(SimEventType.BellRung, F.Client | F.Pos | F.Int);
             return layout;
         }
 

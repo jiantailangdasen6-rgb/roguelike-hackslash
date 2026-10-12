@@ -18,4 +18,5 @@ Step 'PlayMode tests' { powershell -NoProfile -ExecutionPolicy Bypass -File "$to
 Step 'Windows player' { powershell -NoProfile -ExecutionPolicy Bypass -File "$tools\RunMethod.ps1" -Method Game.EditorTools.PlayerBuild.BuildWindows | Select-String 'PlayerBuild|error CS|exit:' }
 Step 'Network test' { powershell -NoProfile -ExecutionPolicy Bypass -File "$tools\NetTest.ps1" -Seconds $NetSeconds }
 if (-not $SkipOnline) { Step "Online test (Relay, host stall)" { powershell -NoProfile -ExecutionPolicy Bypass -File "$tools\OnlineTest.ps1" -Seconds 120 -HostExtra "-freezeat 50 -freezefor 4" } }
+if (-not $SkipOnline) { Step "Resume test (Relay, host connection breaks)" { powershell -NoProfile -ExecutionPolicy Bypass -File "$tools\ResumeTest.ps1" } }
 Write-Host "##### ALL OK"

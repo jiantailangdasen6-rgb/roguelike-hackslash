@@ -55,6 +55,7 @@ powershell -File Tools/ServeWeb.ps1             # local test at http://localhost
 powershell -File Tools/DeployWeb.ps1            # publish to https://jiantailangdasen6-rgb.github.io/roguelike-web/
 powershell -File Tools/OnlineTest.ps1           # Relay: Windows host + 2 Windows clients join by room code (Logs/online/)
 powershell -File Tools/CrossTest.ps1            # Relay: Windows host + headless Edge on the published page (?onlinejoin=CODE&botmove)
+powershell -File Tools/ResumeTest.ps1           # Relay: host connection breaks, "continue" room, clients rejoin with their characters
 ```
 Online co-op uses Unity Relay over secure WebSockets (room codes; browsers can't host LAN). The Unity Cloud project
 (id f2ea130d-3bfa-4974-8a26-2babfbec2d80, Relay enabled) is set as `cloudProjectId` in `ProjectSettings/ProjectSettings.asset`;
@@ -64,6 +65,7 @@ Solo uses NGO's `SinglePlayerTransport` (no sockets, works in browsers).
 Player flags: `-startroom <n>`, `-difficulty easy|normal|hard|nightmare`, `-downat <s>` (host knocks a teammate down), `-autosolo`, `-onlinehost <n> -codefile <path>`, `-onlinejoinfile <path>`, `-autohost <n>`, `-autojoin <ip>`, `-botmove`, `-class warrior|mage|ranger`, `-autoquit <s>`,
 `-screenshot <path> -screenshotat <s1,s2,..>`, `-profile <name>`, `-localonly`, `-doorwait <s>` (bots linger by the open doors for screenshots),
 `-freezeat <s> -freezefor <s>` (stall the main thread once: transport robustness), `-pingat <s1,..>` / `-pingroomat <s1,..>` (co-op pings, seconds after the run scene loads).
+`-failat <s>` (host acts as if its connection broke; the run is kept) + `-autoresume` (reopen a room straight into it): `Tools/ResumeTest.ps1`.
 Online co-op over Relay: always re-check with `OnlineTest.ps1 -HostExtra "-freezeat 50 -freezefor 4"` after network changes (LAN NetTest never shows queue overflows).
 
 ## Gotchas

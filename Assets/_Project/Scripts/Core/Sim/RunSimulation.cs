@@ -244,6 +244,7 @@ namespace Game.Core
             CollectLoot();
             UpdateObjectives(dt);
             StepPuzzles(dt);
+            StepBell(dt);
             UpdateDoors(dt);
             CheckDefeat();
             CheckLevelUp();
@@ -666,6 +667,7 @@ namespace Game.Core
         {
             if (Players.Count == 0) return;
             foreach (var p in Players) if (p.Alive) return;
+            SplitRunEnded();
             Phase = RunPhase.Defeat;
             Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 0 });
         }

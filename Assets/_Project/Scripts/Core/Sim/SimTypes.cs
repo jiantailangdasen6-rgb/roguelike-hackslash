@@ -311,6 +311,7 @@ namespace Game.Core
         DoorOpened,      // Int = 0 the boss door, 1 the way down to the next area, 2 a treasure door unlocked, 3 a secret room found; Pos, Id = room
         KeyGained,       // Pos, Int = keys the team holds now, Id = room it came from
         PuzzleEnded,     // Id = room, Int = 1 solved / 0 failed, Pos
+        BellRung,        // ClientId = who rang it, Pos = the bell, Int = players called to the campfire
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

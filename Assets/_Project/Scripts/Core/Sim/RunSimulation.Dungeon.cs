@@ -116,6 +116,7 @@ namespace Game.Core
             _rainTargets.Clear();
             ClearBursts();
 
+            SplitAreaEntered();
             Events.Add(new SimEvent(SimEventType.RoomStarted) { Int = Area * RoomsPerArea, Id = arrival.Id, Seed = MapSeed });
             for (int i = 0; i < Players.Count; i++)
             {
@@ -185,6 +186,7 @@ namespace Game.Core
             if (room.Objective == RoomObjective.Boss)
             {
                 room.SpawnTimer = 12f;
+                SplitBossWoke();
                 ResetBossTrials();
                 Vector2 at = room.Center + new Vector2(0f, 3f);
                 PendingSpawns.Add(new PendingSpawn { Room = room.Id, Type = AreaBoss, Position = at, Timer = 1.6f });
@@ -252,11 +254,13 @@ namespace Game.Core
             if (room.Kind == RoomKind.MiniBoss) ChampionDefeated(room);
             if (room.Objective == RoomObjective.Boss)
             {
+                SplitBossFell();
                 RemoveTrialProps();
                 ActiveTrial = BossTrial.None;
                 ClearBursts();
                 if (Area >= AreaCount - 1)
                 {
+                    SplitRunEnded();
                     Phase = RunPhase.Victory;
                     Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 1 });
                     return;

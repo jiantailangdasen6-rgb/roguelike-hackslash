@@ -504,6 +504,7 @@ namespace Game.Core
             p.ReviveProgress = 0f;
             p.Shield = 0f;
             p.DashSlashTimer = 0f;
+            CountDown();
             Events.Add(new SimEvent(SimEventType.PlayerDowned) { ClientId = p.ClientId, Pos = p.Position });
         }
     }

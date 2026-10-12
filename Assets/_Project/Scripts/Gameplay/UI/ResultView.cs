@@ -16,6 +16,8 @@ namespace Game.Gameplay
         private GameObject _panel;
         private Text _title;
         private Text _summary;
+        private Text _splits;
+        private bool _logged;
         private Text _shardsText;
         private Text _wait;
         private Button _back;
@@ -34,7 +36,9 @@ namespace Game.Gameplay
             _title = UIKit.Title(panel.transform, "", 104);
             _title.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 150f), new Vector2(0f, 230f));
             _summary = UIKit.Label(panel.transform, "", 28, TextAnchor.MiddleCenter, UIKit.MutedText);
-            _summary.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 44f), new Vector2(0f, 120f));
+            _summary.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 44f), new Vector2(0f, 140f));
+            _splits = UIKit.Label(panel.transform, "", 24, TextAnchor.MiddleCenter, UIKit.MutedText);
+            _splits.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1500f, 40f), new Vector2(0f, 100f));
             _shardsText = UIKit.Title(panel.transform, "", 56, TextAnchor.MiddleCenter, new Color(0.62f, 0.86f, 1f));
             _shardsText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 170f), new Vector2(0f, 0f));
 
@@ -60,12 +64,29 @@ namespace Game.Gameplay
             _title.text = _victory ? "迷宮を踏破した" : "力尽きた…";
             _title.color = _victory ? UIKit.AccentColor : new Color(0.75f, 0.15f, 0.15f);
             _shards = -1;
+            _logged = false;
             _shownAt = Time.time;
             _panel.SetActive(true);
             _back.gameObject.SetActive(IsHost);
             _wait.enabled = !IsHost;
             _leave.gameObject.SetActive(!IsHost);
             EventSystem.current?.SetSelectedGameObject(IsHost ? _back.gameObject : _leave.gameObject);
+        }
+
+        /// <summary>"エリア1 4:32（主 1:05）／エリア2 …　倒れた回数 2" from the host's splits.</summary>
+        private static string SplitsLine(string text)
+        {
+            var (areas, downs) = RunSimulation.ParseSplits(text);
+            if (areas.Count == 0) return "";
+            var parts = new System.Collections.Generic.List<string>();
+            for (int i = 0; i < areas.Count; i++)
+            {
+                var a = areas[i];
+                if (a[3] < 0) continue;
+                string boss = a[1] >= 0 && a[2] >= a[1] ? $"（主 {UIKit.FormatTime(a[2] - a[1])}）" : a[1] >= 0 ? "（主の間で）" : "";
+                parts.Add($"エリア{i + 1} {UIKit.FormatTime(a[3] - a[0])}{boss}");
+            }
+            return string.Join("／", parts) + $"　倒れた回数 {downs}";
         }
 
         private void Update()
@@ -90,6 +111,13 @@ namespace Game.Gameplay
                 ProfileStore.Save();
             }
 
+            string splits = d.RunSplits.Value.ToString();
+            _splits.text = SplitsLine(splits);
+            if (!_logged && d.Phase.Value != RunPhase.Playing)
+            {
+                _logged = true; // pace from real runs: read back from Player.log
+                Debug.Log($"[RunStats] {(_victory ? "victory" : "defeat")} difficulty={d.DifficultyLevel.Value} players={NetPlayer.All.Count} elapsed={d.Elapsed.Value} splits={splits} kills={d.Kills.Value}");
+            }
             _summary.text = $"{HudView.RoomTitle(d.RoomIndex.Value)}まで　討伐 {d.Kills.Value}　{UIKit.FormatTime(d.Elapsed.Value)}　（{DifficultyCatalog.Get(d.DifficultyLevel.Value).Name}）";
             // One line about requests: what was finished, or the one closest to done.
             string quest = "";

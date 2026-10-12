@@ -53,11 +53,8 @@ namespace Game.Gameplay
             input.DodgePressed -= Dodge;
         }
 
-        public void Teleport(Vector2 position)
-        {
-            transform.position = position;
-            _dashUntil = 0f;
-        }
+        /// <summary>The host moved this player (a new area, the gathering bell): a jump everyone sees as one.</summary>
+        public void Teleport(Vector2 position) => Teleport(position, network: true);
 
         private static RoomLayout CurrentLayout => PlayArea.Layout;
 
@@ -265,6 +262,8 @@ namespace Game.Gameplay
             public Bot(NetPlayer player) => _player = player;
 
             private int _campStop;
+            private float _nextBell;
+            private float _bellSince = -1f;
             private float _campStopUntil;
 
             /// <summary>Visits a few stations (for camp screenshots), then waits in the gate.</summary>
@@ -294,6 +293,7 @@ namespace Game.Gameplay
                 Vector2 Toward(Vector2 at) => (at - pos).sqrMagnitude > 0.2f ? (at - pos).normalized : Vector2.zero;
 
                 if (room.Kind == RoomKind.Boss && director.ExitOpen.Value) return Toward(room.Origin + RunSimulation.ExitOffset);
+                if (room.Kind == RoomKind.Campfire && CommandLine.Has("-tobell")) return Toward(room.Bounds.center + RunSimulation.BellSpot); // screenshots
                 bool used = (_player.UsedPedestals.Value & (1 << room.Id)) != 0;
                 if (RoomCatalog.HasPedestal(room.Kind) && !used) return Toward(RunSimulation.PedestalPosition(room.Bounds));
 
@@ -320,7 +320,25 @@ namespace Game.Gameplay
                 }
                 if (goal < 0)
                 {
-                    // Everything seen: to the campfire, wait at the boss door with the team, then in.
+                    // Everything seen: to the campfire, ring the bell if a teammate is elsewhere, wait at the boss door with the team, then in.
+                    if (room.Kind == RoomKind.Campfire && !director.BossDoorOpen.Value && _nextBell < Time.time)
+                        foreach (var mate in NetPlayer.All)
+                        {
+                            if (mate == _player || mate.Downed.Value || map.RoomAt(mate.transform.position) == room) continue;
+                            Vector2 bell = room.Bounds.center + RunSimulation.BellSpot;
+                            if ((bell - pos).sqrMagnitude < 0.8f)
+                            {
+                                // Stand under it long enough to ring it, then leave it be for its cooldown.
+                                if (_bellSince < 0f) _bellSince = Time.time;
+                                if (Time.time - _bellSince > RunSimulation.BellHoldTime + 0.6f)
+                                {
+                                    _bellSince = -1f;
+                                    _nextBell = Time.time + RunSimulation.BellCooldown;
+                                }
+                                return Vector2.zero;
+                            }
+                            return Toward(bell);
+                        }
                     if (room.Kind == RoomKind.Campfire && !director.BossDoorOpen.Value)
                         for (int d = 0; d < 4; d++)
                             if (room.Neighbor[d] == map.Boss.Id) return Toward(DungeonMap.EntryPoint(room, d));

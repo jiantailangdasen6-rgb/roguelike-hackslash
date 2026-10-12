@@ -180,6 +180,8 @@ namespace Game.Core
         public QuestLog quests = new();
         /// <summary>Gear kept between runs: worn set and stash (see GearVault).</summary>
         public GearVaultData gear = new();
+        /// <summary>First-run hints already learnt (GuideHints): they stop showing.</summary>
+        public List<string> guideSeen = new();
 
         public bool IsUnlocked(string id)
         {

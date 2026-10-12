@@ -204,6 +204,18 @@ namespace Game.Gameplay
                     ShowCallout(e.Pos + Vector2.up * 2f, "鍵！", new Color(1f, 0.85f, 0.45f), 46);
                     break;
                 }
+                case SimEventType.BellRung:
+                {
+                    // Rings of sound rolling out from the bell.
+                    for (int i = 0; i < 3; i++)
+                    {
+                        var ring = Spawn("fx_circle", e.Pos + Vector2.up * 1.2f, 1f, 0.9f + i * 0.25f, 0.4f + i * 0.3f, 4.5f + i, new Color(1f, 0.8f, 0.45f, 0.6f), order: -330);
+                        ring.FadeOut = true;
+                    }
+                    ShowCallout(e.Pos + Vector2.up * 3f, "カーン！", new Color(1f, 0.85f, 0.5f), 40);
+                    CameraShake.Add(0.12f);
+                    break;
+                }
                 case SimEventType.DoorOpened when e.Int >= 2:
                     for (int i = 0; i < 10; i++) Burst("fx_puff", e.Pos + Random.insideUnitCircle * 1.2f, Random.Range(8f, 12f), Random.Range(0.8f, 1.4f), new Color(0.7f, 0.65f, 0.6f, 0.85f));
                     CameraShake.Add(0.3f);
@@ -1141,6 +1153,13 @@ namespace Game.Gameplay
                     keys > 0 ? "宝物庫の扉\n<size=22><color=#e8e0d4>ここに立つと鍵で開く</color></size>" : "宝物庫の扉\n<size=22><color=#e8e0d4>鍵がかかっている（精鋭の主・仕掛けの間で手に入る）</color></size>", keys <= 0);
                 mark.LabelBelow = d == Dir.S ? 1.6f : -1.4f;
                 _doors.Add(mark);
+            }
+            if (room.Kind == RoomKind.Campfire && NetPlayer.All.Count > 1)
+            {
+                var bell = CreateMark(room.Bounds.center + RunSimulation.BellSpot, new Color(1f, 0.78f, 0.4f), null, RunSimulation.BellRadius,
+                    "集合の鐘\n<size=22><color=#e8e0d4>下に立つと仲間を焚き火へ呼ぶ（戦闘中の人は残る）</color></size>", true);
+                bell.LabelBelow = -0.9f;
+                _doors.Add(bell);
             }
             if (room.Kind == RoomKind.Campfire && !director.BossDoorOpen.Value)
             {

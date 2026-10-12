@@ -350,6 +350,14 @@ namespace Game.Gameplay
                         Decor("decor_bones", o + p, -950);
                     Glow(o + new Vector2(0f, 2.5f), new Color(1f, 0.25f, 0.2f), 0.9f, 9f);
                     break;
+                case RoomKind.Campfire:
+                {
+                    // The gathering bell (RunSimulation.Bell), with a lantern-warm glow on it.
+                    Vector2 bell = b.center + RunSimulation.BellSpot;
+                    Decor("decor_bell", bell);
+                    Glow(bell + new Vector2(0f, 1f), new Color(1f, 0.75f, 0.4f), 0.55f, 3.2f);
+                    break;
+                }
                 case RoomKind.Puzzle:
                     Decor("decor_rune", o + new Vector2(0f, 0.3f), -955, scale: 1.6f);
                     Glow(o, new Color(0.5f, 0.9f, 1f), 0.6f, 8f);

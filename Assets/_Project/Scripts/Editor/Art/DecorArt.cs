@@ -25,6 +25,7 @@ namespace Game.EditorTools.Art
             ["decor_bones"] = One(BonePile(), new Vector2(0.5f, 0.15f)),
             ["decor_chains"] = One(Chains(), new Vector2(0.5f, 1f)),
             ["decor_rune"] = One(RuneCircle(), new Vector2(0.5f, 0.5f)),
+            ["decor_bell"] = One(Bell(), new Vector2(0.5f, 0.04f)),
         };
 
         private static PropArt.Sheet One(PixelCanvas c, Vector2 pivot) => new() { Frames = new List<PixelCanvas> { c }, Pivot = pivot };
@@ -153,6 +154,48 @@ namespace Game.EditorTools.Art
             // Shackle.
             for (int x = 3; x <= 14; x++) { c.Set(x, 8, Iron[3]); c.Set(x, 2, Iron[1]); }
             for (int y = 2; y <= 8; y++) { c.Set(3, y, Iron[3]); c.Set(14, y, Iron[1]); }
+            AddOutline(c);
+            return c;
+        }
+
+        private static readonly Color32[] Wood = { C("#21150d"), C("#3d2716"), C("#5e3d21"), C("#80562f"), C("#a87542") };
+        private static readonly Color32[] Bronze = { C("#2a1a0c"), C("#5a3a17"), C("#8a5d24"), C("#b8862f"), C("#dcb04e"), C("#fff0b0") };
+
+        /// <summary>The gathering bell by the campfire: a bronze bell under a wooden beam on two posts.</summary>
+        private static PixelCanvas Bell()
+        {
+            var c = new PixelCanvas(44, 56);
+            // Posts and beam.
+            for (int y = 1; y < 50; y++)
+            {
+                c.Set(4, y, Wood[3]); c.Set(5, y, Wood[2]); c.Set(6, y, Wood[1]);
+                c.Set(37, y, Wood[3]); c.Set(38, y, Wood[2]); c.Set(39, y, Wood[1]);
+            }
+            for (int x = 2; x <= 41; x++) { c.Set(x, 52, Wood[4]); c.Set(x, 51, Wood[3]); c.Set(x, 50, Wood[2]); c.Set(x, 49, Wood[1]); }
+            for (int x = 1; x <= 9; x++) { c.Set(x, 1, Wood[2]); c.Set(x, 2, Wood[3]); }
+            for (int x = 34; x <= 42; x++) { c.Set(x, 1, Wood[2]); c.Set(x, 2, Wood[3]); }
+            // Rope.
+            for (int y = 43; y < 49; y++) { c.Set(21, y, (y % 2 == 0) ? Wood[4] : Wood[3]); c.Set(22, y, Wood[2]); }
+            // The bell: a flared shape, lit from the top-left.
+            const float cx = 21.5f;
+            for (int y = 16; y <= 42; y++)
+            {
+                float v = (42f - y) / 26f; // 0 crown .. 1 lip
+                float half = 4.5f + 6.5f * Mathf.Pow(v, 1.6f) + (y <= 19 ? 1.8f : 0f);
+                for (int x = 0; x < 44; x++)
+                {
+                    float dx = x - cx;
+                    if (Mathf.Abs(dx) > half) continue;
+                    float lit = -dx / half * 0.9f + (1f - v) * 0.6f;
+                    int shade = Mathf.Clamp(Mathf.RoundToInt(2.4f + lit * 2f), 1, 5);
+                    if (y == 18 || y == 19) shade = Mathf.Max(1, shade - 1); // the lip band
+                    if (y == 27) shade = Mathf.Max(1, shade - 1); // a band round the waist
+                    c.Set(x, y, Bronze[shade]);
+                }
+            }
+            // The clapper under the lip.
+            for (int y = 12; y <= 16; y++) { c.Set(21, y, Bronze[1]); c.Set(22, y, Bronze[2]); }
+            c.Set(21, 11, Bronze[2]); c.Set(22, 11, Bronze[3]);
             AddOutline(c);
             return c;
         }

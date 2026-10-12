@@ -63,6 +63,7 @@ namespace Game.Gameplay
             Add("fuse", 0.4f, 0.2f, SfxSynth.Telegraph);
             Add("click", 0.3f, 0.03f, SfxSynth.Hit);
             Add("ping", 0.45f, 0.12f, () => SfxSynth.Chime("ping", new[] { 784f, 1175f }, 0.07f, 0.55f));
+            Add("bell", 0.6f, 1f, () => SfxSynth.Chime("bell", new[] { 330f, 494f, 659f }, 0.015f, 2.2f));
 
             for (int i = 0; i < Voices; i++)
             {
@@ -259,6 +260,7 @@ namespace Game.Gameplay
                 case SimEventType.KeyGained: Play("levelup", e.Pos, 1.3f); Play("clank", e.Pos, 1.4f, 0.6f); break;
                 case SimEventType.DoorOpened: Play(e.Int >= 2 ? "explosion" : "clear", e.Pos, e.Int >= 2 ? 0.6f : 1.1f, 0.7f); break;
                 case SimEventType.PuzzleEnded: Play(e.Int == 1 ? "clear" : "shatter", e.Pos, e.Int == 1 ? 1.2f : 0.7f); break;
+                case SimEventType.BellRung: Play("bell"); break;
                 case SimEventType.TrialEvent:
                     switch ((TrialMoment)e.Int)
                     {

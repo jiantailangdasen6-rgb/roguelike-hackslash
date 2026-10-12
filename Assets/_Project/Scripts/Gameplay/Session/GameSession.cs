@@ -42,6 +42,8 @@ namespace Game.Gameplay
         public static bool Refused { get; private set; }
 
         private static bool _leaving;
+        /// <summary>This device got into the current session (so a later disconnect is not a refusal).</summary>
+        private static bool _connected;
 
         /// <summary>Room code of the current online session (host and clients), or null.</summary>
         public static string JoinCode { get; private set; }
@@ -56,6 +58,32 @@ namespace Game.Gameplay
 
         private static readonly Dictionary<ulong, Loadout> Loadouts = new();
 
+        /// <summary>
+        /// A run cut off by a broken connection, kept on the host: "続きから部屋を作る" opens a new room straight into it and
+        /// the others come back (with their characters) by joining with the new code.
+        /// </summary>
+        public sealed class SuspendedRun
+        {
+            public RunSimulation Sim;
+            public Dictionary<string, int> Slots;
+            public bool Online;
+        }
+
+        public static SuspendedRun Suspended { get; private set; }
+        private static bool _resuming;
+
+        public static void Suspend(SuspendedRun run) => Suspended = run;
+
+        /// <summary>RunDirector, when the game scene opens: the run to carry on, if this host is resuming one.</summary>
+        public static SuspendedRun TakeSuspended()
+        {
+            if (!_resuming) return null;
+            _resuming = false;
+            var run = Suspended;
+            Suspended = null;
+            return run;
+        }
+
         public static NetworkManager EnsureNetworkManager()
         {
             if (NetworkManager.Singleton != null) return NetworkManager.Singleton;
@@ -67,6 +95,7 @@ namespace Game.Gameplay
             nm.ConnectionApprovalCallback = Approve;
             nm.OnClientDisconnectCallback += OnClientDisconnected;
             nm.OnTransportFailure += OnTransportFailure;
+            nm.OnClientConnectedCallback += id => { if (id == nm.LocalClientId) _connected = true; };
             return nm;
         }
 
@@ -88,12 +117,16 @@ namespace Game.Gameplay
             return t;
         }
 
-        private static void Prepare()
+        /// <param name="resume">Host the suspended run (if any); anything else drops it.</param>
+        private static void Prepare(bool resume = false)
         {
+            _resuming = resume && Suspended != null;
+            if (!_resuming) Suspended = null;
             InGame = false;
             JoinCode = null;
             Loadouts.Clear();
             Refused = false;
+            _connected = false;
             _leaving = false;
             var profile = ProfileStore.Current;
             if (string.IsNullOrEmpty(profile.playerKey))
@@ -122,14 +155,14 @@ namespace Game.Gameplay
             return true;
         }
 
-        public static bool StartLanHost()
+        public static bool StartLanHost(bool resume = false)
         {
-            Prepare();
+            Prepare(resume);
             // -localonly (automated tests) avoids opening a LAN port and the firewall prompt that comes with it.
             string listen = CommandLine.Has("-localonly") ? "127.0.0.1" : "0.0.0.0";
             Udp(false).SetConnectionData(listen, Port, listen);
             if (!Network.StartHost()) return false;
-            EnterCamp();
+            EnterCampOrResume();
             return true;
         }
 
@@ -157,17 +190,17 @@ namespace Game.Gameplay
         }
 
         /// <summary>Creates a Relay allocation, starts hosting over secure WebSockets and returns the room code.</summary>
-        public static async Task<string> StartOnlineHostAsync()
+        public static async Task<string> StartOnlineHostAsync(bool resume = false)
         {
             if (!OnlineAvailable) throw new InvalidOperationException("オンライン協力はまだ準備中です（Unity Cloud の設定待ち）");
-            Prepare();
+            Prepare(resume);
             await EnsureServicesAsync();
             var allocation = await RelayService.Instance.CreateAllocationAsync(MaxPlayers - 1);
             string code = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
             Udp(true).SetRelayServerData(allocation.ToRelayServerData("wss"));
             if (!Network.StartHost()) throw new InvalidOperationException("部屋を作れませんでした");
             JoinCode = code;
-            EnterCamp();
+            EnterCampOrResume();
             return code;
         }
 
@@ -184,6 +217,18 @@ namespace Game.Gameplay
         }
 
         // ------------------------------------------------------------------ Flow
+
+        /// <summary>A new room: the camp, or straight back into the suspended run.</summary>
+        private static void EnterCampOrResume()
+        {
+            if (!_resuming)
+            {
+                EnterCamp();
+                return;
+            }
+            InGame = true;
+            Network.SceneManager.LoadScene(GameScene, LoadSceneMode.Single);
+        }
 
         /// <summary>Host only: take the party to the camp (after starting a session, and after each run).</summary>
         private static void EnterCamp()
@@ -257,8 +302,14 @@ namespace Game.Gameplay
             var nm = NetworkManager.Singleton;
             if (nm == null || nm.IsServer || _leaving) return;
             // We are a client and lost the host (or were refused).
-            Refused = !string.IsNullOrEmpty(nm.DisconnectReason);
-            string reason = Refused ? nm.DisconnectReason : "ホストとの接続が切れました";
+            // A refusal is the host's own reason, before ever being let in. Netcode's transport messages ("[Disconnect
+            // Event]...": the room is gone, could not reach it) and a host closing its room are not refusals: retry.
+            string why = nm.DisconnectReason;
+            bool transport = string.IsNullOrEmpty(why) || why.StartsWith("[Disconnect Event]");
+            Refused = !_connected && !transport;
+            string reason = Refused ? why
+                : _connected ? "ホストとの接続が切れました。ホストが部屋を作り直したら、新しいコードで参加すると続きから遊べます"
+                : "接続できませんでした。ルームコードを確かめて、もう一度お試しください";
             ReturnToLobby(reason);
         }
 
@@ -269,9 +320,17 @@ namespace Game.Gameplay
         private static void OnTransportFailure()
         {
             if (_leaving) return;
-            Debug.LogWarning("[GameSession] Transport failure: back to the title");
-            ReturnToLobby("通信が切れました（回線が不安定だったようです）。もう一度部屋を作って集まってください");
+            // The host keeps the run so the party can carry on in a new room.
+            var nm = NetworkManager.Singleton;
+            bool kept = nm != null && nm.IsServer && InGame && RunDirector.Instance != null && RunDirector.Instance.SuspendForResume();
+            Debug.LogWarning($"[GameSession] Transport failure: back to the title (run kept: {kept})");
+            ReturnToLobby(kept
+                ? "通信が切れました。「続きから部屋を作る」で同じ迷宮の続きへ（新しいルームコードを仲間に伝えてください）"
+                : "通信が切れました（回線が不安定だったようです）。もう一度部屋を作って集まってください");
         }
+
+        /// <summary>Tests (-failat): behave as if the connection broke.</summary>
+        public static void SimulateTransportFailure() => OnTransportFailure();
 
         /// <summary>Best guess of this device's LAN address, for showing to friends who want to join.</summary>
         public static string LocalAddress()

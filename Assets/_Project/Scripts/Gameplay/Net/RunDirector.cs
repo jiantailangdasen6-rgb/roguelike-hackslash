@@ -70,6 +70,9 @@ namespace Game.Gameplay
         public readonly NetworkVariable<int> TrialProgress = new();
         /// <summary>How much of the Lich's floor has fallen (players' movement is clamped to what's left).</summary>
         public readonly NetworkVariable<int> CollapseStage = new();
+        /// <summary>Area times and downs so far (RunSimulation.SplitsText), for the result screen.</summary>
+        public readonly NetworkVariable<FixedString128Bytes> RunSplits = new();
+        private int _splitsVersion = -1;
 
         /// <summary>Host only.</summary>
         public RunSimulation Sim { get; private set; }
@@ -191,9 +194,46 @@ namespace Game.Gameplay
             if (sceneName == GameSession.GameScene) StartRun();
         }
 
+        /// <summary>
+        /// The connection broke mid-run (host): everyone else is kept as a player who left (their character waits for
+        /// them by profile key) and the run is handed to GameSession, to carry on in a new room.
+        /// </summary>
+        public bool SuspendForResume()
+        {
+            if (!IsServer || Sim == null || !Started.Value || Sim.Phase != RunPhase.Playing) return false;
+            foreach (var p in Sim.Players.ToArray())
+                if (p.ClientId != NetworkManager.LocalClientId) Sim.DetachPlayer(p.ClientId, GameSession.LoadoutFor(p.ClientId).playerKey);
+            Sim.Events.Clear();
+            GameSession.Suspend(new GameSession.SuspendedRun { Sim = Sim, Slots = new Dictionary<string, int>(_slotByKey), Online = GameSession.JoinCode != null });
+            Debug.Log($"[RunDirector] Run suspended at {Sim.Elapsed:0}s (area {Sim.Area + 1})");
+            return true;
+        }
+
+        /// <summary>A new room opened straight into a suspended run: the host's character, then the others as they rejoin.</summary>
+        private bool ResumeRun(GameSession.SuspendedRun run)
+        {
+            ulong me = NetworkManager.LocalClientId;
+            var mine = run.Sim.GetPlayer(me);
+            if (mine == null) return false;
+            Sim = run.Sim;
+            DifficultyLevel.Value = Sim.Difficulty;
+            foreach (var (key, slot) in run.Slots) _slotByKey[key] = slot;
+            var loadout = GameSession.LoadoutFor(me);
+            int mySlot = _slotByKey.TryGetValue(loadout.playerKey, out int s) ? s : 0;
+            SpawnPlayer(me, mine, loadout, mySlot);
+            Sim.SyncGear(mine);
+            Sim.Events.Add(new SimEvent(SimEventType.Teleport) { ClientId = me, Pos = mine.Position });
+            Started.Value = true;
+            _startTime = Time.time;
+            Debug.Log($"[RunDirector] Run resumed at {Sim.Elapsed:0}s (area {Sim.Area + 1})");
+            return true;
+        }
+
         private void StartRun()
         {
             if (Started.Value) return;
+            var suspended = GameSession.TakeSuspended();
+            if (suspended != null && ResumeRun(suspended)) return;
 
             DifficultyLevel.Value = ChosenDifficulty();
             Sim = new RunSimulation((ulong)DateTime.UtcNow.Ticks, DifficultyLevel.Value);
@@ -441,6 +481,11 @@ namespace Game.Gameplay
             SetIfChanged(TrialTimer, Mathf.Ceil(Mathf.Max(0f, Sim.TrialTimer)));
             SetIfChanged(TrialProgress, Sim.TrialDone | Sim.TrialTotal << 8);
             SetIfChanged(CollapseStage, Sim.CollapseStage);
+            if (Sim.SplitsVersion != _splitsVersion)
+            {
+                _splitsVersion = Sim.SplitsVersion;
+                RunSplits.Value = new FixedString128Bytes(Sim.SplitsText());
+            }
         }
 
         /// <summary>Round trip to a player in milliseconds (0 for the host's own player and in solo).</summary>

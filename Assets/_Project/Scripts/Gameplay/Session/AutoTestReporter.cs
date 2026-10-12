@@ -18,6 +18,7 @@ namespace Game.Gameplay
         private float _dropAt;
         private float _wipeAt;
         private float _freezeAt;
+        private float _failAt;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Install()
@@ -31,6 +32,7 @@ namespace Game.Gameplay
             if (CommandLine.Has("-dropat")) reporter._dropAt = Time.time + CommandLine.GetFloat("-dropat", 30f);
             if (CommandLine.Has("-wipeat")) reporter._wipeAt = Time.time + CommandLine.GetFloat("-wipeat", 30f);
             if (CommandLine.Has("-freezeat")) reporter._freezeAt = Time.time + CommandLine.GetFloat("-freezeat", 30f);
+            if (CommandLine.Has("-failat")) reporter._failAt = Time.time + CommandLine.GetFloat("-failat", 40f);
             if (CommandLine.GetValue("-screenshot") != null)
             {
                 string times = CommandLine.GetValue("-screenshotat") ?? "20";
@@ -108,6 +110,13 @@ namespace Game.Gameplay
                 float seconds = CommandLine.GetFloat("-freezefor", 3f);
                 Debug.Log($"[AutoTest] freezing for {seconds}s");
                 System.Threading.Thread.Sleep(Mathf.RoundToInt(seconds * 1000f));
+            }
+            // -failat <s> (host): act as if the connection broke mid-run (the run is kept for "続きから", see -autoresume).
+            if (_failAt > 0f && Time.time >= _failAt && NetworkManager.Singleton != null && NetworkManager.Singleton.IsHost && RunDirector.Instance != null && RunDirector.Instance.IsRunning)
+            {
+                _failAt = 0f;
+                Debug.Log("[AutoTest] simulating a transport failure");
+                GameSession.SimulateTransportFailure();
             }
             // -dropat <s> (client): leave the session once; -autojoin/-onlinejoinfile then bring it back (reconnect test).
             if (_dropAt > 0f && Time.time >= _dropAt && NetworkManager.Singleton != null && NetworkManager.Singleton.IsConnectedClient && !NetworkManager.Singleton.IsHost)

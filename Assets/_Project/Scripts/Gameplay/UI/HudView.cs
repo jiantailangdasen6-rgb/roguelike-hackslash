@@ -72,6 +72,7 @@ namespace Game.Gameplay
         private readonly TeamFrame[] _team = new TeamFrame[GameSession.MaxPlayers - 1];
         private readonly List<(string Text, float Until)> _toasts = new();
         private readonly HashSet<string> _tipsShown = new();
+        private GuideHints _guide;
         private readonly StringBuilder _sb = new();
         private ClassId? _shownClass;
         private CanvasGroup _curtain;
@@ -167,6 +168,7 @@ namespace Game.Gameplay
 
             _toastText = UIKit.Label(root, "", 26, TextAnchor.LowerCenter);
             _toastText.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1300f, 220f), new Vector2(0f, 130f));
+            _guide = new GuideHints(root);
 
             _hintText = UIKit.Label(root, "", 22, TextAnchor.LowerLeft, UIKit.MutedText);
             _hintText.rectTransform.Place(new Vector2(0f, 0f), new Vector2(1100f, 110f), new Vector2(24f, 120f));
@@ -333,6 +335,14 @@ namespace Game.Gameplay
                     Toast($"<color=#{hex}>{RoomCatalog.Name(kind)}</color>：{text}");
                     break;
                 }
+                case SimEventType.BellRung:
+                {
+                    var who = NetPlayer.All.Find(p => p.OwnerClientId == e.ClientId);
+                    string name = who != null ? $"<color=#{ColorUtility.ToHtmlStringRGB(who.Color)}>{who.DisplayName}（{who.ClassDef.Name}）</color>" : "仲間";
+                    Debug.Log($"[Bell] rung by client {e.ClientId}, called {e.Int}");
+                    Toast($"{name}が集合の鐘を鳴らした" + (e.Int > 0 ? $"：{e.Int}人が焚き火の間へ" : "（来られる仲間はいなかった）"));
+                    break;
+                }
                 case SimEventType.DoorOpened:
                     if (e.Int == 0) Banner("主の扉が開いた", "覚悟はいいか", 2.4f);
                     else if (e.Int == 2) Banner("宝物庫の扉が開いた", "", 2f);
@@ -496,6 +506,7 @@ namespace Game.Gameplay
             bool choosing = PerkView.IsShowing || (_mapRoot != null && _mapRoot.activeSelf); // the big map hides them too
             _bannerText.enabled = _bannerSub.enabled = !choosing && Time.time < _bannerUntil;
             _toastText.enabled = _centerText.enabled = !choosing;
+            _guide.Update(director, local, choosing);
 
             _toasts.RemoveAll(t => t.Until < Time.time);
             _sb.Clear();

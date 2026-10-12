@@ -35,7 +35,7 @@ namespace Game.Gameplay
             if (!string.IsNullOrEmpty(GameSession.LastJoinCode))
             {
                 _code.text = GameSession.LastJoinCode;
-                if (GameSession.LobbyMessage != null && !GameSession.Refused) _status.text += "　―　「コードで参加」で戻れます";
+                if (GameSession.LobbyMessage != null && !GameSession.Refused && GameSession.Suspended == null) _status.text += "　―　「コードで参加」で戻れます";
             }
             GameSession.LobbyMessage = null;
             if (BagView.LastBankSummary != null)
@@ -59,7 +59,9 @@ namespace Game.Gameplay
             if (CommandLine.Has("-openvault")) VaultView.Open(); // screenshots of the stash
             // Failed connections retry (the host may not be up yet), but a refusal is final.
             if (GameSession.Refused) yield break;
-            if (CommandLine.Has("-autosolo")) GameSession.StartSolo();
+            // -autoresume (tests): a host whose connection broke opens a new room into the same run.
+            if (GameSession.Suspended != null && CommandLine.Has("-autoresume")) ResumeHost();
+            else if (CommandLine.Has("-autosolo")) GameSession.StartSolo();
             else if (CommandLine.Has("-autohost")) HostLan();
             else if (CommandLine.Has("-autojoin")) _autoJoin = CommandLine.GetValue("-autojoin");
             else if (CommandLine.Has("-onlinehost")) HostOnline();
@@ -105,6 +107,15 @@ namespace Game.Gameplay
             var joinOnline = UIKit.Button(root, "コードで参加", 30, () => JoinOnline(_code.text));
             joinOnline.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(380f, 80f), new Vector2(210f, 150f));
 
+            // The host of a run cut off by a broken connection: carry on in a new room.
+            if (GameSession.Suspended != null)
+            {
+                var run = GameSession.Suspended.Sim;
+                var resume = UIKit.Button(root, $"続きから部屋を作る（エリア{run.Area + 1}・{UIKit.FormatTime(run.Elapsed)}）", 30, ResumeHost, UIKit.BloodColor);
+                resume.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(800f, 90f), new Vector2(0f, 360f));
+                _resumeButton = resume;
+            }
+
             if (!GameSession.IsBrowser)
             {
                 var lan = UIKit.Label(root, "同じWi-Fi（LAN）：", 22, TextAnchor.MiddleRight, UIKit.MutedText);
@@ -129,7 +140,7 @@ namespace Game.Gameplay
             var version = UIKit.Label(root, $"ver {GameSession.BuildStamp}", 18, TextAnchor.LowerRight, new Color(1f, 1f, 1f, 0.25f));
             version.rectTransform.Place(new Vector2(1f, 0f), new Vector2(300f, 30f), new Vector2(-16f, 8f));
 
-            EventSystem.current?.SetSelectedGameObject(_soloButton.gameObject);
+            EventSystem.current?.SetSelectedGameObject((_resumeButton != null ? _resumeButton : _soloButton).gameObject);
         }
 
         private static InputField CreateInputField(Transform parent, string initial, string hint)
@@ -148,6 +159,38 @@ namespace Game.Gameplay
         }
 
         // ------------------------------------------------------------------ Session
+
+        private Button _resumeButton;
+
+        /// <summary>A new room (online or LAN, as before) that opens straight into the suspended run.</summary>
+        private async void ResumeHost()
+        {
+            var run = GameSession.Suspended;
+            if (run == null || _busy) return;
+            if (!run.Online)
+            {
+                if (!GameSession.StartLanHost(resume: true)) _status.text = "部屋を作れませんでした（ポート7777が使用中かもしれません）";
+                return;
+            }
+            _busy = true;
+            _status.text = "部屋を準備しています…";
+            try
+            {
+                string code = await GameSession.StartOnlineHostAsync(resume: true);
+                string codeFile = CommandLine.GetValue("-codefile");
+                if (codeFile != null) System.IO.File.WriteAllText(codeFile, code);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogWarning($"[Lobby] Resume host failed: {ex}");
+                _status.text = $"部屋を作れませんでした：{ex.Message}";
+                if (GameSession.Network.IsListening) GameSession.Network.Shutdown();
+            }
+            finally
+            {
+                _busy = false;
+            }
+        }
 
         private void HostLan()
         {

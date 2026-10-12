@@ -9,10 +9,11 @@ namespace Game.Core
     public static class ItemGenerator
     {
         // Common / Magic / Rare / Legendary.
-        // Tuned with Tools/BalanceRun.ps1 (2026-10-12): about one piece per room, fewer whites, a legendary every few rooms.
-        private static readonly float[] BaseRarityWeights = { 50f, 34f, 13f, 3f };
+        // 2026-10-12 (second pass): legendaries had become an every-run thing. Now about 0.4% from a plain monster,
+        // ~2% from an elite, ~5% from a boss; deeper areas and harder difficulties (rarity boost) raise the odds.
+        private static readonly float[] BaseRarityWeights = { 62f, 30f, 7f, 0.4f };
 
-        /// <param name="rarityBoost">0 = normal enemy, 1 = elite, 3 = boss / treasure. Shifts weight toward higher rarities.</param>
+        /// <param name="rarityBoost">0 = normal enemy, 1 = elite, 2.5 = boss / treasure, plus area and difficulty. Shifts weight toward higher rarities.</param>
         /// <param name="minRarity">Floor for guaranteed drops (treasure doors).</param>
         public static ItemInstance Generate(ulong seed, int itemLevel, float rarityBoost = 0f, ClassId owner = ClassId.Warrior, Rarity minRarity = Rarity.Common, EquipSlot? slot = null)
         {
@@ -50,10 +51,11 @@ namespace Game.Core
 
         private static Rarity RollRarity(GameRandom rng, float boost)
         {
-            float common = BaseRarityWeights[0] / (1f + boost);
-            float magic = BaseRarityWeights[1] * (1f + boost * 0.5f);
-            float rare = BaseRarityWeights[2] * (1f + boost * 1.5f);
-            float legendary = BaseRarityWeights[3] * (1f + boost * 2f);
+            boost = UnityEngine.Mathf.Max(-0.5f, boost);
+            float common = BaseRarityWeights[0] / (1f + boost * 0.6f);
+            float magic = BaseRarityWeights[1] * (1f + boost * 0.4f);
+            float rare = BaseRarityWeights[2] * (1f + boost * 1.1f);
+            float legendary = BaseRarityWeights[3] * (1f + boost) * (1f + boost);
             float roll = rng.Value() * (common + magic + rare + legendary);
             if (roll < common) return Rarity.Common;
             if (roll < common + magic) return Rarity.Magic;

@@ -71,6 +71,7 @@ namespace Game.Gameplay
             Set(SimEventType.ItemSalvaged, F.Client | F.Value);
             Set(SimEventType.LegendaryProc, F.Client | F.Int | F.Pos | F.Vec);
             Set(SimEventType.Combo, F.Client | F.Int | F.Pos | F.Value);
+            Set(SimEventType.TrialEvent, F.Int | F.Pos | F.Value | F.Client | F.Id);
             return layout;
         }
 

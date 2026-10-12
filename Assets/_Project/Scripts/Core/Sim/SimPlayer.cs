@@ -43,6 +43,9 @@ namespace Game.Core
         /// <summary>Healing from the rest room's fire not yet shown as a number.</summary>
         public float HealedByFire;
         public bool PhoenixUsed;
+        /// <summary>Id of the bone cage holding this player (0 = free) and how long until it crushes them.</summary>
+        public int CagedBy;
+        public float CageTimer;
 
         // Input edge detection
         public PlayerInput Input;
@@ -216,15 +219,38 @@ namespace Game.Core
         /// <summary>Weariness: the dodge recovers slower.</summary>
         public float DodgeFactor { get; private set; } = 1f;
 
+        private static readonly int[] NoCurses = new int[RewardCatalog.CurseKinds];
+        private IReadOnlyList<int> _curses = NoCurses;
+        private DifficultyDef _difficulty;
+
         public void SetCurses(IReadOnlyList<int> stacks)
         {
+            _curses = stacks;
             Stats.RemoveModifiersFrom(_curseSource);
             int frail = stacks[(int)CurseKind.Frailty], hunted = stacks[(int)CurseKind.Hunted];
             if (frail > 0) Stats.AddModifier(new StatModifier(StatType.MaxHealth, ModifierKind.PercentAdd, -RewardCatalog.FrailtyPerStack * frail), _curseSource);
             if (hunted > 0) Stats.AddModifier(new StatModifier(StatType.DamageTaken, ModifierKind.PercentAdd, RewardCatalog.HuntedPerStack * hunted), _curseSource);
             HealFactor = Mathf.Pow(RewardCatalog.ThirstFactor, stacks[(int)CurseKind.Thirst]);
             DodgeFactor = 1f + RewardCatalog.WearinessPerStack * stacks[(int)CurseKind.Weariness];
+
+            // The difficulty's handicaps ride along with the curses.
+            if (_difficulty != null)
+            {
+                if (_difficulty.Has(DifficultyMod.Frailty))
+                    Stats.AddModifier(new StatModifier(StatType.MaxHealth, ModifierKind.PercentAdd, -DifficultyCatalog.FrailtyFactor), _curseSource);
+                if (_difficulty.Has(DifficultyMod.Thirst)) HealFactor *= DifficultyCatalog.ThirstFactor;
+                if (_difficulty.Has(DifficultyMod.Weariness)) DodgeFactor *= DifficultyCatalog.WearinessFactor;
+            }
             Hp = Mathf.Min(Hp, MaxHp);
+        }
+
+        /// <summary>The run's difficulty: its handicaps (thirst, frailty, weariness) apply to this player.</summary>
+        public void SetDifficulty(DifficultyDef def)
+        {
+            bool fresh = Hp >= MaxHp - 0.01f;
+            _difficulty = def;
+            SetCurses(_curses);
+            if (fresh) Hp = MaxHp;
         }
 
         // ------------------------------------------------------------------ Buffs

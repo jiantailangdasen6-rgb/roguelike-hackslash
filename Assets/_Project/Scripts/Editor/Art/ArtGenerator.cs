@@ -63,6 +63,11 @@ namespace Game.EditorTools.Art
             Character("npc_crone", CampArt.Crone(), HeroArt.FrameSize);
             Character("npc_keeper", CampArt.Gravekeeper(), HeroArt.FrameSize);
             Character("treasure_chest", CampArt.TreasureChest(), EnemyArt.FrameSize);
+            // The bosses' trials.
+            Character("bone_brazier", GimmickArt.BoneBrazier(), EnemyArt.FrameSize);
+            Character("bone_cage", GimmickArt.BoneCage(), EnemyArt.FrameSize);
+            Character("blood_sigil", GimmickArt.BloodSigil(), EnemyArt.FrameSize);
+            Character("soul_vessel", GimmickArt.SoulVessel(), EnemyArt.FrameSize);
 
             foreach (var (name, gen) in ProceduralArt.Effects) Effect(name, gen());
             foreach (var (name, sheet) in PropArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);

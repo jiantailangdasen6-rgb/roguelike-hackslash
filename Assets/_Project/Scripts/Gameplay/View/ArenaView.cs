@@ -73,6 +73,113 @@ namespace Game.Gameplay
             }
 
             foreach (var g in _gimmicks.Values) Animate(g);
+            UpdateAbyss(director);
+        }
+
+        // ------------------------------------------------------------------ The Lich's collapsing floor
+
+        private const int AbyssPixelsPerUnit = 16;
+        private SpriteRenderer _abyss;
+        private SpriteRenderer _abyssWarn;
+        private int _abyssStage;
+        private int _warnStage;
+
+        private void UpdateAbyss(RunDirector director)
+        {
+            int stage = director != null && director.IsSpawned ? director.CollapseStage.Value : 0;
+            if (stage != _abyssStage)
+            {
+                _abyssStage = stage;
+                SetAbyss(ref _abyss, stage > 0 ? AbyssTexture(stage, warn: false) : null, -940);
+            }
+
+            // The next band to fall pulses red while the warning lasts.
+            int warn = director != null && director.IsSpawned && director.Trial.Value == BossTrial.Collapse ? stage + 1 : 0;
+            if (warn != _warnStage)
+            {
+                _warnStage = warn;
+                SetAbyss(ref _abyssWarn, warn > 0 ? AbyssTexture(warn, warn: true) : null, -939);
+            }
+            if (_abyssWarn != null)
+                _abyssWarn.color = new Color(1f, 1f, 1f, 0.45f + 0.4f * Mathf.Sin(Time.time * 12f));
+        }
+
+        private void SetAbyss(ref SpriteRenderer renderer, Texture2D texture, int order)
+        {
+            if (renderer != null)
+            {
+                Destroy(renderer.sprite.texture);
+                Destroy(renderer.gameObject);
+                renderer = null;
+            }
+            if (texture == null) return;
+            var bounds = RunSimulation.DefaultBounds;
+            var go = new GameObject("Abyss");
+            go.transform.SetParent(transform, false);
+            go.transform.localPosition = bounds.min;
+            renderer = go.AddComponent<SpriteRenderer>();
+            renderer.sprite = UnityEngine.Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, AbyssPixelsPerUnit);
+            renderer.sortingOrder = order;
+        }
+
+        /// <summary>
+        /// Pixel-art void over the fallen floor: a crumbled stone rim, then darkness with faint drifting motes.
+        /// The warning version is a red band (only the strip about to fall).
+        /// </summary>
+        private static Texture2D AbyssTexture(int stage, bool warn)
+        {
+            var bounds = RunSimulation.DefaultBounds;
+            var safe = RunSimulation.SafeArea(bounds, stage);
+            var before = RunSimulation.SafeArea(bounds, stage - 1);
+            int w = Mathf.RoundToInt(bounds.width * AbyssPixelsPerUnit), h = Mathf.RoundToInt(bounds.height * AbyssPixelsPerUnit);
+            var pixels = new Color32[w * h];
+            var rim = new Color32(70, 60, 84, 255);
+            var rimLight = new Color32(112, 100, 128, 255);
+            for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+            {
+                var p = bounds.min + new Vector2((x + 0.5f) / AbyssPixelsPerUnit, (y + 0.5f) / AbyssPixelsPerUnit);
+                // Chunky jitter (4-pixel cells) so the edge looks broken, not ruled.
+                float jitter = (Hash(x / 4, y / 4, stage) - 0.5f) * 0.5f;
+                float outside = Outside(safe, p) + jitter;
+                if (outside <= 0f) continue;
+                if (warn)
+                {
+                    if (Outside(before, p) + jitter > 0f) continue; // already fallen
+                    pixels[y * w + x] = outside < 0.15f ? new Color32(255, 120, 90, 200) : new Color32(200, 30, 30, 110);
+                    continue;
+                }
+                Color32 c;
+                if (outside < 0.12f) c = Hash(x, y, 7) < 0.5f ? rimLight : rim;
+                else if (outside < 0.24f) c = new Color32(18, 12, 26, 255); // the cliff's shadow
+                else
+                {
+                    // A violet glow rising from below the broken edge, fading into black.
+                    float deep = Mathf.Clamp01((outside - 0.24f) / 1.4f);
+                    float glow = (1f - deep) * (1f - deep);
+                    // Banded (pixel-art) rather than smooth.
+                    glow = Mathf.Floor(glow * 5f) / 5f;
+                    c = new Color32((byte)(4 + 70 * glow), (byte)(2 + 22 * glow), (byte)(8 + 120 * glow), 255);
+                    float mote = Hash(x, y, 13);
+                    if (mote > 0.994f) c = new Color32(120, 90, 200, 255);
+                    else if (mote > 0.985f) c = new Color32(48, 36, 84, 255);
+                }
+                pixels[y * w + x] = c;
+            }
+            var tex = new Texture2D(w, h, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
+            tex.SetPixels32(pixels);
+            tex.Apply();
+            return tex;
+        }
+
+        private static float Outside(Rect r, Vector2 p) =>
+            Mathf.Max(Mathf.Max(r.xMin - p.x, p.x - r.xMax), Mathf.Max(r.yMin - p.y, p.y - r.yMax));
+
+        private static float Hash(int x, int y, int salt)
+        {
+            uint h = (uint)(x * 374761393 + y * 668265263 + salt * 2246822519);
+            h = (h ^ (h >> 13)) * 1274126177u;
+            return ((h ^ (h >> 16)) & 0xFFFF) / 65535f;
         }
 
         private void ShowArea(int area)

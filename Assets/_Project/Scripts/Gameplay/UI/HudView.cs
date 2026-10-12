@@ -47,6 +47,7 @@ namespace Game.Gameplay
         private UIKit.Bar _bossBar;
         private GameObject _bossRoot;
         private Text _bossName;
+        private Text _trialText;
         private Text _centerText;
         private Text _bannerText;
         private Text _bannerSub;
@@ -114,6 +115,9 @@ namespace Game.Gameplay
             _bossName.rectTransform.Stretch(2f);
             _bossBar = UIKit.CreateBar(boss.transform, "BossHp", new Color(0.6f, 0.08f, 0.1f), new Color(0.1f, 0.02f, 0.03f));
             _bossBar.Root.Place(new Vector2(0.5f, 0f), new Vector2(860f, 14f), new Vector2(0f, 8f));
+            // What the boss's trial asks of the team (or of you, shut in a cage).
+            _trialText = UIKit.Title(root, "", 34, TextAnchor.UpperCenter, new Color(1f, 0.86f, 0.55f));
+            _trialText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1200f, 50f), new Vector2(0f, -100f));
 
             // Bottom: skills
             string[] keys = { "左クリック", "Q", "E", "Space" };
@@ -130,8 +134,10 @@ namespace Game.Gameplay
                 shade.rectTransform.anchorMax = new Vector2(1f, 0f);
                 shade.rectTransform.offsetMin = Vector2.zero;
                 shade.rectTransform.offsetMax = Vector2.zero;
-                var time = UIKit.Title(slot.transform, "", 32, TextAnchor.MiddleCenter, Color.white);
-                time.rectTransform.Stretch();
+                // Seconds left sit in the top-right corner, clear of the skill's name.
+                var time = UIKit.Title(slot.transform, "", 28, TextAnchor.UpperRight, new Color(1f, 0.92f, 0.75f));
+                time.rectTransform.Stretch(8f);
+                time.rectTransform.offsetMax = new Vector2(-10f, -2f);
                 _skills[i] = new SkillSlot { Key = key, Name = name, Shade = shade, Time = time };
             }
 
@@ -239,6 +245,22 @@ namespace Game.Gameplay
                 RoomObjective.Boss => $"{AreaNames[area]} ─ 主の間",
                 RoomObjective.Rest => $"{AreaNames[area]} ─ 焚き火の間",
                 _ => $"{AreaNames[area]} ─ 第{room % RunSimulation.RoomsPerArea + 1}の間",
+            };
+        }
+
+        /// <summary>The banner under the boss bar: what to do now (empty when nothing special is going on).</summary>
+        private static string TrialText(RunDirector d, NetPlayer local)
+        {
+            if (local != null && local.Caged.Value) return "<color=#ffd59a>檻に閉じ込められた！ 攻撃して壊せ</color>";
+            int progress = d.TrialProgress.Value, done = progress & 0xFF, total = progress >> 8;
+            int seconds = Mathf.CeilToInt(d.TrialTimer.Value);
+            return d.Trial.Value switch
+            {
+                BossTrial.BoneWard => $"骨の燭台を壊して加護を破れ　<color=#ffffff>{done}/{total}</color>",
+                BossTrial.BloodRitual => $"<color=#ff8a7a>血の紋章の上に立って、すべて灯せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Collapse => $"<color=#c8b0ff>床が崩れる！ 中央へ　{seconds}</color>",
+                BossTrial.Phylactery => $"<color=#9ae8ff>魂の器を壊せ！</color>　<color=#ffffff>残り {seconds}秒</color>",
+                _ => "",
             };
         }
 
@@ -410,6 +432,7 @@ namespace Game.Gameplay
                 var def = EnemyCatalog.Get(director.BossType.Value);
                 _bossName.text = boss < 0.5f ? $"{def.Name}  <size=18><color=#ff7060>激昂</color></size>" : def.Name;
             }
+            _trialText.text = TrialText(director, local);
 
             if (local != null)
             {
@@ -517,6 +540,7 @@ namespace Game.Gameplay
             bool cooling = remaining > 0.05f;
             slot.Shade.rectTransform.anchorMax = new Vector2(1f, cooling ? Mathf.Clamp01(remaining / Mathf.Max(0.1f, max)) : 0f);
             slot.Time.text = cooling ? remaining.ToString(remaining < 1f ? "0.0" : "0") : "";
+            slot.Name.color = cooling ? new Color(0.62f, 0.6f, 0.58f) : Color.white;
         }
 
         private static string ObjectiveText(RunDirector d)

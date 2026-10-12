@@ -587,14 +587,14 @@ namespace Game.Core
         public void DamageEnemy(int index, float damage, SimPlayer attacker, HitFlags flags, Vector2 pushDirection, float knockback)
         {
             ref var e = ref Enemies[index];
-            if (e.Dead) return;
+            if (e.Dead || e.Def.Untargetable) return;
 
             bool disabled = e.Frozen > 0f || e.Marked > 0f || e.Stunned > 0f;
             if (attacker != null)
             {
                 bool direct = (flags & HitFlags.DamageOverTime) == 0;
                 if (direct && disabled && e.StatusBy != 0 && e.StatusBy != attacker.ClientId + 1) flags |= HitFlags.Teamwork;
-                if (direct && disabled && e.Def.Armored) flags |= HitFlags.ArmorBreak;
+                if (direct && disabled && IsArmored(e)) flags |= HitFlags.ArmorBreak;
                 if ((flags & HitFlags.DamageOverTime) == 0 && RollCrit(attacker, disabled))
                 {
                     damage *= CritMultiplier(attacker);
@@ -622,7 +622,7 @@ namespace Game.Core
             }
             if (e.Marked > 0f) damage *= 1f + e.MarkBonus;
             // Armoured monsters shrug off blows until a teammate freezes, stuns or marks them.
-            if (e.Def.Armored && !disabled && (flags & HitFlags.DamageOverTime) == 0)
+            if (IsArmored(e) && !disabled && (flags & HitFlags.DamageOverTime) == 0)
             {
                 damage *= EnemyCatalog.ArmorFactor;
                 flags |= HitFlags.Blocked;
@@ -649,6 +649,12 @@ namespace Game.Core
                         if (j != self) DamageEnemy(j, splashDamage, attacker, HitFlags.None, (Enemies[j].Position - center).normalized, 3f);
                     e = ref Enemies[index];
                 }
+            }
+
+            if (e.Def.Boss)
+            {
+                damage = BossDamage(index, damage, ref flags);
+                e = ref Enemies[index];
             }
 
             e.Health -= damage;
@@ -706,6 +712,8 @@ namespace Game.Core
 
                 Kills++;
                 RollLoot(e);
+                if (!def.Boss && DifficultyDef.Has(DifficultyMod.Vengeance))
+                    QueueBurst(e.Position, DifficultyCatalog.VengeanceRadius, DifficultyCatalog.VengeanceDelay, DifficultyCatalog.VengeanceDamage * EnemyDamageScale, AreaKind.SoulBurst);
                 int xp = def.Xp * (e.Elite ? EnemyCatalog.EliteXpMultiplier : 1);
                 if (def.Boss)
                 {

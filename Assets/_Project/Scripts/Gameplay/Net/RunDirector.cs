@@ -57,6 +57,12 @@ namespace Game.Gameplay
         public readonly NetworkVariable<int> LayoutId = new();
         public readonly NetworkVariable<Difficulty> DifficultyLevel = new(Difficulty.Normal);
         public readonly NetworkVariable<EnemyType> BossType = new();
+        /// <summary>The boss's trial in progress, seconds left on it, and its progress (done | total << 8).</summary>
+        public readonly NetworkVariable<BossTrial> Trial = new();
+        public readonly NetworkVariable<float> TrialTimer = new();
+        public readonly NetworkVariable<int> TrialProgress = new();
+        /// <summary>How much of the Lich's floor has fallen (players' movement is clamped to what's left).</summary>
+        public readonly NetworkVariable<int> CollapseStage = new();
 
         /// <summary>Host only.</summary>
         public RunSimulation Sim { get; private set; }
@@ -128,6 +134,7 @@ namespace Game.Gameplay
             DifficultyLevel.Value = ChosenDifficulty();
             Sim = new RunSimulation((ulong)DateTime.UtcNow.Ticks, null, DifficultyLevel.Value);
             Sim.DropChanceScale = CommandLine.GetFloat("-lootrate", 1f);
+            Sim.BossStartHealth = CommandLine.GetFloat("-bosshp", 1f);
             int slot = 0;
             foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
             {
@@ -301,6 +308,7 @@ namespace Game.Gameplay
                 SetIfChanged(p.Valor, sp.ValorTimer > 0f);
                 SetIfChanged(p.Picks, sp.PicksLeft);
                 SetIfChanged(p.Legendary, sp.AnyLegendaryEquipped);
+                SetIfChanged(p.Caged, sp.CagedBy != 0);
             }
 
             var room = Sim.Room;
@@ -328,6 +336,10 @@ namespace Game.Gameplay
             SetIfChanged(RoomsCleared, Sim.RoomsCleared);
             SetIfChanged(LayoutId, Sim.Layout.Id);
             SetIfChanged(BossType, Sim.AreaBoss);
+            SetIfChanged(Trial, Sim.ActiveTrial);
+            SetIfChanged(TrialTimer, Mathf.Ceil(Mathf.Max(0f, Sim.TrialTimer)));
+            SetIfChanged(TrialProgress, Sim.TrialDone | Sim.TrialTotal << 8);
+            SetIfChanged(CollapseStage, Sim.CollapseStage);
         }
 
         private float BossHealthFraction()

@@ -13,7 +13,7 @@ namespace Game.Gameplay
     {
         // Dark-fantasy palette: near-black panels, tarnished gold trim, blood red accents.
         public static readonly Color PanelColor = new(0.055f, 0.045f, 0.06f, 0.96f);
-        public static readonly Color ButtonColor = new(0.17f, 0.1f, 0.11f, 1f);
+        public static readonly Color ButtonColor = new(0.24f, 0.14f, 0.15f, 1f);
         public static readonly Color AccentColor = new(0.88f, 0.7f, 0.34f, 1f);
         public static readonly Color GoldTrim = new(0.55f, 0.42f, 0.2f, 1f);
         public static readonly Color BloodColor = new(0.62f, 0.1f, 0.1f, 1f);
@@ -57,13 +57,29 @@ namespace Game.Gameplay
             }
         }
 
-        /// <summary>A dark panel with a thin gold border; returns the inner panel to put content in.</summary>
+        /// <summary>
+        /// A dark panel with a gold border, a soft top-to-bottom shade, an inner shadow and studded corners;
+        /// returns the inner panel to put content in. The outer image keeps the border colour (selection tints it).
+        /// </summary>
         public static Image Framed(Transform parent, string name, Color? fill = null, Color? border = null)
         {
             var outer = Panel(parent, name, border ?? GoldTrim);
             var inner = Panel(outer.transform, "Inner", fill ?? PanelColor);
+            inner.sprite = ShadeSprite;
             inner.rectTransform.Stretch(2f);
+            AddTrim(outer.transform, GoldTrim);
             return inner;
+        }
+
+        /// <summary>Inner shadow, bevel and corner studs over a panel or button (doesn't catch clicks).</summary>
+        public static Image AddTrim(Transform parent, Color studs)
+        {
+            var trim = Panel(parent, "Trim", studs);
+            trim.sprite = TrimSprite;
+            trim.type = Image.Type.Sliced;
+            trim.raycastTarget = false;
+            trim.rectTransform.Stretch();
+            return trim;
         }
 
         public static RectTransform Outer(this Image framedInner) => (RectTransform)framedInner.transform.parent;
@@ -145,9 +161,17 @@ namespace Game.Gameplay
             return label;
         }
 
+        /// <summary>A bevelled button with a gold rim: the fill (tinted <paramref name="color"/>) brightens on hover.</summary>
         public static Button Button(Transform parent, string text, int fontSize, UnityAction onClick, Color? color = null)
         {
             var image = Panel(parent, "Button", color ?? ButtonColor);
+            image.sprite = BevelSprite;
+            image.type = Image.Type.Sliced;
+            var rim = Panel(image.transform, "Rim", GoldTrim);
+            rim.sprite = RimSprite;
+            rim.type = Image.Type.Sliced;
+            rim.raycastTarget = false;
+            rim.rectTransform.Stretch();
             var button = image.gameObject.AddComponent<Button>();
             var colors = button.colors;
             colors.highlightedColor = new Color(1.25f, 1.25f, 1.25f);
@@ -190,6 +214,71 @@ namespace Game.Gameplay
 
         // ------------------------------------------------------------------ Runtime-generated UI shapes
 
+        // ------------------------------------------------------------------ Frame sprites (generated, pixel-art sized: 1 texel = 2 UI px)
+
+        private const float FramePixelsPerUnit = 50f;
+        private static Sprite _shade, _trim, _bevel, _rim;
+
+        /// <summary>Vertical shade for panel fills: full colour at the top, a little darker at the bottom.</summary>
+        public static Sprite ShadeSprite => _shade != null ? _shade : _shade = PixelSprite(4, 32, 0, (x, y, w, h) =>
+        {
+            float v = Mathf.Lerp(0.8f, 1f, y / (h - 1f));
+            return new Color(v, v, v, 1f);
+        });
+
+        /// <summary>Panel overlay: transparent centre, inner shadow and bevel, studded corners (tinted gold).</summary>
+        public static Sprite TrimSprite => _trim != null ? _trim : _trim = PixelSprite(24, 24, 7, (x, y, w, h) =>
+        {
+            int dx = Mathf.Min(x, w - 1 - x), dy = Mathf.Min(y, h - 1 - y), d = Mathf.Min(dx, dy);
+            bool corner = dx <= 4 && dy <= 4;
+            if (corner)
+            {
+                // A diamond stud with an L-shaped bracket around it.
+                int cx = Mathf.Abs(dx - 2), cy = Mathf.Abs(dy - 2);
+                if (cx + cy <= 1) return Color.white;
+                if (cx + cy == 2) return new Color(0f, 0f, 0f, 0.8f);
+                if ((dx == 0 || dy == 0) && dx + dy <= 5) return new Color(0.75f, 0.75f, 0.75f, 1f);
+            }
+            if (d == 1) return new Color(0f, 0f, 0f, 0.55f);              // shadow just inside the rim
+            if (d == 2) return y > h / 2 ? new Color(1f, 1f, 1f, 0.07f) : new Color(0f, 0f, 0f, 0.2f); // bevel
+            return Color.clear;
+        });
+
+        /// <summary>Button fill: lit top edge, shaded bottom edge (tinted by the button colour).</summary>
+        public static Sprite BevelSprite => _bevel != null ? _bevel : _bevel = PixelSprite(16, 16, 4, (x, y, w, h) =>
+        {
+            // Texels can't go above 1, so the body sits a little below full colour and the top edge lights up to it.
+            int dx = Mathf.Min(x, w - 1 - x), dy = Mathf.Min(y, h - 1 - y);
+            if (dx == 0 && dy == 0) return Color.clear; // clipped corner (matches the rim)
+            float v = Mathf.Lerp(0.66f, 0.86f, y / (h - 1f));
+            if (y == h - 2) v = 1f;    // highlight under the rim
+            if (y == 1) v = 0.42f;     // shadow above the rim
+            return new Color(v, v, v, 1f);
+        });
+
+        /// <summary>Button rim: dark outline, a gold line, notched corners.</summary>
+        public static Sprite RimSprite => _rim != null ? _rim : _rim = PixelSprite(16, 16, 4, (x, y, w, h) =>
+        {
+            int dx = Mathf.Min(x, w - 1 - x), dy = Mathf.Min(y, h - 1 - y), d = Mathf.Min(dx, dy);
+            if (dx == 0 && dy == 0) return Color.clear;                    // clipped corner
+            if (d == 0) return new Color(0.05f, 0.03f, 0.03f, 0.95f);
+            if (d == 1) return dx == 1 && dy == 1 ? new Color(1.2f, 1.2f, 1.1f, 1f) : Color.white;
+            return Color.clear;
+        });
+
+        /// <summary>A point-filtered sprite drawn texel by texel; <paramref name="border"/> texels on each side for 9-slicing.</summary>
+        private static Sprite PixelSprite(int w, int h, int border, Func<int, int, int, int, Color> paint)
+        {
+            var tex = new Texture2D(w, h, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
+            var pixels = new Color[w * h];
+            for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                pixels[y * w + x] = paint(x, y, w, h);
+            tex.SetPixels(pixels);
+            tex.Apply();
+            return Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(0.5f, 0.5f), FramePixelsPerUnit, 0, SpriteMeshType.FullRect, new Vector4(border, border, border, border));
+        }
+
         private static Sprite _ring;
         private static Sprite _arrow;
         private static Sprite _disc;
@@ -229,6 +318,28 @@ namespace Game.Gameplay
             tex.SetPixels32(pixels);
             tex.Apply();
             return Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 100f);
+        }
+
+        /// <summary>
+        /// Stacks two text blocks (description, then comparison) from <paramref name="top"/> down, shrinking the type
+        /// until both end above <paramref name="bottom"/> - long legendary texts never run under the buttons.
+        /// Both rects must be anchored top-left with their width set.
+        /// </summary>
+        public static void Flow(Text first, Text second, float top, float bottom, int firstSize, int secondSize, float gap = 14f)
+        {
+            for (int shrink = 0; shrink <= 8; shrink++)
+            {
+                first.fontSize = Mathf.Max(14, firstSize - shrink);
+                second.fontSize = Mathf.Max(13, secondSize - shrink);
+                float h1 = first.preferredHeight, h2 = string.IsNullOrEmpty(second.text) ? 0f : second.preferredHeight;
+                var p1 = first.rectTransform.anchoredPosition;
+                first.rectTransform.anchoredPosition = new Vector2(p1.x, top);
+                first.rectTransform.sizeDelta = new Vector2(first.rectTransform.sizeDelta.x, h1);
+                var p2 = second.rectTransform.anchoredPosition;
+                second.rectTransform.anchoredPosition = new Vector2(p2.x, top - h1 - gap);
+                second.rectTransform.sizeDelta = new Vector2(second.rectTransform.sizeDelta.x, h2);
+                if (top - h1 - gap - h2 >= bottom) return;
+            }
         }
 
         public static string FormatTime(float seconds)

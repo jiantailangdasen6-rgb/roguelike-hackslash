@@ -16,6 +16,11 @@ namespace Game.Core
         Lich,
         PowderKeg,
         TreasureChest,
+        // Objects of the bosses' trials
+        BoneBrazier,  // feeds the Bone King's ward
+        BoneCage,     // closes around a player
+        BloodSigil,   // a rune to light by standing on it
+        SoulVessel,   // the Lich's phylactery
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -36,6 +41,7 @@ namespace Game.Core
         Rain,          // circles drop on every player (+Extra random spots)
         Blink,         // vanishes and reappears inside the telegraphed circle, hitting there
         SelfDestruct,  // bursts (SelfCircle) and dies
+        Cage,          // a bone cage closes on whoever stands in the circle (teammates break it open)
     }
 
     public sealed class EnemyAttack
@@ -74,6 +80,8 @@ namespace Game.Core
         public bool Flying;   // ignores obstacles, no ground shadow contact
         public bool Armored;  // takes much less damage unless frozen, stunned or marked
         public bool Prop;     // a breakable object, not a monster (no AI, no XP)
+        public bool Untargetable; // attacks pass through it (floor runes)
+        public bool Flat;     // drawn on the floor beneath everything
         public string Title;  // boss subtitle
         public EnemyAttack[] Attacks;
     }
@@ -125,6 +133,7 @@ namespace Game.Core
                     new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 3.2f, Range = 3f, Windup = 1.1f, Recover = 0.9f, Damage = 30f },
                     new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 9f, SizeB = 1.6f, Range = 9f, Windup = 1.0f, Recover = 1.0f, Damage = 24f, ProjectileSpeed = 18f },
                     new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 3 },
+                    new EnemyAttack { Kind = AttackKind.Cage, Shape = AttackShape.Circle, SizeA = 1.15f, Range = 99f, Windup = 1.0f, Recover = 0.5f },
                 },
             },
             new()
@@ -199,6 +208,28 @@ namespace Game.Core
             {
                 // Rest rooms: a few hits break it open and souls spill out (the team's XP).
                 Type = EnemyType.TreasureChest, Name = "宝箱", Sheet = "treasure_chest", Health = 30f, Speed = 0f, Radius = 0.55f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // Bone King: while any stands, his ward holds.
+                Type = EnemyType.BoneBrazier, Name = "骨の燭台", Sheet = "bone_brazier", Health = 70f, Speed = 0f, Radius = 0.5f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                Type = EnemyType.BoneCage, Name = "骨の檻", Sheet = "bone_cage", Health = 55f, Speed = 0f, Radius = 0.6f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // Health carries how far it is lit (0..1).
+                Type = EnemyType.BloodSigil, Name = "血の紋章", Sheet = "blood_sigil", Health = 1f, Speed = 0f, Radius = 0.3f, Xp = 0, Prop = true, Untargetable = true, Flat = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                Type = EnemyType.SoulVessel, Name = "魂の器", Sheet = "soul_vessel", Health = 260f, Speed = 0f, Radius = 0.55f, Xp = 0, Prop = true,
                 Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };

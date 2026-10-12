@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Game.Core
 {
     public enum Difficulty : byte
@@ -6,6 +8,28 @@ namespace Game.Core
         Normal,
         Hard,
         Nightmare,
+    }
+
+    /// <summary>
+    /// What a difficulty changes, named so the team can prepare for it: strengths given to the monsters and
+    /// handicaps laid on the players. Shown at the camp's tablet and on the HUD.
+    /// </summary>
+    [System.Flags]
+    public enum DifficultyMod
+    {
+        None = 0,
+        // Monsters
+        IronGuard = 1 << 0,  // elites are armoured: freeze, stun or mark them to break the guard
+        Ferocity = 1 << 1,   // attacks come quicker (shorter telegraphs)
+        Vengeance = 1 << 2,  // monsters burst a moment after dying
+        Swiftness = 1 << 3,  // monsters move faster
+        LordsWrath = 1 << 4, // bosses' trials are harsher
+        // Players
+        Thirst = 1 << 8,     // healing weaker
+        Frailty = 1 << 9,    // max HP down
+        Weariness = 1 << 10, // dodge recovers slower
+        // Help on the easiest setting
+        Mercy = 1 << 16,     // teammates get up faster
     }
 
     /// <summary>Chosen by the host before a run. Scales the monsters and the soul-shard reward.</summary>
@@ -19,20 +43,86 @@ namespace Game.Core
         public float EnemyCount;
         public float EliteChance;
         public float Shards;
+        /// <summary>Better gear: shifts drop rarity upward (0 = normal).</summary>
+        public float LootBoost;
+        public DifficultyMod Mods;
         /// <summary>Needs a victory on this difficulty first (null = always open).</summary>
         public Difficulty? UnlockedBy;
+
+        public bool Has(DifficultyMod mod) => (Mods & mod) != 0;
     }
 
     public static class DifficultyCatalog
     {
+        public const float FerocityWindup = 0.8f;
+        public const float SwiftnessSpeed = 1.2f;
+        public const float ThirstFactor = 0.6f;
+        public const float FrailtyFactor = 0.25f;
+        public const float WearinessFactor = 1.4f;
+        public const float MercyRevive = 1.6f;
+        public const float VengeanceRadius = 1.4f;
+        public const float VengeanceDelay = 1.1f;
+        public const float VengeanceDamage = 14f;
+
+        private const DifficultyMod HardMods = DifficultyMod.IronGuard | DifficultyMod.Ferocity | DifficultyMod.Thirst;
+
         public static readonly DifficultyDef[] All =
         {
-            new() { Id = Difficulty.Easy, Name = "見習い", Text = "魔物が弱く数も少ない。まずは迷宮に慣れたい人に", EnemyHealth = 0.7f, EnemyDamage = 0.6f, EnemyCount = 0.85f, EliteChance = 0.03f, Shards = 0.7f },
+            new() { Id = Difficulty.Easy, Name = "見習い", Text = "魔物が弱く数も少ない。まずは迷宮に慣れたい人に", EnemyHealth = 0.7f, EnemyDamage = 0.6f, EnemyCount = 0.85f, EliteChance = 0.03f, Shards = 0.7f, LootBoost = -0.3f, Mods = DifficultyMod.Mercy },
             new() { Id = Difficulty.Normal, Name = "標準", Text = "本来の迷宮", EnemyHealth = 1f, EnemyDamage = 1f, EnemyCount = 1f, EliteChance = 0.05f, Shards = 1f },
-            new() { Id = Difficulty.Hard, Name = "熟練", Text = "魔物が硬く、痛く、多い。魂の欠片 1.5倍", EnemyHealth = 1.35f, EnemyDamage = 1.35f, EnemyCount = 1.15f, EliteChance = 0.08f, Shards = 1.5f },
-            new() { Id = Difficulty.Nightmare, Name = "冥府", Text = "生きて帰った者はいない。魂の欠片 2.2倍（熟練を踏破すると解放）", EnemyHealth = 1.8f, EnemyDamage = 1.7f, EnemyCount = 1.3f, EliteChance = 0.12f, Shards = 2.2f, UnlockedBy = Difficulty.Hard },
+            new() { Id = Difficulty.Hard, Name = "熟練", Text = "魂の欠片 1.5倍\n良い装備が出やすい", EnemyHealth = 1.15f, EnemyDamage = 1.15f, EnemyCount = 1.1f, EliteChance = 0.08f, Shards = 1.5f, LootBoost = 0.6f, Mods = HardMods },
+            new()
+            {
+                Id = Difficulty.Nightmare, Name = "冥府", Text = "魂の欠片 2.2倍\n伝説が出やすい\n（熟練を踏破すると解放）", EnemyHealth = 1.3f, EnemyDamage = 1.3f, EnemyCount = 1.25f, EliteChance = 0.12f, Shards = 2.2f, LootBoost = 1.2f,
+                Mods = HardMods | DifficultyMod.Vengeance | DifficultyMod.Swiftness | DifficultyMod.LordsWrath | DifficultyMod.Frailty | DifficultyMod.Weariness,
+                UnlockedBy = Difficulty.Hard,
+            },
         };
 
         public static DifficultyDef Get(Difficulty d) => All[(int)d < All.Length ? (int)d : 1];
+
+        public static readonly DifficultyMod[] ModOrder =
+        {
+            DifficultyMod.IronGuard, DifficultyMod.Ferocity, DifficultyMod.Vengeance, DifficultyMod.Swiftness, DifficultyMod.LordsWrath,
+            DifficultyMod.Thirst, DifficultyMod.Frailty, DifficultyMod.Weariness, DifficultyMod.Mercy,
+        };
+
+        /// <summary>Strengths of the monsters (red) as opposed to the players' handicaps (purple) and help (green).</summary>
+        public static bool IsMonsterMod(DifficultyMod m) => (int)m < 1 << 8;
+        public static bool IsHelp(DifficultyMod m) => (int)m >= 1 << 16;
+
+        public static string ModName(DifficultyMod m) => m switch
+        {
+            DifficultyMod.IronGuard => "鉄の守り",
+            DifficultyMod.Ferocity => "猛り",
+            DifficultyMod.Vengeance => "怨念",
+            DifficultyMod.Swiftness => "俊足",
+            DifficultyMod.LordsWrath => "主の怒り",
+            DifficultyMod.Thirst => "渇き",
+            DifficultyMod.Frailty => "脆い身体",
+            DifficultyMod.Weariness => "重い足",
+            DifficultyMod.Mercy => "女神の慈悲",
+            _ => "",
+        };
+
+        public static string ModText(DifficultyMod m) => m switch
+        {
+            DifficultyMod.IronGuard => "精鋭が鎧をまとう。凍結・気絶・印で崩す",
+            DifficultyMod.Ferocity => $"魔物の攻撃の予兆が{(1f - FerocityWindup) * 100f:0}%短い",
+            DifficultyMod.Vengeance => "倒した魔物が少し後に爆ぜる",
+            DifficultyMod.Swiftness => $"魔物の足が{(SwiftnessSpeed - 1f) * 100f:0}%速い",
+            DifficultyMod.LordsWrath => "主の試練が厳しくなる",
+            DifficultyMod.Thirst => $"回復量 −{(1f - ThirstFactor) * 100f:0}%",
+            DifficultyMod.Frailty => $"最大HP −{FrailtyFactor * 100f:0}%",
+            DifficultyMod.Weariness => $"回避の再使用 +{(WearinessFactor - 1f) * 100f:0}%",
+            DifficultyMod.Mercy => "倒れた仲間が早く起きる",
+            _ => "",
+        };
+
+        public static IEnumerable<DifficultyMod> ModsOf(DifficultyDef def)
+        {
+            foreach (var m in ModOrder)
+                if (def.Has(m)) yield return m;
+        }
     }
 }

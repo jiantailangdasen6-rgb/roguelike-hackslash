@@ -22,6 +22,7 @@ namespace Game.Gameplay
             public SpriteRenderer Icon;
             public SpriteRenderer Ice;
             public Light2D Glow;
+            public SpriteRenderer Ward;
             public EnemyType Type;
             public EnemyAnim Anim = (EnemyAnim)255;
             public int SeenFrame;
@@ -71,12 +72,14 @@ namespace Game.Gameplay
             return away;
         }
 
-        public Vector2? Nearest(Vector2 position)
+        /// <summary>Closest thing to hit (floor runes don't count). With <paramref name="only"/>: closest of that kind, unlit if it's a sigil.</summary>
+        public Vector2? Nearest(Vector2 position, EnemyType? only = null)
         {
             Vector2? best = null;
             float bestSq = float.MaxValue;
             foreach (var v in _visuals.Values)
             {
+                if (only.HasValue ? v.Type != only.Value || v.Anim == EnemyAnim.Walk && v.Type == EnemyType.BloodSigil : EnemyCatalog.Get(v.Type).Untargetable) continue;
                 Vector2 p = v.Root.transform.position;
                 float sq = (p - position).sqrMagnitude;
                 if (sq < bestSq)
@@ -225,8 +228,9 @@ namespace Game.Gameplay
             }
 
             var r = v.Animator.Renderer;
-            r.flipX = s.FacingLeft;
-            r.sortingOrder = SortOrder(t.position.y);
+            var def = EnemyCatalog.Get(s.Type);
+            r.flipX = s.FacingLeft && !def.Prop;
+            r.sortingOrder = def.Flat ? -930 : SortOrder(t.position.y);
 
             if (s.Anim != v.Anim)
             {
@@ -252,6 +256,7 @@ namespace Game.Gameplay
             else if (s.Elite) tint = new Color(1f, 0.82f, 0.7f);
             // Wraiths are half-there, and nearly vanish while gathering for a blink.
             if (s.Type == EnemyType.Wraith) tint.a = s.Anim == EnemyAnim.Windup ? 0.3f : 0.78f;
+            TrialLook(v, s, def, ref tint);
             r.color = tint;
 
             // Status icon over the head: red mark or spinning stun stars.
@@ -267,6 +272,53 @@ namespace Game.Gameplay
         }
 
         public static int SortOrder(float y) => Mathf.RoundToInt(-y * 32f);
+
+        /// <summary>
+        /// Boss trials: a warded boss sits in a pulsing ring (bone white for the King, blood for the Bishop) and the
+        /// Lich turns half-there while his soul hides in the vessel; blood sigils brighten as they are lit.
+        /// </summary>
+        private static void TrialLook(Visual v, in EnemyRenderState s, EnemyDef def, ref Color tint)
+        {
+            var director = RunDirector.Instance;
+            var trial = director != null && director.IsSpawned ? director.Trial.Value : BossTrial.None;
+            if (def.Boss)
+            {
+                bool ring = trial is BossTrial.BoneWard or BossTrial.BloodRitual;
+                if (ring && v.Ward == null)
+                    v.Ward = Child(v.Root.transform, "Ward", SpriteSheet.Load("fx_revive_ring").First, 0, new Vector3(0f, 1.1f), 1.5f);
+                if (v.Ward != null)
+                {
+                    v.Ward.enabled = ring;
+                    if (ring)
+                    {
+                        float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 5f);
+                        var c = trial == BossTrial.BoneWard ? new Color(0.75f, 1f, 0.95f) : new Color(1f, 0.25f, 0.25f);
+                        c.a = 0.45f + 0.35f * pulse;
+                        v.Ward.color = c;
+                        v.Ward.transform.localScale = Vector3.one * (1.45f + 0.1f * pulse);
+                        v.Ward.transform.localRotation = Quaternion.Euler(0f, 0f, Time.time * 40f);
+                        v.Ward.sortingOrder = v.Animator.Renderer.sortingOrder + 3;
+                        tint = Color.Lerp(tint, c, 0.25f);
+                    }
+                }
+                if (trial == BossTrial.Phylactery) tint = new Color(0.6f, 0.9f, 1f, 0.4f + 0.1f * Mathf.Sin(Time.time * 8f));
+                if (v.Glow != null && trial == BossTrial.BloodRitual) v.Glow.intensity = 2f + Mathf.Sin(Time.time * 6f) * 0.6f;
+                return;
+            }
+            if (s.Type == EnemyType.BloodSigil)
+            {
+                bool lit = s.Anim == EnemyAnim.Walk;
+                float charge = lit ? 1f : s.Health;
+                // Unlit runes breathe so they catch the eye; charging ones redden toward the lit look.
+                float breathe = 0.5f + 0.5f * Mathf.Sin(Time.time * 4f);
+                tint = lit ? Color.white : Color.Lerp(new Color(1f, 0.9f, 0.85f, 0.75f + 0.25f * breathe), new Color(1f, 0.45f, 0.4f, 1f), charge);
+                if (v.Glow != null)
+                {
+                    v.Glow.intensity = lit ? 1.4f + 0.3f * Mathf.Sin(Time.time * 7f) : 0.45f + 0.25f * breathe + charge * 0.9f;
+                    v.Glow.pointLightOuterRadius = lit ? 3f : 1.8f;
+                }
+            }
+        }
 
         private Visual Acquire(EnemyType type, bool elite)
         {
@@ -296,11 +348,12 @@ namespace Game.Gameplay
 
             v.Root.SetActive(true);
             v.Anim = (EnemyAnim)255;
-            v.Shadow.enabled = true;
+            v.Shadow.enabled = !def.Flat;
             v.Animator.Renderer.color = Color.white;
             v.Animator.Play("idle", force: true);
 
-            if (elite || def.Boss || def.Type == EnemyType.Wraith)
+            bool trialProp = type is EnemyType.BoneBrazier or EnemyType.BloodSigil or EnemyType.SoulVessel;
+            if (elite || def.Boss || def.Type == EnemyType.Wraith || trialProp)
             {
                 if (v.Glow == null)
                 {
@@ -315,6 +368,13 @@ namespace Game.Gameplay
                 v.Glow.intensity = def.Boss ? 1.4f : def.Type == EnemyType.Wraith && !elite ? 0.6f : 0.9f;
                 v.Glow.pointLightOuterRadius = def.Boss ? 4.5f : 2.2f;
                 v.Glow.pointLightInnerRadius = 0.2f;
+                if (trialProp)
+                {
+                    v.Glow.color = type == EnemyType.BloodSigil ? new Color(1f, 0.2f, 0.15f) : new Color(0.5f, 0.95f, 1f);
+                    v.Glow.intensity = 1.1f;
+                    v.Glow.pointLightOuterRadius = 2.8f;
+                    v.Glow.transform.localPosition = new Vector3(0f, type == EnemyType.BloodSigil ? 0.1f : 0.9f);
+                }
             }
             else if (v.Glow != null)
             {

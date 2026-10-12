@@ -33,6 +33,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<int> Picks = new();
         /// <summary>Wearing a legendary piece: the character glows.</summary>
         public readonly NetworkVariable<bool> Legendary = new();
+        /// <summary>Shut in a bone cage: can still attack (the bars) but not move or dodge.</summary>
+        public readonly NetworkVariable<bool> Caged = new();
         public readonly NetworkVariable<bool> FacingLeft = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [SerializeField] private PixelAnimator animator;

@@ -33,6 +33,7 @@ namespace Game.Gameplay
 
         private RectTransform _root;
         private CampPanels _panels;
+        private bool _pinnedForShots;
         private readonly List<Sign> _signs = new();
         private Text _gateText;
         private Text _cornerText;
@@ -91,6 +92,12 @@ namespace Game.Gameplay
 
             _panels = new CampPanels(_root, ClosePanel);
             ProfileStore.Changed += OnProfileChanged;
+            // -openstation <Tablet|Mirror|...>: screenshots of a camp panel.
+            if (System.Enum.TryParse(CommandLine.GetValue("-openstation") ?? "", true, out CampStation open))
+            {
+                _panels.Show(open);
+                _pinnedForShots = true;
+            }
         }
 
         private void OnDestroy()
@@ -158,7 +165,7 @@ namespace Game.Gameplay
                 bool escape = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame
                               || Gamepad.current != null && (Gamepad.current.buttonEast.wasPressedThisFrame || Gamepad.current.startButton.wasPressedThisFrame);
                 // Walking away (pushed, or a gamepad stick) also closes it.
-                if (escape || here == null || here.Value.Id != _panels.Open.Value)
+                if (escape || (!_pinnedForShots && (here == null || here.Value.Id != _panels.Open.Value)))
                 {
                     _escapeFrame = Time.frameCount;
                     ClosePanel();

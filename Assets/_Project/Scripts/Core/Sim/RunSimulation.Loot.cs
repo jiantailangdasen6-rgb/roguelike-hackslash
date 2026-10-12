@@ -63,14 +63,17 @@ namespace Game.Core
             }
         }
 
+        /// <summary>Better finds deeper in the labyrinth and on harder difficulties.</summary>
+        private float LootBoost => 0.35f * Room.Area + DifficultyDef.LootBoost;
+
         private ItemInstance RollItem(SimPlayer owner, float boost, Rarity minRarity = Rarity.Common) =>
-            ItemGenerator.Generate(_lootRng.NextULong() | 1ul, Room.Index + 1, boost, owner.ClassId, minRarity);
+            ItemGenerator.Generate(_lootRng.NextULong() | 1ul, Room.Index + 1, boost + LootBoost, owner.ClassId, minRarity);
 
         /// <summary>A monster died: each player rolls their own drop.</summary>
         private void RollLoot(in Enemy e)
         {
             float chance = Mathf.Min(1f, (e.Def.Boss ? 1f : e.Elite ? EliteDropChance : NormalDropChance) * DropChanceScale);
-            float boost = e.Def.Boss ? 3f : e.Elite ? 1f : 0f;
+            float boost = e.Def.Boss ? 2.5f : e.Elite ? 1f : 0f;
             for (int i = 0; i < Players.Count; i++)
             {
                 if (!_lootRng.Chance(chance)) continue;

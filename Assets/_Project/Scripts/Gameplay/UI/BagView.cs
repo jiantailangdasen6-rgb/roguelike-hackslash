@@ -344,6 +344,7 @@ namespace Game.Gameplay
                     : (worn != null ? $"いま装備中：{ItemText.ColoredTitle(worn)}\n" : "この枠はいま空いている\n") +
                       "<color=#e0b45a>装備すると：</color>\n" + string.Join("\n", ItemText.CompareLines(selected, worn, GearCap));
             }
+            UIKit.Flow(_detailBody, _compareBody, -74f, -476f, 24, 21);
             RefreshButtons();
         }
 

@@ -1,0 +1,2446 @@
+fileFormatVersion: 2
+guid: 0efe3ad0cb54f494b8c9eebf1eb846a7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8635626936825443872
+    second: soul_vessel_0
+  - first:
+      213: -8776973550351791167
+    second: soul_vessel_1
+  - first:
+      213: 2674318935180525789
+    second: soul_vessel_2
+  - first:
+      213: 2608212221139154291
+    second: soul_vessel_3
+  - first:
+      213: 890418053576556895
+    second: soul_vessel_4
+  - first:
+      213: 7606315190498865852
+    second: soul_vessel_5
+  - first:
+      213: 4587228233269152608
+    second: soul_vessel_6
+  - first:
+      213: -2512814029134297968
+    second: soul_vessel_7
+  - first:
+      213: -5415348228863552028
+    second: soul_vessel_8
+  - first:
+      213: -3264971613486863934
+    second: soul_vessel_9
+  - first:
+      213: -2444392067389632317
+    second: soul_vessel_10
+  - first:
+      213: -8448953729205916338
+    second: soul_vessel_11
+  - first:
+      213: 8747759570092622422
+    second: soul_vessel_12
+  - first:
+      213: -5426131357953765105
+    second: soul_vessel_13
+  - first:
+      213: -1543253911311446954
+    second: soul_vessel_14
+  - first:
+      213: -4320475593813170194
+    second: soul_vessel_15
+  - first:
+      213: 596327320241443066
+    second: soul_vessel_16
+  - first:
+      213: -4934446937742004635
+    second: soul_vessel_17
+  - first:
+      213: 7047090367975034419
+    second: soul_vessel_18
+  - first:
+      213: 2941457237492500176
+    second: soul_vessel_19
+  - first:
+      213: 4700708799352745951
+    second: soul_vessel_20
+  - first:
+      213: -6112888711026291359
+    second: soul_vessel_21
+  - first:
+      213: 5595630425121188120
+    second: soul_vessel_22
+  - first:
+      213: 7079409569435765083
+    second: soul_vessel_23
+  - first:
+      213: 2569554190196925619
+    second: soul_vessel_24
+  - first:
+      213: -1455279344031876246
+    second: soul_vessel_25
+  - first:
+      213: 3974744104349503487
+    second: soul_vessel_26
+  - first:
+      213: -8026627535698988479
+    second: soul_vessel_27
+  - first:
+      213: 7488221034617170514
+    second: soul_vessel_28
+  - first:
+      213: 4557857061138416601
+    second: soul_vessel_29
+  - first:
+      213: -4552840996720387265
+    second: soul_vessel_30
+  - first:
+      213: -816504326289090963
+    second: soul_vessel_31
+  - first:
+      213: -3539106266943343195
+    second: soul_vessel_32
+  - first:
+      213: 6024665855355402794
+    second: soul_vessel_33
+  - first:
+      213: -7265256799289448968
+    second: soul_vessel_34
+  - first:
+      213: -2523735515632645575
+    second: soul_vessel_35
+  - first:
+      213: -5257771514590339413
+    second: soul_vessel_36
+  - first:
+      213: 8055337468279175152
+    second: soul_vessel_37
+  - first:
+      213: -2353852129844320975
+    second: soul_vessel_38
+  - first:
+      213: -7062100522985263422
+    second: soul_vessel_39
+  - first:
+      213: 5156248771689289724
+    second: soul_vessel_40
+  - first:
+      213: 9036150365291686330
+    second: soul_vessel_41
+  - first:
+      213: 3920846011636723008
+    second: soul_vessel_42
+  - first:
+      213: 8675821755456896018
+    second: soul_vessel_43
+  - first:
+      213: 4016143060793751917
+    second: soul_vessel_44
+  - first:
+      213: -4474439303574431873
+    second: soul_vessel_45
+  - first:
+      213: 1896074244193236677
+    second: soul_vessel_46
+  - first:
+      213: 3458194685207097542
+    second: soul_vessel_47
+  - first:
+      213: -5187543015842503304
+    second: soul_vessel_48
+  - first:
+      213: 8824991010691589377
+    second: soul_vessel_49
+  - first:
+      213: 1990554133372602086
+    second: soul_vessel_50
+  - first:
+      213: 108698736754652861
+    second: soul_vessel_51
+  - first:
+      213: -8842683601725285199
+    second: soul_vessel_52
+  - first:
+      213: 7691346827052172392
+    second: soul_vessel_53
+  - first:
+      213: 5091855565375616316
+    second: soul_vessel_54
+  - first:
+      213: 2822687799108583395
+    second: soul_vessel_55
+  - first:
+      213: -6394097926760449218
+    second: soul_vessel_56
+  - first:
+      213: 5250154432058725379
+    second: soul_vessel_57
+  - first:
+      213: 7119023335837611271
+    second: soul_vessel_58
+  - first:
+      213: 4368066296449019132
+    second: soul_vessel_59
+  - first:
+      213: -434049835081486206
+    second: soul_vessel_60
+  - first:
+      213: 3639204189115970366
+    second: soul_vessel_61
+  - first:
+      213: 6912848630839332872
+    second: soul_vessel_62
+  - first:
+      213: 8366654673703619259
+    second: soul_vessel_63
+  - first:
+      213: 2859310901666635953
+    second: soul_vessel_64
+  - first:
+      213: 5789945622225618250
+    second: soul_vessel_65
+  - first:
+      213: 4302414318479050722
+    second: soul_vessel_66
+  - first:
+      213: -6412465645821633377
+    second: soul_vessel_67
+  - first:
+      213: -6245971560425188524
+    second: soul_vessel_68
+  - first:
+      213: -4504454758648926247
+    second: soul_vessel_69
+  - first:
+      213: 1005000086412288726
+    second: soul_vessel_70
+  - first:
+      213: 3102717952199451751
+    second: soul_vessel_71
+  - first:
+      213: -2883119787241927439
+    second: soul_vessel_72
+  - first:
+      213: 5919300596439851982
+    second: soul_vessel_73
+  - first:
+      213: -8702630309358302491
+    second: soul_vessel_74
+  - first:
+      213: -1949492745611484055
+    second: soul_vessel_75
+  - first:
+      213: -7745471717184319664
+    second: soul_vessel_76
+  - first:
+      213: -7361141322505706815
+    second: soul_vessel_77
+  - first:
+      213: -4374505418729253023
+    second: soul_vessel_78
+  - first:
+      213: -1584091614308750496
+    second: soul_vessel_79
+  - first:
+      213: -7904014762826376153
+    second: soul_vessel_80
+  - first:
+      213: 6165681404001687007
+    second: soul_vessel_81
+  - first:
+      213: 8232294003439557801
+    second: soul_vessel_82
+  - first:
+      213: 7326647512326783408
+    second: soul_vessel_83
+  - first:
+      213: 9201962726263545425
+    second: soul_vessel_84
+  - first:
+      213: 8477064656797037374
+    second: soul_vessel_85
+  - first:
+      213: 4024430920245196193
+    second: soul_vessel_86
+  - first:
+      213: -115712419266304558
+    second: soul_vessel_87
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: soul_vessel_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 336
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 026764e02f8e7d770800000000000000
+      internalID: 8635626936825443872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 341
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cb4840fe0de13680800000000000000
+      internalID: -8776973550351791167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_2
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 343
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd0498307e61d1520800000000000000
+      internalID: 2674318935180525789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_3
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 337
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375f4db323b323420800000000000000
+      internalID: 2608212221139154291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_4
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 337
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f51860980866b5c00800000000000000
+      internalID: 890418053576556895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_5
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 343
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb2b753ad5f0f8960800000000000000
+      internalID: 7606315190498865852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_6
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 341
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06b86a326cb19af30800000000000000
+      internalID: 4587228233269152608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_7
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 336
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09405d634f0b02dd0800000000000000
+      internalID: -2512814029134297968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_8
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 335
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e51c834a71d8d4b0800000000000000
+      internalID: -5415348228863552028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_9
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 340
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c9a168bd9d70b2d0800000000000000
+      internalID: -3264971613486863934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_10
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 340
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c0557b9d56c31ed0800000000000000
+      internalID: -2444392067389632317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_11
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 335
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4d28f609594fba80800000000000000
+      internalID: -8448953729205916338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_12
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 272
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65205eb3bf8466970800000000000000
+      internalID: 8747759570092622422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_13
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 277
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f01de80674282b4b0800000000000000
+      internalID: -5426131357953765105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_14
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 279
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c8c028eb2459ae0800000000000000
+      internalID: -1543253911311446954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_15
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 273
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee7650a96569a04c0800000000000000
+      internalID: -4320475593813170194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_16
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 273
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af01adcc984964800800000000000000
+      internalID: 596327320241443066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_17
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 279
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56eafd867a2558bb0800000000000000
+      internalID: -4934446937742004635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_18
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 277
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33e8a334a5b4cc160800000000000000
+      internalID: 7047090367975034419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_19
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 272
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d60eb2e5c722d820800000000000000
+      internalID: 2941457237492500176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_20
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 271
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdf29f16fb54c3140800000000000000
+      internalID: 4700708799352745951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_21
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 276
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16d48c3da18aa2ba0800000000000000
+      internalID: -6112888711026291359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_22
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 276
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81967b7893ca7ad40800000000000000
+      internalID: 5595630425121188120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_23
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 271
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5948bdbe7d1f3260800000000000000
+      internalID: 7079409569435765083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_24
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 208
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b4edc10ce3e8a320800000000000000
+      internalID: 2569554190196925619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_25
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 213
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6b3402a52fcdcbe0800000000000000
+      internalID: -1455279344031876246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_26
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 215
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff84dc24b0292730800000000000000
+      internalID: 3974744104349503487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_27
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 209
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 142fa4e78c0bb9090800000000000000
+      internalID: -8026627535698988479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_28
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 209
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25ae6ff4b518be760800000000000000
+      internalID: 7488221034617170514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_29
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 215
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d3492a39d2c04f30800000000000000
+      internalID: 4557857061138416601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_30
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 213
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3b55a74c3f01d0c0800000000000000
+      internalID: -4552840996720387265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_31
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 208
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6618f924a13ba4f0800000000000000
+      internalID: -816504326289090963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_32
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 207
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a5bb78e99192eec0800000000000000
+      internalID: -3539106266943343195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_33
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 212
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2a32e6eca9eb9350800000000000000
+      internalID: 6024665855355402794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_34
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 212
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f56c5c1f6f9c2b90800000000000000
+      internalID: -7265256799289448968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_35
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 207
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93acdab7be3e9fcd0800000000000000
+      internalID: -2523735515632645575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_36
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 144
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baedca21aa4a807b0800000000000000
+      internalID: -5257771514590339413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_37
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 149
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f7bca69fbe4acf60800000000000000
+      internalID: 8055337468279175152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_38
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 151
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13525da85ff655fd0800000000000000
+      internalID: -2353852129844320975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_39
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 145
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ceec5fadf06efd90800000000000000
+      internalID: -7062100522985263422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_40
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 145
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf7951a50fcae8740800000000000000
+      internalID: 5156248771689289724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_41
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 151
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab92a34b1ead66d70800000000000000
+      internalID: 9036150365291686330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_42
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 149
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04d2d9e8ca4a96630800000000000000
+      internalID: 3920846011636723008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_43
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 144
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21c3d9c8be5b66870800000000000000
+      internalID: 8675821755456896018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_44
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 143
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d69f2c9d5d43cb730800000000000000
+      internalID: 4016143060793751917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_45
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 148
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f775665f82997e1c0800000000000000
+      internalID: -4474439303574431873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_46
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 148
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c6b7e0ba75305a10800000000000000
+      internalID: 1896074244193236677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_47
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 143
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c0b9ef6eb9fdff20800000000000000
+      internalID: 3458194685207097542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_48
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 80
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87526a3ac152208b0800000000000000
+      internalID: -5187543015842503304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_49
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 85
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 105a942419aa87a70800000000000000
+      internalID: 8824991010691589377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_50
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 80
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e60cd9107edf9b10800000000000000
+      internalID: 1990554133372602086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_51
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 87
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db67bc7dcec228100800000000000000
+      internalID: 108698736754652861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_52
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 19
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bc1ef16d1a784580800000000000000
+      internalID: -8842683601725285199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_53
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 26
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 864c5ce40372dba60800000000000000
+      internalID: 7691346827052172392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_54
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 18
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c353fcda8a7e9a640800000000000000
+      internalID: 5091855565375616316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_55
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 23
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ef32b919933c2720800000000000000
+      internalID: 2822687799108583395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_56
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 27
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3bb16020d99347a0800000000000000
+      internalID: -6394097926760449218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_57
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 27
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3049dc2b3ab4cd840800000000000000
+      internalID: 5250154432058725379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_58
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 22
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7053158710adbc260800000000000000
+      internalID: 7119023335837611271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_59
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 23
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfc2333572d7e9c30800000000000000
+      internalID: 4368066296449019132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_60
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 28
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 280b62589f1f9f9f0800000000000000
+      internalID: -434049835081486206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_61
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 28
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e33fe5dbdec018230800000000000000
+      internalID: 3639204189115970366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_62
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 21
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8005933343f5fef50800000000000000
+      internalID: 6912848630839332872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_63
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 22
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bba4778e8145c1470800000000000000
+      internalID: 8366654673703619259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_64
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 28
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b0ed34ad105ea720800000000000000
+      internalID: 2859310901666635953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_65
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 27
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a450691fdd40a5050800000000000000
+      internalID: 5789945622225618250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_66
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 27
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e78f79070f35bb30800000000000000
+      internalID: 4302414318479050722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_67
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 26
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9cd76648785207a0800000000000000
+      internalID: -6412465645821633377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_68
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 15
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4531aa755f9d159a0800000000000000
+      internalID: -6245971560425188524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_69
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 17
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dfa9eb3346fc71c0800000000000000
+      internalID: -4504454758648926247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_70
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 16
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d267ddf04a72fd00800000000000000
+      internalID: 1005000086412288726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_71
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 14
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7646313e9811f0b20800000000000000
+      internalID: 3102717952199451751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_72
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 12
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc8b8434d91df7d0800000000000000
+      internalID: -2883119787241927439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_73
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 19
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec32e89d784952250800000000000000
+      internalID: 5919300596439851982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_74
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 19
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ea862797db0a3780800000000000000
+      internalID: -8702630309358302491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_75
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 17
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96460ad3da202f4e0800000000000000
+      internalID: -1949492745611484055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_76
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 11
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05fc46fa28e828490800000000000000
+      internalID: -7745471717184319664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_77
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 12
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c2299ad7f8f7d990800000000000000
+      internalID: -7361141322505706815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_78
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1671f90bf72aa43c0800000000000000
+      internalID: -4374505418729253023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_79
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06ba375d11d240ae0800000000000000
+      internalID: -1584091614308750496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_80
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 10
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72c5a42537c4f4290800000000000000
+      internalID: -7904014762826376153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_81
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd590cbd196e09550800000000000000
+      internalID: 6165681404001687007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_82
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9acd79197cbfe3270800000000000000
+      internalID: 8232294003439557801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_83
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b1ccbe181b7da560800000000000000
+      internalID: 7326647512326783408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_84
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15ed25f6850f3bf70800000000000000
+      internalID: 9201962726263545425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_85
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e33f766546594a570800000000000000
+      internalID: 8477064656797037374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_86
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a530508996a9d730800000000000000
+      internalID: 4024430920245196193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: soul_vessel_87
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 7
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d5e781fa28e46ef0800000000000000
+      internalID: -115712419266304558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      soul_vessel_0: 8635626936825443872
+      soul_vessel_1: -8776973550351791167
+      soul_vessel_10: -2444392067389632317
+      soul_vessel_11: -8448953729205916338
+      soul_vessel_12: 8747759570092622422
+      soul_vessel_13: -5426131357953765105
+      soul_vessel_14: -1543253911311446954
+      soul_vessel_15: -4320475593813170194
+      soul_vessel_16: 596327320241443066
+      soul_vessel_17: -4934446937742004635
+      soul_vessel_18: 7047090367975034419
+      soul_vessel_19: 2941457237492500176
+      soul_vessel_2: 2674318935180525789
+      soul_vessel_20: 4700708799352745951
+      soul_vessel_21: -6112888711026291359
+      soul_vessel_22: 5595630425121188120
+      soul_vessel_23: 7079409569435765083
+      soul_vessel_24: 2569554190196925619
+      soul_vessel_25: -1455279344031876246
+      soul_vessel_26: 3974744104349503487
+      soul_vessel_27: -8026627535698988479
+      soul_vessel_28: 7488221034617170514
+      soul_vessel_29: 4557857061138416601
+      soul_vessel_3: 2608212221139154291
+      soul_vessel_30: -4552840996720387265
+      soul_vessel_31: -816504326289090963
+      soul_vessel_32: -3539106266943343195
+      soul_vessel_33: 6024665855355402794
+      soul_vessel_34: -7265256799289448968
+      soul_vessel_35: -2523735515632645575
+      soul_vessel_36: -5257771514590339413
+      soul_vessel_37: 8055337468279175152
+      soul_vessel_38: -2353852129844320975
+      soul_vessel_39: -7062100522985263422
+      soul_vessel_4: 890418053576556895
+      soul_vessel_40: 5156248771689289724
+      soul_vessel_41: 9036150365291686330
+      soul_vessel_42: 3920846011636723008
+      soul_vessel_43: 8675821755456896018
+      soul_vessel_44: 4016143060793751917
+      soul_vessel_45: -4474439303574431873
+      soul_vessel_46: 1896074244193236677
+      soul_vessel_47: 3458194685207097542
+      soul_vessel_48: -5187543015842503304
+      soul_vessel_49: 8824991010691589377
+      soul_vessel_5: 7606315190498865852
+      soul_vessel_50: 1990554133372602086
+      soul_vessel_51: 108698736754652861
+      soul_vessel_52: -8842683601725285199
+      soul_vessel_53: 7691346827052172392
+      soul_vessel_54: 5091855565375616316
+      soul_vessel_55: 2822687799108583395
+      soul_vessel_56: -6394097926760449218
+      soul_vessel_57: 5250154432058725379
+      soul_vessel_58: 7119023335837611271
+      soul_vessel_59: 4368066296449019132
+      soul_vessel_6: 4587228233269152608
+      soul_vessel_60: -434049835081486206
+      soul_vessel_61: 3639204189115970366
+      soul_vessel_62: 6912848630839332872
+      soul_vessel_63: 8366654673703619259
+      soul_vessel_64: 2859310901666635953
+      soul_vessel_65: 5789945622225618250
+      soul_vessel_66: 4302414318479050722
+      soul_vessel_67: -6412465645821633377
+      soul_vessel_68: -6245971560425188524
+      soul_vessel_69: -4504454758648926247
+      soul_vessel_7: -2512814029134297968
+      soul_vessel_70: 1005000086412288726
+      soul_vessel_71: 3102717952199451751
+      soul_vessel_72: -2883119787241927439
+      soul_vessel_73: 5919300596439851982
+      soul_vessel_74: -8702630309358302491
+      soul_vessel_75: -1949492745611484055
+      soul_vessel_76: -7745471717184319664
+      soul_vessel_77: -7361141322505706815
+      soul_vessel_78: -4374505418729253023
+      soul_vessel_79: -1584091614308750496
+      soul_vessel_8: -5415348228863552028
+      soul_vessel_80: -7904014762826376153
+      soul_vessel_81: 6165681404001687007
+      soul_vessel_82: 8232294003439557801
+      soul_vessel_83: 7326647512326783408
+      soul_vessel_84: 9201962726263545425
+      soul_vessel_85: 8477064656797037374
+      soul_vessel_86: 4024430920245196193
+      soul_vessel_87: -115712419266304558
+      soul_vessel_9: -3264971613486863934
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -195,6 +195,9 @@ namespace Game.Core
         FirePool,    // alchemist: burning ground
         Potion,      // alchemist: healing splash
         FlaskBurst,  // alchemist: basic flask bursting
+        // Hostile
+        SoulBurst,    // a vengeful dead monster / the Lich's soul
+        BloodTorrent, // the Blood Bishop's ritual completed
     }
 
     /// <summary>Owner input sent to the host each network tick. Button presses are counters so a lost packet never loses a press.</summary>
@@ -280,6 +283,7 @@ namespace Game.Core
         ItemSalvaged,    // ClientId, Value = soul shards
         LegendaryProc,   // ClientId, Int = LegendaryId (None = a plain chain bolt), Pos, Vec = chain target (zero = none)
         Combo,           // ClientId = who set it off, Int = ComboKind, Pos, Value = radius
+        TrialEvent,      // Int = TrialMoment, Pos, Value (seconds), ClientId (cages), Id (collapse stage)
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

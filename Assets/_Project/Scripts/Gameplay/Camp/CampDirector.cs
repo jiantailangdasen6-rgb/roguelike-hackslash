@@ -139,7 +139,7 @@ namespace Game.Gameplay
             if (avatar != null) Apply(avatar, loadout);
         }
 
-        private static Difficulty ChosenDifficulty()
+        public static Difficulty ChosenDifficulty()
         {
             string flag = CommandLine.GetValue("-difficulty");
             if (flag != null && System.Enum.TryParse(flag, true, out Difficulty d)) return d;

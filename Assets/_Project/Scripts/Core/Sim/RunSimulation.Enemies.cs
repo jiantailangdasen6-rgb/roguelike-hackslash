@@ -44,6 +44,12 @@ namespace Game.Core
                     e.Position = Confine(e.Position, e.Radius, def.Flying);
                     continue;
                 }
+                if (def.Boss && BossChannelling)
+                {
+                    e.State = EnemyState.Chase;
+                    e.Moving = false;
+                    continue;
+                }
 
                 var target = NearestLivingPlayer(e.Position);
                 switch (e.State)
@@ -63,7 +69,7 @@ namespace Game.Core
                         if (e.StateTimer <= 0f)
                         {
                             e.State = EnemyState.Chase;
-                            e.Cooldown = def.AttackCooldown * _aiRng.Range(0.8f, 1.25f) * (BossEnraged(e) ? 0.7f : 1f);
+                            e.Cooldown = def.AttackCooldown * _aiRng.Range(0.8f, 1.25f) * (BossEnraged(e) ? 0.7f : 1f) * (def.Boss && BossWarded ? 1.3f : 1f);
                         }
                         break;
                 }
@@ -78,6 +84,12 @@ namespace Game.Core
         private Vector2 Confine(Vector2 p, float radius, bool flying)
         {
             p = Enemies.ClampToBounds(p, radius);
+            if (CollapseStage > 0 && !flying)
+            {
+                var area = PlayRect;
+                p.x = Mathf.Clamp(p.x, area.xMin + radius, area.xMax - radius);
+                p.y = Mathf.Clamp(p.y, area.yMin + radius, area.yMax - radius);
+            }
             return flying ? p : Arena.Resolve(Layout, p, radius);
         }
 
@@ -126,7 +138,7 @@ namespace Game.Core
                 move = dir;
             }
 
-            float speed = def.Speed * (e.HitStun > 0f ? 0.25f : 1f);
+            float speed = def.Speed * (e.HitStun > 0f ? 0.25f : 1f) * (DifficultyDef.Has(DifficultyMod.Swiftness) ? DifficultyCatalog.SwiftnessSpeed : 1f);
             if (move != Vector2.zero)
             {
                 if (!def.Flying) move = Arena.Steer(Layout, e.Position, move, e.Radius, e.Id);
@@ -146,8 +158,9 @@ namespace Game.Core
             switch (def.Type)
             {
                 case EnemyType.BoneKing:
-                    // 0 cleave, 1 slam, 2 charge, 3 summon
+                    // 0 cleave, 1 slam, 2 charge, 3 summon, 4 bone cage
                     if (n % 5 == 4 && roomForMinions) return 3;
+                    if (n % 5 == 2) return 4;
                     if (distance > 4.5f) return 2;
                     return n % 2 == 0 ? 0 : 1;
                 case EnemyType.BloodBishop:
@@ -183,7 +196,7 @@ namespace Game.Core
             var a = def.Attacks[attackIndex];
             e.State = EnemyState.Windup;
             e.AttackIndex = attackIndex;
-            e.StateTimer = a.Windup * (BossEnraged(e) ? 0.75f : 1f);
+            e.StateTimer = a.Windup * (BossEnraged(e) ? 0.75f : 1f) * (DifficultyDef.Has(DifficultyMod.Ferocity) ? DifficultyCatalog.FerocityWindup : 1f);
             e.AimDirection = (target.Position - e.Position).sqrMagnitude > 0.0001f ? (target.Position - e.Position).normalized : Vector2.right;
             e.AimTarget = target.Position;
             e.AttackCounter++;
@@ -191,6 +204,13 @@ namespace Game.Core
 
             switch (a.Kind)
             {
+                case AttackKind.Cage:
+                {
+                    var victim = RandomLivingPlayer() ?? target;
+                    e.AimTarget = victim.Position;
+                    Telegraph(e, AttackShape.Circle, e.AimTarget, e.AimDirection, a);
+                    return;
+                }
                 case AttackKind.Rain:
                 {
                     var spots = new List<Vector2>();
@@ -305,6 +325,9 @@ namespace Game.Core
                     }
                     break;
                 }
+                case AttackKind.Cage:
+                    CloseCages(e.AimTarget, a.SizeA);
+                    break;
                 case AttackKind.Rain:
                     if (_rainTargets.Remove(e.Id, out var spots))
                         foreach (var s in spots)

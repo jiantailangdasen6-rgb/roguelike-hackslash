@@ -204,6 +204,8 @@ namespace Game.Gameplay
                         case AreaKind.FirePool: Play("flame", e.Pos); break;
                         case AreaKind.Potion: Play("heal", e.Pos, 1.2f); break;
                         case AreaKind.FlaskBurst: Play("shatter", e.Pos, 1.5f, 0.45f); break;
+                        case AreaKind.SoulBurst: Play("blink", e.Pos, 1.4f, 0.6f); break;
+                        case AreaKind.BloodTorrent: Play("explosion", e.Pos, 0.6f); Play("roar", null, 1.3f, 0.7f); break;
                     }
                     break;
                 case SimEventType.HazardWarn:
@@ -253,6 +255,24 @@ namespace Game.Gameplay
                     }
                     break;
                 case SimEventType.SpawnWarning: Play("telegraph", e.Pos, 0.6f, 0.6f); break;
+                case SimEventType.TrialEvent:
+                    switch ((TrialMoment)e.Int)
+                    {
+                        case TrialMoment.CageClosed: Play("clank", e.Pos, 0.6f); Play("slam", e.Pos, 1.3f, 0.6f); break;
+                        case TrialMoment.CageBroken: Play("shatter", e.Pos, 0.8f); break;
+                        case TrialMoment.CageCrushed: Play("heavyhit", e.Pos, 0.7f); break;
+                        case TrialMoment.WardUp: Play("roar", null, 0.9f); Play("nova", e.Pos, 0.6f); break;
+                        case TrialMoment.RitualStart: Play("roar", null, 1.15f); break;
+                        case TrialMoment.SigilLit: Play("levelup", e.Pos, 1.2f, 0.7f); break;
+                        case TrialMoment.WardBroken:
+                        case TrialMoment.RitualBroken:
+                        case TrialMoment.VesselBroken: Play("shatter", e.Pos, 0.6f); Play("clear", null, 1.3f, 0.6f); break;
+                        case TrialMoment.CollapseWarn: Play("telegraph", null, 0.5f); Play("spikes", null, 0.5f, 0.7f); break;
+                        case TrialMoment.Collapsed: Play("explosion", null, 0.5f); Play("slam", null, 0.7f); break;
+                        case TrialMoment.VesselRise: Play("blink", e.Pos, 0.6f); break;
+                        case TrialMoment.LichRises: Play("roar", null, 0.8f); break;
+                    }
+                    break;
             }
         }
     }

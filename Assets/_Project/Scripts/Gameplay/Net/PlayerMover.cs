@@ -76,7 +76,7 @@ namespace Game.Gameplay
 
         public void Dodge()
         {
-            if (!CanAct || player.DodgeCooldown.Value > 0.05f || Time.time < _dashUntil) return;
+            if (!CanAct || player.Caged.Value || player.DodgeCooldown.Value > 0.05f || Time.time < _dashUntil) return;
             _dodge++;
             player.PredictAction(AttackAnim.Dodge);
             Vector2 move = CurrentMove();
@@ -87,6 +87,8 @@ namespace Game.Gameplay
         public void Skill1()
         {
             if (!CanAct || player.Skill1Cooldown.Value > 0.05f) return;
+            // Caged: skills that travel can't get out of the bars.
+            if (player.Caged.Value && player.Class.Value is ClassId.Warrior or ClassId.Guardian or ClassId.Assassin) return;
             _skill1++;
             player.PredictAction(AttackAnim.Skill1);
             if (player.Class.Value == ClassId.Warrior)
@@ -146,7 +148,7 @@ namespace Game.Gameplay
             _attackHeld = _bot ? _botBrain.Attack : input.AttackHeld;
             if (_attackHeld && !wasHeld && CanAct) player.PredictAction(AttackAnim.BasicA);
 
-            if (CanAct || CanWalkInCamp)
+            if ((CanAct && !player.Caged.Value) || CanWalkInCamp)
             {
                 Vector2 move = CurrentMove();
                 if (move.sqrMagnitude > 0.01f) _lastMove = move.normalized;
@@ -283,7 +285,18 @@ namespace Game.Gameplay
                 }
 
                 var view = EnemyView.Instance;
-                var nearest = view != null ? view.Nearest(pos) : null;
+                // Boss trials: stand on the unlit sigils, smash the braziers or the soul vessel first.
+                var trial = director.Trial.Value;
+                if (trial == BossTrial.BloodRitual && view != null && view.Nearest(pos, EnemyType.BloodSigil) is Vector2 sigil)
+                {
+                    Vector2 toSigil = sigil - pos;
+                    Move = toSigil.sqrMagnitude > 0.3f ? toSigil.normalized : Vector2.zero;
+                    return;
+                }
+                var nearest = view == null ? null
+                    : trial == BossTrial.BoneWard ? view.Nearest(pos, EnemyType.BoneBrazier) ?? view.Nearest(pos)
+                    : trial == BossTrial.Phylactery ? view.Nearest(pos, EnemyType.SoulVessel) ?? view.Nearest(pos)
+                    : view.Nearest(pos);
                 if (nearest.HasValue)
                 {
                     Vector2 to = nearest.Value - pos;

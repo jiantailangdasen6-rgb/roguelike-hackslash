@@ -331,7 +331,7 @@ namespace Game.Gameplay
             _title.text = "迷宮の碑　<size=28><color=#bfb6aa>難易度</color></size>";
             var nm = Unity.Netcode.NetworkManager.Singleton;
             bool host = nm != null && nm.IsServer;
-            var current = CampDirector.Instance != null ? CampDirector.Instance.DifficultyLevel.Value : Profile.difficulty;
+            var current = host || CampDirector.Instance == null ? CampDirector.ChosenDifficulty() : CampDirector.Instance.DifficultyLevel.Value;
             for (int i = 0; i < DifficultyCatalog.All.Length; i++)
             {
                 var def = DifficultyCatalog.All[i];
@@ -339,11 +339,11 @@ namespace Game.Gameplay
                 bool chosen = def.Id == current;
                 var card = UIKit.Framed(_body, def.Name, chosen ? new Color(0.25f, 0.06f, 0.06f, 1f) : new Color(0.06f, 0.05f, 0.07f, 1f),
                     chosen ? UIKit.AccentColor : UIKit.GoldTrim * 0.6f);
-                card.Outer().Place(new Vector2(0f, 1f), new Vector2(272f, 300f), new Vector2(i * 284f, -20f));
+                card.Outer().Place(new Vector2(0f, 1f), new Vector2(272f, 220f), new Vector2(i * 284f, -6f));
                 var name = UIKit.Title(card.transform, def.Name, 44, TextAnchor.MiddleCenter, open ? Color.white : new Color(1f, 1f, 1f, 0.35f));
-                name.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(260f, 70f), new Vector2(0f, -20f));
-                var text = UIKit.Label(card.transform, open ? def.Text : "熟練を踏破すると挑める", 21, TextAnchor.UpperCenter, open ? UIKit.MutedText : new Color(1f, 1f, 1f, 0.35f));
-                text.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(240f, 180f), new Vector2(0f, -100f));
+                name.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(260f, 64f), new Vector2(0f, -14f));
+                var text = UIKit.Label(card.transform, open ? def.Text : "熟練を踏破すると挑める", 20, TextAnchor.UpperCenter, open ? UIKit.MutedText : new Color(1f, 1f, 1f, 0.35f));
+                text.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(244f, 130f), new Vector2(0f, -84f));
                 var d = def.Id;
                 var button = AddButton(card.Outer(), () =>
                 {
@@ -357,11 +357,50 @@ namespace Game.Gameplay
                 });
                 button.interactable = host;
             }
+
+            // What the chosen difficulty changes: the monsters' strengths and the team's handicaps, so the
+            // party can pick gear and classes for it.
+            var chosenDef = DifficultyCatalog.Get(current);
+            var detail = UIKit.Framed(_body, "Detail", new Color(0.045f, 0.035f, 0.05f, 1f), UIKit.GoldTrim * 0.7f);
+            detail.Outer().Place(new Vector2(0f, 1f), new Vector2(1124f, 290f), new Vector2(0f, -244f));
+            var head = UIKit.Title(detail.transform, $"「{chosenDef.Name}」で変わること", 28, TextAnchor.UpperLeft);
+            head.rectTransform.Place(new Vector2(0f, 1f), new Vector2(600f, 40f), new Vector2(24f, -14f));
+            var scale = UIKit.Label(detail.transform,
+                $"魔物の体力 ×{chosenDef.EnemyHealth:0.##}　攻撃 ×{chosenDef.EnemyDamage:0.##}　数 ×{chosenDef.EnemyCount:0.##}　魂の欠片 ×{chosenDef.Shards:0.##}",
+                20, TextAnchor.UpperRight, UIKit.MutedText);
+            scale.rectTransform.Place(new Vector2(1f, 1f), new Vector2(560f, 34f), new Vector2(-24f, -20f));
+
+            int monsterRow = 0, playerRow = 0;
+            foreach (var mod in DifficultyCatalog.ModsOf(chosenDef))
+            {
+                bool monster = DifficultyCatalog.IsMonsterMod(mod);
+                bool help = DifficultyCatalog.IsHelp(mod);
+                string color = help ? "#8fe39a" : monster ? "#ff8a7a" : "#d6a8ff";
+                int row = monster ? monsterRow++ : playerRow++;
+                var line = UIKit.Label(detail.transform,
+                    $"<color={color}>{DifficultyCatalog.ModName(mod)}</color>　<size=19><color=#cfc6bb>{DifficultyCatalog.ModText(mod)}</color></size>",
+                    22, TextAnchor.UpperLeft);
+                line.rectTransform.Place(new Vector2(0f, 1f), new Vector2(540f, 34f), new Vector2(monster ? 24f : 572f, -104f - row * 36f));
+            }
+            if (monsterRow + playerRow == 0)
+            {
+                var none = UIKit.Label(detail.transform, "特別な強化も枷もない、本来の迷宮", 22, TextAnchor.UpperLeft, UIKit.MutedText);
+                none.rectTransform.Place(new Vector2(0f, 1f), new Vector2(800f, 34f), new Vector2(24f, -104f));
+            }
+            else
+            {
+                var monsterHead = UIKit.Label(detail.transform, monsterRow > 0 ? "魔物の強化" : "", 20, TextAnchor.UpperLeft, new Color(1f, 0.55f, 0.48f));
+                monsterHead.rectTransform.Place(new Vector2(0f, 1f), new Vector2(400f, 30f), new Vector2(24f, -66f));
+                var playerHead = UIKit.Label(detail.transform, playerRow > 0 ? (chosenDef.Has(DifficultyMod.Mercy) ? "助け" : "あなたたちへの枷") : "", 20, TextAnchor.UpperLeft,
+                    chosenDef.Has(DifficultyMod.Mercy) ? new Color(0.56f, 0.89f, 0.6f) : new Color(0.84f, 0.66f, 1f));
+                playerHead.rectTransform.Place(new Vector2(0f, 1f), new Vector2(400f, 30f), new Vector2(572f, -66f));
+            }
+
             var note = UIKit.Label(_body, host
                     ? "仲間と遊ぶときも、あなた（部屋を作った人）の選んだ難易度になります"
                     : $"難易度は部屋を作った人が選びます（いまは「{DifficultyCatalog.Get(current).Name}」）",
-                24, TextAnchor.MiddleCenter, UIKit.MutedText);
-            note.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1100f, 50f), new Vector2(0f, -360f));
+                22, TextAnchor.MiddleCenter, UIKit.MutedText);
+            note.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1100f, 40f), new Vector2(0f, -548f));
         }
 
         // ------------------------------------------------------------------ Helpers

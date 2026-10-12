@@ -195,6 +195,7 @@ namespace Game.Gameplay
                     CameraShake.Add(0.6f);
                     break;
                 case SimEventType.Combo: OnCombo(e); break;
+                case SimEventType.TrialEvent: OnTrial(e); break;
                 case SimEventType.RoomStarted:
                     HitStop.Reset();
                     _calloutAt.Clear();
@@ -248,7 +249,9 @@ namespace Game.Gameplay
             {
                 // Armour: dull sparks and a grey number tell players to freeze/stun/mark it first.
                 Spark(at, 0.8f, new Color(0.7f, 0.75f, 0.85f));
-                ShowNumber(at + Vector2.up * 0.3f, Mathf.RoundToInt(e.Value).ToString(), new Color(0.62f, 0.64f, 0.7f), 20);
+                // A warded boss takes nothing at all: say so (now and then), the trial is the way through.
+                if (e.Value < 0.5f) { if (CalloutReady(e.Id, 0.5f)) ShowNumber(at + Vector2.up * 0.3f, "無効", new Color(0.75f, 0.8f, 0.9f), 22); }
+                else ShowNumber(at + Vector2.up * 0.3f, Mathf.RoundToInt(e.Value).ToString(), new Color(0.62f, 0.64f, 0.7f), 20);
                 if (mine && heavy) HitStop.Freeze(0.03f, e.Id);
                 return;
             }
@@ -349,6 +352,102 @@ namespace Game.Gameplay
             }
         }
 
+        /// <summary>Boss trials: the name of what to do, bursts when one is overcome or failed.</summary>
+        private void OnTrial(in SimEvent e)
+        {
+            switch ((TrialMoment)e.Int)
+            {
+                case TrialMoment.CageClosed:
+                {
+                    var ring = Spawn("fx_revive_ring", e.Pos, 1f, 0.4f, 2f, 0.9f, new Color(0.9f, 0.85f, 0.7f, 0.9f), order: -300);
+                    ring.FadeOut = true;
+                    CameraShake.Add(0.25f);
+                    ShowCallout(e.Pos + Vector2.up * 1.9f, IsLocal(e.ClientId) ? "檻を壊せ！" : "仲間が檻に！", new Color(0.95f, 0.88f, 0.7f), 36);
+                    break;
+                }
+                case TrialMoment.CageBroken:
+                    for (int i = 0; i < 8; i++) Shard(e.Pos + Vector2.up * 0.6f, i * 45f + Random.Range(0f, 20f), new Color(0.9f, 0.86f, 0.75f));
+                    break;
+                case TrialMoment.CageCrushed:
+                    CameraShake.Add(0.4f);
+                    Burst("fx_puff", e.Pos + Vector2.up * 0.5f, 12f, 1.6f, new Color(0.9f, 0.85f, 0.75f));
+                    break;
+                case TrialMoment.WardUp:
+                {
+                    var nova = Spawn("fx_nova", e.Pos + Vector2.up * 0.8f, 1f, 0.6f, 0.5f, 6f, new Color(0.75f, 1f, 0.95f, 0.8f));
+                    nova.FadeOut = true;
+                    AddLight(nova, new Color(0.5f, 1f, 0.9f), 3f, 8f);
+                    CameraShake.Add(0.5f);
+                    ShowCallout(e.Pos + Vector2.up * 3f, "不死の加護", new Color(0.75f, 1f, 0.95f), 46);
+                    break;
+                }
+                case TrialMoment.RitualStart:
+                {
+                    var nova = Spawn("fx_nova", e.Pos + Vector2.up * 0.8f, 1f, 0.6f, 0.5f, 7f, new Color(1f, 0.3f, 0.3f, 0.8f));
+                    nova.FadeOut = true;
+                    AddLight(nova, new Color(1f, 0.2f, 0.2f), 3f, 9f);
+                    CameraShake.Add(0.5f);
+                    ShowCallout(e.Pos + Vector2.up * 3f, "血の儀式", new Color(1f, 0.4f, 0.35f), 46);
+                    break;
+                }
+                case TrialMoment.SigilLit:
+                {
+                    var pillar = Spawn("fx_holy", e.Pos + Vector2.up * 0.8f, 12f, 0.8f, 1.4f, 2.4f, new Color(1f, 0.45f, 0.35f));
+                    pillar.FadeOut = true;
+                    AddLight(pillar, new Color(1f, 0.3f, 0.2f), 2.2f, 4f);
+                    break;
+                }
+                case TrialMoment.WardBroken:
+                case TrialMoment.RitualBroken:
+                case TrialMoment.VesselBroken:
+                {
+                    bool vessel = (TrialMoment)e.Int == TrialMoment.VesselBroken;
+                    var flash = Spawn("fx_nova", e.Pos + Vector2.up * 0.8f, 1f, 0.7f, 0.5f, 8f, new Color(1f, 0.95f, 0.8f, 0.9f));
+                    flash.FadeOut = true;
+                    AddLight(flash, new Color(1f, 0.9f, 0.6f), 4f, 10f);
+                    for (int i = 0; i < 12; i++) Shard(e.Pos + Vector2.up * 1f, i * 30f + Random.Range(0f, 20f), new Color(1f, 0.9f, 0.65f));
+                    HitStop.Freeze(0.12f, -1, major: true);
+                    CameraShake.Add(0.7f);
+                    if (!vessel) ShowCallout(e.Pos + Vector2.up * 3f, "隙あり！", new Color(1f, 0.85f, 0.4f), 52);
+                    break;
+                }
+                case TrialMoment.RitualFailed:
+                    ShowCallout(e.Pos + Vector2.up * 3f, "血の奔流", new Color(1f, 0.3f, 0.3f), 48);
+                    break;
+                case TrialMoment.CollapseWarn:
+                    CameraShake.Add(0.35f);
+                    ShowCallout(e.Pos + Vector2.up * 2f, "床が崩れる！ 中央へ", new Color(0.8f, 0.7f, 1f), 46);
+                    break;
+                case TrialMoment.Collapsed:
+                {
+                    CameraShake.Add(0.9f);
+                    var area = RunSimulation.SafeArea(RunSimulation.DefaultBounds, e.Id);
+                    for (int i = 0; i < 24; i++)
+                    {
+                        float t = i / 24f;
+                        Vector2 at = t < 0.5f
+                            ? new Vector2(Mathf.Lerp(area.xMin, area.xMax, t * 2f), i % 2 == 0 ? area.yMin : area.yMax)
+                            : new Vector2(i % 2 == 0 ? area.xMin : area.xMax, Mathf.Lerp(area.yMin, area.yMax, (t - 0.5f) * 2f));
+                        Burst("fx_puff", at, Random.Range(8f, 12f), Random.Range(1f, 1.6f), new Color(0.55f, 0.5f, 0.65f, 0.85f));
+                    }
+                    break;
+                }
+                case TrialMoment.VesselRise:
+                {
+                    var pillar = Spawn("fx_holy", e.Pos + Vector2.up * 0.8f, 12f, 1f, 1.6f, 3f, new Color(0.55f, 0.95f, 1f));
+                    pillar.FadeOut = true;
+                    AddLight(pillar, new Color(0.5f, 0.9f, 1f), 3f, 6f);
+                    HitStop.Freeze(0.1f, -1, major: true);
+                    ShowCallout(e.Pos + Vector2.up * 2.4f, "魂の器", new Color(0.6f, 0.95f, 1f), 46);
+                    break;
+                }
+                case TrialMoment.LichRises:
+                    CameraShake.Add(0.6f);
+                    ShowCallout(e.Pos + Vector2.up * 3f, "冥王の復活", new Color(0.6f, 0.95f, 1f), 46);
+                    break;
+            }
+        }
+
         /// <summary>The final blow on a boss: a long hold, slow motion, a burst of light and souls.</summary>
         private void BossFell(Vector2 at)
         {
@@ -414,6 +513,22 @@ namespace Game.Gameplay
                     var ring = Spawn("fx_circle", e.Pos, 1f, 0.35f, r * 0.5f, r * 1.05f, new Color(1f, 0.5f, 0.3f, 0.8f), order: -300);
                     ring.FadeOut = true;
                     CameraShake.Add(0.3f);
+                    break;
+                }
+                case AreaKind.SoulBurst:
+                {
+                    var ring = Spawn("fx_nova", e.Pos + Vector2.up * 0.3f, 1f, 0.4f, r * 0.3f, r * 1.1f, new Color(0.7f, 0.5f, 1f, 0.85f));
+                    ring.FadeOut = true;
+                    AddLight(ring, new Color(0.6f, 0.4f, 1f), 1.8f, r + 1.5f);
+                    for (int i = 0; i < 6; i++) Shard(e.Pos + Vector2.up * 0.3f, i * 60f + Random.Range(0f, 30f), new Color(0.75f, 0.6f, 1f));
+                    break;
+                }
+                case AreaKind.BloodTorrent:
+                {
+                    var wave = Spawn("fx_nova", e.Pos + Vector2.up * 0.3f, 1f, 0.8f, 1f, r, new Color(1f, 0.15f, 0.15f, 0.8f));
+                    wave.FadeOut = true;
+                    AddLight(wave, new Color(1f, 0.15f, 0.1f), 4f, r);
+                    CameraShake.Add(0.9f);
                     break;
                 }
                 case AreaKind.Explosion:

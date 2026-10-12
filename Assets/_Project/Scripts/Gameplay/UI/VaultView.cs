@@ -241,6 +241,7 @@ namespace Game.Gameplay
                     : (worn != null ? $"いま装備中：{ItemText.ColoredTitle(worn)}\n" : "この枠はいま空いている（冒険中は貸し出し品が入る）\n") +
                       "<color=#e0b45a>装備すると：</color>\n" + string.Join("\n", ItemText.CompareLines(selected, worn));
             }
+            UIKit.Flow(_detailBody, _compareBody, -70f, -504f, 23, 20);
 
             _equipButton.gameObject.SetActive(selected != null);
             _equipLabel.text = inStash ? "装備する" : "外す";

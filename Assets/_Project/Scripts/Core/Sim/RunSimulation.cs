@@ -82,6 +82,9 @@ namespace Game.Core
 
         private readonly GameRandom _layoutRng;
 
+        /// <summary>Bosses arrive with this share of their health (automated screenshots of the trials: -bosshp).</summary>
+        public float BossStartHealth = 1f;
+
         public static float XpRequired(int level, int playerCount) =>
             (12f + 7f * (level - 1)) * (1f + 0.5f * Mathf.Max(0, playerCount - 1));
 
@@ -105,6 +108,7 @@ namespace Game.Core
             var existing = GetPlayer(clientId);
             if (existing != null) return existing;
             var player = new SimPlayer(clientId, StartPosition(Players.Count), loadout);
+            player.SetDifficulty(DifficultyDef);
             Players.Add(player);
             return player;
         }
@@ -154,6 +158,7 @@ namespace Game.Core
                 for (int level = 1; level < TeamLevel; level++) player.StockedChoices.Enqueue(ChoiceKind.LevelUp);
                 player.Hp = player.MaxHp;
             }
+            player.SetDifficulty(DifficultyDef);
             player.SetCurses(CurseStacks); // curses the team took while they were away count for them too
 
             foreach (var mate in Players)
@@ -228,6 +233,7 @@ namespace Game.Core
             UpdatePlayers(dt);
             UpdateSpawning(dt);
             StepEnemies(dt);
+            StepBossTrials(dt);
             StepPlayersCombat(dt);
             StepDelayedAreas(dt);
             StepZones(dt);
@@ -260,6 +266,7 @@ namespace Game.Core
                 foreach (var other in Players)
                     if (other != p && other.Alive && (other.Position - p.Position).sqrMagnitude <= helpRadius * helpRadius)
                         helpSpeed = Mathf.Max(helpSpeed, other.Stats.Get(StatType.ReviveSpeed));
+                if (DifficultyDef.Has(DifficultyMod.Mercy)) helpSpeed *= DifficultyCatalog.MercyRevive;
 
                 p.ReviveProgress = helpSpeed > 0f
                     ? p.ReviveProgress + dt / ReviveTime * helpSpeed
@@ -304,7 +311,11 @@ namespace Game.Core
                 var def = EnemyCatalog.Get(s.Type);
                 Vector2 at = def.Flying ? s.Position : Arena.Resolve(Layout, s.Position, def.Radius);
                 int id = Enemies.Spawn(s.Type, at, EnemyHealthScale, EnemyDamageScale, s.Elite);
-                if (def.Boss) Events.Add(new SimEvent(SimEventType.BossSpawned) { Id = id, Pos = at, Int = (int)s.Type });
+                if (def.Boss)
+                {
+                    Enemies[Enemies.IndexOf(id)].Health *= Mathf.Clamp(BossStartHealth, 0.01f, 1f);
+                    Events.Add(new SimEvent(SimEventType.BossSpawned) { Id = id, Pos = at, Int = (int)s.Type });
+                }
             }
 
             if (Room.Cleared) return;
@@ -412,13 +423,14 @@ namespace Game.Core
 
         private Vector2 RandomSpawnPoint()
         {
-            Vector2 best = Vector2.zero;
+            Vector2 best = PlayRect.center;
             float bestDistance = -1f;
+            var area = PlayRect;
             for (int attempt = 0; attempt < 14; attempt++)
             {
                 var p = new Vector2(
-                    _spawnRng.Range(Bounds.xMin + 1f, Bounds.xMax - 1f),
-                    _spawnRng.Range(Bounds.yMin + 1f, Bounds.yMax - 1.5f));
+                    _spawnRng.Range(area.xMin + 1f, area.xMax - 1f),
+                    _spawnRng.Range(area.yMin + 1f, area.yMax - 1.5f));
                 if (SpawnBlocked(p)) continue;
                 float nearest = float.MaxValue;
                 foreach (var pl in Players) nearest = Mathf.Min(nearest, (pl.Position - p).magnitude);
@@ -619,6 +631,7 @@ namespace Game.Core
 
             Layout = Arena.Get(Bounds == DefaultBounds ? Arena.Pick(_layoutRng, index, Layout.Id) : 0);
             ResetHazards();
+            ResetBossTrials();
 
             Room.Objective = ObjectiveOf(index);
             switch (Room.Objective)
@@ -775,6 +788,9 @@ namespace Game.Core
             _zones.Clear();
             _rainTargets.Clear();
             StopHazards();
+            ClearBursts();
+            RemoveTrialProps();
+            ActiveTrial = BossTrial.None;
 
             foreach (var p in Players)
                 if (p.Alive)

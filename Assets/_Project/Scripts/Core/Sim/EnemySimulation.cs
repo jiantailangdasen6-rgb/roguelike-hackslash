@@ -198,7 +198,7 @@ namespace Game.Core
             foreach (int i in _candidates)
             {
                 ref var e = ref _enemies[i];
-                if (e.Dead) continue;
+                if (e.Dead || e.Def.Untargetable) continue;
                 float r = radius + e.Radius;
                 if ((e.Position - center).sqrMagnitude <= r * r) results.Add(i);
             }

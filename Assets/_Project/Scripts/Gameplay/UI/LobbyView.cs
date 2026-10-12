@@ -300,6 +300,7 @@ namespace Game.Gameplay
             try
             {
                 string code = await GameSession.StartOnlineHostAsync();
+                BrowserBridge.ConsoleLog($"[Lobby] Room code {code}");
                 string codeFile = CommandLine.GetValue("-codefile");
                 if (codeFile != null) System.IO.File.WriteAllText(codeFile, code);
             }

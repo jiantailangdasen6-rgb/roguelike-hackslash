@@ -707,6 +707,9 @@ namespace Game.Gameplay
             _toastsHidden = choosing;
             _guide.Update(director, local, choosing || _cinematics.Playing);
             UpdateCodexNotice();
+            // With the touch controls the key caps and the skill bar step aside (the on-screen buttons show the same).
+            if (_legend != null) _legend.gameObject.SetActive(!TouchInput.Active);
+            foreach (var s in _skills) s.Root.gameObject.SetActive(!TouchInput.Active);
             _cinematics.Update();
 
             _toasts.RemoveAll(t => t.Until < Time.time);

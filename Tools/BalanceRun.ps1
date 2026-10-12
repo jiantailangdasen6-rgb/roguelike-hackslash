@@ -23,6 +23,7 @@ foreach ($c in $classes) {
     $line = Select-String -Path "$out\$c.log" -Pattern '\[AutoTest\] FINAL' | Select-Object -Last 1
     $text = if ($line) { $line.Line -replace '^.*FINAL ', '' } else { '(no FINAL line)' }
     $m = [regex]::Match($text, 'phase=(\S+) room=(\d+) level=(\d+).*kills=(\d+).*loot=(\S+) procs=(\d+)')
-    if ($m.Success) { Write-Host ("{0,-9} phase={1} room={2} level={3} kills={4} loot={5} procs={6}" -f $c, $m.Groups[1], $m.Groups[2], $m.Groups[3], $m.Groups[4], $m.Groups[5], $m.Groups[6]) }
+    $sp = [regex]::Match($text, 'splits=(\S+)')
+    if ($m.Success) { Write-Host ("{0,-9} phase={1} room={2} level={3} kills={4} loot={5} procs={6} splits={7}" -f $c, $m.Groups[1], $m.Groups[2], $m.Groups[3], $m.Groups[4], $m.Groups[5], $m.Groups[6], $sp.Groups[1]) }
     else { Write-Host "$c $text" }
 }

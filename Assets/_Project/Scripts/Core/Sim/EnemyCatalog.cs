@@ -135,7 +135,7 @@ namespace Game.Core
             },
             new()
             {
-                Type = EnemyType.BoneKing, Name = "骸骨の騎士王", Title = "朽ちた納骨堂の主", Sheet = "bone_king", Health = 3200f, Speed = 1.8f, Radius = 0.9f, Xp = 40,
+                Type = EnemyType.BoneKing, Name = "骸骨の騎士王", Title = "朽ちた納骨堂の主", Sheet = "bone_king", Health = 2600f, Speed = 1.8f, Radius = 0.9f, Xp = 40,
                 AttackCooldown = 0.9f, Boss = true,
                 Attacks = new[]
                 {
@@ -186,19 +186,19 @@ namespace Game.Core
             },
             new()
             {
-                Type = EnemyType.BloodBishop, Name = "血の司教", Title = "血塗られた礼拝堂の主", Sheet = "blood_bishop", Health = 3300f, Speed = 1.6f, Radius = 0.8f, Xp = 50,
+                Type = EnemyType.BloodBishop, Name = "血の司教", Title = "血塗られた礼拝堂の主", Sheet = "blood_bishop", Health = 2700f, Speed = 1.6f, Radius = 0.8f, Xp = 50,
                 PreferredDistance = 5.5f, AttackCooldown = 0.95f, Boss = true,
                 Attacks = new[]
                 {
-                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 12f, SizeB = 0.5f, Range = 13f, Windup = 0.8f, Recover = 0.6f, Damage = 16f, ProjectileSpeed = 9f, Projectile = ProjectileKind.BloodOrb, Count = 7, Spread = 70f },
-                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.8f, Range = 99f, Windup = 1.2f, Recover = 0.7f, Damage = 26f, Extra = 2 },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 12f, SizeB = 0.5f, Range = 13f, Windup = 0.8f, Recover = 0.6f, Damage = 14f, ProjectileSpeed = 9f, Projectile = ProjectileKind.BloodOrb, Count = 7, Spread = 70f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.8f, Range = 99f, Windup = 1.2f, Recover = 0.7f, Damage = 22f, Extra = 2 },
                     new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.Cultist, Summon2 = EnemyType.Bloater },
                     new EnemyAttack { Kind = AttackKind.Blink, Shape = AttackShape.Circle, SizeA = 2.6f, Range = 99f, Windup = 1.0f, Recover = 0.8f, Damage = 22f },
                 },
             },
             new()
             {
-                Type = EnemyType.Lich, Name = "冥王リッチ", Title = "奈落の玉座の主", Sheet = "lich", Health = 3700f, Speed = 1.45f, Radius = 0.85f, Xp = 60,
+                Type = EnemyType.Lich, Name = "冥王リッチ", Title = "奈落の玉座の主", Sheet = "lich", Health = 3000f, Speed = 1.45f, Radius = 0.85f, Xp = 60,
                 PreferredDistance = 4.5f, AttackCooldown = 0.9f, Boss = true, Flying = true,
                 Attacks = new[]
                 {

@@ -93,6 +93,7 @@ namespace Game.Gameplay
         /// <summary>The key was pressed this frame (false without a keyboard).</summary>
         public static bool Pressed(KeyAction a)
         {
+            if (TouchInput.For(a) is TouchButton b && TouchInput.Pressed(b)) return true; // the on-screen button
             var kb = Keyboard.current;
             return kb != null && kb[KeyFor(a)].wasPressedThisFrame;
         }

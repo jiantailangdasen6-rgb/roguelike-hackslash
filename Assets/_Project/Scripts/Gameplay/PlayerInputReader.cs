@@ -24,13 +24,14 @@ namespace Game.Gameplay
         private InputAction _skill2;
         private InputAction _dodge;
 
-        public Vector2 Move => _move.ReadValue<Vector2>();
+        public Vector2 Move => TouchInput.Active && TouchInput.Move.sqrMagnitude > 0.0001f ? TouchInput.Move : _move.ReadValue<Vector2>();
         public Vector2 AimScreenPosition => _aimPoint.ReadValue<Vector2>();
         public Vector2 AimStick => _aimStick.ReadValue<Vector2>();
-        public bool AttackHeld => _attack.IsPressed();
+        public bool AttackHeld => _attack.IsPressed() || TouchInput.AttackHeld;
 
         /// <summary>True when the latest input came from keyboard/mouse, so aiming follows the cursor.</summary>
-        public bool UsingMouse { get; private set; } = true;
+        public bool UsingMouse { get => _usingMouse && !TouchInput.Active; private set => _usingMouse = value; }
+        private bool _usingMouse = true;
 
         public event Action Skill1Pressed;
         public event Action Skill2Pressed;
@@ -92,6 +93,14 @@ namespace Game.Gameplay
             var device = ctx.control?.device;
             if (device is Keyboard || device is Mouse) UsingMouse = true;
             else if (device is Gamepad || device is Touchscreen) UsingMouse = false;
+        }
+
+        // The on-screen buttons press the same skills.
+        private void Update()
+        {
+            if (TouchInput.Pressed(TouchButton.Skill1)) Skill1Pressed?.Invoke();
+            if (TouchInput.Pressed(TouchButton.Skill2)) Skill2Pressed?.Invoke();
+            if (TouchInput.Pressed(TouchButton.Dodge)) DodgePressed?.Invoke();
         }
 
         private void OnSkill1(InputAction.CallbackContext _) => Skill1Pressed?.Invoke();

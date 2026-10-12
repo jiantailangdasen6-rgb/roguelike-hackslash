@@ -82,7 +82,7 @@ namespace Game.Gameplay
             _hint = UIKit.Label(_root, "", 24, TextAnchor.MiddleCenter, new Color(1f, 0.92f, 0.8f));
             _hint.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1200f, 50f), new Vector2(0f, 40f));
             _hintUntil = Time.time + 12f;
-            _hintMessage = "WASD で歩く　施設の前で F　準備ができたら全員で奥の門へ";
+            _hintMessage = TouchInput.Active ? "スティックで歩く　施設の前で「調べる」　準備ができたら全員で奥の門へ" : "WASD で歩く　施設の前で F　準備ができたら全員で奥の門へ";
             // What the last run brought home (gear kept in the vault).
             if (BagView.LastBankSummary != null)
             {
@@ -188,7 +188,7 @@ namespace Game.Gameplay
 
         private static bool InteractPressed() =>
             Keyboard.current != null && (Keyboard.current.fKey.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
-            || Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame;
+            || Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame || TouchInput.Pressed(TouchButton.Interact);
 
         private Vector3 ToScreen(Vector2 world) => _camera != null ? _camera.WorldToScreenPoint(world) : Vector3.zero;
 

@@ -122,7 +122,7 @@ namespace Game.Gameplay
         private void Update()
         {
             bool pressed = (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
-                           || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
+                           || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame) || TouchInput.Pressed(TouchButton.Menu);
             if (pressed && !PerkView.IsShowing && !BagView.IsOpen && BagView.ClosedFrame != Time.frameCount
                 && !CampView.PanelOpen && !CampView.ConsumedEscape && !CodexView.IsOpen && CodexView.ClosedFrame != Time.frameCount && !SettingsView.IsOpen && SettingsView.ClosedFrame != Time.frameCount) Toggle(!IsOpen);
         }

@@ -242,7 +242,7 @@ namespace Game.Gameplay
             var director = RunDirector.Instance;
             bool running = director != null && director.IsSpawned && director.Started.Value && NetPlayer.Local != null;
             int count = _bag.Count(i => i != null);
-            _badge.transform.parent.parent.gameObject.SetActive(running && !IsOpen); // the framed outer panel
+            _badge.transform.parent.parent.gameObject.SetActive(running && !IsOpen && !TouchInput.Active); // the framed outer panel (touch: the top row has the bag)
             _badge.text = $"{count}/{SimPlayer.BagSize}";
             _newSeal.gameObject.SetActive(_unseen > 0);
             if (_unseen > 0) _newSeal.rectTransform.localScale = Vector3.one * (1f + 0.12f * Mathf.Sin(Time.time * 6f));

@@ -227,6 +227,19 @@ namespace Game.Gameplay
                 _aim = _botBrain.Aim;
                 return;
             }
+            if (TouchInput.Active)
+            {
+                // Touch: aim at the nearest monster in reach (a chest or keg close by otherwise), else where you walk.
+                Vector2 me = transform.position;
+                var view = EnemyView.Instance;
+                if (view != null && (view.NearestWhere(me, 12f, d => !d.Prop && !d.Untargetable) ?? view.NearestWhere(me, 3f, d => d.Prop && !d.Untargetable)) is Vector2 target)
+                {
+                    _aim = target - me;
+                    return;
+                }
+                if (input.Move.sqrMagnitude > 0.04f) _aim = input.Move.normalized * 5f;
+                return;
+            }
             if (input.UsingMouse && _camera != null)
             {
                 Vector2 world = _camera.ScreenToWorldPoint(input.AimScreenPosition);

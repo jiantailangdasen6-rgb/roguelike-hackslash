@@ -23,6 +23,11 @@ mergeInto(LibraryManager.library, {
     return 1;
   },
 
+  // Writes a line to the browser console (release builds keep Unity's own log quiet; tests read this one).
+  BrowserConsoleLog: function (ptr) {
+    console.log(UTF8ToString(ptr));
+  },
+
   // 1 while the tab is in the background (minimised, other tab in front).
   BrowserPageHidden: function () {
     return document.hidden ? 1 : 0;

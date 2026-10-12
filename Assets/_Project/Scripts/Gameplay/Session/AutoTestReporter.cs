@@ -73,7 +73,7 @@ namespace Game.Gameplay
             if (Time.time >= _nextReport)
             {
                 _nextReport = Time.time + 5f;
-                Debug.Log("[AutoTest] " + Status() + $" longest={_longestFrame * 1000f:0}ms ping={(NetPlayer.Local != null ? NetPlayer.Local.Ping.Value : 0)}");
+                BrowserBridge.ConsoleLog("[AutoTest] " + Status() + $" longest={_longestFrame * 1000f:0}ms ping={(NetPlayer.Local != null ? NetPlayer.Local.Ping.Value : 0)}");
                 _longestFrame = 0f;
             }
             // -downat <s> (host): knock a teammate down to check the downed/revive markers.
@@ -135,7 +135,7 @@ namespace Game.Gameplay
             }
             if (Time.time >= _quitAt)
             {
-                Debug.Log("[AutoTest] FINAL " + Status());
+                BrowserBridge.ConsoleLog("[AutoTest] FINAL " + Status());
                 Application.Quit();
             }
         }
@@ -150,7 +150,7 @@ namespace Game.Gameplay
             var local = NetPlayer.Local;
             string run = d == null || !d.IsSpawned
                 ? "run=none"
-                : $"started={d.Started.Value} phase={d.Phase.Value} room={d.RoomIndex.Value} level={d.TeamLevel.Value} paused={d.Paused.Value} elapsed={d.Elapsed.Value}";
+                : $"started={d.Started.Value} phase={d.Phase.Value} room={d.RoomIndex.Value} level={d.TeamLevel.Value} paused={d.Paused.Value} elapsed={d.Elapsed.Value} splits={d.RunSplits.Value}";
             string player = local == null ? "local=none" : $"local=P{local.Slot.Value + 1}:{local.Class.Value} hp={local.Hp.Value}/{local.MaxHp.Value} downed={local.Downed.Value} pos={(Vector2)local.transform.position}";
             return $"role={role} peers={peers} players={NetPlayer.All.Count} {run} enemiesVisible={enemyView?.VisibleCount ?? 0} events={_eventCount} {player} kills={(d != null && d.IsSpawned ? d.Kills.Value : 0)} shards={ProfileStore.Current.shards} loot={_loot[0]}/{_loot[1]}/{_loot[2]}/{_loot[3]} procs={_legendaryProcs}";
         }

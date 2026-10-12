@@ -41,7 +41,7 @@ namespace Game.Core
         public int DeepestIndex => _deepestIndex;
 
         /// <summary>Waves a fight room sends (the same on every peer, for the HUD).</summary>
-        public static int WaveCountFor(RoomKind kind, int area) => kind == RoomKind.Elite ? 3 : 2 + (area >= 1 ? 1 : 0);
+        public static int WaveCountFor(RoomKind kind, int area) => kind == RoomKind.Elite ? 3 : 2; // bot runs: a third wave pushed an area to 7+ minutes
 
         /// <summary>Rooms (by bit) whose pedestal this player has used.</summary>
         public int PedestalsUsedBy(SimPlayer p)

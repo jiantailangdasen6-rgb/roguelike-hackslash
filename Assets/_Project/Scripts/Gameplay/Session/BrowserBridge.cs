@@ -16,6 +16,7 @@ namespace Game.Gameplay
 #if UNITY_WEBGL && !UNITY_EDITOR
         [DllImport("__Internal")] private static extern int BrowserCopyText(string text);
         [DllImport("__Internal")] private static extern int BrowserPageHidden();
+        [DllImport("__Internal")] private static extern void BrowserConsoleLog(string text);
 #endif
 
         public static void CopyText(string text)
@@ -25,6 +26,15 @@ namespace Game.Gameplay
 #else
             GUIUtility.systemCopyBuffer = text;
 #endif
+        }
+
+        /// <summary>A line in the browser console (and the player log elsewhere): automated tests read the room code from it.</summary>
+        public static void ConsoleLog(string text)
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            BrowserConsoleLog(text);
+#endif
+            Debug.Log(text);
         }
 
         /// <summary>True while the browser tab is in the background (the engine then runs very slowly).</summary>

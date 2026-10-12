@@ -429,16 +429,17 @@ namespace Game.Core
         // Spawn weights per area (index = EnemyType). Each area adds new monsters to the mix.
         private static readonly (EnemyType Type, int Weight)[][] AreaPools =
         {
-            new[] { (EnemyType.Skeleton, 40), (EnemyType.SkeletonArcher, 22), (EnemyType.Ghoul, 20), (EnemyType.Bat, 10) },
+            new[] { (EnemyType.Skeleton, 38), (EnemyType.SkeletonArcher, 20), (EnemyType.Ghoul, 18), (EnemyType.Bat, 9), (EnemyType.ShieldSkeleton, 10) },
             new[]
             {
                 (EnemyType.Skeleton, 20), (EnemyType.SkeletonArcher, 15), (EnemyType.Ghoul, 14), (EnemyType.Cultist, 14),
-                (EnemyType.Bat, 7), (EnemyType.Bloater, 14), (EnemyType.DreadKnight, 11),
+                (EnemyType.Bat, 7), (EnemyType.Bloater, 14), (EnemyType.DreadKnight, 11), (EnemyType.Flagellant, 14),
             },
             new[]
             {
                 (EnemyType.Skeleton, 10), (EnemyType.SkeletonArcher, 12), (EnemyType.Ghoul, 12), (EnemyType.Cultist, 11), (EnemyType.Bat, 6),
                 (EnemyType.Bloater, 11), (EnemyType.DreadKnight, 12), (EnemyType.Necromancer, 9), (EnemyType.Wraith, 13),
+                (EnemyType.AbyssEye, 11), (EnemyType.ShadeStalker, 11),
             },
         };
 

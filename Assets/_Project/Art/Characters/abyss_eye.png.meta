@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 4e2c5d959f9aa134786b5b56dfaa4520
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6251100339533053887
+    second: abyss_eye_0
+  - first:
+      213: 6702211175461722509
+    second: abyss_eye_1
+  - first:
+      213: 6452236297012684202
+    second: abyss_eye_2
+  - first:
+      213: 5246976327904145535
+    second: abyss_eye_3
+  - first:
+      213: 5591155840081477514
+    second: abyss_eye_4
+  - first:
+      213: 615586953252897645
+    second: abyss_eye_5
+  - first:
+      213: 4974064156000674492
+    second: abyss_eye_6
+  - first:
+      213: -268903920758218982
+    second: abyss_eye_7
+  - first:
+      213: 5052491747430261791
+    second: abyss_eye_8
+  - first:
+      213: -8315257459619925718
+    second: abyss_eye_9
+  - first:
+      213: -9076763016704525293
+    second: abyss_eye_10
+  - first:
+      213: 122776019027157187
+    second: abyss_eye_11
+  - first:
+      213: 7243176590622111324
+    second: abyss_eye_12
+  - first:
+      213: 2229266095784417997
+    second: abyss_eye_13
+  - first:
+      213: 8093090317260521552
+    second: abyss_eye_14
+  - first:
+      213: -5162022754030569856
+    second: abyss_eye_15
+  - first:
+      213: 5680626501421067050
+    second: abyss_eye_16
+  - first:
+      213: -8379524261640286047
+    second: abyss_eye_17
+  - first:
+      213: -3632793465408503734
+    second: abyss_eye_18
+  - first:
+      213: 9029899019306848279
+    second: abyss_eye_19
+  - first:
+      213: 5015820843222279060
+    second: abyss_eye_20
+  - first:
+      213: 7376979511876216834
+    second: abyss_eye_21
+  - first:
+      213: -4130903220844264969
+    second: abyss_eye_22
+  - first:
+      213: 2788579451221559505
+    second: abyss_eye_23
+  - first:
+      213: 760940895525390535
+    second: abyss_eye_24
+  - first:
+      213: 638613298869486131
+    second: abyss_eye_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: abyss_eye_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 329
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1400fc66c51af39a0800000000000000
+      internalID: -6251100339533053887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 331
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d899c03ed89030d50800000000000000
+      internalID: 6702211175461722509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 331
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa5a25a0ab2fa8950800000000000000
+      internalID: 6452236297012684202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_3
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 329
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f703c99ab2101d840800000000000000
+      internalID: 5246976327904145535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_4
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 328
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8f38e30d96c79d40800000000000000
+      internalID: 5591155840081477514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_5
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 328
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d63010d82110b8800800000000000000
+      internalID: 615586953252897645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_6
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 265
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb26c640ffc670540800000000000000
+      internalID: 4974064156000674492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_7
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 267
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1f1f7c0f49a44cf0800000000000000
+      internalID: -268903920758218982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_8
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 267
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f146c2c997e0e1640800000000000000
+      internalID: 5052491747430261791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_9
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 265
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a21ff6785654a9c80800000000000000
+      internalID: -8315257459619925718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_10
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 264
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31c7ce6802cd80280800000000000000
+      internalID: -9076763016704525293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_11
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 264
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c0ec09832034b100800000000000000
+      internalID: 122776019027157187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_12
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 207
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c56b471bbbee48460800000000000000
+      internalID: 7243176590622111324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_13
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 211
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dca5d05f3b1ffee10800000000000000
+      internalID: 2229266095784417997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_14
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 211
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0508777b3ce605070800000000000000
+      internalID: 8093090317260521552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_15
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 137
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 086368f97afcc58b0800000000000000
+      internalID: -5162022754030569856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_16
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 136
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b6fdea4b3a5de40800000000000000
+      internalID: 5680626501421067050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_17
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 138
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a0d926a413f5bb80800000000000000
+      internalID: -8379524261640286047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_18
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 75
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4047ff2799b59dc0800000000000000
+      internalID: -3632793465408503734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_19
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 74
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 710de6bc055a05d70800000000000000
+      internalID: 9029899019306848279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_20
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 9
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 493a3416b76cb9540800000000000000
+      internalID: 5015820843222279060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_21
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 7
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20867b8f7cb406660800000000000000
+      internalID: 7376979511876216834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_22
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 4
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f18f0838651ca6c0800000000000000
+      internalID: -4130903220844264969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_23
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 1
+        width: 27
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d8c3028c3603b620800000000000000
+      internalID: 2788579451221559505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_24
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c8cbdc76b76f8a00800000000000000
+      internalID: 760940895525390535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_25
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 0
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 332c4fb696fccd800800000000000000
+      internalID: 638613298869486131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      abyss_eye_0: -6251100339533053887
+      abyss_eye_1: 6702211175461722509
+      abyss_eye_10: -9076763016704525293
+      abyss_eye_11: 122776019027157187
+      abyss_eye_12: 7243176590622111324
+      abyss_eye_13: 2229266095784417997
+      abyss_eye_14: 8093090317260521552
+      abyss_eye_15: -5162022754030569856
+      abyss_eye_16: 5680626501421067050
+      abyss_eye_17: -8379524261640286047
+      abyss_eye_18: -3632793465408503734
+      abyss_eye_19: 9029899019306848279
+      abyss_eye_2: 6452236297012684202
+      abyss_eye_20: 5015820843222279060
+      abyss_eye_21: 7376979511876216834
+      abyss_eye_22: -4130903220844264969
+      abyss_eye_23: 2788579451221559505
+      abyss_eye_24: 760940895525390535
+      abyss_eye_25: 638613298869486131
+      abyss_eye_3: 5246976327904145535
+      abyss_eye_4: 5591155840081477514
+      abyss_eye_5: 615586953252897645
+      abyss_eye_6: 4974064156000674492
+      abyss_eye_7: -268903920758218982
+      abyss_eye_8: 5052491747430261791
+      abyss_eye_9: -8315257459619925718
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

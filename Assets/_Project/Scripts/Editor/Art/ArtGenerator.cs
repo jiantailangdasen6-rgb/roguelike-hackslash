@@ -58,6 +58,10 @@ namespace Game.EditorTools.Art
             Character("powder_keg", EnemyArt.PowderKeg(), EnemyArt.FrameSize);
             Character("blood_bishop", EnemyArt.BloodBishop(), EnemyArt.BossFrameSize);
             Character("lich", EnemyArt.Lich(), EnemyArt.BossFrameSize);
+            Character("shield_skeleton", EnemyArt.ShieldSkeleton(), EnemyArt.FrameSize);
+            Character("flagellant", EnemyArt.Flagellant(), EnemyArt.FrameSize);
+            Character("abyss_eye", EnemyArt.AbyssEye(), EnemyArt.FrameSize);
+            Character("shade_stalker", EnemyArt.ShadeStalker(), EnemyArt.FrameSize);
             // The camp's residents (idle only).
             Character("npc_master", CampArt.Master(), HeroArt.FrameSize);
             Character("npc_crone", CampArt.Crone(), HeroArt.FrameSize);

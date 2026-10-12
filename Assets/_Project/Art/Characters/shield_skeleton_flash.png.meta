@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 68a082b4e19d34e47aa3702fe134b647
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -267162114819615097
+    second: shield_skeleton_flash_0
+  - first:
+      213: -5756702360579400113
+    second: shield_skeleton_flash_1
+  - first:
+      213: -8100349982924607896
+    second: shield_skeleton_flash_2
+  - first:
+      213: -7415159272207175261
+    second: shield_skeleton_flash_3
+  - first:
+      213: 5266654156863204492
+    second: shield_skeleton_flash_4
+  - first:
+      213: -6239152062635745995
+    second: shield_skeleton_flash_5
+  - first:
+      213: 8314178099841842415
+    second: shield_skeleton_flash_6
+  - first:
+      213: 5431877878771772284
+    second: shield_skeleton_flash_7
+  - first:
+      213: 3603242120504453548
+    second: shield_skeleton_flash_8
+  - first:
+      213: -182931703120998398
+    second: shield_skeleton_flash_9
+  - first:
+      213: 7462594018451500997
+    second: shield_skeleton_flash_10
+  - first:
+      213: 3782805058492645001
+    second: shield_skeleton_flash_11
+  - first:
+      213: 2059171951973009588
+    second: shield_skeleton_flash_12
+  - first:
+      213: -409198158113367395
+    second: shield_skeleton_flash_13
+  - first:
+      213: 6739913557834310578
+    second: shield_skeleton_flash_14
+  - first:
+      213: 3614445733953561587
+    second: shield_skeleton_flash_15
+  - first:
+      213: -1545188377530098667
+    second: shield_skeleton_flash_16
+  - first:
+      213: 110809095659479467
+    second: shield_skeleton_flash_17
+  - first:
+      213: 4968463246268159127
+    second: shield_skeleton_flash_18
+  - first:
+      213: -3682985209333739769
+    second: shield_skeleton_flash_19
+  - first:
+      213: -5116287196881971637
+    second: shield_skeleton_flash_20
+  - first:
+      213: -307020228790705641
+    second: shield_skeleton_flash_21
+  - first:
+      213: -7002452103373114549
+    second: shield_skeleton_flash_22
+  - first:
+      213: -767115331725732080
+    second: shield_skeleton_flash_23
+  - first:
+      213: 8775745832801957955
+    second: shield_skeleton_flash_24
+  - first:
+      213: 4309056891495046460
+    second: shield_skeleton_flash_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: shield_skeleton_flash_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 328
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7861cb8d879da4cf0800000000000000
+      internalID: -267162114819615097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 328
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4e130014b51c10b0800000000000000
+      internalID: -5756702360579400113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 327
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86eef67ab96c59f80800000000000000
+      internalID: -8100349982924607896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_3
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 327
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a1b52bddef081990800000000000000
+      internalID: -7415159272207175261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_4
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 265
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8c6aae3d0ae61940800000000000000
+      internalID: 5266654156863204492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_5
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 264
+        width: 25
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53d53f661441a69a0800000000000000
+      internalID: -6239152062635745995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_6
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 264
+        width: 25
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fecb7607ee4e16370800000000000000
+      internalID: 8314178099841842415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_7
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 265
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7b6e73c628e16b40800000000000000
+      internalID: 5431877878771772284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_8
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 264
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca9a4682e99410230800000000000000
+      internalID: 3603242120504453548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_9
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 264
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 200d051d598167df0800000000000000
+      internalID: -182931703120998398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_10
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 200
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cfa1c4a8b5709760800000000000000
+      internalID: 7462594018451500997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_11
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 199
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98e310698293f7430800000000000000
+      internalID: 3782805058492645001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_12
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 199
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b88cc8faf5a39c10800000000000000
+      internalID: 2059171951973009588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_13
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 136
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9a98e6717c325af0800000000000000
+      internalID: -409198158113367395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_14
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 136
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b3ad87dbabf88d50800000000000000
+      internalID: 6739913557834310578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_15
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 136
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f36a30be37192230800000000000000
+      internalID: 3614445733953561587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_16
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 72
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51c914e7b536e8ae0800000000000000
+      internalID: -1545188377530098667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_17
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 72
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba16aa0194ca98100800000000000000
+      internalID: 110809095659479467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_18
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 8
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 794d5699ff683f440800000000000000
+      internalID: 4968463246268159127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_19
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 6
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70f05a4277863ecc0800000000000000
+      internalID: -3682985209333739769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_20
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 4
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4698f4d6eb4ff8b0800000000000000
+      internalID: -5116287196881971637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_21
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 2
+        width: 36
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71222148abe3dbbf0800000000000000
+      internalID: -307020228790705641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_22
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 2
+        width: 39
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4332cd99ea42de90800000000000000
+      internalID: -7002452103373114549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_23
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 1
+        width: 41
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0175bbe8ba8aa55f0800000000000000
+      internalID: -767115331725732080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_24
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 2
+        width: 25
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 348764bc656b9c970800000000000000
+      internalID: 8775745832801957955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_skeleton_flash_25
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 0
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3dd2869968dccb30800000000000000
+      internalID: 4309056891495046460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      shield_skeleton_flash_0: -267162114819615097
+      shield_skeleton_flash_1: -5756702360579400113
+      shield_skeleton_flash_10: 7462594018451500997
+      shield_skeleton_flash_11: 3782805058492645001
+      shield_skeleton_flash_12: 2059171951973009588
+      shield_skeleton_flash_13: -409198158113367395
+      shield_skeleton_flash_14: 6739913557834310578
+      shield_skeleton_flash_15: 3614445733953561587
+      shield_skeleton_flash_16: -1545188377530098667
+      shield_skeleton_flash_17: 110809095659479467
+      shield_skeleton_flash_18: 4968463246268159127
+      shield_skeleton_flash_19: -3682985209333739769
+      shield_skeleton_flash_2: -8100349982924607896
+      shield_skeleton_flash_20: -5116287196881971637
+      shield_skeleton_flash_21: -307020228790705641
+      shield_skeleton_flash_22: -7002452103373114549
+      shield_skeleton_flash_23: -767115331725732080
+      shield_skeleton_flash_24: 8775745832801957955
+      shield_skeleton_flash_25: 4309056891495046460
+      shield_skeleton_flash_3: -7415159272207175261
+      shield_skeleton_flash_4: 5266654156863204492
+      shield_skeleton_flash_5: -6239152062635745995
+      shield_skeleton_flash_6: 8314178099841842415
+      shield_skeleton_flash_7: 5431877878771772284
+      shield_skeleton_flash_8: 3603242120504453548
+      shield_skeleton_flash_9: -182931703120998398
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

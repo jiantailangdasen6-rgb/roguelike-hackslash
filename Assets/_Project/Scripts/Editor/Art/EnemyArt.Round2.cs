@@ -464,9 +464,11 @@ namespace Game.EditorTools.Art
 
         // ------------------------------------------------------------------ Wraith (floating cloak, claws)
 
-        public static List<Clip> Wraith()
+        public static List<Clip> Wraith() => WraithClips(Palette.Standard());
+
+        /// <summary>The wraith's body and moves; recoloured for the shade stalker (EnemyArt.Round3).</summary>
+        private static List<Clip> WraithClips(Dictionary<char, PixelMaterial> m)
         {
-            var m = Palette.Standard();
             var empty = new PixelPart("none", P(0f, 0f), m, 0, ".");
             var claw = new PixelPart("arm", P(1.5f, 11.5f), m, 0, ".jj", "jjj", "jjj", ".jj", ".jj", ".jj", ".jj", ".jj", ".jb", ".bb", "b.b", "b.b");
             var rig = new HumanoidRig

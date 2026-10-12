@@ -275,7 +275,7 @@ namespace Game.Gameplay
             else if (s.Poisoned) tint = new Color(0.72f, 1f, 0.65f);
             else if (s.Elite) tint = new Color(1f, 0.82f, 0.7f);
             // Wraiths are half-there, and nearly vanish while gathering for a blink.
-            if (s.Type == EnemyType.Wraith) tint.a = s.Anim == EnemyAnim.Windup ? 0.3f : 0.78f;
+            if (s.Type is EnemyType.Wraith or EnemyType.ShadeStalker) tint.a = s.Anim == EnemyAnim.Windup ? 0.3f : 0.78f;
             TrialLook(v, s, def, ref tint);
             r.color = tint;
 
@@ -381,7 +381,7 @@ namespace Game.Gameplay
             v.Animator.Play("idle", force: true);
 
             bool trialProp = type is EnemyType.BoneBrazier or EnemyType.BloodSigil or EnemyType.SoulVessel or EnemyType.PressurePlate or EnemyType.WardCrystal;
-            if (elite || def.Boss || def.Type == EnemyType.Wraith || trialProp)
+            if (elite || def.Boss || def.Type is EnemyType.Wraith or EnemyType.ShadeStalker or EnemyType.AbyssEye || trialProp)
             {
                 if (v.Glow == null)
                 {
@@ -392,8 +392,8 @@ namespace Game.Gameplay
                     v.Glow.lightType = Light2D.LightType.Point;
                 }
                 v.Glow.enabled = true;
-                v.Glow.color = def.Type is EnemyType.Lich or EnemyType.Wraith ? new Color(0.45f, 0.8f, 1f) : def.Boss ? new Color(1f, 0.25f, 0.2f) : new Color(1f, 0.55f, 0.2f);
-                v.Glow.intensity = def.Boss ? 1.4f : def.Type == EnemyType.Wraith && !elite ? 0.6f : 0.9f;
+                v.Glow.color = def.Type is EnemyType.Lich or EnemyType.Wraith ? new Color(0.45f, 0.8f, 1f) : def.Type is EnemyType.ShadeStalker or EnemyType.AbyssEye ? new Color(0.7f, 0.4f, 1f) : def.Boss ? new Color(1f, 0.25f, 0.2f) : new Color(1f, 0.55f, 0.2f);
+                v.Glow.intensity = def.Boss ? 1.4f : def.Type is EnemyType.Wraith or EnemyType.ShadeStalker or EnemyType.AbyssEye && !elite ? 0.6f : 0.9f;
                 v.Glow.pointLightOuterRadius = def.Boss ? 4.5f : 2.2f;
                 v.Glow.pointLightInnerRadius = 0.2f;
                 if (trialProp)

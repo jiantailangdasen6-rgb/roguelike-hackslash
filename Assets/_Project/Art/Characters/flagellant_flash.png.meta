@@ -1,0 +1,860 @@
+fileFormatVersion: 2
+guid: e2cafbf87c699b342a8c0add68734017
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7098592782405889120
+    second: flagellant_flash_0
+  - first:
+      213: -3016518750280803925
+    second: flagellant_flash_1
+  - first:
+      213: 7372522175352055061
+    second: flagellant_flash_2
+  - first:
+      213: -6107950032495275961
+    second: flagellant_flash_3
+  - first:
+      213: -5903293801021024128
+    second: flagellant_flash_4
+  - first:
+      213: -2738320181629950613
+    second: flagellant_flash_5
+  - first:
+      213: -5932509247905587678
+    second: flagellant_flash_6
+  - first:
+      213: 666694332903557649
+    second: flagellant_flash_7
+  - first:
+      213: -3682813217325489092
+    second: flagellant_flash_8
+  - first:
+      213: 7204521288017120463
+    second: flagellant_flash_9
+  - first:
+      213: 2659034008626458016
+    second: flagellant_flash_10
+  - first:
+      213: -9135647210370629812
+    second: flagellant_flash_11
+  - first:
+      213: -4369184680957726517
+    second: flagellant_flash_12
+  - first:
+      213: -4852053996070949168
+    second: flagellant_flash_13
+  - first:
+      213: 8365795499044890812
+    second: flagellant_flash_14
+  - first:
+      213: -6040838609258837816
+    second: flagellant_flash_15
+  - first:
+      213: 5694772866853197821
+    second: flagellant_flash_16
+  - first:
+      213: -5103499013576227180
+    second: flagellant_flash_17
+  - first:
+      213: -2396628149282760818
+    second: flagellant_flash_18
+  - first:
+      213: 89517946261453988
+    second: flagellant_flash_19
+  - first:
+      213: 8405476065189137121
+    second: flagellant_flash_20
+  - first:
+      213: 4731311027638391033
+    second: flagellant_flash_21
+  - first:
+      213: 7834038563957479160
+    second: flagellant_flash_22
+  - first:
+      213: -1980707375592702529
+    second: flagellant_flash_23
+  - first:
+      213: 9016239858673921416
+    second: flagellant_flash_24
+  - first:
+      213: -1756030753538205338
+    second: flagellant_flash_25
+  - first:
+      213: 2596100865942557923
+    second: flagellant_flash_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: flagellant_flash_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 328
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a39b8f697bbc7d90800000000000000
+      internalID: -7098592782405889120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 328
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba91537cd2c2326d0800000000000000
+      internalID: -3016518750280803925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 327
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 515ac807bd5705660800000000000000
+      internalID: 7372522175352055061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 327
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74098478ec33c3ba0800000000000000
+      internalID: -6107950032495275961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_4
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 265
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0885061a099431ea0800000000000000
+      internalID: -5903293801021024128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_5
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 265
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b65e9a49d488ff9d0800000000000000
+      internalID: -2738320181629950613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_6
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 265
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22e1ed3554e7bada0800000000000000
+      internalID: -5932509247905587678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_7
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 265
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11a8b76a6f2904900800000000000000
+      internalID: 666694332903557649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_8
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 265
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c34633724e404ecc0800000000000000
+      internalID: -3682813217325489092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_9
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 265
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcc0005b0f99bf360800000000000000
+      internalID: 7204521288017120463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_10
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 200
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0adecd9b759c6e420800000000000000
+      internalID: 2659034008626458016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_11
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 199
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4ff190d349a73180800000000000000
+      internalID: -9135647210370629812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_12
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 199
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc0bf6d7ea98d53c0800000000000000
+      internalID: -4369184680957726517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_13
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 136
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0de2d2d099a0aacb0800000000000000
+      internalID: -4852053996070949168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_14
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 160
+        width: 35
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb8e128bea6491470800000000000000
+      internalID: 8365795499044890812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_15
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 137
+        width: 24
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c889a56a41aa2ca0800000000000000
+      internalID: -6040838609258837816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_16
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 135
+        width: 15
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df7515d00c5e70f40800000000000000
+      internalID: 5694772866853197821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_17
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 136
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4968b38cfaabc29b0800000000000000
+      internalID: -5103499013576227180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_18
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 136
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e879c4765677dbed0800000000000000
+      internalID: -2396628149282760818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_19
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 72
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4acbfeb09180e3100800000000000000
+      internalID: 89517946261453988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_20
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 72
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ea85a972ff36a470800000000000000
+      internalID: 8405476065189137121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_21
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 3
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f05644ef4ef8a140800000000000000
+      internalID: 4731311027638391033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_22
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 8
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f69561419818bc60800000000000000
+      internalID: 7834038563957479160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_23
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 8
+        width: 36
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbdfcc9d22d1384e0800000000000000
+      internalID: -1980707375592702529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_24
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 8
+        width: 30
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88d2af1a16e102d70800000000000000
+      internalID: 9016239858673921416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_25
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66991b0655351a7e0800000000000000
+      internalID: -1756030753538205338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flagellant_flash_26
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 0
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e4179b9bf3370420800000000000000
+      internalID: 2596100865942557923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      flagellant_flash_0: -7098592782405889120
+      flagellant_flash_1: -3016518750280803925
+      flagellant_flash_10: 2659034008626458016
+      flagellant_flash_11: -9135647210370629812
+      flagellant_flash_12: -4369184680957726517
+      flagellant_flash_13: -4852053996070949168
+      flagellant_flash_14: 8365795499044890812
+      flagellant_flash_15: -6040838609258837816
+      flagellant_flash_16: 5694772866853197821
+      flagellant_flash_17: -5103499013576227180
+      flagellant_flash_18: -2396628149282760818
+      flagellant_flash_19: 89517946261453988
+      flagellant_flash_2: 7372522175352055061
+      flagellant_flash_20: 8405476065189137121
+      flagellant_flash_21: 4731311027638391033
+      flagellant_flash_22: 7834038563957479160
+      flagellant_flash_23: -1980707375592702529
+      flagellant_flash_24: 9016239858673921416
+      flagellant_flash_25: -1756030753538205338
+      flagellant_flash_26: 2596100865942557923
+      flagellant_flash_3: -6107950032495275961
+      flagellant_flash_4: -5903293801021024128
+      flagellant_flash_5: -2738320181629950613
+      flagellant_flash_6: -5932509247905587678
+      flagellant_flash_7: 666694332903557649
+      flagellant_flash_8: -3682813217325489092
+      flagellant_flash_9: 7204521288017120463
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

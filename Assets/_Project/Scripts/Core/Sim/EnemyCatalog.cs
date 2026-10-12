@@ -26,6 +26,11 @@ namespace Game.Core
         WardCrystal,   // puzzle: monsters go for it, the team keeps it whole
         CrackedWall,   // hides a secret room: break it open
         TreasureImp,   // puzzle: runs off with treasure (never fights back)
+        // One or two monsters of each area's own (round 4)
+        ShieldSkeleton, // crypt: holds a great shield up (armoured)
+        Flagellant,     // chapel: a long whip lash in a line
+        AbyssEye,       // abyss: floats and drops curse circles under players
+        ShadeStalker,   // abyss: blinks in and lunges
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -259,6 +264,34 @@ namespace Game.Core
                 // Flees instead of fighting (RunSimulation.Puzzles); a little slower than a player.
                 Type = EnemyType.TreasureImp, Name = "宝を抱えた小鬼", Sheet = "treasure_imp", Health = 150f, Speed = 4.1f, Radius = 0.38f, Xp = 8,
                 Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                Type = EnemyType.ShieldSkeleton, Name = "骨の盾兵", Sheet = "shield_skeleton", Health = 45f, Speed = 1.7f, Radius = 0.45f, Xp = 4,
+                AttackCooldown = 1.9f, Armored = true,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 1.9f, SizeB = 90f, Range = 1.6f, Windup = 0.8f, Recover = 0.6f, Damage = 16f } },
+            },
+            new()
+            {
+                Type = EnemyType.Flagellant, Name = "鞭打ちの修道士", Sheet = "flagellant", Health = 70f, Speed = 2.6f, Radius = 0.42f, Xp = 4,
+                AttackCooldown = 2.2f,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Line, SizeA = 4.4f, SizeB = 0.75f, Range = 4f, Windup = 0.65f, Recover = 0.55f, Damage = 18f } },
+            },
+            new()
+            {
+                Type = EnemyType.AbyssEye, Name = "奈落の眼", Sheet = "abyss_eye", Health = 64f, Speed = 1.6f, Radius = 0.45f, Xp = 5,
+                PreferredDistance = 7f, AttackCooldown = 3.2f, Flying = true,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.4f, Range = 12f, Windup = 1.1f, Recover = 0.6f, Damage = 20f } },
+            },
+            new()
+            {
+                Type = EnemyType.ShadeStalker, Name = "影の狩人", Sheet = "shade_stalker", Health = 72f, Speed = 3f, Radius = 0.4f, Xp = 5,
+                AttackCooldown = 2.4f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Blink, Shape = AttackShape.Circle, SizeA = 1.3f, Range = 8f, Windup = 0.75f, Recover = 0.5f, Damage = 16f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.6f, SizeB = 1f, Range = 4.4f, Windup = 0.5f, Recover = 0.6f, Damage = 18f, ProjectileSpeed = 18f },
+                },
             },
         };
 

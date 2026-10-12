@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 4cab19377d3f03d44919d6ad71315c39
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8010389529135841639
+    second: abyss_eye_flash_0
+  - first:
+      213: 2811906114961949318
+    second: abyss_eye_flash_1
+  - first:
+      213: -1344606986630655986
+    second: abyss_eye_flash_2
+  - first:
+      213: 2806727885665369402
+    second: abyss_eye_flash_3
+  - first:
+      213: -5841618877980788517
+    second: abyss_eye_flash_4
+  - first:
+      213: -48832926906862987
+    second: abyss_eye_flash_5
+  - first:
+      213: 2017284884342031642
+    second: abyss_eye_flash_6
+  - first:
+      213: 4927056866402249185
+    second: abyss_eye_flash_7
+  - first:
+      213: 1551643614550859281
+    second: abyss_eye_flash_8
+  - first:
+      213: -2364946781860297833
+    second: abyss_eye_flash_9
+  - first:
+      213: -2487326551524385378
+    second: abyss_eye_flash_10
+  - first:
+      213: 142877808076419361
+    second: abyss_eye_flash_11
+  - first:
+      213: -7435087106882526010
+    second: abyss_eye_flash_12
+  - first:
+      213: 6430613823817940816
+    second: abyss_eye_flash_13
+  - first:
+      213: -1865025789390540482
+    second: abyss_eye_flash_14
+  - first:
+      213: 4600335727741718756
+    second: abyss_eye_flash_15
+  - first:
+      213: 704890404335790103
+    second: abyss_eye_flash_16
+  - first:
+      213: -7543287140956903566
+    second: abyss_eye_flash_17
+  - first:
+      213: -8356639597808167297
+    second: abyss_eye_flash_18
+  - first:
+      213: 2165871949116822461
+    second: abyss_eye_flash_19
+  - first:
+      213: 7922979747986677712
+    second: abyss_eye_flash_20
+  - first:
+      213: -6128594139427755268
+    second: abyss_eye_flash_21
+  - first:
+      213: -7983495813381797704
+    second: abyss_eye_flash_22
+  - first:
+      213: 1486789723074938357
+    second: abyss_eye_flash_23
+  - first:
+      213: 1246418399617249904
+    second: abyss_eye_flash_24
+  - first:
+      213: 7170840680839099535
+    second: abyss_eye_flash_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: abyss_eye_flash_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 329
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76186acf5de9a2f60800000000000000
+      internalID: 8010389529135841639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 331
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6824e04a6b5e50720800000000000000
+      internalID: 2811906114961949318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 331
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e001f57d11ff65de0800000000000000
+      internalID: -1344606986630655986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_3
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 329
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3d744e242083f620800000000000000
+      internalID: 2806727885665369402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_4
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 328
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd83db8a4966eeea0800000000000000
+      internalID: -5841618877980788517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_5
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 328
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 572bf5236b2825ff0800000000000000
+      internalID: -48832926906862987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_6
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 265
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a15c8fd0ae5defb10800000000000000
+      internalID: 2017284884342031642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_7
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 267
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e92e068d1c606440800000000000000
+      internalID: 4927056866402249185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_8
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 267
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11e9e4f75ab888510800000000000000
+      internalID: 1551643614550859281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_9
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 265
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79383829e650e2fd0800000000000000
+      internalID: -2364946781860297833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_10
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 264
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9dddf70ead3b7dd0800000000000000
+      internalID: -2487326551524385378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_11
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 264
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1217ea40c9a9bf100800000000000000
+      internalID: 142877808076419361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_12
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 207
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c42e284ba341d890800000000000000
+      internalID: -7435087106882526010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_13
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 211
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05f7260b3312e3950800000000000000
+      internalID: 6430613823817940816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_14
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 211
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e313f660de81e16e0800000000000000
+      internalID: -1865025789390540482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_15
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 137
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e0559388fca7df30800000000000000
+      internalID: 4600335727741718756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_16
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 136
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 718240c861648c900800000000000000
+      internalID: 704890404335790103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_17
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 138
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 277ed74bf4cd05790800000000000000
+      internalID: -7543287140956903566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_18
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 75
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f765ea8af80470c80800000000000000
+      internalID: -8356639597808167297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_19
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 74
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db3571cff09be0e10800000000000000
+      internalID: 2165871949116822461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_20
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 9
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0df1c516a1414fd60800000000000000
+      internalID: 7922979747986677712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_21
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 7
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfa2ed2d91cd2faa0800000000000000
+      internalID: -6128594139427755268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_22
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 4
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b84f892bdce43190800000000000000
+      internalID: -7983495813381797704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_23
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 1
+        width: 27
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f54593306322a410800000000000000
+      internalID: 1486789723074938357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_24
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07272be3eea2c4110800000000000000
+      internalID: 1246418399617249904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: abyss_eye_flash_25
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 0
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f84b5524b91f38360800000000000000
+      internalID: 7170840680839099535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      abyss_eye_flash_0: 8010389529135841639
+      abyss_eye_flash_1: 2811906114961949318
+      abyss_eye_flash_10: -2487326551524385378
+      abyss_eye_flash_11: 142877808076419361
+      abyss_eye_flash_12: -7435087106882526010
+      abyss_eye_flash_13: 6430613823817940816
+      abyss_eye_flash_14: -1865025789390540482
+      abyss_eye_flash_15: 4600335727741718756
+      abyss_eye_flash_16: 704890404335790103
+      abyss_eye_flash_17: -7543287140956903566
+      abyss_eye_flash_18: -8356639597808167297
+      abyss_eye_flash_19: 2165871949116822461
+      abyss_eye_flash_2: -1344606986630655986
+      abyss_eye_flash_20: 7922979747986677712
+      abyss_eye_flash_21: -6128594139427755268
+      abyss_eye_flash_22: -7983495813381797704
+      abyss_eye_flash_23: 1486789723074938357
+      abyss_eye_flash_24: 1246418399617249904
+      abyss_eye_flash_25: 7170840680839099535
+      abyss_eye_flash_3: 2806727885665369402
+      abyss_eye_flash_4: -5841618877980788517
+      abyss_eye_flash_5: -48832926906862987
+      abyss_eye_flash_6: 2017284884342031642
+      abyss_eye_flash_7: 4927056866402249185
+      abyss_eye_flash_8: 1551643614550859281
+      abyss_eye_flash_9: -2364946781860297833
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

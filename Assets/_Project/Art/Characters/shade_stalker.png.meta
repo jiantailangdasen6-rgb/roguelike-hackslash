@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: e89e54e26bcc74d4fbf9aeb8e7cd2725
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8902976372439959868
+    second: shade_stalker_0
+  - first:
+      213: -6258206718418388674
+    second: shade_stalker_1
+  - first:
+      213: 6864252951314884472
+    second: shade_stalker_2
+  - first:
+      213: 3975951301054166818
+    second: shade_stalker_3
+  - first:
+      213: -6019852626482980026
+    second: shade_stalker_4
+  - first:
+      213: -7279713251223926329
+    second: shade_stalker_5
+  - first:
+      213: -1212285796452597066
+    second: shade_stalker_6
+  - first:
+      213: -3407447706036107296
+    second: shade_stalker_7
+  - first:
+      213: -8317311767400070032
+    second: shade_stalker_8
+  - first:
+      213: 2083597590389397855
+    second: shade_stalker_9
+  - first:
+      213: 7607393642154626225
+    second: shade_stalker_10
+  - first:
+      213: 1328830013354416376
+    second: shade_stalker_11
+  - first:
+      213: -705763474518605289
+    second: shade_stalker_12
+  - first:
+      213: 3874366533121759075
+    second: shade_stalker_13
+  - first:
+      213: -9125185062651048411
+    second: shade_stalker_14
+  - first:
+      213: 6376013162914668816
+    second: shade_stalker_15
+  - first:
+      213: 8656723284414966166
+    second: shade_stalker_16
+  - first:
+      213: 8178144203412880303
+    second: shade_stalker_17
+  - first:
+      213: -6868057616570529822
+    second: shade_stalker_18
+  - first:
+      213: 4717603933184469274
+    second: shade_stalker_19
+  - first:
+      213: 5051607617748477275
+    second: shade_stalker_20
+  - first:
+      213: -5354201653690081372
+    second: shade_stalker_21
+  - first:
+      213: 4583442727112891541
+    second: shade_stalker_22
+  - first:
+      213: -6442300861699896611
+    second: shade_stalker_23
+  - first:
+      213: 944239754192178441
+    second: shade_stalker_24
+  - first:
+      213: 413849042295507489
+    second: shade_stalker_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: shade_stalker_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 330
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c63505c826427480800000000000000
+      internalID: -8902976372439959868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 332
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3975b1a5226629a0800000000000000
+      internalID: -6258206718418388674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 332
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 877ec8bd0b9b24f50800000000000000
+      internalID: 6864252951314884472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_3
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 330
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 227f59f84aa6d2730800000000000000
+      internalID: 3975951301054166818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_4
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 328
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64b97464eef257ca0800000000000000
+      internalID: -6019852626482980026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_5
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 328
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c9081a1e5349fa90800000000000000
+      internalID: -7279713251223926329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_6
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 266
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b20138bd781d2fe0800000000000000
+      internalID: -1212285796452597066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_7
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 268
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e78ff26d5056b0d0800000000000000
+      internalID: -3407447706036107296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_8
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 268
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07441f9b309f29c80800000000000000
+      internalID: -8317311767400070032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_9
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 266
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f59150618fc6aec10800000000000000
+      internalID: 2083597590389397855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_10
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 264
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bc013b3634e29960800000000000000
+      internalID: 7607393642154626225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_11
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 264
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f81ed05bd3f07210800000000000000
+      internalID: 1328830013354416376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_12
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 204
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7128fd5fbdf9436f0800000000000000
+      internalID: -705763474518605289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_13
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 205
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3675268a5d384c530800000000000000
+      internalID: 3874366533121759075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_14
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 205
+        width: 20
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52ecbf66884dc5180800000000000000
+      internalID: -9125185062651048411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_15
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 138
+        width: 33
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0116ebaa0362c7850800000000000000
+      internalID: 6376013162914668816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_16
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 137
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 699286e36fbd22870800000000000000
+      internalID: 8656723284414966166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_17
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 137
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fab3856c2da9e7170800000000000000
+      internalID: 8178144203412880303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_18
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 74
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e7c56b7cf1cfa0a0800000000000000
+      internalID: -6868057616570529822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_19
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 74
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a19227448cb487140800000000000000
+      internalID: 4717603933184469274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_20
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 10
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b552e802d5aea1640800000000000000
+      internalID: 5051607617748477275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_21
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 8
+        width: 26
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4af5ef7b6fd02b5b0800000000000000
+      internalID: -5354201653690081372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_22
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 6
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59c59ed40e8ab9f30800000000000000
+      internalID: 4583442727112891541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_23
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 4
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dda4f22cf795896a0800000000000000
+      internalID: -6442300861699896611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_24
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 2
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90d4d6bbd0d9a1d00800000000000000
+      internalID: 944239754192178441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_stalker_25
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 1
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12ac8a4e2894eb500800000000000000
+      internalID: 413849042295507489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      shade_stalker_0: -8902976372439959868
+      shade_stalker_1: -6258206718418388674
+      shade_stalker_10: 7607393642154626225
+      shade_stalker_11: 1328830013354416376
+      shade_stalker_12: -705763474518605289
+      shade_stalker_13: 3874366533121759075
+      shade_stalker_14: -9125185062651048411
+      shade_stalker_15: 6376013162914668816
+      shade_stalker_16: 8656723284414966166
+      shade_stalker_17: 8178144203412880303
+      shade_stalker_18: -6868057616570529822
+      shade_stalker_19: 4717603933184469274
+      shade_stalker_2: 6864252951314884472
+      shade_stalker_20: 5051607617748477275
+      shade_stalker_21: -5354201653690081372
+      shade_stalker_22: 4583442727112891541
+      shade_stalker_23: -6442300861699896611
+      shade_stalker_24: 944239754192178441
+      shade_stalker_25: 413849042295507489
+      shade_stalker_3: 3975951301054166818
+      shade_stalker_4: -6019852626482980026
+      shade_stalker_5: -7279713251223926329
+      shade_stalker_6: -1212285796452597066
+      shade_stalker_7: -3407447706036107296
+      shade_stalker_8: -8317311767400070032
+      shade_stalker_9: 2083597590389397855
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

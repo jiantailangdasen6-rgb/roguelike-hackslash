@@ -64,22 +64,27 @@ namespace Game.Gameplay
         /// <summary>A jagged bolt from one point to another, built from thin stretched dots.</summary>
         private void Lightning(Vector2 from, Vector2 to, Color color)
         {
-            var fx = New(from, 0.22f, color);
+            var fx = New(from, 0.32f, color);
             fx.Segments = new List<SpriteRenderer>();
-            const int joints = 5;
+            const int joints = 6;
             Vector2 dir = to - from;
             Vector2 normal = new Vector2(-dir.y, dir.x).normalized;
             Vector2 prev = from;
+            float unit = Mathf.Max(0.01f, _dot != null ? _dot.bounds.size.x : 1f);
             for (int k = 1; k <= joints; k++)
             {
                 float t = k / (float)joints;
-                Vector2 next = Vector2.Lerp(from, to, t) + (k < joints ? normal * Random.Range(-0.35f, 0.35f) : Vector2.zero);
-                var seg = Child(fx.Root, "Bolt", _dot, 4050);
+                Vector2 next = Vector2.Lerp(from, to, t) + (k < joints ? normal * Random.Range(-0.4f, 0.4f) : Vector2.zero);
                 Vector2 d = next - prev;
-                seg.transform.position = (prev + next) * 0.5f;
-                seg.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
-                seg.transform.localScale = new Vector3(d.magnitude / Mathf.Max(0.01f, seg.sprite != null ? seg.sprite.bounds.size.x : 1f), 0.12f, 1f);
-                fx.Segments.Add(seg);
+                // A pale glow around a white-hot core.
+                foreach (var (thickness, order) in new[] { (0.75f, 4050), (0.28f, 4051) })
+                {
+                    var seg = Child(fx.Root, "Bolt", _dot, order);
+                    seg.transform.position = (prev + next) * 0.5f;
+                    seg.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
+                    seg.transform.localScale = new Vector3(d.magnitude / unit + 0.1f, thickness * 0.5f / unit, 1f);
+                    fx.Segments.Add(seg);
+                }
                 prev = next;
             }
             fx.Light = AddLight(fx.Root, color, 1.6f);
@@ -146,8 +151,14 @@ namespace Game.Gameplay
                     fx.Label.color = new Color(fx.Color.r, fx.Color.g, fx.Color.b, Mathf.Clamp01(fade * 1.6f));
                 }
                 if (fx.Segments != null)
-                    foreach (var seg in fx.Segments)
-                        seg.color = new Color(Mathf.Lerp(1f, fx.Color.r, t), Mathf.Lerp(1f, fx.Color.g, t), Mathf.Lerp(1f, fx.Color.b, t), fade);
+                    for (int s = 0; s < fx.Segments.Count; s++)
+                    {
+                        bool glow = s % 2 == 0;
+                        var c = glow ? fx.Color : Color.Lerp(Color.white, fx.Color, t);
+                        // Flickers like real lightning before fading.
+                        float flick = 0.7f + 0.3f * Mathf.Sin((Time.time - fx.Born) * 90f);
+                        fx.Segments[s].color = new Color(c.r, c.g, c.b, (glow ? 0.45f : 1f) * fade * flick);
+                    }
                 if (fx.Light != null) fx.Light.intensity = 2f * fade;
             }
         }

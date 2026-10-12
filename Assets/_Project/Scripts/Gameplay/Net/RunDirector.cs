@@ -134,6 +134,13 @@ namespace Game.Gameplay
             }
 
             Sim.Start((int)CommandLine.GetFloat("-startroom", 0f));
+            // -legendary (screenshots): everyone starts wearing a legendary piece for their class.
+            if (CommandLine.Has("-legendary"))
+                foreach (var sp in Sim.Players)
+                {
+                    sp.Bag.Add(ItemGenerator.Generate((ulong)(sp.ClientId + 7), 3, 9f, sp.ClassId, Rarity.Legendary, EquipSlot.Weapon));
+                    sp.Equip(sp.Bag.Count - 1);
+                }
             foreach (var sp in Sim.Players) Sim.SyncGear(sp); // the gear everyone set out with (and any loaners)
             Started.Value = true;
             _startTime = Time.time;

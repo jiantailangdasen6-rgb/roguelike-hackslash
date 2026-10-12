@@ -9,7 +9,8 @@ namespace Game.Core
     public static class ItemGenerator
     {
         // Common / Magic / Rare / Legendary.
-        private static readonly float[] BaseRarityWeights = { 58f, 30f, 10f, 2f };
+        // Tuned with Tools/BalanceRun.ps1 (2026-10-12): about one piece per room, fewer whites, a legendary every few rooms.
+        private static readonly float[] BaseRarityWeights = { 50f, 34f, 13f, 3f };
 
         /// <param name="rarityBoost">0 = normal enemy, 1 = elite, 3 = boss / treasure. Shifts weight toward higher rarities.</param>
         /// <param name="minRarity">Floor for guaranteed drops (treasure doors).</param>

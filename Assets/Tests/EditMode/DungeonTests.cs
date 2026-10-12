@@ -44,7 +44,7 @@ namespace Game.Tests
             {
                 var map = DungeonMap.Generate(seed, area);
                 string where = $"seed {seed} area {area}";
-                Assert.That(map.Rooms.Count, Is.InRange(9, 10), where);
+                Assert.That(map.Rooms.Count, Is.InRange(11, 14), where);
                 Assert.AreEqual(Vector2.zero, map.Start.Origin, $"{where}: the start room sits on the old arena");
                 Assert.AreEqual(1, map.Boss.Neighbor.Count(n => n >= 0), $"{where}: the boss is a dead end");
                 Assert.That(map.Boss.Neighbor, Does.Contain(map.Campfire.Id), $"{where}: the campfire leads to the boss");

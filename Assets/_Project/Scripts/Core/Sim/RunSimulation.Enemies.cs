@@ -45,6 +45,12 @@ namespace Game.Core
                     e.Position = Confine(e.Position, e.Radius, def.Flying);
                     continue;
                 }
+                if (e.Type == EnemyType.TreasureImp)
+                {
+                    Flee(ref e, def, dt);
+                    e.Position = Confine(e.Position, e.Radius, def.Flying);
+                    continue;
+                }
                 if (def.Boss && BossChannelling)
                 {
                     e.State = EnemyState.Chase;
@@ -56,7 +62,7 @@ namespace Game.Core
                 switch (e.State)
                 {
                     case EnemyState.Chase:
-                        Chase(ref e, def, target, dt);
+                        if (!ChaseCrystal(ref e, def, target, dt)) Chase(ref e, def, target, dt);
                         break;
                     case EnemyState.Windup:
                         e.StateTimer -= dt;

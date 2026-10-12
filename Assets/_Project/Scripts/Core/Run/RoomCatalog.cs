@@ -17,6 +17,10 @@ namespace Game.Core
             RoomKind.Merchant => "闇商人",
             RoomKind.Campfire => "焚き火の間",
             RoomKind.Boss => "主の間",
+            RoomKind.MiniBoss => "精鋭の主の間",
+            RoomKind.Puzzle => "仕掛けの間",
+            RoomKind.Treasure => "宝物庫",
+            RoomKind.Secret => "隠し部屋",
             _ => "",
         };
 
@@ -33,6 +37,10 @@ namespace Game.Core
             RoomKind.Merchant => "商",
             RoomKind.Campfire => "火",
             RoomKind.Boss => "主",
+            RoomKind.MiniBoss => "将",
+            RoomKind.Puzzle => "仕",
+            RoomKind.Treasure => "宝",
+            RoomKind.Secret => "隠",
             _ => "",
         };
 
@@ -44,6 +52,7 @@ namespace Game.Core
             RoomKind.Spring => RoomReward.Vigor,
             RoomKind.CurseAltar => RoomReward.Cursed,
             RoomKind.Merchant => RoomReward.Shop,
+            RoomKind.Treasure or RoomKind.Secret => RoomReward.Treasure,
             _ => RoomReward.None,
         };
 
@@ -56,6 +65,8 @@ namespace Game.Core
             RoomKind.Campfire => new Color(1f, 0.72f, 0.36f),
             RoomKind.Boss => new Color(1f, 0.25f, 0.25f),
             RoomKind.Start => new Color(0.72f, 0.7f, 0.68f),
+            RoomKind.MiniBoss => new Color(1f, 0.45f, 0.15f),
+            RoomKind.Puzzle => new Color(0.5f, 0.85f, 1f),
             _ => RewardCatalog.Color(Reward(k)),
         };
 
@@ -67,6 +78,8 @@ namespace Game.Core
             RoomKind.Spring => $"上に立つと、最大HP +{RunSimulation.VigorPerStack * 100f:0}%・全回復",
             RoomKind.CurseAltar => $"上に立つと、力を{RewardCatalog.CursedBoons}回選べる。代償に呪いが1つつく（ランの間ずっと）",
             RoomKind.Merchant => "上に立つと、魂の欠片で1つ買える（全員の取り分から払う）",
+            RoomKind.Treasure => "上に立つと、希少以上の装備を1つ得る",
+            RoomKind.Secret => "上に立つと、古い地図（このエリアの全部屋が見える）と装備を得る",
             _ => "",
         };
     }

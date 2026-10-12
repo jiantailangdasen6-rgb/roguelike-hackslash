@@ -224,6 +224,196 @@ namespace Game.EditorTools.Art
             return new List<Clip> { idle, on, Same("windup", idle), Same("strike", on), hurt, death };
         }
 
+        // ------------------------------------------------------------------ Pressure plate (puzzle rooms)
+
+        public static List<Clip> PressurePlate()
+        {
+            var dim = Palette.With(('d', new PixelMaterial(2, "#1c1a22", "#2f2c38", "#46424f", "#5f5a6b", "#7a7488")),
+                ('f', new PixelMaterial(1, "#28303a", "#3a4656", "#4f6072", "#6a7d90", "#8aa0b4")));
+            var lit = Palette.With(('d', new PixelMaterial(2, "#1c1a22", "#2f2c38", "#46424f", "#5f5a6b", "#7a7488")),
+                ('f', new PixelMaterial(1, "#2a6a80", "#3fa4c0", "#6fd8f0", "#b8f4ff", "#ecffff")));
+            string[] rows =
+            {
+                "....dddddddddddddddddddddd....",
+                "..dddddddddddddddddddddddddd..",
+                ".dddffffffffffffffffffffffddd.",
+                "ddddfdddddddddddddddddddddfddd",
+                "ddddfddddddffffffffddddddfdddd",
+                "ddddfdddddffddddddffdddddfdddd",
+                "ddddfddddffdddffdddffddddfdddd",
+                "ddddfddddfdddffffdddfddddfdddd",
+                "ddddfddddffdddffdddffddddfdddd",
+                "ddddfdddddffddddddffdddddfdddd",
+                "ddddfddddddffffffffddddddfdddd",
+                "ddddfdddddddddddddddddddddfddd",
+                ".dddffffffffffffffffffffffddd.",
+                "..dddddddddddddddddddddddddd..",
+                "....dddddddddddddddddddddd....",
+            };
+            var off = new PixelPart("plate", P(14.5f, 7f), dim, 0, rows);
+            var on = new PixelPart("plate_lit", P(14.5f, 7f), lit, 0, rows);
+            var on2 = new PixelPart("plate_lit2", P(14.5f, 7f), lit, 1, rows);
+            Frame One(PixelPart part) => new Frame().Add(part, P(32f, 18f), 0f, 3);
+            var idle = new Clip("idle", 2f, true);
+            idle.Frames.Add(One(off));
+            var walk = new Clip("walk", 6f, true);
+            walk.Frames.Add(One(on));
+            walk.Frames.Add(One(on2));
+            var hurt = new Clip("hurt", 10f, false);
+            hurt.Frames.Add(One(off));
+            var death = new Clip("death", 10f, false);
+            death.Frames.Add(One(on2));
+            return new List<Clip> { idle, walk, Same("windup", idle), Same("strike", walk), hurt, death };
+        }
+
+        // ------------------------------------------------------------------ Ward crystal (puzzle rooms)
+
+        public static List<Clip> WardCrystal()
+        {
+            var m = Palette.With(('f', new PixelMaterial(2, "#173a52", "#2a6688", "#3f97bf", "#76c9ea", "#c8f2ff")));
+            var crystal = new PixelPart("crystal", P(6.5f, 0f), m, 0,
+                "......f.......",
+                ".....fff......",
+                ".....ffF......",
+                "....fffFf.....",
+                "....fffFf.....",
+                "...ffffFff....",
+                "...ffffFff..f.",
+                "..fffffFfff.ff",
+                "..fffffFfff.ff",
+                "..fffffFffffff",
+                ".ffffffFffffff",
+                ".ffffffFfffff.",
+                ".ffffffffffff.",
+                "ffffffffffff..",
+                "ffffffffffff..",
+                ".ffffffffff...",
+                ".fffffffff....",
+                "..ffffffff....");
+            var stand = new PixelPart("stand", P(9.5f, 0f), m, 0,
+                "..mmmmmmmmmmmmmm..",
+                ".mmmmmmmmmmmmmmmm.",
+                "mmMmmmmmmmmmmmmmmm",
+                "mmmmmmmmmmmmmmmmmm",
+                ".mmmmmmmmmmmmmmmm.",
+                "...mmmmmmmmmmmm...");
+            var shard = new PixelPart("shard", P(1f, 1f), m, 0, ".f.", "fFf", ".f.");
+
+            Frame Crystal(float bob, float tilt = 0f, float shake = 0f)
+            {
+                var f = new Frame();
+                f.Add(stand, P(32f + shake, 10f), 0f, 3);
+                f.Add(crystal, P(32f + shake, 16f + bob), tilt, 4);
+                return f;
+            }
+            var idle = new Clip("idle", 4f, true);
+            for (int i = 0; i < 4; i++) idle.Frames.Add(Crystal(Mathf.Sin(i / 4f * Mathf.PI * 2f) * 1f));
+            var hurt = new Clip("hurt", 16f, false);
+            hurt.Frames.Add(Crystal(0f, 4f, 1.5f));
+            hurt.Frames.Add(Crystal(0f, -3f, -1.5f));
+            var death = Shatter(new[] { shard, shard, shard }, P(32f, 24f), 5);
+            return new List<Clip> { idle, Same("walk", idle), Same("windup", idle), Same("strike", idle), hurt, death };
+        }
+
+        // ------------------------------------------------------------------ Cracked wall (hides a secret room)
+
+        public static List<Clip> CrackedWall()
+        {
+            var m = Palette.With(('a', new PixelMaterial(2, "#16131a", "#2a2631", "#3d3846", "#544d5f", "#6c6479")));
+            var wall = new PixelPart("wall", P(15.5f, 0f), m, 0,
+                "..aaaaaaaaaaaaaaaaaaaaaaaaaaaa..",
+                ".aaaaaaakaaaaaaaaaaaaaaaaaaaaaa.",
+                "aaaaaaaakaaaaaaaaaaaaakaaaaaaaaa",
+                "aaaaaaakkaaaaaaaaaaaakaaaaaaaaaa",
+                "aaaaaaakaaaaaaaaaaaakkaaaaaaaaaa",
+                "aaaaaakkaaaaaaaaaaakaaaaaaaaaaaa",
+                "aaaaaakaaaaaaaaaaakkaaaaaaaaaaaa",
+                "aaaaakkkkkaaaaaaakaaaaaaaaaaaaaa",
+                "aaaaakaaakkkaaaakkaaaaaaaaaaaaaa",
+                "aaaakkaaaaakkkkkkaaaaaaaaaaaaaaa",
+                "aaaakaaaaaaaaaakaaaaaaakkkaaaaaa",
+                "aaakkaaaaaaaaaakkaaaaakkakkaaaaa",
+                "aaakaaaaaaaaaaaakkaaakkaaakkaaaa",
+                "aaaaaaaaaaaaaaaaakkkkkaaaaakaaaa",
+                "aaaaaaaaaaaaaaaaaakaaaaaaaaakkaa",
+                "aaaaaaaaaaaaaaaaaakaaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaakkaaaaaaaaaaaa",
+                "aaaaaaaaaaaaaaaaaaakaaaaaaaaaaaa",
+                ".aaaaaaaaaaaaaaaaaakaaaaaaaaaaa.",
+                "..aaaaaaaaaaaaaaaaaaaaaaaaaaaa..");
+            var chip = new PixelPart("chip", P(1f, 1f), m, 0, "aa", "aa");
+
+            Frame Wall(float shake = 0f) => new Frame().Add(wall, P(32f + shake, 10f), 0f, 3);
+            var idle = new Clip("idle", 2f, true);
+            idle.Frames.Add(Wall());
+            var hurt = new Clip("hurt", 16f, false);
+            hurt.Frames.Add(Wall(1.5f));
+            hurt.Frames.Add(Wall(-1.5f));
+            var death = Shatter(new[] { chip, chip, chip, chip }, P(32f, 18f), 5);
+            return new List<Clip> { idle, Same("walk", idle), Same("windup", idle), Same("strike", idle), hurt, death };
+        }
+
+        // ------------------------------------------------------------------ Treasure imp (puzzle rooms: catch it)
+
+        public static List<Clip> TreasureImp()
+        {
+            var m = Palette.With(('x', new PixelMaterial(2, "#1f2a14", "#36491f", "#506b2b", "#6f8f3b", "#94b555")));
+            var body = new PixelPart("body", P(4.5f, 0f), m, 0,
+                "..xxxxx..",
+                ".xxxxxxx.",
+                "xxxxxxxxx",
+                "xxxxxxxxx",
+                ".xxxxxxx.",
+                "..ll.ll..");
+            var head = new PixelPart("head", P(5f, 0f), m, 0,
+                "x........x",
+                "xx......xx",
+                ".xxxxxxxx.",
+                "xxxxxxxxxx",
+                "xxeExxeExx",
+                "xxxxxxxxxx",
+                ".xxkkkkxx.",
+                "..xxxxxx..");
+            var sack = new PixelPart("sack", P(5.5f, 0f), m, 0,
+                "....oo......",
+                "...oggo.....",
+                "..oooooo....",
+                ".oooooooo...",
+                "oooooooooo..",
+                "oooogooooo..",
+                "ooooooooooo.",
+                "oooooooggooo",
+                ".oooooooooo.",
+                "..oooooooo..");
+            var coin = new PixelPart("coin", P(1f, 1f), m, 0, ".g.", "gGg", ".g.");
+            var leg = new PixelPart("leg", P(1f, 3f), m, 0, "xx", "xx", "xx", "kk");
+
+            Frame Imp(float bob, float stride, float lean = 0f, float shake = 0f)
+            {
+                var f = new Frame();
+                f.Add(leg, P(29f + stride + shake, 13f), -stride * 6f, 2);
+                f.Add(leg, P(34f - stride + shake, 13f), stride * 6f, 2);
+                f.Add(body, P(32f + shake, 13f + bob), lean, 3);
+                f.Add(head, P(32f + shake, 19f + bob), lean, 4);
+                f.Add(sack, P(27f + shake, 15f + bob), lean * 0.5f, 5);
+                return f;
+            }
+            var idle = new Clip("idle", 5f, true);
+            idle.Frames.Add(Imp(0f, 0f));
+            idle.Frames.Add(Imp(0.5f, 0f));
+            var walk = new Clip("walk", 12f, true);
+            for (int i = 0; i < 4; i++)
+            {
+                float s = Mathf.Sin(i / 4f * Mathf.PI * 2f);
+                walk.Frames.Add(Imp(Mathf.Abs(s) * 1.5f, s * 2f, -8f));
+            }
+            var hurt = new Clip("hurt", 14f, false);
+            hurt.Frames.Add(Imp(0f, 0f, 10f, 1.5f));
+            hurt.Frames.Add(Imp(0f, 0f, -6f, -1.5f));
+            var death = Shatter(new[] { coin, coin, coin, coin }, P(32f, 20f), 5);
+            return new List<Clip> { idle, walk, Same("windup", idle), Same("strike", walk), hurt, death };
+        }
+
         // ------------------------------------------------------------------ Soul vessel (the Lich's phylactery)
 
         public static List<Clip> SoulVessel()

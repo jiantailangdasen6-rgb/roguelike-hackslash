@@ -1,0 +1,1510 @@
+fileFormatVersion: 2
+guid: a7891587b5d95bf4e97e94d4fb3efcbe
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5611001733028733974
+    second: ward_crystal_flash_0
+  - first:
+      213: -6039386512037478056
+    second: ward_crystal_flash_1
+  - first:
+      213: -8313200555543958002
+    second: ward_crystal_flash_2
+  - first:
+      213: -1370607266400604675
+    second: ward_crystal_flash_3
+  - first:
+      213: -6803623194479052841
+    second: ward_crystal_flash_4
+  - first:
+      213: -2497547729245034758
+    second: ward_crystal_flash_5
+  - first:
+      213: -8955097337844745086
+    second: ward_crystal_flash_6
+  - first:
+      213: -6888982727753264540
+    second: ward_crystal_flash_7
+  - first:
+      213: 7210823786741808000
+    second: ward_crystal_flash_8
+  - first:
+      213: 3613917791151078484
+    second: ward_crystal_flash_9
+  - first:
+      213: 2290076421031183637
+    second: ward_crystal_flash_10
+  - first:
+      213: 9179367170698462617
+    second: ward_crystal_flash_11
+  - first:
+      213: -7690454552735988520
+    second: ward_crystal_flash_12
+  - first:
+      213: -4905141339962554901
+    second: ward_crystal_flash_13
+  - first:
+      213: 2804186700955048786
+    second: ward_crystal_flash_14
+  - first:
+      213: -813702396623665600
+    second: ward_crystal_flash_15
+  - first:
+      213: -1231518816624945877
+    second: ward_crystal_flash_16
+  - first:
+      213: 6356605761524286811
+    second: ward_crystal_flash_17
+  - first:
+      213: -6314023274257247035
+    second: ward_crystal_flash_18
+  - first:
+      213: -2603614148381543244
+    second: ward_crystal_flash_19
+  - first:
+      213: -6476022074596233541
+    second: ward_crystal_flash_20
+  - first:
+      213: 2417819595092467961
+    second: ward_crystal_flash_21
+  - first:
+      213: 3012111801296502063
+    second: ward_crystal_flash_22
+  - first:
+      213: 8115434543066974378
+    second: ward_crystal_flash_23
+  - first:
+      213: 8541760671308148567
+    second: ward_crystal_flash_24
+  - first:
+      213: -66064858506144310
+    second: ward_crystal_flash_25
+  - first:
+      213: -2295969112548841532
+    second: ward_crystal_flash_26
+  - first:
+      213: 399908876355720649
+    second: ward_crystal_flash_27
+  - first:
+      213: 3641670972686069842
+    second: ward_crystal_flash_28
+  - first:
+      213: -760854575378504111
+    second: ward_crystal_flash_29
+  - first:
+      213: -3728202820976977929
+    second: ward_crystal_flash_30
+  - first:
+      213: 3179772904284220908
+    second: ward_crystal_flash_31
+  - first:
+      213: -1652289525450682551
+    second: ward_crystal_flash_32
+  - first:
+      213: -4818562823141221640
+    second: ward_crystal_flash_33
+  - first:
+      213: 9150283576777041583
+    second: ward_crystal_flash_34
+  - first:
+      213: -409181415600448755
+    second: ward_crystal_flash_35
+  - first:
+      213: 6761585790995856768
+    second: ward_crystal_flash_36
+  - first:
+      213: -575835932045430589
+    second: ward_crystal_flash_37
+  - first:
+      213: 3871820246916783045
+    second: ward_crystal_flash_38
+  - first:
+      213: 5617151207248693063
+    second: ward_crystal_flash_39
+  - first:
+      213: 8430632488533603483
+    second: ward_crystal_flash_40
+  - first:
+      213: -2859814062286970203
+    second: ward_crystal_flash_41
+  - first:
+      213: -7711566563014667480
+    second: ward_crystal_flash_42
+  - first:
+      213: -527013901244929823
+    second: ward_crystal_flash_43
+  - first:
+      213: 4157184868837929392
+    second: ward_crystal_flash_44
+  - first:
+      213: 4453860114511741817
+    second: ward_crystal_flash_45
+  - first:
+      213: 8248826829451297809
+    second: ward_crystal_flash_46
+  - first:
+      213: -2849256602764227706
+    second: ward_crystal_flash_47
+  - first:
+      213: -3577220328754135137
+    second: ward_crystal_flash_48
+  - first:
+      213: -4700168325518835400
+    second: ward_crystal_flash_49
+  - first:
+      213: -5862142891469202784
+    second: ward_crystal_flash_50
+  - first:
+      213: -6785220776564962142
+    second: ward_crystal_flash_51
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ward_crystal_flash_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeb98b4f6a7b122b0800000000000000
+      internalID: -5611001733028733974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 328
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85188b027f9cf2ca0800000000000000
+      internalID: -6039386512037478056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0ee834d32491ac80800000000000000
+      internalID: -8313200555543958002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 328
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfd6f97f3ff9afce0800000000000000
+      internalID: -1370607266400604675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_4
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d7b77370cca491a0800000000000000
+      internalID: -6803623194479052841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_5
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 264
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af624c4a29de65dd0800000000000000
+      internalID: -2497547729245034758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_6
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28cb7b8da6a19b380800000000000000
+      internalID: -8955097337844745086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_7
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 264
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 462177065ba6560a0800000000000000
+      internalID: -6888982727753264540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_8
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 200
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08bbeaa870ef11460800000000000000
+      internalID: 7210823786741808000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_9
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 200
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45c360d6517372230800000000000000
+      internalID: 3613917791151078484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_10
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 200
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 515cf002f5cf7cf10800000000000000
+      internalID: 2290076421031183637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_11
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 200
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9954d50bec9a36f70800000000000000
+      internalID: 9179367170698462617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_12
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 136
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d4c2ee7454064590800000000000000
+      internalID: -7690454552735988520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_13
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 136
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be5c27a90ff6debb0800000000000000
+      internalID: -4905141339962554901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_14
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 136
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25bdc4282f87ae620800000000000000
+      internalID: 2804186700955048786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_15
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 136
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 046cc504bf525b4f0800000000000000
+      internalID: -813702396623665600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_16
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 72
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b255cd04924c8eee0800000000000000
+      internalID: -1231518816624945877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_17
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 72
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b554bd8e243373850800000000000000
+      internalID: 6356605761524286811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_18
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 23
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4195209451068a0800000000000000
+      internalID: -6314023274257247035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_19
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 23
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b479810aba1edbd0800000000000000
+      internalID: -2603614148381543244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_20
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 26
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbe6a1e0c3c8026a0800000000000000
+      internalID: -6476022074596233541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 27
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f027709c12dd8120800000000000000
+      internalID: 2417819595092467961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_22
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 23
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2d3a0479bb2dc920800000000000000
+      internalID: 3012111801296502063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_23
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 23
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa8017138b0df9070800000000000000
+      internalID: 8115434543066974378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_24
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 27
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75f69b9031e6a8670800000000000000
+      internalID: 8541760671308148567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_25
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 28
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac5da987c5a451ff0800000000000000
+      internalID: -66064858506144310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_26
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 21
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c7e147b1441320e0800000000000000
+      internalID: -2295969112548841532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_27
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 21
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c555b51103cc8500800000000000000
+      internalID: 399908876355720649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_28
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 27
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 250fdcb8470d98230800000000000000
+      internalID: 3641670972686069842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_29
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 27
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15665dc7bc6e075f0800000000000000
+      internalID: -760854575378504111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_30
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 26
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f7de058943c24cc0800000000000000
+      internalID: -3728202820976977929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_31
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 26
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cede54afb92d02c20800000000000000
+      internalID: 3179772904284220908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_32
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 15
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94fc9694e63e119e0800000000000000
+      internalID: -1652289525450682551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_33
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 16
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fa93c664a6012db0800000000000000
+      internalID: -4818562823141221640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_34
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 12
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa6e2ebce665cfe70800000000000000
+      internalID: 9150283576777041583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_35
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 15
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0b9172abab425af0800000000000000
+      internalID: -409181415600448755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_36
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08df2a6d37af5dd50800000000000000
+      internalID: 6761585790995856768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_37
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 12
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c0b68d45483208f0800000000000000
+      internalID: -575835932045430589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_38
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 19
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cbd3a330087bb530800000000000000
+      internalID: 3871820246916783045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_39
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 19
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74707b5134124fd40800000000000000
+      internalID: 5617151207248693063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_40
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 17
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b94b9e6b49f9ff470800000000000000
+      internalID: 8430632488533603483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_41
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 11
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a2e7b52346ef48d0800000000000000
+      internalID: -2859814062286970203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_42
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8231bbd81130bf490800000000000000
+      internalID: -7711566563014667480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_43
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e86a9826abafa8f0800000000000000
+      internalID: -527013901244929823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_44
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 10
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b1b6bccc9941b930800000000000000
+      internalID: 4157184868837929392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_45
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 973c0c43d2a4fcd30800000000000000
+      internalID: 4453860114511741817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_46
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11408271c48b97270800000000000000
+      internalID: 8248826829451297809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_47
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 9
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68b4d4e37386578d0800000000000000
+      internalID: -2849256602764227706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_48
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9fbd4d50192b5ec0800000000000000
+      internalID: -3577220328754135137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_49
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83148ec7fc5a5ceb0800000000000000
+      internalID: -4700168325518835400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_50
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0aa9563691c75aea0800000000000000
+      internalID: -5862142891469202784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_flash_51
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2acce3247ad06d1a0800000000000000
+      internalID: -6785220776564962142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ward_crystal_flash_0: -5611001733028733974
+      ward_crystal_flash_1: -6039386512037478056
+      ward_crystal_flash_10: 2290076421031183637
+      ward_crystal_flash_11: 9179367170698462617
+      ward_crystal_flash_12: -7690454552735988520
+      ward_crystal_flash_13: -4905141339962554901
+      ward_crystal_flash_14: 2804186700955048786
+      ward_crystal_flash_15: -813702396623665600
+      ward_crystal_flash_16: -1231518816624945877
+      ward_crystal_flash_17: 6356605761524286811
+      ward_crystal_flash_18: -6314023274257247035
+      ward_crystal_flash_19: -2603614148381543244
+      ward_crystal_flash_2: -8313200555543958002
+      ward_crystal_flash_20: -6476022074596233541
+      ward_crystal_flash_21: 2417819595092467961
+      ward_crystal_flash_22: 3012111801296502063
+      ward_crystal_flash_23: 8115434543066974378
+      ward_crystal_flash_24: 8541760671308148567
+      ward_crystal_flash_25: -66064858506144310
+      ward_crystal_flash_26: -2295969112548841532
+      ward_crystal_flash_27: 399908876355720649
+      ward_crystal_flash_28: 3641670972686069842
+      ward_crystal_flash_29: -760854575378504111
+      ward_crystal_flash_3: -1370607266400604675
+      ward_crystal_flash_30: -3728202820976977929
+      ward_crystal_flash_31: 3179772904284220908
+      ward_crystal_flash_32: -1652289525450682551
+      ward_crystal_flash_33: -4818562823141221640
+      ward_crystal_flash_34: 9150283576777041583
+      ward_crystal_flash_35: -409181415600448755
+      ward_crystal_flash_36: 6761585790995856768
+      ward_crystal_flash_37: -575835932045430589
+      ward_crystal_flash_38: 3871820246916783045
+      ward_crystal_flash_39: 5617151207248693063
+      ward_crystal_flash_4: -6803623194479052841
+      ward_crystal_flash_40: 8430632488533603483
+      ward_crystal_flash_41: -2859814062286970203
+      ward_crystal_flash_42: -7711566563014667480
+      ward_crystal_flash_43: -527013901244929823
+      ward_crystal_flash_44: 4157184868837929392
+      ward_crystal_flash_45: 4453860114511741817
+      ward_crystal_flash_46: 8248826829451297809
+      ward_crystal_flash_47: -2849256602764227706
+      ward_crystal_flash_48: -3577220328754135137
+      ward_crystal_flash_49: -4700168325518835400
+      ward_crystal_flash_5: -2497547729245034758
+      ward_crystal_flash_50: -5862142891469202784
+      ward_crystal_flash_51: -6785220776564962142
+      ward_crystal_flash_6: -8955097337844745086
+      ward_crystal_flash_7: -6888982727753264540
+      ward_crystal_flash_8: 7210823786741808000
+      ward_crystal_flash_9: 3613917791151078484
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

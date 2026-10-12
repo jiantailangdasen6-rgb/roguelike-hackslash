@@ -82,7 +82,7 @@ namespace Game.Gameplay
             foreach (var v in _visuals.Values)
             {
                 if (room != null && !room.Bounds.Contains((Vector2)v.Root.transform.position)) continue;
-                if (only.HasValue ? v.Type != only.Value || v.Anim == EnemyAnim.Walk && v.Type == EnemyType.BloodSigil : EnemyCatalog.Get(v.Type).Untargetable) continue;
+                if (only.HasValue ? v.Type != only.Value || v.Anim == EnemyAnim.Walk && v.Type is EnemyType.BloodSigil or EnemyType.PressurePlate : EnemyCatalog.Get(v.Type).Untargetable) continue;
                 Vector2 p = v.Root.transform.position;
                 float sq = (p - position).sqrMagnitude;
                 if (sq < bestSq)
@@ -316,13 +316,13 @@ namespace Game.Gameplay
                 if (v.Glow != null && trial == BossTrial.BloodRitual) v.Glow.intensity = 2f + Mathf.Sin(Time.time * 6f) * 0.6f;
                 return;
             }
-            if (s.Type == EnemyType.BloodSigil)
+            if (s.Type is EnemyType.BloodSigil or EnemyType.PressurePlate)
             {
                 bool lit = s.Anim == EnemyAnim.Walk;
                 float charge = lit ? 1f : s.Health;
                 // Unlit runes breathe so they catch the eye; charging ones redden toward the lit look.
                 float breathe = 0.5f + 0.5f * Mathf.Sin(Time.time * 4f);
-                tint = lit ? Color.white : Color.Lerp(new Color(1f, 0.9f, 0.85f, 0.75f + 0.25f * breathe), new Color(1f, 0.45f, 0.4f, 1f), charge);
+                tint = lit ? Color.white : Color.Lerp(new Color(1f, 0.9f, 0.85f, 0.75f + 0.25f * breathe), s.Type == EnemyType.PressurePlate ? new Color(0.6f, 0.95f, 1f, 1f) : new Color(1f, 0.45f, 0.4f, 1f), charge);
                 if (v.Glow != null)
                 {
                     v.Glow.intensity = lit ? 1.4f + 0.3f * Mathf.Sin(Time.time * 7f) : 0.45f + 0.25f * breathe + charge * 0.9f;
@@ -363,7 +363,7 @@ namespace Game.Gameplay
             v.Animator.Renderer.color = Color.white;
             v.Animator.Play("idle", force: true);
 
-            bool trialProp = type is EnemyType.BoneBrazier or EnemyType.BloodSigil or EnemyType.SoulVessel;
+            bool trialProp = type is EnemyType.BoneBrazier or EnemyType.BloodSigil or EnemyType.SoulVessel or EnemyType.PressurePlate or EnemyType.WardCrystal;
             if (elite || def.Boss || def.Type == EnemyType.Wraith || trialProp)
             {
                 if (v.Glow == null)

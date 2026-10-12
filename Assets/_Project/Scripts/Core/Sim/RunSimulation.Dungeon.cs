@@ -64,7 +64,14 @@ namespace Game.Core
                     Id = r.Id, Kind = r.Kind, Index = r.Index, Layout = r.Layout, Bounds = r.Bounds,
                     Objective = r.Kind switch
                     {
-                        RoomKind.Combat or RoomKind.Elite => RoomObjective.Waves,
+                        RoomKind.Combat or RoomKind.Elite or RoomKind.MiniBoss => RoomObjective.Waves,
+                        RoomKind.Puzzle => r.Puzzle switch
+                        {
+                            PuzzleKind.Plates => RoomObjective.Plates,
+                            PuzzleKind.Thief => RoomObjective.Thief,
+                            PuzzleKind.Gauntlet => RoomObjective.Gauntlet,
+                            _ => RoomObjective.Crystal,
+                        },
                         RoomKind.Boss => RoomObjective.Boss,
                         RoomKind.Campfire => RoomObjective.Rest,
                         _ => RoomObjective.Quiet,
@@ -73,7 +80,7 @@ namespace Game.Core
                 state.Cleared = !state.IsFight;
                 if (state.Objective == RoomObjective.Waves)
                 {
-                    state.WaveCount = WaveCountFor(r.Kind, area);
+                    state.WaveCount = r.Kind == RoomKind.MiniBoss ? 1 : WaveCountFor(r.Kind, area);
                     state.Target = state.WaveCount;
                 }
                 if (state.Objective == RoomObjective.Boss) state.Target = 1f;
@@ -85,6 +92,7 @@ namespace Game.Core
             GatherHold = 0f;
             ResetHazards();
             ResetBossTrials();
+            ResetPuzzles();
         }
 
         /// <summary>The team arrives in an area (the first, or the next after a boss): everyone stands in <paramref name="arrival"/>.</summary>
@@ -173,6 +181,7 @@ namespace Game.Core
             room.WaveTimer = 1.2f;
             room.SpawnTimer = 1.5f;
             StartHazards(room);
+            if (room.Objective is RoomObjective.Plates or RoomObjective.Crystal or RoomObjective.Thief or RoomObjective.Gauntlet) WakePuzzle(room);
             if (room.Objective == RoomObjective.Boss)
             {
                 room.SpawnTimer = 12f;
@@ -240,6 +249,7 @@ namespace Game.Core
                     if (p.Hp > before) Events.Add(new SimEvent(SimEventType.PlayerHealed) { ClientId = p.ClientId, Pos = p.Position, Value = p.Hp - before });
                 }
 
+            if (room.Kind == RoomKind.MiniBoss) ChampionDefeated(room);
             if (room.Objective == RoomObjective.Boss)
             {
                 RemoveTrialProps();
@@ -367,6 +377,13 @@ namespace Game.Core
                 }
                 case RoomKind.Merchant:
                     p.StockedChoices.Enqueue(ChoiceKind.Shop);
+                    break;
+                case RoomKind.Treasure:
+                    GrantTreasureTo(p, 0);
+                    break;
+                case RoomKind.Secret:
+                    GrantTreasureTo(p, 0);
+                    RevealMap();
                     break;
             }
             Events.Add(new SimEvent(SimEventType.PedestalUsed) { ClientId = p.ClientId, Id = room.Id, Int = (int)room.Kind, Value = amount, Pos = PedestalPosition(room.Bounds) });

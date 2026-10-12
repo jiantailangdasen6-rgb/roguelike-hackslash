@@ -1,0 +1,1146 @@
+fileFormatVersion: 2
+guid: edbc7b5bd94e40249878b0e14b48dd3a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7783087179493831438
+    second: cracked_wall_0
+  - first:
+      213: 2453468602495884020
+    second: cracked_wall_1
+  - first:
+      213: 2071673726753318525
+    second: cracked_wall_2
+  - first:
+      213: 4512029370434873129
+    second: cracked_wall_3
+  - first:
+      213: -4609633273132620765
+    second: cracked_wall_4
+  - first:
+      213: 3204262581891751240
+    second: cracked_wall_5
+  - first:
+      213: -9065166377380330948
+    second: cracked_wall_6
+  - first:
+      213: 3886040261361203067
+    second: cracked_wall_7
+  - first:
+      213: 1179847833031172173
+    second: cracked_wall_8
+  - first:
+      213: -5155972711680368471
+    second: cracked_wall_9
+  - first:
+      213: -9047339581964218678
+    second: cracked_wall_10
+  - first:
+      213: -2965034212542999201
+    second: cracked_wall_11
+  - first:
+      213: 1170218976306798744
+    second: cracked_wall_12
+  - first:
+      213: 2332160329004897177
+    second: cracked_wall_13
+  - first:
+      213: 8592834365136655707
+    second: cracked_wall_14
+  - first:
+      213: 7550302637963803038
+    second: cracked_wall_15
+  - first:
+      213: -398873624845084241
+    second: cracked_wall_16
+  - first:
+      213: 6173268852870995137
+    second: cracked_wall_17
+  - first:
+      213: -9118400291808036938
+    second: cracked_wall_18
+  - first:
+      213: 9105512311777585741
+    second: cracked_wall_19
+  - first:
+      213: -4137345693264001495
+    second: cracked_wall_20
+  - first:
+      213: -8694514982123248642
+    second: cracked_wall_21
+  - first:
+      213: 4411106840785431943
+    second: cracked_wall_22
+  - first:
+      213: -9158341093507920756
+    second: cracked_wall_23
+  - first:
+      213: 7779967325153346816
+    second: cracked_wall_24
+  - first:
+      213: -8287647016764232109
+    second: cracked_wall_25
+  - first:
+      213: -4982401589338326388
+    second: cracked_wall_26
+  - first:
+      213: 2210842746696562447
+    second: cracked_wall_27
+  - first:
+      213: 7181232507671236726
+    second: cracked_wall_28
+  - first:
+      213: 1095288906793093671
+    second: cracked_wall_29
+  - first:
+      213: -723224316128529471
+    second: cracked_wall_30
+  - first:
+      213: -7768620393789889673
+    second: cracked_wall_31
+  - first:
+      213: 280101378968699770
+    second: cracked_wall_32
+  - first:
+      213: -3976124366950911465
+    second: cracked_wall_33
+  - first:
+      213: -3768332551955908949
+    second: cracked_wall_34
+  - first:
+      213: -736483780800180419
+    second: cracked_wall_35
+  - first:
+      213: -8545593997463894118
+    second: cracked_wall_36
+  - first:
+      213: 6764572837671971256
+    second: cracked_wall_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cracked_wall_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 328
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0370ad9d84130c60800000000000000
+      internalID: 7783087179493831438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_1
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 264
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fa5757e1b87c0220800000000000000
+      internalID: 2453468602495884020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_2
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 200
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7624ad374010cc10800000000000000
+      internalID: 2071673726753318525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_3
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 136
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92766e08ec2fd9e30800000000000000
+      internalID: 4512029370434873129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_4
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 72
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 324eb1206fa4700c0800000000000000
+      internalID: -4609633273132620765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_5
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 72
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84ddbb067d3d77c20800000000000000
+      internalID: 3204262581891751240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_6
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 9
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c324e66853f023280800000000000000
+      internalID: -9065166377380330948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_7
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 17
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b77fc41570dfde530800000000000000
+      internalID: 3886040261361203067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_8
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 21
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4066d06a59af5010800000000000000
+      internalID: 1179847833031172173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_9
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 21
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a02fa0e22e4278b0800000000000000
+      internalID: -5155972711680368471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_10
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 16
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ace01b6c594617280800000000000000
+      internalID: -9047339581964218678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_11
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 16
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f559e76d7151ad6d0800000000000000
+      internalID: -2965034212542999201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_12
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 22
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 890203875f37d3010800000000000000
+      internalID: 1170218976306798744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_13
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 22
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9935891867f7d5020800000000000000
+      internalID: 2332160329004897177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_14
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 15
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b555dbb0451ef3770800000000000000
+      internalID: 8592834365136655707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_15
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 22
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e99f68afe3018c860800000000000000
+      internalID: 7550302637963803038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_16
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 21
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa916d03d8ae67af0800000000000000
+      internalID: -398873624845084241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_17
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 21
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ccdb56705bdba550800000000000000
+      internalID: 6173268852870995137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_18
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 20
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b7b6f6fe3fe47180800000000000000
+      internalID: -9118400291808036938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_19
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 11
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4ae27954374d5e70800000000000000
+      internalID: 9105512311777585741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_20
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 10
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 926c10833023596c0800000000000000
+      internalID: -4137345693264001495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_21
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 15
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef36b3470b0e65780800000000000000
+      internalID: -8694514982123248642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_22
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 13
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78daf47fc46673d30800000000000000
+      internalID: 4411106840785431943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_23
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 13
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8c09956c4907e080800000000000000
+      internalID: -9158341093507920756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_24
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 8
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00549ebef0ff7fb60800000000000000
+      internalID: 7779967325153346816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_25
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35e21f5b2fc5cfc80800000000000000
+      internalID: -8287647016764232109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_26
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8ab5230724fadab0800000000000000
+      internalID: -4982401589338326388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_27
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07f81bb3cd7eae10800000000000000
+      internalID: 2210842746696562447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_28
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6705b3dfaecd8a360800000000000000
+      internalID: 7181232507671236726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_29
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72a04d7257f333f00800000000000000
+      internalID: 1095288906793093671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_30
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c3fb38f05796f5f0800000000000000
+      internalID: -723224316128529471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_31
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7736c4969e0503490800000000000000
+      internalID: -7768620393789889673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_32
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a73c68a58be13e300800000000000000
+      internalID: 280101378968699770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_33
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 712bd1564f7f1d8c0800000000000000
+      internalID: -3976124366950911465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_34
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba6702d628134bbc0800000000000000
+      internalID: -3768332551955908949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_35
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3f819647eb77c5f0800000000000000
+      internalID: -736483780800180419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_36
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a97447a2983f76980800000000000000
+      internalID: -8545593997463894118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cracked_wall_37
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b9a1b6d72790ed50800000000000000
+      internalID: 6764572837671971256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      cracked_wall_0: 7783087179493831438
+      cracked_wall_1: 2453468602495884020
+      cracked_wall_10: -9047339581964218678
+      cracked_wall_11: -2965034212542999201
+      cracked_wall_12: 1170218976306798744
+      cracked_wall_13: 2332160329004897177
+      cracked_wall_14: 8592834365136655707
+      cracked_wall_15: 7550302637963803038
+      cracked_wall_16: -398873624845084241
+      cracked_wall_17: 6173268852870995137
+      cracked_wall_18: -9118400291808036938
+      cracked_wall_19: 9105512311777585741
+      cracked_wall_2: 2071673726753318525
+      cracked_wall_20: -4137345693264001495
+      cracked_wall_21: -8694514982123248642
+      cracked_wall_22: 4411106840785431943
+      cracked_wall_23: -9158341093507920756
+      cracked_wall_24: 7779967325153346816
+      cracked_wall_25: -8287647016764232109
+      cracked_wall_26: -4982401589338326388
+      cracked_wall_27: 2210842746696562447
+      cracked_wall_28: 7181232507671236726
+      cracked_wall_29: 1095288906793093671
+      cracked_wall_3: 4512029370434873129
+      cracked_wall_30: -723224316128529471
+      cracked_wall_31: -7768620393789889673
+      cracked_wall_32: 280101378968699770
+      cracked_wall_33: -3976124366950911465
+      cracked_wall_34: -3768332551955908949
+      cracked_wall_35: -736483780800180419
+      cracked_wall_36: -8545593997463894118
+      cracked_wall_37: 6764572837671971256
+      cracked_wall_4: -4609633273132620765
+      cracked_wall_5: 3204262581891751240
+      cracked_wall_6: -9065166377380330948
+      cracked_wall_7: 3886040261361203067
+      cracked_wall_8: 1179847833031172173
+      cracked_wall_9: -5155972711680368471
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

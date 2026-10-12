@@ -41,6 +41,12 @@ namespace Game.Gameplay
         /// <summary>Wave number per room, 4 bits each (the HUD of whoever stands there).</summary>
         public readonly NetworkVariable<ulong> RoomWaves = new();
         public readonly NetworkVariable<bool> BossDoorOpen = new();
+        /// <summary>Keys the team holds, sealed rooms opened (bits), the old map found, and the puzzle's state (crystal health or plates lit).</summary>
+        public readonly NetworkVariable<int> Keys = new();
+        public readonly NetworkVariable<int> UnlockedRooms = new();
+        public readonly NetworkVariable<bool> MapRevealed = new();
+        public readonly NetworkVariable<float> PuzzleValue = new();
+        public readonly NetworkVariable<float> PuzzleTime = new();
         public readonly NetworkVariable<bool> ExitOpen = new();
         /// <summary>How long the team has gathered at the boss door / the way down.</summary>
         public readonly NetworkVariable<float> GatherHold = new();
@@ -109,6 +115,7 @@ namespace Game.Gameplay
         public bool IsVisited(int room) => (VisitedRooms.Value & (1 << room)) != 0;
         public bool IsCleared(int room) => (ClearedRooms.Value & (1 << room)) != 0;
         public bool IsFighting(int room) => (FightingRooms.Value & (1 << room)) != 0;
+        public bool IsUnlocked(int room) => (UnlockedRooms.Value & (1 << room)) != 0;
         public int WaveOf(int room) => (int)((RoomWaves.Value >> (room * 4)) & 0xF);
 
         /// <summary>
@@ -119,6 +126,7 @@ namespace Game.Gameplay
         {
             if (to == null) return false;
             if (to.Kind == RoomKind.Boss && !BossDoorOpen.Value) return false;
+            if (to.Sealed && !IsUnlocked(to.Id)) return false; // locked treasure, hidden secret
             if (from.Kind == RoomKind.Boss && IsFighting(from.Id)) return false;
             return true;
         }
@@ -198,6 +206,21 @@ namespace Game.Gameplay
             }
 
             Sim.Start((int)CommandLine.GetFloat("-startroom", 0f));
+            // -startin <plates|crystal|miniboss|treasure|secret|...> (screenshots): begin in a room of that kind.
+            string startIn = CommandLine.GetValue("-startin");
+            if (!string.IsNullOrEmpty(startIn))
+            {
+                var map = Sim.Map;
+                var room = startIn.ToLowerInvariant() switch
+                {
+                    "plates" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Plates) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
+                    "crystal" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Crystal) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
+                    "thief" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Thief) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
+                    "gauntlet" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Gauntlet) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
+                    _ => Enum.TryParse(startIn, true, out RoomKind kind) ? map.Rooms.Find(r => r.Kind == kind) : null,
+                };
+                if (room != null) Sim.MoveTeamTo(room);
+            }
             // -legendary (screenshots): everyone starts wearing a legendary piece for their class.
             if (CommandLine.Has("-legendary"))
                 foreach (var sp in Sim.Players)
@@ -372,13 +395,23 @@ namespace Game.Gameplay
             SetIfChanged(RoomIndex, Sim.DeepestIndex);
             SetIfChanged(MapSeed, Sim.MapSeed);
             SetIfChanged(Area, Sim.Area);
-            int visited = 0, cleared = 0, fighting = 0;
+            int visited = 0, cleared = 0, fighting = 0, unlocked = 0;
+            float puzzle = 0f;
+            float puzzleTime = 0f;
             ulong waves = 0;
             foreach (var r in Sim.RoomStates)
             {
                 if (r.Visited) visited |= 1 << r.Id;
                 if (r.Cleared) cleared |= 1 << r.Id;
                 if (r.Fighting) fighting |= 1 << r.Id;
+                if (r.Unlocked) unlocked |= 1 << r.Id;
+                if (r.Fighting && r.Objective == RoomObjective.Crystal)
+                {
+                    puzzle = Quantize(Sim.CrystalHealth(r));
+                    puzzleTime = Mathf.Ceil(Mathf.Max(0f, r.Target - r.Progress));
+                }
+                if (r.Fighting && r.Objective == RoomObjective.Plates) puzzle = r.Progress;
+                if (r.Fighting && r.Objective == RoomObjective.Thief) puzzleTime = Mathf.Ceil(Mathf.Max(0f, r.Target - r.Progress));
                 waves |= (ulong)Mathf.Min(r.Wave, 15) << (r.Id * 4);
             }
             SetIfChanged(VisitedRooms, visited);
@@ -386,6 +419,11 @@ namespace Game.Gameplay
             SetIfChanged(FightingRooms, fighting);
             SetIfChanged(RoomWaves, waves);
             SetIfChanged(BossDoorOpen, Sim.BossDoorOpen);
+            SetIfChanged(UnlockedRooms, unlocked);
+            SetIfChanged(PuzzleValue, puzzle);
+            SetIfChanged(PuzzleTime, puzzleTime);
+            SetIfChanged(Keys, Sim.Keys);
+            SetIfChanged(MapRevealed, Sim.MapRevealed);
             SetIfChanged(ExitOpen, Sim.ExitOpen);
             SetIfChanged(GatherHold, Quantize(Sim.GatherHold));
             SetIfChanged(BonusShards, Sim.BonusShards);

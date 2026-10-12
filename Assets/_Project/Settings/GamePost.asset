@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3696716735528635013
+--- !u!114 &-5975424433085040619
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22,7 +22,7 @@ MonoBehaviour:
   gain:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
---- !u!114 &-1061141381393199808
+--- !u!114 &-4092958073784722993
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,11 +63,11 @@ MonoBehaviour:
   m_Name: GamePost
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.VolumeProfile
   components:
-  - {fileID: 634366218628768270}
-  - {fileID: 3169914572083638108}
-  - {fileID: -1061141381393199808}
-  - {fileID: -3696716735528635013}
---- !u!114 &634366218628768270
+  - {fileID: 910798910622207996}
+  - {fileID: 1534047033719852116}
+  - {fileID: -4092958073784722993}
+  - {fileID: -5975424433085040619}
+--- !u!114 &910798910622207996
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 1
     m_Value: 0
---- !u!114 &3169914572083638108
+--- !u!114 &1534047033719852116
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}

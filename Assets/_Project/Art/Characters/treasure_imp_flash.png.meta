@@ -1,0 +1,1380 @@
+fileFormatVersion: 2
+guid: f3929a3d5e507a04aa8bf4ec03a472f5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6126237758328763313
+    second: treasure_imp_flash_0
+  - first:
+      213: 372957220503252434
+    second: treasure_imp_flash_1
+  - first:
+      213: -4020917431499098024
+    second: treasure_imp_flash_2
+  - first:
+      213: -209191200932992153
+    second: treasure_imp_flash_3
+  - first:
+      213: 4043568106652998032
+    second: treasure_imp_flash_4
+  - first:
+      213: 7680611260387830841
+    second: treasure_imp_flash_5
+  - first:
+      213: -4786109556938086621
+    second: treasure_imp_flash_6
+  - first:
+      213: -3873255243640491147
+    second: treasure_imp_flash_7
+  - first:
+      213: -7751472482658131388
+    second: treasure_imp_flash_8
+  - first:
+      213: 7029777319403111699
+    second: treasure_imp_flash_9
+  - first:
+      213: 6114748589907374701
+    second: treasure_imp_flash_10
+  - first:
+      213: -917148301055860147
+    second: treasure_imp_flash_11
+  - first:
+      213: -2516169920141706249
+    second: treasure_imp_flash_12
+  - first:
+      213: 148342417500847381
+    second: treasure_imp_flash_13
+  - first:
+      213: -8014021755786399002
+    second: treasure_imp_flash_14
+  - first:
+      213: 5423161938896923905
+    second: treasure_imp_flash_15
+  - first:
+      213: -3955127157374283795
+    second: treasure_imp_flash_16
+  - first:
+      213: -2693945960277670146
+    second: treasure_imp_flash_17
+  - first:
+      213: 3059775207204871419
+    second: treasure_imp_flash_18
+  - first:
+      213: -4204482550292582180
+    second: treasure_imp_flash_19
+  - first:
+      213: -5567403695355125465
+    second: treasure_imp_flash_20
+  - first:
+      213: -27874327397560198
+    second: treasure_imp_flash_21
+  - first:
+      213: -7733864197127231166
+    second: treasure_imp_flash_22
+  - first:
+      213: -800386732989579183
+    second: treasure_imp_flash_23
+  - first:
+      213: -4296425380029121611
+    second: treasure_imp_flash_24
+  - first:
+      213: -2306626467861077955
+    second: treasure_imp_flash_25
+  - first:
+      213: -5351545057444425701
+    second: treasure_imp_flash_26
+  - first:
+      213: -6068581610125344718
+    second: treasure_imp_flash_27
+  - first:
+      213: 1103338832103648104
+    second: treasure_imp_flash_28
+  - first:
+      213: -3294536921615429603
+    second: treasure_imp_flash_29
+  - first:
+      213: -4772977658215349155
+    second: treasure_imp_flash_30
+  - first:
+      213: -2497090815811819607
+    second: treasure_imp_flash_31
+  - first:
+      213: -7336453509256419203
+    second: treasure_imp_flash_32
+  - first:
+      213: 7698125745832046749
+    second: treasure_imp_flash_33
+  - first:
+      213: -7476511732425564266
+    second: treasure_imp_flash_34
+  - first:
+      213: 4655536007905734017
+    second: treasure_imp_flash_35
+  - first:
+      213: -3645724732484016219
+    second: treasure_imp_flash_36
+  - first:
+      213: 8804531994405550882
+    second: treasure_imp_flash_37
+  - first:
+      213: 8446209812164091842
+    second: treasure_imp_flash_38
+  - first:
+      213: 7662594169288283369
+    second: treasure_imp_flash_39
+  - first:
+      213: -269015216070556318
+    second: treasure_imp_flash_40
+  - first:
+      213: 5938879544460443104
+    second: treasure_imp_flash_41
+  - first:
+      213: 502027546879982470
+    second: treasure_imp_flash_42
+  - first:
+      213: -2819048765113785055
+    second: treasure_imp_flash_43
+  - first:
+      213: -8127972554487134142
+    second: treasure_imp_flash_44
+  - first:
+      213: -1810420075500175446
+    second: treasure_imp_flash_45
+  - first:
+      213: 7481267849109394363
+    second: treasure_imp_flash_46
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: treasure_imp_flash_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 328
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b375c278c4c40550800000000000000
+      internalID: 6126237758328763313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 328
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd6384bd920d2500800000000000000
+      internalID: 372957220503252434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_2
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 264
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 858f15856e4d238c0800000000000000
+      internalID: -4020917431499098024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_3
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 264
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76b604a06bdc81df0800000000000000
+      internalID: -209191200932992153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_4
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 264
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 099962ee4c3ad1830800000000000000
+      internalID: 4043568106652998032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_5
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 264
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93c28496f33079a60800000000000000
+      internalID: 7680611260387830841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_6
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 200
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3276a9247b2549db0800000000000000
+      internalID: -4786109556938086621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_7
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 200
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 573b36690ee6f3ac0800000000000000
+      internalID: -3873255243640491147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_8
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 136
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44262f898dc3d6490800000000000000
+      internalID: -7751472482658131388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_9
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 136
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 315ce150a39ce8160800000000000000
+      internalID: 7029777319403111699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_10
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 136
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d62ff38f173fbd450800000000000000
+      internalID: 6114748589907374701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_11
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 136
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d42663dba72a543f0800000000000000
+      internalID: -917148301055860147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_12
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 72
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fb3e63f9c4c41dd0800000000000000
+      internalID: -2516169920141706249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_13
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 72
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51db24c84a40f0200800000000000000
+      internalID: 148342417500847381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_14
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 19
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e279185ca978c090800000000000000
+      internalID: -8014021755786399002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_15
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 19
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10dae5fdc01f24b40800000000000000
+      internalID: 5423161938896923905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_16
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 22
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: def84373ec09c19c0800000000000000
+      internalID: -3955127157374283795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_17
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 23
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef60d891c6e2d9ad0800000000000000
+      internalID: -2693945960277670146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_18
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 19
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfc5efde651867a20800000000000000
+      internalID: 3059775207204871419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_19
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd07b75956da6a5c0800000000000000
+      internalID: -4204482550292582180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_20
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 23
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 721292126db9cb2b0800000000000000
+      internalID: -5567403695355125465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_21
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 24
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a709d196278fc9ff0800000000000000
+      internalID: -27874327397560198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_22
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 17
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 249ae1d0d7bcba490800000000000000
+      internalID: -7733864197127231166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_23
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 17
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1508839c18474e4f0800000000000000
+      internalID: -800386732989579183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_24
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 23
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bb346b51e70064c0800000000000000
+      internalID: -4296425380029121611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_25
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 23
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3060a1d2773dffd0800000000000000
+      internalID: -2306626467861077955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_26
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 22
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b10178bbf1e7bb5b0800000000000000
+      internalID: -5351545057444425701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_27
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 22
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 230c206ad2118cba0800000000000000
+      internalID: -6068581610125344718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_28
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 11
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86bae6272d8df4f00800000000000000
+      internalID: 1103338832103648104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_29
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 12
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1014bfff147742d0800000000000000
+      internalID: -3294536921615429603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_30
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d54c231bb1af2cdb0800000000000000
+      internalID: -4772977658215349155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_31
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 11
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a765a7122d885dd0800000000000000
+      internalID: -2497090815811819607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_32
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 7
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d786a9d476eaf2a90800000000000000
+      internalID: -7336453509256419203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_33
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d90bb94549c35da60800000000000000
+      internalID: 7698125745832046749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_34
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69fdbbd01381e3890800000000000000
+      internalID: -7476511732425564266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_35
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18de2464559cb9040800000000000000
+      internalID: 4655536007905734017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_36
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 15
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a72f63fba8c76dc0800000000000000
+      internalID: -3645724732484016219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_37
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 15
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22bba14533bff2a70800000000000000
+      internalID: 8804531994405550882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_38
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cf95700317f63570800000000000000
+      internalID: 8446209812164091842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_39
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e4586e7cc0075a60800000000000000
+      internalID: 7662594169288283369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_40
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26580f61614444cf0800000000000000
+      internalID: -269015216070556318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_41
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0edf56bea732b6250800000000000000
+      internalID: 5938879544460443104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_42
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68bfd3fd46f87f600800000000000000
+      internalID: 502027546879982470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_43
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 125a3e6851ab0e8d0800000000000000
+      internalID: -2819048765113785055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_44
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2488ba98604a33f80800000000000000
+      internalID: -8127972554487134142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_45
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 7
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaf7399888810e6e0800000000000000
+      internalID: -1810420075500175446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: treasure_imp_flash_46
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb357b7a87dc2d760800000000000000
+      internalID: 7481267849109394363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      treasure_imp_flash_0: 6126237758328763313
+      treasure_imp_flash_1: 372957220503252434
+      treasure_imp_flash_10: 6114748589907374701
+      treasure_imp_flash_11: -917148301055860147
+      treasure_imp_flash_12: -2516169920141706249
+      treasure_imp_flash_13: 148342417500847381
+      treasure_imp_flash_14: -8014021755786399002
+      treasure_imp_flash_15: 5423161938896923905
+      treasure_imp_flash_16: -3955127157374283795
+      treasure_imp_flash_17: -2693945960277670146
+      treasure_imp_flash_18: 3059775207204871419
+      treasure_imp_flash_19: -4204482550292582180
+      treasure_imp_flash_2: -4020917431499098024
+      treasure_imp_flash_20: -5567403695355125465
+      treasure_imp_flash_21: -27874327397560198
+      treasure_imp_flash_22: -7733864197127231166
+      treasure_imp_flash_23: -800386732989579183
+      treasure_imp_flash_24: -4296425380029121611
+      treasure_imp_flash_25: -2306626467861077955
+      treasure_imp_flash_26: -5351545057444425701
+      treasure_imp_flash_27: -6068581610125344718
+      treasure_imp_flash_28: 1103338832103648104
+      treasure_imp_flash_29: -3294536921615429603
+      treasure_imp_flash_3: -209191200932992153
+      treasure_imp_flash_30: -4772977658215349155
+      treasure_imp_flash_31: -2497090815811819607
+      treasure_imp_flash_32: -7336453509256419203
+      treasure_imp_flash_33: 7698125745832046749
+      treasure_imp_flash_34: -7476511732425564266
+      treasure_imp_flash_35: 4655536007905734017
+      treasure_imp_flash_36: -3645724732484016219
+      treasure_imp_flash_37: 8804531994405550882
+      treasure_imp_flash_38: 8446209812164091842
+      treasure_imp_flash_39: 7662594169288283369
+      treasure_imp_flash_4: 4043568106652998032
+      treasure_imp_flash_40: -269015216070556318
+      treasure_imp_flash_41: 5938879544460443104
+      treasure_imp_flash_42: 502027546879982470
+      treasure_imp_flash_43: -2819048765113785055
+      treasure_imp_flash_44: -8127972554487134142
+      treasure_imp_flash_45: -1810420075500175446
+      treasure_imp_flash_46: 7481267849109394363
+      treasure_imp_flash_5: 7680611260387830841
+      treasure_imp_flash_6: -4786109556938086621
+      treasure_imp_flash_7: -3873255243640491147
+      treasure_imp_flash_8: -7751472482658131388
+      treasure_imp_flash_9: 7029777319403111699
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

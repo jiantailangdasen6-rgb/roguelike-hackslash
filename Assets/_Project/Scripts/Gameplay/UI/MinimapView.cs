@@ -107,7 +107,8 @@ namespace Game.Gameplay
 
             bool Known(MapRoom r)
             {
-                if (d.IsVisited(r.Id)) return true;
+                if (r.Kind == RoomKind.Secret && !d.IsUnlocked(r.Id)) return false; // hidden until the wall breaks
+                if (d.IsVisited(r.Id) || d.MapRevealed.Value) return true;
                 foreach (int n in r.Neighbor) if (n >= 0 && d.IsVisited(n)) return true;
                 return false;
             }
@@ -115,6 +116,7 @@ namespace Game.Gameplay
             foreach (var c in _cells)
             {
                 bool visited = d.IsVisited(c.Room.Id), known = visited || Known(c.Room);
+                bool shown = visited || (known && d.MapRevealed.Value); // the old map names every room
                 bool current = c.Room == here;
                 bool fighting = d.IsFighting(c.Room.Id);
                 var kindColor = RoomCatalog.Color(c.Room.Kind);
@@ -124,11 +126,12 @@ namespace Game.Gameplay
                     : visited ? new Color(0.55f, 0.48f, 0.4f, 0.9f) : new Color(0.32f, 0.29f, 0.27f, 0.7f);
                 c.Box.color = !known ? Color.clear : visited ? new Color(0.13f, 0.11f, 0.12f, 0.95f) : new Color(0.06f, 0.05f, 0.06f, 0.85f);
                 bool used = NetPlayer.Local != null && (NetPlayer.Local.UsedPedestals.Value & (1 << c.Room.Id)) != 0;
-                c.Mark.text = visited ? RoomCatalog.Mark(c.Room.Kind) : known ? "?" : "";
-                c.Mark.color = visited ? (used || (d.IsCleared(c.Room.Id) && c.Room.IsFight) ? kindColor * 0.55f : kindColor) : new Color(0.5f, 0.47f, 0.45f);
+                bool locked = c.Room.Kind == RoomKind.Treasure && !d.IsUnlocked(c.Room.Id);
+                c.Mark.text = shown ? RoomCatalog.Mark(c.Room.Kind) : known ? (locked && Known(c.Room) ? "錠" : "?") : "";
+                c.Mark.color = shown ? (used || (d.IsCleared(c.Room.Id) && c.Room.IsFight) ? kindColor * 0.55f : kindColor) : new Color(0.5f, 0.47f, 0.45f);
             }
             foreach (var (line, a, b) in _links)
-                line.color = Known(a) && Known(b) && (d.IsVisited(a.Id) || d.IsVisited(b.Id)) ? new Color(0.45f, 0.4f, 0.35f, 0.9f) : Color.clear;
+                line.color = Known(a) && Known(b) && (d.IsVisited(a.Id) || d.IsVisited(b.Id) || d.MapRevealed.Value) ? new Color(0.45f, 0.4f, 0.35f, 0.9f) : Color.clear;
 
             int slot = 0;
             foreach (var p in NetPlayer.All)

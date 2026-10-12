@@ -228,11 +228,33 @@ namespace Game.Core
                 Id = 12, Name = "sanctum",
                 Obstacles = new[] { O(ObstacleKind.Statue, -7f, 3.6f), O(ObstacleKind.Statue, 7f, 3.6f), O(P, -7f, -3.6f), O(P, 7f, -3.6f) },
             },
+            new()
+            {
+                // Pressure plate puzzles: the plates (RunSimulation.PlateSpots) lie between four pillars.
+                Id = 13, Name = "plate_hall",
+                Obstacles = new[] { O(P, -4f, 0.5f), O(P, 4f, 0.5f), O(P, -11f, 4.5f), O(P, 11f, 4.5f) },
+            },
+            new()
+            {
+                // Gauntlet puzzles: a ring of spikes around the plate in the middle, fire breathing across the room.
+                Id = 14, Name = "gauntlet",
+                Obstacles = new[] { O(P, -6.5f, 4.6f), O(P, 6.5f, 4.6f), O(P, -6.5f, -3.4f), O(P, 6.5f, -3.4f) },
+                Gimmicks = new[]
+                {
+                    G(Spike, -2.2f, 0.5f, 0f), G(Spike, 2.2f, 0.5f, 0.5f), G(Spike, 0f, 2.6f, 0.25f), G(Spike, 0f, -1.6f, 0.75f),
+                    G(Spike, -2.2f, 2.6f, 0.6f), G(Spike, 2.2f, 2.6f, 0.1f), G(Spike, -2.2f, -1.6f, 0.35f), G(Spike, 2.2f, -1.6f, 0.85f),
+                    G(Spike, -6f, 0.5f, 0.4f), G(Spike, 6f, 0.5f, 0.9f), G(Spike, -9.5f, 0.5f, 0.15f), G(Spike, 9.5f, 0.5f, 0.65f),
+                    G(Flame, -13.7f, 3.4f, 0f, 1f, 0f), G(Flame, 13.7f, 3.4f, 0.5f, -1f, 0f),
+                    G(Flame, -13.7f, -2.6f, 0.5f, 1f, 0f), G(Flame, 13.7f, -2.6f, 0f, -1f, 0f),
+                },
+            },
         };
 
         public static RoomLayout Get(int id) => id >= 0 && id < Layouts.Length ? Layouts[id] : Layouts[0];
 
         public const int SanctumLayout = 12;
+        public const int PlatesLayout = 13;
+        public const int GauntletLayout = 14;
 
         /// <summary>Picks the layout for a fight room (never the same twice in a row).</summary>
         public static int PickFight(GameRandom rng, int area, int previous)

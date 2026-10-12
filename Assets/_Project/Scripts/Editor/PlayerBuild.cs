@@ -17,7 +17,25 @@ namespace Game.EditorTools
         public const string WebGLPath = "Builds/WebGL";
 
         [MenuItem("Tools/Game/Build Windows Player")]
-        public static void BuildWindows() => Build(WindowsPath, BuildTarget.StandaloneWindows64, BuildOptions.Development);
+        public static void BuildWindows()
+        {
+            WindowSettings();
+            Build(WindowsPath, BuildTarget.StandaloneWindows64, BuildOptions.Development);
+        }
+
+        /// <summary>
+        /// The desktop window: opens at 1280x720 and can be resized and maximised (the UI scales, the pixel-perfect
+        /// camera keeps the art crisp); Alt+Enter still switches to full screen.
+        /// </summary>
+        private static void WindowSettings()
+        {
+            PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
+            PlayerSettings.defaultIsNativeResolution = false;
+            PlayerSettings.defaultScreenWidth = 1280;
+            PlayerSettings.defaultScreenHeight = 720;
+            PlayerSettings.resizableWindow = true;
+            PlayerSettings.allowFullscreenSwitch = true;
+        }
 
         public const string ReleasePath = "Builds/Release/LabyrinthSurvivor/LabyrinthSurvivor.exe";
 
@@ -27,6 +45,7 @@ namespace Game.EditorTools
         public static void BuildWindowsRelease()
         {
             if (System.IO.Directory.Exists("Builds/Release/LabyrinthSurvivor")) System.IO.Directory.Delete("Builds/Release/LabyrinthSurvivor", true);
+            WindowSettings();
             Build(ReleasePath, BuildTarget.StandaloneWindows64, BuildOptions.None);
         }
 

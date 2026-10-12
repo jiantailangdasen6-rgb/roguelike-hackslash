@@ -196,6 +196,25 @@ namespace Game.Gameplay
                     break;
                 case SimEventType.Combo: OnCombo(e); break;
                 case SimEventType.TrialEvent: OnTrial(e); break;
+                case SimEventType.KeyGained:
+                {
+                    var glint = Spawn("fx_holy", e.Pos + Vector2.up * 0.8f, 12f, 1f, 1.4f, 2.6f, new Color(1f, 0.85f, 0.45f));
+                    glint.FadeOut = true;
+                    AddLight(glint, new Color(1f, 0.8f, 0.4f), 2.5f, 5f);
+                    ShowCallout(e.Pos + Vector2.up * 2f, "鍵！", new Color(1f, 0.85f, 0.45f), 46);
+                    break;
+                }
+                case SimEventType.DoorOpened when e.Int >= 2:
+                    for (int i = 0; i < 10; i++) Burst("fx_puff", e.Pos + Random.insideUnitCircle * 1.2f, Random.Range(8f, 12f), Random.Range(0.8f, 1.4f), new Color(0.7f, 0.65f, 0.6f, 0.85f));
+                    CameraShake.Add(0.3f);
+                    break;
+                case SimEventType.PuzzleEnded when e.Int == 1:
+                {
+                    var flash = Spawn("fx_nova", e.Pos + Vector2.up * 0.5f, 1f, 0.6f, 0.5f, 7f, new Color(0.6f, 0.95f, 1f, 0.85f));
+                    flash.FadeOut = true;
+                    AddLight(flash, new Color(0.5f, 0.9f, 1f), 3f, 8f);
+                    break;
+                }
                 case SimEventType.RoomStarted:
                     HitStop.Reset();
                     _calloutAt.Clear();
@@ -1064,7 +1083,7 @@ namespace Game.Gameplay
             bool used = room != null && NetPlayer.Local != null && (NetPlayer.Local.UsedPedestals.Value & (1 << room.Id)) != 0;
             int key = room == null ? 0
                 : (room.Id + 1) * 1000 + director.Area.Value * 100 + (used ? 1 : 0) + (director.BossDoorOpen.Value ? 2 : 0) + (director.ExitOpen.Value ? 4 : 0)
-                  + (int)(director.MapSeed.Value % 97) * 10000;
+                  + (int)(director.MapSeed.Value % 97) * 10000 + director.Keys.Value * 7 + director.UnlockedRooms.Value * 131;
             if (key != _doorsKey)
             {
                 ClearDoors();
@@ -1110,6 +1129,17 @@ namespace Game.Gameplay
                 string text = used ? "<color=#bfb6aa>もう使った</color>" : RoomCatalog.PedestalText(room.Kind);
                 var mark = CreateMark(RunSimulation.PedestalPosition(room.Bounds), RoomCatalog.Color(room.Kind), GameIcons.Reward(reward), RunSimulation.PedestalRadius,
                     $"{RoomCatalog.Name(room.Kind)}\n<size=22><color=#e8e0d4>{text}</color></size>", used);
+                _doors.Add(mark);
+            }
+            // A locked treasure door seen from the room next to it.
+            for (int d = 0; d < 4; d++)
+            {
+                var next = director.Map[room.Neighbor[d]];
+                if (next == null || next.Kind != RoomKind.Treasure || director.IsUnlocked(next.Id)) continue;
+                int keys = director.Keys.Value;
+                var mark = CreateMark(DungeonMap.EntryPoint(room, d), new Color(0.9f, 0.75f, 0.35f), GameIcons.Reward(RoomReward.Treasure), RunSimulation.UnlockRadius * 0.7f,
+                    keys > 0 ? "宝物庫の扉\n<size=22><color=#e8e0d4>ここに立つと鍵で開く</color></size>" : "宝物庫の扉\n<size=22><color=#e8e0d4>鍵がかかっている（精鋭の主・仕掛けの間で手に入る）</color></size>", keys <= 0);
+                mark.LabelBelow = d == Dir.S ? 1.6f : -1.4f;
                 _doors.Add(mark);
             }
             if (room.Kind == RoomKind.Campfire && !director.BossDoorOpen.Value)

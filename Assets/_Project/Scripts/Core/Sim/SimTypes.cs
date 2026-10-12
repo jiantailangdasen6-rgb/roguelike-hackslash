@@ -17,6 +17,10 @@ namespace Game.Core
         Boss,
         Rest, // no fighting: a campfire that heals, treasure chests, doors open from the start
         Quiet, // no fighting: the start room and the pedestal rooms
+        Plates,  // puzzle: light every pressure plate at once (monsters keep coming until then)
+        Crystal, // puzzle: keep the ward crystal whole until the time is up
+        Thief,    // puzzle: catch the treasure imp before it gets away
+        Gauntlet, // puzzle: through the traps to the plate in the middle
     }
 
     /// <summary>What a door promises: the team receives it on walking through (Hades-style room choice).</summary>
@@ -118,12 +122,14 @@ namespace Game.Core
         public float WaveTimer;
         public float SpawnTimer;
         public int LastWaveSize;
+        /// <summary>A sealed room (treasure, secret) has been opened.</summary>
+        public bool Unlocked;
         /// <summary>Players who used this room's pedestal (each may once).</summary>
         public readonly HashSet<ulong> UsedBy = new();
 
         public int Area => Index / RunSimulation.RoomsPerArea;
         public Vector2 Center => Bounds.center;
-        public bool IsFight => Objective is RoomObjective.Waves or RoomObjective.Survive or RoomObjective.Boss;
+        public bool IsFight => Objective is RoomObjective.Waves or RoomObjective.Survive or RoomObjective.Boss or RoomObjective.Plates or RoomObjective.Crystal or RoomObjective.Thief or RoomObjective.Gauntlet;
         /// <summary>Picks and gear swaps wait for this: a fight going on here.</summary>
         public bool Fighting => Active && !Cleared;
     }
@@ -254,6 +260,7 @@ namespace Game.Core
         /// <summary>Map room it appears in.</summary>
         public int Room;
         public EnemyType Type;
+        public bool Champion;
         public Vector2 Position;
         public float Timer;
         public bool Elite;
@@ -301,7 +308,9 @@ namespace Game.Core
         TrialEvent,      // Int = TrialMoment, Pos, Value (seconds), ClientId (cages), Id (collapse stage)
         RoomEntered,     // ClientId = first one in, Id = map room id, Int = room index (the room is now on everyone's map)
         PedestalUsed,    // ClientId, Id = map room id, Int = RoomKind, Value = amount (curse kind for the altar)
-        DoorOpened,      // Int = 0 the boss door, 1 the way down to the next area; Pos
+        DoorOpened,      // Int = 0 the boss door, 1 the way down to the next area, 2 a treasure door unlocked, 3 a secret room found; Pos, Id = room
+        KeyGained,       // Pos, Int = keys the team holds now, Id = room it came from
+        PuzzleEnded,     // Id = room, Int = 1 solved / 0 failed, Pos
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

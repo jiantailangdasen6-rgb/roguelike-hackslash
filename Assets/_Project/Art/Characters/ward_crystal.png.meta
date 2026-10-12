@@ -1,0 +1,1510 @@
+fileFormatVersion: 2
+guid: 2a2220f03be6e3c498cf35a2364f3f89
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6455722632551036092
+    second: ward_crystal_0
+  - first:
+      213: 9105205230685944839
+    second: ward_crystal_1
+  - first:
+      213: -1638250452332571506
+    second: ward_crystal_2
+  - first:
+      213: 3120605586502852130
+    second: ward_crystal_3
+  - first:
+      213: 8836659825554039785
+    second: ward_crystal_4
+  - first:
+      213: -2165228864717435950
+    second: ward_crystal_5
+  - first:
+      213: -6410171646568536243
+    second: ward_crystal_6
+  - first:
+      213: -2605502185824864479
+    second: ward_crystal_7
+  - first:
+      213: -944352367207593177
+    second: ward_crystal_8
+  - first:
+      213: 6869673107073458712
+    second: ward_crystal_9
+  - first:
+      213: -145560893498612327
+    second: ward_crystal_10
+  - first:
+      213: -1095379678646468233
+    second: ward_crystal_11
+  - first:
+      213: 3486183080881937850
+    second: ward_crystal_12
+  - first:
+      213: -3684140653567790647
+    second: ward_crystal_13
+  - first:
+      213: -689541465466096308
+    second: ward_crystal_14
+  - first:
+      213: 3647771122058818513
+    second: ward_crystal_15
+  - first:
+      213: -1779026441316241204
+    second: ward_crystal_16
+  - first:
+      213: -2703154681324483978
+    second: ward_crystal_17
+  - first:
+      213: 1523529077689426358
+    second: ward_crystal_18
+  - first:
+      213: -529861786701330011
+    second: ward_crystal_19
+  - first:
+      213: 8922874695892500882
+    second: ward_crystal_20
+  - first:
+      213: 7446016025848238561
+    second: ward_crystal_21
+  - first:
+      213: -3583120158744144075
+    second: ward_crystal_22
+  - first:
+      213: -3734168882465687271
+    second: ward_crystal_23
+  - first:
+      213: -2441118808044941996
+    second: ward_crystal_24
+  - first:
+      213: 105298541660010113
+    second: ward_crystal_25
+  - first:
+      213: 489769148042212961
+    second: ward_crystal_26
+  - first:
+      213: 674510943807798103
+    second: ward_crystal_27
+  - first:
+      213: 2635065041405267417
+    second: ward_crystal_28
+  - first:
+      213: -7836589167818576431
+    second: ward_crystal_29
+  - first:
+      213: 8594687119836426755
+    second: ward_crystal_30
+  - first:
+      213: 513797143162463112
+    second: ward_crystal_31
+  - first:
+      213: 8221394062894324227
+    second: ward_crystal_32
+  - first:
+      213: 7475816816514316166
+    second: ward_crystal_33
+  - first:
+      213: -7121772937073707244
+    second: ward_crystal_34
+  - first:
+      213: 4978855487631931189
+    second: ward_crystal_35
+  - first:
+      213: 1150712497661492442
+    second: ward_crystal_36
+  - first:
+      213: 5955919871727235897
+    second: ward_crystal_37
+  - first:
+      213: -8331928421408755403
+    second: ward_crystal_38
+  - first:
+      213: -7420614202743743471
+    second: ward_crystal_39
+  - first:
+      213: -7890698947600027148
+    second: ward_crystal_40
+  - first:
+      213: 6598923840839141910
+    second: ward_crystal_41
+  - first:
+      213: -867312440970225177
+    second: ward_crystal_42
+  - first:
+      213: 2049139140393744578
+    second: ward_crystal_43
+  - first:
+      213: 23373405496994986
+    second: ward_crystal_44
+  - first:
+      213: -5536623724255229894
+    second: ward_crystal_45
+  - first:
+      213: -6718899157076059719
+    second: ward_crystal_46
+  - first:
+      213: -3645909604716496106
+    second: ward_crystal_47
+  - first:
+      213: 743314771004140784
+    second: ward_crystal_48
+  - first:
+      213: -5449409441287671589
+    second: ward_crystal_49
+  - first:
+      213: 4711415457294516376
+    second: ward_crystal_50
+  - first:
+      213: -3651332940498343358
+    second: ward_crystal_51
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ward_crystal_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb477a9c785579950800000000000000
+      internalID: 6455722632551036092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 328
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70c70167aef2c5e70800000000000000
+      internalID: 9105205230685944839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e841897b4e3c349e0800000000000000
+      internalID: -1638250452332571506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 328
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22e1a9b4f3e9e4b20800000000000000
+      internalID: 3120605586502852130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_4
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e32d1fea4f12aa70800000000000000
+      internalID: 8836659825554039785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_5
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 264
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2db4815c1df83f1e0800000000000000
+      internalID: -2165228864717435950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_6
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d47600999de7a07a0800000000000000
+      internalID: -6410171646568536243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_7
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 264
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 127b768019567dbd0800000000000000
+      internalID: -2605502185824864479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_8
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 200
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72bcac1868cf4e2f0800000000000000
+      internalID: -944352367207593177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_9
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 200
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 812ea263b4bf55f50800000000000000
+      internalID: 6869673107073458712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_10
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 200
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 995a3d9732ddafdf0800000000000000
+      internalID: -145560893498612327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_11
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 200
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77188106cfd6cc0f0800000000000000
+      internalID: -1095379678646468233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_12
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 136
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abdd1fd9a09616030800000000000000
+      internalID: 3486183080881937850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_13
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 136
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c13481589d4fdcc0800000000000000
+      internalID: -3684140653567790647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_14
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 136
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c45bdf4c0b14e66f0800000000000000
+      internalID: -689541465466096308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_15
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 136
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d37e30428c7f9230800000000000000
+      internalID: 3647771122058818513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_16
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 72
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc0715790e0af47e0800000000000000
+      internalID: -1779026441316241204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_17
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 72
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67a48b6a3277c7ad0800000000000000
+      internalID: -2703154681324483978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_18
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 23
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b128a8cf99a42510800000000000000
+      internalID: 1523529077689426358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_19
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 23
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a90d97238d85a8f0800000000000000
+      internalID: -529861786701330011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_20
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 26
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2918effa24b64db70800000000000000
+      internalID: 8922874695892500882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 27
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e1dc84ff10955760800000000000000
+      internalID: 7446016025848238561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_22
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 23
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53793862333364ec0800000000000000
+      internalID: -3583120158744144075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_23
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 23
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 919b0559f219d2cc0800000000000000
+      internalID: -3734168882465687271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_24
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 27
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45dc4ffa0676f1ed0800000000000000
+      internalID: -2441118808044941996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_25
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 28
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 186f20b3778167100800000000000000
+      internalID: 105298541660010113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_26
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 21
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 166700bf1720cc600800000000000000
+      internalID: 489769148042212961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_27
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 21
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75bf6c231285c5900800000000000000
+      internalID: 674510943807798103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_28
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 27
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ddc209a1b1a19420800000000000000
+      internalID: 2635065041405267417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_29
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 27
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ddef710ca7de3390800000000000000
+      internalID: -7836589167818576431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_30
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 26
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 302b97d1666764770800000000000000
+      internalID: 8594687119836426755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_31
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 26
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8832fcc87cf512700800000000000000
+      internalID: 513797143162463112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_32
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 15
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30a52556752481270800000000000000
+      internalID: 8221394062894324227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_33
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 16
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6873a3a39cf6fb760800000000000000
+      internalID: 7475816816514316166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_34
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 12
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4173bba1f316a2d90800000000000000
+      internalID: -7121772937073707244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_35
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 15
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5373e48dfa2781540800000000000000
+      internalID: 4978855487631931189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_36
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adc37bd7be628ff00800000000000000
+      internalID: 1150712497661492442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_37
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 12
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 933fdf8419da7a250800000000000000
+      internalID: 5955919871727235897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_38
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 19
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53133f3ce3b0f5c80800000000000000
+      internalID: -8331928421408755403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_39
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 19
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11c9d3ed2bea40990800000000000000
+      internalID: -7420614202743743471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_40
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 17
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f170c62d1b9e7290800000000000000
+      internalID: -7890698947600027148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_41
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 11
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61ac2194546149b50800000000000000
+      internalID: 6598923840839141910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_42
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e951be1eefa6f3f0800000000000000
+      internalID: -867312440970225177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_43
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c8b48ef031007c10800000000000000
+      internalID: 2049139140393744578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_44
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 10
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aace6db0df9035000800000000000000
+      internalID: 23373405496994986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_45
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3844cc9e06f923b0800000000000000
+      internalID: -5536623724255229894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_46
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b95fcc90dca1c2a0800000000000000
+      internalID: -6718899157076059719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_47
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 9
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61b30b70880276dc0800000000000000
+      internalID: -3645909604716496106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_48
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fca00298d8c05a00800000000000000
+      internalID: 743314771004140784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_49
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd073604cfecf54b0800000000000000
+      internalID: -5449409441287671589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_50
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8900351756f426140800000000000000
+      internalID: 4711415457294516376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ward_crystal_51
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24ae9e4490cd35dc0800000000000000
+      internalID: -3651332940498343358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ward_crystal_0: 6455722632551036092
+      ward_crystal_1: 9105205230685944839
+      ward_crystal_10: -145560893498612327
+      ward_crystal_11: -1095379678646468233
+      ward_crystal_12: 3486183080881937850
+      ward_crystal_13: -3684140653567790647
+      ward_crystal_14: -689541465466096308
+      ward_crystal_15: 3647771122058818513
+      ward_crystal_16: -1779026441316241204
+      ward_crystal_17: -2703154681324483978
+      ward_crystal_18: 1523529077689426358
+      ward_crystal_19: -529861786701330011
+      ward_crystal_2: -1638250452332571506
+      ward_crystal_20: 8922874695892500882
+      ward_crystal_21: 7446016025848238561
+      ward_crystal_22: -3583120158744144075
+      ward_crystal_23: -3734168882465687271
+      ward_crystal_24: -2441118808044941996
+      ward_crystal_25: 105298541660010113
+      ward_crystal_26: 489769148042212961
+      ward_crystal_27: 674510943807798103
+      ward_crystal_28: 2635065041405267417
+      ward_crystal_29: -7836589167818576431
+      ward_crystal_3: 3120605586502852130
+      ward_crystal_30: 8594687119836426755
+      ward_crystal_31: 513797143162463112
+      ward_crystal_32: 8221394062894324227
+      ward_crystal_33: 7475816816514316166
+      ward_crystal_34: -7121772937073707244
+      ward_crystal_35: 4978855487631931189
+      ward_crystal_36: 1150712497661492442
+      ward_crystal_37: 5955919871727235897
+      ward_crystal_38: -8331928421408755403
+      ward_crystal_39: -7420614202743743471
+      ward_crystal_4: 8836659825554039785
+      ward_crystal_40: -7890698947600027148
+      ward_crystal_41: 6598923840839141910
+      ward_crystal_42: -867312440970225177
+      ward_crystal_43: 2049139140393744578
+      ward_crystal_44: 23373405496994986
+      ward_crystal_45: -5536623724255229894
+      ward_crystal_46: -6718899157076059719
+      ward_crystal_47: -3645909604716496106
+      ward_crystal_48: 743314771004140784
+      ward_crystal_49: -5449409441287671589
+      ward_crystal_5: -2165228864717435950
+      ward_crystal_50: 4711415457294516376
+      ward_crystal_51: -3651332940498343358
+      ward_crystal_6: -6410171646568536243
+      ward_crystal_7: -2605502185824864479
+      ward_crystal_8: -944352367207593177
+      ward_crystal_9: 6869673107073458712
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

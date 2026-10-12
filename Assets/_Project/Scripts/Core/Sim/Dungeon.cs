@@ -16,6 +16,19 @@ namespace Game.Core
         Merchant,   // buy with the run's soul shards
         Campfire,   // the breather before the boss: heals, chests
         Boss,       // the area's lord (everyone enters together)
+        MiniBoss,   // a champion and its escort: drops a key
+        Puzzle,     // a light trial (pressure plates, guard the crystal): solved, it gives a key
+        Treasure,   // behind a locked door (a key): gear for everyone
+        Secret,     // behind a cracked wall: the old map of the area, and treasure
+    }
+
+    /// <summary>Which trial a puzzle room holds.</summary>
+    public enum PuzzleKind : byte
+    {
+        Plates,  // light every pressure plate within a few seconds of each other
+        Crystal, // keep the crystal alive while monsters go for it
+        Thief,    // catch the imp running off with treasure before it escapes
+        Gauntlet, // get through the traps to the plate in the middle
     }
 
     /// <summary>Directions of a room's doors (bit = 1 << dir).</summary>
@@ -42,6 +55,7 @@ namespace Game.Core
         public RoomKind Kind;
         /// <summary>Steps from the start room.</summary>
         public int Depth;
+        public PuzzleKind Puzzle;
         /// <summary>Monster strength tier for this room (area * 4 + 0..3), the old "room index".</summary>
         public int Index;
         /// <summary>Obstacles and gimmicks, already moved to the room's place in the world.</summary>
@@ -51,9 +65,11 @@ namespace Game.Core
 
         public Rect Bounds => new(Origin + RunSimulation.DefaultBounds.min, RunSimulation.DefaultBounds.size);
         public bool HasDoor(int dir) => Neighbor[dir] >= 0;
-        public bool IsFight => Kind is RoomKind.Combat or RoomKind.Elite or RoomKind.Boss;
+        public bool IsFight => Kind is RoomKind.Combat or RoomKind.Elite or RoomKind.Boss or RoomKind.MiniBoss or RoomKind.Puzzle;
         /// <summary>Rooms with a pedestal to use (each player once).</summary>
-        public bool HasPedestal => Kind is RoomKind.Shrine or RoomKind.Whetstone or RoomKind.Spring or RoomKind.CurseAltar or RoomKind.Merchant;
+        public bool HasPedestal => Kind is RoomKind.Shrine or RoomKind.Whetstone or RoomKind.Spring or RoomKind.CurseAltar or RoomKind.Merchant or RoomKind.Treasure or RoomKind.Secret;
+        /// <summary>The room behind this door is shut by a lock (treasure) or hidden by a cracked wall (secret).</summary>
+        public bool Sealed => Kind is RoomKind.Treasure or RoomKind.Secret;
     }
 
     /// <summary>
@@ -128,7 +144,7 @@ namespace Game.Core
             for (int attempt = 0; attempt < 40; attempt++)
             {
                 var map = new DungeonMap(area);
-                if (map.TryBuild(rng, 9 + (area > 0 ? 1 : 0)))
+                if (map.TryBuild(rng, 11 + (area > 0 ? 1 : 0)))
                 {
                     map.AssignLayouts(rng);
                     return map;
@@ -211,7 +227,30 @@ namespace Game.Core
             Boss.Kind = RoomKind.Boss;
             Campfire.Kind = RoomKind.Campfire;
             AssignKinds(rng);
+            AddSecret(rng);
             return true;
+        }
+
+        /// <summary>A hidden room off a quiet corner: a free cell next to exactly one ordinary room.</summary>
+        private void AddSecret(GameRandom rng)
+        {
+            var options = new List<(MapRoom From, int Dir)>();
+            foreach (var r in Rooms)
+            {
+                if (r.Kind is RoomKind.Boss or RoomKind.Campfire or RoomKind.Treasure) continue;
+                for (int d = 0; d < 4; d++)
+                {
+                    var c = r.Cell + Dir.Step(d);
+                    if (Free(c) && Occupied(c) == 1) options.Add((r, d));
+                }
+            }
+            if (options.Count == 0) return;
+            var (from, dir) = options[rng.Range(0, options.Count)];
+            var secret = Place(from.Cell + Dir.Step(dir));
+            Link(from, secret, dir);
+            secret.Kind = RoomKind.Secret;
+            secret.Depth = from.Depth + 1;
+            secret.Index = from.Index;
         }
 
         private static int DoorCount(MapRoom r)
@@ -248,20 +287,36 @@ namespace Game.Core
                 return sa != sb ? sa.CompareTo(sb) : rng.Range(-1, 2);
             });
 
-            var treats = new List<RoomKind> { RoomKind.Shrine, rng.Chance(0.5f) ? RoomKind.Spring : RoomKind.Whetstone };
+            // The treasure room needs a dead end off the path (its door is locked); the keys come from the champion and
+            // the puzzle. The way to the boss keeps at least two fights.
+            var treats = new List<RoomKind> { RoomKind.MiniBoss, RoomKind.Puzzle, RoomKind.Shrine, rng.Chance(0.5f) ? RoomKind.Spring : RoomKind.Whetstone };
             if (Area >= 1) treats.Add(rng.Chance(0.5f) ? RoomKind.CurseAltar : RoomKind.Merchant);
+            var treasure = free.Find(r => !onPath.Contains(r.Id) && DoorCount(r) == 1);
+            if (treasure != null)
+            {
+                treasure.Kind = RoomKind.Treasure;
+                free.Remove(treasure);
+            }
+            int pathRooms = 0;
+            foreach (var r in free) if (onPath.Contains(r.Id)) pathRooms++;
             int t = 0;
             bool elite = false;
             foreach (var r in free)
             {
-                if (t < treats.Count && !(onPath.Contains(r.Id) && CountFights(free) <= 2))
+                bool keepForFight = onPath.Contains(r.Id) && pathRooms <= 2;
+                if (t < treats.Count && !keepForFight)
                 {
                     r.Kind = treats[t++];
+                    if (onPath.Contains(r.Id)) pathRooms--;
                     continue;
                 }
                 r.Kind = !elite && r.Depth >= 2 ? RoomKind.Elite : RoomKind.Combat;
                 elite |= r.Kind == RoomKind.Elite;
             }
+            // No champion and no puzzle (a cramped map): nothing would ever open the treasure room.
+            if (treasure != null && !Rooms.Exists(r => r.Kind is RoomKind.MiniBoss or RoomKind.Puzzle)) treasure.Kind = RoomKind.Shrine;
+            foreach (var r in Rooms)
+                if (r.Kind == RoomKind.Puzzle) r.Puzzle = (PuzzleKind)rng.Range(0, 4);
 
             int maxDepth = Boss.Depth;
             foreach (var r in Rooms)
@@ -289,10 +344,17 @@ namespace Game.Core
                     RoomKind.Start => 0,
                     RoomKind.Boss => 10,
                     RoomKind.Campfire => Arena.RestLayout,
-                    RoomKind.Combat or RoomKind.Elite => Arena.PickFight(rng, Area, previous),
+                    RoomKind.Combat or RoomKind.Elite or RoomKind.MiniBoss => Arena.PickFight(rng, Area, previous),
+                    RoomKind.Puzzle => r.Puzzle switch
+                    {
+                        PuzzleKind.Plates => Arena.PlatesLayout,
+                        PuzzleKind.Thief => 1,
+                        PuzzleKind.Gauntlet => Arena.GauntletLayout,
+                        _ => 0,
+                    },
                     _ => Arena.SanctumLayout,
                 };
-                if (r.IsFight) previous = id;
+                if (r.Kind is RoomKind.Combat or RoomKind.Elite or RoomKind.MiniBoss) previous = id;
                 r.Layout = Arena.Get(id).Placed(r.Origin);
             }
         }

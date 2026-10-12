@@ -29,6 +29,8 @@ namespace Game.Core
         public int Id;
         /// <summary>Map room it belongs to (it never leaves it).</summary>
         public int RoomId;
+        /// <summary>A mini-boss room's champion: bigger, tougher, drops the key.</summary>
+        public bool Champion;
         public EnemyType Type;
         public bool Elite;
         public Vector2 Position;

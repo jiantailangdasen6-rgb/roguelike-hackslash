@@ -68,6 +68,10 @@ namespace Game.EditorTools.Art
             Character("bone_cage", GimmickArt.BoneCage(), EnemyArt.FrameSize);
             Character("blood_sigil", GimmickArt.BloodSigil(), EnemyArt.FrameSize);
             Character("soul_vessel", GimmickArt.SoulVessel(), EnemyArt.FrameSize);
+            Character("pressure_plate", GimmickArt.PressurePlate(), EnemyArt.FrameSize);
+            Character("ward_crystal", GimmickArt.WardCrystal(), EnemyArt.FrameSize);
+            Character("cracked_wall", GimmickArt.CrackedWall(), EnemyArt.FrameSize);
+            Character("treasure_imp", GimmickArt.TreasureImp(), EnemyArt.FrameSize);
 
             foreach (var (name, gen) in ProceduralArt.Effects) Effect(name, gen());
             foreach (var (name, sheet) in PropArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);

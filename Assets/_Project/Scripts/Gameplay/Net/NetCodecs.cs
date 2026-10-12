@@ -74,7 +74,9 @@ namespace Game.Gameplay
             Set(SimEventType.TrialEvent, F.Int | F.Pos | F.Value | F.Client | F.Id);
             Set(SimEventType.RoomEntered, F.Client | F.Id | F.Int | F.Value); // Value = RoomKind
             Set(SimEventType.PedestalUsed, F.Client | F.Id | F.Int | F.Value | F.Pos);
-            Set(SimEventType.DoorOpened, F.Int | F.Pos);
+            Set(SimEventType.DoorOpened, F.Int | F.Pos | F.Id);
+            Set(SimEventType.KeyGained, F.Int | F.Pos | F.Id);
+            Set(SimEventType.PuzzleEnded, F.Int | F.Pos | F.Id);
             return layout;
         }
 

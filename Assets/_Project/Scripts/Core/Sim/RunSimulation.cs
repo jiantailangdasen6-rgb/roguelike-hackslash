@@ -243,6 +243,7 @@ namespace Game.Core
             CollectSouls();
             CollectLoot();
             UpdateObjectives(dt);
+            StepPuzzles(dt);
             UpdateDoors(dt);
             CheckDefeat();
             CheckLevelUp();
@@ -315,6 +316,7 @@ namespace Game.Core
                 Vector2 at = def.Flying ? s.Position : Arena.Resolve(Layout, s.Position, def.Radius);
                 int id = Enemies.Spawn(s.Type, at, EnemyHealthScale, EnemyDamageScale, s.Elite);
                 Enemies[Enemies.IndexOf(id)].RoomId = s.Room;
+                if (s.Champion) MakeChampion(Enemies.IndexOf(id));
                 if (def.Boss)
                 {
                     Enemies[Enemies.IndexOf(id)].Health *= Mathf.Clamp(BossStartHealth, 0.01f, 1f);
@@ -345,6 +347,19 @@ namespace Game.Core
                         {
                             room.SpawnTimer = 0.8f;
                             QueueSpawn(RandomEnemyType(), _spawnRng.Chance(EliteChance + 0.01f));
+                        }
+                        break;
+                    }
+                    case RoomObjective.Plates:
+                    case RoomObjective.Crystal:
+                    {
+                        // A steady trickle that keeps the puzzle from being a walk in the park.
+                        room.SpawnTimer -= dt;
+                        int target = Mathf.RoundToInt((room.Objective == RoomObjective.Crystal ? 5 + room.Area * 2 : 3 + room.Area) * PlayerScale * DifficultyDef.EnemyCount);
+                        if (room.SpawnTimer <= 0f && hostile < target && PlayersIn(room, alive: true) > 0)
+                        {
+                            room.SpawnTimer = room.Objective == RoomObjective.Crystal ? 1.1f : 1.8f;
+                            QueueSpawn(RandomEnemyType(), _spawnRng.Chance(EliteChance));
                         }
                         break;
                     }
@@ -395,6 +410,13 @@ namespace Game.Core
         {
             Room.Wave++;
             Room.WaveTimer = 20f;
+            if (Room.Kind == RoomKind.MiniBoss)
+            {
+                SpawnChampion();
+                Room.LastWaveSize = 4;
+                Events.Add(new SimEvent(SimEventType.WaveStarted) { Int = Room.Wave, Value = Room.WaveCount, Id = Room.Id });
+                return;
+            }
             int size = Mathf.RoundToInt((5f + Room.Index * 0.5f + Room.Area * 1.5f) * PlayerScale * DifficultyDef.EnemyCount);
             Room.LastWaveSize = size;
             bool eliteRoom = Room.Kind == RoomKind.Elite;

@@ -38,7 +38,7 @@ namespace Game.Gameplay
         private readonly Dictionary<int, GimmickVisual> _gimmicks = new();
         private int _area = -1;
         private int _roomId = -1;
-        private (ulong Seed, int Area) _mapKey;
+        private (ulong Seed, int Area, int Unlocked) _mapKey;
         private MapRoom _room;
 
         private sealed class DoorVisual
@@ -76,7 +76,7 @@ namespace Game.Gameplay
                 // Draw the room the local player stands in (another one after a door or a new area).
                 ShowArea(director.Area.Value);
                 var room = director.LocalRoom;
-                var key = (director.MapSeed.Value, director.Area.Value);
+                var key = (director.MapSeed.Value, director.Area.Value, director.UnlockedRooms.Value);
                 if (room.Id != _roomId || key != _mapKey)
                 {
                     _mapKey = key;
@@ -291,6 +291,9 @@ namespace Game.Gameplay
             for (int d = 0; d < 4; d++)
             {
                 if (!room.HasDoor(d)) continue;
+                // A secret room's door is just wall until the cracked wall in front of it is broken.
+                var behind = director != null ? director.Map[room.Neighbor[d]] : null;
+                if (behind != null && behind.Kind == RoomKind.Secret && !director.IsUnlocked(behind.Id)) continue;
                 Vector2 at = DungeonMap.DoorPosition(room, d);
                 string kind = d == Dir.N ? "n" : d == Dir.S ? "s" : "side";
                 // The arch stands in the back wall above the floor; the others sit in the black wall tops

@@ -710,11 +710,13 @@ namespace Game.Core
                 {
                     if (def.Type == EnemyType.PowderKeg) IgniteKeg(e);
                     else if (def.Type == EnemyType.TreasureChest) SpillChest(e);
+                    else if (def.Type == EnemyType.CrackedWall) WallBroken(e);
                     continue;
                 }
 
                 Kills++;
                 RollLoot(e);
+                if (def.Type == EnemyType.TreasureImp) ImpCaught(e);
                 if (!def.Boss && DifficultyDef.Has(DifficultyMod.Vengeance))
                     QueueBurst(e.Position, DifficultyCatalog.VengeanceRadius, DifficultyCatalog.VengeanceDelay, DifficultyCatalog.VengeanceDamage * EnemyDamageScale, AreaKind.SoulBurst);
                 int xp = def.Xp * (e.Elite ? EnemyCatalog.EliteXpMultiplier : 1);

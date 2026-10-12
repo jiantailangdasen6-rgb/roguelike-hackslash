@@ -310,7 +310,8 @@ namespace Game.Gameplay
                     for (int d = 0; d < 4; d++)
                     {
                         var n = map[r.Neighbor[d]];
-                        if (n == null || seen[n.Id] || !director.DoorOpen(r, n)) continue;
+                        bool withKey = n != null && n.Kind == RoomKind.Treasure && director.Keys.Value > 0; // the key opens it on arrival
+                        if (n == null || seen[n.Id] || (!director.DoorOpen(r, n) && !withKey)) continue;
                         seen[n.Id] = true;
                         first[n.Id] = r == room ? d : first[r.Id];
                         if (!director.IsVisited(n.Id) && n.Kind != RoomKind.Boss) { goal = n.Id; break; }
@@ -368,7 +369,7 @@ namespace Game.Gameplay
                 // Nothing to fight here: explore (pedestals, unvisited rooms, then the campfire and the boss door).
                 if (!fighting && director.Trial.Value == BossTrial.None)
                 {
-                    var chest = view != null ? view.Nearest(pos, EnemyType.TreasureChest) : null;
+                    var chest = view == null ? null : view.Nearest(pos, EnemyType.TreasureChest) ?? view.Nearest(pos, EnemyType.CrackedWall);
                     if (chest.HasValue)
                     {
                         Vector2 toChest = chest.Value - pos;
@@ -382,6 +383,13 @@ namespace Game.Gameplay
                 }
                 // Boss trials: stand on the unlit sigils, smash the braziers or the soul vessel first.
                 var trial = director.Trial.Value;
+                // Pressure plates: run to the next unlit one.
+                if (fighting && room.Kind == RoomKind.Puzzle && room.Puzzle is PuzzleKind.Plates or PuzzleKind.Gauntlet && view != null && view.Nearest(pos, EnemyType.PressurePlate) is Vector2 plate)
+                {
+                    Vector2 toPlate = plate - pos;
+                    Move = toPlate.sqrMagnitude > 0.3f ? toPlate.normalized : Vector2.zero;
+                    return;
+                }
                 if (trial == BossTrial.BloodRitual && view != null && view.Nearest(pos, EnemyType.BloodSigil) is Vector2 sigil)
                 {
                     Vector2 toSigil = sigil - pos;

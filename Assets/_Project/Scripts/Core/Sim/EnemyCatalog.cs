@@ -21,6 +21,11 @@ namespace Game.Core
         BoneCage,     // closes around a player
         BloodSigil,   // a rune to light by standing on it
         SoulVessel,   // the Lich's phylactery
+        // Objects of the map's rooms
+        PressurePlate, // puzzle: light it by standing on it
+        WardCrystal,   // puzzle: monsters go for it, the team keeps it whole
+        CrackedWall,   // hides a secret room: break it open
+        TreasureImp,   // puzzle: runs off with treasure (never fights back)
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -230,6 +235,29 @@ namespace Game.Core
             new()
             {
                 Type = EnemyType.SoulVessel, Name = "魂の器", Sheet = "soul_vessel", Health = 260f, Speed = 0f, Radius = 0.55f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // Health carries how long it stays lit (0..1).
+                Type = EnemyType.PressurePlate, Name = "押し板", Sheet = "pressure_plate", Health = 1f, Speed = 0f, Radius = 0.3f, Xp = 0, Prop = true, Untargetable = true, Flat = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // The team can't hurt it; monsters chip at it (RunSimulation.Puzzles).
+                Type = EnemyType.WardCrystal, Name = "守りの結晶", Sheet = "ward_crystal", Health = 320f, Speed = 0f, Radius = 0.7f, Xp = 0, Prop = true, Untargetable = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                Type = EnemyType.CrackedWall, Name = "ひび割れた壁", Sheet = "cracked_wall", Health = 45f, Speed = 0f, Radius = 0.8f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // Flees instead of fighting (RunSimulation.Puzzles); a little slower than a player.
+                Type = EnemyType.TreasureImp, Name = "宝を抱えた小鬼", Sheet = "treasure_imp", Health = 150f, Speed = 4.1f, Radius = 0.38f, Xp = 8,
                 Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };

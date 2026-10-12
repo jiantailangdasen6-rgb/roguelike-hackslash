@@ -313,6 +313,8 @@ namespace Game.Gameplay
                         RoomKind.Whetstone => "持っている力を強化する",
                         RoomKind.CurseAltar => $"力を{RewardCatalog.CursedBoons}つ授かる。代償に「{RewardCatalog.CurseName((CurseKind)Mathf.RoundToInt(e.Value))}」（{RewardCatalog.CurseText((CurseKind)Mathf.RoundToInt(e.Value))}）がこのランの間つく",
                         RoomKind.Merchant => "魂の欠片で1つ買える（全員の取り分から払う）",
+                        RoomKind.Treasure => "希少以上の装備を手に入れた（I で袋を開く）",
+                        RoomKind.Secret => "古い地図を見つけた（このエリアの全部屋が地図に載った）。装備も手に入れた",
                         _ => "新たな力を授かる",
                     };
                     Toast($"<color=#{hex}>{RoomCatalog.Name(kind)}</color>：{text}");
@@ -320,7 +322,16 @@ namespace Game.Gameplay
                 }
                 case SimEventType.DoorOpened:
                     if (e.Int == 0) Banner("主の扉が開いた", "覚悟はいいか", 2.4f);
+                    else if (e.Int == 2) Banner("宝物庫の扉が開いた", "", 2f);
+                    else if (e.Int == 3) Banner("隠し部屋を見つけた", "", 2.4f);
                     else Banner("奥への道が開いた", NetPlayer.All.Count > 1 ? "全員で光の上に立つと次のエリアへ" : "光の上に立つと次のエリアへ", 3f);
+                    break;
+                case SimEventType.KeyGained:
+                    Banner("鍵を手に入れた", "宝物庫（地図の「錠」）の扉の前に立つと開く", 2.8f);
+                    break;
+                case SimEventType.PuzzleEnded:
+                    if (RunDirector.Instance != null && RunDirector.Instance.LocalRoom.Id == e.Id)
+                        Banner(e.Int == 1 ? "仕掛けを解いた" : "しくじった…", e.Int == 1 ? "" : "鍵は手に入らなかった", 2.4f);
                     break;
                 case SimEventType.BossSpawned:
                 {
@@ -423,7 +434,7 @@ namespace Game.Gameplay
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
             _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
             var here = director.LocalRoom;
-            _roomText.text = RoomTitle(here);
+            _roomText.text = RoomTitle(here) + (director.Keys.Value > 0 ? $"　<color=#e6c766>鍵 ×{director.Keys.Value}</color>" : "");
             _objectiveText.text = ObjectiveText(director, here);
             _minimap.Update(director);
             AnnounceRoom(director, here);
@@ -563,6 +574,19 @@ namespace Game.Gameplay
                 case RoomKind.Boss:
                     if (d.ExitOpen.Value) return Gather(team ? "奥への道（光）の上に全員で立つ" : "奥への道（光）の上に立つ");
                     return d.IsFighting(room.Id) ? $"{EnemyCatalog.Get(d.BossType.Value).Name}を討て" : "";
+                case RoomKind.MiniBoss:
+                    if (d.IsFighting(room.Id)) return "精鋭の主を倒せ　<color=#e6c766>鍵を落とす</color>";
+                    return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み</color>" : "";
+                case RoomKind.Puzzle:
+                    if (d.IsFighting(room.Id))
+                        return room.Puzzle switch
+                        {
+                            PuzzleKind.Plates => $"押し板をすべて光らせろ　<color=#ffffff>{Mathf.RoundToInt(d.PuzzleValue.Value)}/{RunSimulation.PlateSpots.Length}</color>　<size=20>（踏むとしばらく光る）</size>",
+                            PuzzleKind.Thief => $"宝を抱えた小鬼を捕まえろ　<color=#ffffff>残り {Mathf.RoundToInt(d.PuzzleTime.Value)}秒</color>",
+                            PuzzleKind.Gauntlet => "罠をくぐり抜けて、中央の押し板を踏め",
+                            _ => $"結晶を守れ　<color=#ffffff>残り {Mathf.RoundToInt(d.PuzzleTime.Value)}秒　結晶 {d.PuzzleValue.Value:P0}</color>",
+                        };
+                    return d.IsCleared(room.Id) ? "<color=#bfb6aa>仕掛けは終わった</color>" : "";
                 case RoomKind.Campfire:
                     if (d.BossDoorOpen.Value) return "主の間へ";
                     return Gather(team ? "焚き火で休み、全員で主の扉の前に立つ" : "焚き火で休み、主の扉の前に立つ");
@@ -586,6 +610,14 @@ namespace Game.Gameplay
             {
                 RoomKind.Combat => "魔物が来る",
                 RoomKind.Elite => "精鋭が率いる群れ。倒すと良い装備が出やすい",
+                RoomKind.MiniBoss => "精鋭の主とお供。倒すと鍵を落とす",
+                RoomKind.Puzzle => room.Puzzle switch
+                {
+                    PuzzleKind.Plates => "押し板をすべて同時に光らせると鍵が手に入る",
+                    PuzzleKind.Thief => "逃げる小鬼を捕まえると鍵と宝が手に入る",
+                    PuzzleKind.Gauntlet => "罠の中央の押し板を踏むと鍵が手に入る",
+                    _ => "結晶を守り抜くと鍵が手に入る",
+                },
                 RoomKind.Campfire => "火のそばで傷が癒える・宝箱を壊すと魂",
                 RoomKind.Boss => "",
                 _ => RoomCatalog.PedestalText(room.Kind),

@@ -62,7 +62,9 @@ without it the online buttons explain it's unavailable. Verified desktop<->deskt
 Solo uses NGO's `SinglePlayerTransport` (no sockets, works in browsers).
 
 Player flags: `-startroom <n>`, `-difficulty easy|normal|hard|nightmare`, `-downat <s>` (host knocks a teammate down), `-autosolo`, `-onlinehost <n> -codefile <path>`, `-onlinejoinfile <path>`, `-autohost <n>`, `-autojoin <ip>`, `-botmove`, `-class warrior|mage|ranger`, `-autoquit <s>`,
-`-screenshot <path> -screenshotat <s1,s2,..>`, `-profile <name>`, `-localonly`, `-doorwait <s>` (bots linger by the open doors for screenshots).
+`-screenshot <path> -screenshotat <s1,s2,..>`, `-profile <name>`, `-localonly`, `-doorwait <s>` (bots linger by the open doors for screenshots),
+`-freezeat <s> -freezefor <s>` (stall the main thread once: transport robustness), `-pingat <s1,..>` / `-pingroomat <s1,..>` (co-op pings, seconds after the run scene loads).
+Online co-op over Relay: always re-check with `OnlineTest.ps1 -HostExtra "-freezeat 50 -freezefor 4"` after network changes (LAN NetTest never shows queue overflows).
 
 ## Gotchas
 - **Japanese text uses bundled subset fonts** (`Resources/Fonts/Body.ttf`, `Title.ttf`, from `Tools/SubsetFonts.ps1`, full fonts

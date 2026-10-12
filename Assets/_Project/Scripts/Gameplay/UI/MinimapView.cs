@@ -29,6 +29,7 @@ namespace Game.Gameplay
         private readonly List<Cell> _cells = new();
         private readonly List<(Image Line, MapRoom A, MapRoom B)> _links = new();
         private readonly List<Image> _dots = new();
+        private readonly List<(Image Ring, Image Core)> _pingMarks = new();
         private (ulong Seed, int Area) _key = (0, -1);
 
         public RectTransform Root => _root;
@@ -56,6 +57,7 @@ namespace Game.Gameplay
             _cells.Clear();
             _links.Clear();
             _dots.Clear();
+            _pingMarks.Clear();
 
             foreach (var room in map.Rooms)
                 for (int d = 0; d < 2; d++) // each door once: east and north
@@ -99,6 +101,20 @@ namespace Game.Gameplay
                 dot.raycastTarget = false;
                 dot.enabled = false;
                 _dots.Add(dot);
+            }
+            for (int i = 0; i < GameSession.MaxPlayers * 4; i++)
+            {
+                var ring = UIKit.Panel(_grid, "PingRing", Color.clear);
+                ring.sprite = UIKit.RingSprite;
+                var core = UIKit.Panel(_grid, "PingCore", Color.clear);
+                core.sprite = UIKit.DiscSprite;
+                foreach (var img in new[] { ring, core })
+                {
+                    img.rectTransform.anchorMin = img.rectTransform.anchorMax = Vector2.zero;
+                    img.raycastTarget = false;
+                    img.enabled = false;
+                }
+                _pingMarks.Add((ring, core));
             }
         }
 
@@ -167,6 +183,53 @@ namespace Game.Gameplay
                 slot++;
             }
             for (int i = slot; i < _dots.Count; i++) _dots[i].enabled = false;
+            UpdatePings(map);
+        }
+
+        /// <summary>Pings pulse on the map where they were made (so a call from another room can be found).</summary>
+        private void UpdatePings(DungeonMap map)
+        {
+            Pings.Prune();
+            int k = 0;
+            foreach (var m in Pings.Active)
+            {
+                if (k >= _pingMarks.Count) break;
+                var room = map.RoomAt(m.Position);
+                if (room == null) continue;
+                var (ring, core) = _pingMarks[k++];
+                Vector2 local = m.Position - room.Bounds.center;
+                Vector2 inCell = new(local.x / room.Bounds.width * (CellW - 10f), local.y / room.Bounds.height * (CellH - 10f));
+                if (_large) inCell.y -= CellH * 0.22f;
+                Vector2 at = CellCenter(room.Cell) + inCell;
+                float scale = _large ? 1.8f : 1f;
+                float fade = Mathf.Clamp01(Pings.Life - m.Age);
+                float pulse = Mathf.Repeat(m.Age * 1.3f, 1f);
+                var color = Pings.ColorOf(m);
+                ring.enabled = core.enabled = true;
+                ring.rectTransform.anchoredPosition = core.rectTransform.anchoredPosition = at;
+                float size = Mathf.Lerp(10f, 34f, pulse) * scale;
+                ring.rectTransform.sizeDelta = new Vector2(size, size);
+                ring.color = new Color(color.r, color.g, color.b, (1f - pulse) * fade);
+                core.rectTransform.sizeDelta = new Vector2(8f * scale, 8f * scale);
+                core.color = new Color(color.r, color.g, color.b, fade * (Mathf.PingPong(m.Age * 4f, 1f) > 0.3f ? 1f : 0.4f));
+                ring.transform.SetAsLastSibling();
+                core.transform.SetAsLastSibling();
+            }
+            for (; k < _pingMarks.Count; k++) _pingMarks[k].Ring.enabled = _pingMarks[k].Core.enabled = false;
+        }
+
+        /// <summary>The known room drawn under a screen point (the big map pings a room with a click).</summary>
+        public MapRoom RoomUnder(Vector2 screenPoint)
+        {
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(_grid, screenPoint, null, out var local)) return null;
+            Vector2 p = local - _grid.rect.min; // from the grid's bottom-left, like the cell centres
+            foreach (var c in _cells)
+            {
+                if (c.Frame.color.a <= 0.01f) continue; // nobody knows it yet
+                Vector2 d = p - CellCenter(c.Room.Cell);
+                if (Mathf.Abs(d.x) <= CellW * 0.5f && Mathf.Abs(d.y) <= CellH * 0.5f) return c.Room;
+            }
+            return null;
         }
 
         private static Color ClassColor(ClassId c) => c switch

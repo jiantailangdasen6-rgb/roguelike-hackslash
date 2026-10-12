@@ -77,6 +77,7 @@ namespace Game.EditorTools.Art
             foreach (var (name, sheet) in PropArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             foreach (var (name, sheet) in DoorArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             foreach (var (name, sheet) in DecorArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
+            foreach (var (name, sheet) in PingArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             foreach (var (name, sheet) in CampArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             Effect("icons_perk", IconArt.Perks(), "icons_perk");
             Effect("icons_trinket", IconArt.Trinkets(), "icons_trinket");
@@ -85,6 +86,7 @@ namespace Game.EditorTools.Art
             WritePreview("props", PropArt.Sheets());
             WritePreview("doors", DoorArt.Sheets());
             WritePreview("decor", DecorArt.Sheets());
+            WritePreview("pings", PingArt.Sheets());
             WritePreview("camp", CampArt.Sheets());
 
             var tiles = ProceduralArt.Tiles();

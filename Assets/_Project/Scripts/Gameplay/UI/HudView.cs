@@ -80,6 +80,7 @@ namespace Game.Gameplay
         private void Awake()
         {
             Instance = this;
+            gameObject.AddComponent<PingView>();
             var root = UIKit.CreateCanvas("HUD", 20, transform).transform;
 
             _xpBar = UIKit.CreateBar(root, "XpBar", new Color(0.45f, 0.75f, 1f), new Color(0f, 0f, 0f, 0.7f));
@@ -294,6 +295,7 @@ namespace Game.Gameplay
                     Banner(AreaNames[area], "扉をくぐって迷宮を探索しよう　主の間は焚き火の間の奥", 3.2f);
                     Tip("map", "右上は地図（M で大きく開く）。入った部屋とその隣が見える。寄り道（祠・泉・精鋭）をするほど強くなる");
                     if (NetPlayer.All.Count > 1) Tip("split", "仲間とは別の部屋を探索できる。倒れた仲間は地図で赤く点滅する。主の扉は全員がそろうと開く");
+                    if (NetPlayer.All.Count > 1) Tip("ping", "F キー（中クリック）で合図：敵なら「危ない」、祭壇や扉なら「ここ」、ほかは「来て」。M の地図で部屋をクリックすると「集合」");
                     break;
                 }
                 case SimEventType.TeamLevelUp:
@@ -412,7 +414,7 @@ namespace Game.Gameplay
             string key = string.Join(",", _party);
             if (key == _hintKey) return;
             _hintKey = key;
-            var text = "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　I 袋　M 地図　Esc メニュー\n" +
+            var text = "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　I 袋　M 地図　F 合図　Esc メニュー\n" +
                        "<color=#9fd8ff>連携：凍った敵は強打で「砕ける」／印の敵は全員の攻撃が通りやすい／倒れた仲間のそばに立つと復活</color>";
             var combos = ComboCatalog.Available(_party);
             for (int i = 0; i < combos.Count && i < 2; i++)
@@ -620,6 +622,12 @@ namespace Game.Gameplay
             }
         }
 
+        /// <summary>The big map (M) is on screen (pings then call everyone to the room clicked).</summary>
+        public bool BigMapOpen => _mapRoot != null && _mapRoot.activeSelf;
+
+        /// <summary>The room of the big map under a screen point (null off the rooms or on one nobody knows yet).</summary>
+        public MapRoom BigMapRoomAt(Vector2 screenPoint) => BigMapOpen ? _bigMap.RoomUnder(screenPoint) : null;
+
         private void BuildBigMap()
         {
             var canvas = UIKit.CreateCanvas("BigMap", 30, transform).transform;
@@ -630,7 +638,7 @@ namespace Game.Gameplay
             _bigMap = new MinimapView(dim.transform, new Vector2(0f, 10f), large: true);
             _mapTitle = UIKit.Title(dim.transform, "", 40, TextAnchor.MiddleCenter);
             _mapTitle.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 60f), new Vector2(0f, _bigMap.Root.sizeDelta.y * 0.5f + 46f));
-            var hint = UIKit.Label(dim.transform, "M で閉じる　白い点＝自分　色の点＝仲間　赤く点滅＝倒れた仲間", 22, TextAnchor.MiddleCenter, UIKit.MutedText);
+            var hint = UIKit.Label(dim.transform, "M で閉じる　部屋をクリックで仲間に「集合！」　白い点＝自分　色の点＝仲間　赤く点滅＝倒れた仲間", 22, TextAnchor.MiddleCenter, UIKit.MutedText);
             hint.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 40f), new Vector2(0f, -_bigMap.Root.sizeDelta.y * 0.5f - 18f));
             _mapRoot.SetActive(CommandLine.Has("-openmap")); // screenshots of the big map
 

@@ -94,6 +94,22 @@ namespace Game.Gameplay
             return best;
         }
 
+        /// <summary>Closest thing drawn within <paramref name="radius"/> of a spot that matches (pings: a monster, a chest...).</summary>
+        public Vector2? NearestWhere(Vector2 position, float radius, System.Func<EnemyDef, bool> match)
+        {
+            Vector2? best = null;
+            float bestSq = radius * radius;
+            foreach (var v in _visuals.Values)
+            {
+                Vector2 p = v.Root.transform.position;
+                float sq = (p - position).sqrMagnitude;
+                if (sq > bestSq || !match(EnemyCatalog.Get(v.Type))) continue;
+                bestSq = sq;
+                best = p;
+            }
+            return best;
+        }
+
         public bool TryGetPosition(int id, out Vector2 position)
         {
             if (_visuals.TryGetValue((ushort)id, out var v))

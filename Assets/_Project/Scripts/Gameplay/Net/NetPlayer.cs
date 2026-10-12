@@ -178,6 +178,14 @@ namespace Game.Gameplay
             });
         }
 
+        /// <summary>Owner → everyone (relayed by the host): a ping at a spot. Not part of the simulation.</summary>
+        [Rpc(SendTo.Everyone)]
+        public void PingRpc(Vector2 position, byte kind, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId != OwnerClientId || kind > (byte)PingKind.Gather) return;
+            Pings.Add(this, position, (PingKind)kind);
+        }
+
         private void PlayAction(AttackAnim anim)
         {
             string clip = anim switch

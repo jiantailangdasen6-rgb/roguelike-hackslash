@@ -62,6 +62,7 @@ namespace Game.Gameplay
             Add("revive", 0.55f, 0.3f, () => SfxSynth.Chime("revive", new[] { 392f, 523f, 659f }, 0.08f, 0.9f));
             Add("fuse", 0.4f, 0.2f, SfxSynth.Telegraph);
             Add("click", 0.3f, 0.03f, SfxSynth.Hit);
+            Add("ping", 0.45f, 0.12f, () => SfxSynth.Chime("ping", new[] { 784f, 1175f }, 0.07f, 0.55f));
 
             for (int i = 0; i < Voices; i++)
             {

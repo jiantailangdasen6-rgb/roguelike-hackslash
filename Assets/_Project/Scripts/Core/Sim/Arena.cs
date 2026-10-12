@@ -51,6 +51,19 @@ namespace Game.Core
         public Obstacle[] Obstacles = System.Array.Empty<Obstacle>();
         public GimmickDef[] Gimmicks = System.Array.Empty<GimmickDef>();
         public bool Boss;
+        /// <summary>Where the room's centre sits in the world (layouts are authored around zero).</summary>
+        public Vector2 Origin;
+
+        /// <summary>A copy moved to a room's place on the area map, so collision works in world coordinates.</summary>
+        public RoomLayout Placed(Vector2 origin)
+        {
+            var copy = new RoomLayout { Id = Id, Name = Name, Boss = Boss, Origin = origin };
+            copy.Obstacles = (Obstacle[])Obstacles.Clone();
+            for (int i = 0; i < copy.Obstacles.Length; i++) copy.Obstacles[i].Position += origin;
+            copy.Gimmicks = (GimmickDef[])Gimmicks.Clone();
+            for (int i = 0; i < copy.Gimmicks.Length; i++) copy.Gimmicks[i].Position += origin;
+            return copy;
+        }
     }
 
     /// <summary>
@@ -135,14 +148,14 @@ namespace Game.Core
                 {
                     O(ObstacleKind.Sarcophagus, -8f, 2.5f), O(ObstacleKind.Sarcophagus, 8f, 2.5f),
                     O(ObstacleKind.Sarcophagus, -6f, -2.5f), O(ObstacleKind.Sarcophagus, 6f, -2.5f),
-                    O(ObstacleKind.Statue, -11.5f, -0.2f), O(ObstacleKind.Statue, 11.5f, -0.2f),
+                    O(ObstacleKind.Statue, -11.5f, 4.2f), O(ObstacleKind.Statue, 11.5f, 4.2f),
                 },
                 Gimmicks = new[] { G(Keg, 0f, 0.8f), G(Keg, -3.2f, 5f), G(Keg, 3.2f, 5f) },
             },
             new()
             {
                 Id = 4, Name = "spike_hall",
-                Obstacles = new[] { O(P, -11f, 1f), O(P, 11f, 1f) },
+                Obstacles = new[] { O(P, -11f, 3.2f), O(P, 11f, 3.2f) },
                 Gimmicks = new[]
                 {
                     G(Spike, -6f, 1f, 0f), G(Spike, -3f, 1f, 0.25f), G(Spike, 0f, 1f, 0.5f), G(Spike, 3f, 1f, 0.75f), G(Spike, 6f, 1f, 0f),
@@ -156,7 +169,7 @@ namespace Game.Core
                 Gimmicks = new[]
                 {
                     G(Flame, -13.7f, 3.6f, 0f, 1f, 0f), G(Flame, 13.7f, 3.6f, 0.5f, -1f, 0f),
-                    G(Flame, -13.7f, -1.6f, 0.5f, 1f, 0f), G(Flame, 13.7f, -1.6f, 0f, -1f, 0f),
+                    G(Flame, -13.7f, -3f, 0.5f, 1f, 0f), G(Flame, 13.7f, -3f, 0f, -1f, 0f),
                 },
             },
             new()
@@ -176,7 +189,7 @@ namespace Game.Core
                 Gimmicks = new[]
                 {
                     G(Font, -8.5f, 3.5f), G(Spike, -8.5f, 0.8f, 0f), G(Spike, -5.8f, 3.5f, 0.5f),
-                    G(Keg, 11.5f, 0f), G(Keg, 4f, -6f),
+                    G(Keg, 11.5f, -3f), G(Keg, 4f, -6f),
                 },
             },
             new()
@@ -188,7 +201,7 @@ namespace Game.Core
                     O(ObstacleKind.Pew, -8.5f, 3.5f), O(ObstacleKind.Pew, 8.5f, 3.5f),
                     O(ObstacleKind.Pew, -8.5f, -1f), O(ObstacleKind.Pew, 8.5f, -1f),
                 },
-                Gimmicks = new[] { G(Flame, -13.7f, 1.3f, 0f, 1f, 0f), G(Flame, 13.7f, 1.3f, 0.5f, -1f, 0f), G(Keg, -12f, -5.5f), G(Keg, 12f, -5.5f) },
+                Gimmicks = new[] { G(Flame, -13.7f, 2.8f, 0f, 1f, 0f), G(Flame, 13.7f, 2.8f, 0.5f, -1f, 0f), G(Keg, -12f, -5.5f), G(Keg, 12f, -5.5f) },
             },
             new()
             {
@@ -200,7 +213,7 @@ namespace Game.Core
             {
                 Id = 10, Name = "throne_room", Boss = true,
                 Obstacles = new[] { O(P, -9f, 3.5f), O(P, 9f, 3.5f), O(P, -9f, -3.5f), O(P, 9f, -3.5f) },
-                Gimmicks = new[] { G(Keg, -12.5f, 0f), G(Keg, 12.5f, 0f), G(Font, 12f, -6.2f), G(Font, -12f, -6.2f) },
+                Gimmicks = new[] { G(Keg, -12.5f, 2.6f), G(Keg, 12.5f, 2.6f), G(Font, 12f, -6.2f), G(Font, -12f, -6.2f) },
             },
             new()
             {
@@ -209,16 +222,21 @@ namespace Game.Core
                 Obstacles = new[] { O(ObstacleKind.Campfire, 0f, 0f), O(ObstacleKind.Crates, -12f, 5.8f), O(ObstacleKind.Crates, 12f, -6f) },
                 Gimmicks = new[] { G(Chest, -11.5f, 1.2f), G(Chest, 11.5f, -1.8f), G(Chest, -6.5f, -6.2f) },
             },
+            new()
+            {
+                // Pedestal rooms (shrine, spring, merchant...): the pedestal in the middle, statues keeping watch.
+                Id = 12, Name = "sanctum",
+                Obstacles = new[] { O(ObstacleKind.Statue, -7f, 3.6f), O(ObstacleKind.Statue, 7f, 3.6f), O(P, -7f, -3.6f), O(P, 7f, -3.6f) },
+            },
         };
 
         public static RoomLayout Get(int id) => id >= 0 && id < Layouts.Length ? Layouts[id] : Layouts[0];
 
-        /// <summary>Picks the layout for a room: the first room is open, boss rooms use the throne room, others vary.</summary>
-        public static int Pick(GameRandom rng, int roomIndex, int previous)
+        public const int SanctumLayout = 12;
+
+        /// <summary>Picks the layout for a fight room (never the same twice in a row).</summary>
+        public static int PickFight(GameRandom rng, int area, int previous)
         {
-            if (roomIndex == 0) return 0;
-            if (roomIndex % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1) return 10;
-            int area = roomIndex / RunSimulation.RoomsPerArea;
             // Some rooms suit some areas better (pews in the chapel, crystals in the abyss).
             var pool = area switch
             {

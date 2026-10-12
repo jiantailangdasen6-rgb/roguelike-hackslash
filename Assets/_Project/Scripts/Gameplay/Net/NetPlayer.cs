@@ -35,6 +35,10 @@ namespace Game.Gameplay
         public readonly NetworkVariable<bool> Legendary = new();
         /// <summary>Shut in a bone cage: can still attack (the bars) but not move or dodge.</summary>
         public readonly NetworkVariable<bool> Caged = new();
+        /// <summary>Curses taken at altars (RewardCatalog.PackCurses).</summary>
+        public readonly NetworkVariable<int> Curses = new();
+        /// <summary>Rooms (by bit) whose pedestal this player has used: it goes dark for them.</summary>
+        public readonly NetworkVariable<int> UsedPedestals = new();
         public readonly NetworkVariable<bool> FacingLeft = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [SerializeField] private PixelAnimator animator;

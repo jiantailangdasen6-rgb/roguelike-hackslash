@@ -4,14 +4,14 @@ using UnityEngine;
 namespace Game.Core
 {
     /// <summary>
-    /// The whole run, simulated on the host only: rooms and waves, enemy AI with telegraphed attacks,
+    /// The whole run, simulated on the host only: the area maps and their rooms, enemy AI with telegraphed attacks,
     /// class abilities, statuses and synergies, XP and perk picks. Pure C# so it can be unit-tested and
     /// run headless; the network layer feeds player positions/inputs in and ships <see cref="Events"/> out.
-    /// Split across RunSimulation.*.cs (core loop/rooms here, Combat, Enemies).
+    /// Split across RunSimulation.*.cs (core loop and spawning here, the map and its rooms in Dungeon, Combat, Enemies...).
     /// </summary>
     public sealed partial class RunSimulation
     {
-        public const int RoomsPerArea = 4;
+        public const int RoomsPerArea = 4; // strength tiers per area (room index = area * 4 + tier)
         public const int AreaCount = 3;
         public const int TotalRooms = RoomsPerArea * AreaCount;
 
@@ -27,17 +27,15 @@ namespace Game.Core
         public const float MinSpawnDistance = 5f;
         public const float SurviveSeconds = 40f;
 
-        /// <summary>Walkable floor of the arena (inside the walls).</summary>
+        /// <summary>Walkable floor of one room, around its centre (inside the walls).</summary>
         public static readonly Rect DefaultBounds = new(-14f, -8f, 28f, 16f);
 
-        public readonly Rect Bounds;
         public readonly List<SimPlayer> Players = new();
         public readonly EnemySimulation Enemies;
         public readonly List<Projectile> Projectiles = new();
         public readonly List<Soul> Souls = new();
         public readonly List<PendingSpawn> PendingSpawns = new();
         public readonly List<SimEvent> Events = new();
-        public readonly RoomState Room = new();
 
         private readonly GameRandom _spawnRng;
         private readonly GameRandom _perkRng;
@@ -46,14 +44,19 @@ namespace Game.Core
         private readonly List<int> _hits = new();
         private int _nextProjectileId = 1;
         private int _nextSoulId = 1;
-        private float _spawnTimer;
-        private float _waveTimer;
-        private int _lastWaveSize;
 
         public readonly Difficulty Difficulty;
         public readonly DifficultyDef DifficultyDef;
-        /// <summary>Obstacles and gimmicks of the current room.</summary>
-        public RoomLayout Layout { get; private set; } = Arena.Get(0);
+
+        /// <summary>
+        /// The room being worked on right now: spawning, monster strength and collision all read it. The loops set
+        /// it to the room of the monster, trap or fight they handle (several rooms can be busy at once).
+        /// </summary>
+        public RoomState Room { get; private set; }
+        /// <summary>Obstacles and gimmicks of <see cref="Room"/> (in world coordinates).</summary>
+        public RoomLayout Layout => Room.Layout;
+        /// <summary>Floor of <see cref="Room"/>.</summary>
+        public Rect Bounds => Room.Bounds;
 
         public RunPhase Phase { get; private set; } = RunPhase.Playing;
         public float Elapsed { get; private set; }
@@ -64,10 +67,10 @@ namespace Game.Core
         public int RoomsCleared { get; private set; }
         public float XpToNext => XpRequired(TeamLevel, Players.Count);
 
-        public RunSimulation(ulong seed, Rect? bounds = null, Difficulty difficulty = Difficulty.Normal)
+        public RunSimulation(ulong seed, Difficulty difficulty = Difficulty.Normal)
         {
-            Bounds = bounds ?? DefaultBounds;
-            Enemies = new EnemySimulation(Bounds);
+            Seed = seed;
+            Enemies = new EnemySimulation(DungeonMap.WorldBounds);
             Difficulty = difficulty;
             DifficultyDef = DifficultyCatalog.Get(difficulty);
             var root = new GameRandom(seed);
@@ -75,12 +78,9 @@ namespace Game.Core
             _perkRng = root.Fork(2);
             _combatRng = root.Fork(3);
             _aiRng = root.Fork(4);
-            _layoutRng = root.Fork(5);
-            _doorRng = root.Fork(6);
             _lootRng = root.Fork(7);
+            BuildArea(0);
         }
-
-        private readonly GameRandom _layoutRng;
 
         /// <summary>Bosses arrive with this share of their health (automated screenshots of the trials: -bosshp).</summary>
         public float BossStartHealth = 1f;
@@ -93,13 +93,13 @@ namespace Game.Core
 
         public static float DamageMultiplier(int roomIndex) => 1f + 0.12f * roomIndex;
 
-        /// <summary>Monster health for the current room, players and difficulty.</summary>
-        public float EnemyHealthScale => HealthMultiplier(Room.Index, Players.Count) * DifficultyDef.EnemyHealth * (Room.Trial ? TrialHealth : 1f);
-        public float EnemyDamageScale => DamageMultiplier(Room.Index) * DifficultyDef.EnemyDamage * (Room.Trial ? TrialDamage : 1f);
-        public float EliteChance => DifficultyDef.EliteChance + (Room.Trial ? TrialEliteChance : 0f);
+        /// <summary>Monster health for the current room, the players in it and the difficulty.</summary>
+        public float EnemyHealthScale => HealthMultiplier(Room.Index, PlayersIn(Room)) * DifficultyDef.EnemyHealth;
+        public float EnemyDamageScale => DamageMultiplier(Room.Index) * DifficultyDef.EnemyDamage;
+        public float EliteChance => DifficultyDef.EliteChance;
 
         /// <summary>The boss of the current area.</summary>
-        public EnemyType AreaBoss => EnemyCatalog.AreaBosses[Mathf.Min(Room.Area, EnemyCatalog.AreaBosses.Length - 1)];
+        public EnemyType AreaBoss => EnemyCatalog.AreaBosses[Mathf.Min(Area, EnemyCatalog.AreaBosses.Length - 1)];
 
         // ------------------------------------------------------------------ Players
 
@@ -107,7 +107,7 @@ namespace Game.Core
         {
             var existing = GetPlayer(clientId);
             if (existing != null) return existing;
-            var player = new SimPlayer(clientId, StartPosition(Players.Count), loadout);
+            var player = new SimPlayer(clientId, Map.Start.Origin + StartPosition(Players.Count), loadout);
             player.SetDifficulty(DifficultyDef);
             Players.Add(player);
             return player;
@@ -128,6 +128,7 @@ namespace Game.Core
             if (p.PendingOffer != null) p.StockedChoices.Enqueue(p.OfferKind); // shown again when they return
             p.PendingOffer = null;
             p.Input = default;
+            p.CagedBy = 0;
             if (!string.IsNullOrEmpty(playerKey)) _departed[playerKey] = p;
             RemovePlayer(clientId);
         }
@@ -153,13 +154,12 @@ namespace Game.Core
             }
             else
             {
-                player = new SimPlayer(clientId, StartPosition(Players.Count), loadout);
+                player = new SimPlayer(clientId, Map.Start.Origin + StartPosition(Players.Count), loadout);
                 player.SetLevel(TeamLevel);
                 for (int level = 1; level < TeamLevel; level++) player.StockedChoices.Enqueue(ChoiceKind.LevelUp);
                 player.Hp = player.MaxHp;
             }
             player.SetDifficulty(DifficultyDef);
-            player.SetCurses(CurseStacks); // curses the team took while they were away count for them too
 
             foreach (var mate in Players)
             {
@@ -167,6 +167,7 @@ namespace Game.Core
                 player.Position = mate.Position + new Vector2(0.8f, -0.6f);
                 break;
             }
+            player.RoomId = Map.RoomAt(player.Position)?.Id ?? -1; // arriving in a fight: picks wait
             player.SetGearLevelCap(GearLevelCap);
             if (!returning) GiveLoaners(player);
             Players.Add(player);
@@ -194,6 +195,7 @@ namespace Game.Core
             if (input.Aim.sqrMagnitude > 0.0001f) p.Aim = input.Aim;
         }
 
+        /// <summary>Where the team stands on arriving in a room (around its centre, a little low).</summary>
         private static Vector2 StartPosition(int index) => index switch
         {
             0 => new Vector2(0f, -4f),
@@ -204,13 +206,20 @@ namespace Game.Core
 
         // ------------------------------------------------------------------ Main loop
 
-        /// <param name="firstRoom">Debug: start deeper in the run (e.g. a boss room) for testing and screenshots.</param>
+        /// <param name="firstRoom">
+        /// Debug: start deeper in the run for testing and screenshots. Area = firstRoom / 4; a last tier (3, 7, 11)
+        /// starts in the boss room, tier 2 at the campfire.
+        /// </param>
         public void Start(int firstRoom = 0)
         {
-            StartRoom(Mathf.Clamp(firstRoom, 0, TotalRooms - 1));
+            firstRoom = Mathf.Clamp(firstRoom, 0, TotalRooms - 1);
+            int area = firstRoom / RoomsPerArea, tier = firstRoom % RoomsPerArea;
+            if (area != Area) BuildArea(area);
+            EnterArea(tier == 3 ? Map.Boss : tier == 2 ? Map.Campfire : Map.Start);
+            if (tier == 3) BossDoorOpen = true;
             foreach (var p in Players) GiveLoaners(p);
             foreach (var p in Players) if (p.HasStartPerk) p.StockedChoices.Enqueue(ChoiceKind.Start);
-            HoldIfPicksLeft();
+            OfferAll();
         }
 
         public void Step(float dt)
@@ -218,19 +227,10 @@ namespace Game.Core
             if (Phase != RunPhase.Playing) return;
 
             TickOffers(dt);
-            if (HoldingForPicks)
-            {
-                if (AnyPicksLeft)
-                {
-                    UpdatePlayers(dt); // free to walk about; nothing spawns yet
-                    return;
-                }
-                HoldingForPicks = false;
-            }
-
             Elapsed += dt;
             Enemies.BeginStep();
             UpdatePlayers(dt);
+            UpdateRooms(dt);
             UpdateSpawning(dt);
             StepEnemies(dt);
             StepBossTrials(dt);
@@ -242,7 +242,8 @@ namespace Game.Core
             ProcessDeaths(giveXp: true);
             CollectSouls();
             CollectLoot();
-            UpdateRoom(dt);
+            UpdateObjectives(dt);
+            UpdateDoors(dt);
             CheckDefeat();
             CheckLevelUp();
         }
@@ -308,9 +309,12 @@ namespace Game.Core
                     continue;
                 }
                 PendingSpawns.RemoveAt(i);
+                Room = RoomStates[s.Room];
+                if (Room.Cleared) continue;
                 var def = EnemyCatalog.Get(s.Type);
                 Vector2 at = def.Flying ? s.Position : Arena.Resolve(Layout, s.Position, def.Radius);
                 int id = Enemies.Spawn(s.Type, at, EnemyHealthScale, EnemyDamageScale, s.Elite);
+                Enemies[Enemies.IndexOf(id)].RoomId = s.Room;
                 if (def.Boss)
                 {
                     Enemies[Enemies.IndexOf(id)].Health *= Mathf.Clamp(BossStartHealth, 0.01f, 1f);
@@ -318,53 +322,85 @@ namespace Game.Core
                 }
             }
 
-            if (Room.Cleared) return;
-            int hostile = Enemies.HostileCount + PendingSpawns.Count;
-            switch (Room.Objective)
+            foreach (var room in RoomStates)
             {
-                case RoomObjective.Waves:
+                if (!room.Fighting) continue;
+                Room = room;
+                int hostile = HostilesIn(room) + PendingIn(room);
+                switch (room.Objective)
                 {
-                    _waveTimer -= dt;
-                    bool waveDone = hostile <= Mathf.Max(1, _lastWaveSize / 4) || _waveTimer <= 0f;
-                    if (waveDone && Room.Wave < Room.WaveCount) StartWave();
-                    break;
-                }
-                case RoomObjective.Survive:
-                {
-                    _spawnTimer -= dt;
-                    int target = Mathf.RoundToInt((6 + Room.Area * 2) * PlayerScale * DifficultyDef.EnemyCount);
-                    if (_spawnTimer <= 0f && hostile < target)
+                    case RoomObjective.Waves:
                     {
-                        _spawnTimer = 0.8f;
-                        QueueSpawn(RandomEnemyType(), _spawnRng.Chance(EliteChance + 0.01f));
+                        room.WaveTimer -= dt;
+                        bool waveDone = hostile <= Mathf.Max(1, room.LastWaveSize / 4) || room.WaveTimer <= 0f;
+                        // A room nobody stands in waits for them to come back.
+                        if (waveDone && room.Wave < room.WaveCount && PlayersIn(room, alive: true) > 0) StartWave();
+                        break;
                     }
-                    break;
-                }
-                case RoomObjective.Boss:
-                {
-                    _spawnTimer -= dt;
-                    if (_spawnTimer <= 0f && hostile < 1 + 2 * Room.Area)
+                    case RoomObjective.Survive:
                     {
-                        _spawnTimer = 9f;
-                        QueueSpawn(RandomEnemyType(), false);
+                        room.SpawnTimer -= dt;
+                        int target = Mathf.RoundToInt((6 + room.Area * 2) * PlayerScale * DifficultyDef.EnemyCount);
+                        if (room.SpawnTimer <= 0f && hostile < target)
+                        {
+                            room.SpawnTimer = 0.8f;
+                            QueueSpawn(RandomEnemyType(), _spawnRng.Chance(EliteChance + 0.01f));
+                        }
+                        break;
                     }
-                    break;
+                    case RoomObjective.Boss:
+                    {
+                        room.SpawnTimer -= dt;
+                        if (room.SpawnTimer <= 0f && hostile < 1 + 2 * room.Area)
+                        {
+                            room.SpawnTimer = 9f;
+                            QueueSpawn(RandomEnemyType(), false);
+                        }
+                        break;
+                    }
                 }
             }
         }
 
-        private float PlayerScale => 1f + 0.6f * Mathf.Max(0, Players.Count - 1);
+        /// <summary>Living players (or all) standing in a room; at least 1 for scaling.</summary>
+        public int PlayersIn(RoomState room, bool alive = false)
+        {
+            int n = 0;
+            foreach (var p in Players)
+                if (p.RoomId == room.Id && (!alive || p.Alive)) n++;
+            return alive ? n : Mathf.Max(1, n);
+        }
+
+        private int HostilesIn(RoomState room)
+        {
+            int n = 0;
+            for (int i = 0; i < Enemies.Count; i++)
+            {
+                ref var e = ref Enemies[i];
+                if (!e.Dead && e.RoomId == room.Id && !e.Def.Prop) n++;
+            }
+            return n;
+        }
+
+        private int PendingIn(RoomState room)
+        {
+            int n = 0;
+            foreach (var s in PendingSpawns) if (s.Room == room.Id) n++;
+            return n;
+        }
+
+        private float PlayerScale => 1f + 0.6f * (PlayersIn(Room) - 1);
 
         private void StartWave()
         {
             Room.Wave++;
-            _waveTimer = 20f;
+            Room.WaveTimer = 20f;
             int size = Mathf.RoundToInt((5f + Room.Index * 0.5f + Room.Area * 1.5f) * PlayerScale * DifficultyDef.EnemyCount);
-            _lastWaveSize = size;
-            bool eliteRoom = IsEliteRoom(Room.Index);
+            Room.LastWaveSize = size;
+            bool eliteRoom = Room.Kind == RoomKind.Elite;
             for (int i = 0; i < size; i++)
                 QueueSpawn(RandomEnemyType(), (eliteRoom && i == 0) || _spawnRng.Chance(EliteChance));
-            Events.Add(new SimEvent(SimEventType.WaveStarted) { Int = Room.Wave, Value = Room.WaveCount });
+            Events.Add(new SimEvent(SimEventType.WaveStarted) { Int = Room.Wave, Value = Room.WaveCount, Id = Room.Id });
         }
 
         // Spawn weights per area (index = EnemyType). Each area adds new monsters to the mix.
@@ -397,20 +433,28 @@ namespace Game.Core
             return EnemyType.Skeleton;
         }
 
+        /// <summary>A monster appears in <see cref="Room"/> after a warning rune (at a random free spot unless given).</summary>
         public void QueueSpawn(EnemyType type, bool elite, Vector2? at = null)
         {
             Vector2 pos = at ?? RandomSpawnPoint();
-            PendingSpawns.Add(new PendingSpawn { Type = type, Position = pos, Timer = SpawnWarningTime, Elite = elite });
+            PendingSpawns.Add(new PendingSpawn { Room = Room.Id, Type = type, Position = pos, Timer = SpawnWarningTime, Elite = elite });
             Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = pos, Int = (int)type, Value = SpawnWarningTime });
 
             // Bats come in flocks.
             if (type == EnemyType.Bat && at == null)
                 for (int k = 0; k < 2; k++)
                 {
-                    Vector2 near = Enemies.ClampToBounds(pos + Rotate(Vector2.right, k * 140f + 30f) * 0.9f, 0.5f);
-                    PendingSpawns.Add(new PendingSpawn { Type = type, Position = near, Timer = SpawnWarningTime + 0.1f * (k + 1) });
+                    Vector2 near = ClampToRoom(pos + Rotate(Vector2.right, k * 140f + 30f) * 0.9f, 0.5f);
+                    PendingSpawns.Add(new PendingSpawn { Room = Room.Id, Type = type, Position = near, Timer = SpawnWarningTime + 0.1f * (k + 1) });
                     Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = near, Int = (int)type, Value = SpawnWarningTime + 0.1f * (k + 1) });
                 }
+        }
+
+        /// <summary>Keeps a point on <see cref="Room"/>'s floor (what is left of it after a collapse).</summary>
+        private Vector2 ClampToRoom(Vector2 p, float radius)
+        {
+            var area = PlayRect;
+            return new Vector2(Mathf.Clamp(p.x, area.xMin + radius, area.xMax - radius), Mathf.Clamp(p.y, area.yMin + radius, area.yMax - radius));
         }
 
         private bool SpawnBlocked(Vector2 p)
@@ -423,9 +467,9 @@ namespace Game.Core
 
         private Vector2 RandomSpawnPoint()
         {
-            Vector2 best = PlayRect.center;
-            float bestDistance = -1f;
             var area = PlayRect;
+            Vector2 best = area.center;
+            float bestDistance = -1f;
             for (int attempt = 0; attempt < 14; attempt++)
             {
                 var p = new Vector2(
@@ -492,15 +536,11 @@ namespace Game.Core
 
         // ------------------------------------------------------------------ Perk choices
         //
-        // Fighting and preparing are kept apart: picks earned in a fight (level-ups) are banked and offered once
-        // the room is cleared; door rewards are chosen on entering the next room, before its monsters come.
-        // Nobody's pick pauses anyone else - each player works through their own queue.
+        // Fighting and preparing are kept apart: picks (level-ups, pedestals) are banked and offered to each player
+        // while the room they stand in is quiet. Nobody's pick pauses anyone else.
 
-        /// <summary>Between fights: a cleared room, or a new room holding its monsters until everyone has picked.</summary>
-        public bool OffersOpen => Room.Cleared || HoldingForPicks;
-
-        /// <summary>A new room waits for the team's picks (door rewards, start perks) before spawning anything.</summary>
-        public bool HoldingForPicks { get; private set; }
+        /// <summary>This player can choose now: the room they stand in is not being fought.</summary>
+        public bool CanChoose(SimPlayer p) => p.RoomId < 0 || p.RoomId >= RoomStates.Count || !RoomStates[p.RoomId].Fighting;
 
         public bool AnyPicksLeft
         {
@@ -511,8 +551,15 @@ namespace Game.Core
             }
         }
 
-        /// <summary>Someone is still choosing during a preparation window.</summary>
-        public bool AwaitingChoices => OffersOpen && AnyPicksLeft;
+        /// <summary>Someone has a choice waiting on screen.</summary>
+        public bool AwaitingChoices
+        {
+            get
+            {
+                foreach (var p in Players) if (p.PendingOffer != null) return true;
+                return false;
+            }
+        }
 
         private void OfferAll()
         {
@@ -521,7 +568,7 @@ namespace Game.Core
 
         private void OfferNext(SimPlayer p)
         {
-            if (!OffersOpen || p.PendingOffer != null || p.StockedChoices.Count == 0) return;
+            if (!CanChoose(p) || p.PendingOffer != null || p.StockedChoices.Count == 0) return;
             var kind = p.StockedChoices.Dequeue();
             var shown = kind;
             p.PendingOffer = kind switch
@@ -567,7 +614,7 @@ namespace Game.Core
 
         private void Buy(SimPlayer p, PerkOption ware)
         {
-            int price = RewardCatalog.Price(ware, Room.Area);
+            int price = RewardCatalog.Price(ware, Area);
             if (price > Purse) return;
             BonusShards -= price;
             if (ware.IsShopTreasure) GrantTreasureTo(p, 0);
@@ -582,7 +629,7 @@ namespace Game.Core
             Events.Add(new SimEvent(SimEventType.ItemSalvaged) { ClientId = p.ClientId, Value = -price }); // shards spent (negative salvage)
         }
 
-        /// <summary>Someone away from the keyboard can't hold the team up forever: the first option is taken for them.</summary>
+        /// <summary>Someone away from the keyboard can't hold a choice forever: the first option is taken for them.</summary>
         private void TickOffers(float dt)
         {
             foreach (var p in Players)
@@ -591,253 +638,6 @@ namespace Game.Core
                 p.OfferTimer -= dt;
                 if (p.OfferTimer <= 0f) ChoosePerk(p.ClientId, p.OfferKind == ChoiceKind.Shop ? ShopSkip : 0);
             }
-        }
-
-        /// <summary>Promised picks for everyone (door rewards).</summary>
-        private void StockForAll(ChoiceKind kind, int times)
-        {
-            foreach (var p in Players)
-                for (int i = 0; i < times; i++) p.StockedChoices.Enqueue(kind);
-        }
-
-        /// <summary>After entering a room: wait for the team's picks before the fight starts.</summary>
-        private void HoldIfPicksLeft()
-        {
-            HoldingForPicks = AnyPicksLeft;
-            OfferAll();
-        }
-
-        // ------------------------------------------------------------------ Rooms
-
-        private void StartRoom(int index)
-        {
-            Room.Index = index;
-            Room.Progress = 0f;
-            Room.Wave = 0;
-            Room.Cleared = false;
-            Room.Trial = _enterTrial;
-            _enterTrial = false;
-            Room.Doors.Clear();
-            Room.HoldDoor = -1;
-            Room.ExitHold = 0f;
-            _spawnTimer = 1.5f;
-            foreach (var p in Players)
-            {
-                p.SecondWindUsed = false;
-                p.SetGearLevelCap(GearLevelCap);
-                int blessing = p.PerkLevel(PerkId.Blessing);
-                if (blessing > 0 && p.Alive) p.Shield = Mathf.Max(p.Shield, BlessingShield * blessing);
-            }
-
-            Layout = Arena.Get(Bounds == DefaultBounds ? Arena.Pick(_layoutRng, index, Layout.Id) : 0);
-            ResetHazards();
-            ResetBossTrials();
-
-            Room.Objective = ObjectiveOf(index);
-            switch (Room.Objective)
-            {
-                case RoomObjective.Waves:
-                    Room.WaveCount = 4 + (Room.Area >= 1 ? 1 : 0);
-                    Room.Target = Room.WaveCount;
-                    _waveTimer = 1.2f;
-                    break;
-                case RoomObjective.Survive:
-                    Room.Target = SurviveSeconds;
-                    break;
-                case RoomObjective.Rest:
-                    Layout = Arena.Get(Arena.RestLayout);
-                    ResetHazards();
-                    Room.Target = 0f;
-                    break;
-                default:
-                    Room.Objective = RoomObjective.Boss;
-                    Room.Target = 1f;
-                    _spawnTimer = 12f;
-                    PendingSpawns.Add(new PendingSpawn { Type = AreaBoss, Position = new Vector2(0f, 3f), Timer = 1.6f });
-                    Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = new Vector2(0f, 3f), Int = (int)AreaBoss, Value = 1.6f });
-                    break;
-            }
-            Events.Add(new SimEvent(SimEventType.RoomStarted) { Int = index, Id = Layout.Id, Value = Room.Trial ? 1f : 0f });
-            if (Room.Objective == RoomObjective.Rest) ClearRoom(); // nothing to fight: the doors are open from the start
-            SpawnProps();
-        }
-
-        /// <summary>A rest room chest broke open: a ring of souls (about a wave's worth of XP for the team).</summary>
-        private void SpillChest(in Enemy chest)
-        {
-            int total = Mathf.RoundToInt((10f + 6f * Room.Area) * (1f + 0.5f * Mathf.Max(0, Players.Count - 1)));
-            const int pieces = 6;
-            for (int s = 0; s < pieces; s++)
-                DropSoul(chest.Position + Rotate(Vector2.right, s * 60f + 30f) * 0.9f, Mathf.Max(1, total / pieces));
-            // And a piece of gear for each player (personal loot, fine or better).
-            for (int i = 0; i < Players.Count; i++)
-            {
-                var p = Players[i];
-                float angle = (i - (Players.Count - 1) * 0.5f) * 40f - 90f;
-                DropFor(p, RollItem(p, 1f, Rarity.Magic), chest.Position + Rotate(Vector2.right, angle) * 1.3f);
-            }
-        }
-
-        /// <summary>
-        /// The pace of an area: a fight, a harder fight (a 40 s stand in the crypt, elite packs deeper down),
-        /// a breather by a campfire, then the area's lord.
-        /// </summary>
-        public static RoomObjective ObjectiveOf(int roomIndex) => (roomIndex % RoomsPerArea) switch
-        {
-            0 => RoomObjective.Waves,
-            1 => roomIndex / RoomsPerArea == 0 ? RoomObjective.Survive : RoomObjective.Waves,
-            2 => RoomObjective.Rest,
-            _ => RoomObjective.Boss,
-        };
-
-        /// <summary>Rooms whose every wave is led by an elite.</summary>
-        public static bool IsEliteRoom(int roomIndex) => roomIndex % RoomsPerArea == 1 && ObjectiveOf(roomIndex) == RoomObjective.Waves;
-
-        public const float RestHealRadius = 3.4f;
-        /// <summary>Share of max HP restored per second while sitting by the rest room's fire.</summary>
-        public const float RestHealPerSecond = 0.12f;
-        private float _restHealPulse;
-
-        /// <summary>Rest room: the campfire heals everyone close to it (and gets the fallen back up).</summary>
-        private void WarmByTheFire(float dt)
-        {
-            _restHealPulse -= dt;
-            bool pulse = _restHealPulse <= 0f;
-            if (pulse) _restHealPulse = 1f;
-            foreach (var p in Players)
-            {
-                if ((p.Position - Arena.RestFire).sqrMagnitude > RestHealRadius * RestHealRadius) continue;
-                if (!p.Alive)
-                {
-                    Revive(p, 0.35f, guardian: false);
-                    continue;
-                }
-                float before = p.Hp;
-                p.Heal(p.MaxHp * RestHealPerSecond * dt);
-                p.HealedByFire += p.Hp - before;
-                if (pulse && p.HealedByFire > 0.5f)
-                {
-                    Events.Add(new SimEvent(SimEventType.PlayerHealed) { ClientId = p.ClientId, Pos = p.Position, Value = p.HealedByFire });
-                    p.HealedByFire = 0f;
-                }
-            }
-        }
-
-        private void UpdateRoom(float dt)
-        {
-            if (!Room.Cleared)
-            {
-                switch (Room.Objective)
-                {
-                    case RoomObjective.Survive:
-                        Room.Progress += dt;
-                        if (Room.Progress >= Room.Target) ClearRoom();
-                        break;
-                    case RoomObjective.Waves:
-                        Room.Progress = Mathf.Max(0, Room.Wave - 1);
-                        if (Room.Wave >= Room.WaveCount && Enemies.HostileCount == 0 && PendingSpawns.Count == 0)
-                        {
-                            Room.Progress = Room.WaveCount;
-                            ClearRoom();
-                        }
-                        break;
-                    case RoomObjective.Boss:
-                        if (Room.Progress >= 1f) ClearRoom();
-                        break;
-                }
-                return;
-            }
-
-            if (Room.Objective == RoomObjective.Rest) WarmByTheFire(dt);
-
-            // Everyone standing (downed players are carried along) must agree on one door, once all picks are made.
-            if (AnyPicksLeft)
-            {
-                Room.HoldDoor = -1;
-                Room.ExitHold = 0f;
-                return;
-            }
-            int chosen = -1;
-            bool first = true;
-            foreach (var p in Players)
-            {
-                if (!p.Alive) continue;
-                int at = DoorAt(p.Position);
-                if (first) chosen = at;
-                else if (at != chosen) chosen = -1;
-                first = false;
-            }
-            if (chosen != Room.HoldDoor) Room.ExitHold = 0f;
-            Room.HoldDoor = chosen;
-            Room.ExitHold = chosen >= 0 ? Room.ExitHold + dt : 0f;
-            if (Room.ExitHold >= ExitHoldTime) NextRoom(chosen);
-        }
-
-        private void ClearRoom()
-        {
-            Room.Cleared = true;
-            RoomsCleared++;
-
-            // Leftover enemies crumble (no XP) and pending spawns are cancelled.
-            for (int i = 0; i < Enemies.Count; i++) Enemies[i].Dead = true;
-            ProcessDeaths(giveXp: false);
-            PendingSpawns.Clear();
-            foreach (var proj in Projectiles) Events.Add(new SimEvent(SimEventType.ProjectileEnd) { Id = proj.Id, Pos = proj.Position });
-            Projectiles.Clear();
-            _delayedAreas.Clear();
-            _zones.Clear();
-            _rainTargets.Clear();
-            StopHazards();
-            ClearBursts();
-            RemoveTrialProps();
-            ActiveTrial = BossTrial.None;
-
-            foreach (var p in Players)
-                if (p.Alive)
-                {
-                    float before = p.Hp;
-                    p.Heal(p.MaxHp * 0.2f);
-                    if (p.Hp > before) Events.Add(new SimEvent(SimEventType.PlayerHealed) { ClientId = p.ClientId, Pos = p.Position, Value = p.Hp - before });
-                }
-
-            if (Room.Index >= TotalRooms - 1)
-            {
-                Phase = RunPhase.Victory;
-                Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 1 });
-                return;
-            }
-            RollDoors();
-            Events.Add(new SimEvent(SimEventType.RoomCleared) { Int = Room.Index, Seed = (ulong)Door.Pack(Room.Doors) });
-            OfferAll(); // the banked level-ups
-        }
-
-        private void NextRoom(int doorIndex)
-        {
-            var door = Room.Doors[Mathf.Clamp(doorIndex, 0, Room.Doors.Count - 1)];
-            foreach (var soul in Souls)
-            {
-                TeamXp += soul.Value;
-                Events.Add(new SimEvent(SimEventType.SoulCollected) { Id = soul.Id, ClientId = Players.Count > 0 ? Players[0].ClientId : 0 });
-            }
-            Souls.Clear();
-            SweepLoot();
-            _zones.Clear();
-            // Whatever is left standing (unopened chests, kegs) stays behind.
-            for (int i = 0; i < Enemies.Count; i++) Enemies[i].Dead = true;
-            ProcessDeaths(giveXp: false);
-
-            for (int i = 0; i < Players.Count; i++)
-            {
-                var p = Players[i];
-                p.Position = StartPosition(i);
-                if (p.Downed) Revive(p, 0.35f, guardian: false); // everyone who makes it through gets back up
-                Events.Add(new SimEvent(SimEventType.Teleport) { ClientId = p.ClientId, Pos = p.Position });
-            }
-            _enterTrial = door.Trial;
-            StartRoom(Room.Index + 1);
-            GrantReward(door, door.Trial ? 2 : 1);
-            CheckLevelUp(); // souls picked up on the way out
-            HoldIfPicksLeft();
         }
 
         private void CheckDefeat()

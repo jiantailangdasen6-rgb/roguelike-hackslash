@@ -24,12 +24,7 @@ namespace Game.Tests
             return events;
         }
 
-        private static void StartRoom(RunSimulation sim, int index) =>
-            typeof(RunSimulation).GetMethod("StartRoom", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                .Invoke(sim, new object[] { index });
-
-        private static void UseLayout(RunSimulation sim, int id) =>
-            typeof(RunSimulation).GetProperty("Layout").GetSetMethod(true).Invoke(sim, new object[] { Arena.Get(id) });
+        private static void UseLayout(RunSimulation sim, int id) => sim.UseLayoutForTests(id);
 
         private static void Invulnerable(RunSimulation sim)
         {
@@ -52,11 +47,12 @@ namespace Game.Tests
         public void Layouts_KeepStartExitAndBossSpawnClear()
         {
             var starts = new[] { new Vector2(0f, -4f), new Vector2(-1.5f, -4.8f), new Vector2(1.5f, -4.8f) };
-            var exit = new Vector2(0f, RunSimulation.DefaultBounds.yMax - 1.2f);
+            // Where players step in through the four doorways.
+            var doors = new[] { new Vector2(0f, 6.2f), new Vector2(0f, -6.2f), new Vector2(12.2f, 0f), new Vector2(-12.2f, 0f) };
             foreach (var layout in Arena.Layouts)
             {
                 foreach (var s in starts) Assert.IsFalse(Arena.Overlaps(layout, s, 0.6f), $"{layout.Name}: start blocked");
-                Assert.IsFalse(Arena.Overlaps(layout, exit, RunSimulation.ExitRadius), $"{layout.Name}: exit blocked");
+                foreach (var d in doors) Assert.IsFalse(Arena.Overlaps(layout, d, 1f), $"{layout.Name}: doorway at {d} blocked");
                 if (layout.Boss) Assert.IsFalse(Arena.Overlaps(layout, new Vector2(0f, 3f), 1f), $"{layout.Name}: boss spawn blocked");
                 foreach (var g in layout.Gimmicks)
                 {
@@ -80,16 +76,15 @@ namespace Game.Tests
         [Test]
         public void Rooms_UseVariedLayouts_FirstOpen_BossThrone()
         {
-            var sim = new RunSimulation(21);
-            sim.AddPlayer(0);
-            sim.Start();
-            Assert.AreEqual(0, sim.Layout.Id);
             var seen = new HashSet<int>();
-            for (int room = 1; room < RunSimulation.TotalRooms; room++)
+            for (int area = 0; area < RunSimulation.AreaCount; area++)
             {
-                StartRoom(sim, room);
-                if (room % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1) Assert.IsTrue(sim.Layout.Boss);
-                else seen.Add(sim.Layout.Id);
+                var map = DungeonMap.Generate(21, area);
+                Assert.AreEqual(0, map.Start.Layout.Id);
+                Assert.IsTrue(map.Boss.Layout.Boss);
+                Assert.AreEqual(Arena.RestLayout, map.Campfire.Layout.Id);
+                foreach (var r in map.Rooms)
+                    if (r.IsFight && r.Kind != RoomKind.Boss) seen.Add(r.Layout.Id);
             }
             Assert.GreaterOrEqual(seen.Count, 4, "rooms should not all look the same");
         }
@@ -102,9 +97,7 @@ namespace Game.Tests
             var sim = new RunSimulation(22);
             var p = sim.AddPlayer(0);
             sim.Start();
-            StartRoom(sim, 4); // spike hall or whatever layout comes; force the spike hall below
             UseLayout(sim, 4);
-            typeof(RunSimulation).GetMethod("ResetHazards", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Invoke(sim, null);
 
             var trap = Arena.Get(4).Gimmicks[0];
             int e = Spawn(sim, EnemyType.Skeleton, trap.Position, 1f);
@@ -152,7 +145,6 @@ namespace Game.Tests
             var b = sim.AddPlayer(1);
             sim.Start();
             UseLayout(sim, 7);
-            typeof(RunSimulation).GetMethod("ResetHazards", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Invoke(sim, null);
             var font = Arena.Get(7).Gimmicks.First(g => g.Kind == GimmickKind.HealingFont);
             a.Hp = 10f;
             b.Hp = 10f;
@@ -239,8 +231,7 @@ namespace Game.Tests
             {
                 var sim = new RunSimulation((ulong)(30 + area));
                 sim.AddPlayer(0);
-                sim.Start();
-                StartRoom(sim, area * RunSimulation.RoomsPerArea + RunSimulation.RoomsPerArea - 1);
+                sim.Start(area * RunSimulation.RoomsPerArea + RunSimulation.RoomsPerArea - 1); // starts in the boss room
                 var events = Run(sim, 2.5f, Invulnerable);
                 var boss = events.First(x => x.Type == SimEventType.BossSpawned);
                 Assert.AreEqual((int)EnemyCatalog.AreaBosses[area], boss.Int);
@@ -270,8 +261,8 @@ namespace Game.Tests
         [Test]
         public void Difficulty_ScalesMonsters_AndShards()
         {
-            var easy = new RunSimulation(50, null, Difficulty.Easy);
-            var hard = new RunSimulation(50, null, Difficulty.Hard);
+            var easy = new RunSimulation(50, Difficulty.Easy);
+            var hard = new RunSimulation(50, Difficulty.Hard);
             easy.AddPlayer(0);
             hard.AddPlayer(0);
             Assert.Less(easy.EnemyHealthScale, hard.EnemyHealthScale);
@@ -309,14 +300,15 @@ namespace Game.Tests
         [Test]
         public void FullRun_WithBots_OnHard_RunsWithoutErrors()
         {
-            var sim = new RunSimulation(60, null, Difficulty.Hard);
+            var sim = new RunSimulation(60, Difficulty.Hard);
             sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
             sim.AddPlayer(1, new Loadout { classId = ClassId.Mage });
             sim.Start();
-            // Jump through every room, letting each run a little with players invulnerable.
-            for (int room = 0; room < RunSimulation.TotalRooms; room++)
+            // Walk into every room of every area, letting each run a little with players invulnerable.
+            for (int area = 0; area < RunSimulation.AreaCount; area++)
+            foreach (var room in sim.Map.Rooms.ToArray())
             {
-                StartRoom(sim, room);
+                sim.MoveTeamTo(room);
                 Run(sim, 6f, s =>
                 {
                     Invulnerable(s);
@@ -326,6 +318,7 @@ namespace Game.Tests
                         s.SetPlayerInput(p.ClientId, new PlayerInput { Aim = n >= 0 ? s.Enemies[n].Position - p.Position : Vector2.right, Attack = true });
                     }
                 });
+                if (room == sim.Map.Rooms[sim.Map.Rooms.Count - 1]) sim.GoToNextArea();
             }
             Assert.Greater(sim.Kills, 0);
         }

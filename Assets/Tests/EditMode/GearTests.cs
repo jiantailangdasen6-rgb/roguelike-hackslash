@@ -172,8 +172,14 @@ namespace Game.Tests
             a.Bag.Add(ItemFor(EquipSlot.Ring, 1));
             a.Bag.Add(ItemFor(EquipSlot.Amulet, 1));
 
+            // In a fight room: no swapping.
+            sim.MoveTeamTo(sim.FindRoom(RoomKind.Combat));
+            for (int i = 0; i < 2; i++) sim.Step(Dt);
+            Assert.IsTrue(sim.RoomOf(a).Fighting);
             Assert.IsFalse(sim.EquipFromBag(0, 0), "not mid-fight");
-            sim.Room.Cleared = true;
+            // Back in the quiet start room: fine.
+            sim.MoveTeamTo(sim.Map.Start);
+            for (int i = 0; i < 2; i++) { foreach (var p in sim.Players) p.InvulnerableTimer = 1f; sim.Step(Dt); }
             Assert.IsTrue(sim.EquipFromBag(0, 1));
             Assert.IsNotNull(a.Equipped[(int)EquipSlot.Ring]);
 
@@ -207,35 +213,6 @@ namespace Game.Tests
             Assert.AreEqual(2, sim.Loot.Count, "one personal drop per player");
             Assert.That(sim.Loot.Select(l => l.Owner).Distinct().Count(), Is.EqualTo(2));
             Assert.That(sim.Loot.All(l => l.Item.rarity >= Rarity.Magic));
-        }
-
-        [Test]
-        public void TreasureDoor_GivesEveryoneRareOrBetter()
-        {
-            var sim = new RunSimulation(82);
-            sim.AddPlayer(0);
-            sim.AddPlayer(1, new Loadout { classId = ClassId.Mage });
-            sim.Start();
-            sim.Room.Cleared = true;
-            sim.Room.Doors.Clear();
-            sim.Room.Doors.Add(new Door(RoomReward.Treasure, false));
-            sim.Room.Doors.Add(new Door(RoomReward.Vigor, false));
-            for (int i = 0; i < 120 && sim.Room.Index == 0; i++)
-            {
-                foreach (var p in sim.Players)
-                {
-                    p.InvulnerableTimer = 1f;
-                    sim.SetPlayerPosition(p.ClientId, RunSimulation.DoorPosition(0, 2, sim.Bounds));
-                    if (p.PendingOffer != null) sim.ChoosePerk(p.ClientId, 0);
-                }
-                sim.Step(Dt);
-            }
-            Assert.AreEqual(1, sim.Room.Index);
-            foreach (var p in sim.Players)
-            {
-                Assert.AreEqual(1, p.Bag.Count);
-                Assert.GreaterOrEqual(p.Bag[0].rarity, Rarity.Rare);
-            }
         }
 
         // ------------------------------------------------------------------ Keeping gear between runs

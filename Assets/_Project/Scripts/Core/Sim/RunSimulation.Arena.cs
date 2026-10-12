@@ -9,13 +9,15 @@ namespace Game.Core
     /// </summary>
     public sealed partial class RunSimulation
     {
-        /// <summary>Hazard ids for keg explosions start here (gimmick ids are layout indices).</summary>
-        public const int KegHazardIdBase = 1000;
+        /// <summary>Hazard ids: map room * <see cref="HazardIdsPerRoom"/> + the gimmick's index in the layout; keg explosions above <see cref="KegHazardIdBase"/>.</summary>
+        public const int HazardIdsPerRoom = 64;
+        public const int KegHazardIdBase = 100000;
         private const float HazardGrace = 2.5f;
 
         private sealed class Hazard
         {
             public int Id;
+            public int Room;
             public GimmickDef Def;
             public float Clock;
             public int Phase;   // 0 idle, 1 warning, 2 active
@@ -29,6 +31,7 @@ namespace Game.Core
         private struct Explosion
         {
             public int Id;
+            public int Room;
             public Vector2 Position;
             public float Timer;
         }
@@ -36,39 +39,47 @@ namespace Game.Core
         private readonly List<Hazard> _hazards = new();
         private readonly List<Explosion> _explosions = new();
 
+        /// <summary>A new area: no traps running anywhere.</summary>
         private void ResetHazards()
         {
             _hazards.Clear();
             _explosions.Clear();
-            for (int i = 0; i < Layout.Gimmicks.Length; i++)
+        }
+
+        /// <summary>A fight room wakes: its traps start their cycle (after a short grace).</summary>
+        private void StartHazards(RoomState room)
+        {
+            for (int i = 0; i < room.Layout.Gimmicks.Length; i++)
             {
-                var g = Layout.Gimmicks[i];
+                var g = room.Layout.Gimmicks[i];
                 if (g.Kind is GimmickKind.PowderKeg or GimmickKind.TreasureChest) continue;
                 float period = g.Kind == GimmickKind.FlameJet ? Arena.FlamePeriod : Arena.SpikePeriod;
-                _hazards.Add(new Hazard { Id = i, Def = g, Clock = g.Phase * period - HazardGrace });
+                _hazards.Add(new Hazard { Id = room.Id * HazardIdsPerRoom + i, Room = room.Id, Def = g, Clock = g.Phase * period - HazardGrace });
             }
         }
 
-        /// <summary>Room cleared: traps go quiet, healing fonts keep working.</summary>
-        private void StopHazards()
+        /// <summary>Room cleared: its traps go quiet, healing fonts keep working.</summary>
+        private void StopHazards(RoomState room)
         {
-            _hazards.RemoveAll(h => h.Def.Kind != GimmickKind.HealingFont);
-            _explosions.Clear();
+            _hazards.RemoveAll(h => h.Room == room.Id && h.Def.Kind != GimmickKind.HealingFont);
+            _explosions.RemoveAll(x => x.Room == room.Id);
         }
 
-        private void SpawnProps()
+        /// <summary>First visit: the room's kegs and chests appear (breakable "enemies").</summary>
+        private void SpawnProps(RoomState room)
         {
-            foreach (var g in Layout.Gimmicks)
-                if (g.Kind == GimmickKind.PowderKeg)
-                    Enemies.Spawn(EnemyType.PowderKeg, g.Position, 1f, 1f, false);
-                else if (g.Kind == GimmickKind.TreasureChest)
-                    Enemies.Spawn(EnemyType.TreasureChest, g.Position, 1f, 1f, false);
+            foreach (var g in room.Layout.Gimmicks)
+            {
+                if (g.Kind is not (GimmickKind.PowderKeg or GimmickKind.TreasureChest)) continue;
+                int id = Enemies.Spawn(g.Kind == GimmickKind.PowderKeg ? EnemyType.PowderKeg : EnemyType.TreasureChest, g.Position, 1f, 1f, false);
+                Enemies[Enemies.IndexOf(id)].RoomId = room.Id;
+            }
         }
 
         /// <summary>A keg was broken: it hisses briefly, then explodes.</summary>
         private void IgniteKeg(in Enemy keg)
         {
-            _explosions.Add(new Explosion { Id = KegHazardIdBase + keg.Id, Position = keg.Position, Timer = Arena.KegFuse });
+            _explosions.Add(new Explosion { Id = KegHazardIdBase + keg.Id, Room = keg.RoomId, Position = keg.Position, Timer = Arena.KegFuse });
             Events.Add(new SimEvent(SimEventType.HazardWarn)
             {
                 Id = KegHazardIdBase + keg.Id, Int = (int)GimmickKind.PowderKeg, Pos = keg.Position,
@@ -88,11 +99,13 @@ namespace Game.Core
                     continue;
                 }
                 _explosions.RemoveAt(k);
+                Room = RoomStates[x.Room];
                 Explode(x);
             }
 
             foreach (var h in _hazards)
             {
+                Room = RoomStates[h.Room];
                 switch (h.Def.Kind)
                 {
                     case GimmickKind.SpikeTrap:

@@ -16,6 +16,7 @@ namespace Game.Core
         Survive,
         Boss,
         Rest, // no fighting: a campfire that heals, treasure chests, doors open from the start
+        Quiet, // no fighting: the start room and the pedestal rooms
     }
 
     /// <summary>What a door promises: the team receives it on walking through (Hades-style room choice).</summary>
@@ -95,24 +96,36 @@ namespace Game.Core
         Shop,     // the merchant: priced cards plus "buy nothing"
     }
 
+    /// <summary>One room of the area map at run time. Several can be fought at once while the team explores apart.</summary>
     public sealed class RoomState
     {
+        public int Id;
+        public RoomKind Kind;
+        /// <summary>Strength tier (area * 4 + 0..3): monster health and damage, item level.</summary>
         public int Index;
         public RoomObjective Objective;
+        public RoomLayout Layout;
+        public Rect Bounds;
         public int Wave;
         public int WaveCount;
         public float Target;     // survive: seconds; waves: number of waves
         public float Progress;
         public bool Cleared;
-        /// <summary>Entered through a trial door: tougher monsters.</summary>
-        public bool Trial;
-        /// <summary>Exits offered once the room is cleared (empty after the final room).</summary>
-        public readonly List<Door> Doors = new();
-        /// <summary>The door everyone is standing at (-1 = none or split up).</summary>
-        public int HoldDoor = -1;
-        public float ExitHold;
+        /// <summary>A fight is on (someone walked in; monsters keep coming until it is cleared).</summary>
+        public bool Active;
+        /// <summary>Someone has been inside (the map shows what it is).</summary>
+        public bool Visited;
+        public float WaveTimer;
+        public float SpawnTimer;
+        public int LastWaveSize;
+        /// <summary>Players who used this room's pedestal (each may once).</summary>
+        public readonly HashSet<ulong> UsedBy = new();
 
         public int Area => Index / RunSimulation.RoomsPerArea;
+        public Vector2 Center => Bounds.center;
+        public bool IsFight => Objective is RoomObjective.Waves or RoomObjective.Survive or RoomObjective.Boss;
+        /// <summary>Picks and gear swaps wait for this: a fight going on here.</summary>
+        public bool Fighting => Active && !Cleared;
     }
 
     public enum StatusKind : byte
@@ -238,6 +251,8 @@ namespace Game.Core
     /// <summary>A delayed spawn: the warning rune shows first, then the enemy appears.</summary>
     public struct PendingSpawn
     {
+        /// <summary>Map room it appears in.</summary>
+        public int Room;
         public EnemyType Type;
         public Vector2 Position;
         public float Timer;
@@ -263,12 +278,12 @@ namespace Game.Core
         PlayerDowned,    // ClientId, Pos
         PlayerRevived,   // ClientId, Pos
         Teleport,        // ClientId, Pos
-        RoomStarted,     // Int = room index, Id = layout id, Value = 1 for a trial room
-        RoomCleared,     // Int = room index, Seed = packed doors
+        RoomStarted,     // a new area: Int = area * RoomsPerArea, Id = the room the team arrives in, Seed = map seed
+        RoomCleared,     // Int = room index, Id = map room id
         RunEnded,        // Int = 1 victory / 0 defeat
         BossSpawned,     // Id, Pos
         PerkOffer,       // ClientId, Seed = packed PerkOptions, Int = ChoiceKind, Value = picks still waiting after this one
-        WaveStarted,     // Int = wave number (1-based), Value = wave count
+        WaveStarted,     // Int = wave number (1-based), Value = wave count, Id = map room id
         HazardWarn,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds until it fires
         HazardFire,      // Id, Int = GimmickKind, Pos, Vec = direction, Size, Value = seconds it stays active
         RewardGranted,   // Int = RoomReward, Value = amount (shards / max HP %), Id = 1 when doubled by a trial
@@ -284,6 +299,9 @@ namespace Game.Core
         LegendaryProc,   // ClientId, Int = LegendaryId (None = a plain chain bolt), Pos, Vec = chain target (zero = none)
         Combo,           // ClientId = who set it off, Int = ComboKind, Pos, Value = radius
         TrialEvent,      // Int = TrialMoment, Pos, Value (seconds), ClientId (cages), Id (collapse stage)
+        RoomEntered,     // ClientId = first one in, Id = map room id, Int = room index (the room is now on everyone's map)
+        PedestalUsed,    // ClientId, Id = map room id, Int = RoomKind, Value = amount (curse kind for the altar)
+        DoorOpened,      // Int = 0 the boss door, 1 the way down to the next area; Pos
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

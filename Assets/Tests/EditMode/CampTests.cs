@@ -56,74 +56,6 @@ namespace Game.Tests
 
         // ------------------------------------------------------------------ Pace
 
-        [Test]
-        public void EachArea_FightsThenRestsBeforeItsBoss()
-        {
-            for (int area = 0; area < RunSimulation.AreaCount; area++)
-            {
-                int first = area * RunSimulation.RoomsPerArea;
-                Assert.AreEqual(RoomObjective.Waves, RunSimulation.ObjectiveOf(first));
-                Assert.AreNotEqual(RoomObjective.Rest, RunSimulation.ObjectiveOf(first + 1));
-                Assert.AreEqual(RoomObjective.Rest, RunSimulation.ObjectiveOf(first + 2));
-                Assert.AreEqual(RoomObjective.Boss, RunSimulation.ObjectiveOf(first + 3));
-            }
-        }
-
-        [Test]
-        public void RestRoom_OpensDoorsAtOnce_FireHeals_ChestsSpillSouls()
-        {
-            var sim = new RunSimulation(5);
-            var p = sim.AddPlayer(0);
-            sim.Start(2);
-            Assert.AreEqual(RoomObjective.Rest, sim.Room.Objective);
-            Assert.IsTrue(sim.Room.Cleared, "a rest room has nothing to fight");
-            Assert.Greater(sim.Room.Doors.Count, 0);
-            int chests = 0;
-            for (int i = 0; i < sim.Enemies.Count; i++) if (sim.Enemies[i].Type == EnemyType.TreasureChest) chests++;
-            Assert.AreEqual(3, chests);
-
-            // Sitting by the fire heals.
-            p.Hp = p.MaxHp * 0.3f;
-            p.Position = Arena.RestFire + new Vector2(0f, -1.5f);
-            Run(sim, 2f, s => { if (s.Players[0].PendingOffer != null) s.ChoosePerk(0, 0); });
-            Assert.Greater(p.Hp, p.MaxHp * 0.45f);
-
-            // Breaking a chest spills souls (XP for the team).
-            int souls = sim.Souls.Count;
-            for (int i = 0; i < sim.Enemies.Count; i++)
-                if (sim.Enemies[i].Type == EnemyType.TreasureChest) { sim.DamageEnemy(i, 999f, p, HitFlags.None, Vector2.zero, 0f); break; }
-            var events = Run(sim, Dt * 2);
-            Assert.Greater(sim.Souls.Count, souls);
-            Assert.That(events.Any(e => e.Type == SimEventType.EnemyDied && (EnemyType)e.Int == EnemyType.TreasureChest && e.Value < 0.5f));
-        }
-
-        [Test]
-        public void RestRoom_FireGetsTheFallenBackUp_AndChestsDontFollowIntoTheNextRoom()
-        {
-            var sim = new RunSimulation(6);
-            var a = sim.AddPlayer(0);
-            var b = sim.AddPlayer(1);
-            sim.Start(2);
-            b.Downed = true;
-            b.Hp = 0f;
-            b.Position = Arena.RestFire + new Vector2(1f, -1f);
-            a.Position = new Vector2(12f, -6f); // nobody near enough to revive by hand
-            Run(sim, 0.5f, KeepAliveAndPick);
-            Assert.IsFalse(b.Downed, "the fire should get them back up");
-
-            // Walk through a door: leftover chests stay behind.
-            var door = RunSimulation.DoorPosition(0, sim.Room.Doors.Count, RunSimulation.DefaultBounds);
-            var events = Run(sim, 2.5f, s =>
-            {
-                KeepAliveAndPick(s);
-                if (s.Room.Index == 2) foreach (var p in s.Players) p.Position = door;
-            });
-            Assert.AreEqual(3, sim.Room.Index);
-            for (int i = 0; i < sim.Enemies.Count; i++) Assert.AreNotEqual(EnemyType.TreasureChest, sim.Enemies[i].Type);
-            Assert.That(events.Where(e => e.Type == SimEventType.EnemyDied && (EnemyType)e.Int == EnemyType.TreasureChest).All(e => e.Value > 0.5f),
-                "chests left behind must not count as opened");
-        }
-
         // ------------------------------------------------------------------ Requests
 
         [Test]
@@ -142,8 +74,8 @@ namespace Game.Tests
             Assert.AreEqual(0, QuestCatalog.Amount(shatter, new SimEvent(SimEventType.EnemyHit) { Int = (int)HitFlags.Heavy }));
 
             var rest = QuestCatalog.Chains[(int)QuestGiver.Gravekeeper][0];
-            Assert.AreEqual(1, QuestCatalog.Amount(rest, new SimEvent(SimEventType.RoomStarted) { Int = 2 }));
-            Assert.AreEqual(0, QuestCatalog.Amount(rest, new SimEvent(SimEventType.RoomStarted) { Int = 1 }));
+            Assert.AreEqual(1, QuestCatalog.Amount(rest, new SimEvent(SimEventType.RoomEntered) { Value = (int)RoomKind.Campfire }));
+            Assert.AreEqual(0, QuestCatalog.Amount(rest, new SimEvent(SimEventType.RoomEntered) { Value = (int)RoomKind.Combat }));
             var chapel = QuestCatalog.Chains[(int)QuestGiver.Gravekeeper][1];
             Assert.AreEqual(0, QuestCatalog.Amount(chapel, new SimEvent(SimEventType.RoomStarted) { Int = 3 }));
             Assert.AreEqual(1, QuestCatalog.Amount(chapel, new SimEvent(SimEventType.RoomStarted) { Int = 4 }));

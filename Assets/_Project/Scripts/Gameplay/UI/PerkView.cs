@@ -168,7 +168,7 @@ namespace Game.Gameplay
             return d == null ? 0 : RewardCatalog.Purse(d.RoomsCleared.Value, d.BossesKilled.Value, d.Kills.Value, d.DifficultyLevel.Value, d.BonusShards.Value);
         }
 
-        private static int Area() => RunDirector.Instance != null ? RunDirector.Instance.RoomIndex.Value / RunSimulation.RoomsPerArea : 0;
+        private static int Area() => RunDirector.Instance != null ? RunDirector.Instance.Area.Value : 0;
 
         private void Choose(int index)
         {

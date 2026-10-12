@@ -77,8 +77,11 @@ namespace Game.Gameplay
         {
             Vector2? best = null;
             float bestSq = float.MaxValue;
+            // Only what is in the room around the point (the rest of the map is far away behind walls).
+            var room = RunDirector.Instance != null ? RunDirector.Instance.Map.RoomAt(position) : null;
             foreach (var v in _visuals.Values)
             {
+                if (room != null && !room.Bounds.Contains((Vector2)v.Root.transform.position)) continue;
                 if (only.HasValue ? v.Type != only.Value || v.Anim == EnemyAnim.Walk && v.Type == EnemyType.BloodSigil : EnemyCatalog.Get(v.Type).Untargetable) continue;
                 Vector2 p = v.Root.transform.position;
                 float sq = (p - position).sqrMagnitude;
@@ -271,7 +274,15 @@ namespace Game.Gameplay
             v.Ice.sortingOrder = r.sortingOrder + 1;
         }
 
-        public static int SortOrder(float y) => Mathf.RoundToInt(-y * 32f);
+        /// <summary>
+        /// Lower on screen draws in front. Measured from the middle of the room (rooms sit a map pitch apart), so
+        /// the orders stay within the room's range and above the floor (-1000) in every room of the map.
+        /// </summary>
+        public static int SortOrder(float y)
+        {
+            float local = y - Mathf.Round(y / DungeonMap.PitchY) * DungeonMap.PitchY;
+            return Mathf.RoundToInt(-local * 32f);
+        }
 
         /// <summary>
         /// Boss trials: a warded boss sits in a pulsing ring (bone white for the King, blood for the Bishop) and the

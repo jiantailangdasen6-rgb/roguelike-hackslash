@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Core;
 using Unity.Netcode.Components;
 using UnityEngine;
@@ -157,6 +158,8 @@ namespace Game.Gameplay
 
                 var bounds = PlayArea.Bounds;
                 float r = SimPlayer.BodyRadius;
+                // Walking into an open doorway takes you to the next room.
+                if (move.sqrMagnitude > 0.01f && !PlayArea.InCamp && TryDoor(pos, move)) return;
                 pos = Arena.Resolve(CurrentLayout, pos, r);
                 pos.x = Mathf.Clamp(pos.x, bounds.xMin + r, bounds.xMax - r);
                 pos.y = Mathf.Clamp(pos.y, bounds.yMin + r, bounds.yMax - r);
@@ -172,6 +175,52 @@ namespace Game.Gameplay
 
             _sendTimer -= Time.deltaTime;
             if (_sendTimer <= 0f) SendInput();
+        }
+
+        /// <summary>Half the width of a doorway (the gap in the wall you can walk through).</summary>
+        public const float DoorHalfWidth = 1.4f;
+
+        /// <summary>
+        /// Pressing against the wall inside a doorway steps through it: the player appears just inside the door of the
+        /// room on the other side. Returns false (blocked) for a door that is shut: the boss door until the whole team
+        /// has gathered, and the boss room's doors while the lord fights.
+        /// </summary>
+        private bool TryDoor(Vector2 wanted, Vector2 move)
+        {
+            var director = RunDirector.Instance;
+            if (director == null) return false;
+            var map = director.Map;
+            var room = director.LocalRoom;
+            var b = room.Bounds;
+            float r = SimPlayer.BodyRadius;
+            for (int d = 0; d < 4; d++)
+            {
+                if (!room.HasDoor(d)) continue;
+                Vector2 door = DungeonMap.DoorPosition(room, d);
+                bool pushing = d switch
+                {
+                    Dir.N => wanted.y > b.yMax - r && move.y > 0.3f,
+                    Dir.S => wanted.y < b.yMin + r && move.y < -0.3f,
+                    Dir.E => wanted.x > b.xMax - r && move.x > 0.3f,
+                    _ => wanted.x < b.xMin + r && move.x < -0.3f,
+                };
+                bool inGap = d is Dir.N or Dir.S ? Mathf.Abs(wanted.x - door.x) < DoorHalfWidth : Mathf.Abs(wanted.y - door.y) < DoorHalfWidth;
+                if (!pushing || !inGap) continue;
+                var next = map[room.Neighbor[d]];
+                if (!director.DoorOpen(room, next)) return false;
+                Teleport(DungeonMap.EntryPoint(next, Dir.Opposite(d)), network: true);
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>Jumps the player (not a slide: the others see the jump instead of interpolating across the map).</summary>
+        private void Teleport(Vector2 to, bool network)
+        {
+            _dashUntil = 0f;
+            var networkTransform = GetComponent<NetworkTransform>();
+            if (network && networkTransform != null && player.IsSpawned) networkTransform.Teleport(to, transform.rotation, transform.localScale);
+            else transform.position = to;
         }
 
         private void UpdateAim()
@@ -209,7 +258,6 @@ namespace Game.Gameplay
             private float _nextSkill1;
             private float _nextSkill2;
             private float _nextDodge;
-            private float _doorsSeenAt = -1f;
             public Vector2 Move;
             public Vector2 Aim = Vector2.right;
             public bool Attack;
@@ -239,6 +287,55 @@ namespace Game.Gameplay
                 }
             }
 
+            /// <summary>Where to walk while nothing is fighting: a pedestal to use, the way down, the next unvisited room, the boss door.</summary>
+            private Vector2 Explore(RunDirector director, MapRoom room, Vector2 pos)
+            {
+                var map = director.Map;
+                Vector2 Toward(Vector2 at) => (at - pos).sqrMagnitude > 0.2f ? (at - pos).normalized : Vector2.zero;
+
+                if (room.Kind == RoomKind.Boss && director.ExitOpen.Value) return Toward(room.Origin + RunSimulation.ExitOffset);
+                bool used = (_player.UsedPedestals.Value & (1 << room.Id)) != 0;
+                if (RoomCatalog.HasPedestal(room.Kind) && !used) return Toward(RunSimulation.PedestalPosition(room.Bounds));
+
+                // Breadth-first over open doors to the nearest room nobody has visited yet (the boss waits until the end).
+                var first = new int[map.Rooms.Count];
+                var seen = new bool[map.Rooms.Count];
+                var queue = new Queue<int>();
+                seen[room.Id] = true;
+                queue.Enqueue(room.Id);
+                int goal = -1;
+                while (queue.Count > 0 && goal < 0)
+                {
+                    var r = map[queue.Dequeue()];
+                    for (int d = 0; d < 4; d++)
+                    {
+                        var n = map[r.Neighbor[d]];
+                        if (n == null || seen[n.Id] || !director.DoorOpen(r, n)) continue;
+                        seen[n.Id] = true;
+                        first[n.Id] = r == room ? d : first[r.Id];
+                        if (!director.IsVisited(n.Id) && n.Kind != RoomKind.Boss) { goal = n.Id; break; }
+                        queue.Enqueue(n.Id);
+                    }
+                }
+                if (goal < 0)
+                {
+                    // Everything seen: to the campfire, wait at the boss door with the team, then in.
+                    if (room.Kind == RoomKind.Campfire && !director.BossDoorOpen.Value)
+                        for (int d = 0; d < 4; d++)
+                            if (room.Neighbor[d] == map.Boss.Id) return Toward(DungeonMap.EntryPoint(room, d));
+                    goal = room.Kind == RoomKind.Campfire ? map.Boss.Id : map.Campfire.Id;
+                    if (goal == room.Id) return Vector2.zero;
+                    if (!seen[goal]) return Vector2.zero;
+                }
+                int dir = first[goal];
+                // Walk to the doorway and on through the wall.
+                Vector2 door = DungeonMap.DoorPosition(room, dir);
+                Vector2 inside = DungeonMap.EntryPoint(room, dir);
+                Vector2 beyond = door + (Vector2)Dir.Step(dir) * 1.5f;
+                bool lined = dir is Dir.N or Dir.S ? Mathf.Abs(pos.x - door.x) < 0.8f : Mathf.Abs(pos.y - door.y) < 0.8f;
+                return lined ? Toward(beyond) : Toward(inside);
+            }
+
             public void Think(PlayerMover mover)
             {
                 var director = RunDirector.Instance;
@@ -252,30 +349,13 @@ namespace Game.Gameplay
                 }
                 if (director == null || !director.IsRunning) return;
 
-                var doors = director.Doors;
-                if (doors.Length == 0) _doorsSeenAt = -1f;
-                else if (_doorsSeenAt < 0f) _doorsSeenAt = Time.time;
-                // -doorwait <s>: linger before choosing so screenshots can catch the open doors.
-                if (doors.Length > 0 && Time.time - _doorsSeenAt < CommandLine.GetFloat("-doorwait", 0f))
-                {
-                    Vector2 toView = new Vector2(0f, 3f) - pos; // close enough that the camera frames every door
-                    Move = toView.sqrMagnitude > 0.3f ? toView.normalized : Vector2.zero;
-                    return;
-                }
-                if (doors.Length > 0)
-                {
-                    // Every bot derives the same door from the room number, so they gather at one exit.
-                    int pick = director.RoomIndex.Value % doors.Length;
-                    Vector2 toExit = RunDirector.DoorPosition(pick, doors.Length) - pos;
-                    Move = toExit.sqrMagnitude > 0.2f ? toExit.normalized : Vector2.zero;
-                    return;
-                }
-                if (director.RoomCleared.Value) return;
+                var room = director.LocalRoom;
+                bool fighting = director.IsFighting(room.Id);
 
-                // Help downed allies first.
+                // Help downed allies in this room first.
                 foreach (var other in NetPlayer.All)
                 {
-                    if (other == _player || !other.Downed.Value) continue;
+                    if (other == _player || !other.Downed.Value || director.Map.RoomAt(other.transform.position) != room) continue;
                     Vector2 toMate = (Vector2)other.transform.position - pos;
                     if (toMate.magnitude > 1f)
                     {
@@ -285,6 +365,21 @@ namespace Game.Gameplay
                 }
 
                 var view = EnemyView.Instance;
+                // Nothing to fight here: explore (pedestals, unvisited rooms, then the campfire and the boss door).
+                if (!fighting && director.Trial.Value == BossTrial.None)
+                {
+                    var chest = view != null ? view.Nearest(pos, EnemyType.TreasureChest) : null;
+                    if (chest.HasValue)
+                    {
+                        Vector2 toChest = chest.Value - pos;
+                        Aim = toChest;
+                        Move = toChest.magnitude > 1.3f ? toChest.normalized : Vector2.zero;
+                        Attack = toChest.magnitude < 2.5f;
+                        return;
+                    }
+                    Move = Explore(director, room, pos);
+                    return;
+                }
                 // Boss trials: stand on the unlit sigils, smash the braziers or the soul vessel first.
                 var trial = director.Trial.Value;
                 if (trial == BossTrial.BloodRitual && view != null && view.Nearest(pos, EnemyType.BloodSigil) is Vector2 sigil)

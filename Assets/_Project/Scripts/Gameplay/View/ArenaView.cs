@@ -37,7 +37,17 @@ namespace Game.Gameplay
         private readonly List<GameObject> _spawned = new();
         private readonly Dictionary<int, GimmickVisual> _gimmicks = new();
         private int _area = -1;
-        private int _layout = -1;
+        private int _roomId = -1;
+        private (ulong Seed, int Area) _mapKey;
+        private MapRoom _room;
+
+        private sealed class DoorVisual
+        {
+            public MapRoom To;
+            public SpriteRenderer Bars;
+        }
+
+        private readonly List<DoorVisual> _doors = new();
 
         private void OnEnable() => RunDirector.EventReceived += OnEvent;
         private void OnDisable() => RunDirector.EventReceived -= OnEvent;
@@ -48,10 +58,6 @@ namespace Game.Gameplay
         {
             switch (e.Type)
             {
-                case SimEventType.RoomStarted:
-                    ShowArea(e.Int / RunSimulation.RoomsPerArea);
-                    BuildLayout(e.Id);
-                    break;
                 case SimEventType.HazardWarn when _gimmicks.TryGetValue(e.Id, out var g):
                     g.WarnUntil = Time.time + e.Value;
                     break;
@@ -67,9 +73,17 @@ namespace Game.Gameplay
             var director = RunDirector.Instance;
             if (director != null && director.IsSpawned)
             {
-                // Late joiners and missed events: follow the replicated state too.
-                ShowArea(director.RoomIndex.Value / RunSimulation.RoomsPerArea);
-                if (director.LayoutId.Value != _layout) BuildLayout(director.LayoutId.Value);
+                // Draw the room the local player stands in (another one after a door or a new area).
+                ShowArea(director.Area.Value);
+                var room = director.LocalRoom;
+                var key = (director.MapSeed.Value, director.Area.Value);
+                if (room.Id != _roomId || key != _mapKey)
+                {
+                    _mapKey = key;
+                    BuildRoom(room);
+                }
+                foreach (var d in _doors)
+                    if (d.Bars != null) d.Bars.enabled = !director.DoorOpen(_room, d.To);
             }
 
             foreach (var g in _gimmicks.Values) Animate(g);
@@ -86,7 +100,9 @@ namespace Game.Gameplay
 
         private void UpdateAbyss(RunDirector director)
         {
-            int stage = director != null && director.IsSpawned ? director.CollapseStage.Value : 0;
+            // Only the boss room falls; it is drawn when you stand in it.
+            bool inBossRoom = _room != null && _room.Kind == RoomKind.Boss;
+            int stage = director != null && director.IsSpawned && inBossRoom ? director.CollapseStage.Value : 0;
             if (stage != _abyssStage)
             {
                 _abyssStage = stage;
@@ -94,7 +110,7 @@ namespace Game.Gameplay
             }
 
             // The next band to fall pulses red while the warning lasts.
-            int warn = director != null && director.IsSpawned && director.Trial.Value == BossTrial.Collapse ? stage + 1 : 0;
+            int warn = director != null && director.IsSpawned && inBossRoom && director.Trial.Value == BossTrial.Collapse ? stage + 1 : 0;
             if (warn != _warnStage)
             {
                 _warnStage = warn;
@@ -113,10 +129,9 @@ namespace Game.Gameplay
                 renderer = null;
             }
             if (texture == null) return;
-            var bounds = RunSimulation.DefaultBounds;
             var go = new GameObject("Abyss");
             go.transform.SetParent(transform, false);
-            go.transform.localPosition = bounds.min;
+            go.transform.localPosition = _room != null ? _room.Bounds.min : RunSimulation.DefaultBounds.min;
             renderer = go.AddComponent<SpriteRenderer>();
             renderer.sprite = UnityEngine.Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, AbyssPixelsPerUnit);
             renderer.sortingOrder = order;
@@ -195,17 +210,24 @@ namespace Game.Gameplay
                 globalLight.color = AreaLight[area].Color;
                 globalLight.intensity = AreaLight[area].Intensity;
             }
-            if (_layout >= 0) BuildLayout(_layout); // props use the area's palette
+            if (_room != null) BuildRoom(_room); // props use the area's palette
         }
 
-        private void BuildLayout(int id)
+        /// <summary>The room's floor and walls (the area look moved to its spot), obstacles, traps and doorways.</summary>
+        private void BuildRoom(MapRoom room)
         {
-            _layout = id;
+            _room = room;
+            _roomId = room.Id;
             foreach (var go in _spawned) Destroy(go);
             _spawned.Clear();
             _gimmicks.Clear();
+            _doors.Clear();
+            if (areaRoots != null)
+                foreach (var root in areaRoots)
+                    if (root != null) root.localPosition = room.Origin;
+            BuildDoors(room);
 
-            var layout = Arena.Get(id);
+            var layout = room.Layout;
             foreach (var o in layout.Obstacles)
             {
                 string kind = o.Kind.ToString().ToLowerInvariant();
@@ -224,6 +246,7 @@ namespace Game.Gameplay
                 r.gameObject.AddComponent<PropFader>();
             }
 
+            int idBase = room.Id * RunSimulation.HazardIdsPerRoom;
             for (int i = 0; i < layout.Gimmicks.Length; i++)
             {
                 var def = layout.Gimmicks[i];
@@ -233,7 +256,7 @@ namespace Game.Gameplay
                     {
                         var sheet = SpriteSheet.Load("trap_spikes");
                         var r = Sprite("Spikes", sheet?.First, def.Position, -960);
-                        _gimmicks[i] = new GimmickVisual { Def = def, Renderer = r, Frames = sheet?.Sprites("default") };
+                        _gimmicks[idBase + i] = new GimmickVisual { Def = def, Renderer = r, Frames = sheet?.Sprites("default") };
                         break;
                     }
                     case GimmickKind.FlameJet:
@@ -242,7 +265,7 @@ namespace Game.Gameplay
                         var r = Sprite("Vent", sheet?.First, def.Position, EnemyView.SortOrder(def.Position.y) + 5);
                         r.flipX = def.Direction.x < 0f;
                         var light = AddLight(r.gameObject, new Color(1f, 0.45f, 0.15f), 0.3f, 2.2f);
-                        _gimmicks[i] = new GimmickVisual { Def = def, Renderer = r, Frames = sheet?.Sprites("default"), Light = light };
+                        _gimmicks[idBase + i] = new GimmickVisual { Def = def, Renderer = r, Frames = sheet?.Sprites("default"), Light = light };
                         break;
                     }
                     case GimmickKind.HealingFont:
@@ -250,10 +273,43 @@ namespace Game.Gameplay
                         var sheet = SpriteSheet.Load("prop_font");
                         var r = Sprite("Font", sheet?.First, def.Position, EnemyView.SortOrder(def.Position.y));
                         var light = AddLight(r.gameObject, new Color(0.45f, 1f, 0.7f), 1.1f, 3.2f);
-                        _gimmicks[i] = new GimmickVisual { Def = def, Renderer = r, Frames = sheet?.Sprites("default"), Light = light };
+                        _gimmicks[idBase + i] = new GimmickVisual { Def = def, Renderer = r, Frames = sheet?.Sprites("default"), Light = light };
                         break;
                     }
                 }
+            }
+        }
+
+        /// <summary>Torch colour of the doorways per area.</summary>
+        private static readonly Color[] DoorLight = { new(1f, 0.62f, 0.32f), new(1f, 0.35f, 0.28f), new(0.72f, 0.48f, 1f) };
+
+        /// <summary>An arch or a gap in the wall for every door of the room, and the bone bars of a shut one.</summary>
+        private void BuildDoors(MapRoom room)
+        {
+            var director = RunDirector.Instance;
+            int area = Mathf.Max(0, _area);
+            for (int d = 0; d < 4; d++)
+            {
+                if (!room.HasDoor(d)) continue;
+                Vector2 at = DungeonMap.DoorPosition(room, d);
+                string kind = d == Dir.N ? "n" : d == Dir.S ? "s" : "side";
+                // The arch stands in the back wall above the floor; the others sit in the black wall tops
+                // (the side sheet is drawn for the east and mirrored for the west, around its right-edge pivot).
+                Vector2 spot = d switch
+                {
+                    Dir.E => at + new Vector2(1.25f, 0f),
+                    Dir.W => at - new Vector2(1.25f, 0f),
+                    _ => at,
+                };
+                var r = Sprite("Door", SpriteSheet.Load($"door_{kind}_{area}")?.First, spot, d == Dir.N ? -985 : 905);
+                r.flipX = d == Dir.W;
+                var light = AddLight(r.gameObject, DoorLight[area], 0.9f, 3.2f);
+                light.transform.position = at;
+                var bars = Sprite("Bars", SpriteSheet.Load($"door_bars_{kind}")?.First, r.transform.localPosition, r.sortingOrder + 1);
+                bars.flipX = d == Dir.W;
+                var to = director != null ? director.Map[room.Neighbor[d]] : null;
+                bars.enabled = director != null && !director.DoorOpen(room, to);
+                _doors.Add(new DoorVisual { To = to, Bars = bars });
             }
         }
 

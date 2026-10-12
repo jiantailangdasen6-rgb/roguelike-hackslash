@@ -86,7 +86,7 @@ namespace Game.Core
         }
 
         /// <summary>Where players and walkers may stand right now.</summary>
-        public Rect PlayRect => SafeArea(Bounds, CollapseStage);
+        public Rect PlayRect => Room.Kind == RoomKind.Boss ? SafeArea(Bounds, CollapseStage) : Bounds;
 
         /// <summary>The boss is warded: hits do nothing.</summary>
         private bool BossWarded => ActiveTrial is BossTrial.BoneWard or BossTrial.BloodRitual or BossTrial.Phylactery;
@@ -140,7 +140,9 @@ namespace Game.Core
         {
             StepCages(dt);
             StepBursts(dt);
-            if (Room.Objective != RoomObjective.Boss || Room.Cleared) return;
+            var bossRoom = RoomStates[Map.Boss.Id];
+            if (!bossRoom.Fighting) return;
+            Room = bossRoom;
             _exposed -= dt;
 
             int b = BossIndex();
@@ -259,6 +261,7 @@ namespace Game.Core
         private int SpawnTrialProp(EnemyType type, Vector2 at, float healthScale)
         {
             int id = Enemies.Spawn(type, at, healthScale, 1f, false);
+            Enemies[Enemies.IndexOf(id)].RoomId = Room.Id;
             _trialProps.Add(id);
             return id;
         }
@@ -292,6 +295,7 @@ namespace Game.Core
                 if ((p.Position - at).sqrMagnitude > r * r) continue;
                 // A little in front of the player so the bars are drawn over them.
                 int id = Enemies.Spawn(EnemyType.BoneCage, p.Position + new Vector2(0f, -0.06f), EnemyHealthScale, 1f, false);
+                Enemies[Enemies.IndexOf(id)].RoomId = Room.Id;
                 p.CagedBy = id;
                 p.CageTimer = Wrath ? CageTime * 0.8f : CageTime;
                 TrialEvent(TrialMoment.CageClosed, p.Position, p.CageTimer, p.ClientId);
@@ -344,7 +348,7 @@ namespace Game.Core
             }
             TrialTimer = (Players.Count == 1 ? 14f : 11f) - (Wrath ? 2.5f : 0f);
             _ritualRain = 1.5f;
-            for (int k = 0; k < Players.Count; k++) QueueSpawn(EnemyType.Cultist, false);
+            for (int k = 0; k < PlayersIn(Room); k++) QueueSpawn(EnemyType.Cultist, false);
             TrialEvent(TrialMoment.RitualStart, center, TrialTimer);
         }
 
@@ -381,7 +385,7 @@ namespace Game.Core
             {
                 _ritualRain = Wrath ? 2f : 2.6f;
                 foreach (var p in Players)
-                    if (p.Alive) QueueBurst(p.Position, 1.6f, 1.2f, 18f * EnemyDamageScale, AreaKind.Slam);
+                    if (p.Alive && p.RoomId == Room.Id) QueueBurst(p.Position, 1.6f, 1.2f, 18f * EnemyDamageScale, AreaKind.Slam);
             }
 
             if (TrialTimer > 0f) return;
@@ -396,7 +400,7 @@ namespace Game.Core
             Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.BloodTorrent, Pos = boss.Position, Value = 14f });
             foreach (var p in Players)
             {
-                if (!p.Alive) continue;
+                if (!p.Alive || p.RoomId != Room.Id) continue;
                 p.InvulnerableTimer = 0f;
                 HurtPlayer(p, p.MaxHp * RitualTorrent);
             }
@@ -421,7 +425,7 @@ namespace Game.Core
             float r = SimPlayer.BodyRadius;
             foreach (var p in Players)
             {
-                if (area.Contains(p.Position)) continue;
+                if (p.RoomId != Room.Id || area.Contains(p.Position)) continue;
                 var safe = new Vector2(Mathf.Clamp(p.Position.x, area.xMin + r + 0.4f, area.xMax - r - 0.4f), Mathf.Clamp(p.Position.y, area.yMin + r + 0.4f, area.yMax - r - 0.4f));
                 p.Position = Arena.Resolve(Layout, safe, r);
                 Events.Add(new SimEvent(SimEventType.Teleport) { ClientId = p.ClientId, Pos = p.Position });
@@ -432,7 +436,7 @@ namespace Game.Core
             for (int i = 0; i < Enemies.Count; i++)
             {
                 ref var e = ref Enemies[i];
-                if (e.Dead) continue;
+                if (e.Dead || e.RoomId != Room.Id) continue;
                 if (e.Def.Prop && !area.Contains(e.Position)) e.Dead = true; // kegs fall
                 else e.Position = Confine(e.Position, e.Radius, e.Def.Flying);
             }

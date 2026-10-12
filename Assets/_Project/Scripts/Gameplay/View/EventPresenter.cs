@@ -1016,10 +1016,14 @@ namespace Game.Gameplay
             public Fx Portal;
             public Fx Ring;
             public Fx Icon;
-            public Fx Skull;
             public Text Label;
             public Vector2 Position;
             public Color Color;
+            public bool Dim;
+            /// <summary>Needs the whole team standing on it (it brightens as they hold).</summary>
+            public bool Gather;
+            public float Scale = 1.6f;
+            public float LabelBelow = -1.75f;
         }
 
         private readonly List<DoorFx> _doors = new();
@@ -1040,79 +1044,120 @@ namespace Game.Gameplay
         {
             foreach (var d in _doors)
             {
-                Release(d.Portal);
+                if (d.Portal != null) Release(d.Portal);
                 Release(d.Ring);
-                Release(d.Icon);
-                if (d.Skull != null) Release(d.Skull);
+                if (d.Icon != null) Release(d.Icon);
                 Destroy(d.Label.gameObject);
             }
             _doors.Clear();
         }
 
+        /// <summary>
+        /// The glowing marks of the room you stand in: its pedestal (shrine, spring, merchant...; dim once you used
+        /// it), the ring before the boss door at the campfire, and the way down after the boss. Each has a label.
+        /// </summary>
         private void UpdateDoors()
         {
             var director = RunDirector.Instance;
-            bool open = director != null && director.Phase.Value == RunPhase.Playing;
-            var doors = open ? director.Doors : System.Array.Empty<Door>();
-            int key = doors.Length == 0 ? 0 : director.DoorsPacked.Value;
+            bool open = director != null && director.IsSpawned && director.Phase.Value == RunPhase.Playing;
+            var room = open ? director.LocalRoom : null;
+            bool used = room != null && NetPlayer.Local != null && (NetPlayer.Local.UsedPedestals.Value & (1 << room.Id)) != 0;
+            int key = room == null ? 0
+                : (room.Id + 1) * 1000 + director.Area.Value * 100 + (used ? 1 : 0) + (director.BossDoorOpen.Value ? 2 : 0) + (director.ExitOpen.Value ? 4 : 0)
+                  + (int)(director.MapSeed.Value % 97) * 10000;
             if (key != _doorsKey)
             {
                 ClearDoors();
                 _doorsKey = key;
-                int area = director != null ? (director.RoomIndex.Value + 1) / RunSimulation.RoomsPerArea : 0;
-                for (int i = 0; i < doors.Length; i++) _doors.Add(CreateDoor(doors[i], RunDirector.DoorPosition(i, doors.Length), area));
+                if (room != null) CreateMarks(director, room, used);
             }
             if (_doors.Count == 0) return;
 
-            int held = director.HoldDoor.Value;
-            float hold = Mathf.Clamp01(director.ExitHold.Value / RunSimulation.ExitHoldTime);
+            float hold = Mathf.Clamp01(director.GatherHold.Value / RunSimulation.ExitHoldTime);
             for (int i = 0; i < _doors.Count; i++)
             {
                 var d = _doors[i];
-                bool chosen = i == held;
-                float pulse = 1.6f + 0.08f * Mathf.Sin(Time.time * 4f + i * 1.7f) + (chosen ? 0.25f * hold : 0f);
-                d.Portal.Go.transform.localScale = Vector3.one * pulse;
-                d.Portal.StartScale = d.Portal.EndScale = pulse;
-                if (d.Portal.Light != null) d.Portal.Light.intensity = chosen ? 1.8f + 1.6f * hold : 1.5f;
-
+                float pulse = d.Scale * (1f + 0.05f * Mathf.Sin(Time.time * 4f + i * 1.7f) + (d.Gather ? 0.2f * hold : 0f));
+                if (d.Portal != null)
+                {
+                    d.Portal.Go.transform.localScale = Vector3.one * pulse;
+                    d.Portal.StartScale = d.Portal.EndScale = pulse;
+                    if (d.Portal.Light != null) d.Portal.Light.intensity = (d.Dim ? 0.4f : 1.5f) + (d.Gather ? 1.6f * hold : 0f);
+                }
                 var ringColor = d.Color;
-                ringColor.a = chosen ? 0.45f + 0.4f * hold : 0.22f + 0.06f * Mathf.Sin(Time.time * 3f + i);
+                ringColor.a = d.Dim ? 0.1f : d.Gather ? 0.3f + 0.5f * hold : 0.22f + 0.06f * Mathf.Sin(Time.time * 3f + i);
                 d.Ring.Renderer.color = ringColor;
 
-                Vector2 iconAt = d.Position + new Vector2(0f, 0.2f + 0.1f * Mathf.Sin(Time.time * 2.2f + i * 2f));
-                d.Icon.Go.transform.position = iconAt;
-                if (d.Skull != null) d.Skull.Go.transform.position = iconAt + new Vector2(0.55f, 0.45f);
-
+                if (d.Icon != null)
+                {
+                    Vector2 iconAt = d.Position + new Vector2(0f, 0.2f + 0.1f * Mathf.Sin(Time.time * 2.2f + i * 2f));
+                    d.Icon.Go.transform.position = iconAt;
+                }
                 if (_camera != null)
                 {
-                    d.Label.transform.position = _camera.WorldToScreenPoint(d.Position + new Vector2(0f, -1.75f));
-                    d.Label.enabled = !PerkView.IsShowing; // the cards stand in front of the doors
-                    var c = d.Label.color;
-                    c.a = chosen ? 1f : 0.88f;
-                    d.Label.color = c;
+                    d.Label.transform.position = _camera.WorldToScreenPoint(d.Position + new Vector2(0f, d.LabelBelow));
+                    d.Label.enabled = !PerkView.IsShowing; // the cards stand in front of the marks
                 }
             }
         }
 
-        private DoorFx CreateDoor(Door door, Vector2 at, int area)
+        private void CreateMarks(RunDirector director, MapRoom room, bool used)
         {
-            var color = RewardCatalog.Color(door.Reward);
-            if (door.Trial) color = Color.Lerp(color, RewardCatalog.TrialColor, 0.55f);
-            var d = new DoorFx { Position = at, Color = color };
+            int area = director.Area.Value;
+            if (RoomCatalog.HasPedestal(room.Kind))
+            {
+                var reward = RoomCatalog.Reward(room.Kind);
+                string text = used ? "<color=#bfb6aa>もう使った</color>" : RoomCatalog.PedestalText(room.Kind);
+                var mark = CreateMark(RunSimulation.PedestalPosition(room.Bounds), RoomCatalog.Color(room.Kind), GameIcons.Reward(reward), RunSimulation.PedestalRadius,
+                    $"{RoomCatalog.Name(room.Kind)}\n<size=22><color=#e8e0d4>{text}</color></size>", used);
+                _doors.Add(mark);
+            }
+            if (room.Kind == RoomKind.Campfire && !director.BossDoorOpen.Value)
+            {
+                var map = director.Map;
+                for (int d = 0; d < 4; d++)
+                {
+                    if (room.Neighbor[d] != map.Boss.Id) continue;
+                    Vector2 door = DungeonMap.EntryPoint(room, d);
+                    var mark = CreateMark(door, new Color(1f, 0.3f, 0.25f), null, RunSimulation.BossDoorRadius * 0.6f,
+                        NetPlayer.All.Count > 1 ? "主の扉\n<size=22><color=#e8e0d4>全員でここに立つと開く</color></size>" : "主の扉\n<size=22><color=#e8e0d4>ここに立つと開く</color></size>", false);
+                    mark.Gather = true;
+                    mark.LabelBelow = d == Dir.S ? 1.6f : -1.4f;
+                    _doors.Add(mark);
+                }
+            }
+            if (room.Kind == RoomKind.Boss && director.ExitOpen.Value)
+            {
+                var mark = CreateMark(room.Origin + RunSimulation.ExitOffset, new Color(1f, 0.9f, 0.6f), null, RunSimulation.ExitRadius * 1.6f,
+                    "奥への道\n<size=22><color=#e8e0d4>" + (NetPlayer.All.Count > 1 ? "全員でここに立つと次のエリアへ" : "ここに立つと次のエリアへ") + "</color></size>", false);
+                mark.Gather = true;
+                mark.Scale = 2.2f;
+                AddLight(mark.Ring, new Color(1f, 0.85f, 0.5f), 2.5f, 6f);
+                _doors.Add(mark);
+            }
+        }
 
-            d.Ring = Spawn("fx_circle", at, 1f, 99999f, RunSimulation.ExitRadius, RunSimulation.ExitRadius, color, order: -360);
-            d.Portal = Spawn("fx_portal", at, 8f, 99999f, 1.6f, 1.6f, Color.Lerp(Color.white, color, 0.6f), order: -350);
-            AddLight(d.Portal, color, 1.5f, 3.6f);
-            d.Icon = SpawnIcon(GameIcons.Reward(door.Reward), at + Vector2.up * 0.2f, 1.6f, 2600);
-            if (door.Trial) d.Skull = SpawnIcon(GameIcons.Trial, at + new Vector2(0.55f, 0.65f), 1f, 2601);
+        private DoorFx CreateMark(Vector2 at, Color color, Sprite icon, float ringRadius, string label, bool dim)
+        {
+            var d = new DoorFx { Position = at, Color = color, Dim = dim };
+            d.Ring = Spawn("fx_circle", at, 1f, 99999f, ringRadius, ringRadius, color, order: -360);
+            if (!dim)
+            {
+                d.Portal = Spawn("fx_portal", at, 8f, 99999f, 1.6f, 1.6f, Color.Lerp(Color.white, color, 0.6f), order: -350);
+                AddLight(d.Portal, color, 1.5f, 3.6f);
+            }
+            if (icon != null)
+            {
+                d.Icon = SpawnIcon(icon, at + Vector2.up * 0.2f, 1.6f, 2600);
+                if (dim) d.Icon.Renderer.color = new Color(1f, 1f, 1f, 0.35f);
+            }
 
             d.Label = UIKit.Label(_numberLayer, "", 32, TextAnchor.UpperCenter);
             d.Label.font = UIKit.TitleFont;
-            d.Label.rectTransform.sizeDelta = new Vector2(380f, 110f);
+            d.Label.rectTransform.sizeDelta = new Vector2(520f, 110f);
             d.Label.rectTransform.pivot = new Vector2(0.5f, 1f);
-            string trial = door.Trial ? "<color=#ff6a5a>試練 </color>" : "";
-            d.Label.text = $"{trial}{RewardCatalog.Name(door.Reward)}\n<size=22><color=#e8e0d4>{RewardCatalog.Describe(door, area)}</color></size>";
-            d.Label.color = color;
+            d.Label.text = label;
+            d.Label.color = dim ? new Color(color.r, color.g, color.b, 0.6f) : color;
             var shadow = d.Label.gameObject.AddComponent<Outline>();
             shadow.effectColor = new Color(0f, 0f, 0f, 0.85f);
             shadow.effectDistance = new Vector2(2f, -2f);

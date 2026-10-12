@@ -46,6 +46,12 @@ namespace Game.Core
         /// <summary>Id of the bone cage holding this player (0 = free) and how long until it crushes them.</summary>
         public int CagedBy;
         public float CageTimer;
+        /// <summary>Map room the player stands in (-1 before the first step).</summary>
+        public int RoomId = -1;
+        /// <summary>Time spent on a pedestal (it works after a short hold).</summary>
+        public float PedestalHold;
+        /// <summary>Curses taken at curse altars (stacks per kind; personal).</summary>
+        public readonly int[] CurseStacks = new int[RewardCatalog.CurseKinds];
 
         // Input edge detection
         public PlayerInput Input;

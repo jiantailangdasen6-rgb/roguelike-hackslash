@@ -218,7 +218,7 @@ namespace Game.Gameplay
             get
             {
                 var d = RunDirector.Instance;
-                return d != null && (d.RoomCleared.Value || d.Paused.Value);
+                return d != null && !d.LocalFighting;
             }
         }
 
@@ -264,7 +264,7 @@ namespace Game.Gameplay
             }
             if (!BetweenFights || Time.time < _nextBotAction || PerkView.IsShowing) return;
             _nextBotAction = Time.time + 1.2f;
-            int room = RunDirector.Instance.RoomIndex.Value;
+            int room = RunDirector.Instance.LocalRoom.Id + RunDirector.Instance.Area.Value * 100;
             if (CommandLine.Has("-openbag") && !IsOpen && _autoOpenedRoom != room)
             {
                 _autoOpenedRoom = room;

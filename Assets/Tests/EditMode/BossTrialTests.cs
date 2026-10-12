@@ -28,7 +28,7 @@ namespace Game.Tests
         /// <summary>A run started in the given room with every pending pick made, run until the boss stands.</summary>
         private static (RunSimulation Sim, SimPlayer Player) BossRoom(int room, Difficulty difficulty = Difficulty.Normal)
         {
-            var sim = new RunSimulation(77, null, difficulty);
+            var sim = new RunSimulation(77, difficulty);
             var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
             sim.Start(room);
             for (int guard = 0; guard < 10 && p.PendingOffer != null; guard++) sim.ChoosePerk(0, 0);
@@ -130,7 +130,7 @@ namespace Game.Tests
             SetBossHealth(sim, 0.69f);
             Run(sim, 0.1f);
             float before = sim.Enemies[Boss(sim)].Health;
-            var events = Run(sim, 16f, s => p.Position = new Vector2(0f, -7f));
+            var events = Run(sim, 16f, s => p.Position = sim.Map.Boss.Origin + new Vector2(0f, -7f));
             Assert.That(events.Any(e => e.Type == SimEventType.TrialEvent && (TrialMoment)e.Int == TrialMoment.RitualFailed));
             Assert.Greater(sim.Enemies[Boss(sim)].Health, before);
         }
@@ -156,7 +156,7 @@ namespace Game.Tests
             Run(sim, 0.1f);
             Assert.AreEqual(BossTrial.Collapse, sim.ActiveTrial);
             // Standing on the edge until it falls (afterwards the client applies the teleport).
-            Run(sim, RunSimulation.CollapseWarnTime + 0.2f, s => { if (s.CollapseStage == 0) p.Position = new Vector2(-13f, -7f); });
+            Run(sim, RunSimulation.CollapseWarnTime + 0.2f, s => { if (s.CollapseStage == 0) p.Position = sim.Map.Boss.Origin + new Vector2(-13f, -7f); });
             Assert.AreEqual(1, sim.CollapseStage);
             Run(sim, 0.1f);
             Assert.That(sim.PlayRect.Contains(p.Position), $"player moved onto the floor left ({p.Position})");
@@ -196,8 +196,8 @@ namespace Game.Tests
         [Test]
         public void Nightmare_LaysHandicapsOnPlayers()
         {
-            var normal = new RunSimulation(1, null, Difficulty.Normal).AddPlayer(0, new Loadout { classId = ClassId.Warrior });
-            var nightmare = new RunSimulation(1, null, Difficulty.Nightmare).AddPlayer(0, new Loadout { classId = ClassId.Warrior });
+            var normal = new RunSimulation(1, Difficulty.Normal).AddPlayer(0, new Loadout { classId = ClassId.Warrior });
+            var nightmare = new RunSimulation(1, Difficulty.Nightmare).AddPlayer(0, new Loadout { classId = ClassId.Warrior });
             Assert.AreEqual(normal.MaxHp * (1f - DifficultyCatalog.FrailtyFactor), nightmare.MaxHp, 1f, "frailty");
             Assert.AreEqual(nightmare.MaxHp, nightmare.Hp, 0.01f, "starts at full health");
             Assert.Less(nightmare.HealFactor, normal.HealFactor, "thirst");
@@ -209,7 +209,7 @@ namespace Game.Tests
         {
             float Damage(Difficulty d)
             {
-                var sim = new RunSimulation(2, null, d);
+                var sim = new RunSimulation(2, d);
                 sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
                 sim.Enemies.Spawn(EnemyType.Skeleton, Vector2.zero, 100f, 1f, true);
                 float before = sim.Enemies[0].Health;
@@ -223,7 +223,7 @@ namespace Game.Tests
         [Test]
         public void Vengeance_DeadMonstersBurst()
         {
-            var sim = new RunSimulation(3, null, Difficulty.Nightmare);
+            var sim = new RunSimulation(3, Difficulty.Nightmare);
             sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
             sim.Enemies.Spawn(EnemyType.Skeleton, new Vector2(3f, 0f), 1f, 1f, false);
             sim.Enemies[0].Cooldown = 99f;

@@ -51,12 +51,12 @@ namespace Game.Gameplay
             Set(SimEventType.PlayerDowned, F.Client | F.Pos);
             Set(SimEventType.PlayerRevived, F.Client | F.Pos);
             Set(SimEventType.Teleport, F.Client | F.Pos);
-            Set(SimEventType.RoomStarted, F.Int | F.Id | F.Value);
-            Set(SimEventType.RoomCleared, F.Int | F.Seed);
+            Set(SimEventType.RoomStarted, F.Int | F.Id | F.Seed); // a new area: Int = its first room index, Id = arrival room, Seed = map seed
+            Set(SimEventType.RoomCleared, F.Int | F.Id | F.Value); // Value = RoomKind
             Set(SimEventType.RunEnded, F.Int);
             Set(SimEventType.BossSpawned, F.Id | F.Pos | F.Int);
             Set(SimEventType.PerkOffer, F.Client | F.Seed | F.Int | F.Value);
-            Set(SimEventType.WaveStarted, F.Int | F.Value);
+            Set(SimEventType.WaveStarted, F.Int | F.Value | F.Id);
             Set(SimEventType.HazardWarn, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
             Set(SimEventType.HazardFire, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
             Set(SimEventType.RewardGranted, F.Id | F.Int | F.Value);
@@ -72,6 +72,9 @@ namespace Game.Gameplay
             Set(SimEventType.LegendaryProc, F.Client | F.Int | F.Pos | F.Vec);
             Set(SimEventType.Combo, F.Client | F.Int | F.Pos | F.Value);
             Set(SimEventType.TrialEvent, F.Int | F.Pos | F.Value | F.Client | F.Id);
+            Set(SimEventType.RoomEntered, F.Client | F.Id | F.Int | F.Value); // Value = RoomKind
+            Set(SimEventType.PedestalUsed, F.Client | F.Id | F.Int | F.Value | F.Pos);
+            Set(SimEventType.DoorOpened, F.Int | F.Pos);
             return layout;
         }
 

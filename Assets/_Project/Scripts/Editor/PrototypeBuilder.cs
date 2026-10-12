@@ -720,7 +720,7 @@ namespace Game.EditorTools
             foreach (var c in new[]
                      {
                          new Vector2(-13.2f, 7.2f), new Vector2(13.2f, 7.2f), new Vector2(-13.2f, -7.4f), new Vector2(13.2f, -7.4f),
-                         new Vector2(-7.5f, 7.4f), new Vector2(7.5f, 7.4f), new Vector2(-13.3f, 0f), new Vector2(13.3f, 0f),
+                         new Vector2(-7.5f, 7.4f), new Vector2(7.5f, 7.4f), new Vector2(-13.3f, 3.6f), new Vector2(13.3f, 3.6f),
                      })
                 Candle(props, c, candleSheet, candleLight);
         }

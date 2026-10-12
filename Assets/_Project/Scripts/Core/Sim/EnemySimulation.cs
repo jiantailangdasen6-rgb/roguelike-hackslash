@@ -27,6 +27,8 @@ namespace Game.Core
     public struct Enemy
     {
         public int Id;
+        /// <summary>Map room it belongs to (it never leaves it).</summary>
+        public int RoomId;
         public EnemyType Type;
         public bool Elite;
         public Vector2 Position;

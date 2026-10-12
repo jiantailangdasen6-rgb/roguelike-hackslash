@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game.Tests
 {
-    /// <summary>Reward doors (room choice), trial rooms, new perks and trinkets.</summary>
+    /// <summary>Perk offers, new perks and trinkets.</summary>
     public class Round3Tests
     {
         private const float Dt = 1f / 30f;
@@ -33,57 +33,11 @@ namespace Game.Tests
             }
         }
 
-        private static void ClearCurrentRoom(RunSimulation sim)
-        {
-            for (int i = 0; i < 40 && !sim.Room.Cleared; i++)
-            {
-                for (int k = 0; k < sim.Enemies.Count; k++)
-                    sim.DamageEnemy(k, 999999f, sim.Players[0], HitFlags.None, Vector2.zero, 0f);
-                if (sim.Room.Objective == RoomObjective.Survive) Run(sim, 10f, KeepAliveAndPick);
-                else Run(sim, 1.2f, KeepAliveAndPick);
-            }
-            Assert.IsTrue(sim.Room.Cleared, "room should clear");
-        }
-
-        private static void SetDoors(RunSimulation sim, params Door[] doors)
-        {
-            sim.Room.Doors.Clear();
-            sim.Room.Doors.AddRange(doors);
-        }
-
-        private static void StandAt(RunSimulation sim, int door, int count)
-        {
-            foreach (var p in sim.Players) sim.SetPlayerPosition(p.ClientId, RunSimulation.DoorPosition(door, count, sim.Bounds));
-        }
-
         /// <summary>Everyone waits at one door until the next room starts; level-up picks before that are answered.</summary>
-        private static List<SimEvent> WalkThrough(RunSimulation sim, int door, int count)
-        {
-            var events = new List<SimEvent>();
-            int room = sim.Room.Index;
-            for (int i = 0; i < 200 && sim.Room.Index == room; i++)
-            {
-                StandAt(sim, door, count);
-                foreach (var p in sim.Players) p.InvulnerableTimer = 1f;
-                sim.Step(Dt);
-                if (sim.Room.Index == room)
-                {
-                    foreach (var p in sim.Players)
-                        if (p.PendingOffer != null) sim.ChoosePerk(p.ClientId, 0);
-                    sim.Events.Clear();
-                    continue;
-                }
-                events.AddRange(sim.Events);
-                sim.Events.Clear();
-            }
-            Assert.AreEqual(room + 1, sim.Room.Index, "walked through the door");
-            return events;
-        }
-
         /// <summary>Stops wave spawns so combat tests only see the player's own effects.</summary>
         private static void Quiet(RunSimulation sim) => sim.Room.Cleared = true;
 
-        // ------------------------------------------------------------------ Doors
+        // ------------------------------------------------------------------ Perk offers
 
         [Test]
         public void DoorPack_RoundTrips()
@@ -100,133 +54,6 @@ namespace Game.Tests
         }
 
         [Test]
-        public void DoorSpots_AreClearInEveryLayout()
-        {
-            foreach (var layout in Arena.Layouts)
-                for (int count = 2; count <= Door.MaxCount; count++)
-                    for (int i = 0; i < count; i++)
-                    {
-                        var at = RunSimulation.DoorPosition(i, count, RunSimulation.DefaultBounds);
-                        Assert.IsFalse(Arena.Overlaps(layout, at, RunSimulation.ExitRadius), $"{layout.Name}: door {i}/{count} blocked");
-                        Assert.IsTrue(RunSimulation.DefaultBounds.Contains(at));
-                    }
-        }
-
-        [Test]
-        public void ClearingARoom_OpensTwoOrThreeDistinctRewardDoors()
-        {
-            var sim = new RunSimulation(11);
-            sim.AddPlayer(0);
-            sim.Start();
-            ClearCurrentRoom(sim);
-            Assert.That(sim.Room.Doors.Count, Is.InRange(2, 3));
-            Assert.AreEqual(sim.Room.Doors.Count, sim.Room.Doors.Select(d => d.Reward).Distinct().Count(), "rewards differ between doors");
-            Assert.IsFalse(sim.Room.Doors.Any(d => d.Reward == RoomReward.Upgrade), "nothing to upgrade before any perk");
-        }
-
-        [Test]
-        public void BeforeABoss_OneDoorAlwaysHeals_AndNoTrial()
-        {
-            for (ulong seed = 1; seed <= 12; seed++)
-            {
-                var sim = new RunSimulation(seed);
-                sim.AddPlayer(0);
-                sim.Start(2); // the room before the first boss
-                ClearCurrentRoom(sim);
-                Assert.That(sim.Room.Doors.Any(d => d.Reward == RoomReward.Vigor), $"seed {seed}");
-                Assert.IsFalse(sim.Room.Doors.Any(d => d.Trial), $"seed {seed}");
-            }
-        }
-
-        [Test]
-        public void SplitTeam_DoesNotLeave_SameDoorDoes()
-        {
-            var sim = new RunSimulation(12);
-            sim.AddPlayer(0);
-            sim.AddPlayer(1);
-            sim.Start();
-            ClearCurrentRoom(sim);
-            SetDoors(sim, new Door(RoomReward.Shards, false), new Door(RoomReward.Vigor, false));
-
-            Run(sim, RunSimulation.ExitHoldTime + 0.5f, s =>
-            {
-                KeepAliveAndPick(s);
-                s.SetPlayerPosition(0, RunSimulation.DoorPosition(0, 2, s.Bounds));
-                s.SetPlayerPosition(1, RunSimulation.DoorPosition(1, 2, s.Bounds));
-            });
-            Assert.AreEqual(0, sim.Room.Index, "players at different doors stay");
-            Assert.AreEqual(-1, sim.Room.HoldDoor);
-
-            var events = Run(sim, RunSimulation.ExitHoldTime + 0.3f, s =>
-            {
-                KeepAliveAndPick(s);
-                if (s.Room.Index == 0) StandAt(s, 1, 2);
-            });
-            Assert.AreEqual(1, sim.Room.Index);
-            Assert.That(events.Any(e => e.Type == SimEventType.RewardGranted && e.Int == (int)RoomReward.Vigor));
-        }
-
-        [Test]
-        public void ShardDoor_AddsBonusShards_TrialDoubles_AndToughensTheRoom()
-        {
-            var sim = new RunSimulation(13);
-            sim.AddPlayer(0);
-            sim.Start();
-            ClearCurrentRoom(sim);
-            float normalHealth = sim.EnemyHealthScale;
-            SetDoors(sim, new Door(RoomReward.Shards, true), new Door(RoomReward.Boon, false));
-            var events = Run(sim, RunSimulation.ExitHoldTime + 0.3f, s =>
-            {
-                KeepAliveAndPick(s);
-                if (s.Room.Index == 0) StandAt(s, 0, 2);
-            });
-            Assert.AreEqual(1, sim.Room.Index);
-            Assert.IsTrue(sim.Room.Trial);
-            Assert.AreEqual(RunSimulation.ShardReward(0) * 2, sim.BonusShards);
-            Assert.That(events.Any(e => e.Type == SimEventType.RoomStarted && e.Value > 0.5f), "the room start says it's a trial");
-            // Room 1 is tougher than room 0 anyway; the trial adds its own factor on top.
-            Assert.AreEqual(RunSimulation.HealthMultiplier(1, 1) * RunSimulation.TrialHealth, sim.EnemyHealthScale, 0.001f);
-            Assert.Greater(sim.EnemyHealthScale, normalHealth);
-            Assert.Greater(sim.EliteChance, sim.DifficultyDef.EliteChance);
-        }
-
-        [Test]
-        public void VigorDoor_RaisesMaxHp_AndHealsFully()
-        {
-            var sim = new RunSimulation(14);
-            var p = sim.AddPlayer(0);
-            sim.Start();
-            ClearCurrentRoom(sim);
-            float before = p.MaxHp;
-            p.Hp = 10f;
-            SetDoors(sim, new Door(RoomReward.Vigor, false), new Door(RoomReward.Shards, false));
-            Run(sim, RunSimulation.ExitHoldTime + 0.3f, s =>
-            {
-                KeepAliveAndPick(s);
-                if (s.Room.Index == 0) StandAt(s, 0, 2);
-            });
-            Assert.AreEqual(1, p.VigorStacks);
-            Assert.Greater(p.MaxHp, before);
-            Assert.AreEqual(p.MaxHp, p.Hp, 0.01f);
-        }
-
-        [Test]
-        public void BoonDoor_OffersAPerkToEveryone_TaggedAsBoon()
-        {
-            var sim = new RunSimulation(15);
-            sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
-            sim.AddPlayer(1, new Loadout { classId = ClassId.Ranger });
-            sim.Start();
-            ClearCurrentRoom(sim);
-            SetDoors(sim, new Door(RoomReward.Boon, false), new Door(RoomReward.Shards, false));
-            var events = WalkThrough(sim, 0, 2);
-            var offers = events.Where(e => e.Type == SimEventType.PerkOffer).ToList();
-            Assert.AreEqual(2, offers.Count, "one offer per player");
-            Assert.That(offers.All(e => e.Int == (int)ChoiceKind.Boon), "door rewards come before any level-up");
-            Assert.IsTrue(sim.AwaitingChoices, "the run pauses for the pick");
-        }
-
-        [Test]
         public void UpgradeOffer_OnlyRaisesOwnedPerks_OrFallsBackToABoon()
         {
             var rng = new GameRandom(5);
@@ -238,41 +65,6 @@ namespace Game.Tests
             Assert.AreEqual(1, offer.Length);
             Assert.AreEqual((byte)PerkId.Fury, offer[0].Perk);
             Assert.AreEqual(2, offer[0].Level);
-
-            var sim = new RunSimulation(16);
-            sim.AddPlayer(0);
-            sim.Start();
-            ClearCurrentRoom(sim);
-            SetDoors(sim, new Door(RoomReward.Upgrade, false), new Door(RoomReward.Shards, false));
-            System.Array.Clear(sim.Players[0].PerkLevels, 0, PerkCatalog.Count); // forget level-up picks made while clearing
-            var events = WalkThrough(sim, 0, 2);
-            var o = events.FirstOrDefault(e => e.Type == SimEventType.PerkOffer);
-            Assert.AreEqual(SimEventType.PerkOffer, o.Type);
-            Assert.AreEqual((int)ChoiceKind.Boon, o.Int, "a player with nothing to upgrade gets a new perk instead");
-        }
-
-        [Test]
-        public void TrialBoon_GivesTwoChoicesInARow()
-        {
-            var sim = new RunSimulation(17);
-            sim.AddPlayer(0);
-            sim.Start(1);
-            ClearCurrentRoom(sim);
-            SetDoors(sim, new Door(RoomReward.Boon, true), new Door(RoomReward.Vigor, false));
-            int perksBefore = sim.Players[0].PerkLevels.Sum();
-            int offers = 0;
-            for (int i = 0; i < 200; i++)
-            {
-                if (sim.Room.Index == 1) StandAt(sim, 0, 2);
-                sim.Players[0].InvulnerableTimer = 1f;
-                sim.Step(Dt);
-                foreach (var e in sim.Events)
-                    if (e.Type == SimEventType.PerkOffer && e.Int == (int)ChoiceKind.Boon) offers++;
-                sim.Events.Clear();
-                if (sim.Players[0].PendingOffer != null) sim.ChoosePerk(0, 0);
-            }
-            Assert.AreEqual(2, offers);
-            Assert.GreaterOrEqual(sim.Players[0].PerkLevels.Sum(), perksBefore + 2);
         }
 
         // ------------------------------------------------------------------ New perks and trinkets
@@ -280,7 +72,7 @@ namespace Game.Tests
         [Test]
         public void Executioner_HitsWoundedEnemiesHarder()
         {
-            var sim = new RunSimulation(18, new Rect(-10f, -10f, 20f, 20f));
+            var sim = new RunSimulation(18);
             var p = sim.AddPlayer(0);
             p.Stats.SetBase(StatType.CritChance, 0f);
             sim.Enemies.Spawn(EnemyType.Skeleton, new Vector2(3f, 0f), 50f, 1f, false);
@@ -299,7 +91,7 @@ namespace Game.Tests
         [Test]
         public void Comradery_GrowsWithNearbyAllies()
         {
-            var sim = new RunSimulation(19, new Rect(-10f, -10f, 20f, 20f));
+            var sim = new RunSimulation(19);
             var a = sim.AddPlayer(0);
             var b = sim.AddPlayer(1);
             a.Stats.SetBase(StatType.CritChance, 0f);
@@ -318,20 +110,9 @@ namespace Game.Tests
         }
 
         [Test]
-        public void Blessing_ShieldsOnEveryRoomStart()
-        {
-            var sim = new RunSimulation(20);
-            var p = sim.AddPlayer(0);
-            p.AddPerk(PerkId.Blessing);
-            p.AddPerk(PerkId.Blessing);
-            sim.Start();
-            Assert.AreEqual(RunSimulation.BlessingShield * 2, p.Shield, 0.01f);
-        }
-
-        [Test]
         public void FrostArmor_ShieldsAlliesNearTheNova()
         {
-            var sim = new RunSimulation(21, new Rect(-10f, -10f, 20f, 20f));
+            var sim = new RunSimulation(21);
             var mage = sim.AddPlayer(0, new Loadout { classId = ClassId.Mage });
             var ally = sim.AddPlayer(1, new Loadout { classId = ClassId.Warrior });
             Quiet(sim);
@@ -346,7 +127,7 @@ namespace Game.Tests
         [Test]
         public void Earthshaker_StunsAroundTheEndOfTheDash()
         {
-            var sim = new RunSimulation(22, new Rect(-10f, -10f, 20f, 20f));
+            var sim = new RunSimulation(22);
             var w = sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
             Quiet(sim);
             w.AddPerk(PerkId.Earthshaker);
@@ -361,7 +142,7 @@ namespace Game.Tests
         [Test]
         public void Ricochet_BouncesToASecondEnemy()
         {
-            var sim = new RunSimulation(23, new Rect(-12f, -10f, 24f, 20f));
+            var sim = new RunSimulation(23);
             var r = sim.AddPlayer(0, new Loadout { classId = ClassId.Ranger });
             Quiet(sim);
             r.AddPerk(PerkId.Ricochet);

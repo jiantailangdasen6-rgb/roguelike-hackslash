@@ -331,93 +331,25 @@ namespace Game.Tests
         public void WaveRoom_SpawnsWithWarnings_AndClearsAfterLastWave()
         {
             var sim = new RunSimulation(1);
-            sim.AddPlayer(0);
+            var p = sim.AddPlayer(0);
             sim.Start();
-            Assert.AreEqual(RoomObjective.Waves, sim.Room.Objective);
+            sim.MoveTeamTo(sim.FindRoom(RoomKind.Combat));
+            var first = Run(sim, 0.1f, KeepAliveAndPick);
+            var room = sim.RoomOf(p);
+            Assert.AreEqual(RoomObjective.Waves, room.Objective);
+            Assert.IsTrue(room.Fighting, "walking in wakes the room");
 
-            var events = Run(sim, 1.2f, KeepAliveAndPick);
-            Assert.That(events.Any(e => e.Type == SimEventType.SpawnWarning));
+            var events = first.Concat(Run(sim, 1.2f, KeepAliveAndPick)).ToList();
+            Assert.That(events.Any(e => e.Type == SimEventType.SpawnWarning), "a warning rune first");
             Assert.Greater(sim.Enemies.Count, 0, "enemies appear after the warning");
 
-            for (int i = 0; i < 20 && !sim.Room.Cleared; i++)
+            for (int i = 0; i < 20 && !room.Cleared; i++)
             {
                 KillAll(sim);
                 events = Run(sim, 1.2f, KeepAliveAndPick);
             }
-            Assert.IsTrue(sim.Room.Cleared);
-            Assert.AreEqual(sim.Room.WaveCount, sim.Room.Wave);
-        }
-
-        [Test]
-        public void Exit_LeadsToNextRoom_AndTeleports()
-        {
-            var sim = new RunSimulation(2);
-            sim.AddPlayer(0);
-            sim.Start();
-            for (int i = 0; i < 20 && !sim.Room.Cleared; i++)
-            {
-                KillAll(sim);
-                Run(sim, 1.2f, KeepAliveAndPick);
-            }
-
-            var events = Run(sim, RunSimulation.ExitHoldTime + 0.3f, s =>
-            {
-                KeepAliveAndPick(s);
-                if (s.Room.Index == 0) s.SetPlayerPosition(0, RunSimulation.DoorPosition(0, s.Room.Doors.Count, s.Bounds));
-            });
-            Assert.AreEqual(1, sim.Room.Index);
-            Assert.AreEqual(RoomObjective.Survive, sim.Room.Objective);
-            Assert.That(events.Any(e => e.Type == SimEventType.Teleport));
-        }
-
-        [Test]
-        public void LevelUp_BanksPicksDuringTheFight_AndOffersThemOnceTheRoomIsCleared()
-        {
-            var sim = new RunSimulation(3);
-            sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
-            sim.AddPlayer(1, new Loadout { classId = ClassId.Mage });
-            sim.Start();
-            float hpBefore = sim.Players[0].MaxHp;
-
-            var events = new List<SimEvent>();
-            while (sim.TeamLevel < 2 && !sim.Room.Cleared)
-            {
-                KillAll(sim);
-                events.AddRange(Run(sim, 0.5f, s => { foreach (var p in s.Players) p.InvulnerableTimer = 1f; }));
-                foreach (var soul in sim.Souls.ToArray()) sim.SetPlayerPosition(0, soul.Position);
-            }
-            Assert.Greater(sim.TeamLevel, 1, "leveled up during the fight");
-            Assert.Greater(sim.Players[0].MaxHp, hpBefore, "growth curve raises max HP on level-up");
-
-            if (!sim.Room.Cleared)
-            {
-                Assert.That(events.Any(e => e.Type == SimEventType.TeamLevelUp));
-                Assert.IsNull(sim.Players[0].PendingOffer, "no pick screen mid-fight");
-                Assert.Greater(sim.Players[0].PicksLeft, 0, "the pick is banked");
-                Assert.IsFalse(sim.AwaitingChoices);
-                float elapsed = sim.Elapsed;
-                sim.Step(Dt);
-                Assert.Greater(sim.Elapsed, elapsed, "the fight goes on");
-            }
-
-            for (int i = 0; i < 60 && !sim.Room.Cleared; i++)
-            {
-                KillAll(sim);
-                Run(sim, 1f, s => { foreach (var p in s.Players) p.InvulnerableTimer = 1f; });
-            }
-            Assert.IsTrue(sim.Room.Cleared);
-            Assert.IsNotNull(sim.Players[0].PendingOffer, "offered after the room");
-            Assert.IsNotNull(sim.Players[1].PendingOffer);
-            Assert.IsTrue(sim.AwaitingChoices);
-
-            // Each player works through their own picks; the door waits for everyone.
-            while (sim.Players[0].PendingOffer != null) sim.ChoosePerk(0, 0);
-            Assert.IsTrue(sim.AwaitingChoices, "still waiting for player 1");
-            foreach (var p in sim.Players) sim.SetPlayerPosition(p.ClientId, RunSimulation.DoorPosition(0, sim.Room.Doors.Count, sim.Bounds));
-            Run(sim, 2f, s => { foreach (var p in s.Players) p.InvulnerableTimer = 1f; });
-            Assert.AreEqual(0, sim.Room.Index, "the door stays shut while someone is choosing");
-            while (sim.Players[1].PendingOffer != null) sim.ChoosePerk(1, 0);
-            Assert.IsFalse(sim.AwaitingChoices);
+            Assert.IsTrue(room.Cleared, $"wave {room.Wave}/{room.WaveCount} active {room.Active} hostile {sim.Enemies.HostileCount} pending {sim.PendingSpawns.Count} in room {sim.PlayersIn(room, alive: true)} player room {p.RoomId}/{room.Id}");
+            Assert.AreEqual(room.WaveCount, room.Wave);
         }
 
         [Test]
@@ -480,12 +412,8 @@ namespace Game.Tests
         public void BossRoom_SpawnsTheBoneKing_AndKillingItClearsTheRoom()
         {
             var sim = new RunSimulation(8);
-            sim.AddPlayer(0);
-            sim.Start();
-            // Jump to the first boss room.
-            typeof(RunSimulation).GetMethod("StartRoom", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                .Invoke(sim, new object[] { RunSimulation.RoomsPerArea - 1 });
-            Assert.AreEqual(RoomObjective.Boss, sim.Room.Objective);
+            var p = sim.AddPlayer(0);
+            sim.Start(RunSimulation.RoomsPerArea - 1); // the first boss room
 
             var events = Run(sim, 2f, KeepAliveAndPick);
             Assert.That(events.Any(e => e.Type == SimEventType.BossSpawned));
@@ -494,8 +422,10 @@ namespace Game.Tests
                 if (sim.Enemies[i].Def.Boss) sim.DamageEnemy(i, 999999f, sim.Players[0], HitFlags.None, Vector2.zero, 0f);
             Run(sim, 0.2f, KeepAliveAndPick);
 
-            Assert.IsTrue(sim.Room.Cleared);
+            Assert.AreEqual(RoomObjective.Boss, sim.RoomOf(p).Objective);
+            Assert.IsTrue(sim.RoomOf(p).Cleared);
             Assert.AreEqual(1, sim.BossesKilled);
+            Assert.IsTrue(sim.ExitOpen, "the way to the next area opens");
         }
 
         [Test]
@@ -507,6 +437,7 @@ namespace Game.Tests
             sim.AddPlayer(1, new Loadout { classId = ClassId.Mage });
             sim.AddPlayer(2, new Loadout { classId = ClassId.Ranger });
             sim.Start();
+            sim.MoveTeamTo(sim.FindRoom(RoomKind.Combat));
             byte press = 0;
             Run(sim, 120f, s =>
             {

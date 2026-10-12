@@ -29,21 +29,23 @@ namespace Game.Gameplay
 
         public readonly NetworkVariable<int> TeamLevel = new(1);
         public readonly NetworkVariable<float> XpFraction = new();
+        /// <summary>The deepest strength tier reached (area * 4 + 0..3): how far the run got.</summary>
         public readonly NetworkVariable<int> RoomIndex = new();
-        public readonly NetworkVariable<RoomObjective> Objective = new();
-        public readonly NetworkVariable<int> Wave = new();
-        public readonly NetworkVariable<int> WaveCount = new();
-        public readonly NetworkVariable<float> Progress = new();
-        public readonly NetworkVariable<float> Target = new();
-        public readonly NetworkVariable<bool> RoomCleared = new();
-        /// <summary>Exits of the cleared room (<see cref="Door.Pack"/>); positions come from <see cref="RunSimulation.DoorPosition"/>.</summary>
-        public readonly NetworkVariable<int> DoorsPacked = new();
-        public readonly NetworkVariable<int> HoldDoor = new(-1);
-        public readonly NetworkVariable<float> ExitHold = new();
-        public readonly NetworkVariable<bool> RoomTrial = new();
+        /// <summary>The area map: every peer generates it from the seed (<see cref="DungeonMap.Generate"/>).</summary>
+        public readonly NetworkVariable<ulong> MapSeed = new();
+        public readonly NetworkVariable<int> Area = new();
+        /// <summary>Rooms by bit: visited by anyone, cleared, being fought.</summary>
+        public readonly NetworkVariable<int> VisitedRooms = new();
+        public readonly NetworkVariable<int> ClearedRooms = new();
+        public readonly NetworkVariable<int> FightingRooms = new();
+        /// <summary>Wave number per room, 4 bits each (the HUD of whoever stands there).</summary>
+        public readonly NetworkVariable<ulong> RoomWaves = new();
+        public readonly NetworkVariable<bool> BossDoorOpen = new();
+        public readonly NetworkVariable<bool> ExitOpen = new();
+        /// <summary>How long the team has gathered at the boss door / the way down.</summary>
+        public readonly NetworkVariable<float> GatherHold = new();
         public readonly NetworkVariable<int> BonusShards = new();
-        /// <summary>Curses from curse doors (RewardCatalog.PackCurses).</summary>
-        public readonly NetworkVariable<int> Curses = new();
+        /// <summary>Someone has a choice waiting on screen.</summary>
         public readonly NetworkVariable<bool> Paused = new();
         /// <summary>The host's browser tab is in the background: the run is on hold until it comes back.</summary>
         public readonly NetworkVariable<bool> HostAway = new();
@@ -54,7 +56,6 @@ namespace Game.Gameplay
         public readonly NetworkVariable<int> Kills = new();
         public readonly NetworkVariable<int> BossesKilled = new();
         public readonly NetworkVariable<int> RoomsCleared = new();
-        public readonly NetworkVariable<int> LayoutId = new();
         public readonly NetworkVariable<Difficulty> DifficultyLevel = new(Difficulty.Normal);
         public readonly NetworkVariable<EnemyType> BossType = new();
         /// <summary>The boss's trial in progress, seconds left on it, and its progress (done | total << 8).</summary>
@@ -72,10 +73,64 @@ namespace Game.Gameplay
 
         public bool IsRunning => Started.Value && Phase.Value == RunPhase.Playing;
 
-        /// <summary>Exits currently open (none while the room is being fought).</summary>
-        public Door[] Doors => RoomCleared.Value ? Door.Unpack(DoorsPacked.Value) : System.Array.Empty<Door>();
+        // ------------------------------------------------------------------ The map, on every peer
 
-        public static Vector2 DoorPosition(int index, int count) => RunSimulation.DoorPosition(index, count, RunSimulation.DefaultBounds);
+        private DungeonMap _map;
+        private (ulong Seed, int Area) _mapKey;
+
+        /// <summary>The current area's map (the host's own; clients generate the same one from the seed).</summary>
+        public DungeonMap Map
+        {
+            get
+            {
+                if (IsServer && Sim != null) return Sim.Map;
+                var key = (MapSeed.Value, Area.Value);
+                if (_map == null || key != _mapKey)
+                {
+                    _mapKey = key;
+                    _map = DungeonMap.Generate(key.Item1, key.Item2);
+                }
+                return _map;
+            }
+        }
+
+        /// <summary>The room the local player stands in (the start room before anyone has spawned).</summary>
+        public MapRoom LocalRoom
+        {
+            get
+            {
+                var map = Map;
+                var local = NetPlayer.Local;
+                return (local != null ? map.RoomAt(local.transform.position) : null) ?? _lastLocalRoom ?? map.Start;
+            }
+        }
+        private MapRoom _lastLocalRoom;
+
+        public bool IsVisited(int room) => (VisitedRooms.Value & (1 << room)) != 0;
+        public bool IsCleared(int room) => (ClearedRooms.Value & (1 << room)) != 0;
+        public bool IsFighting(int room) => (FightingRooms.Value & (1 << room)) != 0;
+        public int WaveOf(int room) => (int)((RoomWaves.Value >> (room * 4)) & 0xF);
+
+        /// <summary>
+        /// Doors are open except the boss door (until the whole team has gathered at it) and the boss room's doors
+        /// while the lord fights (no running away).
+        /// </summary>
+        public bool DoorOpen(MapRoom from, MapRoom to)
+        {
+            if (to == null) return false;
+            if (to.Kind == RoomKind.Boss && !BossDoorOpen.Value) return false;
+            if (from.Kind == RoomKind.Boss && IsFighting(from.Id)) return false;
+            return true;
+        }
+
+        /// <summary>The local player stands where a fight is going on (picks and gear swaps wait).</summary>
+        public bool LocalFighting => IsFighting(LocalRoom.Id);
+
+        private void LateUpdate()
+        {
+            var local = NetPlayer.Local;
+            if (local != null && IsSpawned) _lastLocalRoom = Map.RoomAt(local.transform.position) ?? _lastLocalRoom;
+        }
 
         private readonly List<EnemyRenderState> _snapshotBuffer = new();
         private readonly List<ulong> _remoteClients = new();
@@ -132,7 +187,7 @@ namespace Game.Gameplay
             if (Started.Value) return;
 
             DifficultyLevel.Value = ChosenDifficulty();
-            Sim = new RunSimulation((ulong)DateTime.UtcNow.Ticks, null, DifficultyLevel.Value);
+            Sim = new RunSimulation((ulong)DateTime.UtcNow.Ticks, DifficultyLevel.Value);
             Sim.DropChanceScale = CommandLine.GetFloat("-lootrate", 1f);
             Sim.BossStartHealth = CommandLine.GetFloat("-bosshp", 1f);
             int slot = 0;
@@ -142,7 +197,6 @@ namespace Game.Gameplay
                 SpawnPlayer(clientId, Sim.AddPlayer(clientId, loadout), loadout, slot++);
             }
 
-            Sim.ForceDealDoors = CommandLine.Has("-dealdoors"); // screenshots: a curse door and the merchant after every room
             Sim.Start((int)CommandLine.GetFloat("-startroom", 0f));
             // -legendary (screenshots): everyone starts wearing a legendary piece for their class.
             if (CommandLine.Has("-legendary"))
@@ -309,24 +363,32 @@ namespace Game.Gameplay
                 SetIfChanged(p.Picks, sp.PicksLeft);
                 SetIfChanged(p.Legendary, sp.AnyLegendaryEquipped);
                 SetIfChanged(p.Caged, sp.CagedBy != 0);
+                SetIfChanged(p.Curses, RewardCatalog.PackCurses(sp.CurseStacks));
+                SetIfChanged(p.UsedPedestals, Sim.PedestalsUsedBy(sp));
             }
 
-            var room = Sim.Room;
             SetIfChanged(TeamLevel, Sim.TeamLevel);
             SetIfChanged(XpFraction, Quantize(Sim.TeamXp / Sim.XpToNext));
-            SetIfChanged(RoomIndex, room.Index);
-            SetIfChanged(Objective, room.Objective);
-            SetIfChanged(Wave, room.Wave);
-            SetIfChanged(WaveCount, room.WaveCount);
-            SetIfChanged(Progress, room.Objective == RoomObjective.Survive ? Mathf.Floor(room.Progress) : room.Progress);
-            SetIfChanged(Target, room.Target);
-            SetIfChanged(RoomCleared, room.Cleared);
-            SetIfChanged(DoorsPacked, room.Cleared ? Door.Pack(room.Doors) : 0);
-            SetIfChanged(HoldDoor, room.HoldDoor);
-            SetIfChanged(ExitHold, Quantize(room.ExitHold));
-            SetIfChanged(RoomTrial, room.Trial);
+            SetIfChanged(RoomIndex, Sim.DeepestIndex);
+            SetIfChanged(MapSeed, Sim.MapSeed);
+            SetIfChanged(Area, Sim.Area);
+            int visited = 0, cleared = 0, fighting = 0;
+            ulong waves = 0;
+            foreach (var r in Sim.RoomStates)
+            {
+                if (r.Visited) visited |= 1 << r.Id;
+                if (r.Cleared) cleared |= 1 << r.Id;
+                if (r.Fighting) fighting |= 1 << r.Id;
+                waves |= (ulong)Mathf.Min(r.Wave, 15) << (r.Id * 4);
+            }
+            SetIfChanged(VisitedRooms, visited);
+            SetIfChanged(ClearedRooms, cleared);
+            SetIfChanged(FightingRooms, fighting);
+            SetIfChanged(RoomWaves, waves);
+            SetIfChanged(BossDoorOpen, Sim.BossDoorOpen);
+            SetIfChanged(ExitOpen, Sim.ExitOpen);
+            SetIfChanged(GatherHold, Quantize(Sim.GatherHold));
             SetIfChanged(BonusShards, Sim.BonusShards);
-            SetIfChanged(Curses, RewardCatalog.PackCurses(Sim.CurseStacks));
             SetIfChanged(Paused, Sim.AwaitingChoices);
             SetIfChanged(Elapsed, Mathf.Floor(Sim.Elapsed));
             SetIfChanged(Phase, Sim.Phase);
@@ -334,7 +396,6 @@ namespace Game.Gameplay
             SetIfChanged(Kills, Sim.Kills);
             SetIfChanged(BossesKilled, Sim.BossesKilled);
             SetIfChanged(RoomsCleared, Sim.RoomsCleared);
-            SetIfChanged(LayoutId, Sim.Layout.Id);
             SetIfChanged(BossType, Sim.AreaBoss);
             SetIfChanged(Trial, Sim.ActiveTrial);
             SetIfChanged(TrialTimer, Mathf.Ceil(Mathf.Max(0f, Sim.TrialTimer)));
@@ -344,7 +405,7 @@ namespace Game.Gameplay
 
         private float BossHealthFraction()
         {
-            if (Sim.Room.Objective != RoomObjective.Boss || Sim.Room.Cleared) return -1f;
+            if (!Sim.RoomStates[Sim.Map.Boss.Id].Fighting) return -1f;
             for (int i = 0; i < Sim.Enemies.Count; i++)
             {
                 ref var e = ref Sim.Enemies[i];

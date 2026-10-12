@@ -3,16 +3,25 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
-    /// <summary>The walkable area of the current scene: the camp, or the run's arena with its room layout.</summary>
+    /// <summary>The walkable area of the current scene: the camp, or the room of the area map the local player is in.</summary>
     public static class PlayArea
     {
         public static bool InCamp => CampDirector.Instance != null;
 
-        /// <summary>In a run: the floor left standing (the Lich's collapse shrinks it).</summary>
-        public static Rect Bounds => InCamp ? Camp.Bounds
-            : RunSimulation.SafeArea(RunSimulation.DefaultBounds, RunDirector.Instance != null ? RunDirector.Instance.CollapseStage.Value : 0);
+        /// <summary>In a run: the floor of the local player's room (the Lich's collapse shrinks the boss room's).</summary>
+        public static Rect Bounds
+        {
+            get
+            {
+                if (InCamp) return Camp.Bounds;
+                var director = RunDirector.Instance;
+                if (director == null) return RunSimulation.DefaultBounds;
+                var room = director.LocalRoom;
+                return room.Kind == RoomKind.Boss ? RunSimulation.SafeArea(room.Bounds, director.CollapseStage.Value) : room.Bounds;
+            }
+        }
 
         public static RoomLayout Layout =>
-            InCamp ? Camp.Layout : RunDirector.Instance != null ? Arena.Get(RunDirector.Instance.LayoutId.Value) : null;
+            InCamp ? Camp.Layout : RunDirector.Instance != null ? RunDirector.Instance.LocalRoom.Layout : null;
     }
 }

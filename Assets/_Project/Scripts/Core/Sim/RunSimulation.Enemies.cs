@@ -25,6 +25,7 @@ namespace Game.Core
                 if (e.Dead) continue;
                 var def = e.Def;
                 if (def.Prop) continue;
+                Room = RoomStates[e.RoomId];
 
                 TickStatuses(i, dt);
                 e = ref Enemies[i];
@@ -51,7 +52,7 @@ namespace Game.Core
                     continue;
                 }
 
-                var target = NearestLivingPlayer(e.Position);
+                var target = NearestLivingPlayer(e.Position, e.RoomId);
                 switch (e.State)
                 {
                     case EnemyState.Chase:
@@ -83,25 +84,21 @@ namespace Game.Core
 
         private Vector2 Confine(Vector2 p, float radius, bool flying)
         {
-            p = Enemies.ClampToBounds(p, radius);
-            if (CollapseStage > 0 && !flying)
-            {
-                var area = PlayRect;
-                p.x = Mathf.Clamp(p.x, area.xMin + radius, area.xMax - radius);
-                p.y = Mathf.Clamp(p.y, area.yMin + radius, area.yMax - radius);
-            }
+            // Flyers may hover over the fallen floor; walkers keep to what is left of it.
+            p = flying ? new Vector2(Mathf.Clamp(p.x, Bounds.xMin + radius, Bounds.xMax - radius), Mathf.Clamp(p.y, Bounds.yMin + radius, Bounds.yMax - radius)) : ClampToRoom(p, radius);
             return flying ? p : Arena.Resolve(Layout, p, radius);
         }
 
         private static bool BossEnraged(in Enemy e) => e.Def.Boss && e.Health < e.MaxHealth * 0.5f;
 
-        private SimPlayer NearestLivingPlayer(Vector2 position)
+        /// <summary>Monsters only go after players in their own room (the others are elsewhere on the map).</summary>
+        private SimPlayer NearestLivingPlayer(Vector2 position, int room)
         {
             SimPlayer best = null;
             float bestSq = float.MaxValue;
             foreach (var p in Players)
             {
-                if (!p.Alive) continue;
+                if (!p.Alive || p.RoomId != room) continue;
                 float sq = (p.Position - position).sqrMagnitude;
                 if (sq < bestSq)
                 {
@@ -215,11 +212,11 @@ namespace Game.Core
                 {
                     var spots = new List<Vector2>();
                     foreach (var p in Players)
-                        if (p.Alive) spots.Add(p.Position);
+                        if (p.Alive && p.RoomId == e.RoomId) spots.Add(p.Position);
                     for (int k = 0; k < a.Extra; k++)
                     {
                         var near = spots.Count > 0 ? spots[_aiRng.Range(0, spots.Count)] : e.Position;
-                        spots.Add(Enemies.ClampToBounds(near + Rotate(Vector2.right, _aiRng.Range(0f, 360f)) * _aiRng.Range(2f, 4.5f), 1f));
+                        spots.Add(ClampToRoom(near + Rotate(Vector2.right, _aiRng.Range(0f, 360f)) * _aiRng.Range(2f, 4.5f), 1f));
                     }
                     _rainTargets[e.Id] = spots;
                     foreach (var s in spots) Telegraph(e, AttackShape.Circle, s, e.AimDirection, a);
@@ -263,7 +260,7 @@ namespace Game.Core
             float bestScore = -1f;
             for (int k = 0; k < 8; k++)
             {
-                var p = Enemies.ClampToBounds(near + Rotate(Vector2.right, _aiRng.Range(0f, 360f)) * _aiRng.Range(4.5f, 7f), 1.5f);
+                var p = ClampToRoom(near + Rotate(Vector2.right, _aiRng.Range(0f, 360f)) * _aiRng.Range(4.5f, 7f), 1.5f);
                 if (Arena.Overlaps(Layout, p, 1f)) continue;
                 float score = (p - near).magnitude;
                 if (score > bestScore)
@@ -320,7 +317,7 @@ namespace Game.Core
                     for (int s = 0; s < count; s++)
                     {
                         Vector2 at = center + Rotate(Vector2.right, s * 360f / count + 30f) * 2.2f;
-                        at = Arena.Resolve(Layout, Enemies.ClampToBounds(at, 0.5f), 0.5f);
+                        at = Arena.Resolve(Layout, ClampToRoom(at, 0.5f), 0.5f);
                         QueueSpawn(s % 2 == 0 ? a.Summon1 : a.Summon2, false, at);
                     }
                     break;
@@ -374,7 +371,7 @@ namespace Game.Core
             float step = Mathf.Min(e.LungeLeft, a.ProjectileSpeed * dt);
             e.LungeLeft -= step;
             Vector2 before = e.Position;
-            Vector2 next = Enemies.ClampToBounds(e.Position + e.AimDirection * step, e.Radius);
+            Vector2 next = ClampToRoom(e.Position + e.AimDirection * step, e.Radius);
             bool hitPillar = !def.Flying && Arena.Overlaps(Layout, next, e.Radius);
             e.Position = def.Flying ? next : Arena.Resolve(Layout, next, e.Radius);
             e.Moving = true;

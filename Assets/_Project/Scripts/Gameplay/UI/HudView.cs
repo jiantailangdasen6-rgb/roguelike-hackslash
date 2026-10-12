@@ -48,6 +48,10 @@ namespace Game.Gameplay
         private GameObject _bossRoot;
         private Text _bossName;
         private Text _trialText;
+        private MinimapView _minimap;
+        private int _shownRoom = -1;
+        private (ulong, int) _shownMap;
+        private readonly HashSet<(int Area, int Room)> _roomsBannered = new();
         private Text _centerText;
         private Text _bannerText;
         private Text _bannerSub;
@@ -102,10 +106,12 @@ namespace Game.Gameplay
             _timeText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(240f, 44f), new Vector2(-28f, -22f));
             _difficultyText = UIKit.Label(root, "", 22, TextAnchor.UpperRight, UIKit.MutedText);
             _difficultyText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(900f, 32f), new Vector2(-28f, -64f));
+            _minimap = new MinimapView(root, new Vector2(-24f, -98f));
+            float below = -98f - _minimap.Root.sizeDelta.y - 10f;
             _roomText = UIKit.Title(root, "", 26, TextAnchor.UpperRight, UIKit.MutedText);
-            _roomText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(700f, 40f), new Vector2(-28f, -98f));
-            _objectiveText = UIKit.Label(root, "", 28, TextAnchor.UpperRight, UIKit.AccentColor);
-            _objectiveText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(800f, 40f), new Vector2(-28f, -136f));
+            _roomText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(700f, 40f), new Vector2(-28f, below));
+            _objectiveText = UIKit.Label(root, "", 26, TextAnchor.UpperRight, UIKit.AccentColor);
+            _objectiveText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(760f, 80f), new Vector2(-28f, below - 38f));
 
             // Boss bar
             var boss = UIKit.Framed(root, "Boss", new Color(0.03f, 0.02f, 0.03f, 0.9f));
@@ -237,16 +243,15 @@ namespace Game.Gameplay
             _bannerUntil = Time.time + seconds;
         }
 
-        public static string RoomTitle(int room)
+        /// <summary>How far a run got (result screen): the area, or its lord's hall.</summary>
+        public static string RoomTitle(int index)
         {
-            int area = Mathf.Min(room / RunSimulation.RoomsPerArea, AreaNames.Length - 1);
-            return RunSimulation.ObjectiveOf(room) switch
-            {
-                RoomObjective.Boss => $"{AreaNames[area]} ─ 主の間",
-                RoomObjective.Rest => $"{AreaNames[area]} ─ 焚き火の間",
-                _ => $"{AreaNames[area]} ─ 第{room % RunSimulation.RoomsPerArea + 1}の間",
-            };
+            int area = Mathf.Min(index / RunSimulation.RoomsPerArea, AreaNames.Length - 1);
+            return index % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1 ? $"{AreaNames[area]} ─ 主の間" : AreaNames[area];
         }
+
+        public static string RoomTitle(MapRoom room) =>
+            $"{AreaNames[Mathf.Clamp(room.Index / RunSimulation.RoomsPerArea, 0, AreaNames.Length - 1)]} ─ {RoomCatalog.Name(room.Kind)}";
 
         /// <summary>The banner under the boss bar: what to do now (empty when nothing special is going on).</summary>
         private static string TrialText(RunDirector d, NetPlayer local)
@@ -273,54 +278,50 @@ namespace Game.Gameplay
             {
                 case SimEventType.RoomStarted:
                 {
-                    var objective = RunSimulation.ObjectiveOf(e.Int) switch
-                    {
-                        RoomObjective.Survive => $"{RunSimulation.SurviveSeconds:0}秒間 生き延びよ",
-                        RoomObjective.Boss => $"{AreaBoss(e.Int).Name}を討て",
-                        RoomObjective.Rest => "ひと息つこう　火のそばで傷が癒える・宝箱を壊すと魂",
-                        _ => RunSimulation.IsEliteRoom(e.Int) ? "精鋭が率いる群れを倒せ" : "すべての魔物を倒せ",
-                    };
-                    bool trial = e.Value > 0.5f;
-                    Banner(trial ? $"{RoomTitle(e.Int)}  <color=#ff6a5a>試練</color>" : RoomTitle(e.Int),
-                        trial ? $"{objective}（魔物が手強い）" : objective);
-                    var layout = Arena.Get(e.Id);
-                    foreach (var g in layout.Gimmicks)
-                    {
-                        if (g.Kind == GimmickKind.PowderKeg) Tip("keg", "火薬樽は攻撃すると爆発する。魔物の群れを巻き込め（味方も巻き込むので注意）");
-                        if (g.Kind is GimmickKind.SpikeTrap or GimmickKind.FlameJet) Tip("trap", "罠は魔物にも効く。誘い込んで一網打尽に");
-                        if (g.Kind == GimmickKind.HealingFont) Tip("font", "癒しの泉：上に立つと周りの仲間ごと回復（部屋に1回）");
-                    }
+                    // A new area: its name, then the map takes over.
+                    int area = Mathf.Clamp(e.Int / RunSimulation.RoomsPerArea, 0, AreaNames.Length - 1);
+                    Banner(AreaNames[area], "扉をくぐって迷宮を探索しよう　主の間は焚き火の間の奥", 3.2f);
+                    Tip("map", "右上は地図。入った部屋とその隣が見える。寄り道（祠・泉・精鋭）をするほど強くなる");
+                    if (NetPlayer.All.Count > 1) Tip("split", "仲間とは別の部屋を探索できる。倒れた仲間は地図で赤く点滅する。主の扉は全員がそろうと開く");
                     break;
                 }
                 case SimEventType.TeamLevelUp:
                     // Between rooms the pick comes right away, so the reminder is only for level-ups mid-fight.
-                    Toast(RunDirector.Instance != null && RunDirector.Instance.RoomCleared.Value
+                    Toast(RunDirector.Instance != null && !RunDirector.Instance.LocalFighting
                         ? $"<color=#e0b45a>レベル {e.Int}！</color>"
-                        : $"<color=#e0b45a>レベル {e.Int}！</color> 力は部屋を制圧した後に選べる");
+                        : $"<color=#e0b45a>レベル {e.Int}！</color> 力は戦いが終わってから選べる");
                     break;
                 case SimEventType.RoomCleared:
                 {
-                    Banner("部屋を制圧した", NetPlayer.All.Count > 1 ? "力を選んだら、報酬の門を選んで全員でその前に立て" : "力を選んだら、報酬の門を選んでその前に立て");
-                    Tip("doors", "門の上の印は、その先で得られる報酬。赤い「試練」の門は報酬2倍だが、次の部屋の魔物が手強い");
+                    var director = RunDirector.Instance;
+                    if (director != null && director.LocalRoom.Id == e.Id) Banner("部屋を制圧した", "扉から次の部屋へ", 2f);
+                    else Toast($"仲間が{RoomCatalog.Name(director != null ? director.Map[e.Id]?.Kind ?? RoomKind.Combat : RoomKind.Combat)}を制圧した");
                     break;
                 }
-                case SimEventType.RewardGranted:
+                case SimEventType.PedestalUsed:
                 {
-                    var reward = (RoomReward)e.Int;
-                    string hex = ColorUtility.ToHtmlStringRGB(RewardCatalog.Color(reward));
-                    string text = reward switch
+                    var kind = (RoomKind)e.Int;
+                    string hex = ColorUtility.ToHtmlStringRGB(RoomCatalog.Color(kind));
+                    if (!IsMe(e.ClientId))
                     {
-                        RoomReward.Vigor => $"最大HP +{e.Value:0}%、全員の傷が癒えた",
-                        RoomReward.Shards => $"魂の欠片 +{e.Value:0}（ラン後に受け取る）",
-                        RoomReward.Treasure => "全員が希少以上の装備を手に入れた（I で袋を開く）",
-                        RoomReward.Upgrade => "持っている力を強化する",
-                        RoomReward.Cursed => $"力を{RewardCatalog.CursedBoons}つ授かる。代償に「{RewardCatalog.CurseName((CurseKind)Mathf.RoundToInt(e.Value))}」（{RewardCatalog.CurseText((CurseKind)Mathf.RoundToInt(e.Value))}）がこのランの間つく",
-                        RoomReward.Shop => "魂の欠片で1人1つ買える（全員の取り分から払う）",
+                        Toast($"{NameOf(e.ClientId)}が<color=#{hex}>{RoomCatalog.Name(kind)}</color>を使った");
+                        break;
+                    }
+                    string text = kind switch
+                    {
+                        RoomKind.Spring => $"最大HP +{e.Value:0}%、傷が癒えた",
+                        RoomKind.Whetstone => "持っている力を強化する",
+                        RoomKind.CurseAltar => $"力を{RewardCatalog.CursedBoons}つ授かる。代償に「{RewardCatalog.CurseName((CurseKind)Mathf.RoundToInt(e.Value))}」（{RewardCatalog.CurseText((CurseKind)Mathf.RoundToInt(e.Value))}）がこのランの間つく",
+                        RoomKind.Merchant => "魂の欠片で1つ買える（全員の取り分から払う）",
                         _ => "新たな力を授かる",
                     };
-                    Toast($"<color=#{hex}>{RewardCatalog.Name(reward)}</color>：{text}");
+                    Toast($"<color=#{hex}>{RoomCatalog.Name(kind)}</color>：{text}");
                     break;
                 }
+                case SimEventType.DoorOpened:
+                    if (e.Int == 0) Banner("主の扉が開いた", "覚悟はいいか", 2.4f);
+                    else Banner("奥への道が開いた", NetPlayer.All.Count > 1 ? "全員で光の上に立つと次のエリアへ" : "光の上に立つと次のエリアへ", 3f);
+                    break;
                 case SimEventType.BossSpawned:
                 {
                     var def = EnemyCatalog.Get((EnemyType)e.Int);
@@ -337,7 +338,7 @@ namespace Game.Gameplay
                         case EnemyType.Necromancer: Tip("necro", "死霊術師は骸骨を呼び続ける。先に仕留めろ"); break;
                     }
                     break;
-                case SimEventType.WaveStarted when e.Int > 1:
+                case SimEventType.WaveStarted when e.Int > 1 && RunDirector.Instance != null && RunDirector.Instance.LocalRoom.Id == e.Id:
                     Toast($"第{e.Int}波 襲来！");
                     break;
                 case SimEventType.PlayerDowned:
@@ -416,13 +417,16 @@ namespace Game.Gameplay
             _xpBar.Fill = director.XpFraction.Value;
             // Banked picks show as stars next to the level until the room is cleared.
             int banked = local != null ? local.Picks.Value : 0;
-            _levelText.text = banked > 0 && !director.RoomCleared.Value
+            _levelText.text = banked > 0 && director.LocalFighting
                 ? $"<size=24><color=#e0b45a>★{banked}</color></size>  Lv {director.TeamLevel.Value}"
                 : $"Lv {director.TeamLevel.Value}";
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
-            _difficultyText.text = CurseText(director.Curses.Value) + $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
-            _roomText.text = RoomTitle(director.RoomIndex.Value) + $"   {director.RoomIndex.Value + 1}/{RunSimulation.TotalRooms}";
-            _objectiveText.text = ObjectiveText(director);
+            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
+            var here = director.LocalRoom;
+            _roomText.text = RoomTitle(here);
+            _objectiveText.text = ObjectiveText(director, here);
+            _minimap.Update(director);
+            AnnounceRoom(director, here);
 
             float boss = director.BossHealth.Value;
             UIKit.Toggle(_bossRoot, boss >= 0f);
@@ -543,27 +547,56 @@ namespace Game.Gameplay
             slot.Name.color = cooling ? new Color(0.62f, 0.6f, 0.58f) : Color.white;
         }
 
-        private static string ObjectiveText(RunDirector d)
+        /// <summary>What to do in the room you stand in.</summary>
+        private static string ObjectiveText(RunDirector d, MapRoom room)
         {
-            if (d.RoomCleared.Value)
+            bool team = NetPlayer.All.Count > 1;
+            string Gather(string where) =>
+                d.GatherHold.Value > 0.05f ? $"{where}…  {d.GatherHold.Value / RunSimulation.ExitHoldTime:P0}" : where;
+            switch (room.Kind)
             {
-                if (d.Paused.Value) return "全員が力を選び終えると門が開く";
-                var doors = d.Doors;
-                if (doors.Length == 0) return "";
-                int held = d.HoldDoor.Value;
-                if (held >= 0 && held < doors.Length)
-                    return $"「{RewardCatalog.Name(doors[held].Reward)}」の門へ…  {d.ExitHold.Value / RunSimulation.ExitHoldTime:P0}";
-                if (d.Objective.Value == RoomObjective.Rest)
-                    return NetPlayer.All.Count > 1 ? "焚き火で休み、全員で同じ門へ" : "焚き火で休み、進む門の前に立つ";
-                return NetPlayer.All.Count > 1 ? "門を選べ：全員で同じ門の前に立つ" : "門を選べ：進みたい門の前に立つ";
+                case RoomKind.Combat:
+                case RoomKind.Elite:
+                    if (d.IsFighting(room.Id))
+                        return $"{(room.Kind == RoomKind.Elite ? "精鋭の群れ" : "魔物の群れ")}  第{Mathf.Max(1, d.WaveOf(room.Id))}波 / {RunSimulation.WaveCountFor(room.Kind, d.Area.Value)}";
+                    return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み　扉から次の部屋へ</color>" : "";
+                case RoomKind.Boss:
+                    if (d.ExitOpen.Value) return Gather(team ? "奥への道（光）の上に全員で立つ" : "奥への道（光）の上に立つ");
+                    return d.IsFighting(room.Id) ? $"{EnemyCatalog.Get(d.BossType.Value).Name}を討て" : "";
+                case RoomKind.Campfire:
+                    if (d.BossDoorOpen.Value) return "主の間へ";
+                    return Gather(team ? "焚き火で休み、全員で主の扉の前に立つ" : "焚き火で休み、主の扉の前に立つ");
+                case RoomKind.Start:
+                    return "<color=#bfb6aa>扉をくぐって探索しよう</color>";
+                default:
+                    bool used = NetPlayer.Local != null && (NetPlayer.Local.UsedPedestals.Value & (1 << room.Id)) != 0;
+                    return used ? "<color=#bfb6aa>もう使った</color>" : RoomCatalog.PedestalText(room.Kind);
             }
-            string objective = d.Objective.Value switch
+        }
+
+        /// <summary>The first time you step into a room of this area: its name.</summary>
+        private void AnnounceRoom(RunDirector d, MapRoom room)
+        {
+            var map = (d.MapSeed.Value, d.Area.Value);
+            if (room.Id == _shownRoom && map == _shownMap) return;
+            _shownRoom = room.Id;
+            _shownMap = map;
+            if (room.Kind == RoomKind.Start || !_roomsBannered.Add((d.Area.Value, room.Id))) return;
+            string sub = room.Kind switch
             {
-                RoomObjective.Survive => $"生き延びよ  残り {UIKit.FormatTime(d.Target.Value - d.Progress.Value)}",
-                RoomObjective.Waves => $"魔物の群れ  第{Mathf.Max(1, d.Wave.Value)}波 / {d.WaveCount.Value}",
-                _ => $"{EnemyCatalog.Get(d.BossType.Value).Name}を討て",
+                RoomKind.Combat => "魔物が来る",
+                RoomKind.Elite => "精鋭が率いる群れ。倒すと良い装備が出やすい",
+                RoomKind.Campfire => "火のそばで傷が癒える・宝箱を壊すと魂",
+                RoomKind.Boss => "",
+                _ => RoomCatalog.PedestalText(room.Kind),
             };
-            return d.RoomTrial.Value ? $"<color=#ff6a5a>試練</color>  {objective}" : objective;
+            if (room.Kind != RoomKind.Boss) Banner(RoomCatalog.Name(room.Kind), sub, 2f);
+            foreach (var g in room.Layout.Gimmicks)
+            {
+                if (g.Kind == GimmickKind.PowderKeg) Tip("keg", "火薬樽は攻撃すると爆発する。魔物の群れを巻き込め（味方も巻き込むので注意）");
+                if (g.Kind is GimmickKind.SpikeTrap or GimmickKind.FlameJet) Tip("trap", "罠は魔物にも効く。誘い込んで一網打尽に");
+                if (g.Kind == GimmickKind.HealingFont) Tip("font", "癒しの泉：上に立つと周りの仲間ごと回復（部屋に1回）");
+            }
         }
 
         private static string CenterMessage(RunDirector d, NetPlayer local)
@@ -576,7 +609,6 @@ namespace Game.Gameplay
                 return local.BeingRevived
                     ? $"仲間が助け起こしている…  {local.ReviveProgress.Value:P0}"
                     : NetPlayer.All.Count > 1 ? "倒れた… 仲間がそばに来れば立ち上がれる" : "倒れた…";
-            if (d.Paused.Value && !PerkView.IsShowing) return "仲間が力を選んでいる…";
             return "";
         }
     }

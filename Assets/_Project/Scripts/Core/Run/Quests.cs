@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game.Core
 {
@@ -21,7 +22,7 @@ namespace Game.Core
         BreakChest,  // rest room chests opened
         ExplodeKeg,  // powder kegs set off
         Rest,        // campfire rooms reached
-        Trial,       // trial rooms entered
+        Trial,       // elite nests cleared (once: trial doors; the id is kept for saved progress)
         ReachArea,   // reach area Count (1 = blood chapel, 2 = abyss); done once
         Victory,     // labyrinth cleared
     }
@@ -78,7 +79,7 @@ namespace Game.Core
             {
                 Q("g1", QuestGiver.Gravekeeper, "火の番", "焚き火の間にたどり着く", QuestGoal.Rest, 2, 30),
                 Q("g2", QuestGiver.Gravekeeper, "礼拝堂へ", "血塗られた礼拝堂にたどり着く", QuestGoal.ReachArea, 1, 50, unlock: "class_assassin", unlockName: "新クラス「暗殺者」"),
-                Q("g3", QuestGiver.Gravekeeper, "試練を越えて", "試練の門をくぐる", QuestGoal.Trial, 3, 60),
+                Q("g3", QuestGiver.Gravekeeper, "精鋭狩り", "精鋭の巣を制圧する", QuestGoal.Trial, 3, 60),
                 Q("g4", QuestGiver.Gravekeeper, "奈落へ", "奈落の玉座にたどり着く", QuestGoal.ReachArea, 2, 80),
                 Q("g5", QuestGiver.Gravekeeper, "迷宮の果て", "迷宮を踏破する", QuestGoal.Victory, 1, 150),
             },
@@ -100,7 +101,7 @@ namespace Game.Core
             new[]
             {
                 Q("gr_rest", QuestGiver.Gravekeeper, "火の番", "焚き火の間にたどり着く", QuestGoal.Rest, 3, 40),
-                Q("gr_trial", QuestGiver.Gravekeeper, "試練を越えて", "試練の門をくぐる", QuestGoal.Trial, 3, 45),
+                Q("gr_trial", QuestGiver.Gravekeeper, "精鋭狩り", "精鋭の巣を制圧する", QuestGoal.Trial, 3, 45),
             },
         };
 
@@ -140,9 +141,9 @@ namespace Game.Core
                 case QuestGoal.ExplodeKeg:
                     return e.Type == SimEventType.EnemyDied && e.Value < 0.5f && (EnemyType)e.Int == EnemyType.PowderKeg ? 1 : 0;
                 case QuestGoal.Rest:
-                    return e.Type == SimEventType.RoomStarted && RunSimulation.ObjectiveOf(e.Int) == RoomObjective.Rest ? 1 : 0;
+                    return e.Type == SimEventType.RoomEntered && (RoomKind)Mathf.RoundToInt(e.Value) == RoomKind.Campfire ? 1 : 0;
                 case QuestGoal.Trial:
-                    return e.Type == SimEventType.RoomStarted && e.Value > 0.5f ? 1 : 0;
+                    return e.Type == SimEventType.RoomCleared && (RoomKind)Mathf.RoundToInt(e.Value) == RoomKind.Elite ? 1 : 0;
                 case QuestGoal.ReachArea:
                     return e.Type == SimEventType.RoomStarted && e.Int / RunSimulation.RoomsPerArea >= q.Count ? 1 : 0;
                 case QuestGoal.Victory:

@@ -486,8 +486,10 @@ namespace Game.Core
                 }
 
                 // Lobbed flasks sail over cover; everything else stops at it.
-                bool blocked = !FliesOver(proj.Kind) && Arena.BlocksShot(Layout, proj.Position);
-                if (spent || proj.Life <= 0f || !Bounds.Contains(proj.Position) || blocked)
+                // Shots stop at the walls of the room they fly in (rooms sit apart on the map).
+                var inRoom = Map.RoomAt(proj.Position, 0f);
+                bool blocked = inRoom == null || (!FliesOver(proj.Kind) && Arena.BlocksShot(inRoom.Layout, proj.Position));
+                if (spent || proj.Life <= 0f || blocked)
                 {
                     if (!proj.Hostile && IsFlask(proj.Kind)) BreakFlask(proj); // RunSimulation.Classes.cs
                     Events.Add(new SimEvent(SimEventType.ProjectileEnd) { Id = proj.Id, Pos = proj.Position });
@@ -701,6 +703,7 @@ namespace Game.Core
                 ref var e = ref Enemies[i];
                 if (!e.Dead) continue;
                 var def = e.Def;
+                Room = RoomStates[e.RoomId];
                 Events.Add(new SimEvent(SimEventType.EnemyDied) { Id = e.Id, Pos = e.Position, Int = (int)e.Type, Value = giveXp ? 0f : 1f });
                 if (!giveXp) continue;
                 if (def.Prop)

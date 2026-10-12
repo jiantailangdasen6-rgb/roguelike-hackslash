@@ -39,9 +39,6 @@ namespace Game.Core
         /// <summary>Gear brought from home works at most this many levels above the current room.</summary>
         public const int GearLevelGrace = 2;
 
-        /// <summary>Item level gear works at in this room (gear found here is never above it).</summary>
-        public int GearLevelCap => Room.Index + 1 + GearLevelGrace;
-
         /// <summary>
         /// Empty slots get a plain piece on loan for this run (common or fine, at the room's level), so a friend with
         /// an empty stash isn't left far behind. Loaners are handed back when replaced and never go home.
@@ -64,7 +61,7 @@ namespace Game.Core
         }
 
         /// <summary>Better finds deeper in the labyrinth and on harder difficulties.</summary>
-        private float LootBoost => 0.35f * Room.Area + DifficultyDef.LootBoost;
+        private float LootBoost => 0.35f * Area + DifficultyDef.LootBoost;
 
         private ItemInstance RollItem(SimPlayer owner, float boost, Rarity minRarity = Rarity.Common) =>
             ItemGenerator.Generate(_lootRng.NextULong() | 1ul, Room.Index + 1, boost + LootBoost, owner.ClassId, minRarity);
@@ -93,8 +90,11 @@ namespace Game.Core
             });
         }
 
-        private Vector2 ClampToFloor(Vector2 p) =>
-            new(Mathf.Clamp(p.x, Bounds.xMin + 0.5f, Bounds.xMax - 0.5f), Mathf.Clamp(p.y, Bounds.yMin + 0.5f, Bounds.yMax - 0.5f));
+        private Vector2 ClampToFloor(Vector2 p)
+        {
+            var b = Map.RoomAt(p)?.Bounds ?? Bounds;
+            return new(Mathf.Clamp(p.x, b.xMin + 0.5f, b.xMax - 0.5f), Mathf.Clamp(p.y, b.yMin + 0.5f, b.yMax - 0.5f));
+        }
 
         /// <summary>Owners pick up their own drops by walking over them (if the bag has room).</summary>
         private void CollectLoot()
@@ -118,7 +118,7 @@ namespace Game.Core
             SyncGear(p);
         }
 
-        /// <summary>Leaving a room: everyone's drops follow them (as long as their bag has room).</summary>
+        /// <summary>Leaving an area: everyone's drops follow them (as long as their bag has room).</summary>
         private void SweepLoot()
         {
             for (int i = Loot.Count - 1; i >= 0; i--)
@@ -130,14 +130,7 @@ namespace Game.Core
             Loot.Clear();
         }
 
-        /// <summary>Treasure door: gear straight into each bag (or at their feet when it's full).</summary>
-        private void GrantTreasure(int times)
-        {
-            foreach (var p in Players)
-                for (int i = 0; i < times; i++) GrantTreasureTo(p, i);
-        }
-
-        /// <summary>One rare-or-better piece for one player (treasure doors, the merchant).</summary>
+        /// <summary>One rare-or-better piece for one player (the merchant).</summary>
         private void GrantTreasureTo(SimPlayer p, int slot)
         {
             var item = RollItem(p, 2f, Rarity.Rare);
@@ -155,7 +148,7 @@ namespace Game.Core
         public bool EquipFromBag(ulong clientId, int bagIndex)
         {
             var p = GetPlayer(clientId);
-            if (p == null || !OffersOpen || !p.Equip(bagIndex)) return false;
+            if (p == null || !CanChoose(p) || !p.Equip(bagIndex)) return false;
             SyncGear(p);
             return true;
         }
@@ -163,7 +156,7 @@ namespace Game.Core
         public bool UnequipSlot(ulong clientId, EquipSlot slot)
         {
             var p = GetPlayer(clientId);
-            if (p == null || !OffersOpen || !p.Unequip(slot)) return false;
+            if (p == null || !CanChoose(p) || !p.Unequip(slot)) return false;
             SyncGear(p);
             return true;
         }
@@ -173,7 +166,7 @@ namespace Game.Core
         {
             var from = GetPlayer(clientId);
             var to = GetPlayer(toClientId);
-            if (from == null || to == null || from == to || !OffersOpen) return false;
+            if (from == null || to == null || from == to || !CanChoose(from) || !CanChoose(to)) return false;
             if (bagIndex < 0 || bagIndex >= from.Bag.Count || to.BagFull) return false;
             var item = from.Bag[bagIndex];
             if (item.loaner) return false; // lent to this player only
@@ -198,7 +191,7 @@ namespace Game.Core
         public bool SalvageItem(ulong clientId, int bagIndex)
         {
             var p = GetPlayer(clientId);
-            if (p == null || !OffersOpen || bagIndex < 0 || bagIndex >= p.Bag.Count) return false;
+            if (p == null || !CanChoose(p) || bagIndex < 0 || bagIndex >= p.Bag.Count) return false;
             var item = p.Bag[bagIndex];
             p.Bag.RemoveAt(bagIndex);
             int shards = item.loaner ? 0 : SalvageValue(item.rarity);

@@ -49,6 +49,10 @@ namespace Game.Tests
                 Assert.IsNotNull(NetPlayer.Local, "local player was not spawned");
                 Assert.Greater(NetPlayer.Local.MaxHp.Value, 0f);
 
+                // The run starts in the quiet entrance: step into a fight room of the map (the host teleports the player).
+                var start = RunDirector.Instance.Sim;
+                start.MoveTeamTo(start.FindRoom(RoomKind.Combat));
+
                 // Keep the player alive and pick upgrades so the run keeps going.
                 deadline = Time.realtimeSinceStartup + 12f;
                 while (Time.realtimeSinceStartup < deadline)

@@ -226,6 +226,7 @@ namespace Game.Gameplay
                 foreach (var root in areaRoots)
                     if (root != null) root.localPosition = room.Origin;
             BuildDoors(room);
+            AddRoomDecor(room);
 
             var layout = room.Layout;
             foreach (var o in layout.Obstacles)
@@ -277,6 +278,82 @@ namespace Game.Gameplay
                         break;
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Dressing that tells the special rooms apart at a glance: candles around a pedestal, gold in the treasure room,
+        /// webs and bones in the secret room, chains and a red glow in the champion's hall, a rune circle under a puzzle.
+        /// </summary>
+        private void AddRoomDecor(MapRoom room)
+        {
+            var b = room.Bounds;
+            Vector2 o = room.Origin;
+            void Decor(string sheet, Vector2 at, int? order = null, bool flipX = false, bool flipY = false, float scale = 1f)
+            {
+                var r = Sprite(sheet, SpriteSheet.Load(sheet, quiet: true)?.First, at, order ?? EnemyView.SortOrder(at.y));
+                r.flipX = flipX;
+                r.flipY = flipY;
+                r.transform.localScale = Vector3.one * scale;
+            }
+            void Candle(Vector2 at, string sheet, Color color)
+            {
+                var r = Sprite("Candle", SpriteSheet.Load(sheet, quiet: true)?.First, at, EnemyView.SortOrder(at.y));
+                r.gameObject.AddComponent<SpriteLoop>().Configure(sheet, 9f);
+                var l = AddLight(r.gameObject, color, 0.55f, 1.8f);
+                l.gameObject.AddComponent<LightFlicker>().Configure(0.55f, 0.15f);
+            }
+            void Glow(Vector2 at, Color color, float intensity, float radius)
+            {
+                var go = new GameObject("RoomGlow");
+                go.transform.SetParent(transform, false);
+                go.transform.localPosition = at;
+                _spawned.Add(go);
+                var l = go.AddComponent<Light2D>();
+                l.lightType = Light2D.LightType.Point;
+                l.color = color;
+                l.intensity = intensity;
+                l.pointLightOuterRadius = radius;
+                l.pointLightInnerRadius = 0.5f;
+            }
+
+            if (RoomCatalog.HasPedestal(room.Kind))
+            {
+                Vector2 pedestal = RunSimulation.PedestalPosition(b);
+                string candles = room.Kind == RoomKind.CurseAltar ? "fx_candle_soul" : room.Kind == RoomKind.Secret ? "fx_candle_soul" : "fx_candle";
+                var color = room.Kind is RoomKind.CurseAltar or RoomKind.Secret ? new Color(0.72f, 0.48f, 1f) : new Color(1f, 0.62f, 0.32f);
+                for (int i = 0; i < 6; i++)
+                {
+                    float a = (i * 60f + 30f) * Mathf.Deg2Rad;
+                    Candle(pedestal + new Vector2(Mathf.Cos(a) * 3.2f, Mathf.Sin(a) * 2f - 0.3f), candles, color);
+                }
+            }
+            switch (room.Kind)
+            {
+                case RoomKind.Treasure:
+                    foreach (var p in new[] { new Vector2(-4.6f, -2.6f), new Vector2(4.8f, -2.4f), new Vector2(-5f, 2.9f), new Vector2(5.2f, 3.1f), new Vector2(-10.5f, -5.6f), new Vector2(10.5f, -5.6f), new Vector2(-11f, 4.4f), new Vector2(11f, 4.2f) })
+                        Decor("decor_gold", o + p);
+                    Glow(o + new Vector2(0f, 1f), new Color(1f, 0.82f, 0.45f), 1.1f, 11f);
+                    break;
+                case RoomKind.Secret:
+                    Decor("decor_cobweb", new Vector2(b.xMin - 1f, b.yMax + 1f), 905);
+                    Decor("decor_cobweb", new Vector2(b.xMax + 1f, b.yMax + 1f), 905, flipX: true);
+                    Decor("decor_cobweb", new Vector2(b.xMin - 1f, b.yMin + 0.5f), 905, flipY: true);
+                    Decor("decor_cobweb", new Vector2(b.xMax + 1f, b.yMin + 0.5f), 905, flipX: true, flipY: true);
+                    foreach (var p in new[] { new Vector2(-9f, -5f), new Vector2(8.5f, 5f), new Vector2(10f, -6f), new Vector2(-10.5f, 4.5f) })
+                        Decor("decor_bones", o + p, -950);
+                    Glow(o, new Color(0.6f, 0.45f, 1f), 0.7f, 10f);
+                    break;
+                case RoomKind.MiniBoss:
+                    foreach (float x in new[] { -9.5f, -6f, 6f, 9.5f }) Decor("decor_chains", new Vector2(o.x + x, b.yMax + 2.2f), -985);
+                    foreach (var p in new[] { new Vector2(-10f, -5.5f), new Vector2(9.5f, -6f), new Vector2(-11f, 3.5f), new Vector2(11f, 3f) })
+                        Decor("decor_bones", o + p, -950);
+                    Glow(o + new Vector2(0f, 2.5f), new Color(1f, 0.25f, 0.2f), 0.9f, 9f);
+                    break;
+                case RoomKind.Puzzle:
+                    Decor("decor_rune", o + new Vector2(0f, 0.3f), -955, scale: 1.6f);
+                    Glow(o, new Color(0.5f, 0.9f, 1f), 0.6f, 8f);
+                    break;
             }
         }
 

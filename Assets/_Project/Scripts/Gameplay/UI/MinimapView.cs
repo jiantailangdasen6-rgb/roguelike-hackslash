@@ -12,8 +12,9 @@ namespace Game.Gameplay
     /// </summary>
     public sealed class MinimapView
     {
-        private const float CellW = 40f, CellH = 28f, Gap = 12f;
-        private const float Pad = 10f;
+        private readonly float CellW, CellH, Gap, Pad;
+        /// <summary>The big map (M): room names in full and bigger dots.</summary>
+        private readonly bool _large;
 
         private sealed class Cell
         {
@@ -32,11 +33,16 @@ namespace Game.Gameplay
 
         public RectTransform Root => _root;
 
-        public MinimapView(Transform parent, Vector2 offset)
+        public MinimapView(Transform parent, Vector2 offset, bool large = false)
         {
+            _large = large;
+            CellW = large ? 200f : 40f;
+            CellH = large ? 100f : 28f;
+            Gap = large ? 34f : 12f;
+            Pad = large ? 26f : 10f;
             float w = DungeonMap.Size * (CellW + Gap) - Gap + Pad * 2f, h = DungeonMap.Size * (CellH + Gap) - Gap + Pad * 2f;
             var panel = UIKit.Framed(parent, "Minimap", new Color(0.03f, 0.025f, 0.04f, 0.78f));
-            _root = panel.Outer().Place(new Vector2(1f, 1f), new Vector2(w, h), offset);
+            _root = panel.Outer().Place(large ? new Vector2(0.5f, 0.5f) : new Vector2(1f, 1f), new Vector2(w, h), offset);
             _grid = UIKit.Rect("Grid", panel.transform);
             _grid.Stretch(Pad - 2f);
         }
@@ -62,7 +68,8 @@ namespace Game.Gameplay
                     var b = CellCenter(other.Cell);
                     line.rectTransform.anchorMin = line.rectTransform.anchorMax = Vector2.zero;
                     line.rectTransform.anchoredPosition = (a + b) * 0.5f;
-                    line.rectTransform.sizeDelta = dir == Dir.E ? new Vector2(Gap + 6f, 6f) : new Vector2(6f, Gap + 6f);
+                    float t = _large ? 12f : 6f;
+                line.rectTransform.sizeDelta = dir == Dir.E ? new Vector2(Gap + t, t) : new Vector2(t, Gap + t);
                     line.raycastTarget = false;
                     _links.Add((line, room, other));
                 }
@@ -77,8 +84,9 @@ namespace Game.Gameplay
                 var box = UIKit.Panel(frame.transform, "Fill", Color.clear);
                 box.rectTransform.Stretch(2f);
                 box.raycastTarget = false;
-                var mark = UIKit.Label(box.transform, "", 18, TextAnchor.MiddleCenter);
+                var mark = UIKit.Label(box.transform, "", _large ? 26 : 18, TextAnchor.MiddleCenter);
                 mark.rectTransform.Stretch();
+                if (_large) mark.rectTransform.anchorMin = new Vector2(0f, 0.4f); // the name on top, the dots below
                 _cells.Add(new Cell { Room = room, Box = box, Frame = frame, Mark = mark });
             }
 
@@ -127,7 +135,8 @@ namespace Game.Gameplay
                 c.Box.color = !known ? Color.clear : visited ? new Color(0.13f, 0.11f, 0.12f, 0.95f) : new Color(0.06f, 0.05f, 0.06f, 0.85f);
                 bool used = NetPlayer.Local != null && (NetPlayer.Local.UsedPedestals.Value & (1 << c.Room.Id)) != 0;
                 bool locked = c.Room.Kind == RoomKind.Treasure && !d.IsUnlocked(c.Room.Id);
-                c.Mark.text = shown ? RoomCatalog.Mark(c.Room.Kind) : known ? (locked && Known(c.Room) ? "錠" : "?") : "";
+                string name = _large ? RoomCatalog.Name(c.Room.Kind) : RoomCatalog.Mark(c.Room.Kind);
+                c.Mark.text = shown ? name : known ? (locked && Known(c.Room) ? (_large ? "鍵のかかった部屋" : "錠") : "?") : "";
                 c.Mark.color = shown ? (used || (d.IsCleared(c.Room.Id) && c.Room.IsFight) ? kindColor * 0.55f : kindColor) : new Color(0.5f, 0.47f, 0.45f);
             }
             foreach (var (line, a, b) in _links)
@@ -145,12 +154,14 @@ namespace Game.Gameplay
                     // Where in the room they stand, squeezed into the map cell.
                     Vector2 local = (Vector2)p.transform.position - room.Bounds.center;
                     Vector2 inCell = new(local.x / room.Bounds.width * (CellW - 10f), local.y / room.Bounds.height * (CellH - 10f));
+                    if (_large) inCell.y -= CellH * 0.22f; // under the room's name
                     dot.rectTransform.anchoredPosition = CellCenter(room.Cell) + inCell;
                     bool me = p == NetPlayer.Local;
                     dot.color = p.Downed.Value
                         ? new Color(1f, 0.15f, 0.1f, Mathf.PingPong(Time.time * 3f, 1f) > 0.5f ? 1f : 0.25f)
                         : me ? Color.white : ClassColor(p.Class.Value);
-                    dot.rectTransform.sizeDelta = me ? new Vector2(12f, 12f) : new Vector2(10f, 10f);
+                    float size = (me ? 12f : 10f) * (_large ? 1.8f : 1f);
+                    dot.rectTransform.sizeDelta = new Vector2(size, size);
                     dot.transform.SetAsLastSibling();
                 }
                 slot++;

@@ -49,6 +49,13 @@ namespace Game.Gameplay
         private Text _bossName;
         private Text _trialText;
         private MinimapView _minimap;
+        // The big map (M) and the short black fade when walking through a door.
+        private GameObject _mapRoot;
+        private MinimapView _bigMap;
+        private Text _mapTitle;
+        private Image _fade;
+        private float _fadeStart = -10f;
+        private const float FadeTime = 0.28f;
         private int _shownRoom = -1;
         private (ulong, int) _shownMap;
         private readonly HashSet<(int Area, int Room)> _roomsBannered = new();
@@ -107,6 +114,7 @@ namespace Game.Gameplay
             _difficultyText = UIKit.Label(root, "", 22, TextAnchor.UpperRight, UIKit.MutedText);
             _difficultyText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(900f, 32f), new Vector2(-28f, -64f));
             _minimap = new MinimapView(root, new Vector2(-24f, -98f));
+            BuildBigMap();
             float below = -98f - _minimap.Root.sizeDelta.y - 10f;
             _roomText = UIKit.Title(root, "", 26, TextAnchor.UpperRight, UIKit.MutedText);
             _roomText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(700f, 40f), new Vector2(-28f, below));
@@ -281,7 +289,7 @@ namespace Game.Gameplay
                     // A new area: its name, then the map takes over.
                     int area = Mathf.Clamp(e.Int / RunSimulation.RoomsPerArea, 0, AreaNames.Length - 1);
                     Banner(AreaNames[area], "扉をくぐって迷宮を探索しよう　主の間は焚き火の間の奥", 3.2f);
-                    Tip("map", "右上は地図。入った部屋とその隣が見える。寄り道（祠・泉・精鋭）をするほど強くなる");
+                    Tip("map", "右上は地図（M で大きく開く）。入った部屋とその隣が見える。寄り道（祠・泉・精鋭）をするほど強くなる");
                     if (NetPlayer.All.Count > 1) Tip("split", "仲間とは別の部屋を探索できる。倒れた仲間は地図で赤く点滅する。主の扉は全員がそろうと開く");
                     break;
                 }
@@ -401,7 +409,7 @@ namespace Game.Gameplay
             string key = string.Join(",", _party);
             if (key == _hintKey) return;
             _hintKey = key;
-            var text = "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　I 袋　Esc メニュー\n" +
+            var text = "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　I 袋　M 地図　Esc メニュー\n" +
                        "<color=#9fd8ff>連携：凍った敵は強打で「砕ける」／印の敵は全員の攻撃が通りやすい／倒れた仲間のそばに立つと復活</color>";
             var combos = ComboCatalog.Available(_party);
             for (int i = 0; i < combos.Count && i < 2; i++)
@@ -437,6 +445,7 @@ namespace Game.Gameplay
             _roomText.text = RoomTitle(here) + (director.Keys.Value > 0 ? $"　<color=#e6c766>鍵 ×{director.Keys.Value}</color>" : "");
             _objectiveText.text = ObjectiveText(director, here);
             _minimap.Update(director);
+            UpdateBigMap(director);
             AnnounceRoom(director, here);
 
             float boss = director.BossHealth.Value;
@@ -478,7 +487,7 @@ namespace Game.Gameplay
             if (_hintText.enabled) UpdateHint();
             _centerText.text = CenterMessage(director, local);
             // While a choice is on screen, only the cards speak (banners and toasts wait behind them).
-            bool choosing = PerkView.IsShowing;
+            bool choosing = PerkView.IsShowing || (_mapRoot != null && _mapRoot.activeSelf); // the big map hides them too
             _bannerText.enabled = _bannerSub.enabled = !choosing && Time.time < _bannerUntil;
             _toastText.enabled = _centerText.enabled = !choosing;
 
@@ -598,11 +607,51 @@ namespace Game.Gameplay
             }
         }
 
+        private void BuildBigMap()
+        {
+            var canvas = UIKit.CreateCanvas("BigMap", 30, transform).transform;
+            var dim = UIKit.Panel(canvas, "Dim", new Color(0f, 0f, 0f, 0.55f));
+            dim.rectTransform.Stretch();
+            dim.raycastTarget = false;
+            _mapRoot = dim.gameObject;
+            _bigMap = new MinimapView(dim.transform, new Vector2(0f, 10f), large: true);
+            _mapTitle = UIKit.Title(dim.transform, "", 40, TextAnchor.MiddleCenter);
+            _mapTitle.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 60f), new Vector2(0f, _bigMap.Root.sizeDelta.y * 0.5f + 46f));
+            var hint = UIKit.Label(dim.transform, "M で閉じる　白い点＝自分　色の点＝仲間　赤く点滅＝倒れた仲間", 22, TextAnchor.MiddleCenter, UIKit.MutedText);
+            hint.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 40f), new Vector2(0f, -_bigMap.Root.sizeDelta.y * 0.5f - 18f));
+            _mapRoot.SetActive(CommandLine.Has("-openmap")); // screenshots of the big map
+
+            var fadeCanvas = UIKit.CreateCanvas("RoomFade", 25, transform).transform;
+            _fade = UIKit.Panel(fadeCanvas, "Fade", Color.clear);
+            _fade.rectTransform.Stretch();
+            _fade.raycastTarget = false;
+        }
+
+        private void UpdateBigMap(RunDirector d)
+        {
+            var kb = UnityEngine.InputSystem.Keyboard.current;
+            var pad = UnityEngine.InputSystem.Gamepad.current;
+            bool toggle = kb != null && kb.mKey.wasPressedThisFrame || pad != null && pad.selectButton.wasPressedThisFrame;
+            if (toggle && !PerkView.IsShowing && !PauseMenuView.IsOpen && !BagView.IsOpen) _mapRoot.SetActive(!_mapRoot.activeSelf);
+            if (PerkView.IsShowing || PauseMenuView.IsOpen || BagView.IsOpen) _mapRoot.SetActive(false);
+            if (_mapRoot.activeSelf)
+            {
+                _bigMap.Update(d);
+                int area = Mathf.Clamp(d.Area.Value, 0, AreaNames.Length - 1);
+                string keys = d.Keys.Value > 0 ? $"　<size=28><color=#e6c766>鍵 ×{d.Keys.Value}</color></size>" : "";
+                string boss = d.BossDoorOpen.Value ? "" : "　<size=24><color=#bfb6aa>主の扉は全員がそろうと開く</color></size>";
+                _mapTitle.text = AreaNames[area] + keys + boss;
+            }
+            float k = (Time.time - _fadeStart) / FadeTime;
+            _fade.color = new Color(0f, 0f, 0f, k >= 1f ? 0f : 1f - k * k);
+        }
+
         /// <summary>The first time you step into a room of this area: its name.</summary>
         private void AnnounceRoom(RunDirector d, MapRoom room)
         {
             var map = (d.MapSeed.Value, d.Area.Value);
             if (room.Id == _shownRoom && map == _shownMap) return;
+            if (map == _shownMap && _shownRoom >= 0) _fadeStart = Time.time; // through a door: a blink of darkness
             _shownRoom = room.Id;
             _shownMap = map;
             if (room.Kind == RoomKind.Start || !_roomsBannered.Add((d.Area.Value, room.Id))) return;

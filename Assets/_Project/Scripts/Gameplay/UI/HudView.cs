@@ -31,7 +31,7 @@ namespace Game.Gameplay
         }
 
         private static string[] MouseKeys => new[] { "クリック", GameSettings.Label(KeyAction.Skill1), GameSettings.Label(KeyAction.Skill2), GameSettings.Label(KeyAction.Dodge) };
-        private string[] _mouseKeys = MouseKeys;
+        private string[] _mouseKeys; // set in Awake (PlayerPrefs can't be read from a field initializer)
         private static readonly string[] PadKeys = { "RT", "RB", "LB", "A" };
 
         private UIKit.Bar _hpTrail;
@@ -158,6 +158,7 @@ namespace Game.Gameplay
         private readonly TeamFrame[] _team = new TeamFrame[GameSession.MaxPlayers - 1];
         private readonly List<(string Text, float Until)> _toasts = new();
         private GuideHints _guide;
+        private Cinematics _cinematics;
         private readonly StringBuilder _sb = new();
         private ClassId? _shownClass;
         private CanvasGroup _curtain;
@@ -167,6 +168,7 @@ namespace Game.Gameplay
         {
             Instance = this;
             gameObject.AddComponent<PingView>();
+            _mouseKeys = MouseKeys;
             var root = UIKit.CreateCanvas("HUD", 20, transform).transform;
 
             _xpBar = UIKit.CreateBar(root, "XpBar", new Color(0.45f, 0.75f, 1f), new Color(0f, 0f, 0f, 0.7f));
@@ -262,6 +264,7 @@ namespace Game.Gameplay
 
             BuildKeyLegend(root);
 
+            _cinematics = new Cinematics(transform);
             BuildCurtain();
             gameObject.AddComponent<AllyOverlay>();
             gameObject.AddComponent<BagView>();
@@ -395,7 +398,7 @@ namespace Game.Gameplay
                 {
                     // A new area: its name, then the map takes over.
                     int area = Mathf.Clamp(e.Int / RunSimulation.RoomsPerArea, 0, AreaNames.Length - 1);
-                    Banner(AreaNames[area], LayerNames[area], 3.2f);
+                    _cinematics.Area(LayerNames[area], AreaNames[area]);
                     break;
                 }
                 case SimEventType.TeamLevelUp:
@@ -457,7 +460,7 @@ namespace Game.Gameplay
                 case SimEventType.BossSpawned:
                 {
                     var def = EnemyCatalog.Get((EnemyType)e.Int);
-                    Banner(def.Name, def.Title ?? "", 3.5f);
+                    _cinematics.Lord(def.Name, def.Title ?? "");
                     break;
                 }
                 case SimEventType.WaveStarted when e.Int > 1 && RunDirector.Instance != null && RunDirector.Instance.LocalRoom.Id == e.Id:
@@ -702,8 +705,9 @@ namespace Game.Gameplay
             _bannerText.enabled = _bannerSub.enabled = !choosing && Time.time < _bannerUntil;
             _centerText.enabled = !choosing;
             _toastsHidden = choosing;
-            _guide.Update(director, local, choosing);
+            _guide.Update(director, local, choosing || _cinematics.Playing);
             UpdateCodexNotice();
+            _cinematics.Update();
 
             _toasts.RemoveAll(t => t.Until < Time.time);
             UpdateToasts();

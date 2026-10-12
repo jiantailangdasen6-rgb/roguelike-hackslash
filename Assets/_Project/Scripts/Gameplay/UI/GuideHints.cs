@@ -84,7 +84,7 @@ namespace Game.Gameplay
                 else if (!d.IsFighting(room.Id) && NearDoor(room, me, 6f))
                 {
                     key = "door";
-                    text = "扉の切れ目で、壁に向かって歩き続けると隣の部屋へ進める";
+                    text = "扉の切れ目で壁に向かって歩くと、隣の部屋へ進める";
                     return;
                 }
             }
@@ -96,7 +96,7 @@ namespace Game.Gameplay
                 else if (RoomCatalog.HasPedestal(room.Kind))
                 {
                     key = "pedestal";
-                    text = "中央の祭壇の上にしばらく立つと使える（仲間もそれぞれ1回ずつ）";
+                    text = "中央の祭壇の上にしばらく立つと使える（1人1回）";
                     return;
                 }
             }
@@ -109,7 +109,7 @@ namespace Game.Gameplay
                 if (d.Keys.Value == 0 && !Seen("key"))
                 {
                     key = "key";
-                    text = "鍵のかかった宝物庫。鍵は「精鋭の主の間」と「仕掛けの間」で手に入る（鍵は全員で共有）";
+                    text = "鍵のかかった宝物庫。鍵は精鋭の主の間と仕掛けの間で手に入る";
                     return;
                 }
                 if (d.Keys.Value > 0 && !Seen("unlock"))
@@ -127,7 +127,7 @@ namespace Game.Gameplay
             if (room.Kind == RoomKind.Campfire && !d.BossDoorOpen.Value && !Seen("bossdoor") && NetPlayer.All.Count > 1)
             {
                 key = "bossdoor";
-                text = "主の扉は、生きている全員がその前にそろうと開く。右上の「集合の鐘」を鳴らすと、仲間をここへ呼べる";
+                text = "主の扉は全員がそろうと開く。集合の鐘で仲間を呼べる";
             }
         }
 

@@ -102,6 +102,7 @@ namespace Game.Core
                 case ClassId.Guardian:
                     // Like the warrior's dash, the owner moves itself; we sweep the path and stun what it hits.
                     p.BashStuns = true;
+                    p.BashAflame = false;
                     p.DashSlashTimer = ClassCatalog.ShieldBashDuration + 0.08f;
                     p.DashSlashFrom = p.Position;
                     p.DashSlashDir = dir;
@@ -144,7 +145,8 @@ namespace Game.Core
                 }
             }
             int retribution = p.PerkLevel(PerkId.Retribution);
-            float damage = ClassCatalog.ShieldBashDamage * p.Stats.Get(StatType.Might) * (1f + 0.4f * retribution);
+            CatchFire(p);
+            float damage = ClassCatalog.ShieldBashDamage * p.Stats.Get(StatType.Might) * (1f + 0.4f * retribution) * (p.BashAflame ? FlameChargeMultiplier : 1f);
             Vector2 from = p.DashSlashFrom, to = p.Position;
             Vector2 seg = to - from;
             float len = seg.magnitude;
@@ -157,6 +159,11 @@ namespace Game.Core
                 if ((from + seg * t - e.Position).sqrMagnitude > (1.1f + e.Radius) * (1.1f + e.Radius)) continue;
                 p.DashSlashHits.Add(e.Id);
                 ApplyStatus(i, StatusKind.Stunned, e.Def.Boss ? 0.4f : ClassCatalog.ShieldBashStun + 0.5f * retribution, p);
+                if (p.BashAflame && !e.Def.Prop)
+                {
+                    e.BurnDps = Mathf.Max(e.BurnDps, 6f * p.Stats.Get(StatType.Might));
+                    ApplyStatus(i, StatusKind.Burning, FlameChargeBurn);
+                }
                 DamageEnemy(i, damage, p, HitFlags.Heavy, p.DashSlashDir, 7f);
             }
         }
@@ -182,9 +189,14 @@ namespace Game.Core
         {
             float r = ClassCatalog.ShadowStepRadius * p.Stats.Get(StatType.Area);
             float damage = ClassCatalog.ShadowStepDamage * p.Stats.Get(StatType.Might) * (1f + 0.3f * p.PerkLevel(PerkId.ShadowDance));
+            bool execution = ShadowExecution(p, r);
             Enemies.QueryCircle(p.Position, r, _hits);
             foreach (int i in _hits.ToArray())
-                if (!Enemies[i].Dead) DamageEnemy(i, damage, p, HitFlags.Heavy, (Enemies[i].Position - p.Position).normalized, 3f);
+            {
+                if (Enemies[i].Dead) continue;
+                float cut = execution && Enemies[i].Marked > 0f ? damage * ExecutionMultiplier : damage;
+                DamageEnemy(i, cut, p, HitFlags.Heavy, (Enemies[i].Position - p.Position).normalized, 3f);
+            }
             Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.ShadowStep, Pos = p.Position, Value = r });
             // Legendary "黒刃の": a second, wider cut.
             if (p.HasLegendary(LegendaryId.BlackBlade))

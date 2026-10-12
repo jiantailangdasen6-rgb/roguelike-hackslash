@@ -194,6 +194,7 @@ namespace Game.Gameplay
                 case SimEventType.BossSpawned:
                     CameraShake.Add(0.6f);
                     break;
+                case SimEventType.Combo: OnCombo(e); break;
                 case SimEventType.RoomStarted:
                     HitStop.Reset();
                     _calloutAt.Clear();
@@ -289,6 +290,63 @@ namespace Game.Gameplay
 
             if (mine && heavy) HitStop.Freeze(crit ? 0.065f : 0.045f, e.Id);
             if (heavy) CameraShake.Add(mine ? 0.07f : 0.03f);
+        }
+
+        /// <summary>Two classes' abilities met: the name of the technique, a burst in its colours, a beat of hit stop.</summary>
+        private void OnCombo(in SimEvent e)
+        {
+            float r = Mathf.Max(1f, e.Value);
+            switch ((ComboKind)e.Int)
+            {
+                case ComboKind.SteamBurst:
+                {
+                    for (int i = 0; i < 12; i++)
+                    {
+                        Vector2 at = e.Pos + Random.insideUnitCircle * r * 0.8f;
+                        Burst("fx_puff", at + Vector2.up * 0.4f, Random.Range(8f, 12f), r * Random.Range(0.5f, 0.9f), new Color(0.92f, 0.95f, 1f, 0.9f));
+                    }
+                    var ring = Spawn("fx_nova", e.Pos + Vector2.up * 0.3f, 1f, 0.4f, 0.4f, r * 1.1f, new Color(0.85f, 0.95f, 1f, 0.8f));
+                    ring.FadeOut = true;
+                    AddLight(ring, new Color(0.75f, 0.9f, 1f), 2.6f, r + 2f);
+                    ShowCallout(e.Pos + Vector2.up * 1.8f, "蒸気爆発！", new Color(0.8f, 0.92f, 1f), 44);
+                    HitStop.Freeze(0.09f, -1, major: true);
+                    CameraShake.Add(0.4f);
+                    break;
+                }
+                case ComboKind.ShadowExecution:
+                {
+                    var slash = Spawn("fx_nova", e.Pos + Vector2.up * 0.3f, 1f, 0.35f, 0.3f, r * 1.2f, new Color(1f, 0.45f, 0.35f, 0.85f));
+                    slash.FadeOut = true;
+                    AddLight(slash, new Color(1f, 0.35f, 0.3f), 2.4f, r + 1.5f);
+                    for (int i = 0; i < 8; i++) Shard(e.Pos + Vector2.up * 0.4f, i * 45f + Random.Range(0f, 20f), new Color(0.75f, 0.4f, 1f));
+                    ShowCallout(e.Pos + Vector2.up * 1.7f, "影の処刑！", new Color(0.85f, 0.55f, 1f), 42);
+                    HitStop.Freeze(0.08f, -1, major: true);
+                    CameraShake.Add(0.25f);
+                    break;
+                }
+                case ComboKind.HolyWarCry:
+                {
+                    var pillar = Spawn("fx_holy", e.Pos + Vector2.up * 0.8f, 12f, 1.1f, 2f, 3f, new Color(1f, 0.92f, 0.65f));
+                    pillar.FadeOut = true;
+                    AddLight(pillar, new Color(1f, 0.85f, 0.45f), 3f, r + 2.5f);
+                    var ring = Spawn("fx_revive_ring", e.Pos, 1f, 0.6f, r * 0.6f, r * 1.05f, new Color(1f, 0.9f, 0.5f, 0.9f), order: -300);
+                    ring.FadeOut = true;
+                    ShowCallout(e.Pos + Vector2.up * 2.2f, "聖域の鬨！", new Color(1f, 0.88f, 0.5f), 42);
+                    HitStop.Freeze(0.07f, -1, major: true);
+                    CameraShake.Add(0.3f);
+                    break;
+                }
+                case ComboKind.FlameCharge:
+                {
+                    for (int i = 0; i < 8; i++) Ember(e.Pos, i * 45f + Random.Range(0f, 30f));
+                    var flare = Spawn("fx_explosion", e.Pos + Vector2.up * 0.3f, 22f, 0.36f, 0.8f, 1.1f, new Color(1f, 0.75f, 0.45f));
+                    flare.Renderer.sortingOrder = 2700;
+                    AddLight(flare, new Color(1f, 0.55f, 0.2f), 2.4f, 3.5f);
+                    ShowCallout(e.Pos + Vector2.up * 1.8f, "炎の突進！", new Color(1f, 0.62f, 0.3f), 42);
+                    CameraShake.Add(0.2f);
+                    break;
+                }
+            }
         }
 
         /// <summary>The final blow on a boss: a long hold, slow motion, a burst of light and souls.</summary>
@@ -913,6 +971,7 @@ namespace Game.Gameplay
                 if (_camera != null)
                 {
                     d.Label.transform.position = _camera.WorldToScreenPoint(d.Position + new Vector2(0f, -1.75f));
+                    d.Label.enabled = !PerkView.IsShowing; // the cards stand in front of the doors
                     var c = d.Label.color;
                     c.a = chosen ? 1f : 0.88f;
                     d.Label.color = c;
@@ -937,7 +996,7 @@ namespace Game.Gameplay
             d.Label.rectTransform.sizeDelta = new Vector2(380f, 110f);
             d.Label.rectTransform.pivot = new Vector2(0.5f, 1f);
             string trial = door.Trial ? "<color=#ff6a5a>試練 </color>" : "";
-            d.Label.text = $"{trial}{RewardCatalog.Name(door.Reward)}\n<size=22><color=#e8e0d4>{RewardCatalog.Describe(door.Reward, area, door.Trial)}</color></size>";
+            d.Label.text = $"{trial}{RewardCatalog.Name(door.Reward)}\n<size=22><color=#e8e0d4>{RewardCatalog.Describe(door, area)}</color></size>";
             d.Label.color = color;
             var shadow = d.Label.gameObject.AddComponent<Outline>();
             shadow.effectColor = new Color(0f, 0f, 0f, 0.85f);

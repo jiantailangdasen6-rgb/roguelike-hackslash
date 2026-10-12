@@ -137,7 +137,7 @@ namespace Game.Core
         public static readonly LegendaryDef[] Legendaries =
         {
             new() { Id = LegendaryId.WhirlwindBlade, Class = ClassId.Warrior, Name = "旋風の", Text = "突進斬りの終わりに回転斬りを放つ" },
-            new() { Id = LegendaryId.WarDrum, Class = ClassId.Warrior, Name = "鬨の", Text = "闘の声の範囲が2倍、聞いた仲間の攻撃速度+20%" },
+            new() { Id = LegendaryId.WarDrum, Class = ClassId.Warrior, Name = "鬨の", Text = "鬨の声の範囲が2倍、聞いた仲間の攻撃速度+20%" },
             new() { Id = LegendaryId.FrostCrown, Class = ClassId.Mage, Name = "霜の王の", Text = "氷結陣が自分についてくる" },
             new() { Id = LegendaryId.ThunderStaff, Class = ClassId.Mage, Name = "雷鳴の", Text = "魔弾が当たると近くの敵へ連鎖する" },
             new() { Id = LegendaryId.ShadowQuiver, Class = ClassId.Ranger, Name = "影の", Text = "貫通の一矢が扇状に3本になる" },

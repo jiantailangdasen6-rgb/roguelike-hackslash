@@ -27,6 +27,17 @@ namespace Game.Core
         Vigor,    // max HP up and a full heal
         Shards,   // bonus soul shards at the end of the run
         Treasure, // a piece of gear (rare or better) for everyone
+        Cursed,   // two perk picks for everyone, and a curse on the team for the rest of the run
+        Shop,     // a merchant: each player may buy one thing with the run's soul shards
+    }
+
+    /// <summary>Lasting penalties taken through curse doors (team-wide, they stack).</summary>
+    public enum CurseKind : byte
+    {
+        Frailty,  // max HP down
+        Weariness, // dodge recovers slower
+        Thirst,   // healing weaker
+        Hunted,   // damage taken up
     }
 
     /// <summary>One of the exits that open when a room is cleared. A trial door doubles the reward but toughens the room behind it.</summary>
@@ -34,33 +45,41 @@ namespace Game.Core
     {
         public RoomReward Reward;
         public bool Trial;
+        /// <summary>For a curse door: what it lays on the team.</summary>
+        public CurseKind Curse;
 
-        public Door(RoomReward reward, bool trial)
+        public Door(RoomReward reward, bool trial, CurseKind curse = default)
         {
             Reward = reward;
             Trial = trial;
+            Curse = curse;
         }
 
         public const int MaxCount = 3;
 
-        /// <summary>Count in the low 2 bits, then 4 bits per door (3 reward + 1 trial).</summary>
+        /// <summary>Count in the low 2 bits, then 4 bits per door (3 reward + 1 trial), then the curse (+1) of the curse door.</summary>
         public static int Pack(IReadOnlyList<Door> doors)
         {
             int count = Mathf.Min(doors.Count, MaxCount);
             int packed = count;
             for (int i = 0; i < count; i++)
+            {
                 packed |= ((int)doors[i].Reward & 0x7 | (doors[i].Trial ? 0x8 : 0)) << (2 + i * 4);
+                if (doors[i].Reward == RoomReward.Cursed) packed |= ((int)doors[i].Curse + 1) << 14;
+            }
             return packed;
         }
 
         public static Door[] Unpack(int packed)
         {
             int count = Mathf.Min(packed & 0x3, MaxCount);
+            var curse = (CurseKind)Mathf.Max(0, ((packed >> 14) & 0x7) - 1);
             var doors = new Door[count];
             for (int i = 0; i < count; i++)
             {
                 int v = (packed >> (2 + i * 4)) & 0xF;
-                doors[i] = new Door((RoomReward)(v & 0x7), (v & 0x8) != 0);
+                var reward = (RoomReward)(v & 0x7);
+                doors[i] = new Door(reward, (v & 0x8) != 0, reward == RoomReward.Cursed ? curse : default);
             }
             return doors;
         }
@@ -73,6 +92,7 @@ namespace Game.Core
         Start,
         Boon,
         Upgrade,
+        Shop,     // the merchant: priced cards plus "buy nothing"
     }
 
     public sealed class RoomState
@@ -259,6 +279,16 @@ namespace Game.Core
         ItemGiven,       // ClientId = giver, Id = receiver client, Int = Rarity
         ItemSalvaged,    // ClientId, Value = soul shards
         LegendaryProc,   // ClientId, Int = LegendaryId (None = a plain chain bolt), Pos, Vec = chain target (zero = none)
+        Combo,           // ClientId = who set it off, Int = ComboKind, Pos, Value = radius
+    }
+
+    /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>
+    public enum ComboKind : byte
+    {
+        SteamBurst,      // frost nova on burning ground
+        ShadowExecution, // shadow step onto a marked enemy
+        HolyWarCry,      // war cry inside holy ground
+        FlameCharge,     // shield charge through burning ground
     }
 
     /// <summary>Something that happened during a tick; the network layer sends these to clients for presentation.</summary>

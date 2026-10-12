@@ -42,6 +42,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<float> ExitHold = new();
         public readonly NetworkVariable<bool> RoomTrial = new();
         public readonly NetworkVariable<int> BonusShards = new();
+        /// <summary>Curses from curse doors (RewardCatalog.PackCurses).</summary>
+        public readonly NetworkVariable<int> Curses = new();
         public readonly NetworkVariable<bool> Paused = new();
         /// <summary>The host's browser tab is in the background: the run is on hold until it comes back.</summary>
         public readonly NetworkVariable<bool> HostAway = new();
@@ -133,6 +135,7 @@ namespace Game.Gameplay
                 SpawnPlayer(clientId, Sim.AddPlayer(clientId, loadout), loadout, slot++);
             }
 
+            Sim.ForceDealDoors = CommandLine.Has("-dealdoors"); // screenshots: a curse door and the merchant after every room
             Sim.Start((int)CommandLine.GetFloat("-startroom", 0f));
             // -legendary (screenshots): everyone starts wearing a legendary piece for their class.
             if (CommandLine.Has("-legendary"))
@@ -315,6 +318,7 @@ namespace Game.Gameplay
             SetIfChanged(ExitHold, Quantize(room.ExitHold));
             SetIfChanged(RoomTrial, room.Trial);
             SetIfChanged(BonusShards, Sim.BonusShards);
+            SetIfChanged(Curses, RewardCatalog.PackCurses(Sim.CurseStacks));
             SetIfChanged(Paused, Sim.AwaitingChoices);
             SetIfChanged(Elapsed, Mathf.Floor(Sim.Elapsed));
             SetIfChanged(Phase, Sim.Phase);

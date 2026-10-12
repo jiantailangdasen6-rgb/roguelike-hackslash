@@ -168,7 +168,7 @@ namespace Game.Gameplay
                     _unseen++;
                     HudView.Instance?.Toast($"<color=#9fd8ff>{NameOf(e.ClientId)}から装備を受け取った</color>");
                     break;
-                case SimEventType.ItemSalvaged when IsMe(e.ClientId):
+                case SimEventType.ItemSalvaged when IsMe(e.ClientId) && e.Value > 0f: // negative = bought from the merchant (HudView)
                     HudView.Instance?.Toast($"分解した：魂の欠片 +{e.Value:0}");
                     break;
             }

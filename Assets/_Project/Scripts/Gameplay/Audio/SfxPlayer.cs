@@ -243,6 +243,15 @@ namespace Game.Gameplay
                     else if ((RoomReward)e.Int == RoomReward.Shards) Play("soul", null, 0.75f);
                     break;
                 case SimEventType.BossSpawned: Play("roar"); break;
+                case SimEventType.Combo:
+                    switch ((ComboKind)e.Int)
+                    {
+                        case ComboKind.SteamBurst: Play("explosion", e.Pos, 1.35f, 0.8f); Play("nova", e.Pos, 0.8f); break;
+                        case ComboKind.ShadowExecution: Play("shatter", e.Pos, 0.75f); Play("blink", e.Pos, 0.6f); break;
+                        case ComboKind.HolyWarCry: Play("levelup", e.Pos, 0.8f); Play("slam", e.Pos, 1.2f, 0.7f); break;
+                        case ComboKind.FlameCharge: Play("flame", e.Pos, 1.2f); break;
+                    }
+                    break;
                 case SimEventType.SpawnWarning: Play("telegraph", e.Pos, 0.6f, 0.6f); break;
             }
         }

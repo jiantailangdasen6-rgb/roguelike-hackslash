@@ -86,6 +86,44 @@ namespace Game.Core
                 d.Trial = true;
                 Room.Doors[t] = d;
             }
+
+            // Sometimes one ordinary door is swapped for a deal: a curse door (power now, a lasting price) or the
+            // merchant (spend the run's soul shards). Never before a boss, never on the healing or trial door.
+            if (ForceDealDoors && !nextIsBoss && Room.Doors.Count >= 2)
+            {
+                Room.Doors[0] = new Door(RoomReward.Cursed, false, (CurseKind)_doorRng.Range(0, RewardCatalog.CurseKinds));
+                Room.Doors[1] = new Door(RoomReward.Shop, false);
+            }
+            else if (!nextIsBoss && next >= 4)
+            {
+                bool curse = _doorRng.Chance(CurseDoorChance);
+                bool shop = !curse && _doorRng.Chance(ShopDoorChance);
+                if (curse || shop)
+                {
+                    int t = -1;
+                    for (int i = 0; i < Room.Doors.Count; i++)
+                        if (!Room.Doors[i].Trial && Room.Doors[i].Reward != RoomReward.Vigor) t = i;
+                    if (t >= 0)
+                        Room.Doors[t] = curse
+                            ? new Door(RoomReward.Cursed, false, (CurseKind)_doorRng.Range(0, RewardCatalog.CurseKinds))
+                            : new Door(RoomReward.Shop, false);
+                }
+            }
+        }
+
+        /// <summary>Test flag (-dealdoors): every room offers a curse door and the merchant.</summary>
+        public bool ForceDealDoors;
+
+        public const float CurseDoorChance = 0.3f;
+        public const float ShopDoorChance = 0.3f;
+
+        /// <summary>Curses the team carries for the rest of the run (stacks per kind).</summary>
+        public readonly int[] CurseStacks = new int[RewardCatalog.CurseKinds];
+
+        private void Curse(CurseKind kind)
+        {
+            CurseStacks[(int)kind]++;
+            foreach (var p in Players) p.SetCurses(CurseStacks);
         }
 
         private bool AnyUpgradeable()
@@ -99,11 +137,20 @@ namespace Game.Core
             return false;
         }
 
-        private void GrantReward(RoomReward reward, int times)
+        private void GrantReward(Door door, int times)
         {
+            var reward = door.Reward;
             float amount = 0f;
             switch (reward)
             {
+                case RoomReward.Cursed:
+                    Curse(door.Curse);
+                    StockForAll(ChoiceKind.Boon, RewardCatalog.CursedBoons);
+                    amount = (int)door.Curse;
+                    break;
+                case RoomReward.Shop:
+                    StockForAll(ChoiceKind.Shop, 1);
+                    break;
                 case RoomReward.Boon:
                 case RoomReward.Upgrade:
                     StockForAll(reward == RoomReward.Boon ? ChoiceKind.Boon : ChoiceKind.Upgrade, times);

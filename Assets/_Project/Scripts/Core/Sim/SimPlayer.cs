@@ -65,6 +65,7 @@ namespace Game.Core
         public float ShadowStepTimer;  // assassin: >0 until the arrival slash lands (the owner moves itself)
         public float SureCritTimer;    // assassin: smoke bomb, every blow is critical
         public bool BashStuns;         // guardian: the dash in progress is a shield bash
+        public bool BashAflame;        // guardian: the bash went through burning ground (combo)
 
         // Buffs
         public float ValorTimer;
@@ -204,7 +205,26 @@ namespace Game.Core
 
         public void Heal(float amount)
         {
-            if (!Downed) Hp = Mathf.Min(MaxHp, Hp + amount);
+            if (!Downed) Hp = Mathf.Min(MaxHp, Hp + amount * HealFactor);
+        }
+
+        // ------------------------------------------------------------------ Curses (curse doors)
+
+        private readonly object _curseSource = new();
+        /// <summary>Thirst: healing is weaker.</summary>
+        public float HealFactor { get; private set; } = 1f;
+        /// <summary>Weariness: the dodge recovers slower.</summary>
+        public float DodgeFactor { get; private set; } = 1f;
+
+        public void SetCurses(IReadOnlyList<int> stacks)
+        {
+            Stats.RemoveModifiersFrom(_curseSource);
+            int frail = stacks[(int)CurseKind.Frailty], hunted = stacks[(int)CurseKind.Hunted];
+            if (frail > 0) Stats.AddModifier(new StatModifier(StatType.MaxHealth, ModifierKind.PercentAdd, -RewardCatalog.FrailtyPerStack * frail), _curseSource);
+            if (hunted > 0) Stats.AddModifier(new StatModifier(StatType.DamageTaken, ModifierKind.PercentAdd, RewardCatalog.HuntedPerStack * hunted), _curseSource);
+            HealFactor = Mathf.Pow(RewardCatalog.ThirstFactor, stacks[(int)CurseKind.Thirst]);
+            DodgeFactor = 1f + RewardCatalog.WearinessPerStack * stacks[(int)CurseKind.Weariness];
+            Hp = Mathf.Min(Hp, MaxHp);
         }
 
         // ------------------------------------------------------------------ Buffs
@@ -362,6 +382,13 @@ namespace Game.Core
 
         public bool IsHeal => Perk == HealId;
 
+        // The merchant's wares that aren't perks.
+        public const byte ShopTreasureId = 254;
+        public const byte ShopVigorId = 253;
+        public bool IsShopTreasure => Perk == ShopTreasureId;
+        public bool IsShopVigor => Perk == ShopVigorId;
+        public bool IsPerk => !IsHeal && !IsShopTreasure && !IsShopVigor;
+
         public static ulong Pack(IReadOnlyList<PerkOption> options)
         {
             ulong packed = (ulong)Mathf.Min(options.Count, 3);
@@ -385,6 +412,8 @@ namespace Game.Core
         public (string Title, string Body) Describe()
         {
             if (IsHeal) return ("休息", "HPを40%回復する");
+            if (IsShopTreasure) return ("宝物", "希少以上の装備を1つ");
+            if (IsShopVigor) return ("生命の霊薬", $"最大HP +{RunSimulation.VigorPerStack * 100f:0}%・全回復");
             var def = PerkCatalog.Get((PerkId)Perk);
             string title = def.MaxLevel > 1 ? $"{def.Name} Lv{Level}" : def.Name;
             if (Level == 1 && def.MaxLevel > 1) title += "（新規）";
@@ -444,6 +473,17 @@ namespace Game.Core
             }
             if (owned.Count > OptionCount) owned.RemoveRange(OptionCount, owned.Count - OptionCount);
             return owned.ToArray();
+        }
+
+        /// <summary>The merchant: two perks and either a piece of treasure or an elixir of life.</summary>
+        public static PerkOption[] RollShop(GameRandom rng, SimPlayer player)
+        {
+            var perks = Roll(rng, player);
+            var wares = new List<PerkOption>(OptionCount);
+            for (int i = 0; i < perks.Length && wares.Count < OptionCount - 1; i++)
+                if (perks[i].IsPerk) wares.Add(perks[i]);
+            wares.Add(new PerkOption(rng.Chance(0.5f) ? PerkOption.ShopTreasureId : PerkOption.ShopVigorId, 1));
+            return wares.ToArray();
         }
 
         public static void Apply(SimPlayer player, PerkOption option)

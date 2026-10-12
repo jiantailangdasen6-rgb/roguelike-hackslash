@@ -99,7 +99,49 @@ namespace Game.EditorTools.Art
             Add(C("#8a5ac8"), Crystals);
             Add(C("#c8902c"), Chest);
             Add(C("#b0302c"), Skull);
+            Add(C("#6a2a8a"), CursedEye);   // RoomReward.Cursed
+            Add(C("#a8862c"), CoinPouch);   // RoomReward.Shop
             return icons;
+        }
+
+        /// <summary>The curse door: a violet eye that weeps.</summary>
+        private static void CursedEye(PixelCanvas c)
+        {
+            var white = C("#d8c8e8");
+            var iris = C("#9a3ae0");
+            var irisDark = C("#5a1a90");
+            for (int x = 4; x <= 20; x++)
+            {
+                float h = 5.2f * Mathf.Sin(Mathf.PI * (x - 4) / 16f);
+                for (int y = Mathf.RoundToInt(13 - h); y <= Mathf.RoundToInt(13 + h); y++) c.Set(x, y, white);
+            }
+            c.Disc(12, 13, 4f, irisDark);
+            c.Disc(12, 13, 3f, iris);
+            c.Rect(12, 10, 1, 7, Ink);                       // slit pupil
+            c.Set(14, 15, White);
+            c.Rect(8, 5, 1, 4, irisDark);                    // tears of shadow
+            c.Set(8, 4, iris);
+            c.Rect(15, 6, 1, 3, irisDark);
+            c.Set(15, 5, iris);
+        }
+
+        /// <summary>The merchant door: a pouch spilling soul-shard coins.</summary>
+        private static void CoinPouch(PixelCanvas c)
+        {
+            var sack = C("#8a5a2c");
+            var sackDark = C("#5a3818");
+            var coin = C("#c9a8ff");
+            var coinDark = C("#6a3ab0");
+            c.Disc(12, 10, 6f, sackDark);
+            c.Disc(11.2f, 10.6f, 5.1f, sack);                // lit from the upper left
+            c.Rect(10, 15, 5, 3, sack);                      // neck
+            c.Rect(9, 16, 7, 1, Gold);                       // tie
+            c.Rect(9, 18, 2, 1, sack);                       // ruffle
+            c.Rect(14, 18, 2, 1, sack);
+            c.Disc(19, 6, 2.4f, coinDark);
+            c.Disc(18.6f, 6.4f, 1.6f, coin);
+            c.Disc(5.5f, 6, 2.2f, coinDark);
+            c.Disc(5.2f, 6.4f, 1.4f, coin);
         }
 
         // ------------------------------------------------------------------ Frame

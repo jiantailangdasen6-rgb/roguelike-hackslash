@@ -22,6 +22,9 @@ namespace Game.Gameplay
         private readonly Text[] _bodies = new Text[PerkRoller.OptionCount];
         private readonly Image[] _icons = new Image[PerkRoller.OptionCount];
         private PerkOption[] _options;
+        private Button _skip;
+        private bool _shop;
+        private readonly bool[] _affordable = new bool[PerkRoller.OptionCount];
 
         /// <summary>Perks this player has picked in the current run (for the HUD).</summary>
         public static readonly List<PerkOption> Taken = new();
@@ -73,6 +76,10 @@ namespace Game.Gameplay
                 _buttons[i] = button;
             }
 
+            // The merchant: walk away without buying.
+            _skip = UIKit.Button(dim.transform, "買わない [4]", 28, () => Choose(RunSimulation.ShopSkip));
+            _skip.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0.5f), new Vector2(360f, 64f), new Vector2(0f, -340f));
+
             _panel.SetActive(false);
             RunDirector.EventReceived += OnEvent;
         }
@@ -87,11 +94,13 @@ namespace Game.Gameplay
         {
             var local = NetPlayer.Local;
             if (e.Type != SimEventType.PerkOffer || local == null || e.ClientId != local.OwnerClientId) return;
+            _shop = (ChoiceKind)e.Int == ChoiceKind.Shop;
             _heading.text = (ChoiceKind)e.Int switch
             {
                 ChoiceKind.Start => "旅立ちの力を選べ",
                 ChoiceKind.Boon => "<color=#ffcc5c>祝福</color>  力を選べ",
                 ChoiceKind.Upgrade => "<color=#8cd9ff>研磨</color>  強化する力を選べ",
+                ChoiceKind.Shop => $"<color=#f2d173>闇商人</color>  1つ買える  <size=30><color=#c9a8ff>手持ちの魂の欠片 {Purse()}</color></size>",
                 _ => "力を選べ",
             };
             int more = Mathf.RoundToInt(e.Value);
@@ -120,7 +129,16 @@ namespace Game.Gameplay
                 _buttons[i].gameObject.SetActive(used);
                 if (!used) continue;
                 var (title, body) = options[i].Describe();
-                ClassId? cls = options[i].IsHeal ? null : PerkCatalog.Get((PerkId)options[i].Perk).Class;
+                ClassId? cls = options[i].IsPerk ? PerkCatalog.Get((PerkId)options[i].Perk).Class : null;
+                _affordable[i] = true;
+                if (_shop)
+                {
+                    // Priced wares; what the team can't pay for is greyed out.
+                    int price = RewardCatalog.Price(options[i], Area());
+                    _affordable[i] = price <= Purse();
+                    body += _affordable[i] ? $"\n\n<color=#c9a8ff>魂の欠片 {price}</color>" : $"\n\n<color=#8a7f80>魂の欠片 {price}（足りない）</color>";
+                }
+                _buttons[i].interactable = _affordable[i];
                 _titles[i].text = title;
                 _bodies[i].text = body;
                 _tags[i].text = cls.HasValue ? ClassCatalog.Get(cls.Value).Name + "の技" : "共通";
@@ -128,6 +146,7 @@ namespace Game.Gameplay
                 _icons[i].sprite = GameIcons.Perk(options[i]);
                 _icons[i].enabled = _icons[i].sprite != null;
             }
+            _skip.gameObject.SetActive(_shop);
             _deadline = Time.time + RunSimulation.ChoiceTimeout;
             _panel.SetActive(true);
             IsShowing = true;
@@ -136,13 +155,27 @@ namespace Game.Gameplay
             if (CommandLine.Has("-botmove")) Invoke(nameof(BotChoose), CommandLine.GetFloat("-perkdelay", 0.8f));
         }
 
-        private void BotChoose() => Choose(Random.Range(0, _count));
+        private void BotChoose()
+        {
+            int pick = Random.Range(0, _shop ? _count + 1 : _count);
+            Choose(pick < _count && _affordable[pick] ? pick : _shop ? RunSimulation.ShopSkip : 0);
+        }
+
+        /// <summary>What the team would take home now (the merchant is paid from it).</summary>
+        private static int Purse()
+        {
+            var d = RunDirector.Instance;
+            return d == null ? 0 : RewardCatalog.Purse(d.RoomsCleared.Value, d.BossesKilled.Value, d.Kills.Value, d.DifficultyLevel.Value, d.BonusShards.Value);
+        }
+
+        private static int Area() => RunDirector.Instance != null ? RunDirector.Instance.RoomIndex.Value / RunSimulation.RoomsPerArea : 0;
 
         private void Choose(int index)
         {
             if (!IsShowing) return;
+            if (index < _count && !_affordable[index]) return; // can't pay for that one
             RunDirector.Instance?.ChoosePerkRpc(index);
-            if (_options != null && index < _options.Length) Taken.Add(_options[index]);
+            if (_options != null && index < _options.Length && _options[index].IsPerk) Taken.Add(_options[index]);
             _options = null;
             Hide();
         }
@@ -162,16 +195,17 @@ namespace Game.Gameplay
                 if (kb.digit1Key.wasPressedThisFrame) Choose(0);
                 else if (kb.digit2Key.wasPressedThisFrame && _count > 1) Choose(1);
                 else if (kb.digit3Key.wasPressedThisFrame && _count > 2) Choose(2);
+                else if (kb.digit4Key.wasPressedThisFrame && _shop) Choose(RunSimulation.ShopSkip);
             }
             if (!IsShowing) return;
 
             float left = _deadline - Time.time;
-            _timerText.text = $"残り {Mathf.CeilToInt(Mathf.Max(0f, left))} 秒（時間切れで左を選択）";
+            _timerText.text = $"残り {Mathf.CeilToInt(Mathf.Max(0f, left))} 秒（{(_shop ? "時間切れで何も買わない" : "時間切れで左を選択")}）";
             var director = RunDirector.Instance;
             if (left < -1f || (director != null && !director.Paused.Value && left < RunSimulation.ChoiceTimeout - 1f))
             {
                 // Timed out: the host picked the first option.
-                if (_options != null && _options.Length > 0) Taken.Add(_options[0]);
+                if (!_shop && _options != null && _options.Length > 0 && _options[0].IsPerk) Taken.Add(_options[0]);
                 _options = null;
                 Hide();
             }

@@ -81,7 +81,7 @@ namespace Game.Core
         private void Dodge(SimPlayer p)
         {
             bool evasive = p.PerkLevel(PerkId.Evasive) > 0;
-            p.DodgeCooldown = ClassCatalog.DodgeCooldown * (evasive ? 0.6f : 1f);
+            p.DodgeCooldown = ClassCatalog.DodgeCooldown * (evasive ? 0.6f : 1f) * p.DodgeFactor;
             p.InvulnerableTimer = Mathf.Max(p.InvulnerableTimer, ClassCatalog.DodgeInvulnerability);
             if (evasive) p.EvasiveTimer = 0.5f;
             if (p.Stats.Get(StatType.DodgeStrike) > 0f) p.DodgeStrikeTimer = 2f; // gear: the next blow lands harder
@@ -247,6 +247,7 @@ namespace Game.Core
                         if (bulwark > 0) ally.Shield = Mathf.Max(ally.Shield, 25f * bulwark);
                     }
                     Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.WarCry, Pos = p.Position, Value = radius });
+                    HolyWarCry(p);
                     break;
                 }
                 case ClassId.Mage:
@@ -414,6 +415,7 @@ namespace Game.Core
                                 ally.Shield = Mathf.Max(ally.Shield, 15f * armor);
                     }
                     Events.Add(new SimEvent(SimEventType.AreaEffect) { ClientId = p.ClientId, Int = (int)AreaKind.FrostNova, Pos = area.Position, Value = area.Radius });
+                    SteamBursts(p, area.Position, area.Radius);
                 }
             }
         }

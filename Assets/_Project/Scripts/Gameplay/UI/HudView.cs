@@ -100,7 +100,7 @@ namespace Game.Gameplay
             _timeText = UIKit.Title(root, "", 30, TextAnchor.UpperRight, UIKit.MutedText);
             _timeText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(240f, 44f), new Vector2(-28f, -22f));
             _difficultyText = UIKit.Label(root, "", 22, TextAnchor.UpperRight, UIKit.MutedText);
-            _difficultyText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(400f, 32f), new Vector2(-28f, -64f));
+            _difficultyText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(900f, 32f), new Vector2(-28f, -64f));
             _roomText = UIKit.Title(root, "", 26, TextAnchor.UpperRight, UIKit.MutedText);
             _roomText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(700f, 40f), new Vector2(-28f, -98f));
             _objectiveText = UIKit.Label(root, "", 28, TextAnchor.UpperRight, UIKit.AccentColor);
@@ -146,11 +146,8 @@ namespace Game.Gameplay
             _toastText = UIKit.Label(root, "", 26, TextAnchor.LowerCenter);
             _toastText.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1300f, 220f), new Vector2(0f, 130f));
 
-            _hintText = UIKit.Label(root,
-                "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　I 袋　Esc メニュー\n" +
-                "<color=#9fd8ff>連携：凍った敵は強打で「砕ける」／印の敵は全員の攻撃が通りやすい／倒れた仲間のそばに立つと復活</color>",
-                22, TextAnchor.LowerLeft, UIKit.MutedText);
-            _hintText.rectTransform.Place(new Vector2(0f, 0f), new Vector2(1100f, 80f), new Vector2(24f, 120f));
+            _hintText = UIKit.Label(root, "", 22, TextAnchor.LowerLeft, UIKit.MutedText);
+            _hintText.rectTransform.Place(new Vector2(0f, 0f), new Vector2(1100f, 110f), new Vector2(24f, 120f));
 
             BuildCurtain();
             gameObject.AddComponent<AllyOverlay>();
@@ -295,6 +292,8 @@ namespace Game.Gameplay
                         RoomReward.Shards => $"魂の欠片 +{e.Value:0}（ラン後に受け取る）",
                         RoomReward.Treasure => "全員が希少以上の装備を手に入れた（I で袋を開く）",
                         RoomReward.Upgrade => "持っている力を強化する",
+                        RoomReward.Cursed => $"力を{RewardCatalog.CursedBoons}つ授かる。代償に「{RewardCatalog.CurseName((CurseKind)Mathf.RoundToInt(e.Value))}」（{RewardCatalog.CurseText((CurseKind)Mathf.RoundToInt(e.Value))}）がこのランの間つく",
+                        RoomReward.Shop => "魂の欠片で1人1つ買える（全員の取り分から払う）",
                         _ => "新たな力を授かる",
                     };
                     Toast($"<color=#{hex}>{RewardCatalog.Name(reward)}</color>：{text}");
@@ -334,13 +333,46 @@ namespace Game.Gameplay
                 case SimEventType.PlayerRejoined:
                     Toast(IsMe(e.ClientId) ? "<color=#9fd8ff>冒険に戻った</color>" : "<color=#9fd8ff>仲間が戻ってきた！</color>");
                     break;
+                case SimEventType.ItemSalvaged when e.Value < 0f:
+                    // Bought from the merchant: the whole team's payout shrinks, so everyone hears about it.
+                    Toast($"<color=#f2d173>{(IsMe(e.ClientId) ? "闇商人から買った" : NameOf(e.ClientId) + "が闇商人から買った")}</color>（魂の欠片 {e.Value:0}）");
+                    break;
                 case SimEventType.PlayerLeft:
                     Toast($"<color=#ff9a80>{NameOf(e.ClientId)}が抜けた</color>（同じルームコードで戻ってこられる）");
                     break;
-                case SimEventType.AreaEffect when (AreaKind)e.Int == AreaKind.Shatter:
-                    Toast("<color=#9fd8ff>連携：砕き！</color>");
-                    break;
             }
+        }
+
+        /// <summary>"呪い：脆さ×2・渇き　" in violet before the difficulty, or nothing.</summary>
+        private static string CurseText(int packed)
+        {
+            if (packed == 0) return "";
+            var parts = new List<string>();
+            for (int i = 0; i < RewardCatalog.CurseKinds; i++)
+            {
+                int n = RewardCatalog.CurseStack(packed, (CurseKind)i);
+                if (n > 0) parts.Add(RewardCatalog.CurseName((CurseKind)i) + (n > 1 ? $"×{n}" : ""));
+            }
+            return $"<color=#d88cff>呪い：{string.Join("・", parts)}</color>　";
+        }
+
+        private readonly List<ClassId> _party = new();
+        private string _hintKey;
+
+        /// <summary>Controls and teamwork tips at the start of a run, with the combination techniques this party can do.</summary>
+        private void UpdateHint()
+        {
+            _party.Clear();
+            foreach (var p in NetPlayer.All) _party.Add(p.Class.Value);
+            string key = string.Join(",", _party);
+            if (key == _hintKey) return;
+            _hintKey = key;
+            var text = "WASD 移動　マウス 照準　左クリック 攻撃　Q・E スキル　Space 回避　I 袋　Esc メニュー\n" +
+                       "<color=#9fd8ff>連携：凍った敵は強打で「砕ける」／印の敵は全員の攻撃が通りやすい／倒れた仲間のそばに立つと復活</color>";
+            var combos = ComboCatalog.Available(_party);
+            for (int i = 0; i < combos.Count && i < 2; i++)
+                text += $"\n<color=#ffd27a>連携技「{combos[i].Name}」：{combos[i].How}</color>";
+            _hintText.text = text;
         }
 
         private static bool IsMe(ulong clientId) =>
@@ -366,7 +398,7 @@ namespace Game.Gameplay
                 ? $"<size=24><color=#e0b45a>★{banked}</color></size>  Lv {director.TeamLevel.Value}"
                 : $"Lv {director.TeamLevel.Value}";
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
-            _difficultyText.text = $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
+            _difficultyText.text = CurseText(director.Curses.Value) + $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
             _roomText.text = RoomTitle(director.RoomIndex.Value) + $"   {director.RoomIndex.Value + 1}/{RunSimulation.TotalRooms}";
             _objectiveText.text = ObjectiveText(director);
 
@@ -405,8 +437,12 @@ namespace Game.Gameplay
             UpdateTeam(local);
 
             _hintText.enabled = director.RoomIndex.Value == 0 && director.Elapsed.Value < 30f;
+            if (_hintText.enabled) UpdateHint();
             _centerText.text = CenterMessage(director, local);
-            _bannerText.enabled = _bannerSub.enabled = Time.time < _bannerUntil;
+            // While a choice is on screen, only the cards speak (banners and toasts wait behind them).
+            bool choosing = PerkView.IsShowing;
+            _bannerText.enabled = _bannerSub.enabled = !choosing && Time.time < _bannerUntil;
+            _toastText.enabled = _centerText.enabled = !choosing;
 
             _toasts.RemoveAll(t => t.Until < Time.time);
             _sb.Clear();
@@ -457,7 +493,7 @@ namespace Game.Gameplay
             var order = new List<PerkOption>();
             foreach (var o in taken)
             {
-                if (o.IsHeal) continue;
+                if (!o.IsPerk) continue;
                 if (!levels.ContainsKey(o.Perk)) order.Add(o);
                 levels[o.Perk] = Mathf.Max(levels.TryGetValue(o.Perk, out int l) ? l : 0, o.Level);
             }

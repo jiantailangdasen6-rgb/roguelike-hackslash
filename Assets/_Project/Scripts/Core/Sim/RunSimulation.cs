@@ -154,6 +154,7 @@ namespace Game.Core
                 for (int level = 1; level < TeamLevel; level++) player.StockedChoices.Enqueue(ChoiceKind.LevelUp);
                 player.Hp = player.MaxHp;
             }
+            player.SetCurses(CurseStacks); // curses the team took while they were away count for them too
 
             foreach (var mate in Players)
             {
@@ -511,7 +512,12 @@ namespace Game.Core
             if (!OffersOpen || p.PendingOffer != null || p.StockedChoices.Count == 0) return;
             var kind = p.StockedChoices.Dequeue();
             var shown = kind;
-            p.PendingOffer = kind == ChoiceKind.Upgrade ? PerkRoller.RollUpgrade(_perkRng, p) : null;
+            p.PendingOffer = kind switch
+            {
+                ChoiceKind.Upgrade => PerkRoller.RollUpgrade(_perkRng, p),
+                ChoiceKind.Shop => PerkRoller.RollShop(_perkRng, p),
+                _ => null,
+            };
             if (p.PendingOffer == null)
             {
                 if (kind == ChoiceKind.Upgrade) shown = ChoiceKind.Boon; // nothing to upgrade yet: a new perk instead
@@ -526,10 +532,42 @@ namespace Game.Core
         {
             var p = GetPlayer(clientId);
             if (p?.PendingOffer == null) return;
+            if (p.OfferKind == ChoiceKind.Shop)
+            {
+                // The merchant: index past the wares (or one the team can't afford) buys nothing.
+                var wares = p.PendingOffer;
+                p.PendingOffer = null;
+                if (index >= 0 && index < wares.Length) Buy(p, wares[index]);
+                OfferNext(p);
+                return;
+            }
             var option = p.PendingOffer[Mathf.Clamp(index, 0, p.PendingOffer.Length - 1)];
             p.PendingOffer = null;
             PerkRoller.Apply(p, option);
             OfferNext(p);
+        }
+
+        /// <summary>The "buy nothing" choice at the merchant.</summary>
+        public const int ShopSkip = PerkRoller.OptionCount;
+
+        /// <summary>Soul shards the team would take home now: the merchant is paid out of this.</summary>
+        public int Purse => RewardCatalog.Purse(RoomsCleared, BossesKilled, Kills, Difficulty, BonusShards);
+
+        private void Buy(SimPlayer p, PerkOption ware)
+        {
+            int price = RewardCatalog.Price(ware, Room.Area);
+            if (price > Purse) return;
+            BonusShards -= price;
+            if (ware.IsShopTreasure) GrantTreasureTo(p, 0);
+            else if (ware.IsShopVigor)
+            {
+                float before = p.Hp;
+                p.AddVigor(1);
+                if (p.Alive) p.Hp = p.MaxHp;
+                if (p.Hp > before) Events.Add(new SimEvent(SimEventType.PlayerHealed) { ClientId = p.ClientId, Pos = p.Position, Value = p.Hp - before });
+            }
+            else PerkRoller.Apply(p, ware);
+            Events.Add(new SimEvent(SimEventType.ItemSalvaged) { ClientId = p.ClientId, Value = -price }); // shards spent (negative salvage)
         }
 
         /// <summary>Someone away from the keyboard can't hold the team up forever: the first option is taken for them.</summary>
@@ -539,7 +577,7 @@ namespace Game.Core
             {
                 if (p.PendingOffer == null) continue;
                 p.OfferTimer -= dt;
-                if (p.OfferTimer <= 0f) ChoosePerk(p.ClientId, 0);
+                if (p.OfferTimer <= 0f) ChoosePerk(p.ClientId, p.OfferKind == ChoiceKind.Shop ? ShopSkip : 0);
             }
         }
 
@@ -781,7 +819,7 @@ namespace Game.Core
             }
             _enterTrial = door.Trial;
             StartRoom(Room.Index + 1);
-            GrantReward(door.Reward, door.Trial ? 2 : 1);
+            GrantReward(door, door.Trial ? 2 : 1);
             CheckLevelUp(); // souls picked up on the way out
             HoldIfPicksLeft();
         }

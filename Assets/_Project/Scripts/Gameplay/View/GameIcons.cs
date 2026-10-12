@@ -6,7 +6,11 @@ namespace Game.Gameplay
     /// <summary>Generated pixel icons: one frame per perk (in PerkId order, then the rest icon) and per trinket.</summary>
     public static class GameIcons
     {
-        public static Sprite Perk(PerkOption option) => option.IsHeal ? Frame("icons_perk", PerkCatalog.Count) : Perk((PerkId)option.Perk);
+        public static Sprite Perk(PerkOption option) =>
+            option.IsHeal ? Frame("icons_perk", PerkCatalog.Count)
+            : option.IsShopTreasure ? Reward(RoomReward.Treasure)
+            : option.IsShopVigor ? Reward(RoomReward.Vigor)
+            : Perk((PerkId)option.Perk);
 
         public static Sprite Perk(PerkId id) => Frame("icons_perk", (int)id);
 

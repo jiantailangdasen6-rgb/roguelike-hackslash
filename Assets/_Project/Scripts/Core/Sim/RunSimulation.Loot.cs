@@ -131,17 +131,20 @@ namespace Game.Core
         private void GrantTreasure(int times)
         {
             foreach (var p in Players)
-                for (int i = 0; i < times; i++)
-                {
-                    var item = RollItem(p, 2f, Rarity.Rare);
-                    if (!p.BagFull)
-                    {
-                        p.Bag.Add(item);
-                        Events.Add(new SimEvent(SimEventType.LootPicked) { Id = 0, ClientId = p.ClientId, Int = (int)item.rarity });
-                    }
-                    else DropFor(p, item, p.Position + new Vector2(0.6f * (i + 1), 0f));
-                    SyncGear(p);
-                }
+                for (int i = 0; i < times; i++) GrantTreasureTo(p, i);
+        }
+
+        /// <summary>One rare-or-better piece for one player (treasure doors, the merchant).</summary>
+        private void GrantTreasureTo(SimPlayer p, int slot)
+        {
+            var item = RollItem(p, 2f, Rarity.Rare);
+            if (!p.BagFull)
+            {
+                p.Bag.Add(item);
+                Events.Add(new SimEvent(SimEventType.LootPicked) { Id = 0, ClientId = p.ClientId, Int = (int)item.rarity });
+            }
+            else DropFor(p, item, p.Position + new Vector2(0.6f * (slot + 1), 0f));
+            SyncGear(p);
         }
 
         // ------------------------------------------------------------------ Bag actions (between fights only)

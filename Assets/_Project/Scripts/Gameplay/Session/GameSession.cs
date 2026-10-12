@@ -66,6 +66,7 @@ namespace Game.Gameplay
             nm.SetSingleton();
             nm.ConnectionApprovalCallback = Approve;
             nm.OnClientDisconnectCallback += OnClientDisconnected;
+            nm.OnTransportFailure += OnTransportFailure;
             return nm;
         }
 
@@ -259,6 +260,17 @@ namespace Game.Gameplay
             Refused = !string.IsNullOrEmpty(nm.DisconnectReason);
             string reason = Refused ? nm.DisconnectReason : "ホストとの接続が切れました";
             ReturnToLobby(reason);
+        }
+
+        /// <summary>
+        /// The connection itself broke (Relay lost, transport queues overflowed). Netcode shuts down on its own; without
+        /// this the host was left on a frozen game screen.
+        /// </summary>
+        private static void OnTransportFailure()
+        {
+            if (_leaving) return;
+            Debug.LogWarning("[GameSession] Transport failure: back to the title");
+            ReturnToLobby("通信が切れました（回線が不安定だったようです）。もう一度部屋を作って集まってください");
         }
 
         /// <summary>Best guess of this device's LAN address, for showing to friends who want to join.</summary>

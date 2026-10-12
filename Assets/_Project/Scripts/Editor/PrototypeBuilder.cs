@@ -199,6 +199,9 @@ namespace Game.EditorTools
             nt.SyncRotAngleX = nt.SyncRotAngleY = nt.SyncRotAngleZ = false;
             nt.SyncScaleX = nt.SyncScaleY = nt.SyncScaleZ = false;
             nt.Interpolate = true;
+            // Movement deltas unreliable (teleports and periodic full syncs stay reliable): over Relay a latency spike
+            // otherwise makes the reliable pipeline resend 30 positions a second and overflow the send queue.
+            nt.UseUnreliableDeltas = true;
 
             var body = new GameObject("Body");
             body.transform.SetParent(root.transform, false);
@@ -264,6 +267,9 @@ namespace Game.EditorTools
 
             var go = new GameObject("NetworkManager");
             var transport = go.AddComponent<UnityTransport>();
+            // The default 128 packets is about a second of traffic with three players over Relay (WebSockets): a short
+            // hitch filled it, a dropped reliable packet then held every later message and the run froze for everyone.
+            transport.MaxPacketQueueSize = 1024;
             go.AddComponent<SinglePlayerTransport>(); // solo play without sockets (works in browsers)
             var nm = go.AddComponent<NetworkManager>();
             nm.NetworkConfig.NetworkTransport = transport;

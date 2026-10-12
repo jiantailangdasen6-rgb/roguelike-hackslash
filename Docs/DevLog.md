@@ -246,6 +246,21 @@
 - **気になる点**：ボットは祭壇→未訪問の部屋→焚き火→主の扉の順に回るので、3人の NetTest でも全員が主の扉にそろうまで時間がかかる。主の間の扉は戦闘中は閉じる（逃げられない）。
   ブラウザ版で部屋をまたぐ瞬間移動とカメラの切り替えは CrossTest でしか見ていない（人の目での確認はまだ）
 
+### 不具合：協力プレイで部屋に入ると進行が止まる（2026-10-12 報告・修正）
+- **症状**：ルームコード（Relay）で3人プレイ中、部屋の制圧やレベルアップのあたりで全員の進行が止まった
+- **原因**：ユーザーの PC のログ（`%USERPROFILE%/AppData/LocalLow/DefaultCompany/LabyrinthSurvivor/Player.log`）に
+  `Receive queue is full ... (128)` → `Failed to establish connection with the Relay server` → `Transport failure!`。
+  Unity Transport の送受信キュー（既定128パケット）は3人・Relay（WebSocket）だと約1秒分しかなく、遅延の山や一瞬の固まりであふれる。
+  あふれて落ちたのが「順番どおり確実に届ける」通信だと、後続の通信がすべてその1個を待って止まる（仲間側は経過時間が止まり、30秒後に切断）。
+  ホスト側は通信が切れた後に何も表示せず、固まった画面のままだった。LAN の NetTest では回線が速いので一度も起きていなかった
+- **再現**：`Tools/OnlineTest.ps1 -HostExtra "-freezeat 50 -freezefor 4"`（新フラグ `-freezeat/-freezefor`：メインスレッドを一度止める）。
+  修正前は最初の部屋の制圧時点（固める前）に `send queue full` が出て、仲間2人が固まった後に切断された
+- **修正**：`UnityTransport.MaxPacketQueueSize` 128→1024、プレイヤーの `NetworkTransform.UseUnreliableDeltas`（移動の差分は届かなくてもよい方式。
+  瞬間移動と定期的な全体同期は確実に届く方式のまま）、`NetworkManager.OnTransportFailure` でタイトルへ戻して理由を表示（`GameSession.OnTransportFailure`）
+- 3人がばらばらに部屋を回る長時間テスト `CoopStallTests` も追加（シミュレーションの例外は出ていなかった）
+- 修正後：同じ固まりテストで警告0件・切断なし（3人とも最後まで進行）。Windows版 ver 55754c69 を Releases に公開。
+  ブラウザ版は「公開は後回し」の指示どおり未公開（ビルドだけ済み。公開済みのページは迷宮より前の ver 03359739 のまま）
+
 ### Claude が自分の判断で決めたこと（ユーザーが変更可）
 - 迷宮：部屋数（9〜10）、部屋の間隔、祭壇の部屋の数と種類、戦闘部屋の波の数（2〜3）、扉は押し込みで瞬間移動、戦闘中の部屋から出られる（主の間だけは閉じる）、呪いを個人に変更
 - ボスの試練の内容・発動HP・時間・ダメージ、難易度ごとの変化の組み合わせと数値、ドロップの重み

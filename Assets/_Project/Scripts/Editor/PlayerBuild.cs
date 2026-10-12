@@ -19,6 +19,17 @@ namespace Game.EditorTools
         [MenuItem("Tools/Game/Build Windows Player")]
         public static void BuildWindows() => Build(WindowsPath, BuildTarget.StandaloneWindows64, BuildOptions.Development);
 
+        public const string ReleasePath = "Builds/Release/LabyrinthSurvivor/LabyrinthSurvivor.exe";
+
+        /// <summary>The copy handed to friends (Tools/PackageWindows.ps1 zips it): no development overlay or debugger.
+        /// Build it right after the web build (no builder run in between) so both share the build stamp.</summary>
+        [MenuItem("Tools/Game/Build Windows Release")]
+        public static void BuildWindowsRelease()
+        {
+            if (System.IO.Directory.Exists("Builds/Release/LabyrinthSurvivor")) System.IO.Directory.Delete("Builds/Release/LabyrinthSurvivor", true);
+            Build(ReleasePath, BuildTarget.StandaloneWindows64, BuildOptions.None);
+        }
+
         [MenuItem("Tools/Game/Build WebGL Player")]
         public static void BuildWebGL()
         {

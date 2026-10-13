@@ -10,7 +10,7 @@ namespace Game.Gameplay
     /// current layout's obstacles and gimmicks (spike traps, flame vents, healing fonts). Kegs are drawn by
     /// <see cref="EnemyView"/> since they are breakable "enemies" in the simulation.
     /// </summary>
-    public sealed class ArenaView : MonoBehaviour
+    public sealed partial class ArenaView : MonoBehaviour
     {
         private sealed class GimmickVisual
         {
@@ -57,6 +57,9 @@ namespace Game.Gameplay
                     if (g.Def.Kind == GimmickKind.HealingFont) g.Used = true;
                     else g.ActiveUntil = Time.time + e.Value;
                     break;
+                case SimEventType.TrialEvent:
+                    OnLandTrial(e); // ArenaView.Lands.cs
+                    break;
             }
         }
 
@@ -80,6 +83,7 @@ namespace Game.Gameplay
 
             foreach (var g in _gimmicks.Values) Animate(g);
             UpdateAbyss(director);
+            UpdateLands(director);
         }
 
         // ------------------------------------------------------------------ The Lich's collapsing floor
@@ -202,7 +206,8 @@ namespace Game.Gameplay
                 globalLight.color = LandLook.Ambient((Biome)area);
                 globalLight.intensity = LandLook.AmbientIntensity((Biome)area);
             }
-            if (_room != null) BuildRoom(_room); // props use the area's palette
+            LandLook.ApplyGrading((Biome)area);
+            if (_room != null) BuildRoom(_room); // props use the land's palette
         }
 
         /// <summary>The room's floor and walls (the area look moved to its spot), obstacles, traps and doorways.</summary>
@@ -219,6 +224,7 @@ namespace Game.Gameplay
                     if (root != null) root.localPosition = room.Origin;
             BuildDoors(room);
             AddRoomDecor(room);
+            AddFloorFeatures(room);
 
             var layout = room.Layout;
             foreach (var o in layout.Obstacles)
@@ -269,6 +275,9 @@ namespace Game.Gameplay
                         _gimmicks[idBase + i] = new GimmickVisual { Def = def, Renderer = r, Frames = sheet?.Sprites("default"), Light = light };
                         break;
                     }
+                    default:
+                        AddLandGimmick(def, idBase + i); // ArenaView.Lands.cs
+                        break;
                 }
             }
         }
@@ -369,6 +378,54 @@ namespace Game.Gameplay
             }
         }
 
+        /// <summary>Floor features each land picks from (DecalArt), with the light some of them give off.</summary>
+        private static readonly (string Sheet, Color Light, float Intensity)[][] LandFeatures =
+        {
+            new[] { ("decal_rubble", default(Color), 0f), ("decal_crack", default, 0f), ("decal_blood", default, 0f), ("decal_rug_brown", default, 0f) },
+            new[] { ("decal_rug_red", default(Color), 0f), ("decal_glass", new Color(0.8f, 0.5f, 0.9f), 0.35f), ("decal_blood", default, 0f), ("decal_crack", default, 0f) },
+            new[] { ("decal_rift", new Color(0.7f, 0.45f, 1f), 0.9f), ("decal_chainpile", default, 0f), ("decal_crack", default, 0f), ("decal_rubble", default, 0f) },
+            new[] { ("decal_pool", new Color(0.35f, 0.95f, 0.8f), 0.45f), ("decal_pool", new Color(0.35f, 0.95f, 0.8f), 0.45f), ("decal_algae", default, 0f), ("decal_rubble", default, 0f) },
+            new[] { ("decal_ice", new Color(0.6f, 0.82f, 1f), 0.4f), ("decal_frozen", default, 0f), ("decal_crack", default, 0f), ("decal_rubble", default, 0f) },
+            new[] { ("decal_slag", new Color(1f, 0.5f, 0.15f), 0.9f), ("decal_tools", default, 0f), ("decal_crack", default, 0f), ("decal_rubble", default, 0f) },
+        };
+
+        /// <summary>
+        /// A few features on the floor, different in every room of a land (picked from the map's seed and the room,
+        /// so every player sees the same): pools, frozen sheets, slag, rifts, rugs, rubble. Quiet rooms keep fewer.
+        /// </summary>
+        private void AddFloorFeatures(MapRoom room)
+        {
+            var director = RunDirector.Instance;
+            ulong seed = (director != null ? director.MapSeed.Value : 0ul) ^ (ulong)(room.Id * 7919 + room.Index * 104729 + 17);
+            var rng = new GameRandom(seed);
+            var set = LandFeatures[Mathf.Clamp(_area, 0, LandFeatures.Length - 1)];
+            var b = room.Bounds;
+            int count = room.IsFight ? 2 + rng.Range(0, 3) : rng.Range(0, 2);
+            var placed = new List<Vector2>();
+            for (int i = 0; i < count; i++)
+            {
+                var (sheet, light, intensity) = set[rng.Range(0, set.Length)];
+                Vector2 at = default;
+                bool found = false;
+                for (int attempt = 0; attempt < 8 && !found; attempt++)
+                {
+                    at = new Vector2(rng.Range(b.xMin + 3f, b.xMax - 3f), rng.Range(b.yMin + 2f, b.yMax - 2.5f));
+                    var candidate = at;
+                    found = !placed.Exists(p => (p - candidate).sqrMagnitude < 25f) && (at - b.center).sqrMagnitude > 4f;
+                }
+                if (!found) continue;
+                placed.Add(at);
+                var r = Sprite("Feature", SpriteSheet.Load(sheet, quiet: true)?.First, at, -997);
+                r.flipX = rng.Chance(0.5f);
+                if (intensity > 0f)
+                {
+                    var l = AddLight(r.gameObject, light, intensity, 4.5f);
+                    l.transform.localPosition = Vector3.zero;
+                    if (sheet is "decal_slag" or "decal_rift") l.gameObject.AddComponent<LightFlicker>().Configure(intensity, 0.18f);
+                }
+            }
+        }
+
         /// <summary>An arch or a gap in the wall for every door of the room, and the bone bars of a shut one.</summary>
         private void BuildDoors(MapRoom room)
         {
@@ -431,6 +488,9 @@ namespace Game.Gameplay
                     g.Light.intensity = g.Used ? 0f : 0.9f + 0.25f * Mathf.Sin(now * 2.5f);
                     break;
                 }
+                default:
+                    AnimateLand(g, now); // ArenaView.Lands.cs
+                    break;
             }
         }
 

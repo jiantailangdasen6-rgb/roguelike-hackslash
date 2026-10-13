@@ -18,6 +18,17 @@ namespace Game.EditorTools.Art
             BaseShade = baseShade;
         }
 
+        /// <summary>
+        /// Palette swap: while set, parts built with a material listed here use its replacement instead (monster
+        /// variants drawn by an existing generator in other colours, EnemyArt.Lands).
+        /// </summary>
+        public static System.Collections.Generic.Dictionary<int, PixelMaterial> Swaps;
+
+        /// <summary>A material is matched by its darkest colour and ramp length (inline materials are found too).</summary>
+        public static int SwapKey(PixelMaterial m) => (m.Ramp[0].r | m.Ramp[0].g << 8 | m.Ramp[0].b << 16) ^ (m.Ramp.Length << 24);
+
+        public static PixelMaterial Swapped(PixelMaterial m) => Swaps != null && Swaps.TryGetValue(SwapKey(m), out var to) ? to : m;
+
         /// <summary>A single colour that is never shaded (eyes, glows, holes).</summary>
         public PixelMaterial(string hex)
         {
@@ -68,6 +79,7 @@ namespace Game.EditorTools.Art
                 bool highlight = char.IsUpper(ch) && !materials.ContainsKey(ch);
                 if (!materials.TryGetValue(highlight ? char.ToLowerInvariant(ch) : ch, out var mat))
                     throw new ArgumentException($"Part '{name}': unknown material '{ch}'");
+                mat = PixelMaterial.Swapped(mat);
 
                 Color32 color;
                 if (mat.Fixed)

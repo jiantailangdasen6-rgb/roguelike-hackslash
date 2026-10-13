@@ -336,6 +336,13 @@ namespace Game.Gameplay
                 }
                 if (trial == BossTrial.Phylactery) tint = new Color(0.6f, 0.9f, 1f, 0.4f + 0.1f * Mathf.Sin(Time.time * 8f));
                 if (v.Glow != null && trial == BossTrial.BloodRitual) v.Glow.intensity = 2f + Mathf.Sin(Time.time * 6f) * 0.6f;
+                // Red-hot iron: the colossus glows like a forge while he burns.
+                if (trial == BossTrial.Overheat)
+                {
+                    float heat = 0.5f + 0.5f * Mathf.Sin(Time.time * 7f);
+                    tint = Color.Lerp(tint, new Color(1f, 0.42f, 0.18f), 0.5f + 0.2f * heat);
+                    if (v.Glow != null) { v.Glow.color = new Color(1f, 0.45f, 0.12f); v.Glow.intensity = 2.4f + heat; }
+                }
                 return;
             }
             if (s.Type is EnemyType.BloodSigil or EnemyType.PressurePlate)
@@ -381,12 +388,13 @@ namespace Game.Gameplay
 
             v.Root.SetActive(true);
             v.Anim = (EnemyAnim)255;
-            v.Shadow.enabled = !def.Flat;
+            v.Shadow.enabled = !def.Flat && type != EnemyType.IceMirror; // the queen's reflections cast no shadow
             v.Animator.Renderer.color = Color.white;
             v.Animator.Play("idle", force: true);
 
             bool trialProp = type is EnemyType.BoneBrazier or EnemyType.BloodSigil or EnemyType.SoulVessel or EnemyType.PressurePlate or EnemyType.WardCrystal;
-            if (elite || def.Boss || def.Type is EnemyType.Wraith or EnemyType.ShadeStalker or EnemyType.AbyssEye || trialProp)
+            bool glows = def.Type is EnemyType.Wraith or EnemyType.ShadeStalker or EnemyType.AbyssEye or EnemyType.TideWitch or EnemyType.FrostWitch or EnemyType.FireImp or EnemyType.SlagBloater or EnemyType.IceMirror;
+            if (elite || def.Boss || glows || trialProp)
             {
                 if (v.Glow == null)
                 {
@@ -401,6 +409,18 @@ namespace Game.Gameplay
                 v.Glow.intensity = def.Boss ? 1.4f : def.Type is EnemyType.Wraith or EnemyType.ShadeStalker or EnemyType.AbyssEye && !elite ? 0.6f : 0.9f;
                 v.Glow.pointLightOuterRadius = def.Boss ? 4.5f : 2.2f;
                 v.Glow.pointLightInnerRadius = 0.2f;
+                // The new lands: drowned teal, cold blue, forge orange (a reflection glows just like the queen).
+                switch (def.Type)
+                {
+                    case EnemyType.DrownedSaint: case EnemyType.TideWitch: v.Glow.color = new Color(0.35f, 1f, 0.85f); break;
+                    case EnemyType.FrostQueen: case EnemyType.IceMirror: case EnemyType.FrostWitch: v.Glow.color = new Color(0.6f, 0.85f, 1f); break;
+                    case EnemyType.ForgeColossus: case EnemyType.FireImp: case EnemyType.SlagBloater: v.Glow.color = new Color(1f, 0.5f, 0.15f); break;
+                }
+                if (def.Type == EnemyType.IceMirror)
+                {
+                    v.Glow.intensity = 1.4f;
+                    v.Glow.pointLightOuterRadius = 4.5f;
+                }
                 if (trialProp)
                 {
                     v.Glow.color = type == EnemyType.BloodSigil ? new Color(1f, 0.2f, 0.15f) : new Color(0.5f, 0.95f, 1f);

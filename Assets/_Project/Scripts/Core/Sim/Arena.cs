@@ -24,6 +24,11 @@ namespace Game.Core
         HealingFont, // stand on it to heal everyone nearby (once per room)
         PowderKeg,   // a breakable barrel (spawned as a static "enemy"), explodes when hit
         TreasureChest, // rest rooms: a breakable chest (static "enemy") full of souls
+        // The new lands (Direction carries a zone's size)
+        Water,       // sunken: shallow water slows everyone wading through it
+        Ice,         // frost: a frozen sheet, players slide on it
+        Icicle,      // frost: icicles fall from the ceiling on a cycle (a shadow grows first)
+        LavaCrack,   // forge: a crack in the floor that erupts along a line
     }
 
     public struct Obstacle
@@ -95,6 +100,23 @@ namespace Game.Core
         public const float KegFuse = 0.55f;
         public const float KegRadius = 2.6f;
         public const float KegDamageToPlayers = 20f;
+
+        public const float WaterSlow = 0.7f;          // players wading
+        public const float WaterSlowMonsters = 0.65f; // walkers wading
+
+        public const float IcicleRadius = 1.2f;
+        public const float IciclePeriod = 5.2f;
+        public const float IcicleWarn = 1.1f;
+        public const float IcicleActive = 0.25f;
+        public const float IcicleDamage = 18f;
+
+        public const float LavaLength = 6.5f;
+        public const float LavaWidth = 1.2f;
+        public const float LavaPeriod = 6f;
+        public const float LavaWarn = 1.2f;
+        public const float LavaActive = 1.2f;
+        public const float LavaTick = 0.35f;
+        public const float LavaDamage = 9f;
 
         private static Obstacle O(ObstacleKind kind, float x, float y) => new()
         {
@@ -248,7 +270,110 @@ namespace Game.Core
                     G(Flame, -13.7f, -2.6f, 0.5f, 1f, 0f), G(Flame, 13.7f, -2.6f, 0f, -1f, 0f),
                 },
             },
+
+            // ---------------------------------------------------------------- Sunken catacombs (water slows the wader)
+            new()
+            {
+                // A channel of water across the hall: cross it, or fight around its ends.
+                Id = 15, Name = "flooded_hall",
+                Obstacles = new[] { O(P, -7f, 4.2f), O(P, 7f, 4.2f), O(P, -7f, -4.2f), O(P, 7f, -4.2f) },
+                Gimmicks = new[] { Z(Pool, 0f, 0.2f, 22f, 3.2f), G(Font, 12f, 5f) },
+            },
+            new()
+            {
+                Id = 16, Name = "sunken_tombs",
+                Obstacles = new[]
+                {
+                    O(ObstacleKind.Sarcophagus, -8f, 2.8f), O(ObstacleKind.Sarcophagus, 8f, -0.8f),
+                    O(ObstacleKind.Statue, -11.5f, 4.6f), O(ObstacleKind.Statue, 11.5f, 4.6f),
+                },
+                Gimmicks = new[] { Z(Pool, -8f, -0.6f, 9f, 6f), Z(Pool, 8f, 2.2f, 9f, 5.5f), G(Spike, 0f, 3.2f, 0f), G(Spike, 0f, -1.2f, 0.5f) },
+            },
+            new()
+            {
+                // A sunken pool in the middle ringed by pillars; spikes keep the dry edges busy.
+                Id = 17, Name = "drowned_crossing",
+                Obstacles = new[] { O(P, -6.5f, 4f), O(P, 6.5f, 4f), O(P, -6.5f, -3.4f), O(P, 6.5f, -3.4f) },
+                Gimmicks = new[] { Z(Pool, 0f, 0.4f, 10f, 6.4f), G(Spike, -11f, -5f, 0f), G(Spike, 11f, -5f, 0.5f), G(Spike, -11f, 4f, 0.25f), G(Spike, 11f, 4f, 0.75f) },
+            },
+
+            // ---------------------------------------------------------------- Frozen mausoleum (ice sheets, icicles)
+            new()
+            {
+                Id = 18, Name = "ice_hall",
+                Obstacles = new[] { O(P, -11f, 4.2f), O(P, 11f, 4.2f), O(P, 0f, 4.6f) },
+                Gimmicks = new[]
+                {
+                    Z(Frozen, -7f, 0f, 8f, 10f), Z(Frozen, 7f, 0f, 8f, 10f),
+                    G(Drip, 0f, 1.5f, 0f), G(Drip, -4f, -3.5f, 0.33f), G(Drip, 4f, -3.5f, 0.66f),
+                },
+            },
+            new()
+            {
+                Id = 19, Name = "frozen_court",
+                Obstacles = new[] { O(ObstacleKind.Statue, -9f, 4.2f), O(ObstacleKind.Statue, 9f, 4.2f), O(ObstacleKind.Statue, -9f, -3.6f), O(ObstacleKind.Statue, 9f, -3.6f) },
+                Gimmicks = new[]
+                {
+                    G(Drip, -4f, 2.4f, 0f), G(Drip, 4f, 2.4f, 0.5f), G(Drip, 0f, -0.4f, 0.25f), G(Drip, -4f, -3.2f, 0.75f), G(Drip, 4f, -3.2f, 0.1f),
+                    Z(Frozen, 0f, 5f, 8f, 2.6f),
+                },
+            },
+            new()
+            {
+                // A frozen lake with blocks of ice standing in it.
+                Id = 20, Name = "glacier",
+                Obstacles = new[] { O(ObstacleKind.Crystal, -3.5f, 2.2f), O(ObstacleKind.Crystal, 3.5f, -1.6f) },
+                Gimmicks = new[]
+                {
+                    Z(Frozen, 0f, 0.4f, 17f, 9f),
+                    G(Drip, -10.5f, 4.2f, 0f), G(Drip, 10.5f, 4.2f, 0.5f), G(Drip, -10.5f, -4f, 0.25f), G(Drip, 10.5f, -4f, 0.75f),
+                },
+            },
+
+            // ---------------------------------------------------------------- Burnt forge (lava cracks erupt along lines)
+            new()
+            {
+                Id = 21, Name = "foundry",
+                Obstacles = new[] { O(ObstacleKind.Crates, -4f, 5.2f), O(ObstacleKind.Crates, 4.5f, 5.2f), O(P, -10f, 0.5f), O(P, 10f, 0.5f) },
+                Gimmicks = new[]
+                {
+                    G(Lava, -12.5f, 3.4f, 0f, 1f, 0f), G(Lava, 12.5f, 3.4f, 0.5f, -1f, 0f),
+                    G(Lava, -12.5f, -3.6f, 0.5f, 1f, 0f), G(Lava, 12.5f, -3.6f, 0f, -1f, 0f),
+                    G(Keg, -6f, 0.4f), G(Keg, 6f, 0.4f),
+                },
+            },
+            new()
+            {
+                // The great furnace in the middle, cracks running up from the floor on both sides.
+                Id = 22, Name = "furnace_hall",
+                Obstacles = new[] { O(ObstacleKind.Altar, 0f, 2.4f), O(ObstacleKind.Crates, -11.5f, -5.5f), O(ObstacleKind.Crates, 11.5f, -5.5f) },
+                Gimmicks = new[]
+                {
+                    G(Lava, -7.5f, -6.8f, 0f, 0f, 1f), G(Lava, 7.5f, -6.8f, 0.5f, 0f, 1f),
+                    G(Keg, -11.5f, 5f), G(Keg, 11.5f, 5f), G(Flame, -13.7f, 3f, 0.25f, 1f, 0f), G(Flame, 13.7f, 3f, 0.75f, -1f, 0f),
+                },
+            },
+            new()
+            {
+                Id = 23, Name = "smelter",
+                Obstacles = new[] { O(P, -10f, 4.2f), O(P, 10f, 4.2f), O(P, -10f, -4f), O(P, 10f, -4f) },
+                Gimmicks = new[]
+                {
+                    G(Lava, -6.5f, 0.6f, 0f, 1f, 0f), G(Lava, 6.5f, 0.6f, 0.5f, -1f, 0f),
+                    G(Lava, -3f, 6.8f, 0.25f, 0f, -1f),
+                    G(Keg, -12f, 0.6f), G(Keg, 12f, 0.6f), G(Font, 0f, -5.6f),
+                },
+            },
         };
+
+        private const GimmickKind Pool = GimmickKind.Water;
+        private const GimmickKind Frozen = GimmickKind.Ice;
+        private const GimmickKind Drip = GimmickKind.Icicle;
+        private const GimmickKind Lava = GimmickKind.LavaCrack;
+
+        /// <summary>A zone gimmick (water, ice): its centre and size.</summary>
+        private static GimmickDef Z(GimmickKind kind, float x, float y, float w, float h) =>
+            new() { Kind = kind, Position = new Vector2(x, y), Direction = new Vector2(w, h) };
 
         public static RoomLayout Get(int id) => id >= 0 && id < Layouts.Length ? Layouts[id] : Layouts[0];
 
@@ -356,9 +481,35 @@ namespace Game.Core
                     float across = Mathf.Abs(g.Direction.x * to.y - g.Direction.y * to.x);
                     return along >= -margin && along <= FlameLength + margin && across <= FlameWidth * 0.5f + margin;
                 }
+                case GimmickKind.LavaCrack:
+                {
+                    Vector2 to = p - g.Position;
+                    float along = Vector2.Dot(to, g.Direction);
+                    float across = Mathf.Abs(g.Direction.x * to.y - g.Direction.y * to.x);
+                    return along >= -margin && along <= LavaLength + margin && across <= LavaWidth * 0.5f + margin;
+                }
+                case GimmickKind.Icicle:
+                    return (p - g.Position).sqrMagnitude <= (IcicleRadius + margin) * (IcicleRadius + margin);
+                case GimmickKind.Water:
+                case GimmickKind.Ice:
+                    return false; // not a danger: see InZone
                 default:
                     return (p - g.Position).sqrMagnitude <= (1f + margin) * (1f + margin);
             }
+        }
+
+        /// <summary>Inside a zone gimmick (water, ice).</summary>
+        public static bool InZone(in GimmickDef g, Vector2 p) =>
+            g.Kind is GimmickKind.Water or GimmickKind.Ice
+            && Mathf.Abs(p.x - g.Position.x) <= g.Direction.x * 0.5f && Mathf.Abs(p.y - g.Position.y) <= g.Direction.y * 0.5f;
+
+        /// <summary>Standing in a zone of this kind somewhere in the room.</summary>
+        public static bool InZone(RoomLayout layout, GimmickKind kind, Vector2 p)
+        {
+            if (layout == null) return false;
+            foreach (var g in layout.Gimmicks)
+                if (g.Kind == kind && InZone(g, p)) return true;
+            return false;
         }
     }
 }

@@ -754,10 +754,17 @@ namespace Game.Core
                     else if (def.Type == EnemyType.TreasureChest) SpillChest(e);
                     else if (def.Type == EnemyType.CrackedWall) WallBroken(e);
                     else if (def.Type == EnemyType.Captive) CaptiveFreed(e);
+                    else if (def.Type == EnemyType.QuenchCistern) CisternBroken(e); // RunSimulation.Lands.cs
                     continue;
                 }
 
+                if (def.Type == EnemyType.IceMirror)
+                {
+                    MirrorShattered(e); // a reflection: no reward
+                    continue;
+                }
                 Kills++;
+                LandMonsterFell(e);
                 RollLoot(e);
                 if (def.Type == EnemyType.TreasureImp) ImpCaught(e);
                 if (def.Type == EnemyType.Mimic) MimicSlain(e);

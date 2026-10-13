@@ -52,8 +52,8 @@ namespace Game.Core
             for (int i = 0; i < room.Layout.Gimmicks.Length; i++)
             {
                 var g = room.Layout.Gimmicks[i];
-                if (g.Kind is GimmickKind.PowderKeg or GimmickKind.TreasureChest) continue;
-                float period = g.Kind == GimmickKind.FlameJet ? Arena.FlamePeriod : Arena.SpikePeriod;
+                if (g.Kind is GimmickKind.PowderKeg or GimmickKind.TreasureChest or GimmickKind.Water or GimmickKind.Ice) continue;
+                float period = g.Kind switch { GimmickKind.FlameJet => Arena.FlamePeriod, GimmickKind.Icicle => Arena.IciclePeriod, GimmickKind.LavaCrack => Arena.LavaPeriod, _ => Arena.SpikePeriod };
                 _hazards.Add(new Hazard { Id = room.Id * HazardIdsPerRoom + i, Room = room.Id, Def = g, Clock = g.Phase * period - HazardGrace });
             }
         }
@@ -114,18 +114,30 @@ namespace Game.Core
                 {
                     case GimmickKind.SpikeTrap:
                         CycleTrap(h, dt, Arena.SpikePeriod, Arena.SpikeWarn, Arena.SpikeActive, new Vector2(Arena.SpikeSize, Arena.SpikeSize));
-                        if (h.Phase == 2) SpikeHits(h);
+                        if (h.Phase == 2) SpikeHits(h, Arena.SpikeDamage);
                         break;
                     case GimmickKind.FlameJet:
                         CycleTrap(h, dt, Arena.FlamePeriod, Arena.FlameWarn, Arena.FlameActive, new Vector2(Arena.FlameLength, Arena.FlameWidth));
                         if (h.Phase == 2 && (h.Tick -= dt) <= 0f)
                         {
                             h.Tick = Arena.FlameTick;
-                            FlameHits(h);
+                            FlameHits(h, Arena.FlameDamage);
                         }
                         break;
                     case GimmickKind.HealingFont:
                         StepFont(h, dt);
+                        break;
+                    case GimmickKind.Icicle:
+                        CycleTrap(h, dt, Arena.IciclePeriod, Arena.IcicleWarn, Arena.IcicleActive, new Vector2(Arena.IcicleRadius, Arena.IcicleRadius));
+                        if (h.Phase == 2) SpikeHits(h, Arena.IcicleDamage);
+                        break;
+                    case GimmickKind.LavaCrack:
+                        CycleTrap(h, dt, Arena.LavaPeriod, Arena.LavaWarn, Arena.LavaActive, new Vector2(Arena.LavaLength, Arena.LavaWidth));
+                        if (h.Phase == 2 && (h.Tick -= dt) <= 0f)
+                        {
+                            h.Tick = Arena.LavaTick;
+                            FlameHits(h, Arena.LavaDamage);
+                        }
                         break;
                 }
             }
@@ -152,14 +164,14 @@ namespace Game.Core
             }
         }
 
-        private void SpikeHits(Hazard h)
+        private void SpikeHits(Hazard h, float damage)
         {
             for (int pi = 0; pi < Players.Count; pi++)
             {
                 var p = Players[pi];
                 if (!p.Alive || (h.PlayerMask & (1 << pi)) != 0 || !Arena.InGimmick(h.Def, p.Position, SimPlayer.BodyRadius * 0.5f)) continue;
                 h.PlayerMask |= 1 << pi;
-                HurtPlayer(p, Arena.SpikeDamage * EnemyDamageScale);
+                HurtPlayer(p, damage * EnemyDamageScale);
             }
             for (int i = 0; i < Enemies.Count; i++)
             {
@@ -170,11 +182,11 @@ namespace Game.Core
             }
         }
 
-        private void FlameHits(Hazard h)
+        private void FlameHits(Hazard h, float damage)
         {
             foreach (var p in Players)
                 if (p.Alive && Arena.InGimmick(h.Def, p.Position, SimPlayer.BodyRadius * 0.5f))
-                    HurtPlayer(p, Arena.FlameDamage * EnemyDamageScale);
+                    HurtPlayer(p, damage * EnemyDamageScale);
             for (int i = 0; i < Enemies.Count; i++)
             {
                 ref var e = ref Enemies[i];

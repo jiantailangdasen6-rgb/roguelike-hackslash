@@ -399,6 +399,9 @@ namespace Game.Gameplay
                 BossTrial.BloodRitual => $"<color=#ff8a7a>血の紋章の上に立って、すべて灯せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 BossTrial.Collapse => $"<color=#c8b0ff>床が崩れる！ 中央へ　{seconds}</color>",
                 BossTrial.Phylactery => $"<color=#9ae8ff>魂の器を壊せ！</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Flood => $"<color=#8affe0>封じの栓を壊して水を引かせろ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Mirror => $"<color=#bfe4ff>影のない写し身を砕け</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Overheat => $"<color=#ffb070>水甕を壊し、巨人を水へ誘い込め</color>　<color=#ffffff>残り {seconds}秒</color>",
                 _ => "",
             };
         }

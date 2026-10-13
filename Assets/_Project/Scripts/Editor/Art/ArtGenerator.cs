@@ -84,11 +84,29 @@ namespace Game.EditorTools.Art
             // Room events (round 5).
             Character("mimic", EventArt.Mimic(), EnemyArt.FrameSize);
             Character("captive", EventArt.Captive(), EnemyArt.FrameSize);
+            // The new lands (round 6).
+            Character("drowned", EnemyArt.Drowned(), EnemyArt.FrameSize);
+            Character("carrion_crab", EnemyArt.CarrionCrab(), EnemyArt.FrameSize);
+            Character("tide_witch", EnemyArt.TideWitch(), EnemyArt.FrameSize);
+            Character("drowned_saint", EnemyArt.DrownedSaint(), EnemyArt.BossFrameSize);
+            Character("flood_seal", GimmickArt.FloodSeal(), EnemyArt.FrameSize);
+            Character("frost_wolf", EnemyArt.FrostWolf(), EnemyArt.FrameSize);
+            Character("icebound", EnemyArt.Icebound(), EnemyArt.FrameSize);
+            Character("frost_witch", EnemyArt.FrostWitch(), EnemyArt.FrameSize);
+            Character("frost_queen", EnemyArt.FrostQueen(), EnemyArt.BossFrameSize);
+            Character("iron_sentinel", EnemyArt.IronSentinel(), EnemyArt.FrameSize);
+            Character("fire_imp", EnemyArt.FireImp(), EnemyArt.FrameSize);
+            Character("slag_bloater", EnemyArt.SlagBloater(), EnemyArt.FrameSize);
+            Character("forge_colossus", EnemyArt.ForgeColossus(), EnemyArt.BossFrameSize);
+            Character("quench_cistern", GimmickArt.QuenchCistern(), EnemyArt.FrameSize);
+            Effect("trap_icicle", GimmickArt.Icicle(), "trap_icicle", new Vector2(0.5f, 0.5f));
+            Effect("trap_lava", GimmickArt.LavaCrack(), "trap_lava", new Vector2(0f, 0.5f));
 
             foreach (var (name, gen) in ProceduralArt.Effects) Effect(name, gen());
             foreach (var (name, sheet) in PropArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             foreach (var (name, sheet) in DoorArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             foreach (var (name, sheet) in DecorArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
+            foreach (var (name, sheet) in DecalArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             foreach (var (name, sheet) in PingArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             foreach (var (name, sheet) in CampArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);
             Effect("icons_perk", IconArt.Perks(), "icons_perk");
@@ -100,12 +118,14 @@ namespace Game.EditorTools.Art
             WritePreview("props", PropArt.Sheets());
             WritePreview("doors", DoorArt.Sheets());
             WritePreview("decor", DecorArt.Sheets());
+            WritePreview("decals", DecalArt.Sheets());
             WritePreview("pings", PingArt.Sheets());
             WritePreview("skills", new Dictionary<string, PropArt.Sheet> { ["icons_skill"] = new() { Frames = skills, Pivot = new Vector2(0.5f, 0.5f) } });
             WritePreview("camp", CampArt.Sheets());
 
             var tiles = ProceduralArt.Tiles();
             foreach (var (name, canvas) in PropArt.AreaTiles()) tiles[name] = canvas;
+            foreach (var (name, canvas) in LandArt.Tiles()) tiles[name] = canvas;
             foreach (var (name, canvas) in CampArt.Tiles()) tiles[name] = canvas;
             foreach (var (name, canvas) in tiles)
             {
@@ -113,7 +133,9 @@ namespace Game.EditorTools.Art
                 PixelCanvas.WriteStrip(path, new[] { canvas });
                 Import(path, name == "pillar" ? new Vector2(0.5f, 0.05f) : new Vector2(0.5f, 0.5f));
             }
-            foreach (var (name, canvas) in PropArt.Decor())
+            var decor = PropArt.Decor();
+            foreach (var (name, canvas) in LandArt.Decor()) decor[name] = canvas;
+            foreach (var (name, canvas) in decor)
             {
                 string path = $"{TileDir}/{name}.png";
                 PixelCanvas.WriteStrip(path, new[] { canvas });

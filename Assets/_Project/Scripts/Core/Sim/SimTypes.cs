@@ -199,6 +199,9 @@ namespace Game.Core
         HealFlask,   // thrown to a spot (no collision), heals there
         Wisp,        // a downed player's ghost: a small soul spark
         SoulBolt,    // deathcaller basic
+        WaterOrb,    // sunken monsters
+        IceShard,    // frost monsters
+        FireBolt,    // forge monsters
     }
 
     public enum AttackAnim : byte
@@ -238,6 +241,8 @@ namespace Game.Core
         // Hostile
         SoulBurst,    // a vengeful dead monster / the Lich's soul
         BloodTorrent, // the Blood Bishop's ritual completed
+        SlagPool,     // molten slag left burning (Value = radius, Size.x = seconds)
+        Steam,        // the colossus quenched in water
     }
 
     /// <summary>Owner input sent to the host each network tick. Button presses are counters so a lost packet never loses a press.</summary>

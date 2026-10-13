@@ -603,7 +603,7 @@ namespace Game.EditorTools
         }
 
         /// <summary>
-        /// Three looks for the same arena, one per area (crypt, blood chapel, abyss throne): floor, back wall,
+        /// One look of the arena per land (crypt, blood chapel, abyss throne, sunken catacombs, frozen mausoleum, burnt forge): floor, back wall,
         /// black wall tops, wall shading, decorations and candles. <see cref="ArenaView"/> shows the current one
         /// and places each room's obstacles and traps at runtime.
         /// </summary>
@@ -615,8 +615,8 @@ namespace Game.EditorTools
 
             var grid = new GameObject("Arena");
             grid.AddComponent<Grid>();
-            var roots = new Transform[3];
-            for (int area = 0; area < 3; area++)
+            var roots = new Transform[LandArt.Count];
+            for (int area = 0; area < LandArt.Count; area++)
             {
                 var root = new GameObject("Area" + area).transform;
                 root.SetParent(grid.transform, false);
@@ -714,12 +714,41 @@ namespace Game.EditorTools
                     candleSheet = "fx_candle_red";
                     candleLight = new Color(1f, 0.35f, 0.28f);
                     break;
-                default:
+                case 2:
                     foreach (float x in new[] { -12f, 12f }) Prop(props, "chains_2", new Vector2(x, yMax + 0.2f), 1f, order: -980);
                     foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_2", new Vector2(x, yMax + 0.6f), 1f, order: -980);
                     for (int i = 0; i < 6; i++) Prop(props, "bones_2", ScatterNearWalls(rng, xMin, xMax, yMin, yMax), 1f, order: -950);
                     candleSheet = "fx_candle_soul";
                     candleLight = new Color(0.72f, 0.48f, 1f);
+                    break;
+                case 3:
+                    // Sunken catacombs: roots and weed down the wall, broken urns, a cold teal glow off the water.
+                    foreach (float x in new[] { -12.5f, -3.2f, 3.2f, 12.5f }) Prop(props, "roots_3", new Vector2(x, yMax + 0.4f), 1f, order: -982);
+                    foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_3", new Vector2(x, yMax + 0.5f), 1f, order: -980);
+                    for (int i = 0; i < 6; i++) Prop(props, "urns_3", ScatterNearWalls(rng, xMin, xMax, yMin, yMax), 1f, order: -950);
+                    foreach (float x in new[] { -6f, 6f })
+                        Light(props, new Vector2(x, 0f), new Color(0.3f, 0.85f, 0.75f), 0.35f, 7f); // light off the water
+                    candleSheet = "fx_candle_teal";
+                    candleLight = new Color(0.4f, 0.95f, 0.8f);
+                    break;
+                case 4:
+                    // Frozen mausoleum: icicles under the wall's lip, pale banners, snow heaped along the walls.
+                    foreach (float x in new[] { -11f, -3.5f, 3.5f, 11f }) Prop(props, "icicles_4", new Vector2(x, yMax + 1.15f), 1f, order: -978);
+                    foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_4", new Vector2(x, yMax + 0.5f), 1f, order: -980);
+                    for (int i = 0; i < 6; i++) Prop(props, "snow_4", ScatterNearWalls(rng, xMin, xMax, yMin, yMax), 1f, order: -950);
+                    candleSheet = "fx_candle_ice";
+                    candleLight = new Color(0.55f, 0.8f, 1f);
+                    break;
+                default:
+                    // Burnt forge: weapon racks, soot-black banners, slag cooling on the floor, the glow of the furnaces.
+                    foreach (float x in new[] { -11.5f, 11.5f }) Prop(props, "rack_5", new Vector2(x, yMax + 0.2f), 1f, order: -980);
+                    foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_5", new Vector2(x, yMax + 0.5f), 1f, order: -980);
+                    foreach (float x in new[] { -12f, 12f }) Prop(props, "chains_2", new Vector2(x + (x < 0 ? 4f : -4f), yMax + 0.2f), 1f, order: -981);
+                    for (int i = 0; i < 7; i++) Prop(props, "slag_5", ScatterNearWalls(rng, xMin, xMax, yMin, yMax), 1f, order: -950);
+                    foreach (float x in new[] { -9f, 9f })
+                        Light(props, new Vector2(x, yMax - 0.5f), new Color(1f, 0.45f, 0.15f), 0.6f, 5f); // furnace mouths
+                    candleSheet = "fx_candle_ember";
+                    candleLight = new Color(1f, 0.5f, 0.2f);
                     break;
             }
 

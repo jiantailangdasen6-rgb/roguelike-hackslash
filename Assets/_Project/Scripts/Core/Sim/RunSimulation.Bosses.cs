@@ -11,6 +11,9 @@ namespace Game.Core
         BloodRitual,  // Blood Bishop, 70% / 35%: light every blood sigil before the ritual ends
         Collapse,     // Lich, 66% / 33%: the floor's edge falls into the abyss (warning, then the arena shrinks)
         Phylactery,   // Lich at 0: break the soul vessel before he rises again
+        Flood,        // Drowned Saint, 60% / 30%: the hall floods (it hurts and slows) until its seals are broken
+        Mirror,       // Frost Queen, 66% / 33%: two reflections with her face; shatter them while she is warded
+        Overheat,     // Forge Colossus, 50%: red-hot and hard to hurt until lured into water from a broken cistern
     }
 
     /// <summary>Moments of the trials, for the presentation (TrialEvent's Int).</summary>
@@ -30,6 +33,17 @@ namespace Game.Core
         VesselRise,    // Pos = vessel, Value = seconds
         VesselBroken,  // Pos = vessel
         LichRises,     // Pos = boss
+        FloodRise,     // Pos = room, Value = seconds
+        FloodDrained,  // Pos = boss
+        FloodTorrent,  // Pos = boss (too slow: everyone is swept)
+        MirrorsRise,   // Pos = the queen, Value = seconds
+        MirrorBroken,  // Pos = the reflection
+        MirrorsShattered, // Pos = the queen (both broken: she reels)
+        MirrorsBurst,  // Pos = the queen (too slow)
+        OverheatStart, // Pos = boss, Value = seconds
+        CisternBroken, // Pos = the water left, Value = seconds it stays
+        Quenched,      // Pos = boss
+        CooledDown,    // Pos = boss (he cooled by himself)
     }
 
     /// <summary>
@@ -89,7 +103,7 @@ namespace Game.Core
         public Rect PlayRect => Room.Kind == RoomKind.Boss ? SafeArea(Bounds, CollapseStage) : Bounds;
 
         /// <summary>The boss is warded: hits do nothing.</summary>
-        private bool BossWarded => ActiveTrial is BossTrial.BoneWard or BossTrial.BloodRitual or BossTrial.Phylactery;
+        private bool BossWarded => ActiveTrial is BossTrial.BoneWard or BossTrial.BloodRitual or BossTrial.Phylactery or BossTrial.Mirror;
 
         /// <summary>The boss stands still channelling (no attacks).</summary>
         private bool BossChannelling => ActiveTrial == BossTrial.BloodRitual;
@@ -105,6 +119,7 @@ namespace Game.Core
             _trialProps.Clear();
             _bursts.Clear();
             foreach (var p in Players) p.CagedBy = 0;
+            ResetLandTrials(); // RunSimulation.Lands.cs
         }
 
         /// <summary>Armoured: dread knights always, elites too under "iron guard".</summary>
@@ -164,7 +179,25 @@ namespace Game.Core
                         case EnemyType.Lich:
                             if (Threshold(0, hp, 0.66f) || Threshold(1, hp, 0.33f)) BeginCollapse();
                             break;
+                        case EnemyType.DrownedSaint:
+                            if (Threshold(0, hp, 0.6f) || Threshold(1, hp, 0.3f)) BeginFlood(b); // RunSimulation.Lands.cs
+                            break;
+                        case EnemyType.FrostQueen:
+                            if (Threshold(0, hp, 0.66f) || Threshold(1, hp, 0.33f)) BeginMirrors(b);
+                            break;
+                        case EnemyType.ForgeColossus:
+                            if (Threshold(0, hp, Wrath ? 0.6f : 0.5f)) BeginOverheat(b);
+                            break;
                     }
+                    break;
+                case BossTrial.Flood:
+                    StepFlood(b, dt);
+                    break;
+                case BossTrial.Mirror:
+                    StepMirrors(b, dt);
+                    break;
+                case BossTrial.Overheat:
+                    StepOverheat(b, dt);
                     break;
                 case BossTrial.BoneWard:
                     TrialDone = TrialTotal - LivingTrialProps();
@@ -475,6 +508,7 @@ namespace Game.Core
                 return 0f;
             }
             if (_exposed > 0f) damage *= 1f + ExposedBonus;
+            if (ActiveTrial == BossTrial.Overheat && e.Def.Boss) damage *= OverheatArmor; // red-hot iron shrugs blows off
             if (e.Type == EnemyType.Lich && e.Health - damage <= 0f)
             {
                 RaisePhylactery(index);

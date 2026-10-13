@@ -36,6 +36,22 @@ namespace Game.Core
         Captive,        // an adventurer in a cage: break the bars to set them free
         // A deathcaller's summons (on the players' side)
         BoneServant,
+        // The new lands (round 6): three monsters, a lord and the lord's trial object each
+        Drowned,        // sunken: a waterlogged corpse, slow and heavy-handed, spits water
+        CarrionCrab,    // sunken: an armoured scuttler that lunges sideways
+        TideWitch,      // sunken: calls bursts of water under players
+        DrownedSaint,   // sunken lord
+        FloodSeal,      // the saint's flood: break the seals to drain it
+        FrostWolf,      // frost: runs in pairs and lunges
+        Icebound,       // frost: frozen dead; shatters into ice when it falls
+        FrostWitch,     // frost: ice spikes erupt along a line
+        FrostQueen,     // frost lord
+        IceMirror,      // the queen's reflection: no shadow, shatters when struck
+        IronSentinel,   // forge: an armoured guard with a hammer
+        FireImp,        // forge: a flying imp throwing fire, in pairs
+        SlagBloater,    // forge: bursts into molten slag that keeps burning
+        ForgeColossus,  // forge lord
+        QuenchCistern,  // the colossus' overheat: break it to flood the floor and lure him in
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -320,6 +336,138 @@ namespace Game.Core
             {
                 // A deathcaller's summon: a skeleton raised on the players' side (RunSimulation.Deathcaller).
                 Type = EnemyType.BoneServant, Name = "骨の兵", Sheet = "bone_servant", Health = 1f, Speed = 3.7f, Radius = 0.36f, Xp = 0, Friendly = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+
+            // ---------------------------------------------------------------- Sunken catacombs
+            new()
+            {
+                Type = EnemyType.Drowned, Name = "溺れた亡者", Sheet = "drowned", Health = 88f, Speed = 1.9f, Radius = 0.45f, Xp = 3,
+                AttackCooldown = 1.9f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 2.0f, SizeB = 110f, Range = 1.7f, Windup = 0.75f, Recover = 0.55f, Damage = 18f },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 7f, SizeB = 0.5f, Range = 6.5f, Windup = 0.85f, Recover = 0.5f, Damage = 12f, ProjectileSpeed = 8f, Projectile = ProjectileKind.WaterOrb },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.CarrionCrab, Name = "屍喰い蟹", Sheet = "carrion_crab", Health = 52f, Speed = 3.1f, Radius = 0.42f, Xp = 3,
+                AttackCooldown = 2.1f, Armored = true,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.4f, SizeB = 1.0f, Range = 4.2f, Windup = 0.5f, Recover = 0.7f, Damage = 15f, ProjectileSpeed = 17f } },
+            },
+            new()
+            {
+                Type = EnemyType.TideWitch, Name = "水底の魔女", Sheet = "tide_witch", Health = 58f, Speed = 1.8f, Radius = 0.4f, Xp = 5,
+                PreferredDistance = 7f, AttackCooldown = 3f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.6f, Range = 11f, Windup = 1.15f, Recover = 0.6f, Damage = 20f, Extra = 1 },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 10f, SizeB = 0.5f, Range = 10f, Windup = 0.9f, Recover = 0.5f, Damage = 12f, ProjectileSpeed = 7f, Projectile = ProjectileKind.WaterOrb, Count = 3, Spread = 30f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.DrownedSaint, Name = "水底の聖女", Title = "水没した地下墓地の主", Sheet = "drowned_saint", Health = 2700f, Speed = 1.55f, Radius = 0.85f, Xp = 50,
+                PreferredDistance = 5f, AttackCooldown = 0.95f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 12f, SizeB = 0.5f, Range = 13f, Windup = 0.85f, Recover = 0.6f, Damage = 14f, ProjectileSpeed = 8.5f, Projectile = ProjectileKind.WaterOrb, Count = 9, Spread = 100f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 2.0f, Range = 99f, Windup = 1.2f, Recover = 0.7f, Damage = 22f, Extra = 2 },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 3.0f, Range = 2.8f, Windup = 1.0f, Recover = 0.8f, Damage = 28f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.Drowned, Summon2 = EnemyType.CarrionCrab },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 8f, SizeB = 1.6f, Range = 8f, Windup = 1.0f, Recover = 1.0f, Damage = 24f, ProjectileSpeed = 14f },
+                },
+            },
+            new()
+            {
+                // The flood holds while any stands; nothing else hurts it much.
+                Type = EnemyType.FloodSeal, Name = "封じの栓", Sheet = "flood_seal", Health = 75f, Speed = 0f, Radius = 0.55f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+
+            // ---------------------------------------------------------------- Frozen mausoleum
+            new()
+            {
+                Type = EnemyType.FrostWolf, Name = "雪狼", Sheet = "frost_wolf", Health = 40f, Speed = 4.0f, Radius = 0.4f, Xp = 2,
+                AttackCooldown = 1.7f,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.4f, SizeB = 0.9f, Range = 4f, Windup = 0.45f, Recover = 0.6f, Damage = 13f, ProjectileSpeed = 18f } },
+            },
+            new()
+            {
+                Type = EnemyType.Icebound, Name = "氷漬けの亡者", Sheet = "icebound", Health = 95f, Speed = 1.45f, Radius = 0.48f, Xp = 4,
+                AttackCooldown = 2.2f,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 2.2f, SizeB = 100f, Range = 1.8f, Windup = 0.85f, Recover = 0.6f, Damage = 20f } },
+            },
+            new()
+            {
+                Type = EnemyType.FrostWitch, Name = "霜の魔女", Sheet = "frost_witch", Health = 56f, Speed = 1.9f, Radius = 0.4f, Xp = 5,
+                PreferredDistance = 7.5f, AttackCooldown = 2.8f,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Line, SizeA = 9f, SizeB = 0.9f, Range = 9f, Windup = 1.0f, Recover = 0.6f, Damage = 20f } },
+            },
+            new()
+            {
+                Type = EnemyType.FrostQueen, Name = "凍てつく女王", Title = "凍てつく霊廟の主", Sheet = "frost_queen", Health = 2700f, Speed = 1.7f, Radius = 0.8f, Xp = 50,
+                PreferredDistance = 4.5f, AttackCooldown = 0.9f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 6f, SizeB = 60f, Range = 6f, Windup = 1.0f, Recover = 0.8f, Damage = 30f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.6f, Range = 99f, Windup = 1.2f, Recover = 0.6f, Damage = 24f, Extra = 3 },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 12f, SizeB = 0.45f, Range = 12f, Windup = 0.8f, Recover = 0.5f, Damage = 16f, ProjectileSpeed = 11f, Projectile = ProjectileKind.IceShard, Count = 5, Spread = 50f },
+                    new EnemyAttack { Kind = AttackKind.Blink, Shape = AttackShape.Circle, SizeA = 2.4f, Range = 99f, Windup = 0.9f, Recover = 0.7f, Damage = 22f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.FrostWolf, Summon2 = EnemyType.Icebound },
+                },
+            },
+            new()
+            {
+                // The queen's double in the ice: looks the same but casts no shadow, and breaks when struck.
+                Type = EnemyType.IceMirror, Name = "凍てつく女王", Title = "氷の写し身", Sheet = "frost_queen", Health = 60f, Speed = 1.9f, Radius = 0.8f, Xp = 0,
+                PreferredDistance = 4.5f, AttackCooldown = 1.6f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 12f, SizeB = 0.45f, Range = 12f, Windup = 0.9f, Recover = 0.6f, Damage = 12f, ProjectileSpeed = 10f, Projectile = ProjectileKind.IceShard, Count = 3, Spread = 30f },
+                },
+            },
+
+            // ---------------------------------------------------------------- Burnt forge
+            new()
+            {
+                Type = EnemyType.IronSentinel, Name = "鉄の番兵", Sheet = "iron_sentinel", Health = 150f, Speed = 1.6f, Radius = 0.52f, Xp = 6,
+                AttackCooldown = 2.3f, Armored = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 2.3f, Range = 2.0f, Windup = 1.0f, Recover = 0.8f, Damage = 26f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.2f, SizeB = 1.2f, Range = 4.6f, Windup = 0.85f, Recover = 0.9f, Damage = 20f, ProjectileSpeed = 13f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.FireImp, Name = "火の小鬼", Sheet = "fire_imp", Health = 30f, Speed = 3.6f, Radius = 0.32f, Xp = 2,
+                PreferredDistance = 6f, AttackCooldown = 2.1f, Flying = true,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 9f, SizeB = 0.4f, Range = 9f, Windup = 0.7f, Recover = 0.4f, Damage = 11f, ProjectileSpeed = 10f, Projectile = ProjectileKind.FireBolt } },
+            },
+            new()
+            {
+                Type = EnemyType.SlagBloater, Name = "溶鉄の膨れ", Sheet = "slag_bloater", Health = 80f, Speed = 1.5f, Radius = 0.5f, Xp = 3,
+                AttackCooldown = 0.4f,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.SelfDestruct, Shape = AttackShape.SelfCircle, SizeA = 2.6f, Range = 1.7f, Windup = 1.0f, Recover = 0.2f, Damage = 26f, HitsEnemies = true } },
+            },
+            new()
+            {
+                Type = EnemyType.ForgeColossus, Name = "炉の巨人", Title = "燃え落ちた鍛冶場の主", Sheet = "forge_colossus", Health = 3000f, Speed = 1.5f, Radius = 0.95f, Xp = 60,
+                AttackCooldown = 1.0f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Circle, SizeA = 2.4f, Range = 3.6f, Windup = 1.1f, Recover = 0.8f, Damage = 34f },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 4.2f, Range = 3.5f, Windup = 1.3f, Recover = 1.0f, Damage = 26f },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 11f, SizeB = 0.45f, Range = 11f, Windup = 0.9f, Recover = 0.6f, Damage = 14f, ProjectileSpeed = 9f, Projectile = ProjectileKind.FireBolt, Count = 7, Spread = 80f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 10f, SizeB = 1.8f, Range = 10f, Windup = 1.0f, Recover = 1.1f, Damage = 28f, ProjectileSpeed = 17f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.FireImp, Summon2 = EnemyType.IronSentinel },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.QuenchCistern, Name = "水甕", Sheet = "quench_cistern", Health = 40f, Speed = 0f, Radius = 0.6f, Xp = 0, Prop = true,
                 Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };

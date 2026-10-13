@@ -145,6 +145,21 @@ namespace Game.Gameplay
 
         // ------------------------------------------------------------------ Frame
 
+        /// <summary>How quickly the walk on ice catches up with the stick (lower = more slide).</summary>
+        private const float IceGrip = 2.6f;
+        private Vector2 _slide;
+
+        /// <summary>Wading slows you: shallow water, and the Drowned Saint's flood in her hall.</summary>
+        private float GroundSpeed(Vector2 at)
+        {
+            if (PlayArea.InCamp) return 1f;
+            float k = Arena.InZone(CurrentLayout, GimmickKind.Water, at) ? Arena.WaterSlow : 1f;
+            var director = RunDirector.Instance;
+            if (director != null && director.IsSpawned && director.Trial.Value == BossTrial.Flood && director.LocalRoom.Kind == RoomKind.Boss)
+                k *= RunSimulation.FloodSlow;
+            return k;
+        }
+
         private Vector2 CurrentMove() => _bot
             ? Arena.Steer(CurrentLayout, transform.position, _botBrain.Move, SimPlayer.BodyRadius, player.Slot.Value)
             : Vector2.ClampMagnitude(input.Move, 1f);
@@ -163,8 +178,14 @@ namespace Game.Gameplay
             {
                 Vector2 move = CurrentMove();
                 if (move.sqrMagnitude > 0.01f) _lastMove = move.normalized;
-                Vector2 velocity = Time.time < _dashUntil ? _dashDirection * _dashSpeed : move * player.MoveSpeed.Value * (_attackHeld ? 0.8f : 1f);
-                Vector2 pos = (Vector2)transform.position + velocity * Time.deltaTime;
+                Vector2 here = transform.position;
+                Vector2 walk = move * player.MoveSpeed.Value * (_attackHeld ? 0.8f : 1f) * GroundSpeed(here);
+                // On ice the feet keep sliding: the pace eases toward where you want to go.
+                if (!PlayArea.InCamp && Arena.InZone(CurrentLayout, GimmickKind.Ice, here))
+                    walk = Vector2.Lerp(_slide, walk, 1f - Mathf.Exp(-IceGrip * Time.deltaTime));
+                Vector2 velocity = Time.time < _dashUntil ? _dashDirection * _dashSpeed : walk;
+                _slide = velocity;
+                Vector2 pos = here + velocity * Time.deltaTime;
 
                 var bounds = PlayArea.Bounds;
                 float r = SimPlayer.BodyRadius;

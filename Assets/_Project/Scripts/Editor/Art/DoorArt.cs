@@ -12,19 +12,22 @@ namespace Game.EditorTools.Art
         private static Color32 C(string hex) => PixelMaterial.Hex(hex);
         private static readonly Color32 Outline = PixelRenderer.Outline;
 
-        // Stone ramps (dark -> light) per area: crypt grey, chapel marble, abyss obsidian.
+        // Stone ramps (dark -> light) per land: crypt grey, chapel marble, abyss obsidian, sunken green, frost blue, forge char.
         private static readonly Color32[][] Stone =
         {
             new[] { C("#16131a"), C("#2a2631"), C("#3d3846"), C("#544d5f"), C("#6c6479"), C("#8a8199") },
             new[] { C("#22191c"), C("#45363a"), C("#6b5a5d"), C("#92807e"), C("#b6a39d"), C("#d8cbc2") },
             new[] { C("#07060b"), C("#120f1b"), C("#1f1a2d"), C("#2e2742"), C("#41385a"), C("#5a4f7a") },
+            new[] { C("#081010"), C("#111d1c"), C("#1b2c2a"), C("#273e3a"), C("#35524c"), C("#4a6c64") }, // sunken
+            new[] { C("#0c1220"), C("#182235"), C("#27354f"), C("#3a4b6c"), C("#566b90"), C("#86a0c4") }, // frost
+            new[] { C("#0e0907"), C("#1b130e"), C("#291d16"), C("#392a1f"), C("#4b392b"), C("#634c3a") }, // forge
         };
-        private static readonly Color32[] Torch = { C("#ff9a3c"), C("#ff4a3a"), C("#c58bff") };
+        private static readonly Color32[] Torch = { C("#ff9a3c"), C("#ff4a3a"), C("#c58bff"), C("#5fe8c8"), C("#a8e4ff"), C("#ff8a2a") };
 
         public static Dictionary<string, PropArt.Sheet> Sheets()
         {
             var sheets = new Dictionary<string, PropArt.Sheet>();
-            for (int area = 0; area < 3; area++)
+            for (int area = 0; area < LandArt.Count; area++)
             {
                 sheets[$"door_n_{area}"] = One(North(area), new Vector2(0.5f, 0f));
                 sheets[$"door_s_{area}"] = One(South(area), new Vector2(0.5f, 1f));

@@ -12,6 +12,9 @@ namespace Game.Core
         Crypt,  // 朽ちた納骨堂: grey stone, bones, candles
         Chapel, // 血塗られた礼拝堂: marble, crimson carpet, stained glass
         Abyss,  // 奈落の玉座: obsidian, violet cracks, chains
+        Sunken, // 水没した地下墓地: wet green stone, shallow water, drowned dead
+        Frost,  // 凍てつく霊廟: ice-crusted marble, snow, a frozen court
+        Forge,  // 燃え落ちた鍛冶場: charred brick and iron, molten cracks
     }
 
     public sealed class BiomeDef
@@ -63,6 +66,36 @@ namespace Game.Core
                     (EnemyType.ShadeStalker, 11, 0), (EnemyType.DreadKnight, 12, 1), (EnemyType.Necromancer, 9, 1),
                 },
                 FightLayouts = new[] { 2, 4, 5, 6, 7, 9, 9, 3 },
+            },
+            new()
+            {
+                Id = Biome.Sunken, Name = "水没した地下墓地", Hint = "溺れた亡者と水底の聖女", Lord = EnemyType.DrownedSaint, Champion = EnemyType.Drowned, Music = "music_sunken",
+                Pool = new[]
+                {
+                    (EnemyType.Drowned, 28, 0), (EnemyType.CarrionCrab, 16, 0), (EnemyType.TideWitch, 12, 0), (EnemyType.Skeleton, 14, 0),
+                    (EnemyType.Ghoul, 10, 0), (EnemyType.Bat, 6, 0), (EnemyType.Bloater, 8, 1), (EnemyType.Wraith, 8, 1),
+                },
+                FightLayouts = new[] { 15, 16, 17, 15, 3, 7 },
+            },
+            new()
+            {
+                Id = Biome.Frost, Name = "凍てつく霊廟", Hint = "雪狼の群れと凍てつく女王", Lord = EnemyType.FrostQueen, Champion = EnemyType.Icebound, Music = "music_frost",
+                Pool = new[]
+                {
+                    (EnemyType.FrostWolf, 18, 0), (EnemyType.Icebound, 18, 0), (EnemyType.FrostWitch, 12, 0), (EnemyType.Skeleton, 14, 0),
+                    (EnemyType.SkeletonArcher, 14, 0), (EnemyType.ShieldSkeleton, 8, 0), (EnemyType.Wraith, 8, 1), (EnemyType.DreadKnight, 6, 2),
+                },
+                FightLayouts = new[] { 18, 19, 20, 18, 2, 4 },
+            },
+            new()
+            {
+                Id = Biome.Forge, Name = "燃え落ちた鍛冶場", Hint = "鉄の番兵と炉の巨人", Lord = EnemyType.ForgeColossus, Champion = EnemyType.IronSentinel, Music = "music_forge",
+                Pool = new[]
+                {
+                    (EnemyType.IronSentinel, 12, 0), (EnemyType.FireImp, 16, 0), (EnemyType.SlagBloater, 14, 0), (EnemyType.Skeleton, 16, 0),
+                    (EnemyType.Cultist, 10, 0), (EnemyType.Ghoul, 10, 0), (EnemyType.DreadKnight, 8, 1),
+                },
+                FightLayouts = new[] { 21, 22, 23, 21, 5, 6 },
             },
         };
 

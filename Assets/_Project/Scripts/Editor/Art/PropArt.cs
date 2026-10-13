@@ -22,6 +22,9 @@ namespace Game.EditorTools.Art
             new[] { C("#18151b"), C("#2a2631"), C("#3a3542"), C("#4c4656"), C("#5f586a"), C("#77708a") },
             new[] { C("#2a2023"), C("#4a3b3f"), C("#6e5d60"), C("#93807f"), C("#b9a6a1"), C("#ddd0c8") },
             new[] { C("#06050a"), C("#100d18"), C("#1b1728"), C("#292339"), C("#3a3250"), C("#4e4569") },
+            new[] { C("#0a1110"), C("#132020"), C("#1c2e2c"), C("#284039"), C("#36544c"), C("#4a6e64") }, // sunken: wet green stone
+            new[] { C("#0e1320"), C("#1a2336"), C("#2a3752"), C("#3e4f72"), C("#5a6f94"), C("#8aa2c4") }, // frost: ice-crusted marble
+            new[] { C("#100a08"), C("#1d1410"), C("#2b1f18"), C("#3b2b21"), C("#4e3a2c"), C("#66503e") }, // forge: charred stone
         };
         private static readonly Color32[] Gold = { C("#2e1f0a"), C("#573d12"), C("#87641c"), C("#bb912f"), C("#e6c766") };
         private static readonly Color32[] Crimson = { C("#25060a"), C("#4a0c13"), C("#76121d"), C("#a31d28"), C("#cf3a3a") };
@@ -32,6 +35,9 @@ namespace Game.EditorTools.Art
             C("#ff9a3c"), // crypt: candle orange
             C("#ff4a3a"), // chapel: blood red
             C("#c58bff"), // abyss: violet soulfire
+            C("#5fe8c8"), // sunken: drowned lantern teal
+            C("#a8e4ff"), // frost: cold blue
+            C("#ff7a1f"), // forge: molten orange
         };
 
         public struct Sheet
@@ -47,7 +53,7 @@ namespace Game.EditorTools.Art
         {
             var bottom = new Vector2(0.5f, 0.05f);
             var sheets = new Dictionary<string, Sheet>();
-            for (int area = 0; area < 3; area++)
+            for (int area = 0; area < LandArt.Count; area++)
             {
                 sheets[$"prop_pillar_{area}"] = One(Pillar(area), new Vector2(0.5f, 0.06f));
                 sheets[$"prop_statue_{area}"] = One(Statue(area), new Vector2(0.5f, 0.06f));
@@ -108,8 +114,8 @@ namespace Game.EditorTools.Art
             for (int x = x0; x < x1; x++)
             {
                 int shade = CylShade(x, x0, x1, 2);
-                if (area != 2 && (x - x0) % 4 == 3 && x < x1 - 1) shade -= 1; // flutes
-                if (area == 0 && (y - 5) % 12 == 0) shade = 0;               // block joints
+                if (area is 0 or 1 or 4 && (x - x0) % 4 == 3 && x < x1 - 1) shade -= 1; // flutes
+                if (area is 0 or 3 or 5 && (y - 5) % 12 == 0) shade = 0;     // block joints
                 c.Set(x, y, s[Mathf.Clamp(shade, 0, s.Length - 1)]);
             }
             // Base and plinth
@@ -133,6 +139,45 @@ namespace Game.EditorTools.Art
                         HLine(c, x0, x1 - 1, ry + 1, Gold[4]);
                     }
                     HLine(c, 6, 25, 4, Crimson[2]);
+                    break;
+                case 3:
+                    // Drowned stone: a dark waterline at the foot, weed and green drips, a chipped top.
+                    for (int x = x0; x < x1; x++) c.Rect(x, top, 1, 1 + (x * 5) % 3, s[CylShade(x, x0, x1, 2)]);
+                    for (int y = 5; y < 15; y++)
+                    for (int x = x0; x < x1; x++)
+                        if (y < 13 || (x * 7 + y) % 3 != 0) c.Set(x, y, s[Mathf.Clamp(CylShade(x, x0, x1, 1), 0, s.Length - 1)]);
+                    for (int i = 0; i < 16; i++) c.Set(rng.Range(x0, x1), rng.Range(10, 22), rng.Chance(0.5f) ? C("#1f3a1c") : C("#2a4a26"));
+                    for (int d = 0; d < 3; d++)
+                    {
+                        int x = rng.Range(x0 + 1, x1 - 1), y0 = rng.Range(28, top);
+                        for (int y = y0; y > y0 - rng.Range(5, 12); y--) c.Set(x, y, C("#14302a"));
+                        c.Set(x, y0, A(Glow[3], 180));
+                    }
+                    break;
+                case 4:
+                    // Frozen: a cap of snow on a plain capital, icicles hanging off it, rime on the shaft.
+                    for (int y = top; y < top + 4; y++) HLine(c, 6, 25, y, y == top + 3 ? s[5] : s[3]);
+                    for (int x = 5; x < 27; x++) c.Rect(x, top + 4, 1, 1 + (x * 3) % 2, C("#c6d8ee"));
+                    for (int x = 7; x < 25; x += 3)
+                    {
+                        int len = 2 + (x * 7) % 5;
+                        for (int k = 0; k < len; k++) c.Set(x, top - 1 - k, k == len - 1 ? C("#e8f6ff") : C("#8fb4dc"));
+                    }
+                    for (int i = 0; i < 14; i++) c.Set(rng.Range(x0, x1), rng.Range(6, top - 6), C("#9cb8dc"));
+                    break;
+                case 5:
+                    // Charred stone bound in iron bands, a crack glowing hot, soot rising up the shaft.
+                    for (int x = x0; x < x1; x++) c.Rect(x, top, 1, 2 + (x * 3) % 3, s[CylShade(x, x0, x1, 2)]);
+                    foreach (int by in new[] { 12, 30, 44 })
+                    {
+                        HLine(c, x0 - 1, x1, by, Iron[2]);
+                        HLine(c, x0 - 1, x1, by + 1, Iron[3]);
+                        c.Set(x0 + 2, by + 1, Iron[4]);
+                    }
+                    { int x = 15, y = 40; for (int i = 0; i < 14; i++) { c.Set(x, y, i % 3 == 0 ? C("#ffb347") : Glow[5]); x += rng.Range(-1, 2); y -= 1; x = Mathf.Clamp(x, x0 + 1, x1 - 2); } }
+                    for (int y = 5; y < 18; y++)
+                    for (int x = x0; x < x1; x++)
+                        if ((x * 13 + y * 7) % 5 == 0) c.Set(x, y, C("#0a0605"));
                     break;
                 default:
                     // Obsidian with glowing violet runes and a spiked crown.
@@ -182,7 +227,7 @@ namespace Game.EditorTools.Art
             var m = EnvMaterials(area);
             PixelPart part = area switch
             {
-                0 => new PixelPart("mourner", Vector2.zero, m, 0,
+                0 or 3 => new PixelPart("mourner", Vector2.zero, m, 0,
                     "......aaaa......",
                     ".....aaaaaa.....",
                     "....aaaaaaaa....",
@@ -218,7 +263,7 @@ namespace Game.EditorTools.Art
                     "aaaaaaaaaaaaaaaa",
                     "aaaaaaaaaaaaaaaa",
                     "aaaaaaaaaaaaaaaa"),
-                1 => new PixelPart("angel", Vector2.zero, m, 0,
+                1 or 4 => new PixelPart("angel", Vector2.zero, m, 0,
                     "aaa.......gggg.......aaa",
                     ".aaa.....gaaaag.....aaa.",
                     ".aaaa.....aaaa.....aaaa.",
@@ -251,6 +296,29 @@ namespace Game.EditorTools.Art
                     "..gggggggggggggggggggg..",
                     "..aaaaaaaaaaaaaaaaaaaa..",
                     "..aaaaaaaaaaaaaaaaaaaa.."),
+                5 => new PixelPart("anvil", Vector2.zero, m, 0,
+                    "....######..........",
+                    "..##########........",
+                    ".############zz.....",
+                    "##############zz####",
+                    ".##################.",
+                    "..################..",
+                    "...######kk######...",
+                    "......########......",
+                    "......########......",
+                    ".....##########.....",
+                    "....############....",
+                    "...##############...",
+                    "...aaaaaaaaaaaaaa...",
+                    "..aaaaaaaaaaaaaaaa..",
+                    "..aaaaaaa**aaaaaaa..",
+                    "..aaaaaa****aaaaaa..",
+                    "..aaaaaaa**aaaaaaa..",
+                    "..aaaaaaaaaaaaaaaa..",
+                    ".aaaaaaaaaaaaaaaaaa.",
+                    ".aaaaaaaaaaaaaaaaaa.",
+                    "aaaaaaaaaaaaaaaaaaaa",
+                    "aaaaaaaaaaaaaaaaaaaa"),
                 _ => new PixelPart("idol", Vector2.zero, m, 0,
                     ".a..............a.",
                     ".aa............aa.",
@@ -328,13 +396,18 @@ namespace Game.EditorTools.Art
             var c = new PixelCanvas(84, 48);
             Box(c, 6, 4, 72, 16, s, 2);               // front
             for (int y = 20; y < 30; y++) HLine(c, 5, 78, y, s[y == 29 ? 5 : 4]); // top
-            if (area == 2)
+            if (area >= 2)
             {
-                // Obsidian slab with a soulfire bowl and violet cracks.
-                for (int x = 10; x < 74; x += 7) { c.Set(x, 8 + x % 5, Glow[2]); c.Set(x + 1, 9 + x % 5, A(Glow[2], 170)); }
+                // A dark slab with a bowl of the land's fire (soulfire, drowned light, cold flame, embers) and glowing cracks.
+                var glow = Glow[area];
+                var deep = Color32.Lerp(glow, new Color32(0, 0, 0, 255), 0.35f);
+                var core = Color32.Lerp(glow, new Color32(255, 255, 255, 255), 0.75f);
+                for (int x = 10; x < 74; x += 7) { c.Set(x, 8 + x % 5, glow); c.Set(x + 1, 9 + x % 5, A(glow, 170)); }
+                if (area == 3) for (int x = 6; x < 78; x++) if ((x * 7) % 5 < 2) c.Set(x, 20 + (x % 3), C("#1f3a1c")); // weed on the lip
+                if (area == 4) for (int x = 5; x < 79; x++) c.Set(x, 29, C("#c6d8ee"));                        // snow on top
                 c.Disc(42, 33, 7, Iron[2]);
                 c.Disc(42, 34, 5.5f, Iron[3]);
-                for (int i = 0; i < 9; i++) c.Disc(42 + (i % 3 - 1) * 2.5f, 38 + i / 3 * 2.5f, 2.3f - i / 3 * 0.6f, i < 3 ? C("#7c4ad8") : i < 6 ? Glow[2] : C("#f0dcff"));
+                for (int i = 0; i < 9; i++) c.Disc(42 + (i % 3 - 1) * 2.5f, 38 + i / 3 * 2.5f, 2.3f - i / 3 * 0.6f, i < 3 ? deep : i < 6 ? glow : core);
             }
             else
             {
@@ -638,6 +711,9 @@ namespace Game.EditorTools.Art
                 ["bones_2"] = BonePile(),
                 ["pillar_1"] = Pillar(1),
                 ["pillar_2"] = Pillar(2),
+                ["pillar_3"] = Pillar(3),
+                ["pillar_4"] = Pillar(4),
+                ["pillar_5"] = Pillar(5),
             };
         }
 

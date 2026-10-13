@@ -235,6 +235,7 @@ namespace Game.Core
             UpdateSpawning(dt);
             StepEnemies(dt);
             StepBossTrials(dt);
+            StepPools(dt); // RunSimulation.Lands.cs
             StepPlayersCombat(dt);
             StepDelayedAreas(dt);
             StepZones(dt);
@@ -446,9 +447,10 @@ namespace Game.Core
             PendingSpawns.Add(new PendingSpawn { Room = Room.Id, Type = type, Position = pos, Timer = SpawnWarningTime, Elite = elite });
             Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = pos, Int = (int)type, Value = SpawnWarningTime });
 
-            // Bats come in flocks.
-            if (type == EnemyType.Bat && at == null)
-                for (int k = 0; k < 2; k++)
+            // Bats come in flocks, wolves and imps in pairs.
+            int flock = at != null ? 0 : type == EnemyType.Bat ? 2 : type is EnemyType.FrostWolf or EnemyType.FireImp ? 1 : 0;
+            if (flock > 0)
+                for (int k = 0; k < flock; k++)
                 {
                     Vector2 near = ClampToRoom(pos + Rotate(Vector2.right, k * 140f + 30f) * 0.9f, 0.5f);
                     PendingSpawns.Add(new PendingSpawn { Room = Room.Id, Type = type, Position = near, Timer = SpawnWarningTime + 0.1f * (k + 1) });

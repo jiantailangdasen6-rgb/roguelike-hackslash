@@ -8,7 +8,7 @@ namespace Game.EditorTools.Art
     /// Lich's phylactery. Same clip names as the monsters (idle, walk, windup, strike, hurt, death); for the sigil
     /// "walk" is its lit look.
     /// </summary>
-    public static class GimmickArt
+    public static partial class GimmickArt
     {
         private static Vector2 P(float x, float y) => new(x, y);
 

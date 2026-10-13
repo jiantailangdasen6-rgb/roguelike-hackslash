@@ -478,6 +478,9 @@ namespace Game.Gameplay
                     CameraShake.Add(0.6f);
                     ShowCallout(e.Pos + Vector2.up * 3f, "冥王の復活", new Color(0.6f, 0.95f, 1f), 46);
                     break;
+                default:
+                    LandTrial(e); // EventPresenter.Lands.cs
+                    break;
             }
         }
 
@@ -501,6 +504,10 @@ namespace Game.Gameplay
             float r = e.Value;
             switch ((AreaKind)e.Int)
             {
+                case AreaKind.SlagPool:
+                case AreaKind.Steam:
+                    LandArea(e); // EventPresenter.Lands.cs
+                    break;
                 case AreaKind.FrostNova:
                 {
                     var fx = Spawn("fx_nova", e.Pos, 1f, 0.45f, r * 0.3f, r, Color.white);
@@ -710,6 +717,10 @@ namespace Game.Gameplay
         {
             switch ((GimmickKind)e.Int)
             {
+                case GimmickKind.Icicle:
+                case GimmickKind.LavaCrack:
+                    LandHazardWarn(e); // EventPresenter.Lands.cs
+                    break;
                 case GimmickKind.SpikeTrap:
                     AddTelegraph(new SimEvent { Id = HazardKey(e.Id), Int = (int)AttackShape.Circle, Pos = e.Pos, Size = e.Size, Value = e.Value }, square: true);
                     break;
@@ -733,6 +744,10 @@ namespace Game.Gameplay
             RemoveTelegraph(HazardKey(e.Id));
             switch ((GimmickKind)e.Int)
             {
+                case GimmickKind.Icicle:
+                case GimmickKind.LavaCrack:
+                    LandHazardFire(e); // EventPresenter.Lands.cs
+                    break;
                 case GimmickKind.FlameJet:
                 {
                     var fx = Spawn("fx_flame", e.Pos, 16f, e.Value, 1f, 1f, Color.white, order: EnemyView.SortOrder(e.Pos.y) + 10);
@@ -787,6 +802,11 @@ namespace Game.Gameplay
                 case ProjectileKind.BloodOrb:
                     fx = Spawn("fx_orb", e.Pos, 12f, e.Value + 0.05f, 1f, 1f, new Color(1f, 0.35f, 0.35f));
                     AddLight(fx, new Color(1f, 0.15f, 0.15f), 1f, 1.5f);
+                    break;
+                case ProjectileKind.WaterOrb:
+                case ProjectileKind.IceShard:
+                case ProjectileKind.FireBolt:
+                    fx = LandProjectile(kind, e, ref angle); // EventPresenter.Lands.cs
                     break;
                 case ProjectileKind.SoulBolt:
                     fx = Spawn("fx_orb", e.Pos, 14f, e.Value + 0.05f, 0.85f, 0.85f, new Color(0.55f, 1f, 0.65f));

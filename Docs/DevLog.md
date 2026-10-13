@@ -11,11 +11,11 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 78b8b7a4（第1段階「毎回ちがう迷宮」まで。Windows版と同じ版なので一緒に遊べる） |
-| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 78b8b7a4）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 65e6014b（第2段階「見た目の世代交代」まで。Windows版と同じ版なので一緒に遊べる） |
+| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 65e6014b）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
-| テスト | EditMode 188件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
+| テスト | EditMode 189件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
 | 最新コミット | git log を参照（改善案8つと記録のコミットが最新） |
 
 ---
@@ -429,6 +429,18 @@
 - ボット確認：狩人ソロで鍛冶場→水没→霊廟を9分19秒で踏破（主：巨人38秒・聖女14秒・女王27秒、例外なし）。聖女が短いので人の感想で強さを見る
 - 公開：ブラウザ版・Windows版（Releases）ver 78b8b7a4（NetTest・OnlineTest（ホスト4秒停止）・CrossTest 合格）
 - **次（第2段階 ② 見た目の世代交代）**：ドット絵の法線マップ自動生成で灯りの陰影、柱や像が影を落とす、壊せる物、霧・塵、倒れ方。ブラウザ用に画質設定（高／低）
+
+### 大掛かりな変更：第2段階「見た目の世代交代」（2026-10-14）
+- **灯りの陰影（法線マップ）**（`Editor/Art/NormalMaps.cs`）：書き出した絵から `*_n.png` を自動で作る（輪郭からの丸み＋明るさの凹凸）。キャラ・小物・床と壁のタイルに付け、点光源が陰影をつける。
+  `Light2D` の法線設定は読み取り専用なので `View/LightingQuality.cs` がリフレクションで設定（全シーンに1つ、0.4秒ごとに新しい灯りも拾う）
+- **画質（高／低）**：設定画面に追加（`GameSettings.HighQuality`、スマホは最初「低」、`-highquality`/`-lowquality`）。高では全体照明を6割強にし、部屋ごとに大きな灯り3つ（奥の両隅と手前）、各プレイヤーに淡い灯り、霧を出す
+- **落ち影**（柱・像・結晶は長く右下へ、石棺などは短く）、**床を這う霧**（土地の色、2層が流れる、高画質のみ）
+- **倒れ方**（`View/EventPresenter.Remains.cs`）：魔物の材質（骨・肉・腐肉・水・氷・鉄・火・霊）ごとの破片と、床に40秒残るしみ
+- **壊せる壺**（`EnemyType.Urn`）：主の間と入口以外の部屋の壁際に2〜5個（種で全員同じ）。一撃で割れ、35%で魂
+- **主を1.3倍で描く**（写し身も同じ）、体力が半分を切った瞬間に「怒り」の演出
+- 撮影用：`-seed <n>`（同じ地図）
+- 公開：ブラウザ版・Windows版 ver 65e6014b（NetTest・CrossTest 合格、EditMode 189件）
+- **次（第3段階 ① 物語と本当の結末）**
 ### Claude が自分の判断で決めたこと（ユーザーが変更可）
 - 2026-10-14（第1段階）：新しい土地3つの名前・色・魔物9体と主3体の名前と数値・試練の中身（水が満ちる／氷の写し身／灼熱）、土地は何層目にも出る（同じ降り道で同じ土地は二度出ない）、道は左右2つ、異変6種の中身、新しい土地の曲は既存曲の加工
 - 2026-10-13（新規案）：神の名前・加護12種の中身と数値・寵愛の条件（2つ）と効果・授かる時（中ボスと主、全員）、闇の間の数（各エリア1つ）と灯りの半径・灯りの外のダメージ3割、
@@ -492,7 +504,7 @@
 
 ## 5. 次の候補（ユーザーの感想待ち）
 
-- **大掛かりな変更（6案）を進行中**：第1段階は 2026-10-14 公開済み。次は ② 見た目 → ① 物語と結末 → ④ ルーンと武器 → ③ 地続きの迷宮 → ⑥ Android とマッチング（2章「大掛かりな変更」）
+- **大掛かりな変更（6案）を進行中**：第1・第2段階は 2026-10-14 公開済み。次は ① 物語と結末 → ④ ルーンと武器 → ③ 地続きの迷宮 → ⑥ Android とマッチング（2章「大掛かりな変更」）
 - **新規案 A〜J は 2026-10-13 にすべて実装済み**（2章「新規案をおすすめ順で全部」）。中身は Claude の判断なので、遊んだ感想で調整する
 - 今週の迷宮のオンラインランキング：Unity Cloud の管理画面で Leaderboards を有効にしてボードを作ってもらえれば、記録を送る処理を足せる
 - 新しい案の候補（未相談）：職業ごとの専用の連携技（死霊術師・聖騎士の組み合わせ技）／深層だけの魔物と主／住人の物語の続き（依頼と連動するイベント）

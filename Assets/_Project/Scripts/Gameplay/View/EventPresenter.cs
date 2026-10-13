@@ -124,6 +124,7 @@ namespace Game.Gameplay
                 case SimEventType.EnemyHit: OnEnemyHit(e); break;
                 case SimEventType.EnemyDied:
                     Burst("fx_puff", e.Pos + Vector2.up * 0.4f, 14f, 1.4f, Color.white);
+                    Remains(e); // EventPresenter.Remains.cs
                     if (e.Value < 0.5f && EnemyCatalog.Get((EnemyType)e.Int).Boss) BossFell(e.Pos);
                     if ((EnemyType)e.Int == EnemyType.TreasureChest && e.Value < 0.5f)
                     {
@@ -1042,6 +1043,8 @@ namespace Game.Gameplay
         {
             float dt = Time.deltaTime;
             if (_camera == null) _camera = Camera.main;
+            UpdateStains(); // EventPresenter.Remains.cs
+            UpdateBossRage();
 
             for (int i = _telegraphs.Count - 1; i >= 0; i--)
             {

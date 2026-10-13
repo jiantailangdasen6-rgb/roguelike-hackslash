@@ -91,6 +91,43 @@ namespace Game.EditorTools.Art
             return new List<Clip> { idle, Same("walk", idle), Same("windup", idle), Same("strike", idle), hurt, death };
         }
 
+        /// <summary>A burial urn of dark clay with a painted band and a lid; it bursts into shards.</summary>
+        public static List<Clip> Urn()
+        {
+            var m = Palette.With(
+                ('a', new PixelMaterial(2, "#1e130d", "#3a2417", "#5a3a24", "#7c5434", "#a07048")),
+                ('c', new PixelMaterial(2, "#2a0c0a", "#4a1612", "#6e241a", "#962f22", "#b8412c")));
+            var urn = new PixelPart("urn", P(5f, 0f), m, 0,
+                "...aaaa...",
+                "..aaaaaa..",
+                "...aaaa...",
+                "..aaaaaa..",
+                ".aaaaaaaa.",
+                "aaaaaaaaaa",
+                "acccccccca",
+                "aaaaaaaaaa",
+                "aaaaaaaaaa",
+                ".aaaaaaaa.",
+                "..aaaaaa..",
+                "..aaaaaa..");
+            Frame Pose(float shake, float tilt = 0f)
+            {
+                var f = new Frame { BodyAngle = tilt, BodyPivot = P(32f, 10f) };
+                f.Add(urn, P(32f + shake, 10f), 0f, 4);
+                return f;
+            }
+            var idle = new Clip("idle", 4f, true);
+            idle.Frames.Add(Pose(0f));
+            idle.Frames.Add(Pose(0f));
+            var hurt = new Clip("hurt", 16f, false);
+            hurt.Frames.Add(Pose(1f, -8f));
+            hurt.Frames.Add(Pose(-1f, 6f));
+            var shard = new PixelPart("shard", P(1f, 1f), m, 0, "aa", "ac");
+            var bit = new PixelPart("bit", P(1f, 1f), m, 0, "a.", "aa");
+            var death = Shatter(new[] { shard, bit, shard, bit, shard }, P(32f, 14f), 5);
+            return new List<Clip> { idle, Same("walk", idle), Same("windup", idle), Same("strike", idle), hurt, death };
+        }
+
         // ------------------------------------------------------------------ Floor traps (ArenaView frames)
 
         /// <summary>Where icicles hang overhead: 0 a ring of frost, 1 cracks spreading (warning), 2 shattered ice.</summary>

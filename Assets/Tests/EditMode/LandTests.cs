@@ -223,6 +223,30 @@ namespace Game.Tests
         }
 
         [Test]
+        public void Urns_StandByTheWalls_AndBreakInOneBlow()
+        {
+            var sim = new RunSimulation(12);
+            var p = sim.AddPlayer(0);
+            sim.Start();
+            var room = sim.FindRoom(RoomKind.Combat);
+            sim.MoveTeamTo(room);
+            Run(sim, 0.5f);
+            var urns = Living(sim, EnemyType.Urn).FindAll(i => sim.Enemies[i].RoomId == room.Id);
+            Assert.That(urns.Count, Is.InRange(2, 5), "a few urns in a fight room");
+            foreach (int i in urns) Assert.IsTrue(room.Bounds.Contains(sim.Enemies[i].Position));
+            int id = sim.Enemies[urns[0]].Id;
+            sim.DamageEnemy(urns[0], 10f, p, HitFlags.None, Vector2.zero, 0f);
+            Run(sim, 0.1f);
+            Assert.Less(sim.Enemies.IndexOf(id), 0, "one blow breaks it");
+
+            var bossSim = new RunSimulation(12);
+            bossSim.AddPlayer(0);
+            bossSim.Start(RunSimulation.RoomsPerArea - 1);
+            Run(bossSim, 0.5f);
+            Assert.IsEmpty(Living(bossSim, EnemyType.Urn), "none in a lord's hall");
+        }
+
+        [Test]
         public void EveryNewMonster_HasArtAndACodexEntry()
         {
             foreach (var land in BiomeCatalog.All)

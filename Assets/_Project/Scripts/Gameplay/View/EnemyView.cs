@@ -54,6 +54,14 @@ namespace Game.Gameplay
 
         public int VisibleCount => _visuals.Count;
 
+        /// <summary>Where the lord is drawn (null when none is in sight).</summary>
+        public Vector2? BossPosition()
+        {
+            foreach (var v in _visuals.Values)
+                if (EnemyCatalog.Get(v.Type).Boss && v.Root.activeSelf) return v.Root.transform.position;
+            return null;
+        }
+
         private void Awake() => Instance = this;
         private void OnEnable() => RunDirector.EventReceived += OnEvent;
         private void OnDisable() => RunDirector.EventReceived -= OnEvent;
@@ -387,6 +395,8 @@ namespace Game.Gameplay
             }
 
             v.Root.SetActive(true);
+            // The lords (and the queen's reflections) stand a head taller than their art: they should loom.
+            v.Root.transform.localScale = Vector3.one * (def.Boss || type == EnemyType.IceMirror ? BossScale : 1f);
             v.Anim = (EnemyAnim)255;
             v.Shadow.enabled = !def.Flat && type != EnemyType.IceMirror; // the queen's reflections cast no shadow
             v.Animator.Renderer.color = Color.white;
@@ -443,6 +453,8 @@ namespace Game.Gameplay
             }
             return v;
         }
+
+        private const float BossScale = 1.3f;
 
         private static SpriteRenderer Child(Transform parent, string name, Sprite sprite, int order, Vector3 offset, float scale)
         {

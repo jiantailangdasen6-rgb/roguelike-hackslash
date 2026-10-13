@@ -24,6 +24,8 @@ namespace Game.Gameplay
         public Texture2D Texture;
         /// <summary>Same layout, every opaque pixel white: used for hit flashes.</summary>
         public Texture2D FlashTexture;
+        /// <summary>Lighting relief made from the art (NormalMaps): candles and torches shade the sprite with it.</summary>
+        public Texture2D NormalTexture;
         public int FrameWidth;
         public int FrameHeight;
         /// <summary>Normalized pivot inside a frame (feet for characters, centre for effects).</summary>
@@ -78,7 +80,10 @@ namespace Game.Gameplay
             for (int i = 0; i < clip.Frames; i++)
             {
                 var rect = new Rect(i * FrameWidth, (rows - 1 - clip.Row) * FrameHeight, FrameWidth, FrameHeight);
-                sprites[i] = Sprite.Create(texture, rect, Pivot, PixelsPerUnit, 0, SpriteMeshType.FullRect);
+                sprites[i] = flash || NormalTexture == null
+                    ? Sprite.Create(texture, rect, Pivot, PixelsPerUnit, 0, SpriteMeshType.FullRect)
+                    : Sprite.Create(texture, rect, Pivot, PixelsPerUnit, 0, SpriteMeshType.FullRect, Vector4.zero, false,
+                        new[] { new SecondarySpriteTexture { name = "_NormalMap", texture = NormalTexture } });
                 sprites[i].name = $"{name}_{clipName}_{i}";
             }
             cache[clipName] = sprites;

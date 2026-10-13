@@ -78,6 +78,7 @@ namespace Game.Core
             }
             MaybeDisguise(room, chests); // RunSimulation.Events.cs
             if (room.Captive) SpawnCaptive(room);
+            SpawnUrns(room); // RunSimulation.Lands.cs
         }
 
         /// <summary>A keg was broken: it hisses briefly, then explodes.</summary>

@@ -52,6 +52,8 @@ namespace Game.Core
         SlagBloater,    // forge: bursts into molten slag that keeps burning
         ForgeColossus,  // forge lord
         QuenchCistern,  // the colossus' overheat: break it to flood the floor and lure him in
+        // Room dressing that breaks (round 7)
+        Urn,            // a burial urn: smash it, sometimes souls spill out
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -468,6 +470,12 @@ namespace Game.Core
             new()
             {
                 Type = EnemyType.QuenchCistern, Name = "水甕", Sheet = "quench_cistern", Health = 40f, Speed = 0f, Radius = 0.6f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // A few stand by the walls of most rooms: one blow breaks them (RunSimulation.Lands).
+                Type = EnemyType.Urn, Name = "壺", Sheet = "urn", Health = 6f, Speed = 0f, Radius = 0.38f, Xp = 0, Prop = true,
                 Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };

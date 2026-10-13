@@ -68,6 +68,16 @@ namespace Game.Gameplay
             set { PlayerPrefs.SetFloat("set_uiscale", Mathf.Clamp(value, 1f, 1.3f)); Changed?.Invoke(); }
         }
 
+        /// <summary>
+        /// Picture quality: high shades the art with the lights (normal maps), casts shadows and draws the drifting
+        /// fog; low keeps the flat look for slow machines. Phones start low.
+        /// </summary>
+        public static bool HighQuality
+        {
+            get => CommandLine.Has("-lowquality") ? false : CommandLine.Has("-highquality") || PlayerPrefs.GetInt("set_quality", Application.isMobilePlatform ? 0 : 1) == 1;
+            set { PlayerPrefs.SetInt("set_quality", value ? 1 : 0); Changed?.Invoke(); }
+        }
+
         /// <summary>Flash strength to multiply effects by (1, or a soft 0.35 with fewer flashes).</summary>
         public static float FlashScale => ReduceFlashes ? 0.35f : 1f;
 

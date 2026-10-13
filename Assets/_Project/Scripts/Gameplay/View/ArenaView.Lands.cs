@@ -13,6 +13,65 @@ namespace Game.Gameplay
     public sealed partial class ArenaView
     {
         private const int ZonePpu = 16;
+
+        // ------------------------------------------------------------------ Picture quality: the room's own light
+
+        /// <summary>At high quality the ambient light is lower and the room's lights do more (so the art's relief shows).</summary>
+        private const float HighQualityAmbient = 0.62f;
+
+        /// <summary>
+        /// A soft shadow cast down and to the right (the art is lit from the top-left): long for pillars and statues,
+        /// short and wide for tombs, altars and crates. Drawn on the floor under everything.
+        /// </summary>
+        private void AddDropShadow(Obstacle o)
+        {
+            var sheet = SpriteSheet.Load("fx_shadow", quiet: true);
+            if (sheet == null) return;
+            bool tall = o.Kind is ObstacleKind.Pillar or ObstacleKind.Statue or ObstacleKind.Crystal;
+            float w = Mathf.Max(0.9f, o.Size.x);
+            // The shadow's own sprite is a small ellipse: stretched along its length, then turned.
+            Vector2 at = o.Position + (tall ? new Vector2(0.75f, -0.1f) : new Vector2(0.3f, -0.15f));
+            var r = Sprite("DropShadow", sheet.First, at, -950);
+            r.transform.localScale = tall ? new Vector3(2.4f, 0.7f, 1f) : new Vector3(w * 1.05f, 0.75f, 1f);
+            r.transform.localRotation = Quaternion.Euler(0f, 0f, tall ? -18f : -4f);
+            r.color = new Color(0f, 0f, 0f, GameSettings.HighQuality ? 0.55f : 0.35f);
+        }
+
+        /// <summary>The quality changed in the settings: light the land and the room again.</summary>
+        private void OnSettings()
+        {
+            int land = _area;
+            _area = -1;
+            if (land >= 0) ShowArea(land);
+        }
+
+        /// <summary>
+        /// At high quality, a few big soft lights in the land's torch colour hang over each room: two high in the back
+        /// corners and a weaker one by the front wall, so things are lit from one side and their relief shows.
+        /// </summary>
+        private void AddKeyLights(MapRoom room)
+        {
+            if (!GameSettings.HighQuality) return;
+            var b = room.Bounds;
+            var torch = LandLook.Torch((Biome)Mathf.Max(0, _area));
+            void Key(Vector2 at, float intensity, float radius)
+            {
+                var go = new GameObject("KeyLight");
+                go.transform.SetParent(transform, false);
+                go.transform.localPosition = at;
+                _spawned.Add(go);
+                var l = go.AddComponent<Light2D>();
+                l.lightType = Light2D.LightType.Point;
+                l.color = Color.Lerp(torch, Color.white, 0.35f);
+                l.intensity = intensity;
+                l.pointLightOuterRadius = radius;
+                l.pointLightInnerRadius = radius * 0.2f;
+                l.falloffIntensity = 0.6f;
+            }
+            Key(new Vector2(b.xMin + 5f, b.yMax - 1.5f), 0.75f, 12f);
+            Key(new Vector2(b.xMax - 5f, b.yMax - 1.5f), 0.75f, 12f);
+            Key(new Vector2(b.center.x, b.yMin + 1f), 0.4f, 10f);
+        }
         private static readonly Dictionary<(GimmickKind, int, int), Sprite[]> ZoneCache = new();
 
         private void AddLandGimmick(GimmickDef def, int id)
@@ -159,8 +218,89 @@ namespace Game.Gameplay
             }
         }
 
+        // ------------------------------------------------------------------ Drifting fog (high quality)
+
+        private const int FogPpu = 8, FogSize = 256; // a 32-unit tile, its pixels an eighth of a unit wide
+        private static Sprite _fogSprite;
+        private readonly SpriteRenderer[] _fog = new SpriteRenderer[4];
+
+        /// <summary>Mist hanging low over the floor, in the land's colour (water and frost thicker).</summary>
+        private static (Color Color, float Alpha) FogOf(Biome b) => b switch
+        {
+            Biome.Chapel => (new Color(0.75f, 0.35f, 0.35f), 0.07f),
+            Biome.Abyss => (new Color(0.55f, 0.4f, 0.85f), 0.1f),
+            Biome.Sunken => (new Color(0.45f, 0.85f, 0.75f), 0.13f),
+            Biome.Frost => (new Color(0.85f, 0.92f, 1f), 0.12f),
+            Biome.Forge => (new Color(0.35f, 0.3f, 0.28f), 0.12f),
+            _ => (new Color(0.6f, 0.62f, 0.72f), 0.08f),
+        };
+
+        private static Sprite FogSprite()
+        {
+            if (_fogSprite != null) return _fogSprite;
+            // Tileable value noise in a few soft bands (pixel-art mist rather than a smooth gradient).
+            var pixels = new Color32[FogSize * FogSize];
+            float Noise(int x, int y, int cell, int salt)
+            {
+                int cx = x / cell, cy = y / cell, n = FogSize / cell;
+                float fx = (x % cell) / (float)cell, fy = (y % cell) / (float)cell;
+                float H(int i, int j) => Hash((i % n + n) % n, (j % n + n) % n, salt);
+                fx = fx * fx * (3f - 2f * fx);
+                fy = fy * fy * (3f - 2f * fy);
+                return Mathf.Lerp(Mathf.Lerp(H(cx, cy), H(cx + 1, cy), fx), Mathf.Lerp(H(cx, cy + 1), H(cx + 1, cy + 1), fx), fy);
+            }
+            for (int y = 0; y < FogSize; y++)
+            for (int x = 0; x < FogSize; x++)
+            {
+                float v = Noise(x, y, 64, 1) * 0.55f + Noise(x, y, 32, 2) * 0.3f + Noise(x, y, 16, 3) * 0.15f;
+                v = Mathf.Clamp01((v - 0.32f) * 1.7f);
+                v = Mathf.Floor(v * 7f) / 7f;
+                pixels[y * FogSize + x] = new Color32(255, 255, 255, (byte)(v * 255f));
+            }
+            var tex = new Texture2D(FogSize, FogSize, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Repeat };
+            tex.SetPixels32(pixels);
+            tex.Apply();
+            _fogSprite = UnityEngine.Sprite.Create(tex, new Rect(0, 0, FogSize, FogSize), Vector2.zero, FogPpu, 0, SpriteMeshType.FullRect);
+            return _fogSprite;
+        }
+
+        private void UpdateFog()
+        {
+            bool on = GameSettings.HighQuality && _room != null;
+            for (int i = 0; i < _fog.Length; i++)
+            {
+                if (!on)
+                {
+                    if (_fog[i] != null) _fog[i].enabled = false;
+                    continue;
+                }
+                if (_fog[i] == null)
+                {
+                    var go = new GameObject("Fog");
+                    go.transform.SetParent(transform, false);
+                    _fog[i] = go.AddComponent<SpriteRenderer>();
+                    _fog[i].sprite = FogSprite();
+                    _fog[i].sortingOrder = -940;
+                }
+                var r = _fog[i];
+                r.enabled = true;
+                // Two layers of two tiles side by side, drifting at different speeds; they wrap round every 32 units.
+                int layer = i / 2;
+                float tile = FogSize / (float)FogPpu;
+                float speed = layer == 0 ? 0.35f : -0.22f;
+                float shift = Mathf.Repeat(Time.time * speed + layer * 11f, tile);
+                var b = _room.Bounds;
+                r.transform.localPosition = new Vector3(b.xMin - tile + shift + (i % 2) * tile, b.yMin - 4f - layer * 3f, 0f);
+                var (color, alpha) = FogOf((Biome)Mathf.Max(0, _area));
+                color.a = alpha * (layer == 0 ? 1f : 0.7f);
+                r.color = color;
+                r.flipY = layer == 1;
+            }
+        }
+
         private void UpdateLands(RunDirector director)
         {
+            UpdateFog();
             // The flood rises over the saint's hall while her seals hold (seen by whoever stands in it).
             bool flood = director != null && director.IsSpawned && director.Trial.Value == BossTrial.Flood && _room != null && _room.Kind == RoomKind.Boss;
             _floodAlpha = Mathf.MoveTowards(_floodAlpha, flood ? 1f : 0f, Time.deltaTime * 0.8f);

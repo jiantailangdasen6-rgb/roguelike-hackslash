@@ -755,6 +755,7 @@ namespace Game.Core
                     else if (def.Type == EnemyType.CrackedWall) WallBroken(e);
                     else if (def.Type == EnemyType.Captive) CaptiveFreed(e);
                     else if (def.Type == EnemyType.QuenchCistern) CisternBroken(e); // RunSimulation.Lands.cs
+                    else if (def.Type == EnemyType.Urn) UrnBroken(e);
                     continue;
                 }
 

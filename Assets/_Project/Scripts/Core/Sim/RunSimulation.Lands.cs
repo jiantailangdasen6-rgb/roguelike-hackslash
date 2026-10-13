@@ -142,6 +142,44 @@ namespace Game.Core
             }
         }
 
+        // ------------------------------------------------------------------ Urns by the walls
+
+        /// <summary>
+        /// First visit: two to five urns stand along the walls (not in doorways, traps or the lord's hall), the same for
+        /// every peer. One blow breaks one; now and then souls spill out.
+        /// </summary>
+        private void SpawnUrns(RoomState room)
+        {
+            if (room.Kind is RoomKind.Boss or RoomKind.Start) return;
+            var rng = new GameRandom(MapSeed ^ (ulong)(room.Id * 2654435761u + 977u) ^ (ulong)Area << 40);
+            int count = 2 + rng.Range(0, 4);
+            var b = room.Bounds;
+            var placed = new List<Vector2>();
+            for (int k = 0, guard = 0; k < count && guard < 40; guard++)
+            {
+                bool side = rng.Chance(0.5f);
+                Vector2 p = side
+                    ? new Vector2(rng.Chance(0.5f) ? b.xMin + 0.8f : b.xMax - 0.8f, rng.Range(b.yMin + 1f, b.yMax - 1.5f))
+                    : new Vector2(rng.Range(b.xMin + 1f, b.xMax - 1f), rng.Chance(0.5f) ? b.yMin + 0.8f : b.yMax - 1.2f);
+                if (Mathf.Abs(p.x - b.center.x) < 3f || Mathf.Abs(p.y - b.center.y) < 2.5f) continue; // keep the doorways clear
+                if (Arena.Overlaps(room.Layout, p, 0.7f)) continue;
+                bool trap = false;
+                foreach (var g in room.Layout.Gimmicks) trap |= Arena.InGimmick(g, p, 0.6f) || Arena.InZone(g, p) || (g.Position - p).sqrMagnitude < 1.5f;
+                if (trap || placed.Exists(q => (q - p).sqrMagnitude < 1.2f)) continue;
+                placed.Add(p);
+                k++;
+                int id = Enemies.Spawn(EnemyType.Urn, p, 1f, 1f, false);
+                Enemies[Enemies.IndexOf(id)].RoomId = room.Id;
+            }
+        }
+
+        private void UrnBroken(in Enemy e)
+        {
+            Room = RoomStates[e.RoomId];
+            var rng = new GameRandom((ulong)e.Id * 7919ul + Seed);
+            if (rng.Chance(0.35f)) DropSoul(e.Position, 1 + Area);
+        }
+
         // ------------------------------------------------------------------ Drowned Saint: the flood
 
         private void BeginFlood(int bossIndex)

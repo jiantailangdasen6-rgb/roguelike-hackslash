@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: ed0d15a46729fe446a5f3251f824019a, type: 3}
   FlashTexture: {fileID: 0}
+  NormalTexture: {fileID: 2800000, guid: ed1c5ea86b8aba04fb1379c4bd672c09, type: 3}
   FrameWidth: 40
   FrameHeight: 112
   Pivot: {x: 1, y: 0.5}

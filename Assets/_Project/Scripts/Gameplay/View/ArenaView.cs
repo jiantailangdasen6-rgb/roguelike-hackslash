@@ -41,8 +41,16 @@ namespace Game.Gameplay
 
         private readonly List<DoorVisual> _doors = new();
 
-        private void OnEnable() => RunDirector.EventReceived += OnEvent;
-        private void OnDisable() => RunDirector.EventReceived -= OnEvent;
+        private void OnEnable()
+        {
+            RunDirector.EventReceived += OnEvent;
+            GameSettings.Changed += OnSettings;
+        }
+        private void OnDisable()
+        {
+            RunDirector.EventReceived -= OnEvent;
+            GameSettings.Changed -= OnSettings;
+        }
 
         private void Start() => ShowArea(0);
 
@@ -204,7 +212,7 @@ namespace Game.Gameplay
             if (globalLight != null)
             {
                 globalLight.color = LandLook.Ambient((Biome)area);
-                globalLight.intensity = LandLook.AmbientIntensity((Biome)area);
+                globalLight.intensity = LandLook.AmbientIntensity((Biome)area) * (GameSettings.HighQuality ? HighQualityAmbient : 1f);
             }
             LandLook.ApplyGrading((Biome)area);
             if (_room != null) BuildRoom(_room); // props use the land's palette
@@ -225,6 +233,7 @@ namespace Game.Gameplay
             BuildDoors(room);
             AddRoomDecor(room);
             AddFloorFeatures(room);
+            AddKeyLights(room); // ArenaView.Lands.cs
 
             var layout = room.Layout;
             foreach (var o in layout.Obstacles)
@@ -243,6 +252,7 @@ namespace Game.Gameplay
                     continue;
                 }
                 r.gameObject.AddComponent<PropFader>();
+                AddDropShadow(o); // ArenaView.Lands.cs
             }
 
             int idBase = room.Id * RunSimulation.HazardIdsPerRoom;

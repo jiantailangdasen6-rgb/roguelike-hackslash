@@ -222,7 +222,7 @@ namespace Game.Gameplay
             _timeText = UIKit.Title(root, "", 30, TextAnchor.UpperRight, UIKit.MutedText);
             _timeText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(240f, 44f), new Vector2(-28f, -22f));
             _difficultyText = UIKit.Label(root, "", 22, TextAnchor.UpperRight, UIKit.MutedText);
-            _difficultyText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(900f, 60f), new Vector2(-28f, -64f));
+            _difficultyText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(900f, 32f), new Vector2(-28f, -64f));
             _minimap = new MinimapView(root, new Vector2(-24f, -98f));
             BuildBigMap();
             float below = -98f - _minimap.Root.sizeDelta.y - 10f;
@@ -653,7 +653,7 @@ namespace Game.Gameplay
                 _classText.text = local.ClassDef.Name + (banked > 0 && director.LocalFighting ? $"　<size=22><color=#e0b45a>★{banked}</color></size>" : "");
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
             string ping = local != null && !director.IsServer && local.Ping.Value > 0 ? $"通信 {PingText(local.Ping.Value)}　" : "";
-            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + (director.WeeklyWeek.Value >= 0 ? "<color=#9fd8ff>今週の迷宮</color>" : $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}") + (director.Omen != Omen.None ? $"\n<color=#e08a7a>異変：{OmenCatalog.Name(director.Omen)}</color>" : "");
+            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + (director.WeeklyWeek.Value >= 0 ? "<color=#9fd8ff>今週の迷宮</color>" : $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}") + (director.Omen != Omen.None ? $"　<color=#e08a7a>異変：{OmenCatalog.Name(director.Omen)}</color>" : "");
             // The run's omen is announced once, after the first area's title has faded.
             if (director.Omen != Omen.None && !_omenShown && director.Elapsed.Value >= 4f)
             {

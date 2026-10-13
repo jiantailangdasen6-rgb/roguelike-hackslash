@@ -99,6 +99,7 @@ namespace Game.EditorTools.Art
             Character("slag_bloater", EnemyArt.SlagBloater(), EnemyArt.FrameSize);
             Character("forge_colossus", EnemyArt.ForgeColossus(), EnemyArt.BossFrameSize);
             Character("quench_cistern", GimmickArt.QuenchCistern(), EnemyArt.FrameSize);
+            Character("urn", GimmickArt.Urn(), EnemyArt.FrameSize);
             Effect("trap_icicle", GimmickArt.Icicle(), "trap_icicle", new Vector2(0.5f, 0.5f));
             Effect("trap_lava", GimmickArt.LavaCrack(), "trap_lava", new Vector2(0f, 0.5f));
 
@@ -131,7 +132,11 @@ namespace Game.EditorTools.Art
             {
                 string path = $"{TileDir}/{name}.png";
                 PixelCanvas.WriteStrip(path, new[] { canvas });
-                Import(path, name == "pillar" ? new Vector2(0.5f, 0.05f) : new Vector2(0.5f, 0.5f));
+                // Floors are flat (relief only); the rest also round off at their outline.
+                bool flat = name.StartsWith("floor") || name.StartsWith("carpet") || name.StartsWith("camp_ground");
+                bool lit = !(name.StartsWith("shade") || name == "mote" || name == "walltop");
+                var normal = lit ? NormalMaps.Make(path, tiles: name != "pillar", dome: flat ? 0f : 0.6f, relief: 1f) : null;
+                Import(path, name == "pillar" ? new Vector2(0.5f, 0.05f) : new Vector2(0.5f, 0.5f), normal);
             }
             var decor = PropArt.Decor();
             foreach (var (name, canvas) in LandArt.Decor()) decor[name] = canvas;
@@ -139,7 +144,7 @@ namespace Game.EditorTools.Art
             {
                 string path = $"{TileDir}/{name}.png";
                 PixelCanvas.WriteStrip(path, new[] { canvas });
-                Import(path, new Vector2(0.5f, 0.02f));
+                Import(path, new Vector2(0.5f, 0.02f), NormalMaps.Make(path, tiles: false));
             }
 
             AssetDatabase.SaveAssets();
@@ -207,6 +212,7 @@ namespace Game.EditorTools.Art
             var sheet = LoadOrCreateSheet(name);
             sheet.Texture = texture;
             sheet.FlashTexture = flashTexture;
+            sheet.NormalTexture = NormalMaps.Make(path, tiles: false, dome: 1f, relief: 0.7f);
             sheet.FrameWidth = frameSize;
             sheet.FrameHeight = frameSize;
             sheet.Pivot = new Vector2(0.5f, (float)GroundY / frameSize);
@@ -233,6 +239,10 @@ namespace Game.EditorTools.Art
             var texture = Import(path, null);
 
             var sheet = LoadOrCreateSheet(sheetName ?? "fx_" + name);
+            // Solid things in the room are shaded by the lights; effects (glows, flames, telegraphs) are not.
+            string sheetId = sheetName ?? "fx_" + name;
+            bool solid = sheetId.StartsWith("prop_") && sheetId != "prop_campfire" || sheetId.StartsWith("door_") || sheetId.StartsWith("decor_") || sheetId.StartsWith("decal_") || sheetId.StartsWith("camp_");
+            sheet.NormalTexture = solid ? NormalMaps.Make(path, tiles: false, dome: sheetId.StartsWith("decal_") ? 0.3f : 1f, relief: 0.8f) : null;
             sheet.Texture = texture;
             sheet.FrameWidth = frames[0].Width;
             sheet.FrameHeight = frames[0].Height;
@@ -254,7 +264,7 @@ namespace Game.EditorTools.Art
         }
 
         /// <summary>Imports as a crisp, uncompressed texture; with a pivot it is also a single sprite (tiles/props).</summary>
-        private static Texture2D Import(string path, Vector2? spritePivot)
+        private static Texture2D Import(string path, Vector2? spritePivot, Texture2D normal = null)
         {
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport);
             var importer = (TextureImporter)AssetImporter.GetAtPath(path);
@@ -276,6 +286,7 @@ namespace Game.EditorTools.Art
                 settings.spriteMeshType = SpriteMeshType.FullRect;
                 importer.SetTextureSettings(settings);
             }
+            importer.secondarySpriteTextures = normal != null ? new[] { new SecondarySpriteTexture { name = "_NormalMap", texture = normal } } : System.Array.Empty<SecondarySpriteTexture>();
             importer.SaveAndReimport();
             return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
         }

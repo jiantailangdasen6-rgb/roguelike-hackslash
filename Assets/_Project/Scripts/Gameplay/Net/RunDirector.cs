@@ -253,7 +253,7 @@ namespace Game.Gameplay
             if (suspended != null && ResumeRun(suspended)) return;
 
             DifficultyLevel.Value = ChosenDifficulty();
-            ulong seed = (ulong)DateTime.UtcNow.Ticks;
+            ulong seed = CommandLine.Has("-seed") ? (ulong)CommandLine.GetFloat("-seed", 1f) : (ulong)DateTime.UtcNow.Ticks; // -seed n: the same maps (screenshots)
             // -startin twin (screenshots): look for a map whose puzzle is the twin plates.
             string wanted = CommandLine.GetValue("-startin")?.ToLowerInvariant();
             int wantedArea = (int)CommandLine.GetFloat("-startroom", 0f) / RunSimulation.RoomsPerArea;

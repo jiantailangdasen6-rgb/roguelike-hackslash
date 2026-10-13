@@ -152,6 +152,8 @@ namespace Game.Core
         public List<string> gear = new();
         /// <summary>Levels of the camp's facilities (CampUpgrade order), grown at the hearth.</summary>
         public List<int> camp = new();
+        /// <summary>The title worn next to the name (an earned achievement's; empty for none).</summary>
+        public string title = "";
 
         public string ToJson() => JsonUtility.ToJson(this);
 
@@ -164,6 +166,8 @@ namespace Game.Core
                 l.mastery ??= new List<string>();
                 l.trinkets ??= new List<string>();
                 l.camp ??= new List<int>();
+                l.title ??= "";
+                if (l.title.Length > 16) l.title = l.title.Substring(0, 16);
                 for (int i = 0; i < l.camp.Count; i++) l.camp[i] = i < CampUpgrades.All.Length ? Mathf.Clamp(l.camp[i], 0, CampUpgrades.All[i].MaxLevel) : 0;
                 // Drop unknown ids and trinkets beyond the slot count.
                 l.mastery.RemoveAll(id => MetaCatalog.GetNode(id) == null);
@@ -233,6 +237,13 @@ namespace Game.Core
 
         public void RecordVictory(Difficulty d) => bestVictory = Math.Max(bestVictory, (int)d);
 
+        /// <summary>Lines of the camp's people already told (CampStories).</summary>
+        public List<string> storyRead = new();
+
+        /// <summary>Achievements and the title worn next to the name (AchievementCatalog).</summary>
+        public AchievementLog achievements = new();
+        public string title = "";
+
         /// <summary>Levels of the camp's facilities (CampUpgrade order).</summary>
         public List<int> camp = new();
 
@@ -299,6 +310,7 @@ namespace Game.Core
             playerKey = playerKey,
             gear = GearVault.LoadoutGear(this.gear = GearVault.Normalize(this.gear)),
             camp = new List<int>(camp ?? new List<int>()),
+            title = !string.IsNullOrEmpty(title) && achievements != null && achievements.Titles().Contains(title) ? title : "",
         };
 
         public string ToJson() => JsonUtility.ToJson(this);
@@ -315,6 +327,10 @@ namespace Game.Core
                 p.skins ??= new List<int>();
                 p.quests ??= new QuestLog();
                 p.quests.Repair();
+                p.achievements ??= new AchievementLog();
+                p.storyRead ??= new List<string>();
+                p.achievements.Repair();
+                p.title ??= "";
                 if (!Enum.IsDefined(typeof(Difficulty), p.difficulty)) p.difficulty = Difficulty.Normal;
                 // Classes added later are the rewards of requests some players have already turned in.
                 if (p.quests.Step(QuestGiver.Crone) >= 5 && !p.unlocked.Contains(ClassCatalog.UnlockId(ClassId.Deathcaller))) p.unlocked.Add(ClassCatalog.UnlockId(ClassId.Deathcaller));

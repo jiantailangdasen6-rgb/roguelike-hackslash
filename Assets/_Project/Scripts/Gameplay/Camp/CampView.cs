@@ -211,6 +211,10 @@ namespace Game.Gameplay
                 bool near = here != null && here.Value.Id == s.Station.Id;
                 // Finished requests wait at the board: a pulsing mark draws people over.
                 bool waiting = s.Station.Id == CampStation.Board && CampPanels.Claimable > 0;
+                // Someone has something new to tell: a speech mark over their station.
+                bool talk = CampPanels.HasNews(s.Station.Id);
+                if (talk && !waiting) { s.Name.text = $"{s.Station.Name} <color=#bfe8ff>…</color>"; waiting = true; }
+                else
                 s.Name.text = waiting ? $"{s.Station.Name} <color=#ffd860>！</color>" : s.Station.Name;
                 s.Name.color = near || waiting ? UIKit.AccentColor : new Color(0.9f, 0.8f, 0.62f, 0.7f);
                 s.Name.fontSize = near ? 26 : waiting ? 24 + Mathf.RoundToInt(Mathf.PingPong(Time.time * 4f, 2f)) : 22;
@@ -262,7 +266,7 @@ namespace Game.Gameplay
                 label.enabled = !panel && _camera != null && NetPlayer.All.Count > 1;
                 if (!label.enabled) continue;
                 label.color = p.Color;
-                label.text = $"{p.DisplayName} {p.ClassDef.Name}" + (p == local ? "（あなた）" : "");
+                label.text = $"{p.DisplayName} {p.ClassDef.Name}{p.TitleText}" + (p == local ? "（あなた）" : "");
                 label.rectTransform.position = ToScreen((Vector2)p.transform.position + Vector2.up * 1.7f);
             }
             _gone.Clear();

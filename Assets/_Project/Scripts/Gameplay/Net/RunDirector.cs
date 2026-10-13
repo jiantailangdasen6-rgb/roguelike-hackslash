@@ -321,6 +321,7 @@ namespace Game.Gameplay
             netPlayer.Slot.Value = slot;
             netPlayer.Class.Value = simPlayer.ClassId;
             netPlayer.Skin.Value = (byte)loadout.skin;
+            netPlayer.Title.Value = loadout.title ?? "";
             netPlayer.Hp.Value = simPlayer.Hp;
             netPlayer.MaxHp.Value = simPlayer.MaxHp;
             netPlayer.Downed.Value = simPlayer.Downed;

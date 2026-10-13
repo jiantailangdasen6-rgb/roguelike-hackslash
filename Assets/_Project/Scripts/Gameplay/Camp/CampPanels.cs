@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Game.Core;
 using UnityEngine;
@@ -43,8 +44,45 @@ namespace Game.Gameplay
             _status.rectTransform.Place(new Vector2(0f, 0f), new Vector2(800f, 60f), new Vector2(40f, 26f));
             _close = UIKit.Button(panel.transform, "閉じる（Esc）", 28, close);
             _close.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(260f, 64f), new Vector2(-30f, 24f));
+
+            // The resident's words (CampStories): a box with their portrait over the bottom of the panel.
+            _listen = UIKit.Button(panel.transform, "話を聞く", 24, () => Talk(all: true));
+            _listen.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(200f, 64f), new Vector2(-300f, 24f));
+            var speech = UIKit.Framed(panel.transform, "Speech", new Color(0.05f, 0.04f, 0.05f, 0.98f));
+            _speech = speech.Outer();
+            _speech.Place(new Vector2(0.5f, 0f), new Vector2(Width - 60f, 190f), new Vector2(0f, 100f));
+            var speechButton = _speech.gameObject.AddComponent<Button>();
+            speechButton.targetGraphic = _speech.GetComponent<Image>();
+            speechButton.onClick.AddListener(NextLine);
+            var frame = UIKit.Panel(speech.transform, "PortraitBack", new Color(0.1f, 0.08f, 0.09f, 1f));
+            frame.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(150f, 150f), new Vector2(24f, 0f));
+            frame.raycastTarget = false;
+            _portrait = UIKit.Rect("Portrait", frame.transform).Stretch().gameObject.AddComponent<Image>();
+            _portrait.preserveAspect = true;
+            _portrait.raycastTarget = false;
+            _speaker = UIKit.Title(speech.transform, "", 30, TextAnchor.UpperLeft, UIKit.AccentColor);
+            _speaker.rectTransform.Place(new Vector2(0f, 1f), new Vector2(400f, 40f), new Vector2(196f, -14f));
+            _line = UIKit.Label(speech.transform, "", 25, TextAnchor.UpperLeft, new Color(0.95f, 0.92f, 0.86f));
+            _line.rectTransform.Place(new Vector2(0f, 1f), new Vector2(Width - 300f, 110f), new Vector2(196f, -58f));
+            _more = UIKit.Label(speech.transform, "", 18, TextAnchor.LowerRight, UIKit.MutedText);
+            _more.rectTransform.Place(new Vector2(1f, 0f), new Vector2(360f, 30f), new Vector2(-20f, 10f));
+            _speech.gameObject.SetActive(false);
             _dim.SetActive(false);
         }
+
+        private readonly Button _listen;
+        private readonly RectTransform _speech;
+        private readonly Image _portrait;
+        private readonly Text _speaker, _line, _more;
+        private readonly List<StoryLine> _talk = new();
+
+        private static QuestGiver? Resident(CampStation s) => s switch
+        {
+            CampStation.Master => QuestGiver.Master,
+            CampStation.Charms => QuestGiver.Crone,
+            CampStation.Board => QuestGiver.Gravekeeper,
+            _ => null,
+        };
 
         public void Show(CampStation station)
         {
@@ -52,7 +90,52 @@ namespace Game.Gameplay
             _status.text = "";
             _dim.SetActive(true);
             Rebuild();
+            _listen.gameObject.SetActive(Resident(station).HasValue);
+            Talk(all: false);
             EventSystem.current?.SetSelectedGameObject(_close.gameObject);
+        }
+
+        /// <summary>The resident at a station has something they have not told yet.</summary>
+        public static bool HasNews(CampStation s) => Resident(s) is QuestGiver who && CampStories.Unread(ProfileStore.Current, who).Count > 0;
+
+        /// <summary>The resident tells what they have not told yet (or, asked, everything they have to say).</summary>
+        private void Talk(bool all)
+        {
+            _talk.Clear();
+            if (Open == null || Resident(Open.Value) is not QuestGiver who) return;
+            _talk.AddRange(all ? CampStories.Open(Profile, who) : CampStories.Unread(Profile, who));
+            if (_talk.Count == 0)
+            {
+                _speech.gameObject.SetActive(false);
+                return;
+            }
+            var sheet = SpriteSheet.Load(CampStories.Sheets[(int)who], quiet: true);
+            _portrait.sprite = sheet != null && sheet.TryGetClip("idle", out _) ? sheet.Sprites("idle")[0] : sheet?.First;
+            _speaker.text = CampStories.Names[(int)who];
+            ShowLine();
+        }
+
+        private void ShowLine()
+        {
+            var l = _talk[0];
+            _line.text = $"「{l.Text}」";
+            _more.text = _talk.Count > 1 ? $"クリックで次へ（あと{_talk.Count - 1}）" : "クリックで閉じる";
+            _speech.gameObject.SetActive(true);
+            _speech.SetAsLastSibling();
+            UiSound.Play(UiCue.Page);
+        }
+
+        private void NextLine()
+        {
+            if (_talk.Count == 0) return;
+            if (!Profile.storyRead.Contains(_talk[0].Id))
+            {
+                Profile.storyRead.Add(_talk[0].Id);
+                ProfileStore.Save();
+            }
+            _talk.RemoveAt(0);
+            if (_talk.Count > 0) ShowLine();
+            else _speech.gameObject.SetActive(false);
         }
 
         public void Hide()
@@ -213,16 +296,16 @@ namespace Game.Gameplay
                 bool selected = def.Id == current.Id;
                 var card = UIKit.Framed(_body, def.Name, selected ? new Color(0.17f, 0.11f, 0.06f, 1f) : new Color(0.06f, 0.05f, 0.07f, 1f),
                     selected ? UIKit.AccentColor : UIKit.GoldTrim * (open ? 0.6f : 0.3f));
-                card.Outer().Place(new Vector2(0f, 1f), new Vector2(360f, 92f), new Vector2(0f, -i * 99f));
-                var preview = Preview(card.transform, SkinCatalog.Sheet(def.Id, Profile.SkinFor(def.Id)), "idle", 92f, new Vector2(0f, 0.5f), new Vector2(0f, 4f));
+                card.Outer().Place(new Vector2(0f, 1f), new Vector2(360f, 70f), new Vector2(0f, -i * 74f));
+                var preview = Preview(card.transform, SkinCatalog.Sheet(def.Id, Profile.SkinFor(def.Id)), "idle", 76f, new Vector2(0f, 0.5f), new Vector2(4f, 4f));
                 preview.raycastTarget = false;
                 if (!open) preview.color = new Color(0.1f, 0.09f, 0.12f, 0.9f); // a silhouette until unlocked
-                var name = UIKit.Title(card.transform, def.Name, 30, TextAnchor.UpperLeft, open ? Color.white : new Color(1f, 1f, 1f, 0.45f));
-                name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(250f, 42f), new Vector2(100f, -8f));
+                var name = UIKit.Title(card.transform, def.Name, 26, TextAnchor.UpperLeft, open ? Color.white : new Color(1f, 1f, 1f, 0.45f));
+                name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(250f, 34f), new Vector2(90f, -4f));
                 var unlockQuest = UnlockingQuest(def.Id);
                 string roleText = open ? def.Role : unlockQuest != null ? $"依頼「{unlockQuest.Name}」で解放" : "まだ解放されていない";
-                var role = UIKit.Label(card.transform, roleText, 19, TextAnchor.UpperLeft, open ? UIKit.MutedText : new Color(0.9f, 0.75f, 0.45f, 0.8f));
-                role.rectTransform.Place(new Vector2(0f, 1f), new Vector2(256f, 40f), new Vector2(100f, -50f));
+                var role = UIKit.Label(card.transform, roleText, 17, TextAnchor.UpperLeft, open ? UIKit.MutedText : new Color(0.9f, 0.75f, 0.45f, 0.8f));
+                role.rectTransform.Place(new Vector2(0f, 1f), new Vector2(262f, 30f), new Vector2(90f, -38f));
                 var id = def.Id;
                 AddButton(card.Outer(), () =>
                 {
@@ -244,6 +327,22 @@ namespace Game.Gameplay
             Preview(detail, SkinCatalog.Sheet(current.Id, Profile.SkinFor(current.Id)), "attack", 200f, new Vector2(0f, 1f), new Vector2(0f, 10f));
             var title = UIKit.Title(detail, current.Name, 54, TextAnchor.UpperLeft, Color.white);
             title.rectTransform.Place(new Vector2(0f, 1f), new Vector2(500f, 70f), new Vector2(220f, -6f));
+
+            // The title worn next to the name: cycles through the ones earned from achievements.
+            var titles = new List<string>(Profile.achievements.Titles());
+            string worn = titles.Contains(Profile.title) ? Profile.title : "";
+            var titleButton = UIKit.Button(detail, titles.Count == 0 ? "称号：まだない" : $"称号：{(worn == "" ? "なし" : $"「{worn}」")}", 20, () =>
+            {
+                if (titles.Count == 0)
+                {
+                    _status.text = "称号は実績を達成すると手に入る（図鑑の「実績」）";
+                    return;
+                }
+                int next = titles.IndexOf(worn) + 1; // none -> first -> ... -> last -> none
+                Profile.title = next >= titles.Count ? "" : titles[next];
+                Save();
+            });
+            titleButton.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(250f, 44f), new Vector2(-6f, -14f));
 
             int selectedSkin = Profile.SkinFor(current.Id);
             foreach (var skin in SkinCatalog.For(current.Id))

@@ -49,6 +49,18 @@ namespace Game.Gameplay
                 HudView.Instance?.Toast($"依頼「{q.Name}」達成！　拠点の掲示板で報酬を受け取ろう");
                 SfxPlayer.Instance?.Play("levelup", null, 1.15f);
             }
+            // Achievements count the same deeds over a lifetime; each earns a title.
+            var deeds = ProfileStore.Current.achievements;
+            foreach (var a in AchievementCatalog.All)
+            {
+                int amount = QuestCatalog.Amount(a, e);
+                if (amount <= 0 || deeds.IsDone(a.Id)) continue;
+                _dirty = true;
+                if (!deeds.Add(a, amount)) continue;
+                Codex.Record(CodexCatalog.AchievementEntry(a.Id));
+                HudView.Instance?.Toast($"<color=#e6c766>実績「{a.Name}」</color>　称号「{AchievementCatalog.TitleOf(a)}」を得た（拠点の鏡で付けられる）");
+                SfxPlayer.Instance?.Play("levelup", null, 0.95f);
+            }
             if (e.Type is SimEventType.RoomCleared or SimEventType.RunEnded or SimEventType.RoomStarted) SaveIfDirty();
         }
 

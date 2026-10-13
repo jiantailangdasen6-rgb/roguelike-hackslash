@@ -91,7 +91,7 @@ namespace Game.Gameplay
 
             // Section tabs.
             var sections = (CodexSection[])System.Enum.GetValues(typeof(CodexSection));
-            float tabW = 182f, gap = 10f, x0 = 260f;
+            float tabW = 162f, gap = 8f, x0 = 260f;
             for (int i = 0; i < sections.Length; i++)
             {
                 var s = sections[i];
@@ -184,7 +184,8 @@ namespace Game.Gameplay
             var sprite = Codex.Picture(entry);
             if (sprite != null)
             {
-                var icon = UIKit.Panel(frame.transform, "Icon", known ? Color.white : new Color(0f, 0f, 0f, 0.92f));
+                bool dim = entry.Section == CodexSection.Achievements && !ProfileStore.Current.achievements.IsDone(entry.Id.Substring(4));
+                var icon = UIKit.Panel(frame.transform, "Icon", known && !dim ? Color.white : dim ? new Color(0.35f, 0.32f, 0.3f, 1f) : new Color(0f, 0f, 0f, 0.92f));
                 icon.sprite = sprite;
                 icon.preserveAspect = true;
                 icon.raycastTarget = false;
@@ -243,6 +244,14 @@ namespace Game.Gameplay
             }
             _name.text = known ? entry.Name : "？？？";
             _sub.text = known ? entry.Sub ?? "" : "まだ出会っていない";
+            // Achievements show how far along they are (they are always listed).
+            if (entry.Section == CodexSection.Achievements && AchievementCatalog.Get(entry.Id.Substring(4)) is { } deed)
+            {
+                var log = ProfileStore.Current.achievements;
+                _sub.text = log.IsDone(deed.Id)
+                    ? $"<color=#e0b45a>達成！</color>　{entry.Sub}"
+                    : $"{entry.Sub}　<color=#bfb6aa>{log.Progress(deed)} / {deed.Target}</color>";
+            }
             if (known)
             {
                 var lines = new System.Text.StringBuilder();

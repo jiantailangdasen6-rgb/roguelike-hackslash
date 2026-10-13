@@ -25,6 +25,7 @@ namespace Game.Core
         Trial,       // elite nests cleared (once: trial doors; the id is kept for saved progress)
         ReachArea,   // reach area Count (1 = blood chapel, 2 = abyss); done once
         Victory,     // labyrinth cleared
+        Favor,       // a god's favour awakened (achievements)
     }
 
     public sealed class QuestDef
@@ -146,6 +147,8 @@ namespace Game.Core
                     return e.Type == SimEventType.RoomCleared && (RoomKind)Mathf.RoundToInt(e.Value) == RoomKind.Elite ? 1 : 0;
                 case QuestGoal.ReachArea:
                     return e.Type == SimEventType.RoomStarted && e.Int / RunSimulation.RoomsPerArea >= q.Count ? 1 : 0;
+                case QuestGoal.Favor:
+                    return e.Type == SimEventType.GodSign && (GodSignKind)e.Int == GodSignKind.Favor ? 1 : 0;
                 case QuestGoal.Victory:
                     return e.Type == SimEventType.RunEnded && e.Int >= 1 ? 1 : 0;
                 default:

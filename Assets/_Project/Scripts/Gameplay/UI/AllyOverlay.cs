@@ -113,7 +113,7 @@ namespace Game.Gameplay
                 if (m.Head.gameObject.activeSelf)
                 {
                     m.Head.position = screen;
-                    m.Name.text = $"{p.DisplayName} {p.ClassDef.Name}";
+                    m.Name.text = $"{p.DisplayName} {p.ClassDef.Name}{p.TitleText}";
                     m.Name.enabled = !self && !downed;
                     m.HpRoot.gameObject.SetActive(!self && !downed);
                     m.Hp.Fill = p.Hp.Value / Mathf.Max(1f, p.MaxHp.Value);

@@ -762,7 +762,7 @@ namespace Game.Gameplay
                 }
                 else
                 {
-                    f.Name.text = $"<color=#{ColorUtility.ToHtmlStringRGB(p.Color)}>{p.DisplayName}</color> {p.ClassDef.Name}";
+                    f.Name.text = $"<color=#{ColorUtility.ToHtmlStringRGB(p.Color)}>{p.DisplayName}</color> {p.ClassDef.Name}<size=18>{p.TitleText}</size>";
                     f.Hp.Fill = p.Hp.Value / max;
                     f.Shield.Fill = p.Shield.Value / max;
                     f.HpText.text = $"{p.Hp.Value:0} / {max:0}";

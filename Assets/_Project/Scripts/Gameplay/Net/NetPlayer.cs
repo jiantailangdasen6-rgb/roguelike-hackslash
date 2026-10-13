@@ -19,6 +19,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<int> Slot = new();
         public readonly NetworkVariable<ClassId> Class = new();
         public readonly NetworkVariable<byte> Skin = new();
+        /// <summary>An earned title worn next to the name (AchievementCatalog).</summary>
+        public readonly NetworkVariable<Unity.Collections.FixedString64Bytes> Title = new();
         public readonly NetworkVariable<float> Hp = new();
         public readonly NetworkVariable<float> MaxHp = new();
         public readonly NetworkVariable<float> Shield = new();
@@ -59,6 +61,8 @@ namespace Game.Gameplay
         private bool _wasDowned;
 
         public string DisplayName => $"P{Slot.Value + 1}";
+        /// <summary>The worn title in brackets ("「冥王殺し」"), or empty.</summary>
+        public string TitleText => Title.Value.IsEmpty ? "" : $"<color=#e6c766>「{Title.Value}」</color>";
         public Color Color => GameArt.PlayerColors[Mathf.Clamp(Slot.Value, 0, GameArt.PlayerColors.Length - 1)];
         public ClassDef ClassDef => ClassCatalog.Get(Class.Value);
         public PlayerInputReader Input => input;

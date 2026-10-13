@@ -9,6 +9,7 @@ namespace Game.Core
         Gimmicks,
         Rooms,
         Gods,
+        Achievements,
         Teamwork,
         Controls,
     }
@@ -50,6 +51,7 @@ namespace Game.Core
             CodexSection.Gimmicks => "仕掛け・罠",
             CodexSection.Rooms => "部屋",
             CodexSection.Gods => "神々",
+            CodexSection.Achievements => "実績",
             CodexSection.Teamwork => "連携",
             _ => "操作",
         };
@@ -58,6 +60,7 @@ namespace Game.Core
         public static string RoomId(RoomKind k) => "room:" + k;
         public static string GimmickId(string name) => "gimmick:" + name;
         public static string GodEntry(GodId god) => "god:" + god;
+        public static string AchievementEntry(string id) => "ach:" + id;
 
         private static Entry Monster(EnemyType t, string sub, string counter, params string[] traits)
         {
@@ -239,6 +242,15 @@ namespace Game.Core
                     Counter = "中ボスや主を倒すと、全員が神の加護をひとつ授かる。同じ神をそろえると寵愛が目覚める",
                 });
             }
+
+            // ---------------------------------------------------------------- Achievements (recorded when achieved)
+            foreach (var a in AchievementCatalog.All)
+                list.Add(new Entry
+                {
+                    Id = AchievementEntry(a.Id), Section = CodexSection.Achievements, Name = a.Name, Sub = $"称号「{AchievementCatalog.TitleOf(a)}」",
+                    RewardIcon = (int)RoomReward.Boon, Traits = new[] { a.Text }, AlwaysKnown = true,
+                    Counter = "称号は拠点の鏡で名前の横に付けられる（仲間にも見える）",
+                });
 
             // ---------------------------------------------------------------- Controls (always open)
             list.Add(Open(CodexSection.Controls, "control:Keyboard", "キーボードとマウス", "PC", "warrior", "照準はマウスの方向。回避中は無敵",

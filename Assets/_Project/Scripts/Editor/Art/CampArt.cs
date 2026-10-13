@@ -49,6 +49,11 @@ namespace Game.EditorTools.Art
                 ["camp_stones"] = One(StoneRing(), new Vector2(0.5f, 0.5f)),
                 ["camp_chest"] = One(Chest()),
                 ["camp_board"] = One(Board()),
+                // Built with soul shards at the hearth (CampUpgrades).
+                ["camp_anvil"] = new() { Frames = Anvil(), Pivot = bottom },
+                ["camp_shelf"] = One(Shelf()),
+                ["camp_shrine"] = new() { Frames = Shrine(), Pivot = bottom },
+                ["camp_urn"] = new() { Frames = Urn(), Pivot = bottom },
                 ["fx_flask"] = new() { Frames = Flask(), Pivot = new Vector2(0.5f, 0.5f) },
                 ["prop_campfire"] = new() { Frames = Campfire(), Pivot = new Vector2(0.5f, 0.1f) },
             };
@@ -450,6 +455,162 @@ namespace Game.EditorTools.Art
             c.Set(31, 38, C("#c9d2dc"));
             c.Outline(Outline);
             return c;
+        }
+
+        // ---------------------------------------------------------------- Camp upgrades
+
+        /// <summary>The forge: an anvil on a stump, a hammer leaning on it, coals glowing in a brazier.</summary>
+        private static List<PixelCanvas> Anvil()
+        {
+            var frames = new List<PixelCanvas>();
+            for (int f = 0; f < 4; f++)
+            {
+                var c = new PixelCanvas(64, 44);
+                // Stump
+                for (int y = 0; y < 14; y++) for (int x = 10; x < 30; x++) c.Set(x, y, Wood[x < 13 ? 3 : x > 26 ? 1 : 2]);
+                for (int x = 10; x < 30; x++) c.Set(x, 13, Wood[4]);
+                // Anvil: horn to the left, heel to the right
+                for (int x = 6; x < 34; x++) for (int y = 20; y < 25; y++) c.Set(x, y, Iron[y == 24 ? 4 : y == 20 ? 1 : 3]);
+                for (int x = 2; x < 8; x++) c.Set(x, 23 - (8 - x) / 3, Iron[3]);
+                c.Rect(14, 14, 12, 6, Iron[2]);
+                c.Rect(11, 14, 18, 1, Iron[1]);
+                c.Set(20, 24, C("#c9ccd2"));
+                // Hammer against the stump
+                c.Line(32, 2, 38, 18, Wood[3]);
+                c.Rect(35, 17, 7, 4, Iron[3]);
+                // Brazier of coals, flickering
+                c.Rect(44, 0, 3, 9, Iron[1]);
+                c.Rect(56, 0, 3, 9, Iron[1]);
+                for (int x = 42; x < 61; x++) c.Set(x, 9, Iron[3]);
+                for (int x = 43; x < 60; x++)
+                for (int y = 10; y < 14; y++)
+                {
+                    int heat = (x * 7 + y * 3 + f * 5) % 9;
+                    c.Set(x, y, heat < 3 ? Fire[1] : heat < 6 ? Fire[2] : heat < 8 ? Fire[3] : Fire[4]);
+                }
+                for (int s = 0; s < 3; s++) c.Set(46 + s * 5 + f % 2, 16 + (f + s * 2) % 6, Fire[4]);
+                c.Outline(Outline);
+                frames.Add(c);
+            }
+            return frames;
+        }
+
+        /// <summary>The apothecary: a crooked shelf of bottles and dried herbs.</summary>
+        private static PixelCanvas Shelf()
+        {
+            var c = new PixelCanvas(56, 64);
+            c.Rect(4, 0, 3, 60, Wood[2]);
+            c.Rect(49, 0, 3, 60, Wood[1]);
+            foreach (int y in new[] { 2, 20, 38, 56 })
+            {
+                for (int x = 3; x < 53; x++) c.Set(x, y, Wood[3]);
+                for (int x = 3; x < 53; x++) c.Set(x, y + 1, Wood[4]);
+            }
+            void Bottle(int x, int y, Color32 glass, Color32 shine, int h, int w = 6)
+            {
+                c.Rect(x, y, w, h, glass);
+                c.Rect(x + w / 2 - 1, y + h, 2, 3, glass);
+                c.Set(x + 1, y + h / 2 + 1, shine);
+                c.Set(x + w / 2 - 1, y + h + 3, C("#8a6a40"));
+            }
+            Bottle(9, 4, C("#7a1a22"), C("#ff5a4a"), 9);
+            Bottle(18, 4, C("#3f7a2a"), C("#b6ff4a"), 6);
+            Bottle(27, 4, C("#2a4a7a"), C("#8fd3ff"), 11, 8);
+            Bottle(39, 4, C("#7a5a1a"), C("#ffd27a"), 7);
+            Bottle(10, 22, C("#2a7a5a"), C("#7dffb4"), 10, 8);
+            Bottle(22, 22, C("#7a1a22"), C("#ff5a4a"), 7);
+            Bottle(33, 22, C("#5a2a7a"), C("#d88cff"), 9);
+            // Dried herbs hanging from the top shelf
+            for (int k = 0; k < 4; k++)
+            {
+                int x = 12 + k * 10;
+                c.Line(x, 55, x - 1, 46, Moss[3]);
+                c.Line(x + 1, 55, x + 2, 47, Moss[2]);
+                c.Set(x, 45, Straw[3]);
+            }
+            // Jars on the middle shelf
+            c.Rect(10, 40, 9, 8, C("#6a5a4a"));
+            c.Rect(10, 48, 9, 2, Cloth[3]);
+            c.Rect(30, 40, 12, 10, C("#5a4a3a"));
+            c.Rect(30, 50, 12, 2, Cloth[2]);
+            c.Outline(Outline);
+            return c;
+        }
+
+        /// <summary>A small shrine to the gods: a stone niche with four colour candles (one per god).</summary>
+        private static List<PixelCanvas> Shrine()
+        {
+            var frames = new List<PixelCanvas>();
+            Color32[] godFlames = { C("#ff7a3a"), C("#9fdcff"), C("#ffe066"), C("#8cffa0") };
+            for (int f = 0; f < 4; f++)
+            {
+                var c = new PixelCanvas(48, 60);
+                // Steps
+                c.Rect(2, 0, 44, 4, Stone[2]);
+                c.Rect(6, 4, 36, 4, Stone[3]);
+                // Niche: a pointed arch
+                for (int y = 8; y < 52; y++)
+                {
+                    int half = y < 38 ? 14 : Mathf.Max(0, 14 - (y - 38));
+                    for (int x = 24 - half; x < 24 + half; x++)
+                    {
+                        bool inside = x > 24 - half + 3 && x < 24 + half - 4 && y > 11 && y < 48 - (y > 38 ? 2 : 0);
+                        c.Set(x, y, inside ? C("#120e16") : Stone[x < 24 - half + 2 ? 4 : x > 24 + half - 3 ? 1 : 3]);
+                    }
+                }
+                // A golden sigil inside: a sun in a ring
+                c.Ring(24, 30, 5f, 6.2f, Gold[3]);
+                c.Disc(24, 30, 2.2f, Gold[4]);
+                // Four candles on the step, flickering in the gods' colours
+                for (int k = 0; k < 4; k++)
+                {
+                    int x = 8 + k * 10;
+                    c.Rect(x, 8, 3, 5 + (k % 2), C("#d8cfb5"));
+                    var col = godFlames[k];
+                    c.Set(x + 1, 13 + (k % 2), col);
+                    if ((f + k) % 3 != 0) c.Set(x + 1, 14 + (k % 2), col);
+                    c.Set(x + 1 + ((f + k) % 2 == 0 ? 0 : 1), 15 + (k % 2), A(col, 160));
+                }
+                c.Outline(Outline);
+                frames.Add(c);
+            }
+            return frames;
+        }
+
+        /// <summary>The soul urn: a dark jar that souls drift into, glowing blue.</summary>
+        private static List<PixelCanvas> Urn()
+        {
+            var frames = new List<PixelCanvas>();
+            var soul = new[] { C("#123a5a"), C("#1f6a9a"), C("#5fd0ff"), C("#bff0ff") };
+            for (int f = 0; f < 4; f++)
+            {
+                var c = new PixelCanvas(36, 56);
+                // Stand
+                c.Rect(8, 0, 20, 3, Iron[2]);
+                // Body of the urn
+                for (int y = 3; y < 30; y++)
+                {
+                    float t = (y - 3) / 27f;
+                    int half = Mathf.RoundToInt(7f + 6f * Mathf.Sin(t * Mathf.PI));
+                    for (int x = 18 - half; x < 18 + half; x++)
+                        c.Set(x, y, x < 18 - half + 3 ? Violet[3] : x > 18 + half - 3 ? Violet[1] : Violet[2]);
+                }
+                c.Rect(11, 30, 14, 3, Violet[3]);
+                c.Rect(10, 33, 16, 2, Gold[3]);
+                for (int x = 12; x < 24; x++) c.Set(x, 16, Gold[2]); // a gold band
+                // Glow inside the mouth and wisps rising
+                c.Rect(12, 34, 12, 2, soul[2]);
+                for (int k = 0; k < 3; k++)
+                {
+                    int x = 13 + k * 5;
+                    int top = 38 + (f * 3 + k * 5) % 14;
+                    for (int y = 36; y < top; y++)
+                        if ((y + k) % 3 != 0) c.Set(x + Mathf.RoundToInt(Mathf.Sin((y + f + k) * 0.6f)), y, y > top - 3 ? soul[3] : soul[1 + (y % 2)]);
+                }
+                c.Outline(Outline);
+                frames.Add(c);
+            }
+            return frames;
         }
 
         private static PixelCanvas Table()

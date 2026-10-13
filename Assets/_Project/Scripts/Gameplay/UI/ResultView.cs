@@ -148,6 +148,8 @@ namespace Game.Gameplay
             if (_shards < 0 && d.Phase.Value != RunPhase.Playing)
             {
                 _shards = MetaCatalog.ShardsForRun(d.RoomsCleared.Value, d.BossesKilled.Value, d.Kills.Value, _victory, d.DifficultyLevel.Value) + d.BonusShards.Value;
+                // The camp's soul urn adds its share.
+                _shards = Mathf.RoundToInt(_shards * (1f + CampUpgrades.UrnShards * ProfileStore.Current.CampLevel(CampUpgrade.Urn)));
                 if (_victory) ProfileStore.Current.RecordVictory(d.DifficultyLevel.Value);
                 // This week's labyrinth: each device keeps its best of the week.
                 _weeklyNote = "";

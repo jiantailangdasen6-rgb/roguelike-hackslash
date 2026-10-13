@@ -134,6 +134,8 @@ namespace Game.Core
         public string playerKey = "";
         /// <summary>Worn gear when setting out (packed hex, see GearVault).</summary>
         public List<string> gear = new();
+        /// <summary>Levels of the camp's facilities (CampUpgrade order), grown at the hearth.</summary>
+        public List<int> camp = new();
 
         public string ToJson() => JsonUtility.ToJson(this);
 
@@ -145,6 +147,8 @@ namespace Game.Core
                 if (l == null) return new Loadout();
                 l.mastery ??= new List<string>();
                 l.trinkets ??= new List<string>();
+                l.camp ??= new List<int>();
+                for (int i = 0; i < l.camp.Count; i++) l.camp[i] = i < CampUpgrades.All.Length ? Mathf.Clamp(l.camp[i], 0, CampUpgrades.All[i].MaxLevel) : 0;
                 // Drop unknown ids and trinkets beyond the slot count.
                 l.mastery.RemoveAll(id => MetaCatalog.GetNode(id) == null);
                 l.trinkets.RemoveAll(id => MetaCatalog.GetTrinket(id) == null);
@@ -213,6 +217,23 @@ namespace Game.Core
 
         public void RecordVictory(Difficulty d) => bestVictory = Math.Max(bestVictory, (int)d);
 
+        /// <summary>Levels of the camp's facilities (CampUpgrade order).</summary>
+        public List<int> camp = new();
+
+        public int CampLevel(CampUpgrade id) => CampUpgrades.Level(camp, id);
+
+        /// <summary>Builds the next level of a facility when the shards are there.</summary>
+        public bool TryUpgradeCamp(CampUpgrade id)
+        {
+            var def = CampUpgrades.Get(id);
+            int level = CampLevel(id);
+            if (level >= def.MaxLevel || shards < def.Costs[level]) return false;
+            shards -= def.Costs[level];
+            while (camp.Count <= (int)id) camp.Add(0);
+            camp[(int)id] = level + 1;
+            return true;
+        }
+
         /// <summary>Set out into this week's labyrinth (the host's choice) instead of a fresh one.</summary>
         public bool weekly;
         /// <summary>This device's best in a week's labyrinth (Weekly): which week, how deep, how fast, cleared or not.</summary>
@@ -261,6 +282,7 @@ namespace Game.Core
             trinkets = equippedTrinkets.Where(IsUnlocked).Take(MetaCatalog.TrinketSlots).ToList(),
             playerKey = playerKey,
             gear = GearVault.LoadoutGear(this.gear = GearVault.Normalize(this.gear)),
+            camp = new List<int>(camp ?? new List<int>()),
         };
 
         public string ToJson() => JsonUtility.ToJson(this);
@@ -273,6 +295,7 @@ namespace Game.Core
                 if (p == null) return Default();
                 p.unlocked ??= new List<string>();
                 p.equippedTrinkets ??= new List<string>();
+                p.camp ??= new List<int>();
                 p.skins ??= new List<int>();
                 p.quests ??= new QuestLog();
                 p.quests.Repair();

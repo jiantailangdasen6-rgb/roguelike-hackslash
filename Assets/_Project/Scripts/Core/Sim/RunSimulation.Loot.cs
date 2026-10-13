@@ -48,12 +48,16 @@ namespace Game.Core
             for (int s = 0; s < SimPlayer.SlotCount; s++)
             {
                 if (p.Equipped[s] != null) continue;
-                var item = ItemGenerator.Generate(_lootRng.NextULong() | 1ul, Room.Index + 1, 0f, p.ClassId, Rarity.Common, (EquipSlot)s);
-                if (item.rarity > Rarity.Magic)
+                // The camp's forge lends better pieces (fine, then rare).
+                var least = p.ForgeLevel >= 2 ? Rarity.Rare : p.ForgeLevel >= 1 ? Rarity.Magic : Rarity.Common;
+                var most = p.ForgeLevel >= 2 ? Rarity.Rare : Rarity.Magic;
+                var item = ItemGenerator.Generate(_lootRng.NextULong() | 1ul, Room.Index + 1, 0f, p.ClassId, least, (EquipSlot)s);
+                if (item.rarity > most)
                 {
-                    item.rarity = Rarity.Magic;
+                    item.rarity = most;
                     item.legendary = LegendaryId.None;
-                    if (item.affixes.Count > 1) item.affixes.RemoveRange(1, item.affixes.Count - 1);
+                    int keep = most == Rarity.Rare ? 3 : 1;
+                    if (item.affixes.Count > keep) item.affixes.RemoveRange(keep, item.affixes.Count - keep);
                 }
                 item.loaner = true;
                 p.Wear(item);

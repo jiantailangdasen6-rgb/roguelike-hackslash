@@ -53,6 +53,13 @@ namespace Game.Gameplay
         {
             _instance = this;
             QuestTracker.JustCompleted.Clear();
+            // -campall (screenshots): every facility at its top level on this profile.
+            if (CommandLine.Has("-campall"))
+            {
+                ProfileStore.Current.camp = new System.Collections.Generic.List<int>();
+                foreach (var def in CampUpgrades.All) ProfileStore.Current.camp.Add(def.MaxLevel);
+            }
+            gameObject.AddComponent<CampUpgradeView>(); // what has been built at the hearth
             _root = (RectTransform)UIKit.CreateCanvas("Camp", 20, transform).transform;
 
             foreach (var station in Camp.Stations)

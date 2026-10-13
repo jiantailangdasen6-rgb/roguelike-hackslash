@@ -73,6 +73,51 @@ namespace Game.Gameplay
                 case CampStation.Charms: BuildCharms(); break;
                 case CampStation.Tablet: BuildDifficulty(); break;
                 case CampStation.Board: BuildQuests(); break;
+                case CampStation.Hearth: BuildHearth(); break;
+            }
+        }
+
+        // ------------------------------------------------------------------ Hearth: growing the camp
+
+        /// <summary>The camp's facilities: what each gives now, what the next level gives, and what it costs.</summary>
+        private void BuildHearth()
+        {
+            _title.text = "焚き火　<size=28><color=#bfb6aa>魂の欠片で拠点を育てる</color></size>";
+            string[] icons = { "camp_fire", "camp_anvil", "camp_shelf", "camp_shrine", "camp_urn" };
+            for (int i = 0; i < CampUpgrades.All.Length; i++)
+            {
+                var def = CampUpgrades.All[i];
+                int level = Profile.CampLevel(def.Id);
+                bool max = level >= def.MaxLevel;
+                int cost = max ? 0 : def.Costs[level];
+                bool affordable = !max && Profile.shards >= cost;
+                var row = UIKit.Framed(_body, def.Name, level > 0 ? new Color(0.12f, 0.08f, 0.04f, 1f) : new Color(0.06f, 0.05f, 0.06f, 1f),
+                    level > 0 ? UIKit.AccentColor * 0.85f : UIKit.GoldTrim * 0.55f);
+                row.Outer().Place(new Vector2(0.5f, 1f), new Vector2(1140f, 104f), new Vector2(0f, -i * 114f));
+
+                Preview(row.transform, icons[i], "default", 92f, new Vector2(0f, 0.5f), new Vector2(60f, 0f));
+                var name = UIKit.Title(row.transform, def.Name, 34, TextAnchor.MiddleLeft, level > 0 ? Color.white : new Color(0.85f, 0.8f, 0.72f));
+                name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(200f, 44f), new Vector2(140f, -10f));
+                // Level pips
+                for (int l = 0; l < def.MaxLevel; l++)
+                {
+                    var pip = UIKit.Panel(row.transform, "Pip", l < level ? UIKit.AccentColor : new Color(0.25f, 0.22f, 0.2f, 1f));
+                    pip.rectTransform.Place(new Vector2(0f, 1f), new Vector2(18f, 18f), new Vector2(144f + l * 24f, -66f));
+                }
+                string now = level > 0 ? def.Text(level) : "<color=#8a7f80>まだない</color>";
+                string next = max ? "<color=#e0b45a>完成</color>" : $"次：{def.Text(level + 1)}";
+                var text = UIKit.Label(row.transform, $"{now}\n<size=20><color=#bfb6aa>{next}</color></size>", 24, TextAnchor.MiddleLeft);
+                text.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(560f, 90f), new Vector2(360f, 0f));
+
+                if (max) continue;
+                var id = def.Id;
+                var button = UIKit.Button(row.transform, $"{(level == 0 ? "建てる" : "強くする")}  <color=#9fd8ff>{cost}</color>", 24, () =>
+                {
+                    if (Profile.TryUpgradeCamp(id)) Save($"{CampUpgrades.Get(id).Name}を{(Profile.CampLevel(id) == 1 ? "建てた" : "強くした")}");
+                    else Save("魂の欠片が足りない");
+                }, affordable ? UIKit.BloodColor : (Color?)null);
+                button.GetComponent<RectTransform>().Place(new Vector2(1f, 0.5f), new Vector2(230f, 62f), new Vector2(-24f, 0f));
+                button.interactable = affordable;
             }
         }
 

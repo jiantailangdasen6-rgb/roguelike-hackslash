@@ -28,6 +28,9 @@ namespace Game.Core
         public bool HasStartPerk { get; private set; }
         public bool Phoenix { get; private set; }
         public float HealOnKill { get; private set; }
+        /// <summary>Camp facilities that work during the run (CampUpgrades): better loaners, more healing on clearing a room.</summary>
+        public int ForgeLevel { get; private set; }
+        public int ApothecaryLevel { get; private set; }
         public int Level { get; private set; } = 1;
         /// <summary>Max HP boosts from "vigor" reward doors this run.</summary>
         public int VigorStacks { get; private set; }
@@ -147,6 +150,13 @@ namespace Game.Core
                     case MasteryKind.Stat: Stats.AddModifier(node.Modifier, LoadoutSource); break;
                 }
             }
+
+            // The camp's facilities (CampUpgrades), grown at home with soul shards.
+            int hearth = CampUpgrades.Level(loadout.camp, CampUpgrade.Hearth);
+            if (hearth > 0) Stats.AddModifier(new StatModifier(StatType.MaxHealth, ModifierKind.PercentAdd, CampUpgrades.HearthHealth * hearth), LoadoutSource);
+            ForgeLevel = CampUpgrades.Level(loadout.camp, CampUpgrade.Forge);
+            ApothecaryLevel = CampUpgrades.Level(loadout.camp, CampUpgrade.Apothecary);
+            if (CampUpgrades.Level(loadout.camp, CampUpgrade.Altar) > 0) HasStartPerk = true;
 
             foreach (var id in loadout.trinkets)
             {

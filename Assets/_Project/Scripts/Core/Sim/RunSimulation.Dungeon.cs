@@ -253,7 +253,7 @@ namespace Game.Core
                 if (p.Alive && p.RoomId == room.Id)
                 {
                     float before = p.Hp;
-                    p.Heal(p.MaxHp * 0.2f);
+                    p.Heal(p.MaxHp * (0.2f + CampUpgrades.ApothecaryHeal * p.ApothecaryLevel)); // the camp's apothecary adds to it
                     if (p.Hp > before) Events.Add(new SimEvent(SimEventType.PlayerHealed) { ClientId = p.ClientId, Pos = p.Position, Value = p.Hp - before });
                 }
 

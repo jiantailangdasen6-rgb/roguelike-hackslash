@@ -12,6 +12,7 @@ namespace Game.Core
         Charms,  // お守り職人: trinkets
         Vault,   // 倉庫: gear kept between runs (VaultView)
         Board,   // 依頼の掲示板: requests from the camp's people (QuestCatalog)
+        Hearth,  // 焚き火: grow the camp's facilities with soul shards (CampUpgrades)
     }
 
     public struct CampStationDef
@@ -46,6 +47,7 @@ namespace Game.Core
             new() { Id = CampStation.Charms, Name = "お守り職人", Action = "お守りを選ぶ・作る", Position = new Vector2(9f, -3.6f), Front = new Vector2(7.8f, -4.4f), Radius = 1.7f },
             new() { Id = CampStation.Vault, Name = "倉庫", Action = "装備を整える", Position = new Vector2(9.5f, 3.2f), Front = new Vector2(9.5f, 2.1f), Radius = 1.6f },
             new() { Id = CampStation.Board, Name = "依頼の掲示板", Action = "依頼を見る・報酬を受け取る", Position = new Vector2(5.2f, -5.3f), Front = new Vector2(5.2f, -4.2f), Radius = 1.6f },
+            new() { Id = CampStation.Hearth, Name = "焚き火", Action = "拠点を育てる", Position = FirePosition, Front = FirePosition + new Vector2(0f, -1.4f), Radius = 1.05f },
         };
 
         public static CampStationDef Get(CampStation id)

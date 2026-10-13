@@ -80,6 +80,7 @@ namespace Game.Core
                 };
                 state.Cleared = !state.IsFight;
                 state.Dark = r.Dark;
+                state.Captive = r.Captive;
                 if (state.Dark) ResetLantern(state);
                 if (state.Objective == RoomObjective.Waves)
                 {
@@ -385,6 +386,10 @@ namespace Game.Core
                     amount = (int)kind;
                     break;
                 }
+                case RoomKind.Spirit:
+                    OfferToSpirit(p); // RunSimulation.Events.cs
+                    amount = SpiritOffering * 100f;
+                    break;
                 case RoomKind.Merchant:
                     p.StockedChoices.Enqueue(ChoiceKind.Shop);
                     break;

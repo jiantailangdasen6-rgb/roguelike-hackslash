@@ -20,6 +20,7 @@ namespace Game.Core
         Puzzle,     // a light trial (pressure plates, guard the crystal): solved, it gives a key
         Treasure,   // behind a locked door (a key): gear for everyone
         Secret,     // behind a cracked wall: the old map of the area, and treasure
+        Spirit,     // a wandering spirit: offer a tenth of your max HP for a god's blessing (each player once)
     }
 
     /// <summary>Which trial a puzzle room holds.</summary>
@@ -59,6 +60,8 @@ namespace Game.Core
         public PuzzleKind Puzzle;
         /// <summary>A dark hall: fought by the light of a lantern someone carries.</summary>
         public bool Dark;
+        /// <summary>A fight room with a caged adventurer to set free (one per area).</summary>
+        public bool Captive;
         /// <summary>Monster strength tier for this room (area * 4 + 0..3), the old "room index".</summary>
         public int Index;
         /// <summary>Obstacles and gimmicks, already moved to the room's place in the world.</summary>
@@ -70,7 +73,7 @@ namespace Game.Core
         public bool HasDoor(int dir) => Neighbor[dir] >= 0;
         public bool IsFight => Kind is RoomKind.Combat or RoomKind.Elite or RoomKind.Boss or RoomKind.MiniBoss or RoomKind.Puzzle;
         /// <summary>Rooms with a pedestal to use (each player once).</summary>
-        public bool HasPedestal => Kind is RoomKind.Shrine or RoomKind.Whetstone or RoomKind.Spring or RoomKind.CurseAltar or RoomKind.Merchant or RoomKind.Treasure or RoomKind.Secret;
+        public bool HasPedestal => Kind is RoomKind.Shrine or RoomKind.Whetstone or RoomKind.Spring or RoomKind.CurseAltar or RoomKind.Merchant or RoomKind.Treasure or RoomKind.Secret or RoomKind.Spirit;
         /// <summary>The room behind this door is shut by a lock (treasure) or hidden by a cracked wall (secret).</summary>
         public bool Sealed => Kind is RoomKind.Treasure or RoomKind.Secret;
     }
@@ -151,6 +154,7 @@ namespace Game.Core
                 {
                     map.AssignLayouts(rng);
                     map.PickDarkHall(new GameRandom(seed ^ (0xDA4C1E55u * (ulong)(area + 1))));
+                    map.PickCaptive(new GameRandom(seed ^ (0xCA9715EEu * (ulong)(area + 1))));
                     return map;
                 }
             }
@@ -294,6 +298,8 @@ namespace Game.Core
             // The treasure room needs a dead end off the path (its door is locked); the keys come from the champion and
             // the puzzle. The way to the boss keeps at least two fights.
             var treats = new List<RoomKind> { RoomKind.MiniBoss, RoomKind.Puzzle, RoomKind.Shrine, rng.Chance(0.5f) ? RoomKind.Spring : RoomKind.Whetstone };
+            // Deeper in, the shrine is sometimes a wandering spirit instead (a blessing for a tenth of max HP).
+            if (Area >= 1 && rng.Chance(0.4f)) treats[2] = RoomKind.Spirit;
             if (Area >= 1) treats.Add(rng.Chance(0.5f) ? RoomKind.CurseAltar : RoomKind.Merchant);
             var treasure = free.Find(r => !onPath.Contains(r.Id) && DoorCount(r) == 1);
             if (treasure != null)
@@ -369,6 +375,14 @@ namespace Game.Core
             var fights = Rooms.FindAll(r => r.Kind == RoomKind.Combat);
             if (fights.Count == 0) return;
             fights[rng.Range(0, fights.Count)].Dark = true;
+        }
+
+        /// <summary>One other ordinary fight holds a caged adventurer (its own random stream, like the dark hall).</summary>
+        private void PickCaptive(GameRandom rng)
+        {
+            var fights = Rooms.FindAll(r => r.Kind == RoomKind.Combat && !r.Dark);
+            if (fights.Count == 0) return;
+            fights[rng.Range(0, fights.Count)].Captive = true;
         }
 
         /// <summary>The dark hall of this area, or null.</summary>

@@ -204,6 +204,18 @@ namespace Game.Core
             if (MaxHp > before && !Downed) Hp += MaxHp - before;
         }
 
+        /// <summary>Offerings made to the wandering spirit: each takes a tenth of max HP for the rest of the run.</summary>
+        public int Offerings { get; private set; }
+        private readonly object _offeringSource = new();
+
+        public void AddOffering()
+        {
+            Offerings++;
+            Stats.RemoveModifiersFrom(_offeringSource);
+            Stats.AddModifier(new StatModifier(StatType.MaxHealth, ModifierKind.PercentAdd, -RunSimulation.SpiritOffering * Offerings), _offeringSource);
+            Hp = Mathf.Clamp(Hp, Downed ? 0f : 1f, MaxHp);
+        }
+
         public void AddVigor(int stacks)
         {
             VigorStacks += stacks;

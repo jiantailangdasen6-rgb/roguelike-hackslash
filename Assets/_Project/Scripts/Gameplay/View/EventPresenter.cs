@@ -197,6 +197,7 @@ namespace Game.Gameplay
                 case SimEventType.Combo: OnCombo(e); break;
                 case SimEventType.TrialEvent: OnTrial(e); break;
                 case SimEventType.GodSign: OnGodSign(e); break; // EventPresenter.Gods.cs
+                case SimEventType.RoomEvent: OnRoomEvent(e); break; // EventPresenter.Gods.cs
                 case SimEventType.KeyGained:
                 {
                     var glint = Spawn("fx_holy", e.Pos + Vector2.up * 0.8f, 12f, 1f, 1.4f, 2.6f, new Color(1f, 0.85f, 0.45f));

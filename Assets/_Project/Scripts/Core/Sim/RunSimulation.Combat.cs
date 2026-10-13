@@ -596,6 +596,11 @@ namespace Game.Core
         {
             ref var e = ref Enemies[index];
             if (e.Dead || e.Def.Untargetable) return;
+            if (e.Disguised)
+            {
+                WakeMimic(ref e); // the chest was a mimic (RunSimulation.Events.cs)
+                return;
+            }
 
             bool disabled = e.Frozen > 0f || e.Marked > 0f || e.Stunned > 0f;
             bool wasFrozen = e.Frozen > 0f;
@@ -725,19 +730,23 @@ namespace Game.Core
                 if (!e.Dead) continue;
                 var def = e.Def;
                 Room = RoomStates[e.RoomId];
-                Events.Add(new SimEvent(SimEventType.EnemyDied) { Id = e.Id, Pos = e.Position, Int = (int)e.Type, Value = giveXp ? 0f : 1f });
+                bool vanished = _vanished.Remove(e.Id); // a mimic's chest: no treasure, the mimic stands in its place
+                Events.Add(new SimEvent(SimEventType.EnemyDied) { Id = e.Id, Pos = e.Position, Int = (int)e.Type, Value = giveXp && !vanished ? 0f : 1f });
+                if (vanished) continue;
                 if (!giveXp) continue;
                 if (def.Prop)
                 {
                     if (def.Type == EnemyType.PowderKeg) IgniteKeg(e);
                     else if (def.Type == EnemyType.TreasureChest) SpillChest(e);
                     else if (def.Type == EnemyType.CrackedWall) WallBroken(e);
+                    else if (def.Type == EnemyType.Captive) CaptiveFreed(e);
                     continue;
                 }
 
                 Kills++;
                 RollLoot(e);
                 if (def.Type == EnemyType.TreasureImp) ImpCaught(e);
+                if (def.Type == EnemyType.Mimic) MimicSlain(e);
                 if (!def.Boss && DifficultyDef.Has(DifficultyMod.Vengeance))
                     QueueBurst(e.Position, DifficultyCatalog.VengeanceRadius, DifficultyCatalog.VengeanceDelay, DifficultyCatalog.VengeanceDamage * EnemyDamageScale, AreaKind.SoulBurst);
                 int xp = def.Xp * (e.Elite ? EnemyCatalog.EliteXpMultiplier : 1);

@@ -6,6 +6,45 @@ namespace Game.Gameplay
     /// <summary>Gods' blessings at work: impacts of lightning (the bolt itself is drawn by LegendaryFxView), bursts of flame and frost, a blessing granted, a favour awakening.</summary>
     public sealed partial class EventPresenter
     {
+        /// <summary>Room surprises (RunSimulation.Events): the mimic wakes and falls, the captive goes free.</summary>
+        private void OnRoomEvent(in SimEvent e)
+        {
+            switch ((RoomEventKind)e.Int)
+            {
+                case RoomEventKind.MimicRevealed:
+                {
+                    CameraShake.Add(0.45f);
+                    HitStop.Freeze(0.07f, -1, major: true);
+                    Burst("fx_puff", e.Pos + Vector2.up * 0.4f, 16f, 1.8f, new Color(0.6f, 0.5f, 0.45f));
+                    var ring = Spawn("fx_nova", e.Pos + Vector2.up * 0.4f, 1f, 0.35f, 0.4f, 2.6f, new Color(1f, 0.35f, 0.25f, 0.8f));
+                    ring.FadeOut = true;
+                    AddLight(ring, new Color(1f, 0.3f, 0.2f), 2.5f, 4f);
+                    ShowCallout(e.Pos + Vector2.up * 2.4f, "ミミック！", new Color(1f, 0.4f, 0.3f), 52);
+                    break;
+                }
+                case RoomEventKind.MimicSlain:
+                {
+                    var glint = Spawn("fx_holy", e.Pos + Vector2.up * 0.8f, 12f, 1f, 1.4f, 2.6f, new Color(1f, 0.85f, 0.45f));
+                    glint.FadeOut = true;
+                    AddLight(glint, new Color(1f, 0.8f, 0.4f), 3f, 6f);
+                    for (int i = 0; i < 12; i++) Shard(e.Pos + Vector2.up * 0.6f, i * 30f + Random.Range(0f, 20f), new Color(1f, 0.85f, 0.4f));
+                    ShowCallout(e.Pos + Vector2.up * 2.2f, "お宝！", new Color(1f, 0.85f, 0.45f), 46);
+                    break;
+                }
+                case RoomEventKind.CaptiveFreed:
+                {
+                    var column = Spawn("fx_holy", e.Pos + Vector2.up * 1f, 10f, 1.2f, 1.4f, 2.6f, new Color(1f, 0.95f, 0.8f));
+                    column.FadeOut = true;
+                    AddLight(column, new Color(1f, 0.9f, 0.6f), 2.5f, 6f);
+                    var heal = Spawn("fx_heal", e.Pos, 1f, 0.8f, 0.5f, 3.5f, Color.white);
+                    heal.FadeOut = true;
+                    Burst("fx_puff", e.Pos + Vector2.up * 0.5f, 18f, 1.4f, new Color(0.75f, 0.72f, 0.7f));
+                    ShowCallout(e.Pos + Vector2.up * 2.6f, "助かった！ ありがとう", new Color(0.95f, 0.9f, 0.75f), 40);
+                    break;
+                }
+            }
+        }
+
         private void OnGodSign(in SimEvent e)
         {
             var god = GodCatalog.Get((GodId)Mathf.Clamp(e.Id, 0, GodCatalog.All.Length - 1));

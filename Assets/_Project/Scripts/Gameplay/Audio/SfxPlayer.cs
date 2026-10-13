@@ -261,6 +261,14 @@ namespace Game.Gameplay
                 case SimEventType.DoorOpened: Play(e.Int >= 2 ? "explosion" : "clear", e.Pos, e.Int >= 2 ? 0.6f : 1.1f, 0.7f); break;
                 case SimEventType.PuzzleEnded: Play(e.Int == 1 ? "clear" : "shatter", e.Pos, e.Int == 1 ? 1.2f : 0.7f); break;
                 case SimEventType.BellRung: Play("bell"); break;
+                case SimEventType.RoomEvent:
+                    switch ((RoomEventKind)e.Int)
+                    {
+                        case RoomEventKind.MimicRevealed: Play("roar", e.Pos, 1.5f, 0.8f); Play("clank", e.Pos, 0.7f); break;
+                        case RoomEventKind.MimicSlain: Play("levelup", e.Pos, 1.2f); Play("soul", e.Pos, 1f); break;
+                        case RoomEventKind.CaptiveFreed: Play("shatter", e.Pos, 0.9f); Play("revive", e.Pos, 1.1f, 0.8f); break;
+                    }
+                    break;
                 case SimEventType.GodSign:
                     switch ((GodSignKind)e.Int)
                     {

@@ -31,6 +31,8 @@ namespace Game.Core
         public int RoomId;
         /// <summary>A mini-boss room's champion: bigger, tougher, drops the key.</summary>
         public bool Champion;
+        /// <summary>A chest that is really a mimic (it wakes when hit).</summary>
+        public bool Disguised;
         public EnemyType Type;
         public bool Elite;
         public Vector2 Position;

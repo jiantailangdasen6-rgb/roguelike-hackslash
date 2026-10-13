@@ -108,7 +108,7 @@ namespace Game.Gameplay
             _black.color = new Color(0f, 0f, 0f, black); // the blink hides the jump: not softened by the flash setting
             _barTop.rectTransform.anchoredPosition = new Vector2(0f, -130f * bars);
             _barBottom.rectTransform.anchoredPosition = new Vector2(0f, 130f * bars);
-            _card.alpha = card;
+            _card.alpha = PerkView.IsShowing ? 0f : card; // a choice on screen takes the stage
             _card.transform.localScale = Vector3.one * (1.06f - 0.06f * Mathf.Clamp01(card * 1.5f));
             _redEdge.color = new Color(0.6f, 0.02f, 0.02f, red * 0.55f * GameSettings.FlashScale);
             float ruleWidth = 900f * rule;

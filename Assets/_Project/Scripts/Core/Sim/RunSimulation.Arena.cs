@@ -68,12 +68,16 @@ namespace Game.Core
         /// <summary>First visit: the room's kegs and chests appear (breakable "enemies").</summary>
         private void SpawnProps(RoomState room)
         {
+            var chests = new List<int>();
             foreach (var g in room.Layout.Gimmicks)
             {
                 if (g.Kind is not (GimmickKind.PowderKeg or GimmickKind.TreasureChest)) continue;
                 int id = Enemies.Spawn(g.Kind == GimmickKind.PowderKeg ? EnemyType.PowderKeg : EnemyType.TreasureChest, g.Position, 1f, 1f, false);
                 Enemies[Enemies.IndexOf(id)].RoomId = room.Id;
+                if (g.Kind == GimmickKind.TreasureChest) chests.Add(id);
             }
+            MaybeDisguise(room, chests); // RunSimulation.Events.cs
+            if (room.Captive) SpawnCaptive(room);
         }
 
         /// <summary>A keg was broken: it hisses briefly, then explodes.</summary>

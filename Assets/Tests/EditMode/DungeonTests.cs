@@ -69,7 +69,7 @@ namespace Game.Tests
                 Assert.AreEqual(map.Rooms.Count, seen.Count, $"{where}: every room reachable");
 
                 var kinds = map.Rooms.Select(r => r.Kind).ToList();
-                Assert.That(kinds, Does.Contain(RoomKind.Shrine), where);
+                Assert.That(kinds.Contains(RoomKind.Shrine) || kinds.Contains(RoomKind.Spirit), where + ": a shrine (or, deeper in, the wandering spirit)");
                 Assert.That(kinds.Count(k => k is RoomKind.Combat or RoomKind.Elite), Is.GreaterThanOrEqualTo(3), where);
                 if (area >= 1) Assert.That(kinds.Any(k => k is RoomKind.CurseAltar or RoomKind.Merchant), where);
                 Assert.AreEqual(1, kinds.Count(k => k == RoomKind.Boss), where);

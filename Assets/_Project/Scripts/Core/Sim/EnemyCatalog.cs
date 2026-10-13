@@ -31,6 +31,9 @@ namespace Game.Core
         Flagellant,     // chapel: a long whip lash in a line
         AbyssEye,       // abyss: floats and drops curse circles under players
         ShadeStalker,   // abyss: blinks in and lunges
+        // Room events (round 5)
+        Mimic,          // a campfire chest that bites back
+        Captive,        // an adventurer in a cage: break the bars to set them free
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -292,6 +295,23 @@ namespace Game.Core
                     new EnemyAttack { Kind = AttackKind.Blink, Shape = AttackShape.Circle, SizeA = 1.3f, Range = 8f, Windup = 0.75f, Recover = 0.5f, Damage = 16f },
                     new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.6f, SizeB = 1f, Range = 4.4f, Windup = 0.5f, Recover = 0.6f, Damage = 18f, ProjectileSpeed = 18f },
                 },
+            },
+            new()
+            {
+                // A campfire chest that was never a chest: hops after you and bites (RunSimulation.Events).
+                Type = EnemyType.Mimic, Name = "ミミック", Title = "宝箱に化けた魔物", Sheet = "mimic", Health = 150f, Speed = 2.9f, Radius = 0.55f, Xp = 14,
+                AttackCooldown = 1.7f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 5f, SizeB = 1.2f, Range = 4.6f, Windup = 0.6f, Recover = 0.7f, Damage = 22f, ProjectileSpeed = 17f },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 1.9f, Range = 1.8f, Windup = 0.7f, Recover = 0.6f, Damage = 20f },
+                },
+            },
+            new()
+            {
+                // A fight room's prisoner: break the cage to set them free (they thank the team with gear).
+                Type = EnemyType.Captive, Name = "囚われた冒険者", Sheet = "captive", Health = 45f, Speed = 0f, Radius = 0.6f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };
 

@@ -80,6 +80,7 @@ namespace Game.Gameplay
             Set(SimEventType.BellRung, F.Client | F.Pos | F.Int);
             Set(SimEventType.GodSign, F.Client | F.Int | F.Id | F.Pos | F.Vec | F.Value);
             Set(SimEventType.Lantern, F.Id | F.Int | F.Pos | F.Client);
+            Set(SimEventType.RoomEvent, F.Int | F.Pos | F.Id);
             return layout;
         }
 

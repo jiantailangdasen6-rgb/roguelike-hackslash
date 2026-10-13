@@ -1,0 +1,1484 @@
+fileFormatVersion: 2
+guid: 8e8c4667b64ccbd468f2966096eab921
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6152588210495246403
+    second: captive_flash_0
+  - first:
+      213: 8704916084383448455
+    second: captive_flash_1
+  - first:
+      213: 2681635424905042738
+    second: captive_flash_2
+  - first:
+      213: -7384434692550826002
+    second: captive_flash_3
+  - first:
+      213: 1598965292585215631
+    second: captive_flash_4
+  - first:
+      213: -6231950215846498404
+    second: captive_flash_5
+  - first:
+      213: -5277084744061004853
+    second: captive_flash_6
+  - first:
+      213: 5341065406736480198
+    second: captive_flash_7
+  - first:
+      213: 8671084449276953146
+    second: captive_flash_8
+  - first:
+      213: -184376394457103282
+    second: captive_flash_9
+  - first:
+      213: -795938822502081683
+    second: captive_flash_10
+  - first:
+      213: -4873402737488249307
+    second: captive_flash_11
+  - first:
+      213: 7762491214129467141
+    second: captive_flash_12
+  - first:
+      213: 7648686639369559694
+    second: captive_flash_13
+  - first:
+      213: -1402546512565799881
+    second: captive_flash_14
+  - first:
+      213: 7933696204923772222
+    second: captive_flash_15
+  - first:
+      213: 7466890404443266805
+    second: captive_flash_16
+  - first:
+      213: 2702125135289031604
+    second: captive_flash_17
+  - first:
+      213: -7858396838605026811
+    second: captive_flash_18
+  - first:
+      213: -1853337892254528557
+    second: captive_flash_19
+  - first:
+      213: 618389548189850781
+    second: captive_flash_20
+  - first:
+      213: -1941691517228683266
+    second: captive_flash_21
+  - first:
+      213: -1985905791054668460
+    second: captive_flash_22
+  - first:
+      213: 1087295094110725680
+    second: captive_flash_23
+  - first:
+      213: 6580344863384956107
+    second: captive_flash_24
+  - first:
+      213: 3590037869881207433
+    second: captive_flash_25
+  - first:
+      213: 4061784765602154687
+    second: captive_flash_26
+  - first:
+      213: -1917791945062721421
+    second: captive_flash_27
+  - first:
+      213: 2335048376388391942
+    second: captive_flash_28
+  - first:
+      213: -9170666343582781138
+    second: captive_flash_29
+  - first:
+      213: 2334824563314847609
+    second: captive_flash_30
+  - first:
+      213: -3339349587608956272
+    second: captive_flash_31
+  - first:
+      213: -1081197006507707017
+    second: captive_flash_32
+  - first:
+      213: 7573823259214309532
+    second: captive_flash_33
+  - first:
+      213: 8523195014704280215
+    second: captive_flash_34
+  - first:
+      213: 3917778267066867230
+    second: captive_flash_35
+  - first:
+      213: 1148483848812405214
+    second: captive_flash_36
+  - first:
+      213: 2197259571916462109
+    second: captive_flash_37
+  - first:
+      213: -3699502668288926310
+    second: captive_flash_38
+  - first:
+      213: -4432921034768598557
+    second: captive_flash_39
+  - first:
+      213: 3901609151742330262
+    second: captive_flash_40
+  - first:
+      213: 6105069424821514750
+    second: captive_flash_41
+  - first:
+      213: -2046647844102413742
+    second: captive_flash_42
+  - first:
+      213: -5496673528890755841
+    second: captive_flash_43
+  - first:
+      213: 1905137252752500013
+    second: captive_flash_44
+  - first:
+      213: 3460219457462841981
+    second: captive_flash_45
+  - first:
+      213: -7605429477397310686
+    second: captive_flash_46
+  - first:
+      213: 3612655714009768086
+    second: captive_flash_47
+  - first:
+      213: -2251741021396191670
+    second: captive_flash_48
+  - first:
+      213: 2764269291248612261
+    second: captive_flash_49
+  - first:
+      213: 6130541410132279235
+    second: captive_flash_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: captive_flash_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 326
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34053df2162626550800000000000000
+      internalID: 6152588210495246403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 326
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78d7241ee031ec870800000000000000
+      internalID: 8704916084383448455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 326
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b91960635173520800000000000000
+      internalID: 2681635424905042738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_3
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 326
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee7ef6385c7358990800000000000000
+      internalID: -7384434692550826002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_4
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 262
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8668b0467aa03610800000000000000
+      internalID: 1598965292585215631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 262
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9fec860c4aa389a0800000000000000
+      internalID: -6231950215846498404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_6
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 262
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc35c9c626704c6b0800000000000000
+      internalID: -5277084744061004853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_7
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 262
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c7b7a270b64f1a40800000000000000
+      internalID: 5341065406736480198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_8
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 198
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3201908d51e55870800000000000000
+      internalID: 8671084449276953146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_9
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 198
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e44ca6765a6f07df0800000000000000
+      internalID: -184376394457103282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_10
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 198
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6b12d5abd144f4f0800000000000000
+      internalID: -795938822502081683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_11
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 198
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52eb898d7023e5cb0800000000000000
+      internalID: -4873402737488249307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_12
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 134
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50f074eb1a8e9bb60800000000000000
+      internalID: 7762491214129467141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_13
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 134
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8e16e959f7952a60800000000000000
+      internalID: 7648686639369559694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_14
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 134
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7347d89b067298ce0800000000000000
+      internalID: -1402546512565799881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_15
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 134
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3d9852f9a62a1e60800000000000000
+      internalID: 7933696204923772222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_16
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 70
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fe1d95f249bf9760800000000000000
+      internalID: 7466890404443266805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_17
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 70
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bb9e8b7e70ef7520800000000000000
+      internalID: 2702125135289031604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_18
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 27
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50a05eaf5bd51f290800000000000000
+      internalID: -7858396838605026811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 26
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dbc563a10f9746e0800000000000000
+      internalID: -1853337892254528557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_20
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 29
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9c9ba88406f49800800000000000000
+      internalID: 618389548189850781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_21
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 29
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: effe1344ad9bd05e0800000000000000
+      internalID: -1941691517228683266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_22
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 30
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d9bce6435a074e0800000000000000
+      internalID: -1985905791054668460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_23
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 30
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 036ae7a9029d61f00800000000000000
+      internalID: 1087295094110725680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_24
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 30
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcc60a10ac4125b50800000000000000
+      internalID: 6580344863384956107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_25
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 30
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98a287cfb6062d130800000000000000
+      internalID: 3590037869881207433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_26
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 31
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb84fcb59bb5e5830800000000000000
+      internalID: 4061784765602154687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_27
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 30
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3785e690362a265e0800000000000000
+      internalID: -1917791945062721421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_28
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 22
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6049bff6022c76020800000000000000
+      internalID: 2335048376388391942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_29
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 15
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e213e1d7c8f3bb080800000000000000
+      internalID: -9170666343582781138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_30
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 14
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97fec35e196f66020800000000000000
+      internalID: 2334824563314847609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_31
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 21
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09298b12e3f38a1d0800000000000000
+      internalID: -3339349587608956272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_32
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 22
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77574ee0d01def0f0800000000000000
+      internalID: -1081197006507707017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_33
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 21
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c986f0d5020ab1960800000000000000
+      internalID: 7573823259214309532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_34
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 22
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79234d245b8784670800000000000000
+      internalID: 8523195014704280215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_35
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 21
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1e144d939ebe5630800000000000000
+      internalID: 3917778267066867230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_36
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 21
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed1acbeb9fb30ff00800000000000000
+      internalID: 1148483848812405214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_37
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 20
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d18586760fb3e7e10800000000000000
+      internalID: 2197259571916462109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_38
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 19
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9d570b8ce9b8acc0800000000000000
+      internalID: -3699502668288926310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_39
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 19
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e9b2453ec91b72c0800000000000000
+      internalID: -4432921034768598557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_40
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 6
+        width: 30
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 695c3061adc452630800000000000000
+      internalID: 3901609151742330262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_41
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 12
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef1b59bbb4099b450800000000000000
+      internalID: 6105069424821514750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_42
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 6
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 252e4ff11a8d893e0800000000000000
+      internalID: -2046647844102413742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_43
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 11
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff47c205c84e7b3b0800000000000000
+      internalID: -5496673528890755841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_44
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 6
+        width: 36
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d252daecc38607a10800000000000000
+      internalID: 1905137252752500013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_45
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d72b7f6734b250030800000000000000
+      internalID: 3460219457462841981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_46
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 6
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 223d2738f26147690800000000000000
+      internalID: -7605429477397310686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_47
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 6
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69066513b3bb22230800000000000000
+      internalID: 3612655714009768086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_48
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 7
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a463185a87530c0e0800000000000000
+      internalID: -2251741021396191670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_49
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 6
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a3f4605648ac5620800000000000000
+      internalID: 2764269291248612261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_flash_50
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 6
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cfb1c77eee041550800000000000000
+      internalID: 6130541410132279235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      captive_flash_0: 6152588210495246403
+      captive_flash_1: 8704916084383448455
+      captive_flash_10: -795938822502081683
+      captive_flash_11: -4873402737488249307
+      captive_flash_12: 7762491214129467141
+      captive_flash_13: 7648686639369559694
+      captive_flash_14: -1402546512565799881
+      captive_flash_15: 7933696204923772222
+      captive_flash_16: 7466890404443266805
+      captive_flash_17: 2702125135289031604
+      captive_flash_18: -7858396838605026811
+      captive_flash_19: -1853337892254528557
+      captive_flash_2: 2681635424905042738
+      captive_flash_20: 618389548189850781
+      captive_flash_21: -1941691517228683266
+      captive_flash_22: -1985905791054668460
+      captive_flash_23: 1087295094110725680
+      captive_flash_24: 6580344863384956107
+      captive_flash_25: 3590037869881207433
+      captive_flash_26: 4061784765602154687
+      captive_flash_27: -1917791945062721421
+      captive_flash_28: 2335048376388391942
+      captive_flash_29: -9170666343582781138
+      captive_flash_3: -7384434692550826002
+      captive_flash_30: 2334824563314847609
+      captive_flash_31: -3339349587608956272
+      captive_flash_32: -1081197006507707017
+      captive_flash_33: 7573823259214309532
+      captive_flash_34: 8523195014704280215
+      captive_flash_35: 3917778267066867230
+      captive_flash_36: 1148483848812405214
+      captive_flash_37: 2197259571916462109
+      captive_flash_38: -3699502668288926310
+      captive_flash_39: -4432921034768598557
+      captive_flash_4: 1598965292585215631
+      captive_flash_40: 3901609151742330262
+      captive_flash_41: 6105069424821514750
+      captive_flash_42: -2046647844102413742
+      captive_flash_43: -5496673528890755841
+      captive_flash_44: 1905137252752500013
+      captive_flash_45: 3460219457462841981
+      captive_flash_46: -7605429477397310686
+      captive_flash_47: 3612655714009768086
+      captive_flash_48: -2251741021396191670
+      captive_flash_49: 2764269291248612261
+      captive_flash_5: -6231950215846498404
+      captive_flash_50: 6130541410132279235
+      captive_flash_6: -5277084744061004853
+      captive_flash_7: 5341065406736480198
+      captive_flash_8: 8671084449276953146
+      captive_flash_9: -184376394457103282
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

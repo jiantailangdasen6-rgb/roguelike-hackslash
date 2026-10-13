@@ -320,8 +320,8 @@ namespace Game.Gameplay
             if (RoomCatalog.HasPedestal(room.Kind))
             {
                 Vector2 pedestal = RunSimulation.PedestalPosition(b);
-                string candles = room.Kind == RoomKind.CurseAltar ? "fx_candle_soul" : room.Kind == RoomKind.Secret ? "fx_candle_soul" : "fx_candle";
-                var color = room.Kind is RoomKind.CurseAltar or RoomKind.Secret ? new Color(0.72f, 0.48f, 1f) : new Color(1f, 0.62f, 0.32f);
+                string candles = room.Kind is RoomKind.CurseAltar or RoomKind.Secret or RoomKind.Spirit ? "fx_candle_soul" : "fx_candle";
+                var color = room.Kind == RoomKind.Spirit ? new Color(0.5f, 0.85f, 1f) : room.Kind is RoomKind.CurseAltar or RoomKind.Secret ? new Color(0.72f, 0.48f, 1f) : new Color(1f, 0.62f, 0.32f);
                 for (int i = 0; i < 6; i++)
                 {
                     float a = (i * 60f + 30f) * Mathf.Deg2Rad;
@@ -362,6 +362,18 @@ namespace Game.Gameplay
                     Decor("decor_rune", o + new Vector2(0f, 0.3f), -955, scale: 1.6f);
                     Glow(o, new Color(0.5f, 0.9f, 1f), 0.6f, 8f);
                     break;
+                case RoomKind.Spirit:
+                {
+                    // The wandering spirit floats behind its pedestal, pale and see-through, in a cold light.
+                    Vector2 at = RunSimulation.PedestalPosition(b) + new Vector2(0f, 2.2f);
+                    var spirit = Sprite("Spirit", SpriteSheet.Load("wraith", quiet: true)?.First, at, EnemyView.SortOrder(at.y));
+                    spirit.color = new Color(0.65f, 0.95f, 1f, 0.7f);
+                    spirit.gameObject.AddComponent<SpriteLoop>().Configure("wraith", 6f);
+                    spirit.gameObject.AddComponent<Bobber>();
+                    Glow(at + new Vector2(0f, 0.6f), new Color(0.5f, 0.85f, 1f), 1.2f, 6f);
+                    Decor("decor_rune", o + new Vector2(0f, 0.3f), -955, scale: 1.4f);
+                    break;
+                }
             }
         }
 

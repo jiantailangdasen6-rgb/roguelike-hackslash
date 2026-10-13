@@ -76,6 +76,9 @@ namespace Game.EditorTools.Art
             Character("ward_crystal", GimmickArt.WardCrystal(), EnemyArt.FrameSize);
             Character("cracked_wall", GimmickArt.CrackedWall(), EnemyArt.FrameSize);
             Character("treasure_imp", GimmickArt.TreasureImp(), EnemyArt.FrameSize);
+            // Room events (round 5).
+            Character("mimic", EventArt.Mimic(), EnemyArt.FrameSize);
+            Character("captive", EventArt.Captive(), EnemyArt.FrameSize);
 
             foreach (var (name, gen) in ProceduralArt.Effects) Effect(name, gen());
             foreach (var (name, sheet) in PropArt.Sheets()) Effect(name, sheet.Frames, name, sheet.Pivot);

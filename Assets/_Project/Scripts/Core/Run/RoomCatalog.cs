@@ -21,6 +21,7 @@ namespace Game.Core
             RoomKind.Puzzle => "仕掛けの間",
             RoomKind.Treasure => "宝物庫",
             RoomKind.Secret => "隠し部屋",
+            RoomKind.Spirit => "霊の祠",
             _ => "",
         };
 
@@ -41,6 +42,7 @@ namespace Game.Core
             RoomKind.Puzzle => "仕",
             RoomKind.Treasure => "宝",
             RoomKind.Secret => "隠",
+            RoomKind.Spirit => "霊",
             _ => "",
         };
 
@@ -53,6 +55,7 @@ namespace Game.Core
             RoomKind.CurseAltar => RoomReward.Cursed,
             RoomKind.Merchant => RoomReward.Shop,
             RoomKind.Treasure or RoomKind.Secret => RoomReward.Treasure,
+            RoomKind.Spirit => RoomReward.Boon, // a god's blessing (drawn with the blessing's sunburst)
             _ => RoomReward.None,
         };
 
@@ -67,6 +70,7 @@ namespace Game.Core
             RoomKind.Start => new Color(0.72f, 0.7f, 0.68f),
             RoomKind.MiniBoss => new Color(1f, 0.45f, 0.15f),
             RoomKind.Puzzle => new Color(0.5f, 0.85f, 1f),
+            RoomKind.Spirit => new Color(0.62f, 0.92f, 1f),
             _ => RewardCatalog.Color(Reward(k)),
         };
 
@@ -81,6 +85,7 @@ namespace Game.Core
             RoomKind.Merchant => "魂の欠片で買う",
             RoomKind.Treasure => "希少な装備",
             RoomKind.Secret => "古い地図と装備",
+            RoomKind.Spirit => "最大HPの1割で加護",
             _ => "",
         };
 
@@ -93,6 +98,7 @@ namespace Game.Core
             RoomKind.Merchant => "上に立つと、魂の欠片で1つ買える（全員の取り分から払う）",
             RoomKind.Treasure => "上に立つと、希少以上の装備を1つ得る",
             RoomKind.Secret => "上に立つと、古い地図（このエリアの全部屋が見える）と装備を得る",
+            RoomKind.Spirit => "上に立つと、最大HPの1割を捧げて（ランの間ずっと）神の加護を1つ授かる",
             _ => "",
         };
     }

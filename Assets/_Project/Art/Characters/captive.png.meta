@@ -1,0 +1,1484 @@
+fileFormatVersion: 2
+guid: 200663f4c6d519b4d9f8b9680ca95e26
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6700373733671704516
+    second: captive_0
+  - first:
+      213: -6708700999685915596
+    second: captive_1
+  - first:
+      213: 7096851719928883731
+    second: captive_2
+  - first:
+      213: 4068161867448931319
+    second: captive_3
+  - first:
+      213: -6355502959858540984
+    second: captive_4
+  - first:
+      213: -6697530186671338427
+    second: captive_5
+  - first:
+      213: 425932906094235448
+    second: captive_6
+  - first:
+      213: 2624196218638288513
+    second: captive_7
+  - first:
+      213: 5026388422120858301
+    second: captive_8
+  - first:
+      213: 1403071313888859828
+    second: captive_9
+  - first:
+      213: 4973769773623417019
+    second: captive_10
+  - first:
+      213: -6164170421505539967
+    second: captive_11
+  - first:
+      213: 6768782776012434035
+    second: captive_12
+  - first:
+      213: -863594864092706871
+    second: captive_13
+  - first:
+      213: 4616999367139339145
+    second: captive_14
+  - first:
+      213: 7817936233951334061
+    second: captive_15
+  - first:
+      213: -8170672431536333608
+    second: captive_16
+  - first:
+      213: 5967297101255201281
+    second: captive_17
+  - first:
+      213: -906744541202346452
+    second: captive_18
+  - first:
+      213: -3602725108534464897
+    second: captive_19
+  - first:
+      213: -8679509131785991616
+    second: captive_20
+  - first:
+      213: 4698829946268627124
+    second: captive_21
+  - first:
+      213: -129370035882971612
+    second: captive_22
+  - first:
+      213: 1465083986864703062
+    second: captive_23
+  - first:
+      213: -5099651795334048250
+    second: captive_24
+  - first:
+      213: 3275598032260599937
+    second: captive_25
+  - first:
+      213: 5293191821913031859
+    second: captive_26
+  - first:
+      213: -3061071279150756402
+    second: captive_27
+  - first:
+      213: 525633267148933301
+    second: captive_28
+  - first:
+      213: 800475305978208311
+    second: captive_29
+  - first:
+      213: -5103534046608814153
+    second: captive_30
+  - first:
+      213: -4636368964577305910
+    second: captive_31
+  - first:
+      213: 8483550791728058033
+    second: captive_32
+  - first:
+      213: 8569913454100935014
+    second: captive_33
+  - first:
+      213: -5020227427941726322
+    second: captive_34
+  - first:
+      213: -7897444057366864575
+    second: captive_35
+  - first:
+      213: 6344070384915854375
+    second: captive_36
+  - first:
+      213: 6231919805503757044
+    second: captive_37
+  - first:
+      213: -8121226500442190817
+    second: captive_38
+  - first:
+      213: 6155172309194362668
+    second: captive_39
+  - first:
+      213: -4663457406519659671
+    second: captive_40
+  - first:
+      213: -2764084407597406762
+    second: captive_41
+  - first:
+      213: -2781664513303697467
+    second: captive_42
+  - first:
+      213: -8376320823340301961
+    second: captive_43
+  - first:
+      213: -8386771704412861423
+    second: captive_44
+  - first:
+      213: -5263332011085173678
+    second: captive_45
+  - first:
+      213: 16131856752677307
+    second: captive_46
+  - first:
+      213: 7328514531695756145
+    second: captive_47
+  - first:
+      213: -220533312244107743
+    second: captive_48
+  - first:
+      213: -3581738953835483467
+    second: captive_49
+  - first:
+      213: 2837729459499005955
+    second: captive_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: captive_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 326
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c71cd129628cfc50800000000000000
+      internalID: 6700373733671704516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 326
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43cb9692cf7e5e2a0800000000000000
+      internalID: -6708700999685915596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 326
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31a2bfdd9051d7260800000000000000
+      internalID: 7096851719928883731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_3
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 326
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f355161aa3057830800000000000000
+      internalID: 4068161867448931319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_4
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 262
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84e10bc1bb7bcc7a0800000000000000
+      internalID: -6355502959858540984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 262
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54ccffeb7c79d03a0800000000000000
+      internalID: -6697530186671338427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_6
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 262
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83f85eda8b739e500800000000000000
+      internalID: 425932906094235448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_7
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 262
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 186cbd8ae840b6420800000000000000
+      internalID: 2624196218638288513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_8
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 198
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db266a393a151c540800000000000000
+      internalID: 5026388422120858301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_9
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 198
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b6d2ea1de5b87310800000000000000
+      internalID: 1403071313888859828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_10
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 198
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb81667c141660540800000000000000
+      internalID: 4973769773623417019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_11
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 198
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 180413b29a7747aa0800000000000000
+      internalID: -6164170421505539967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_12
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 134
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37ae00e721c8fed50800000000000000
+      internalID: 6768782776012434035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_13
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 134
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c707efeb05e304f0800000000000000
+      internalID: -863594864092706871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_14
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 134
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98b2b866670e21040800000000000000
+      internalID: 4616999367139339145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_15
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 134
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dae03556593ee7c60800000000000000
+      internalID: 7817936233951334061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_16
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 70
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dc133ea6b0fb9e80800000000000000
+      internalID: -8170672431536333608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_17
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 70
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 102d885f81910d250800000000000000
+      internalID: 5967297101255201281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_18
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 27
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2e0c97d4a89a63f0800000000000000
+      internalID: -906744541202346452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 26
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7e2c621a9c800ec0800000000000000
+      internalID: -3602725108534464897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_20
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 29
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04a032f3e603c8780800000000000000
+      internalID: -8679509131785991616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_21
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 29
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b03f4fc0f8953140800000000000000
+      internalID: 4698829946268627124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_22
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 30
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42ead9643a2643ef0800000000000000
+      internalID: -129370035882971612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_23
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 30
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6560f2baf16055410800000000000000
+      internalID: 1465083986864703062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_24
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 30
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6065ee416b56a39b0800000000000000
+      internalID: -5099651795334048250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_25
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 30
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1809cd33e03457d20800000000000000
+      internalID: 3275598032260599937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_26
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 31
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b40121eae1357940800000000000000
+      internalID: 5293191821913031859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_27
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 30
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecd811ec3e3e485d0800000000000000
+      internalID: -3061071279150756402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_28
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 22
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b84a8aebac6b4700800000000000000
+      internalID: 525633267148933301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_29
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 15
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 730ad48bc0cdb1b00800000000000000
+      internalID: 800475305978208311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_30
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 14
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bf05c403da9c29b0800000000000000
+      internalID: -5103534046608814153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_31
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 21
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aca59b2cdfe48afb0800000000000000
+      internalID: -4636368964577305910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_32
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 22
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1be4fee4f70abb570800000000000000
+      internalID: 8483550791728058033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_33
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 21
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 661f68391e27ee670800000000000000
+      internalID: 8569913454100935014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_34
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 22
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e874cd9a0c1945ab0800000000000000
+      internalID: -5020227427941726322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_35
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 21
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14dd027e874a66290800000000000000
+      internalID: -7897444057366864575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_36
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 21
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7243cfa176aaa0850800000000000000
+      internalID: 6344070384915854375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_37
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 20
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fad5c38b0a3c7650800000000000000
+      internalID: 6231919805503757044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_38
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 19
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1c87a4a68b9b4f80800000000000000
+      internalID: -8121226500442190817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_39
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 19
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2fc9dc8a909b6550800000000000000
+      internalID: 6155172309194362668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_40
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 6
+        width: 30
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9633b336232184fb0800000000000000
+      internalID: -4663457406519659671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_41
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 12
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d5e5f340eff3a9d0800000000000000
+      internalID: -2764084407597406762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_42
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 6
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c72930fcda8569d0800000000000000
+      internalID: -2781664513303697467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_43
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 11
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7710810479451cb80800000000000000
+      internalID: -8376320823340301961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_44
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 6
+        width: 36
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11c8c22e1933c9b80800000000000000
+      internalID: -8386771704412861423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_45
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25c63581c63e4f6b0800000000000000
+      internalID: -5263332011085173678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_46
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 6
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb19f4796df493000800000000000000
+      internalID: 16131856752677307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_47
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 6
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1738301732d14b560800000000000000
+      internalID: 7328514531695756145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_48
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 7
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 126bc86fe1280fcf0800000000000000
+      internalID: -220533312244107743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_49
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 6
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bee47af56b1b4ec0800000000000000
+      internalID: -3581738953835483467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: captive_50
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 6
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 308791298e3a16720800000000000000
+      internalID: 2837729459499005955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      captive_0: 6700373733671704516
+      captive_1: -6708700999685915596
+      captive_10: 4973769773623417019
+      captive_11: -6164170421505539967
+      captive_12: 6768782776012434035
+      captive_13: -863594864092706871
+      captive_14: 4616999367139339145
+      captive_15: 7817936233951334061
+      captive_16: -8170672431536333608
+      captive_17: 5967297101255201281
+      captive_18: -906744541202346452
+      captive_19: -3602725108534464897
+      captive_2: 7096851719928883731
+      captive_20: -8679509131785991616
+      captive_21: 4698829946268627124
+      captive_22: -129370035882971612
+      captive_23: 1465083986864703062
+      captive_24: -5099651795334048250
+      captive_25: 3275598032260599937
+      captive_26: 5293191821913031859
+      captive_27: -3061071279150756402
+      captive_28: 525633267148933301
+      captive_29: 800475305978208311
+      captive_3: 4068161867448931319
+      captive_30: -5103534046608814153
+      captive_31: -4636368964577305910
+      captive_32: 8483550791728058033
+      captive_33: 8569913454100935014
+      captive_34: -5020227427941726322
+      captive_35: -7897444057366864575
+      captive_36: 6344070384915854375
+      captive_37: 6231919805503757044
+      captive_38: -8121226500442190817
+      captive_39: 6155172309194362668
+      captive_4: -6355502959858540984
+      captive_40: -4663457406519659671
+      captive_41: -2764084407597406762
+      captive_42: -2781664513303697467
+      captive_43: -8376320823340301961
+      captive_44: -8386771704412861423
+      captive_45: -5263332011085173678
+      captive_46: 16131856752677307
+      captive_47: 7328514531695756145
+      captive_48: -220533312244107743
+      captive_49: -3581738953835483467
+      captive_5: -6697530186671338427
+      captive_50: 2837729459499005955
+      captive_6: 425932906094235448
+      captive_7: 2624196218638288513
+      captive_8: 5026388422120858301
+      captive_9: 1403071313888859828
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -67,6 +67,8 @@ namespace Game.Core
                 p.RiseTimer = 0f;
             }
             _godBursts.Clear();
+            _mimicWakes.Clear(); // RunSimulation.Events.cs
+            _vanished.Clear();
         }
 
         private void BlessingTaken(SimPlayer p, PerkId id)

@@ -248,6 +248,7 @@ namespace Game.Core
             StepBell(dt);
             StepGods(dt);
             StepDark();
+            StepRoomEvents(dt);
             UpdateDoors(dt);
             CheckDefeat();
             CheckLevelUp();

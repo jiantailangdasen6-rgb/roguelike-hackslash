@@ -240,11 +240,20 @@ namespace Game.Gameplay
             DifficultyLevel.Value = ChosenDifficulty();
             ulong seed = (ulong)DateTime.UtcNow.Ticks;
             // -startin twin (screenshots): look for a map whose puzzle is the twin plates.
-            if (string.Equals(CommandLine.GetValue("-startin"), "twin", StringComparison.OrdinalIgnoreCase))
-                for (int k = 0; k < 300 && !new RunSimulation(seed).Map.Rooms.Exists(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Twin); k++) seed++;
+            string wanted = CommandLine.GetValue("-startin")?.ToLowerInvariant();
+            int wantedArea = (int)CommandLine.GetFloat("-startroom", 0f) / RunSimulation.RoomsPerArea;
+            System.Predicate<MapRoom> has = wanted switch
+            {
+                "twin" => r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Twin,
+                "spirit" => r => r.Kind == RoomKind.Spirit,
+                _ => null,
+            };
+            if (has != null)
+                for (int k = 0; k < 300 && !DungeonMap.Generate(new RunSimulation(seed).MapSeed, wantedArea).Rooms.Exists(has); k++) seed++;
             Sim = new RunSimulation(seed, DifficultyLevel.Value);
             Sim.DropChanceScale = CommandLine.GetFloat("-lootrate", 1f);
             Sim.BossStartHealth = CommandLine.GetFloat("-bosshp", 1f);
+            if (CommandLine.Has("-mimic")) Sim.MimicOdds = 1f;
             int slot = 0;
             foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
             {
@@ -266,6 +275,7 @@ namespace Game.Gameplay
                     "gauntlet" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Gauntlet) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
                     "twin" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Twin) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
                     "dark" => map.DarkHall,
+                    "captive" => map.Rooms.Find(r => r.Captive),
                     _ => Enum.TryParse(startIn, true, out RoomKind kind) ? map.Rooms.Find(r => r.Kind == kind) : null,
                 };
                 if (room != null) Sim.MoveTeamTo(room);

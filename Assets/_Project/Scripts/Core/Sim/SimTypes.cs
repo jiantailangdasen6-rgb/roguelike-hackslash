@@ -130,6 +130,8 @@ namespace Game.Core
         public readonly HashSet<ulong> UsedBy = new();
         /// <summary>A dark hall (one fight room per area): the lantern lights the way (RunSimulation.Coop).</summary>
         public bool Dark;
+        /// <summary>A caged adventurer waits here (RunSimulation.Events).</summary>
+        public bool Captive;
         /// <summary>Who carries the lantern (client id + 1, 0 = it lies on the floor) and where it is.</summary>
         public ulong LanternBy;
         public Vector2 LanternPos;
@@ -138,7 +140,9 @@ namespace Game.Core
         public Vector2 Center => Bounds.center;
         public bool IsFight => Objective is RoomObjective.Waves or RoomObjective.Survive or RoomObjective.Boss or RoomObjective.Plates or RoomObjective.Crystal or RoomObjective.Thief or RoomObjective.Gauntlet or RoomObjective.Twin;
         /// <summary>Picks and gear swaps wait for this: a fight going on here.</summary>
-        public bool Fighting => Active && !Cleared;
+        public bool Fighting => (Active && !Cleared) || Ambushed;
+        /// <summary>A mimic woke in this (cleared) room: it counts as a fight until it falls.</summary>
+        public bool Ambushed;
     }
 
     public enum StatusKind : byte
@@ -321,6 +325,7 @@ namespace Game.Core
         PuzzleEnded,     // Id = room, Int = 1 solved / 0 failed, Pos
         BellRung,        // ClientId = who rang it, Pos = the bell, Int = players called to the campfire
         Lantern,         // Id = dark hall, Int = 1 picked up (ClientId) / 0 dropped, Pos
+        RoomEvent,       // Int = RoomEventKind, Pos, Id = map room id
         GodSign,         // ClientId, Int = GodSignKind, Id = GodId, Pos, Vec (blessings at work: lightning, a favour awakening...)
     }
 

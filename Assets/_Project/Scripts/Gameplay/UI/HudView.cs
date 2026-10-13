@@ -432,6 +432,7 @@ namespace Game.Gameplay
                         RoomKind.Merchant => "魂の欠片で1つ買える（全員の取り分から払う）",
                         RoomKind.Treasure => "希少以上の装備を手に入れた（I で袋を開く）",
                         RoomKind.Secret => "古い地図を見つけた（このエリアの全部屋が地図に載った）。装備も手に入れた",
+                        RoomKind.Spirit => $"最大HPの{e.Value:0}%を捧げた。神の加護を授かる",
                         _ => "新たな力を授かる",
                     };
                     Toast($"<color=#{hex}>{RoomCatalog.Name(kind)}</color>：{text}");

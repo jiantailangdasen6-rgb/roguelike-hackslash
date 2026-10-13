@@ -11,8 +11,8 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 3846f598（改善案8つまで。Windows版と同じ版なので一緒に遊べる） |
-| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 3846f598）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 0a3437f2（神々の加護・協力の仕掛け・幽霊まで。Windows版と同じ版なので一緒に遊べる） |
+| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 0a3437f2）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
 | テスト | EditMode 138件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
@@ -350,7 +350,34 @@
   - 撮影は `Tools/Screenshots.ps1`、または任意の引数で exe を起動（拠点に留まるには `-campwait 30`、施設 `-openstation`、図鑑 `-opencodex`、設定 `-opensettings`、タッチ `-touchui`、全滅 `-wipeat`）
 - **次にやること**：ユーザーに新規案（5章）から選んでもらう。遊んだ感想（スマホ操作・新しい魔物・1回の長さ・図鑑の文章）が来たら調整
 
+### 新規案をおすすめ順で全部（2026-10-13〜、ユーザー「おすすめ順で全部」）
+中身はユーザーに相談せず Claude が決めた（下の「Claude が自分の判断で決めたこと」に追記）。順番：C → A → B → 残り（D〜J）
+- **C 神々の加護**（`Core/Run/GodCatalog.cs`、`Core/Sim/RunSimulation.Gods.cs`、`View/EventPresenter.Gods.cs`）：
+  中ボス（精鋭の主）と主（最後の主以外）を倒すと、**全員**が加護を1つ授かる（`ChoiceKind.Blessing`、静かな部屋で3択。途中参加者も同じ数だけ）。
+  神は4柱：焔神アグナ（焔の刻印・火葬・炎の足跡）／氷姫ニヴァ（凍てつく刃・氷の守り・冬の息吹）／雷神トラス（雷の拳・雷の歩み・天の裁き）／慈母セレナ（分かち合う命・聖なる帳・再生の祈り）。
+  **同じ神を2つで「寵愛」**（燃える敵へ+30%／凍った敵が倒れると冷気が弾ける／雷+1体と気絶／近くの仲間と自分が毎秒1.5回復）。
+  3択は神が重ならず、あと1つで寵愛の神が出やすい。加護は `PerkId` の末尾（`PerkDef.God`）で、通常のレベルアップには出ない。
+  カードは神の色の帯と「寵愛まであと○つ」、アイコンは神の色の縁＋上に菱形。HUD のパーク欄は加護が先頭、寵愛が目覚めた神は光る。
+  演出：空から落ちる黄色い稲妻（無地の棒で描く）、炎と冷気の弾け、授かると神の色の光の柱と名前、寵愛は輪と大きな文字。図鑑に「神々」の見出し（カードが出ると記録）。
+  撮影用 `-blessings FlameBrand,StormFist,...`（全員に付与）・`-offerblessing`（開始時に3択）
+- **A 協力の仕掛け**（`Core/Sim/RunSimulation.Coop.cs`、`View/DarkHallView.cs`）：
+  - **双子の押し板**（`PuzzleKind.Twin`、仕掛けの間の5種目）：部屋の両端の2枚を同時に踏み続けると封印が解ける（協力は4秒、離れると力がゆっくり抜ける）。
+    1人のときは板が4.5秒光り続け、重なりが1秒で解ける。2枚の間に光の帯（たまるほど太く明るい）。ボットは番号で左右に分かれる
+  - **闇の間**：各エリアの通常の戦いの部屋1つ（地図の種とは別の乱数で選ぶ）。部屋がほぼ真っ暗になり、床の灯り（手提げランタン、`prop_lantern`）を拾った人の周りだけ明るい。
+    灯り（半径6.5）の外の魔物は攻撃が3割しか通らず、影のように暗く描かれる（障害物も）。持ち主が倒れるか部屋を出ると灯りはその場に落ちる。
+    灯りの届く範囲は小さな火の粉の輪で示す。同期は `RunDirector.LanternHolder/LanternPos`。撮影用 `-startin dark` / `-startin twin`
+  - 不具合の教訓：①別の partial ファイルの static 配列を static 初期化子で参照すると初期化順で null（TwinSpots は値を直接書く）。
+    ②小さなドット絵（fx_revive_ring）を6倍以上に拡大すると巨大なブロックになる（闇で茶色い塊に見えた）。大きな輪は小さな点を並べて描く。
+    ③実行時に作る SpriteRenderer は Sprites/Default（照明を受けない）。暗くしたいものは色で暗くする
+- **B 倒れている間の幽霊**（`Core/Sim/RunSimulation.Ghosts.cs`）：倒れると亡骸（`SimPlayer.BodyPosition` / `NetPlayer.Body`）を残し、幽霊としてその部屋の中を漂える
+  （障害物はすり抜け、扉は通れない、移動は少し速い）。近くの魔物は動きが遅くなり（55%）、攻撃で魂の火花（威力5）、魂も拾える。
+  起き上がるのは亡骸の場所（仲間が亡骸のそばに立つ → 幽霊は亡骸へ戻る）。焚き火・次のエリアではその場で起きる。仲間の矢印・地図・ボットは亡骸を指す。
+  倒れたときの中央の文言は短く、説明は図鑑の「連携 › 幽霊」
+- 公開：ブラウザ版・Windows版 ver 0a3437f2（C・A・B まで。OnlineTest（ホスト4秒停止）・CrossTest 合格、EditMode 154件）
+
 ### Claude が自分の判断で決めたこと（ユーザーが変更可）
+- 2026-10-13（新規案）：神の名前・加護12種の中身と数値・寵愛の条件（2つ）と効果・授かる時（中ボスと主、全員）、闇の間の数（各エリア1つ）と灯りの半径・灯りの外のダメージ3割、
+  双子の押し板の時間（協力4秒・ソロ4.5秒光る）、幽霊の速さ・足止め55%・火花の威力
 - 迷宮：部屋数（9〜10）、部屋の間隔、祭壇の部屋の数と種類、戦闘部屋の波の数（通常2・精鋭の巣3、2026-10-13 にボット計測で3→2）、扉は押し込みで瞬間移動、戦闘中の部屋から出られる（主の間だけは閉じる）、呪いを個人に変更
 - 2026-10-13：主の体力（騎士王2600・司教2700・リッチ3000）、新しい魔物4体の名前と性能、合図のキー（F・中ボタン・十字キー上）と種類分け、集合の鐘（焚き火の右上・15秒に1回・協力時のみ）、
   最初の案内の内容と「14秒で覚えたことにする」、図鑑の見出し・文章・記録の条件、設定の項目と初期値（揺れ強・点滅通常・大きさ100%）、タッチ操作の配置、曲のこもり具合、UI音の音色

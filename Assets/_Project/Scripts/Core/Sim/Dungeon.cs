@@ -91,15 +91,18 @@ namespace Game.Core
         public static readonly Rect WorldBounds = new(-(Size - 0.4f) * PitchX, -(Size - 0.4f) * PitchY, 2f * (Size - 0.4f) * PitchX, 2f * (Size - 0.4f) * PitchY);
 
         public readonly int Area;
+        /// <summary>The land this area is in (its look and its fight-room layouts).</summary>
+        public readonly Biome Biome;
         public readonly List<MapRoom> Rooms = new();
         public MapRoom Start { get; private set; }
         public MapRoom Boss { get; private set; }
         public MapRoom Campfire { get; private set; }
         private readonly int[,] _grid = new int[Size, Size];
 
-        private DungeonMap(int area)
+        private DungeonMap(int area, Biome biome)
         {
             Area = area;
+            Biome = biome;
             for (int x = 0; x < Size; x++)
             for (int y = 0; y < Size; y++)
                 _grid[x, y] = -1;
@@ -144,12 +147,14 @@ namespace Game.Core
 
         // ------------------------------------------------------------------ Generation
 
-        public static DungeonMap Generate(ulong seed, int area)
+        public static DungeonMap Generate(ulong seed, int area) => Generate(seed, area, BiomeCatalog.Classic(area));
+
+        public static DungeonMap Generate(ulong seed, int area, Biome biome)
         {
             var rng = new GameRandom(seed ^ (0x9E3779B97F4A7C15ul * (ulong)(area + 1)));
             for (int attempt = 0; attempt < 40; attempt++)
             {
-                var map = new DungeonMap(area);
+                var map = new DungeonMap(area, biome);
                 if (map.TryBuild(rng, 11 + (area > 0 ? 1 : 0)))
                 {
                     map.AssignLayouts(rng);
@@ -158,7 +163,7 @@ namespace Game.Core
                     return map;
                 }
             }
-            var fallback = new DungeonMap(area);
+            var fallback = new DungeonMap(area, biome);
             fallback.BuildLine();
             fallback.AssignLayouts(rng);
             return fallback;
@@ -354,7 +359,7 @@ namespace Game.Core
                     RoomKind.Start => 0,
                     RoomKind.Boss => 10,
                     RoomKind.Campfire => Arena.RestLayout,
-                    RoomKind.Combat or RoomKind.Elite or RoomKind.MiniBoss => Arena.PickFight(rng, Area, previous),
+                    RoomKind.Combat or RoomKind.Elite or RoomKind.MiniBoss => Arena.PickFight(rng, Biome, previous),
                     RoomKind.Puzzle => r.Puzzle switch
                     {
                         PuzzleKind.Plates or PuzzleKind.Twin => Arena.PlatesLayout,

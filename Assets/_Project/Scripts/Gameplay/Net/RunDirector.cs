@@ -34,6 +34,16 @@ namespace Game.Gameplay
         /// <summary>The area map: every peer generates it from the seed (<see cref="DungeonMap.Generate"/>).</summary>
         public readonly NetworkVariable<ulong> MapSeed = new();
         public readonly NetworkVariable<int> Area = new();
+        /// <summary>The land of every area so far, 4 bits each (RunSimulation.Route), and the two ways after the lord (left | right << 4).</summary>
+        public readonly NetworkVariable<ulong> RouteBits = new();
+        public readonly NetworkVariable<int> Ways = new();
+
+        /// <summary>The land of an area this run went through (or is in).</summary>
+        public Biome BiomeOf(int area) => area >= 0 && area < 16 ? (Biome)((RouteBits.Value >> (area * 4)) & 0xF) : BiomeCatalog.Classic(area);
+        /// <summary>The land the team is in now.</summary>
+        public Biome Biome => BiomeOf(Area.Value);
+        /// <summary>The land a way out of the lord's hall leads to (0 left, 1 right).</summary>
+        public Biome Way(int side) => (Biome)((Ways.Value >> (side * 4)) & 0xF);
         /// <summary>Rooms by bit: visited by anyone, cleared, being fought.</summary>
         public readonly NetworkVariable<int> VisitedRooms = new();
         public readonly NetworkVariable<int> ClearedRooms = new();
@@ -89,7 +99,7 @@ namespace Game.Gameplay
         // ------------------------------------------------------------------ The map, on every peer
 
         private DungeonMap _map;
-        private (ulong Seed, int Area) _mapKey;
+        private (ulong Seed, int Area, Biome Biome) _mapKey;
 
         /// <summary>The current area's map (the host's own; clients generate the same one from the seed).</summary>
         public DungeonMap Map
@@ -97,11 +107,11 @@ namespace Game.Gameplay
             get
             {
                 if (IsServer && Sim != null) return Sim.Map;
-                var key = (MapSeed.Value, Area.Value);
+                var key = (MapSeed.Value, Area.Value, Biome);
                 if (_map == null || key != _mapKey)
                 {
                     _mapKey = key;
-                    _map = DungeonMap.Generate(key.Item1, key.Item2);
+                    _map = DungeonMap.Generate(key.Item1, key.Item2, key.Item3);
                 }
                 return _map;
             }
@@ -261,6 +271,11 @@ namespace Game.Gameplay
             }
             else WeeklyWeek.Value = -1;
             Sim = new RunSimulation(seed, DifficultyLevel.Value);
+            // The lands: the first from the seed, the next chosen by the team. -route crypt,frost,... fixes them (screenshots).
+            var planned = new List<Biome>();
+            foreach (var name in (CommandLine.GetValue("-route") ?? "").Split(','))
+                if (Enum.TryParse(name.Trim(), true, out Biome land)) planned.Add(land);
+            Sim.UseVariedRoute(planned.ToArray());
             Sim.DropChanceScale = CommandLine.GetFloat("-lootrate", 1f);
             Sim.BossStartHealth = CommandLine.GetFloat("-bosshp", 1f);
             if (CommandLine.Has("-mimic")) Sim.MimicOdds = 1f;
@@ -482,6 +497,10 @@ namespace Game.Gameplay
             SetIfChanged(RoomIndex, Sim.DeepestIndex);
             SetIfChanged(MapSeed, Sim.MapSeed);
             SetIfChanged(Area, Sim.Area);
+            ulong route = 0;
+            for (int i = 0; i < Sim.Route.Count && i < 16; i++) route |= (ulong)Sim.Route[i] << (i * 4);
+            SetIfChanged(RouteBits, route);
+            SetIfChanged(Ways, (int)Sim.NextWays[0] | (int)Sim.NextWays[1] << 4);
             int visited = 0, cleared = 0, fighting = 0, unlocked = 0;
             float puzzle = 0f;
             float puzzleTime = 0f;

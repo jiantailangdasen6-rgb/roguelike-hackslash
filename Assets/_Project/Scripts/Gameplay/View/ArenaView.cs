@@ -6,20 +6,12 @@ using UnityEngine.Rendering.Universal;
 namespace Game.Gameplay
 {
     /// <summary>
-    /// The room around the players: switches the area's look (tiles, candles, light colour) and places the
+    /// The room around the players: switches the land's look (tiles, candles, light colour) and places the
     /// current layout's obstacles and gimmicks (spike traps, flame vents, healing fonts). Kegs are drawn by
     /// <see cref="EnemyView"/> since they are breakable "enemies" in the simulation.
     /// </summary>
     public sealed class ArenaView : MonoBehaviour
     {
-        /// <summary>Ambient light per area: crypt (warm grey), chapel (blood red), abyss (cold violet).</summary>
-        private static readonly (Color Color, float Intensity)[] AreaLight =
-        {
-            (new Color(0.9f, 0.82f, 0.8f), 0.8f),
-            (new Color(0.95f, 0.72f, 0.7f), 0.72f),
-            (new Color(0.72f, 0.7f, 0.95f), 0.7f),
-        };
-
         private sealed class GimmickVisual
         {
             public GimmickDef Def;
@@ -74,9 +66,9 @@ namespace Game.Gameplay
             if (director != null && director.IsSpawned)
             {
                 // Draw the room the local player stands in (another one after a door or a new area).
-                ShowArea(director.Area.Value);
+                ShowArea((int)director.Biome);
                 var room = director.LocalRoom;
-                var key = (director.MapSeed.Value, director.Area.Value, director.UnlockedRooms.Value);
+                var key = (director.MapSeed.Value, director.Area.Value * 16 + (int)director.Biome, director.UnlockedRooms.Value);
                 if (room.Id != _roomId || key != _mapKey)
                 {
                     _mapKey = key;
@@ -199,7 +191,7 @@ namespace Game.Gameplay
 
         private void ShowArea(int area)
         {
-            area = Mathf.Clamp(area, 0, 2);
+            area = Mathf.Clamp(area, 0, BiomeCatalog.Count - 1);
             if (area == _area) return;
             _area = area;
             if (areaRoots != null)
@@ -207,8 +199,8 @@ namespace Game.Gameplay
                     if (areaRoots[i] != null) areaRoots[i].gameObject.SetActive(i == area);
             if (globalLight != null)
             {
-                globalLight.color = AreaLight[area].Color;
-                globalLight.intensity = AreaLight[area].Intensity;
+                globalLight.color = LandLook.Ambient((Biome)area);
+                globalLight.intensity = LandLook.AmbientIntensity((Biome)area);
             }
             if (_room != null) BuildRoom(_room); // props use the area's palette
         }
@@ -377,9 +369,6 @@ namespace Game.Gameplay
             }
         }
 
-        /// <summary>Torch colour of the doorways per area.</summary>
-        private static readonly Color[] DoorLight = { new(1f, 0.62f, 0.32f), new(1f, 0.35f, 0.28f), new(0.72f, 0.48f, 1f) };
-
         /// <summary>An arch or a gap in the wall for every door of the room, and the bone bars of a shut one.</summary>
         private void BuildDoors(MapRoom room)
         {
@@ -403,7 +392,7 @@ namespace Game.Gameplay
                 };
                 var r = Sprite("Door", SpriteSheet.Load($"door_{kind}_{area}")?.First, spot, d == Dir.N ? -985 : 905);
                 r.flipX = d == Dir.W;
-                var light = AddLight(r.gameObject, DoorLight[area], 0.9f, 3.2f);
+                var light = AddLight(r.gameObject, LandLook.Torch((Biome)area), 0.9f, 3.2f);
                 light.transform.position = at;
                 var bars = Sprite("Bars", SpriteSheet.Load($"door_bars_{kind}")?.First, r.transform.localPosition, r.sortingOrder + 1);
                 bars.flipX = d == Dir.W;

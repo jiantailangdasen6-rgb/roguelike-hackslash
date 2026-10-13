@@ -52,10 +52,11 @@ namespace Game.Core
         }
 
         /// <summary>Generates an area's map and its room states (nothing moves yet).</summary>
-        private void BuildArea(int area)
+        private void BuildArea(int area, Biome? biome = null)
         {
             Area = area;
-            Map = DungeonMap.Generate(MapSeed, area);
+            var land = SetRoute(area, biome); // RunSimulation.Route.cs
+            Map = DungeonMap.Generate(MapSeed, area, land);
             RoomStates.Clear();
             foreach (var r in Map.Rooms)
             {
@@ -122,7 +123,7 @@ namespace Game.Core
             ClearBursts();
 
             SplitAreaEntered();
-            Events.Add(new SimEvent(SimEventType.RoomStarted) { Int = Area * RoomsPerArea, Id = arrival.Id, Seed = MapSeed });
+            Events.Add(new SimEvent(SimEventType.RoomStarted) { Int = Area * RoomsPerArea, Id = arrival.Id, Seed = MapSeed, Value = (int)Biome });
             for (int i = 0; i < Players.Count; i++)
             {
                 var p = Players[i];
@@ -264,7 +265,7 @@ namespace Game.Core
                 RemoveTrialProps();
                 ActiveTrial = BossTrial.None;
                 ClearBursts();
-                // The Lich (and every deep lord after it): the way home and the way deeper both open (RunSimulation.Deep.cs).
+                // The third lord (and every deep lord after it): the way home and the way deeper both open (RunSimulation.Deep.cs).
                 if (Area >= AreaCount - 1) Conquered = true;
                 GrantBlessings();
                 ExitOpen = true;
@@ -304,15 +305,24 @@ namespace Game.Core
             if (!BossDoorOpen) { spot = BossDoorPosition; radius = BossDoorRadius; }
             else if (ExitOpen)
             {
-                // Past the Lich: everyone standing in the way home ends the run in victory.
-                if (OffersHome(Area) && AllAt(HomePosition, ExitRadius * 1.6f))
+                // Two ways: the left one (home past the third lord, otherwise a land) and the right one. Everyone in one.
+                int way = AllAt(HomePosition, ExitRadius * 1.6f) ? 0 : AllAt(ExitPosition, ExitRadius * 1.6f) ? 1 : -1;
+                if (way != _gatherWay) GatherHold = 0f;
+                _gatherWay = way;
+                if (way < 0) return;
+                GatherHold += dt;
+                if (GatherHold < ExitHoldTime) return;
+                GatherHold = 0f;
+                _gatherWay = -1;
+                if (way == 0 && OffersHome(Area))
                 {
-                    GatherHold += dt;
-                    if (GatherHold >= ExitHoldTime) EndInVictory();
+                    EndInVictory();
                     return;
                 }
-                spot = ExitPosition;
-                radius = ExitRadius * 1.6f;
+                BuildArea(Area + 1, WayLand(way));
+                EnterArea(Map.Start);
+                CheckLevelUp();
+                return;
             }
             else return;
 
@@ -331,16 +341,12 @@ namespace Game.Core
             if (GatherHold < ExitHoldTime) return;
             GatherHold = 0f;
 
-            if (!BossDoorOpen)
-            {
-                BossDoorOpen = true;
-                Events.Add(new SimEvent(SimEventType.DoorOpened) { Int = 0, Pos = spot });
-                return;
-            }
-            BuildArea(Area + 1);
-            EnterArea(Map.Start);
-            CheckLevelUp();
+            BossDoorOpen = true;
+            Events.Add(new SimEvent(SimEventType.DoorOpened) { Int = 0, Pos = spot });
         }
+
+        /// <summary>Which way the team is gathering in after the lord (-1 none).</summary>
+        private int _gatherWay = -1;
 
         // ------------------------------------------------------------------ Pedestals
 
@@ -447,7 +453,7 @@ namespace Game.Core
         public void GoToNextArea()
         {
             if (Area >= AreaCount - 1) return;
-            BuildArea(Area + 1);
+            BuildArea(Area + 1, WayLand(0));
             EnterArea(Map.Start);
         }
 

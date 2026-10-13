@@ -112,12 +112,7 @@ namespace Game.Gameplay
             if (d == null || !d.IsSpawned) return _track ?? "music_camp";
             if (d.Phase.Value != RunPhase.Playing) return _track;
             if (d.BossHealth.Value >= 0f) return "music_boss";
-            return d.Area.Value switch
-            {
-                0 => "music_crypt",
-                1 => "music_chapel",
-                _ => "music_abyss",
-            };
+            return BiomeCatalog.Get(d.Biome).Music;
         }
 
         private void Update()

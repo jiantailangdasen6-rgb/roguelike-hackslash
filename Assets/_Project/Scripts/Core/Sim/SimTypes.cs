@@ -306,7 +306,7 @@ namespace Game.Core
         PlayerDowned,    // ClientId, Pos
         PlayerRevived,   // ClientId, Pos
         Teleport,        // ClientId, Pos
-        RoomStarted,     // a new area: Int = area * RoomsPerArea, Id = the room the team arrives in, Seed = map seed
+        RoomStarted,     // a new area: Int = area * RoomsPerArea, Id = the room the team arrives in, Seed = map seed, Value = its land (Biome)
         RoomCleared,     // Int = room index, Id = map room id
         RunEnded,        // Int = 1 victory / 0 defeat
         BossSpawned,     // Id, Pos

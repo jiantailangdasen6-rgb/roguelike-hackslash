@@ -51,7 +51,7 @@ namespace Game.Gameplay
             Set(SimEventType.PlayerDowned, F.Client | F.Pos);
             Set(SimEventType.PlayerRevived, F.Client | F.Pos);
             Set(SimEventType.Teleport, F.Client | F.Pos);
-            Set(SimEventType.RoomStarted, F.Int | F.Id | F.Seed); // a new area: Int = its first room index, Id = arrival room, Seed = map seed
+            Set(SimEventType.RoomStarted, F.Int | F.Id | F.Seed | F.Value); // a new area: Int = its first room index, Id = arrival room, Seed = map seed, Value = its land
             Set(SimEventType.RoomCleared, F.Int | F.Id | F.Value); // Value = RoomKind
             Set(SimEventType.RunEnded, F.Int);
             Set(SimEventType.BossSpawned, F.Id | F.Pos | F.Int);

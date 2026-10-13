@@ -1157,7 +1157,7 @@ namespace Game.Gameplay
             var room = open ? director.LocalRoom : null;
             bool used = room != null && NetPlayer.Local != null && (NetPlayer.Local.UsedPedestals.Value & (1 << room.Id)) != 0;
             int key = room == null ? 0
-                : (room.Id + 1) * 1000 + director.Area.Value * 100 + (used ? 1 : 0) + (director.BossDoorOpen.Value ? 2 : 0) + (director.ExitOpen.Value ? 4 : 0)
+                : (room.Id + 1) * 1000 + director.Area.Value * 100 + director.Ways.Value * 1009 + (used ? 1 : 0) + (director.BossDoorOpen.Value ? 2 : 0) + (director.ExitOpen.Value ? 4 : 0)
                   + (int)(director.MapSeed.Value % 97) * 10000 + director.Keys.Value * 7 + director.UnlockedRooms.Value * 131;
             if (key != _doorsKey)
             {
@@ -1242,23 +1242,29 @@ namespace Game.Gameplay
             {
                 bool home = RunSimulation.OffersHome(area);
                 string all = NetPlayer.All.Count > 1 ? "全員で" : "";
-                // Past the Lich the way on leads into the deep layers (violet), and a golden way leads home.
-                var deepColor = new Color(0.72f, 0.5f, 1f);
-                var mark = CreateMark(room.Origin + RunSimulation.ExitSpot(area), home ? deepColor : new Color(1f, 0.9f, 0.6f), null, RunSimulation.ExitRadius * 1.6f,
-                    home ? $"深層へ\n<size=22><color=#e8e0d4>{all}ここに立つと、さらに深く（魔物はより強い）</color></size>"
-                         : $"奥への道\n<size=22><color=#e8e0d4>{all}ここに立つと次のエリアへ</color></size>", false);
-                mark.Gather = true;
-                mark.Scale = 2.2f;
-                AddLight(mark.Ring, home ? deepColor : new Color(1f, 0.85f, 0.5f), 2.5f, 6f);
-                _doors.Add(mark);
+                // Two ways down, each to a land (in its colour, with its name and what waits there). Past the third
+                // lord the right one leads into the deep layers and a golden way on the left leads home.
+                void Way(Vector2 offset, Color color, string title, string text)
+                {
+                    var mark = CreateMark(room.Origin + offset, color, null, RunSimulation.ExitRadius * 1.6f,
+                        $"{title}\n<size=22><color=#e8e0d4>{text}</color></size>", false);
+                    mark.Gather = true;
+                    mark.Scale = 2.2f;
+                    AddLight(mark.Ring, color, 2.5f, 6f);
+                    _doors.Add(mark);
+                }
+                var right = BiomeCatalog.Get(director.Way(1));
                 if (home)
                 {
-                    var back = CreateMark(room.Origin + RunSimulation.HomeOffset, new Color(1f, 0.85f, 0.45f), null, RunSimulation.ExitRadius * 1.6f,
-                        $"帰還\n<size=22><color=#e8e0d4>{all}ここに立つと踏破して拠点へ</color></size>", false);
-                    back.Gather = true;
-                    back.Scale = 2.2f;
-                    AddLight(back.Ring, new Color(1f, 0.85f, 0.5f), 2.5f, 6f);
-                    _doors.Add(back);
+                    Way(RunSimulation.DeepOffset, new Color(0.72f, 0.5f, 1f), "深層へ", $"{right.Name}\n{all}ここに立つと、さらに深く（魔物はより強い）");
+                    Way(RunSimulation.HomeOffset, new Color(1f, 0.85f, 0.45f), "帰還", $"{all}ここに立つと踏破して拠点へ");
+                }
+                else
+                {
+                    var left = BiomeCatalog.Get(director.Way(0));
+                    Way(RunSimulation.HomeOffset, LandLook.Sign(left.Id), left.Name, $"{left.Hint}\n{all}ここに立って進む");
+                    if (right.Id != left.Id)
+                        Way(RunSimulation.DeepOffset, LandLook.Sign(right.Id), right.Name, $"{right.Hint}\n{all}ここに立って進む");
                 }
             }
         }

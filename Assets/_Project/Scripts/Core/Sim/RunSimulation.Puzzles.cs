@@ -36,9 +36,6 @@ namespace Game.Core
         public static readonly Vector2 CrystalSpot = new(0f, 0.5f);
         public static readonly Vector2 GauntletSpot = new(0f, 0.5f);
 
-        /// <summary>Champions of the mini-boss rooms, per area.</summary>
-        private static readonly EnemyType[] Champions = { EnemyType.DreadKnight, EnemyType.Ghoul, EnemyType.Necromancer };
-
         /// <summary>A new area: its puzzles and walls are new, the old map is of the old area. Keys carry over.</summary>
         private void ResetPuzzles()
         {
@@ -90,7 +87,7 @@ namespace Game.Core
         /// <summary>The champion's room: the champion and an escort sized to who walked in.</summary>
         private void SpawnChampion()
         {
-            var type = Champions[Mathf.Clamp(Room.Area, 0, Champions.Length - 1)];
+            var type = BiomeCatalog.Get(Biome).Champion;
             PendingSpawns.Add(new PendingSpawn { Room = Room.Id, Type = type, Position = Room.Center + new Vector2(0f, 2.5f), Timer = 1.2f, Elite = true, Champion = true });
             Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = Room.Center + new Vector2(0f, 2.5f), Int = (int)type, Value = 1.2f });
             int escort = 1 + PlayersIn(Room) + Room.Area;

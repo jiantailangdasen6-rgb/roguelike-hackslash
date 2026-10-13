@@ -14,13 +14,19 @@ namespace Game.Gameplay
     {
         public static HudView Instance { get; private set; }
 
-        public static readonly string[] AreaNames = { "朽ちた納骨堂", "血塗られた礼拝堂", "奈落の玉座" };
         private static readonly string[] LayerNames = { "第一層", "第二層", "第三層" };
 
-        /// <summary>An area's name; past the third (the deep layers after the Lich) "深層 第N階".</summary>
-        public static string AreaName(int area) => area < AreaNames.Length ? AreaNames[Mathf.Max(0, area)] : $"深層 第{area - AreaNames.Length + 1}階";
+        /// <summary>The land an area of this run is in (the classic order outside a run).</summary>
+        public static string LandName(int area)
+        {
+            var d = RunDirector.Instance;
+            return BiomeCatalog.Get(d != null && d.IsSpawned ? d.BiomeOf(area) : BiomeCatalog.Classic(area)).Name;
+        }
 
-        public static string LayerName(int area) => area < LayerNames.Length ? LayerNames[Mathf.Max(0, area)] : "踏破の先";
+        /// <summary>An area's name: its land, and past the third lord the deep layer too ("深層2・凍てつく霊廟").</summary>
+        public static string AreaName(int area) => area < RunSimulation.AreaCount ? LandName(area) : $"深層{area - RunSimulation.AreaCount + 1}・{LandName(area)}";
+
+        public static string LayerName(int area) => area < LayerNames.Length ? LayerNames[Mathf.Max(0, area)] : $"深層 第{area - LayerNames.Length + 1}階";
 
         private sealed class SkillSlot
         {
@@ -372,8 +378,10 @@ namespace Game.Gameplay
         public static string RoomTitle(int index)
         {
             int area = index / RunSimulation.RoomsPerArea;
-            return index % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1 ? $"{AreaName(area)} ─ 主の間" : AreaName(area);
-
+            // Outside a run (the camp's records) the depth says more than a land.
+            var d = RunDirector.Instance;
+            string name = d != null && d.IsSpawned ? AreaName(area) : LayerName(area);
+            return index % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1 ? $"{name} ─ 主の間" : name;
         }
 
         public static string RoomTitle(MapRoom room) =>
@@ -395,9 +403,6 @@ namespace Game.Gameplay
             };
         }
 
-        private static EnemyDef AreaBoss(int room) =>
-            EnemyCatalog.Get(EnemyCatalog.AreaBosses[Mathf.Clamp(room / RunSimulation.RoomsPerArea, 0, EnemyCatalog.AreaBosses.Length - 1)]);
-
         private void OnEvent(SimEvent e)
         {
             switch (e.Type)
@@ -406,7 +411,8 @@ namespace Game.Gameplay
                 {
                     // A new area: its name, then the map takes over.
                     int area = e.Int / RunSimulation.RoomsPerArea;
-                    _cinematics.Area(LayerName(area), AreaName(area));
+                    // The land comes with the event (the synced route may arrive a moment later).
+                    _cinematics.Area(LayerName(area), BiomeCatalog.Get((Biome)Mathf.RoundToInt(e.Value)).Name);
                     break;
                 }
                 case SimEventType.TeamLevelUp:
@@ -458,7 +464,7 @@ namespace Game.Gameplay
                     else if (e.Int == 2) Banner("宝物庫の扉が開いた", "", 2f);
                     else if (e.Int == 3) Banner("隠し部屋を見つけた", "", 2.4f);
                     else if (e.Int == 4) Banner("主を討った", "帰還するか、さらに深層へ", 3.2f);
-                    else Banner("奥への道が開いた", "", 2.6f);
+                    else Banner("主を討った", "左右の道から次の地を選べ", 3.2f);
                     break;
                 case SimEventType.KeyGained:
                     Banner("鍵を手に入れた", "", 2.4f);
@@ -842,7 +848,7 @@ namespace Game.Gameplay
                         return $"{(room.Dark ? "闇の群れ" : room.Kind == RoomKind.Elite ? "精鋭の群れ" : "魔物の群れ")}  第{Mathf.Max(1, d.WaveOf(room.Id))}波 / {RunSimulation.WaveCountFor(room.Kind, d.Area.Value)}{(room.Dark ? (d.LanternHolder.Value == 0 ? "　<color=#ffd08a>灯りを拾え</color>" : "　<color=#ffd08a>灯りのそばで戦え</color>") : "")}";
                     return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み</color>" : "";
                 case RoomKind.Boss:
-                    if (d.ExitOpen.Value) return Gather(RunSimulation.OffersHome(d.Area.Value) ? (team ? "全員で帰還か深層へ" : "帰還か深層へ") : team ? "全員で奥への道へ" : "奥への道へ");
+                    if (d.ExitOpen.Value) return Gather(RunSimulation.OffersHome(d.Area.Value) ? (team ? "全員で帰還か深層へ" : "帰還か深層へ") : team ? "全員で次の道を選ぶ" : "次の道を選ぶ");
                     return d.IsFighting(room.Id) ? $"{EnemyCatalog.Get(d.BossType.Value).Name}を討て" : "";
                 case RoomKind.MiniBoss:
                     if (d.IsFighting(room.Id)) return "精鋭の主を倒せ";

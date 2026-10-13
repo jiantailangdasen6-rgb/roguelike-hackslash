@@ -15,8 +15,8 @@ namespace Game.Core
         /// <summary>The Lich has fallen this run.</summary>
         public bool Conquered { get; private set; }
 
-        /// <summary>The way on from a beaten lord's hall: the middle, or the right side once the way home is offered too.</summary>
-        public static Vector2 ExitSpot(int area) => area >= AreaCount - 1 ? DeepOffset : ExitOffset;
+        /// <summary>The right-hand way on from a beaten lord's hall (the left one is <see cref="HomeOffset"/>: home, or another land).</summary>
+        public static Vector2 ExitSpot(int area) => DeepOffset;
 
         /// <summary>A beaten final (or deep) lord: home or deeper.</summary>
         public static bool OffersHome(int area) => area >= AreaCount - 1;
@@ -26,9 +26,8 @@ namespace Game.Core
         /// <summary>Deep layer of the current area (1 = the first past the Lich, 0 before).</summary>
         public int DeepLayer => Mathf.Max(0, Area - (AreaCount - 1));
 
-        /// <summary>The lords take turns down in the deep layers.</summary>
-        private EnemyType LordOf(int area) =>
-            area < EnemyCatalog.AreaBosses.Length ? EnemyCatalog.AreaBosses[area] : EnemyCatalog.AreaBosses[(area - EnemyCatalog.AreaBosses.Length) % EnemyCatalog.AreaBosses.Length];
+        /// <summary>Every land has its lord (the deep layers go through the lands again).</summary>
+        private EnemyType LordOf(int area) => BiomeCatalog.Get(BiomeOf(area)).Lord;
 
         /// <summary>Everyone alive stands within <paramref name="radius"/> of a spot.</summary>
         private bool AllAt(Vector2 spot, float radius)

@@ -257,15 +257,10 @@ namespace Game.Core
         public const int GauntletLayout = 14;
 
         /// <summary>Picks the layout for a fight room (never the same twice in a row).</summary>
-        public static int PickFight(GameRandom rng, int area, int previous)
+        public static int PickFight(GameRandom rng, Biome biome, int previous)
         {
-            // Some rooms suit some areas better (pews in the chapel, crystals in the abyss).
-            var pool = area switch
-            {
-                0 => new[] { 1, 2, 3, 4, 5, 6, 7 },
-                1 => new[] { 1, 2, 4, 5, 6, 7, 8, 8 },
-                _ => new[] { 2, 4, 5, 6, 7, 9, 9, 3 },
-            };
+            // Some rooms suit some lands better (pews in the chapel, crystals in the abyss).
+            var pool = BiomeCatalog.Get(biome).FightLayouts;
             int pick;
             int guard = 0;
             do pick = pool[rng.Range(0, pool.Length)];

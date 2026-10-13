@@ -21,6 +21,7 @@ namespace Game.Core
         Crystal, // puzzle: keep the ward crystal whole until the time is up
         Thief,    // puzzle: catch the treasure imp before it gets away
         Gauntlet, // puzzle: through the traps to the plate in the middle
+        Twin,     // puzzle: hold both plates at once until the seal breaks
     }
 
     /// <summary>What a door promises: the team receives it on walking through (Hades-style room choice).</summary>
@@ -127,10 +128,15 @@ namespace Game.Core
         public bool Unlocked;
         /// <summary>Players who used this room's pedestal (each may once).</summary>
         public readonly HashSet<ulong> UsedBy = new();
+        /// <summary>A dark hall (one fight room per area): the lantern lights the way (RunSimulation.Coop).</summary>
+        public bool Dark;
+        /// <summary>Who carries the lantern (client id + 1, 0 = it lies on the floor) and where it is.</summary>
+        public ulong LanternBy;
+        public Vector2 LanternPos;
 
         public int Area => Index / RunSimulation.RoomsPerArea;
         public Vector2 Center => Bounds.center;
-        public bool IsFight => Objective is RoomObjective.Waves or RoomObjective.Survive or RoomObjective.Boss or RoomObjective.Plates or RoomObjective.Crystal or RoomObjective.Thief or RoomObjective.Gauntlet;
+        public bool IsFight => Objective is RoomObjective.Waves or RoomObjective.Survive or RoomObjective.Boss or RoomObjective.Plates or RoomObjective.Crystal or RoomObjective.Thief or RoomObjective.Gauntlet or RoomObjective.Twin;
         /// <summary>Picks and gear swaps wait for this: a fight going on here.</summary>
         public bool Fighting => Active && !Cleared;
     }
@@ -313,6 +319,7 @@ namespace Game.Core
         KeyGained,       // Pos, Int = keys the team holds now, Id = room it came from
         PuzzleEnded,     // Id = room, Int = 1 solved / 0 failed, Pos
         BellRung,        // ClientId = who rang it, Pos = the bell, Int = players called to the campfire
+        Lantern,         // Id = dark hall, Int = 1 picked up (ClientId) / 0 dropped, Pos
         GodSign,         // ClientId, Int = GodSignKind, Id = GodId, Pos, Vec (blessings at work: lightning, a favour awakening...)
     }
 

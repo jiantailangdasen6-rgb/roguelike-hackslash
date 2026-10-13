@@ -299,6 +299,16 @@ namespace Game.Gameplay
                 }
             }
 
+            /// <summary>This bot is the living teammate closest to the dark hall's lantern.</summary>
+            private bool NearestToLantern(RunDirector director, Vector2 pos)
+            {
+                Vector2 lantern = director.LanternPos.Value;
+                float mine = (lantern - pos).sqrMagnitude;
+                foreach (var other in NetPlayer.All)
+                    if (other != _player && !other.Downed.Value && ((Vector2)other.transform.position - lantern).sqrMagnitude < mine) return false;
+                return true;
+            }
+
             /// <summary>Where to walk while nothing is fighting: a pedestal to use, the way down, the next unvisited room, the boss door.</summary>
             private Vector2 Explore(RunDirector director, MapRoom room, Vector2 pos)
             {
@@ -414,8 +424,23 @@ namespace Game.Gameplay
                 }
                 // Boss trials: stand on the unlit sigils, smash the braziers or the soul vessel first.
                 var trial = director.Trial.Value;
+                // Twin plates: in a team each bot keeps to one side; alone, run to whichever is dark.
+                if (fighting && room.Kind == RoomKind.Puzzle && room.Puzzle == PuzzleKind.Twin && NetPlayer.All.Count > 1)
+                {
+                    Vector2 mine = room.Origin + RunSimulation.TwinSpots[_player.Slot.Value % 2];
+                    Vector2 toMine = mine - pos;
+                    Move = toMine.sqrMagnitude > 0.3f ? toMine.normalized : Vector2.zero;
+                    return;
+                }
+                // A dark hall: whoever is nearest goes for the lantern while nobody carries it.
+                if (fighting && room.Dark && director.LanternHolder.Value == 0 && NearestToLantern(director, pos))
+                {
+                    Vector2 toLantern = director.LanternPos.Value - pos;
+                    Move = toLantern.sqrMagnitude > 0.3f ? toLantern.normalized : Vector2.zero;
+                    return;
+                }
                 // Pressure plates: run to the next unlit one.
-                if (fighting && room.Kind == RoomKind.Puzzle && room.Puzzle is PuzzleKind.Plates or PuzzleKind.Gauntlet && view != null && view.Nearest(pos, EnemyType.PressurePlate) is Vector2 plate)
+                if (fighting && room.Kind == RoomKind.Puzzle && room.Puzzle is PuzzleKind.Plates or PuzzleKind.Gauntlet or PuzzleKind.Twin && view != null && view.Nearest(pos, EnemyType.PressurePlate) is Vector2 plate)
                 {
                     Vector2 toPlate = plate - pos;
                     Move = toPlate.sqrMagnitude > 0.3f ? toPlate.normalized : Vector2.zero;

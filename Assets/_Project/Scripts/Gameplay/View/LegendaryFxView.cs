@@ -33,6 +33,7 @@ namespace Game.Gameplay
         private Camera _camera;
         private Sprite _ring;
         private Sprite _dot;
+        private Sprite _bar;
 
         private void OnEnable() => RunDirector.EventReceived += OnEvent;
         private void OnDisable() => RunDirector.EventReceived -= OnEvent;
@@ -42,15 +43,15 @@ namespace Game.Gameplay
             if (e.Type == SimEventType.GodSign && (GodSignKind)e.Int == GodSignKind.Lightning)
             {
                 // The storm god's lightning comes straight down from above the screen.
-                _dot ??= Sprite.Create(Texture2D.whiteTexture, new Rect(0f, 0f, 4f, 4f), new Vector2(0.5f, 0.5f), 4f); // a plain bar: crisp bolts
+                _bar ??= Sprite.Create(Texture2D.whiteTexture, new Rect(0f, 0f, 4f, 4f), new Vector2(0.5f, 0.5f), 4f); // a plain bar: crisp bolts from the sky
                 bool big = e.Value > 0f;
                 Vector2 sky = e.Pos + new Vector2(Random.Range(-1.2f, 1.2f), big ? 9f : 7f);
-                Lightning(sky, e.Pos, big ? new Color(1f, 0.85f, 0.3f) : StormColor, big ? 0.55f : 0.42f, big ? 1.25f : 0.8f, 8);
+                Lightning(sky, e.Pos, big ? new Color(1f, 0.85f, 0.3f) : StormColor, big ? 0.55f : 0.42f, big ? 1.25f : 0.8f, 8, _bar);
                 return;
             }
             if (e.Type != SimEventType.LegendaryProc) return;
             _ring ??= SpriteSheet.Load("fx_revive_ring", quiet: true)?.First;
-            _dot ??= Sprite.Create(Texture2D.whiteTexture, new Rect(0f, 0f, 4f, 4f), new Vector2(0.5f, 0.5f), 4f); // a plain bar: crisp bolts
+            _dot ??= SpriteSheet.Load("fx_circle", quiet: true)?.First;
             var id = (LegendaryId)e.Int;
             bool chain = e.Vec.sqrMagnitude > 0.0001f && (id == LegendaryId.ThunderStaff || id == LegendaryId.None);
             if (chain) Lightning(e.Pos, e.Vec, id == LegendaryId.None ? Bolt : Color.Lerp(Bolt, Legendary, 0.35f));
@@ -72,14 +73,15 @@ namespace Game.Gameplay
         }
 
         /// <summary>A jagged bolt from one point to another, built from thin stretched dots.</summary>
-        private void Lightning(Vector2 from, Vector2 to, Color color, float jitter = 0.4f, float width = 1f, int joints = 6)
+        private void Lightning(Vector2 from, Vector2 to, Color color, float jitter = 0.4f, float width = 1f, int joints = 6, Sprite sprite = null)
         {
             var fx = New(from, 0.32f, color);
             fx.Segments = new List<SpriteRenderer>();
             Vector2 dir = to - from;
             Vector2 normal = new Vector2(-dir.y, dir.x).normalized;
             Vector2 prev = from;
-            float unit = Mathf.Max(0.01f, _dot != null ? _dot.bounds.size.x : 1f);
+            sprite ??= _dot;
+            float unit = Mathf.Max(0.01f, sprite != null ? sprite.bounds.size.x : 1f);
             for (int k = 1; k <= joints; k++)
             {
                 float t = k / (float)joints;
@@ -88,7 +90,7 @@ namespace Game.Gameplay
                 // A pale glow around a white-hot core.
                 foreach (var (thickness, order) in new[] { (0.75f, 4050), (0.28f, 4051) })
                 {
-                    var seg = Child(fx.Root, "Bolt", _dot, order);
+                    var seg = Child(fx.Root, "Bolt", sprite, order);
                     seg.transform.position = (prev + next) * 0.5f;
                     seg.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
                     seg.transform.localScale = new Vector3(d.magnitude / unit + 0.1f, thickness * width * 0.5f / unit, 1f);

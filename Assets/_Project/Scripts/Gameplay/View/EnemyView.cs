@@ -277,6 +277,8 @@ namespace Game.Gameplay
             // Wraiths are half-there, and nearly vanish while gathering for a blink.
             if (s.Type is EnemyType.Wraith or EnemyType.ShadeStalker) tint.a = s.Anim == EnemyAnim.Windup ? 0.3f : 0.78f;
             TrialLook(v, s, def, ref tint);
+            float seen = DarkHallView.Visibility(v.Root.transform.position); // out of the lantern's light in a dark hall: a shadow
+            tint = new Color(tint.r * seen, tint.g * seen, tint.b * Mathf.Lerp(1f, seen, 0.8f), tint.a);
             r.color = tint;
 
             // Status icon over the head: red mark or spinning stun stars.

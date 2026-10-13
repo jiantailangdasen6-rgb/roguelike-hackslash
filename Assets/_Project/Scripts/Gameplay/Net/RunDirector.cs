@@ -47,6 +47,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<bool> MapRevealed = new();
         public readonly NetworkVariable<float> PuzzleValue = new();
         public readonly NetworkVariable<float> PuzzleTime = new();
+        public readonly NetworkVariable<ulong> LanternHolder = new();
+        public readonly NetworkVariable<Vector2> LanternPos = new();
         public readonly NetworkVariable<bool> ExitOpen = new();
         /// <summary>How long the team has gathered at the boss door / the way down.</summary>
         public readonly NetworkVariable<float> GatherHold = new();
@@ -236,7 +238,11 @@ namespace Game.Gameplay
             if (suspended != null && ResumeRun(suspended)) return;
 
             DifficultyLevel.Value = ChosenDifficulty();
-            Sim = new RunSimulation((ulong)DateTime.UtcNow.Ticks, DifficultyLevel.Value);
+            ulong seed = (ulong)DateTime.UtcNow.Ticks;
+            // -startin twin (screenshots): look for a map whose puzzle is the twin plates.
+            if (string.Equals(CommandLine.GetValue("-startin"), "twin", StringComparison.OrdinalIgnoreCase))
+                for (int k = 0; k < 300 && !new RunSimulation(seed).Map.Rooms.Exists(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Twin); k++) seed++;
+            Sim = new RunSimulation(seed, DifficultyLevel.Value);
             Sim.DropChanceScale = CommandLine.GetFloat("-lootrate", 1f);
             Sim.BossStartHealth = CommandLine.GetFloat("-bosshp", 1f);
             int slot = 0;
@@ -258,6 +264,8 @@ namespace Game.Gameplay
                     "crystal" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Crystal) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
                     "thief" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Thief) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
                     "gauntlet" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Gauntlet) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
+                    "twin" => map.Rooms.Find(r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Twin) ?? map.Rooms.Find(r => r.Kind == RoomKind.Puzzle),
+                    "dark" => map.DarkHall,
                     _ => Enum.TryParse(startIn, true, out RoomKind kind) ? map.Rooms.Find(r => r.Kind == kind) : null,
                 };
                 if (room != null) Sim.MoveTeamTo(room);
@@ -461,6 +469,7 @@ namespace Game.Gameplay
                     puzzleTime = Mathf.Ceil(Mathf.Max(0f, r.Target - r.Progress));
                 }
                 if (r.Fighting && r.Objective == RoomObjective.Plates) puzzle = r.Progress;
+                if (r.Fighting && r.Objective == RoomObjective.Twin) puzzle = Quantize(Mathf.Clamp01(r.Progress / Mathf.Max(0.1f, r.Target)));
                 if (r.Fighting && r.Objective == RoomObjective.Thief) puzzleTime = Mathf.Ceil(Mathf.Max(0f, r.Target - r.Progress));
                 waves |= (ulong)Mathf.Min(r.Wave, 15) << (r.Id * 4);
             }
@@ -477,6 +486,10 @@ namespace Game.Gameplay
             SetIfChanged(ExitOpen, Sim.ExitOpen);
             SetIfChanged(GatherHold, Quantize(Sim.GatherHold));
             SetIfChanged(BonusShards, Sim.BonusShards);
+            // The dark hall: who carries the lantern (client + 1), or where it lies (clients follow the carrier themselves).
+            var dark = Sim.DarkRoom;
+            SetIfChanged(LanternHolder, dark?.LanternBy ?? 0ul);
+            if (dark != null && dark.LanternBy == 0) SetIfChanged(LanternPos, dark.LanternPos);
             SetIfChanged(Paused, Sim.AwaitingChoices);
             SetIfChanged(Elapsed, Mathf.Floor(Sim.Elapsed));
             SetIfChanged(Phase, Sim.Phase);

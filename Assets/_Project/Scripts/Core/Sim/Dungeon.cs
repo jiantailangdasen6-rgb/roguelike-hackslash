@@ -29,6 +29,7 @@ namespace Game.Core
         Crystal, // keep the crystal alive while monsters go for it
         Thief,    // catch the imp running off with treasure before it escapes
         Gauntlet, // get through the traps to the plate in the middle
+        Twin,     // two plates far apart, held at the same time (a co-op trial; alone they stay lit a while)
     }
 
     /// <summary>Directions of a room's doors (bit = 1 << dir).</summary>
@@ -56,6 +57,8 @@ namespace Game.Core
         /// <summary>Steps from the start room.</summary>
         public int Depth;
         public PuzzleKind Puzzle;
+        /// <summary>A dark hall: fought by the light of a lantern someone carries.</summary>
+        public bool Dark;
         /// <summary>Monster strength tier for this room (area * 4 + 0..3), the old "room index".</summary>
         public int Index;
         /// <summary>Obstacles and gimmicks, already moved to the room's place in the world.</summary>
@@ -147,6 +150,7 @@ namespace Game.Core
                 if (map.TryBuild(rng, 11 + (area > 0 ? 1 : 0)))
                 {
                     map.AssignLayouts(rng);
+                    map.PickDarkHall(new GameRandom(seed ^ (0xDA4C1E55u * (ulong)(area + 1))));
                     return map;
                 }
             }
@@ -316,7 +320,7 @@ namespace Game.Core
             // No champion and no puzzle (a cramped map): nothing would ever open the treasure room.
             if (treasure != null && !Rooms.Exists(r => r.Kind is RoomKind.MiniBoss or RoomKind.Puzzle)) treasure.Kind = RoomKind.Shrine;
             foreach (var r in Rooms)
-                if (r.Kind == RoomKind.Puzzle) r.Puzzle = (PuzzleKind)rng.Range(0, 4);
+                if (r.Kind == RoomKind.Puzzle) r.Puzzle = (PuzzleKind)rng.Range(0, 5);
 
             int maxDepth = Boss.Depth;
             foreach (var r in Rooms)
@@ -347,7 +351,7 @@ namespace Game.Core
                     RoomKind.Combat or RoomKind.Elite or RoomKind.MiniBoss => Arena.PickFight(rng, Area, previous),
                     RoomKind.Puzzle => r.Puzzle switch
                     {
-                        PuzzleKind.Plates => Arena.PlatesLayout,
+                        PuzzleKind.Plates or PuzzleKind.Twin => Arena.PlatesLayout,
                         PuzzleKind.Thief => 1,
                         PuzzleKind.Gauntlet => Arena.GauntletLayout,
                         _ => 0,
@@ -358,6 +362,17 @@ namespace Game.Core
                 r.Layout = Arena.Get(id).Placed(r.Origin);
             }
         }
+
+        /// <summary>One ordinary fight per area is a dark hall (its own random stream: the rest of the map stays as it was).</summary>
+        private void PickDarkHall(GameRandom rng)
+        {
+            var fights = Rooms.FindAll(r => r.Kind == RoomKind.Combat);
+            if (fights.Count == 0) return;
+            fights[rng.Range(0, fights.Count)].Dark = true;
+        }
+
+        /// <summary>The dark hall of this area, or null.</summary>
+        public MapRoom DarkHall => Rooms.Find(r => r.Dark);
 
         /// <summary>Should never be needed: a straight line start - fights - campfire - boss.</summary>
         private void BuildLine()

@@ -70,6 +70,7 @@ namespace Game.Core
                             PuzzleKind.Plates => RoomObjective.Plates,
                             PuzzleKind.Thief => RoomObjective.Thief,
                             PuzzleKind.Gauntlet => RoomObjective.Gauntlet,
+                            PuzzleKind.Twin => RoomObjective.Twin,
                             _ => RoomObjective.Crystal,
                         },
                         RoomKind.Boss => RoomObjective.Boss,
@@ -78,6 +79,8 @@ namespace Game.Core
                     },
                 };
                 state.Cleared = !state.IsFight;
+                state.Dark = r.Dark;
+                if (state.Dark) ResetLantern(state);
                 if (state.Objective == RoomObjective.Waves)
                 {
                     state.WaveCount = r.Kind == RoomKind.MiniBoss ? 1 : WaveCountFor(r.Kind, area);
@@ -183,7 +186,7 @@ namespace Game.Core
             room.WaveTimer = 1.2f;
             room.SpawnTimer = 1.5f;
             StartHazards(room);
-            if (room.Objective is RoomObjective.Plates or RoomObjective.Crystal or RoomObjective.Thief or RoomObjective.Gauntlet) WakePuzzle(room);
+            if (room.Objective is RoomObjective.Plates or RoomObjective.Crystal or RoomObjective.Thief or RoomObjective.Gauntlet or RoomObjective.Twin) WakePuzzle(room);
             if (room.Objective == RoomObjective.Boss)
             {
                 room.SpawnTimer = 12f;

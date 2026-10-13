@@ -55,10 +55,10 @@ namespace Game.Core
         {
             var props = new List<int>();
             _puzzleProps[room.Id] = props;
-            if (room.Objective is RoomObjective.Plates or RoomObjective.Gauntlet)
+            if (room.Objective is RoomObjective.Plates or RoomObjective.Gauntlet or RoomObjective.Twin)
             {
                 // A gauntlet has one plate, in the middle of its traps.
-                var spots = room.Objective == RoomObjective.Gauntlet ? new[] { GauntletSpot } : PlateSpots;
+                var spots = room.Objective == RoomObjective.Gauntlet ? new[] { GauntletSpot } : room.Objective == RoomObjective.Twin ? TwinSpots : PlateSpots;
                 foreach (var spot in spots)
                 {
                     int id = Enemies.Spawn(EnemyType.PressurePlate, room.Center + spot, 1f, 1f, false);
@@ -68,7 +68,7 @@ namespace Game.Core
                     plate.MaxHealth = 1f;
                     props.Add(id);
                 }
-                room.Target = spots.Length;
+                room.Target = room.Objective == RoomObjective.Twin ? TwinHold : spots.Length;
             }
             else if (room.Objective == RoomObjective.Thief)
             {
@@ -116,6 +116,7 @@ namespace Game.Core
                 if (!room.Fighting || !_puzzleProps.TryGetValue(room.Id, out var props)) continue;
                 Room = room;
                 if (room.Objective is RoomObjective.Plates or RoomObjective.Gauntlet) StepPlates(room, props, dt);
+                else if (room.Objective == RoomObjective.Twin) StepTwin(room, props, dt); // RunSimulation.Coop.cs
                 else if (room.Objective == RoomObjective.Crystal) StepCrystal(room, props, dt);
                 else if (room.Objective == RoomObjective.Thief) StepThief(room, props, dt);
             }

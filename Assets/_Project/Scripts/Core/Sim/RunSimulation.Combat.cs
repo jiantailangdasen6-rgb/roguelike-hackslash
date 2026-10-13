@@ -629,6 +629,12 @@ namespace Game.Core
                 }
             }
             if (e.Marked > 0f) damage *= 1f + e.MarkBonus;
+            // A dark hall: out of the lantern's light, blows mostly glance off (RunSimulation.Coop.cs).
+            if (InDarkness(e) && !e.Def.Prop)
+            {
+                damage *= DarkDamageFactor;
+                flags |= HitFlags.Blocked;
+            }
             // Armoured monsters shrug off blows until a teammate freezes, stuns or marks them.
             if (IsArmored(e) && !disabled && (flags & HitFlags.DamageOverTime) == 0)
             {

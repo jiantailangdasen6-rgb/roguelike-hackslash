@@ -58,6 +58,7 @@ namespace Game.EditorTools.Art
             sheets["prop_crates"] = One(Crates(), new Vector2(0.5f, 0.1f));
             sheets["prop_crystal"] = One(Crystal(), new Vector2(0.5f, 0.06f));
             sheets["prop_font"] = new Sheet { Frames = Font(), Pivot = new Vector2(0.5f, 0.2f) };
+            sheets["prop_lantern"] = new Sheet { Frames = Lantern(), Pivot = new Vector2(0.5f, 0.08f) };
             sheets["trap_spikes"] = new Sheet { Frames = Spikes(), Pivot = new Vector2(0.5f, 0.5f) };
             sheets["trap_vent"] = new Sheet { Frames = Vent(), Pivot = new Vector2(0.5f, 0.1f) };
             return sheets;
@@ -445,6 +446,56 @@ namespace Game.EditorTools.Art
         }
 
         // ------------------------------------------------------------------ Gimmicks
+
+        /// <summary>The dark hall's hand lantern: an iron cage around a flickering flame, a ring to carry it by.</summary>
+        private static List<PixelCanvas> Lantern()
+        {
+            var frames = new List<PixelCanvas>();
+            var glass = new[] { C("#5a2a10"), C("#b8561c"), C("#f09038"), C("#ffd27a"), C("#fff6d8") };
+            for (int f = 0; f < 4; f++)
+            {
+                var c = new PixelCanvas(16, 22);
+                // Handle ring
+                for (int x = 5; x <= 10; x++) c.Set(x, 20, Iron[3]);
+                c.Set(4, 19, Iron[3]); c.Set(11, 19, Iron[2]); c.Set(4, 18, Iron[2]); c.Set(11, 18, Iron[1]);
+                c.Set(6, 21, Iron[4]);
+                // Cap: a little roof
+                HLine(c, 5, 10, 17, Iron[2]);
+                HLine(c, 4, 11, 16, Iron[3]);
+                HLine(c, 3, 12, 15, Iron[2]);
+                c.Set(4, 16, Iron[4]); c.Set(3, 15, Iron[3]);
+                // Glass with the flame inside
+                for (int y = 5; y <= 14; y++)
+                for (int x = 4; x <= 11; x++)
+                {
+                    float dx = (x + 0.5f - 8f) / 3.6f, dy = (y + 0.5f - 8.5f) / 5.5f;
+                    float heat = 1f - Mathf.Clamp01(dx * dx + dy * dy);
+                    int shade = Mathf.Clamp(Mathf.FloorToInt(heat * 3.2f), 0, 3);
+                    c.Set(x, y, glass[shade]);
+                }
+                // Flame: a teardrop that sways a pixel each frame
+                int sway = f == 1 ? 1 : f == 3 ? -1 : 0;
+                for (int y = 6; y <= 8; y++) { c.Set(7, y, glass[4]); c.Set(8, y, glass[4]); }
+                c.Set(7 + Mathf.Max(0, sway), 9, glass[4]);
+                c.Set(7 + Mathf.Max(0, sway) + (sway < 0 ? -1 : 0), 10, glass[4]);
+                c.Set(7 + sway, 11, glass[3]);
+                // Iron bars of the cage
+                for (int y = 5; y <= 14; y++)
+                {
+                    c.Set(3, y, Iron[2]); c.Set(12, y, Iron[1]);
+                    if (y % 3 == 0) { c.Set(7, y, A(Iron[1], 200)); }
+                }
+                c.Set(4, 13, A(glass[4], 255)); c.Set(4, 12, glass[3]); // glint on the glass
+                // Base
+                HLine(c, 3, 12, 4, Iron[3]);
+                HLine(c, 4, 11, 3, Iron[2]);
+                HLine(c, 5, 10, 2, Iron[1]);
+                c.Set(3, 4, Iron[4]);
+                c.Outline(Outline);
+                frames.Add(c);
+            }
+            return frames;
+        }
 
         private static List<PixelCanvas> Font()
         {

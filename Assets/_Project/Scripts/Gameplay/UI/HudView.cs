@@ -270,6 +270,7 @@ namespace Game.Gameplay
             gameObject.AddComponent<BagView>();
             gameObject.AddComponent<LootView>();
             gameObject.AddComponent<LegendaryFxView>();
+            gameObject.AddComponent<DarkHallView>();
             Codex.Recorded += OnCodexRecorded;
             GameSettings.Changed += OnSettingsChanged;
             RunDirector.EventReceived += OnEvent;
@@ -829,7 +830,7 @@ namespace Game.Gameplay
                 case RoomKind.Combat:
                 case RoomKind.Elite:
                     if (d.IsFighting(room.Id))
-                        return $"{(room.Kind == RoomKind.Elite ? "精鋭の群れ" : "魔物の群れ")}  第{Mathf.Max(1, d.WaveOf(room.Id))}波 / {RunSimulation.WaveCountFor(room.Kind, d.Area.Value)}";
+                        return $"{(room.Dark ? "闇の群れ" : room.Kind == RoomKind.Elite ? "精鋭の群れ" : "魔物の群れ")}  第{Mathf.Max(1, d.WaveOf(room.Id))}波 / {RunSimulation.WaveCountFor(room.Kind, d.Area.Value)}{(room.Dark ? (d.LanternHolder.Value == 0 ? "　<color=#ffd08a>灯りを拾え</color>" : "　<color=#ffd08a>灯りのそばで戦え</color>") : "")}";
                     return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み</color>" : "";
                 case RoomKind.Boss:
                     if (d.ExitOpen.Value) return Gather(team ? "全員で奥への道へ" : "奥への道へ");
@@ -844,6 +845,7 @@ namespace Game.Gameplay
                             PuzzleKind.Plates => $"押し板を灯せ　<color=#ffffff>{Mathf.RoundToInt(d.PuzzleValue.Value)}/{RunSimulation.PlateSpots.Length}</color>",
                             PuzzleKind.Thief => $"小鬼を捕まえろ　<color=#ffffff>残り {Mathf.RoundToInt(d.PuzzleTime.Value)}秒</color>",
                             PuzzleKind.Gauntlet => "中央の押し板を踏め",
+                            PuzzleKind.Twin => $"2枚を同時に踏め　<color=#ffffff>{d.PuzzleValue.Value:P0}</color>",
                             _ => $"結晶を守れ　<color=#ffffff>残り {Mathf.RoundToInt(d.PuzzleTime.Value)}秒　結晶 {d.PuzzleValue.Value:P0}</color>",
                         };
                     return d.IsCleared(room.Id) ? "<color=#bfb6aa>仕掛けは終わった</color>" : "";
@@ -919,11 +921,14 @@ namespace Game.Gameplay
             Codex.EnterRoom(room.Kind);
             foreach (var g in room.Layout.Gimmicks) Codex.Record(CodexCatalog.GimmickEntry(g.Kind));
             if (room.Kind == RoomKind.Campfire && NetPlayer.All.Count > 1) Codex.Record(CodexCatalog.GimmickId("Bell"));
+            if (room.Dark) Codex.Record(CodexCatalog.GimmickId("DarkHall"));
+            if (room.Kind == RoomKind.Puzzle && room.Puzzle == PuzzleKind.Twin) Codex.Record(CodexCatalog.GimmickId("TwinPlates"));
             if (room.Kind == RoomKind.Start || !_roomsBannered.Add((d.Area.Value, room.Id))) return;
             string sub = room.Kind == RoomKind.Puzzle
-                ? room.Puzzle switch { PuzzleKind.Plates => "押し板の仕掛け", PuzzleKind.Thief => "逃げる宝の小鬼", PuzzleKind.Gauntlet => "罠の通路", _ => "結晶を守れ" }
+                ? room.Puzzle switch { PuzzleKind.Plates => "押し板の仕掛け", PuzzleKind.Thief => "逃げる宝の小鬼", PuzzleKind.Gauntlet => "罠の通路", PuzzleKind.Twin => "双子の押し板", _ => "結晶を守れ" }
                 : CodexCatalog.Get(CodexCatalog.RoomId(room.Kind))?.Sub ?? "";
-            if (room.Kind != RoomKind.Boss) Banner(RoomCatalog.Name(room.Kind), sub, 2f);
+            if (room.Dark) Banner("闇の間", "灯りを持つ者のそばで戦え", 2.4f);
+            else if (room.Kind != RoomKind.Boss) Banner(RoomCatalog.Name(room.Kind), sub, 2f);
         }
 
         private static string CenterMessage(RunDirector d, NetPlayer local)

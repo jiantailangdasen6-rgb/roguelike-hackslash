@@ -247,6 +247,7 @@ namespace Game.Core
             StepPuzzles(dt);
             StepBell(dt);
             StepGods(dt);
+            StepDark();
             UpdateDoors(dt);
             CheckDefeat();
             CheckLevelUp();
@@ -354,6 +355,7 @@ namespace Game.Core
                         break;
                     }
                     case RoomObjective.Plates:
+                    case RoomObjective.Twin:
                     case RoomObjective.Crystal:
                     {
                         // A steady trickle that keeps the puzzle from being a walk in the park.

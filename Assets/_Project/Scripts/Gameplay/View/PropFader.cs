@@ -29,7 +29,9 @@ namespace Game.Gameplay
                 }
             }
             _alpha = Mathf.MoveTowards(_alpha, hidden ? 0.45f : 1f, Time.deltaTime * 4f);
-            var c = _renderer.color;
+            // Out of the lantern's light in a dark hall, props sink into the dark too.
+            float seen = DarkHallView.Visibility(basePos);
+            var c = new Color(seen, seen, Mathf.Lerp(1f, seen, 0.8f), 1f);
             c.a = _alpha;
             _renderer.color = c;
         }

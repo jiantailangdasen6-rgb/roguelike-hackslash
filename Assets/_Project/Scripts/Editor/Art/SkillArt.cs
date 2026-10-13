@@ -45,13 +45,17 @@ namespace Game.EditorTools.Art
             ClassId.Ranger => C("#2f7a36"),
             ClassId.Guardian => C("#a08530"),
             ClassId.Assassin => C("#5a3290"),
+            ClassId.Alchemist => C("#a85a1c"),
+            ClassId.Deathcaller => C("#2a7a44"),
+            ClassId.Paladin => C("#3a5aa0"),
             _ => C("#a85a1c"),
         };
 
         public static List<PixelCanvas> Icons()
         {
             var icons = new List<PixelCanvas>();
-            foreach (ClassId cls in System.Enum.GetValues(typeof(ClassId)))
+            void AddClass(ClassId cls)
+            {
                 for (int slot = 0; slot < 3; slot++)
                 {
                     var c = Tile(ClassGlow(cls));
@@ -59,6 +63,10 @@ namespace Game.EditorTools.Art
                     Finish(c);
                     icons.Add(c);
                 }
+            }
+            // The first six classes, the dodge and the bag, then the classes added later (ClassCatalog.SkillIcon).
+            foreach (ClassId cls in System.Enum.GetValues(typeof(ClassId)))
+                if ((int)cls < 6) AddClass(cls);
             var dodge = Tile(C("#3a4a5a"));
             Wing(dodge);
             Finish(dodge);
@@ -67,6 +75,8 @@ namespace Game.EditorTools.Art
             Pouch(bag);
             Finish(bag);
             icons.Add(bag);
+            foreach (ClassId cls in System.Enum.GetValues(typeof(ClassId)))
+                if ((int)cls >= 6) AddClass(cls);
             return icons;
         }
 
@@ -132,7 +142,90 @@ namespace Game.EditorTools.Art
                 case (ClassId.Alchemist, 0): Flask(c, 16, 12, Green, GreenDark); ThrowArc(c); break;
                 case (ClassId.Alchemist, 1): Flask(c, 16, 10, Amber, Red); Flames(c, 16, 22); break;
                 case (ClassId.Alchemist, 2): Flask(c, 16, 11, Red, RedDark); Plus(c, 16, 12, White); break;
+                case (ClassId.Deathcaller, 0): SoulBolt(c); break;
+                case (ClassId.Deathcaller, 1): RisingSkull(c); break;
+                case (ClassId.Deathcaller, 2): CurseSigil(c); break;
+                case (ClassId.Paladin, 0): Slashes(c, Gold, 2); Sword(c, 9, 7, 23, 21); break;
+                case (ClassId.Paladin, 1): Judgment(c); break;
+                case (ClassId.Paladin, 2): Tether(c); break;
             }
+        }
+
+        // ------------------------------------------------------------------ Deathcaller and paladin
+
+        private static readonly Color32 Soul = C("#8cffb0");
+        private static readonly Color32 SoulDark = C("#2a8a5a");
+        private static readonly Color32 Bone = C("#e8dfc8");
+        private static readonly Color32 BoneDark = C("#9a8f74");
+
+        /// <summary>A green soul flame flying right, its tail of wisps behind.</summary>
+        private static void SoulBolt(PixelCanvas c)
+        {
+            for (int k = 0; k < 4; k++) c.Disc(8 + k * 3, 14 + (k % 2), 1.2f + k * 0.4f, k < 2 ? SoulDark : Soul);
+            c.Disc(22, 16, 4.6f, Soul);
+            c.Disc(23, 16.5f, 2.6f, C("#e0ffe8"));
+            c.Set(18, 20, Soul); c.Set(17, 11, Soul);
+        }
+
+        /// <summary>A skull rising out of the ground, green fire in its eyes.</summary>
+        private static void RisingSkull(PixelCanvas c)
+        {
+            c.Rect(5, 5, 22, 3, SoulDark);
+            c.Line(7, 8, 10, 6, Soul); c.Line(25, 8, 22, 6, Soul);
+            c.Disc(16, 17, 7f, Bone);
+            c.Rect(11, 9, 11, 5, Bone);
+            c.Rect(19, 9, 3, 5, BoneDark);
+            c.Disc(13, 17, 2.2f, Ink); c.Disc(19.5f, 17, 2.2f, Ink);
+            c.Set(13, 17, Soul); c.Set(19, 17, Soul);
+            c.Set(16, 14, Ink); c.Set(16, 13, Ink);
+            for (int x = 12; x <= 20; x += 2) c.Set(x, 10, Ink);
+        }
+
+        /// <summary>A violet ring of curse runes around a dripping eye.</summary>
+        private static void CurseSigil(PixelCanvas c)
+        {
+            c.Ring(16, 16, 10f, 11.2f, Purple);
+            for (int k = 0; k < 6; k++)
+            {
+                float a = k * Mathf.PI / 3f;
+                c.Rect(16 + Mathf.RoundToInt(Mathf.Cos(a) * 10.5f) - 1, 16 + Mathf.RoundToInt(Mathf.Sin(a) * 10.5f) - 1, 3, 3, PurpleDark);
+            }
+            for (int x = 8; x <= 24; x++)
+            {
+                float h = 4.2f * Mathf.Sin(Mathf.PI * (x - 8) / 16f);
+                for (int y = Mathf.RoundToInt(16 - h); y <= Mathf.RoundToInt(16 + h); y++) c.Set(x, y, C("#d8c8e8"));
+            }
+            c.Disc(16, 16, 3.4f, PurpleDark);
+            c.Disc(16, 16, 2.2f, Purple);
+            c.Rect(16, 13, 1, 7, Ink);
+            c.Rect(15, 8, 2, 4, Purple); c.Set(15, 7, Purple);
+        }
+
+        /// <summary>A shaft of light falling onto a gold ring on the ground.</summary>
+        private static void Judgment(PixelCanvas c)
+        {
+            c.Ring(16, 9, 7f, 8.2f, Gold);
+            for (int y = 9; y < 29; y++)
+            {
+                int half = 3 + (y < 14 ? 0 : 1);
+                for (int x = 16 - half; x <= 16 + half; x++) c.Set(x, y, Mathf.Abs(x - 16) <= 1 ? White : C("#fff3c0"));
+            }
+            foreach (var (x, y) in new[] { (7, 20), (25, 22), (9, 26), (24, 14) }) { c.Set(x, y, Gold); c.Set(x + 1, y, Gold); c.Set(x, y + 1, Gold); }
+        }
+
+        /// <summary>Two figures bound by a golden chain of light.</summary>
+        private static void Tether(PixelCanvas c)
+        {
+            void Figure(int x, Color32 col)
+            {
+                c.Disc(x, 21, 3f, col);
+                c.Rect(x - 3, 7, 7, 11, col);
+                c.Rect(x - 2, 4, 2, 3, col); c.Rect(x + 1, 4, 2, 3, col);
+            }
+            Figure(8, Steel);
+            Figure(24, C("#9ad0ff"));
+            for (int x = 11; x <= 21; x++) c.Set(x, 15 + ((x / 2) % 2), x % 3 == 0 ? White : Gold);
+            c.Disc(16, 15.5f, 2f, White);
         }
 
         // ------------------------------------------------------------------ Symbols

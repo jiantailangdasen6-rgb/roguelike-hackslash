@@ -135,6 +135,8 @@ namespace Game.Gameplay
             ClassId.Guardian => new Color(0.85f, 0.75f, 0.4f),
             ClassId.Assassin => new Color(0.55f, 0.35f, 0.85f),
             ClassId.Alchemist => new Color(0.85f, 0.5f, 0.2f),
+            ClassId.Deathcaller => new Color(0.45f, 0.8f, 0.5f),
+            ClassId.Paladin => new Color(0.55f, 0.75f, 1f),
             _ => new Color(0.7f, 0.6f, 0.4f),
         };
 

@@ -64,7 +64,7 @@ namespace Game.Core
                 Q("m2", QuestGiver.Master, "氷を割れ", "凍った敵を強打で砕く", QuestGoal.Shatter, 10, 50),
                 Q("m3", QuestGiver.Master, "納骨堂の主", "骸骨の騎士王を討つ", QuestGoal.KillBoss, 1, 70, T(EnemyType.BoneKing), unlock: "class_guardian", unlockName: "新クラス「守護騎士」"),
                 Q("m4", QuestGiver.Master, "鎧を崩せ", "亡者の騎士を倒す", QuestGoal.Kill, 6, 70, T(EnemyType.DreadKnight)),
-                Q("m5", QuestGiver.Master, "血の司教", "血の司教を討つ", QuestGoal.KillBoss, 1, 100, T(EnemyType.BloodBishop)),
+                Q("m5", QuestGiver.Master, "血の司教", "血の司教を討つ", QuestGoal.KillBoss, 1, 100, T(EnemyType.BloodBishop), unlock: "class_paladin", unlockName: "新クラス「聖騎士」"),
                 Q("m6", QuestGiver.Master, "冥王", "冥王リッチを討つ", QuestGoal.KillBoss, 1, 150, T(EnemyType.Lich)),
             },
             new[]
@@ -73,7 +73,7 @@ namespace Game.Core
                 Q("c2", QuestGiver.Crone, "火遊び", "火薬樽を爆発させる", QuestGoal.ExplodeKeg, 6, 50),
                 Q("c3", QuestGiver.Crone, "膨れの毒袋", "腐れ膨れを倒す", QuestGoal.Kill, 10, 60, T(EnemyType.Bloater), unlock: "class_alchemist", unlockName: "新クラス「錬金術師」"),
                 Q("c4", QuestGiver.Crone, "急所を突け", "会心の一撃を当てる", QuestGoal.Crit, 80, 70, unlock: "soul_lantern", unlockName: "お守り「魂の灯籠」"),
-                Q("c5", QuestGiver.Crone, "霊の残り香", "怨霊と死霊術師を倒す", QuestGoal.Kill, 12, 90, T(EnemyType.Wraith, EnemyType.Necromancer)),
+                Q("c5", QuestGiver.Crone, "霊の残り香", "怨霊と死霊術師を倒す", QuestGoal.Kill, 12, 90, T(EnemyType.Wraith, EnemyType.Necromancer), unlock: "class_deathcaller", unlockName: "新クラス「死霊術師」"),
             },
             new[]
             {

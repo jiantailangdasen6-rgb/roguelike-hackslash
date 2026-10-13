@@ -46,6 +46,16 @@ namespace Game.Core
             new() { Id = "alchemist_1", Class = ClassId.Alchemist, Index = 1, Name = "翡翠の薬師", Cost = 60 },
             new() { Id = "alchemist_2", Class = ClassId.Alchemist, Index = 2, Name = "紫煙の調合師", Cost = 90 },
             new() { Id = "alchemist_3", Class = ClassId.Alchemist, Index = 3, Name = "黄金の賢者", Cost = 120 },
+
+            new() { Id = "deathcaller_0", Class = ClassId.Deathcaller, Index = 0, Name = "墓所の死霊術師", Cost = 0 },
+            new() { Id = "deathcaller_1", Class = ClassId.Deathcaller, Index = 1, Name = "血の降霊師", Cost = 60 },
+            new() { Id = "deathcaller_2", Class = ClassId.Deathcaller, Index = 2, Name = "灰の巫女", Cost = 90 },
+            new() { Id = "deathcaller_3", Class = ClassId.Deathcaller, Index = 3, Name = "奈落の導師", Cost = 120 },
+
+            new() { Id = "paladin_0", Class = ClassId.Paladin, Index = 0, Name = "蒼天の聖騎士", Cost = 0 },
+            new() { Id = "paladin_1", Class = ClassId.Paladin, Index = 1, Name = "緋の誓約者", Cost = 60 },
+            new() { Id = "paladin_2", Class = ClassId.Paladin, Index = 2, Name = "黒曜の審問官", Cost = 90 },
+            new() { Id = "paladin_3", Class = ClassId.Paladin, Index = 3, Name = "白百合の騎士", Cost = 120 },
         };
 
         public const int PerClass = 4;

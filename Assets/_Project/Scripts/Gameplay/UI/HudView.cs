@@ -276,6 +276,7 @@ namespace Game.Gameplay
             gameObject.AddComponent<LootView>();
             gameObject.AddComponent<LegendaryFxView>();
             gameObject.AddComponent<DarkHallView>();
+            gameObject.AddComponent<TetherView>();
             Codex.Recorded += OnCodexRecorded;
             GameSettings.Changed += OnSettingsChanged;
             RunDirector.EventReceived += OnEvent;
@@ -669,8 +670,8 @@ namespace Game.Gameplay
                     var icons = SpriteSheet.Load("icons_skill")?.Sprites("default");
                     if (icons != null)
                     {
-                        for (int s = 0; s < 3; s++) _skills[s].Icon.sprite = icons[Mathf.Min((int)def.Id * 3 + s, icons.Length - 1)];
-                        _skills[3].Icon.sprite = icons[Mathf.Min(18, icons.Length - 1)];
+                        for (int s = 0; s < 3; s++) _skills[s].Icon.sprite = icons[Mathf.Min(ClassCatalog.SkillIcon(def.Id, s), icons.Length - 1)];
+                        _skills[3].Icon.sprite = icons[Mathf.Min(ClassCatalog.DodgeIcon, icons.Length - 1)];
                     }
                 }
                 float max = Mathf.Max(1f, local.MaxHp.Value);

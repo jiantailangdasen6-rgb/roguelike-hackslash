@@ -25,7 +25,7 @@ namespace Game.Tests
         {
             Assert.AreEqual(20, ItemCatalog.Affixes.Length);
             Assert.AreEqual(20, ItemCatalog.Affixes.Select(a => a.Id).Distinct().Count());
-            Assert.AreEqual(12, ItemCatalog.Legendaries.Length);
+            Assert.AreEqual(2 * System.Enum.GetValues(typeof(ClassId)).Length, ItemCatalog.Legendaries.Length);
             foreach (ClassId c in System.Enum.GetValues(typeof(ClassId)))
                 Assert.AreEqual(2, ItemCatalog.Legendaries.Count(l => l.Class == c), $"{c} has two legendaries");
             foreach (var a in ItemCatalog.Affixes)

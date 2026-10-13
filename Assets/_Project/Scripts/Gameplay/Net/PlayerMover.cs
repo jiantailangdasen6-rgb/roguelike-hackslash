@@ -500,11 +500,11 @@ namespace Game.Gameplay
                 {
                     Vector2 to = nearest.Value - pos;
                     Aim = to;
-                    bool melee = _player.Class.Value is ClassId.Warrior or ClassId.Guardian or ClassId.Assassin;
+                    bool melee = _player.Class.Value is ClassId.Warrior or ClassId.Guardian or ClassId.Assassin or ClassId.Paladin;
                     float want = melee ? 1.4f : 5.5f;
                     float d = to.magnitude;
                     Move = d > want + 0.5f ? to.normalized : d < want - 1f ? -to.normalized : new Vector2(-to.y, to.x).normalized * 0.4f;
-                    Attack = d < (melee ? 2.2f : _player.Class.Value == ClassId.Alchemist ? 8f : 10f);
+                    Attack = d < (melee ? 2.2f : _player.Class.Value is ClassId.Alchemist or ClassId.Deathcaller ? 8f : 10f);
                 }
                 else
                 {

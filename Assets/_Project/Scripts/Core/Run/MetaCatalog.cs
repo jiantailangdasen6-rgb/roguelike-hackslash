@@ -95,6 +95,22 @@ namespace Game.Core
             new() { Id = "x_area", Class = ClassId.Alchemist, Name = "大きな瓶", Text = "スキルと攻撃の範囲 +10%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Area, ModifierKind.PercentAdd, 0.1f) },
             new() { Id = "x_twin", Class = ClassId.Alchemist, Name = "技：二本投げ", Text = "パーク「二本投げ」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.TwinFlask },
             new() { Id = "x_start", Class = ClassId.Alchemist, Name = "秘伝の書", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+
+            // Deathcaller
+            new() { Id = "d_hp", Class = ClassId.Deathcaller, Name = "屍の契り", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "d_might", Class = ClassId.Deathcaller, Name = "死霊術の研鑽", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
+            new() { Id = "d_plague", Class = ClassId.Deathcaller, Name = "技：疫病の呪い", Text = "パーク「疫病の呪い」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.PlagueCurse },
+            new() { Id = "d_cd", Class = ClassId.Deathcaller, Name = "冥府の門", Text = "スキルのクールダウン −8%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Cooldown, ModifierKind.PercentAdd, -0.08f) },
+            new() { Id = "d_storm", Class = ClassId.Deathcaller, Name = "技：骨の嵐", Text = "パーク「骨の嵐」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Bonestorm },
+            new() { Id = "d_start", Class = ClassId.Deathcaller, Name = "禁書", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+
+            // Paladin
+            new() { Id = "p_hp", Class = ClassId.Paladin, Name = "聖なる体", Text = "レベルごとの最大HP成長 +4", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 4f },
+            new() { Id = "p_might", Class = ClassId.Paladin, Name = "剣の誓い", Text = "レベルごとの攻撃力成長 +1.2%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.012f },
+            new() { Id = "p_martyr", Class = ClassId.Paladin, Name = "技：殉教", Text = "パーク「殉教」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Martyr },
+            new() { Id = "p_armor", Class = ClassId.Paladin, Name = "聖印の鎧", Text = "防御 +2", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Armor, ModifierKind.Flat, 2f) },
+            new() { Id = "p_radiance", Class = ClassId.Paladin, Name = "技：光輝", Text = "パーク「光輝」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Radiance },
+            new() { Id = "p_start", Class = ClassId.Paladin, Name = "叙任", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
         };
 
         public static readonly TrinketDef[] Trinkets =
@@ -300,6 +316,9 @@ namespace Game.Core
                 p.quests ??= new QuestLog();
                 p.quests.Repair();
                 if (!Enum.IsDefined(typeof(Difficulty), p.difficulty)) p.difficulty = Difficulty.Normal;
+                // Classes added later are the rewards of requests some players have already turned in.
+                if (p.quests.Step(QuestGiver.Crone) >= 5 && !p.unlocked.Contains(ClassCatalog.UnlockId(ClassId.Deathcaller))) p.unlocked.Add(ClassCatalog.UnlockId(ClassId.Deathcaller));
+                if (p.quests.Step(QuestGiver.Master) >= 5 && !p.unlocked.Contains(ClassCatalog.UnlockId(ClassId.Paladin))) p.unlocked.Add(ClassCatalog.UnlockId(ClassId.Paladin));
                 return p;
             }
             catch (Exception)

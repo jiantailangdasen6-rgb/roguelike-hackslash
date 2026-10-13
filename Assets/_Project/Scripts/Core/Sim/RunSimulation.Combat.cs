@@ -164,7 +164,8 @@ namespace Game.Core
                     break;
                 }
                 default:
-                    BasicNewClass(p, dir, might, area); // RunSimulation.Classes.cs
+                    if (c.Id >= ClassId.Deathcaller) BasicRound5(p, dir, might, area); // RunSimulation.Round5.cs
+                    else BasicNewClass(p, dir, might, area); // RunSimulation.Classes.cs
                     break;
             }
             BlessingOnBasic(p);
@@ -212,7 +213,7 @@ namespace Game.Core
                     break;
                 }
                 default:
-                    cd = Skill1NewClass(p, dir, cd); // RunSimulation.Classes.cs
+                    cd = c.Id >= ClassId.Deathcaller ? Skill1Round5(p, dir, cd) : Skill1NewClass(p, dir, cd);
                     break;
             }
 
@@ -311,7 +312,8 @@ namespace Game.Core
                     break;
                 }
                 default:
-                    Skill2NewClass(p, dir, area); // RunSimulation.Classes.cs
+                    if (c.Id >= ClassId.Deathcaller) Skill2Round5(p, dir, area); // RunSimulation.Round5.cs
+                    else Skill2NewClass(p, dir, area); // RunSimulation.Classes.cs
                     break;
             }
 
@@ -512,6 +514,7 @@ namespace Game.Core
             if (owner == null) return;
             ref var e = ref Enemies[index];
 
+            if (proj.Kind == ProjectileKind.SoulBolt && owner.PerkLevel(PerkId.SoulSiphon) > 0) owner.Heal(owner.PerkLevel(PerkId.SoulSiphon)); // deathcaller
             int ignite = owner.PerkLevel(PerkId.Ignite);
             if (proj.Kind == ProjectileKind.Bolt && ignite > 0 && !e.Dead)
             {
@@ -587,6 +590,7 @@ namespace Game.Core
                 case StatusKind.Marked: e.Marked = Mathf.Max(e.Marked, duration); break;
                 case StatusKind.Burning: e.Burning = Mathf.Max(e.Burning, duration); break;
                 case StatusKind.Poisoned: e.Poisoned = Mathf.Max(e.Poisoned, duration); break;
+                case StatusKind.Cursed: e.Cursed = Mathf.Max(e.Cursed, duration); break;
             }
             Events.Add(new SimEvent(SimEventType.StatusApplied) { Id = e.Id, Int = (int)status, Value = duration });
         }
@@ -636,6 +640,7 @@ namespace Game.Core
                 }
             }
             if (e.Marked > 0f) damage *= 1f + e.MarkBonus;
+            if (e.Cursed > 0f) damage *= 1f + ClassCatalog.CurseDamageBonus; // a deathcaller's curse
             // A dark hall: out of the lantern's light, blows mostly glance off (RunSimulation.Coop.cs).
             if (InDarkness(e) && !e.Def.Prop)
             {
@@ -699,6 +704,10 @@ namespace Game.Core
                 if (attacker != null && !e.Def.Prop)
                 {
                     BlessingOnKill(attacker, e.Position, e.Burning > 0f, wasFrozen, _burstDepth);
+                    int steel = attacker.PerkLevel(PerkId.BlessedSteel); // paladin: a kill heals the teammates around
+                    if (steel > 0)
+                        foreach (var mate in Players)
+                            if (mate.Alive && (mate.Position - attacker.Position).sqrMagnitude <= 36f) mate.Heal(3f * steel);
                     float heal = 3f * attacker.PerkLevel(PerkId.Lifesteal) + attacker.HealOnKill + attacker.Stats.Get(StatType.KillHeal);
                     if (heal > 0f) attacker.Heal(heal);
                     float killShield = attacker.Stats.Get(StatType.KillShield);
@@ -733,6 +742,11 @@ namespace Game.Core
                 bool vanished = _vanished.Remove(e.Id); // a mimic's chest: no treasure, the mimic stands in its place
                 Events.Add(new SimEvent(SimEventType.EnemyDied) { Id = e.Id, Pos = e.Position, Int = (int)e.Type, Value = giveXp && !vanished ? 0f : 1f });
                 if (vanished) continue;
+                if (def.Friendly)
+                {
+                    if (giveXp) ServantGone(e); // RunSimulation.Round5.cs
+                    continue;
+                }
                 if (!giveXp) continue;
                 if (def.Prop)
                 {
@@ -747,6 +761,7 @@ namespace Game.Core
                 RollLoot(e);
                 if (def.Type == EnemyType.TreasureImp) ImpCaught(e);
                 if (def.Type == EnemyType.Mimic) MimicSlain(e);
+                if (e.Cursed > 0f && e.CursedBy != 0) CursedFell(e); // rises as a servant
                 if (!def.Boss && DifficultyDef.Has(DifficultyMod.Vengeance))
                     QueueBurst(e.Position, DifficultyCatalog.VengeanceRadius, DifficultyCatalog.VengeanceDelay, DifficultyCatalog.VengeanceDamage * EnemyDamageScale, AreaKind.SoulBurst);
                 int xp = def.Xp * (e.Elite ? EnemyCatalog.EliteXpMultiplier : 1);

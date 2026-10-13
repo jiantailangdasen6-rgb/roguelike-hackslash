@@ -34,6 +34,10 @@ namespace Game.Core
         Mist,           // assassin: smoke twice as wide, sure crits last longer
         Inferno,        // alchemist: a bigger, longer fire pool
         BlessedRain,    // alchemist: the healing potion also shields
+        BoneThrone,     // deathcaller: servants twice as tough and strong
+        Underworld,     // deathcaller: a wider curse, and every cursed monster rises as a servant
+        Scales,         // paladin: devotion binds two teammates
+        Sunburst,       // paladin: judgment falls three times
     }
 
     /// <summary>A random property an item can roll. Values scale up with item level.</summary>
@@ -117,9 +121,9 @@ namespace Game.Core
             new("dodgestrike", StatType.DodgeStrike, ModifierKind.Flat, 0.30f, 0.60f, 8),
         };
 
-        // By ClassId: warrior, mage, ranger, guardian, assassin, alchemist.
-        private static readonly string[] WornWeapon = { "古びた長剣", "古びた杖", "古びた弓", "古びた戦鎚", "古びた双剣", "使い古しの薬瓶" };
-        private static readonly string[] KeenWeapon = { "鋭い戦斧", "水晶の杖", "狩人の長弓", "聖なる戦鎚", "影の双剣", "賢者の薬瓶" };
+        // By ClassId: warrior, mage, ranger, guardian, assassin, alchemist, deathcaller, paladin.
+        private static readonly string[] WornWeapon = { "古びた長剣", "古びた杖", "古びた弓", "古びた戦鎚", "古びた双剣", "使い古しの薬瓶", "古びた骨の杖", "古びた片手剣" };
+        private static readonly string[] KeenWeapon = { "鋭い戦斧", "水晶の杖", "狩人の長弓", "聖なる戦鎚", "影の双剣", "賢者の薬瓶", "魂火の杖", "聖剣" };
 
         /// <summary>Two bases per slot. Order is part of the wire format.</summary>
         public static readonly ItemBaseDef[] Bases =
@@ -148,6 +152,10 @@ namespace Game.Core
             new() { Id = LegendaryId.Mist, Class = ClassId.Assassin, Name = "霧の", Text = "煙玉の範囲が2倍、必中会心の時間+2秒" },
             new() { Id = LegendaryId.Inferno, Class = ClassId.Alchemist, Name = "業火の", Text = "火炎瓶の燃える床が1.6倍の広さになり、2秒長く燃える" },
             new() { Id = LegendaryId.BlessedRain, Class = ClassId.Alchemist, Name = "慈雨の", Text = "回復薬を浴びた仲間に25のシールドも与える" },
+            new() { Id = LegendaryId.BoneThrone, Class = ClassId.Deathcaller, Name = "屍王の", Text = "骨の兵の体力と攻撃が2倍になる" },
+            new() { Id = LegendaryId.Underworld, Class = ClassId.Deathcaller, Name = "冥界の", Text = "死の呪いの範囲が1.6倍、呪われた敵は倒れると必ず骨の兵になる" },
+            new() { Id = LegendaryId.Scales, Class = ClassId.Paladin, Name = "天秤の", Text = "献身で2人の仲間とつながる" },
+            new() { Id = LegendaryId.Sunburst, Class = ClassId.Paladin, Name = "日輪の", Text = "裁きの光が3回続けて落ちる" },
         };
 
         public static LegendaryDef GetLegendary(LegendaryId id)

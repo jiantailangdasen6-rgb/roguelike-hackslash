@@ -64,6 +64,12 @@ namespace Game.Core
         public float Stunned;
         /// <summary>A ghost (downed player) hovers close: slowed for this long.</summary>
         public float Haunted;
+        /// <summary>Cursed by a deathcaller (RunSimulation.Deathcaller): takes more damage, rises as a servant when slain.</summary>
+        public float Cursed;
+        public ulong CursedBy;
+        /// <summary>A bone servant: whose (client + 1) and how long it has left.</summary>
+        public ulong Master;
+        public float Life;
         public float Burning;
         public float BurnDps;
         public float Poisoned;
@@ -206,7 +212,7 @@ namespace Game.Core
             foreach (int i in _candidates)
             {
                 ref var e = ref _enemies[i];
-                if (e.Dead || e.Def.Untargetable) continue;
+                if (e.Dead || e.Def.Untargetable || e.Def.Friendly) continue; // bone servants are on the players' side
                 float r = radius + e.Radius;
                 if ((e.Position - center).sqrMagnitude <= r * r) results.Add(i);
             }
@@ -233,7 +239,7 @@ namespace Game.Core
             float bestSq = maxRange * maxRange;
             for (int i = 0; i < Count; i++)
             {
-                if (_enemies[i].Dead || _enemies[i].Id == exceptId) continue;
+                if (_enemies[i].Dead || _enemies[i].Id == exceptId || _enemies[i].Def.Friendly) continue;
                 float sq = (_enemies[i].Position - position).sqrMagnitude;
                 if (sq < bestSq)
                 {

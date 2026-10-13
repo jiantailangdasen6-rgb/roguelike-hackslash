@@ -34,6 +34,8 @@ namespace Game.Core
         // Room events (round 5)
         Mimic,          // a campfire chest that bites back
         Captive,        // an adventurer in a cage: break the bars to set them free
+        // A deathcaller's summons (on the players' side)
+        BoneServant,
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -94,6 +96,7 @@ namespace Game.Core
         public bool Armored;  // takes much less damage unless frozen, stunned or marked
         public bool Prop;     // a breakable object, not a monster (no AI, no XP)
         public bool Untargetable; // attacks pass through it (floor runes)
+        public bool Friendly;     // on the players' side (a deathcaller's bone servants): untouchable, hunts monsters
         public bool Flat;     // drawn on the floor beneath everything
         public string Title;  // boss subtitle
         public EnemyAttack[] Attacks;
@@ -311,6 +314,12 @@ namespace Game.Core
             {
                 // A fight room's prisoner: break the cage to set them free (they thank the team with gear).
                 Type = EnemyType.Captive, Name = "囚われた冒険者", Sheet = "captive", Health = 45f, Speed = 0f, Radius = 0.6f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // A deathcaller's summon: a skeleton raised on the players' side (RunSimulation.Deathcaller).
+                Type = EnemyType.BoneServant, Name = "骨の兵", Sheet = "bone_servant", Health = 1f, Speed = 3.7f, Radius = 0.36f, Xp = 0, Friendly = true,
                 Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };

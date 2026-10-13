@@ -246,6 +246,11 @@ namespace Game.Core
         public bool RiseUsed;
         public float RiseTimer;
 
+        // Paladin: devotion binds one teammate (two with the "天秤の" sword) by client id + 1.
+        public float DevotionTimer;
+        public ulong DevotedTo;
+        public ulong DevotedTo2;
+
         public bool CanTakePerk(PerkDef def) =>
             (!def.Class.HasValue || def.Class.Value == Class.Id)
             && (!def.Locked || UnlockedPerks.Contains(def.Id))

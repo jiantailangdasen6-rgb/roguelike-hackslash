@@ -9,6 +9,8 @@ namespace Game.Core
         Guardian,
         Assassin,
         Alchemist,
+        Deathcaller, // 死霊術師: calls bone servants, curses (round 5)
+        Paladin,     // 聖騎士: holy sword, judgment, devotion
     }
 
     public enum AbilitySlot : byte
@@ -117,6 +119,30 @@ namespace Game.Core
         public const float PotionRadius = 2.6f;
         public const float PotionHeal = 35f;
 
+        // Deathcaller
+        public const float SoulBoltSpeed = 11f;
+        public const float RaiseRange = 7f;
+        public const int RaiseCount = 2;
+        public const int ServantCap = 4;
+        public const float ServantLife = 14f;
+        public const float ServantDamage = 9f;
+        public const float CurseRange = 8f;
+        public const float CurseRadius = 2.8f;
+        public const float CurseDuration = 6f;
+        public const float CurseDamageBonus = 0.25f;
+
+        // Paladin
+        public const float JudgmentRange = 7.5f;
+        public const float JudgmentRadius = 2f;
+        public const float JudgmentDelay = 0.45f;
+        public const float JudgmentDamage = 30f;
+        public const float JudgmentStun = 0.9f;
+        public const float JudgmentHeal = 18f;
+        public const float DevotionRange = 7f;
+        public const float DevotionDuration = 6f;
+        public const float DevotionShare = 0.5f;
+        public const float DevotionShield = 20f;
+
         // Synergy: heavy hits shatter frozen enemies.
         public const float ShatterMultiplier = 2.5f;
         public const float ShatterRadius = 1.6f;
@@ -171,7 +197,28 @@ namespace Game.Core
                 Skill1Name = "火炎瓶", Skill1Text = "照準地点に火炎瓶を投げ、4秒間燃える床を作る（火薬樽にも火がつく）", Skill1Cooldown = 9f,
                 Skill2Name = "回復薬", Skill2Text = "照準地点に回復薬を投げ、浴びた仲間を癒す。倒れた仲間の復活も早める", Skill2Cooldown = 14f,
             },
+            new()
+            {
+                Id = ClassId.Deathcaller, Name = "死霊術師", Role = "骨の兵を率いる・呪いで弱らせる", Sheet = "deathcaller",
+                Health = 108f, MoveSpeed = 4.5f, Armor = 0f, HealthPerLevel = 5f, MightPerLevel = 0.04f,
+                BasicName = "魂の矢", BasicDamage = 10f, BasicInterval = 0.42f, BasicRange = 9f, BasicArc = 0f,
+                Skill1Name = "骨の兵", Skill1Text = "照準地点に骨の兵を2体呼ぶ（14秒、最大4体）。兵は近くの敵に斬りかかる", Skill1Cooldown = 10f,
+                Skill2Name = "死の呪い", Skill2Text = "照準地点の敵を呪う。呪われた敵は全員から受けるダメージが増え、倒れると骨の兵になる", Skill2Cooldown = 13f,
+            },
+            new()
+            {
+                Id = ClassId.Paladin, Name = "聖騎士", Role = "光で裁き・仲間の傷を肩代わり", Sheet = "paladin",
+                Health = 170f, MoveSpeed = 4.4f, Armor = 3f, HealthPerLevel = 8f, MightPerLevel = 0.03f,
+                BasicName = "聖剣", BasicDamage = 14f, BasicInterval = 0.46f, BasicRange = 2.05f, BasicArc = 115f,
+                Skill1Name = "裁きの光", Skill1Text = "照準地点に光を落とす。敵を打って気絶させ、中の仲間を癒す", Skill1Cooldown = 8f,
+                Skill2Name = "献身", Skill2Text = "近くの仲間と光の鎖でつながる（6秒）。仲間の受けるダメージの半分を肩代わりし、2人にシールド", Skill2Cooldown = 15f,
+            },
         };
+
+        /// <summary>Frame of an ability in the icons_skill sheet: the first six classes, then the dodge and the bag, then the rest.</summary>
+        public static int SkillIcon(ClassId id, int slot) => (int)id < 6 ? (int)id * 3 + slot : 20 + ((int)id - 6) * 3 + slot;
+        public const int DodgeIcon = 18;
+        public const int BagIcon = 19;
 
         public static ClassDef Get(ClassId id) => All[(int)id];
 

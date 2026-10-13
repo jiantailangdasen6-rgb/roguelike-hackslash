@@ -175,11 +175,11 @@ namespace Game.Gameplay
                 var icons = SpriteSheet.Load("icons_skill")?.Sprites("default");
                 if (icons != null)
                 {
-                    int c = (int)local.Class.Value * 3;
-                    Set(_attack, icons[Mathf.Min(c, icons.Length - 1)]);
-                    Set(_skill1, icons[Mathf.Min(c + 1, icons.Length - 1)]);
-                    Set(_skill2, icons[Mathf.Min(c + 2, icons.Length - 1)]);
-                    Set(_dodge, icons[Mathf.Min(18, icons.Length - 1)]);
+                    var cls = local.Class.Value;
+                    Set(_attack, icons[Mathf.Min(ClassCatalog.SkillIcon(cls, 0), icons.Length - 1)]);
+                    Set(_skill1, icons[Mathf.Min(ClassCatalog.SkillIcon(cls, 1), icons.Length - 1)]);
+                    Set(_skill2, icons[Mathf.Min(ClassCatalog.SkillIcon(cls, 2), icons.Length - 1)]);
+                    Set(_dodge, icons[Mathf.Min(ClassCatalog.DodgeIcon, icons.Length - 1)]);
                 }
             }
             var def = local.ClassDef;

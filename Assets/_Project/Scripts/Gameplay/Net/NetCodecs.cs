@@ -127,6 +127,7 @@ namespace Game.Gameplay
         public bool Marked;
         public bool Burning;
         public bool Poisoned;
+        public bool Cursed;
         public float Health; // 0..1
 
         public static EnemyRenderState From(in Enemy e) => new()
@@ -140,6 +141,7 @@ namespace Game.Gameplay
             Marked = e.Marked > 0f,
             Burning = e.Burning > 0f,
             Poisoned = e.Poisoned > 0f,
+            Cursed = e.Cursed > 0f,
             Health = Mathf.Clamp01(e.Health / e.MaxHealth),
         };
     }
@@ -164,7 +166,8 @@ namespace Game.Gameplay
                 w.WriteValueSafe((byte)((byte)s.Type | (s.Elite ? 0x80 : 0)));
                 w.WriteValueSafe((short)Mathf.RoundToInt(s.Position.x * PositionScale));
                 w.WriteValueSafe((short)Mathf.RoundToInt(s.Position.y * PositionScale));
-                byte flags = (byte)((byte)s.Anim & 0x0F);
+                byte flags = (byte)((byte)s.Anim & 0x07); // the anim needs 3 bits; 0x08 is the curse
+                if (s.Cursed) flags |= 0x08;
                 if (s.FacingLeft) flags |= 0x10;
                 if (s.Marked) flags |= 0x20;
                 if (s.Burning) flags |= 0x40;
@@ -192,7 +195,8 @@ namespace Game.Gameplay
                     Type = (EnemyType)(typeAndElite & 0x7F),
                     Elite = (typeAndElite & 0x80) != 0,
                     Position = new Vector2(x / PositionScale, y / PositionScale),
-                    Anim = (EnemyAnim)(flags & 0x0F),
+                    Anim = (EnemyAnim)(flags & 0x07),
+                    Cursed = (flags & 0x08) != 0,
                     FacingLeft = (flags & 0x10) != 0,
                     Marked = (flags & 0x20) != 0,
                     Burning = (flags & 0x40) != 0,

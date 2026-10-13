@@ -33,7 +33,9 @@ namespace Game.Gameplay
         {
             if (item == null) return null;
             int b = ItemCatalog.BaseIndex(item.baseId);
-            int cls = Mathf.Clamp((int)item.classId, 0, WeaponLooks - 1);
+            int cls = Mathf.Max(0, (int)item.classId);
+            // The deathcaller and the paladin (classes 6, 7) have their weapons after the other bases (IconArt.Items).
+            if (b <= 1 && cls >= WeaponLooks) return Frame("icons_item", 2 * WeaponLooks + 6 + b * 2 + Mathf.Min(cls - WeaponLooks, 1));
             int frame = b switch
             {
                 0 => cls,

@@ -274,6 +274,9 @@ namespace Game.Gameplay
             else if (s.Burning) tint = new Color(1f, 0.72f, 0.55f);
             else if (s.Poisoned) tint = new Color(0.72f, 1f, 0.65f);
             else if (s.Elite) tint = new Color(1f, 0.82f, 0.7f);
+            if (s.Cursed) tint = Color.Lerp(tint, new Color(0.78f, 0.55f, 1f), 0.55f); // a deathcaller's curse
+            // A bone servant (on the players' side): pale green, a little see-through.
+            if (def.Friendly) tint = new Color(0.62f, 1f, 0.72f, 0.88f);
             // Wraiths are half-there, and nearly vanish while gathering for a blink.
             if (s.Type is EnemyType.Wraith or EnemyType.ShadeStalker) tint.a = s.Anim == EnemyAnim.Windup ? 0.3f : 0.78f;
             TrialLook(v, s, def, ref tint);

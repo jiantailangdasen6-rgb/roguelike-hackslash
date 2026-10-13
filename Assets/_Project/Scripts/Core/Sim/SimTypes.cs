@@ -152,6 +152,7 @@ namespace Game.Core
         Stunned,
         Burning,
         Poisoned,
+        Cursed,   // a deathcaller's curse
     }
 
     [System.Flags]
@@ -197,6 +198,7 @@ namespace Game.Core
         FireFlask,   // thrown to a spot (no collision), becomes a fire pool
         HealFlask,   // thrown to a spot (no collision), heals there
         Wisp,        // a downed player's ghost: a small soul spark
+        SoulBolt,    // deathcaller basic
     }
 
     public enum AttackAnim : byte
@@ -226,6 +228,13 @@ namespace Game.Core
         FirePool,    // alchemist: burning ground
         Potion,      // alchemist: healing splash
         FlaskBurst,  // alchemist: basic flask bursting
+        // Round 5 classes
+        Raise,        // deathcaller: bone servants rising
+        Curse,        // deathcaller: the curse circle
+        BoneBurst,    // deathcaller: a servant crumbling into shards (bonestorm)
+        JudgmentMark, // paladin: where the light will fall (Value = radius, Size.x = delay)
+        Judgment,     // paladin: the light falls
+        Devotion,     // paladin: the tether (ClientId = paladin, Size.x = bound teammate + 1, Value = seconds)
         // Hostile
         SoulBurst,    // a vengeful dead monster / the Lich's soul
         BloodTorrent, // the Blood Bishop's ritual completed

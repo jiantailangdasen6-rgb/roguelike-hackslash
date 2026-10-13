@@ -166,6 +166,8 @@ namespace Game.EditorTools.Art
                 ClassId.Guardian => C("#d8c070"),
                 ClassId.Assassin => C("#7a4ab0"),
                 ClassId.Alchemist => C("#c87a2a"),
+                ClassId.Deathcaller => C("#4a9a5a"),
+                ClassId.Paladin => C("#7aa0e0"),
                 _ => GoldDark,
             };
 
@@ -256,6 +258,18 @@ namespace Game.EditorTools.Art
                 case PerkId.Remedy: Vial(c, Green, White); Plus(c, 16, 15, White); break;
                 case PerkId.Catalyst: Snowflake(c); Flames(c, 17, 3, Red); break;
                 case PerkId.TwinFlask: Vial(c, Amber, White); Plus(c, 17, 16, Gold); break;
+                // Deathcaller
+                case PerkId.BoneLegion: Skull(c); Plus(c, 18, 17, Green); break;
+                case PerkId.SoulSiphon: Wisp(c); Drop(c, C("#2a8a5a"), C("#8cffb0")); break;
+                case PerkId.PlagueCurse: CursedEye(c); Sparks(c, Toxic); break;
+                case PerkId.Bonestorm: Skull(c); Shards(c, C("#e8dfc8")); Sparks(c, Green); break;
+                // Paladin
+                case PerkId.Zeal: Sunburst(c); Streaks(c, Gold); break;
+                case PerkId.BlessedSteel: Sword(c, 4, 4, 18, 18, White, Gold); SmallHeart(c, 17, 7, Green); break;
+                case PerkId.Martyr: Heart(c, C("#c8c0e8"), White); Plus(c, 12, 12, Gold); break;
+                case PerkId.Radiance: Sword(c, 4, 4, 18, 18, White, Gold); c.Ring(15, 15, 5f, 6f, C("#fff3c0")); Sparks(c, Gold); break;
+                case PerkId.DeathKnell: Hourglass(c); Sparks(c, C("#c58bff")); break;
+                case PerkId.LightShield: Shield(c, C("#fff1c8"), Gold, White); c.Ring(12, 12, 9f, 9.8f, C("#fff3c0")); break;
                 // Gods' blessings
                 case PerkId.FlameBrand: Flames(c, 16, 10, Red); Flames(c, 9, 4, Amber); Sword(c, 4, 4, 18, 18, White, Steel); c.Line(6, 7, 17, 18, Steel); c.Line(7, 7, 18, 18, C("#ffd0a0")); break;
                 case PerkId.FlamePyre: Flames(c, 5, 3, Red); Flames(c, 19, 3, Red); Skull(c); Flames(c, 12, 15, Amber); break;
@@ -492,6 +506,11 @@ namespace Game.EditorTools.Art
             Add(c => { Necklace(c, Gold, GoldDark); c.Disc(12, 8, 3.4f, C("#dfe8ff")); c.Disc(13.6f, 9f, 2.8f, new Color32(0, 0, 0, 0)); }); // moon charm
             Add(c => GearRing(c, C("#c8783a"), C("#7a4018"), Red));                        // copper ring
             Add(c => GearRing(c, C("#dfe4ea"), C("#7a828c"), Blue));                       // silver ring
+            // The deathcaller and the paladin (added later: appended so saved item ids keep their pictures).
+            Add(c => Staff(c, C("#5a5048"), C("#c8c0a8"), C("#e8e0d0")));                   // worn bone staff
+            Add(c => Sword(c, 4, 4, 19, 19, rust, C("#e8dcb0")));                          // worn arming sword
+            Add(c => { Staff(c, C("#2a2030"), C("#7dff9a"), C("#e0ffe0")); Sparks(c, C("#b6ff9a")); }); // soul-flame staff
+            Add(c => { Sword(c, 4, 4, 19, 19, C("#f0f4ff"), Gold); Sparks(c, C("#fff3c0")); }); // holy sword
             return icons;
         }
 

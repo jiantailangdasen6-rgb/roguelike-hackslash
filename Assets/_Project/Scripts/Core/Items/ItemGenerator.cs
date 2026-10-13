@@ -129,6 +129,7 @@ namespace Game.Core
             Put((int)item.classId >> 2, 1);
             Put((int)item.legendary >> 3, 1);
             Put(baseIndex >> 4, 1);
+            Put((int)item.legendary >> 4, 1); // added later (old items read 0)
             return v;
         }
 
@@ -161,6 +162,7 @@ namespace Game.Core
             int classId = classLow | Take(1) << 2;
             int legendary = legendaryLow | Take(1) << 3;
             int baseIndex = baseLow | Take(1) << 4;
+            legendary |= Take(1) << 4;
             if (baseIndex >= ItemCatalog.Bases.Length) return null;
 
             var item = new ItemInstance

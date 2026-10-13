@@ -641,6 +641,57 @@ namespace Game.Gameplay
                     AddLight(boom, new Color(0.7f, 1f, 0.4f), 1.4f, r + 1f);
                     break;
                 }
+                case AreaKind.Raise:
+                {
+                    // Bone servants claw their way up: green soul fire and dust.
+                    var ring = Spawn("fx_circle", e.Pos, 1f, 0.6f, r * 0.4f, r, new Color(0.35f, 1f, 0.5f, 0.5f), order: -300);
+                    ring.FadeOut = true;
+                    AddLight(ring, new Color(0.4f, 1f, 0.55f), 1.6f, r + 2f);
+                    Burst("fx_puff", e.Pos + Vector2.up * 0.3f, 14f, r, new Color(0.45f, 0.55f, 0.45f));
+                    for (int i = 0; i < 6; i++) Shard(e.Pos + Vector2.up * 0.4f, i * 60f + Random.Range(0f, 30f), new Color(0.7f, 1f, 0.75f));
+                    break;
+                }
+                case AreaKind.Curse:
+                {
+                    var ring = Spawn("fx_revive_ring", e.Pos, 1f, 0.9f, r * 0.3f, r, new Color(0.75f, 0.45f, 1f, 0.85f), order: -300);
+                    ring.FadeOut = true;
+                    var ground = Spawn("fx_circle", e.Pos, 1f, 1f, r, r, new Color(0.45f, 0.15f, 0.7f, 0.4f), order: -301);
+                    ground.FadeOut = true;
+                    AddLight(ground, new Color(0.6f, 0.3f, 1f), 1.8f, r + 1.5f);
+                    for (int i = 0; i < 8; i++) Shard(e.Pos + Vector2.up * 0.3f, i * 45f + 10f, new Color(0.8f, 0.6f, 1f));
+                    break;
+                }
+                case AreaKind.BoneBurst:
+                {
+                    for (int i = 0; i < 10; i++) Shard(e.Pos + Vector2.up * 0.4f, i * 36f + Random.Range(0f, 20f), new Color(0.92f, 0.88f, 0.76f));
+                    var ring = Spawn("fx_nova", e.Pos + Vector2.up * 0.3f, 1f, 0.3f, 0.3f, r, new Color(0.7f, 1f, 0.75f, 0.7f));
+                    ring.FadeOut = true;
+                    break;
+                }
+                case AreaKind.JudgmentMark:
+                {
+                    // Where the light will fall: a golden ring that tightens until it strikes.
+                    float delay = Mathf.Max(0.2f, e.Size.x);
+                    var mark = Spawn("fx_revive_ring", e.Pos, 1f, delay, r * 1.3f, r, new Color(1f, 0.85f, 0.4f, 0.85f), order: -300);
+                    mark.FadeOut = false;
+                    var ground = Spawn("fx_circle", e.Pos, 1f, delay, r, r, new Color(1f, 0.85f, 0.45f, 0.2f), order: -301);
+                    ground.FadeOut = false;
+                    break;
+                }
+                case AreaKind.Judgment:
+                {
+                    var column = Spawn("fx_holy", e.Pos + Vector2.up * 1.2f, 14f, 0.8f, r * 0.8f, r * 1.2f, new Color(1f, 0.78f, 0.3f));
+                    column.FadeOut = true;
+                    AddLight(column, new Color(1f, 0.9f, 0.6f), 3.5f, r + 4f);
+                    var flash = Spawn("fx_nova", e.Pos + Vector2.up * 0.2f, 1f, 0.35f, 0.4f, r * 1.1f, new Color(1f, 0.95f, 0.7f, 0.9f));
+                    flash.FadeOut = true;
+                    for (int i = 0; i < 10; i++) Shard(e.Pos + Vector2.up * 0.3f, i * 36f + 10f, new Color(1f, 0.9f, 0.55f));
+                    CameraShake.Add(0.3f);
+                    break;
+                }
+                case AreaKind.Devotion:
+                    TetherView.Bind(e.ClientId, (ulong)Mathf.RoundToInt(e.Size.x) - 1, e.Value);
+                    break;
                 case AreaKind.HolyLight:
                 {
                     var fx = Spawn("fx_holy", e.Pos + Vector2.up * 0.6f, 12f, 1.2f, 1.5f, 2.2f, Color.white);
@@ -736,6 +787,10 @@ namespace Game.Gameplay
                 case ProjectileKind.BloodOrb:
                     fx = Spawn("fx_orb", e.Pos, 12f, e.Value + 0.05f, 1f, 1f, new Color(1f, 0.35f, 0.35f));
                     AddLight(fx, new Color(1f, 0.15f, 0.15f), 1f, 1.5f);
+                    break;
+                case ProjectileKind.SoulBolt:
+                    fx = Spawn("fx_orb", e.Pos, 14f, e.Value + 0.05f, 0.85f, 0.85f, new Color(0.55f, 1f, 0.65f));
+                    AddLight(fx, new Color(0.4f, 1f, 0.55f), 1f, 1.6f);
                     break;
                 case ProjectileKind.Wisp:
                     fx = Spawn("fx_soul", e.Pos, 12f, e.Value + 0.05f, 0.7f, 0.5f, new Color(0.7f, 0.9f, 1f, 0.9f));

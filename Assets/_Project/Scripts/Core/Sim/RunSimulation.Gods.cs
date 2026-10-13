@@ -69,6 +69,8 @@ namespace Game.Core
             _godBursts.Clear();
             _mimicWakes.Clear(); // RunSimulation.Events.cs
             _vanished.Clear();
+            _raises.Clear(); // RunSimulation.Round5.cs
+            _smites.Clear();
         }
 
         private void BlessingTaken(SimPlayer p, PerkId id)

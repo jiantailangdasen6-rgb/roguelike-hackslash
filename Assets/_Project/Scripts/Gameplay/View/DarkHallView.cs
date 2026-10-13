@@ -27,7 +27,7 @@ namespace Game.Gameplay
 
         private void Start()
         {
-            foreach (var l in FindObjectsByType<Light2D>(FindObjectsSortMode.None))
+            foreach (var l in FindObjectsByType<Light2D>())
                 if (l.lightType == Light2D.LightType.Global) _global = l;
 
             _lantern = new GameObject("Lantern");

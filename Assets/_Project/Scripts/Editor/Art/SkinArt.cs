@@ -87,6 +87,39 @@ namespace Game.EditorTools.Art
                             ('w', R("#1a2a12", "#2f4a20", "#4f7a34", "#7aaa4e", "#b6ff4a"))),
                         _ => null,
                     };
+                case ClassId.Deathcaller:
+                    return index switch
+                    {
+                        1 => Over(HeroArt.DeathcallerBase(), // 血の降霊師
+                            ('r', R("#140608", "#260b10", "#3d1219", "#561a23", "#74242e")),
+                            ('f', new PixelMaterial("#ff5a4a")),
+                            ('F', new PixelMaterial("#ffd8c8"))),
+                        2 => Over(HeroArt.DeathcallerBase(), // 灰の巫女
+                            ('r', R("#26262a", "#424248", "#64646c", "#8c8c96", "#b8b8c4")),
+                            ('h', R("#1a1a1e", "#2e2e34", "#46464e", "#62626c", "#82828e")),
+                            ('f', new PixelMaterial("#bfe8ff")),
+                            ('F', new PixelMaterial("#f0faff"))),
+                        3 => Over(HeroArt.DeathcallerBase(), // 奈落の導師
+                            ('r', Art.Palette.Violet),
+                            ('h', R("#0a0612", "#140c22", "#201436", "#2e1e4a", "#3e2a62")),
+                            ('f', new PixelMaterial("#c58bff")),
+                            ('F', new PixelMaterial("#f2e4ff"))),
+                        _ => null,
+                    };
+                case ClassId.Paladin:
+                    return index switch
+                    {
+                        1 => Over(HeroArt.PaladinBase(), // 緋の誓約者
+                            ('c', R("#1c080c", "#3a0e14", "#5f151d", "#8a1f27", "#b3333a"))),
+                        2 => Over(HeroArt.PaladinBase(), // 黒曜の審問官
+                            ('m', R("#0c0d12", "#1a1c24", "#2b2e3a", "#434858", "#636a7e")),
+                            ('c', R("#0a0a0c", "#16161a", "#24242a", "#34343c", "#484852")),
+                            ('g', Silver)),
+                        3 => Over(HeroArt.PaladinBase(), // 白百合の騎士
+                            ('c', R("#3a3530", "#6b645a", "#9c958a", "#cbc5b8", "#efeadf")),
+                            ('g', R("#2e2a1a", "#56502e", "#8a8250", "#c4ba7a", "#f0e8b0"))),
+                        _ => null,
+                    };
                 case ClassId.Alchemist:
                     return index switch
                     {

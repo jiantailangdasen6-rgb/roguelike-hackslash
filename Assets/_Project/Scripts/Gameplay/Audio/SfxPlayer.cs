@@ -154,6 +154,8 @@ namespace Game.Gameplay
                     else if (cls == ClassId.Alchemist) Play("swing", e.Pos, anim == AttackAnim.Skill1 ? 1.2f : 1.5f, 0.6f); // a flask whooshing off
                     else if (cls == ClassId.Assassin) Play(anim == AttackAnim.Skill1 ? "blink" : "swing", e.Pos, anim == AttackAnim.Skill1 ? 1f : 1.35f, 0.8f);
                     else if (cls == ClassId.Guardian) Play("swing", e.Pos, anim == AttackAnim.Skill1 ? 0.6f : 0.75f, 1.2f);
+                    else if (cls == ClassId.Deathcaller) Play(anim == AttackAnim.Skill1 ? "roar" : "bolt", e.Pos, anim == AttackAnim.Skill1 ? 1.6f : 0.7f, anim == AttackAnim.Skill1 ? 0.6f : 0.8f);
+                    else if (cls == ClassId.Paladin && anim == AttackAnim.Skill1) Play("levelup", e.Pos, 1.3f, 0.6f);
                     else Play("swing", e.Pos, anim == AttackAnim.Skill1 ? 0.75f : anim == AttackAnim.BasicB ? 1.1f : 1f, anim == AttackAnim.Skill1 ? 1.3f : 1f);
                     break;
                 }
@@ -200,6 +202,12 @@ namespace Game.Gameplay
                         case AreaKind.Slam: Play("slam", e.Pos); break;
                         case AreaKind.Explosion: Play("explosion", e.Pos); break;
                         case AreaKind.HolyLight: Play("heal", e.Pos, 0.8f, 1.3f); break;
+                        case AreaKind.Raise: Play("roar", e.Pos, 1.8f, e.Value > 1f ? 0.5f : 0.3f); break;
+                        case AreaKind.Curse: Play("nova", e.Pos, 0.6f, 0.8f); break;
+                        case AreaKind.BoneBurst: Play("shatter", e.Pos, 1.2f, 0.6f); break;
+                        case AreaKind.JudgmentMark: Play("telegraph", e.Pos, 1.4f, 0.5f); break;
+                        case AreaKind.Judgment: Play("explosion", e.Pos, 1.5f, 0.8f); Play("levelup", e.Pos, 1.6f, 0.5f); break;
+                        case AreaKind.Devotion: Play("heal", e.Pos, 1.2f, 0.8f); break;
                         case AreaKind.Sanctuary: Play("heal", e.Pos, 0.7f, 1.2f); break;
                         case AreaKind.Smoke: Play("explosion", e.Pos, 1.7f, 0.45f); break;
                         case AreaKind.ShadowStep: Play("blink", e.Pos, 0.8f); break;

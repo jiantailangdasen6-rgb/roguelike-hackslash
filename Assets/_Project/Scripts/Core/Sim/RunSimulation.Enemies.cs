@@ -26,6 +26,13 @@ namespace Game.Core
                 var def = e.Def;
                 if (def.Prop) continue;
                 Room = RoomStates[e.RoomId];
+                if (def.Friendly)
+                {
+                    StepServant(i, dt); // a deathcaller's bone servant (RunSimulation.Round5.cs)
+                    e = ref Enemies[i];
+                    e.Position = Confine(e.Position, e.Radius, false);
+                    continue;
+                }
 
                 TickStatuses(i, dt);
                 e = ref Enemies[i];
@@ -441,6 +448,7 @@ namespace Game.Core
             e.Stunned -= dt;
             e.Marked -= dt;
             e.Haunted -= dt;
+            e.Cursed -= dt;
 
             float dot = 0f;
             if (e.Burning > 0f)
@@ -473,6 +481,14 @@ namespace Game.Core
             float dealt = Mathf.Max(1f, damage - p.Stats.Get(StatType.Armor)) * Mathf.Max(0.2f, p.Stats.Get(StatType.DamageTaken));
             dealt *= SanctuaryFactor(p); // a guardian's holy ground
             if (p.Hp < p.MaxHp * 0.5f) dealt *= 1f - Mathf.Min(0.6f, p.Stats.Get(StatType.LastStand)); // gear
+            // A paladin's devotion takes half the wound (RunSimulation.Round5.cs).
+            var paladin = DevotedPaladin(p);
+            if (paladin != null)
+            {
+                float share = dealt * ClassCatalog.DevotionShare;
+                dealt -= share;
+                TakeShare(paladin, share);
+            }
 
             if (p.Shield > 0f)
             {

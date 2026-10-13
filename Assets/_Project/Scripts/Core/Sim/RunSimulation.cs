@@ -249,6 +249,7 @@ namespace Game.Core
             StepGods(dt);
             StepDark();
             StepRoomEvents(dt);
+            StepRound5(dt);
             UpdateDoors(dt);
             CheckDefeat();
             CheckLevelUp();
@@ -405,7 +406,7 @@ namespace Game.Core
             for (int i = 0; i < Enemies.Count; i++)
             {
                 ref var e = ref Enemies[i];
-                if (!e.Dead && e.RoomId == room.Id && !e.Def.Prop) n++;
+                if (!e.Dead && e.RoomId == room.Id && !e.Def.Prop && !e.Def.Friendly) n++;
             }
             return n;
         }

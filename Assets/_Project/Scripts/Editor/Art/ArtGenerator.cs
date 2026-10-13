@@ -34,6 +34,8 @@ namespace Game.EditorTools.Art
             var guardianFlash = Character("guardian", HeroArt.Guardian(), HeroArt.FrameSize);
             var assassinFlash = Character("assassin", HeroArt.Assassin(), HeroArt.FrameSize);
             var alchemistFlash = Character("alchemist", HeroArt.Alchemist(), HeroArt.FrameSize);
+            var deathcallerFlash = Character("deathcaller", HeroArt.Deathcaller(), HeroArt.FrameSize);
+            var paladinFlash = Character("paladin", HeroArt.Paladin(), HeroArt.FrameSize);
             // Skins are palette swaps: same silhouettes, so they share the class's white flash sheet.
             for (int skin = 1; skin < Game.Core.SkinCatalog.PerClass; skin++)
             {
@@ -43,9 +45,12 @@ namespace Game.EditorTools.Art
                 Character($"guardian_s{skin}", HeroArt.Guardian(SkinArt.Palette(Game.Core.ClassId.Guardian, skin)), HeroArt.FrameSize, guardianFlash);
                 Character($"assassin_s{skin}", HeroArt.Assassin(SkinArt.Palette(Game.Core.ClassId.Assassin, skin)), HeroArt.FrameSize, assassinFlash);
                 Character($"alchemist_s{skin}", HeroArt.Alchemist(SkinArt.Palette(Game.Core.ClassId.Alchemist, skin)), HeroArt.FrameSize, alchemistFlash);
+                Character($"deathcaller_s{skin}", HeroArt.Deathcaller(SkinArt.Palette(Game.Core.ClassId.Deathcaller, skin)), HeroArt.FrameSize, deathcallerFlash);
+                Character($"paladin_s{skin}", HeroArt.Paladin(SkinArt.Palette(Game.Core.ClassId.Paladin, skin)), HeroArt.FrameSize, paladinFlash);
             }
 
             Character("skeleton", EnemyArt.Skeleton(), EnemyArt.FrameSize);
+            Character("bone_servant", EnemyArt.Skeleton(), EnemyArt.FrameSize); // a deathcaller's summon (tinted green at runtime)
             Character("skeleton_archer", EnemyArt.SkeletonArcher(), EnemyArt.FrameSize);
             Character("ghoul", EnemyArt.Ghoul(), EnemyArt.FrameSize);
             Character("cultist", EnemyArt.Cultist(), EnemyArt.FrameSize);

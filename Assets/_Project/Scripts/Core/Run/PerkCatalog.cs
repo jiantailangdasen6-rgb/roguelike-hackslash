@@ -82,6 +82,20 @@ namespace Game.Core
         LifeShare,
         LifeVeil,
         LifeRise,
+
+        // Deathcaller
+        BoneLegion,
+        SoulSiphon,
+        PlagueCurse,
+        Bonestorm,
+
+        // Paladin
+        Zeal,
+        BlessedSteel,
+        Martyr,
+        Radiance,
+        DeathKnell,  // deathcaller (added after the first four)
+        LightShield, // paladin
     }
 
     /// <summary>
@@ -173,6 +187,20 @@ namespace Game.Core
             new() { Id = PerkId.Remedy, Name = "良薬", Class = ClassId.Alchemist, MaxLevel = 2, Text = "回復薬の回復量 +{0:0}%、浴びた仲間に10のシールド", Number = 40 },
             new() { Id = PerkId.Catalyst, Name = "触媒", Class = ClassId.Alchemist, MaxLevel = 2, Locked = true, Text = "燃えている・凍った敵へのダメージ +{0:0}%", Number = 20 },
             new() { Id = PerkId.TwinFlask, Name = "二本投げ", Class = ClassId.Alchemist, MaxLevel = 1, Locked = true, Text = "薬瓶を2本ずつ投げる", Number = 0 },
+
+            // ---------------- Deathcaller
+            new() { Id = PerkId.BoneLegion, Name = "骨の軍勢", Class = ClassId.Deathcaller, MaxLevel = 2, Text = "骨の兵の上限 +{0:0}体、呼ぶ数 +1", Number = 1 },
+            new() { Id = PerkId.SoulSiphon, Name = "魂吸い", Class = ClassId.Deathcaller, MaxLevel = 2, Text = "魂の矢が当たるとHPが {0:0} 回復", Number = 1 },
+            new() { Id = PerkId.PlagueCurse, Name = "疫病の呪い", Class = ClassId.Deathcaller, MaxLevel = 2, Locked = true, Text = "死の呪いの範囲 +30%、呪われた敵が毒を受ける（毎秒 {0:0}）", Number = 4 },
+            new() { Id = PerkId.Bonestorm, Name = "骨の嵐", Class = ClassId.Deathcaller, MaxLevel = 1, Locked = true, Text = "骨の兵が崩れるとき、周りの敵へ骨が弾ける（威力 16）", Number = 0 },
+            new() { Id = PerkId.DeathKnell, Name = "死の宣告", Class = ClassId.Deathcaller, MaxLevel = 2, Text = "死の呪いが +{0:0}秒長く続く", Number = 3 },
+
+            // ---------------- Paladin
+            new() { Id = PerkId.Zeal, Name = "熱誠", Class = ClassId.Paladin, MaxLevel = 2, Text = "裁きの光の範囲 +{0:0}%、クールダウン −15%", Number = 20 },
+            new() { Id = PerkId.BlessedSteel, Name = "祝福の刃", Class = ClassId.Paladin, MaxLevel = 2, Text = "聖剣で敵を倒すと、近くの仲間のHPが {0:0} 回復", Number = 3 },
+            new() { Id = PerkId.Martyr, Name = "殉教", Class = ClassId.Paladin, MaxLevel = 1, Locked = true, Text = "献身の間、自分の受けるダメージ −30%", Number = 0 },
+            new() { Id = PerkId.Radiance, Name = "光輝", Class = ClassId.Paladin, MaxLevel = 2, Locked = true, Text = "聖剣の2撃目で光の波を飛ばす（威力 {0:0}%）", Number = 50 },
+            new() { Id = PerkId.LightShield, Name = "光の盾", Class = ClassId.Paladin, MaxLevel = 2, Text = "献身で与えるシールド +{0:0}", Number = 15 },
 
             // ---------------- Blessings of the gods
             new() { Id = PerkId.FlameBrand, Name = "焔の刻印", God = GodId.Flame, Text = "攻撃が当たった敵が燃える（毎秒 6 ダメージ×3秒）" },

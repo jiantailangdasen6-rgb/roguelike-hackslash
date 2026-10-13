@@ -96,7 +96,7 @@ namespace Game.Core
         /// <summary>Monster health for the current room, the players in it and the difficulty.</summary>
         public float EnemyHealthScale => HealthMultiplier(Room.Index, PlayersIn(Room)) * DifficultyDef.EnemyHealth;
         public float EnemyDamageScale => DamageMultiplier(Room.Index) * DifficultyDef.EnemyDamage;
-        public float EliteChance => DifficultyDef.EliteChance;
+        public float EliteChance => DifficultyDef.EliteChance + OmenElite;
 
         /// <summary>The boss of the current area.</summary>
         public EnemyType AreaBoss => LordOf(Area); // RunSimulation.Deep.cs
@@ -220,6 +220,7 @@ namespace Game.Core
             if (tier == 3) BossDoorOpen = true;
             foreach (var p in Players) GiveLoaners(p);
             foreach (var p in Players) if (p.HasStartPerk) p.StockedChoices.Enqueue(ChoiceKind.Start);
+            if (Omen == Omen.Blessed) foreach (var p in Players) p.StockedChoices.Enqueue(ChoiceKind.Start); // the blessed wind
             OfferAll();
         }
 
@@ -328,7 +329,7 @@ namespace Game.Core
                 if (Room.Cleared) continue;
                 var def = EnemyCatalog.Get(s.Type);
                 Vector2 at = def.Flying ? s.Position : Arena.Resolve(Layout, s.Position, def.Radius);
-                int id = Enemies.Spawn(s.Type, at, EnemyHealthScale, EnemyDamageScale, s.Elite);
+                int id = Enemies.Spawn(s.Type, at, EnemyHealthScale * OmenHealth(def), EnemyDamageScale, s.Elite); // RunSimulation.Omens.cs
                 Enemies[Enemies.IndexOf(id)].RoomId = s.Room;
                 if (s.Champion) MakeChampion(Enemies.IndexOf(id));
                 if (def.Boss)
@@ -432,7 +433,7 @@ namespace Game.Core
                 Events.Add(new SimEvent(SimEventType.WaveStarted) { Int = Room.Wave, Value = Room.WaveCount, Id = Room.Id });
                 return;
             }
-            int size = Mathf.RoundToInt((5f + Room.Index * 0.5f + Room.Area * 1.5f) * PlayerScale * DifficultyDef.EnemyCount);
+            int size = Mathf.RoundToInt((5f + Room.Index * 0.5f + Room.Area * 1.5f) * PlayerScale * DifficultyDef.EnemyCount * OmenWave);
             Room.LastWaveSize = size;
             bool eliteRoom = Room.Kind == RoomKind.Elite;
             for (int i = 0; i < size; i++)

@@ -1,0 +1,1380 @@
+fileFormatVersion: 2
+guid: 111b512de8980ec4e835511154171817
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6213835284264644087
+    second: fire_imp_0
+  - first:
+      213: 6307939314185364248
+    second: fire_imp_1
+  - first:
+      213: 7303989949098210030
+    second: fire_imp_2
+  - first:
+      213: 6947192790390330581
+    second: fire_imp_3
+  - first:
+      213: 8198617239753208759
+    second: fire_imp_4
+  - first:
+      213: -6348455589282451267
+    second: fire_imp_5
+  - first:
+      213: -3463967262004162486
+    second: fire_imp_6
+  - first:
+      213: 3368898359215296143
+    second: fire_imp_7
+  - first:
+      213: -7719675031814798168
+    second: fire_imp_8
+  - first:
+      213: 5299193727433897291
+    second: fire_imp_9
+  - first:
+      213: 6560526097817788579
+    second: fire_imp_10
+  - first:
+      213: 1061844262221302506
+    second: fire_imp_11
+  - first:
+      213: 3482514472473643821
+    second: fire_imp_12
+  - first:
+      213: 6455055869336851084
+    second: fire_imp_13
+  - first:
+      213: 1765066096094161346
+    second: fire_imp_14
+  - first:
+      213: -6932429841947315968
+    second: fire_imp_15
+  - first:
+      213: -1153011487869875372
+    second: fire_imp_16
+  - first:
+      213: -8313382237821897573
+    second: fire_imp_17
+  - first:
+      213: 7517750134716908750
+    second: fire_imp_18
+  - first:
+      213: 7257317724992682464
+    second: fire_imp_19
+  - first:
+      213: -3379887760259782784
+    second: fire_imp_20
+  - first:
+      213: -7238320953202543821
+    second: fire_imp_21
+  - first:
+      213: 1109144553413931937
+    second: fire_imp_22
+  - first:
+      213: 2321401582048720210
+    second: fire_imp_23
+  - first:
+      213: -8139058843950635250
+    second: fire_imp_24
+  - first:
+      213: 828540591875039059
+    second: fire_imp_25
+  - first:
+      213: -7704935117833350683
+    second: fire_imp_26
+  - first:
+      213: 1524522533791226322
+    second: fire_imp_27
+  - first:
+      213: 1633925737228780149
+    second: fire_imp_28
+  - first:
+      213: 4015860873195290982
+    second: fire_imp_29
+  - first:
+      213: 1233600388754970421
+    second: fire_imp_30
+  - first:
+      213: -7936511499036104072
+    second: fire_imp_31
+  - first:
+      213: 8673654951775982006
+    second: fire_imp_32
+  - first:
+      213: -5115235967765587344
+    second: fire_imp_33
+  - first:
+      213: -2182878184029307549
+    second: fire_imp_34
+  - first:
+      213: 3806214750674341892
+    second: fire_imp_35
+  - first:
+      213: 6457730477375837954
+    second: fire_imp_36
+  - first:
+      213: -4130647861264961576
+    second: fire_imp_37
+  - first:
+      213: 7745957744220935331
+    second: fire_imp_38
+  - first:
+      213: 7843668882141997932
+    second: fire_imp_39
+  - first:
+      213: 1275733761739937408
+    second: fire_imp_40
+  - first:
+      213: 8373860790536936546
+    second: fire_imp_41
+  - first:
+      213: 6670083108957294329
+    second: fire_imp_42
+  - first:
+      213: 8291737033310743264
+    second: fire_imp_43
+  - first:
+      213: -8096601104426150354
+    second: fire_imp_44
+  - first:
+      213: -2894861470106645685
+    second: fire_imp_45
+  - first:
+      213: 9047320577206262911
+    second: fire_imp_46
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fire_imp_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 328
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9021e943bb504c9a0800000000000000
+      internalID: -6213835284264644087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 328
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8136db6a26d4a8750800000000000000
+      internalID: 6307939314185364248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_2
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 264
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee2b507192cfc5560800000000000000
+      internalID: 7303989949098210030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_3
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 264
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d4de59f803696060800000000000000
+      internalID: 6947192790390330581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_4
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 264
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b332e001f657c170800000000000000
+      internalID: 8198617239753208759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_5
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 264
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db0f970f641c5e7a0800000000000000
+      internalID: -6348455589282451267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_6
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 200
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a40d8aac0248defc0800000000000000
+      internalID: -3463967262004162486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_7
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 200
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8e8c61653bb0ce20800000000000000
+      internalID: 3368898359215296143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_8
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 136
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a40a3b85743ed490800000000000000
+      internalID: -7719675031814798168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_9
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 136
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b45fca76e948a8940800000000000000
+      internalID: 5299193727433897291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_10
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 136
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a0eb101abbab0b50800000000000000
+      internalID: 6560526097817788579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_11
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 136
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeacc780bbd6cbe00800000000000000
+      internalID: 1061844262221302506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_12
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 72
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2bc2f82670645030800000000000000
+      internalID: 3482514472473643821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_13
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 72
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c829f11ec17f49950800000000000000
+      internalID: 6455055869336851084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_14
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 19
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c927ce3346ce7810800000000000000
+      internalID: 1765066096094161346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_15
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 19
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 001b960d9cf0bcf90800000000000000
+      internalID: -6932429841947315968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_16
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 22
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45b4293292eafffe0800000000000000
+      internalID: -1153011487869875372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_17
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 23
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b947590a6eee0ac80800000000000000
+      internalID: -8313382237821897573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_18
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 19
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec442f1bae9645860800000000000000
+      internalID: 7517750134716908750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_19
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e9b55c150c27b460800000000000000
+      internalID: 7257317724992682464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_20
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 23
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 087660d4df93811d0800000000000000
+      internalID: -3379887760259782784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_21
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 24
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 333781e71715c8b90800000000000000
+      internalID: -7238320953202543821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_22
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 17
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a3fbc64819746f00800000000000000
+      internalID: 1109144553413931937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_23
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 17
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2553b078076473020800000000000000
+      internalID: 2321401582048720210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_24
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 23
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e072250aa114c0f80800000000000000
+      internalID: -8139058843950635250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_25
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 23
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35f14bc47419f7b00800000000000000
+      internalID: 828540591875039059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_26
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 22
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e15c143552921590800000000000000
+      internalID: -7704935117833350683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_27
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 22
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d954beca21382510800000000000000
+      internalID: 1524522533791226322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_28
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 11
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 572c3e41dcedca610800000000000000
+      internalID: 1633925737228780149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_29
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 12
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 661023eef243bb730800000000000000
+      internalID: 4015860873195290982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_30
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53716868401ae1110800000000000000
+      internalID: 1233600388754970421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_31
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 11
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87a662057d8dbd190800000000000000
+      internalID: -7936511499036104072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_32
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 7
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b15ae049330f5870800000000000000
+      internalID: 8673654951775982006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_33
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07ad70f2df70309b0800000000000000
+      internalID: -5115235967765587344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_34
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36dbbf46bdbd4b1e0800000000000000
+      internalID: -2182878184029307549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_35
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 400dbc8462462d430800000000000000
+      internalID: 3806214750674341892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_36
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 15
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 207533797a77e9950800000000000000
+      internalID: 6457730477375837954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_37
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 15
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8df2311c7adfca6c0800000000000000
+      internalID: -4130647861264961576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_38
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a4997d478b2f7b60800000000000000
+      internalID: 7745957744220935331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_39
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6bebdf6a4f4adc60800000000000000
+      internalID: 7843668882141997932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_40
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0865b70e81154b110800000000000000
+      internalID: 1275733761739937408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_41
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26c968ab50ee53470800000000000000
+      internalID: 8373860790536936546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_42
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fe8bbb7f35e09c50800000000000000
+      internalID: 6670083108957294329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_43
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ea207976ea221370800000000000000
+      internalID: 8291737033310743264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_44
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e26d4a2713813af80800000000000000
+      internalID: -8096601104426150354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_45
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 7
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4b0450a4d263d7d0800000000000000
+      internalID: -2894861470106645685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire_imp_46
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7c1675512a8e8d70800000000000000
+      internalID: 9047320577206262911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      fire_imp_0: -6213835284264644087
+      fire_imp_1: 6307939314185364248
+      fire_imp_10: 6560526097817788579
+      fire_imp_11: 1061844262221302506
+      fire_imp_12: 3482514472473643821
+      fire_imp_13: 6455055869336851084
+      fire_imp_14: 1765066096094161346
+      fire_imp_15: -6932429841947315968
+      fire_imp_16: -1153011487869875372
+      fire_imp_17: -8313382237821897573
+      fire_imp_18: 7517750134716908750
+      fire_imp_19: 7257317724992682464
+      fire_imp_2: 7303989949098210030
+      fire_imp_20: -3379887760259782784
+      fire_imp_21: -7238320953202543821
+      fire_imp_22: 1109144553413931937
+      fire_imp_23: 2321401582048720210
+      fire_imp_24: -8139058843950635250
+      fire_imp_25: 828540591875039059
+      fire_imp_26: -7704935117833350683
+      fire_imp_27: 1524522533791226322
+      fire_imp_28: 1633925737228780149
+      fire_imp_29: 4015860873195290982
+      fire_imp_3: 6947192790390330581
+      fire_imp_30: 1233600388754970421
+      fire_imp_31: -7936511499036104072
+      fire_imp_32: 8673654951775982006
+      fire_imp_33: -5115235967765587344
+      fire_imp_34: -2182878184029307549
+      fire_imp_35: 3806214750674341892
+      fire_imp_36: 6457730477375837954
+      fire_imp_37: -4130647861264961576
+      fire_imp_38: 7745957744220935331
+      fire_imp_39: 7843668882141997932
+      fire_imp_4: 8198617239753208759
+      fire_imp_40: 1275733761739937408
+      fire_imp_41: 8373860790536936546
+      fire_imp_42: 6670083108957294329
+      fire_imp_43: 8291737033310743264
+      fire_imp_44: -8096601104426150354
+      fire_imp_45: -2894861470106645685
+      fire_imp_46: 9047320577206262911
+      fire_imp_5: -6348455589282451267
+      fire_imp_6: -3463967262004162486
+      fire_imp_7: 3368898359215296143
+      fire_imp_8: -7719675031814798168
+      fire_imp_9: 5299193727433897291
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

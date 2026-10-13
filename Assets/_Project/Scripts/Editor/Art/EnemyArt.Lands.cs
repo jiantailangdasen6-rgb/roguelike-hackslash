@@ -60,47 +60,52 @@ namespace Game.EditorTools.Art
             (Palette.Crimson, SaintVeil), (Palette.Red, TideRobe), (Palette.CultRobe, TideRobe), (Palette.Gold, PaleSilver), (Palette.Gem, AquaGlow),
             (Palette.EyeRed, AquaGlow), (Palette.Skin, DrownedFlesh), (Palette.Pallid, DrownedFlesh));
 
-        /// <summary>A crab the size of a dog, picked clean of colour by the dark water: a wide shell, two great claws, six legs.</summary>
+        /// <summary>
+        /// A crab the size of a dog, seen from the side facing right: a domed shell with barnacles, eyes on stalks,
+        /// a great claw raised in front and a smaller one behind it, three pairs of jointed legs beneath.
+        /// </summary>
         public static List<Clip> CarrionCrab()
         {
             var m = Palette.With(
                 ('@', R("#140e0c", "#2c1c16", "#4a3022", "#6e4a32", "#94684a")),
                 ('&', R("#1c1410", "#3a2a1e", "#5e442e", "#866248", "#b08a66")));
-            var shell = new PixelPart("shell", P(9.5f, 4.5f), m, 0,
-                ".....@@@@@@@@.....",
-                "...@@@@@@@@@@@@...",
-                "..@@@@&@@@@&@@@@..",
-                ".@@@@@@@@@@@@@@@@.",
-                "@@@@@&@@@@@@&@@@@@",
-                "@@@@@@@@@@@@@@@@@@",
-                ".@@@@@@@@@@@@@@@@.",
-                "..@@ke@@@@@@ek@@..",
-                "...@@@@@@@@@@@@...");
-            var claw = new PixelPart("claw", P(1.5f, 1.5f), m, 0,
-                "..&&&&.",
-                ".&&&&&&",
-                "&&&&...",
-                "&&&&&&&",
-                ".&&&&&.",
-                "..@@...",
-                "..@@...",
-                "..@@...");
-            var leg = new PixelPart("leg", P(0.5f, 4.5f), m, 0, "@...", "@@..", ".@@.", "..@@", "...@");
+            var shell = new PixelPart("shell", P(10f, 1f), m, 0,
+                "......@@@@@@@.......",
+                "....@@@@@@@@@@@.....",
+                "..@@@@&@@@@@&@@@@...",
+                ".@@@@@@@@@@@@@@@@@@.",
+                "@@@&@@@@@@@@@@@@&@@@",
+                "@@@@@@@@@@@@@@@@@@@@",
+                ".@@@@@@@@@@@@@@@@@@.",
+                "..&&&&&&&&&&&&&&&&..");
+            var stalk = new PixelPart("stalk", P(0.5f, 0.5f), m, 0, "ke", ".&", ".&");
+            // The big claw: an arm then pincers opening forward (to the right).
+            var claw = new PixelPart("claw", P(1f, 1f), m, 0,
+                "......&&&&.",
+                "....&&&&&&&",
+                "...&&&&....",
+                "..&&&&&&&&.",
+                ".&&&&&&&&&&",
+                "&&&&.......",
+                "&&&........");
+            var small = new PixelPart("small", P(1f, 1f), m, 0, "...&&&", "..&&&.", ".&&&&&", "&&....");
+            var leg = new PixelPart("leg", P(1f, 7f), m, 0, "&&.", ".&.", ".&&", "..&", "..&", "..&", ".&&", ".&.");
 
-            Frame Pose(float bob, float claws, float legs, float tilt = 0f, float fall = 0f, float lunge = 0f)
+            Frame Pose(float bob, float clawUp, float legs, float tilt = 0f, float fall = 0f, float lunge = 0f)
             {
                 var f = new Frame { BodyAngle = tilt, BodyPivot = P(32f, 16f), BodyOffset = P(lunge, -fall) };
-                Vector2 c = P(32f, 15f + bob);
+                Vector2 c = P(31f, 17f + bob); // the shell's underside, left of its middle
                 for (int k = 0; k < 3; k++)
                 {
                     float swing = (k % 2 == 0 ? legs : -legs);
-                    f.Add(leg, c + P(-7f - k * 2f, -1f), -40f + swing - k * 15f, 2, -1);
-                    var mirrored = leg; // the right legs point the other way
-                    f.Add(mirrored, c + P(7f + k * 2f, -1f), 220f - swing + k * 15f, 2, -1);
+                    f.Add(leg, c + P(-6f + k * 5f, 1f), -25f + swing, 2, -1);      // far legs
+                    f.Add(leg, c + P(-4f + k * 5f, 0f), 20f - swing, 7);           // near legs
                 }
+                f.Add(small, c + P(7f, 4f), 20f + clawUp * 0.5f, 3, -1);
                 f.Add(shell, c, 0f, 5);
-                f.Add(claw, c + P(-8f, 3f), 150f + claws, 6);
-                f.Add(claw, c + P(8f, 3f), 30f - claws, 6);
+                f.Add(stalk, c + P(7f, 8f), 0f, 4);
+                f.Add(stalk, c + P(9f, 8f), 0f, 6);
+                f.Add(claw, c + P(9f, 2f), clawUp, 8);
                 return f;
             }
 
@@ -110,25 +115,25 @@ namespace Game.EditorTools.Art
                 for (int i = 0; i < 6; i++)
                 {
                     float s = Mathf.Sin(i / 6f * Mathf.PI * 2f);
-                    clip.Frames.Add(Pose(Mathf.Round(s), clawAmp * s, legAmp * s));
+                    clip.Frames.Add(Pose(Mathf.Round(s * 0.6f), 10f + clawAmp * s, legAmp * s));
                 }
                 return clip;
             }
 
             var windup = new Clip("windup", 9f, false);
-            windup.Frames.Add(Pose(-1f, -25f, 0f));
-            windup.Frames.Add(Pose(-2f, -45f, 0f));
-            windup.Frames.Add(Pose(-2f, -50f, 0f));
+            windup.Frames.Add(Pose(-1f, 40f, 0f));
+            windup.Frames.Add(Pose(-2f, 60f, 0f));
+            windup.Frames.Add(Pose(-2f, 65f, 0f));
             var strike = new Clip("strike", 14f, false);
-            strike.Frames.Add(Pose(1f, 40f, 15f, 0f, 0f, 3f));
-            strike.Frames.Add(Pose(1f, 50f, -15f, 0f, 0f, 4f));
-            strike.Frames.Add(Pose(0f, 20f, 0f, 0f, 0f, 2f));
+            strike.Frames.Add(Pose(1f, -20f, 20f, -8f, 0f, 3f));
+            strike.Frames.Add(Pose(1f, -30f, -20f, -10f, 0f, 4f));
+            strike.Frames.Add(Pose(0f, 0f, 0f, -3f, 0f, 2f));
             var hurt = new Clip("hurt", 10f, false);
-            hurt.Frames.Add(Pose(1f, -30f, 20f, 12f));
-            hurt.Frames.Add(Pose(0f, -10f, 0f, 5f));
+            hurt.Frames.Add(Pose(1f, 35f, 25f, 10f));
+            hurt.Frames.Add(Pose(0f, 20f, 0f, 4f));
             var death = new Clip("death", 10f, false);
-            for (int i = 0; i < 6; i++) death.Frames.Add(Pose(0f, -20f - i * 8f, i * 6f, i * 34f, Mathf.Min(6f, i * 1.5f)));
-            return new List<Clip> { Loop("idle", 6f, 4f, 8f), Loop("walk", 14f, 22f, 6f), windup, strike, hurt, death };
+            for (int i = 0; i < 6; i++) death.Frames.Add(Pose(0f, 40f + i * 12f, 30f, i * 36f, Mathf.Min(5f, i * 1.2f)));
+            return new List<Clip> { Loop("idle", 6f, 4f, 8f), Loop("walk", 14f, 25f, 6f), windup, strike, hurt, death };
         }
 
         // ------------------------------------------------------------------ Frozen mausoleum
@@ -143,53 +148,63 @@ namespace Game.EditorTools.Art
         public static List<Clip> FrostQueen() => Swapped(Lich,
             (Palette.Robe, QueenRobe), (Palette.Violet, QueenRobe), (Palette.Gold, PaleSilver), (Palette.Bone, IcyBone), (Palette.Soul, ColdGlow),
             (Palette.Rag, FrostRobe), (Palette.Red, FrostRobe), (Palette.Crimson, FrostRobe), (Palette.EyeRed, ColdGlow));
-
-        /// <summary>A lean grey wolf with frost in its coat and pale blue eyes; runs low and lunges.</summary>
+        /// <summary>
+        /// A rangy grey wolf with a frosted ruff and pale blue eyes: long legs, a long muzzle and pricked ears,
+        /// a bushy tail; runs at a gallop and lunges.
+        /// </summary>
         public static List<Clip> FrostWolf()
         {
             var m = Palette.With(
                 ('@', R("#1a1e26", "#323a48", "#4e5a6c", "#76849a", "#a8b6c8")),
-                ('&', R("#2a3240", "#4a5668", "#6e7e94", "#98a8bc", "#d0dcea")));
-            var body = new PixelPart("body", P(4.5f, 2.5f), m, 0,
-                "....&&&&&&&&&.....",
-                "..&&&&&&&&&&&&&&..",
-                ".@@&&&&&&&&&&&&&&@",
-                "@@@@@@@@@@@@@@@@@@",
-                "@@@@@@@@@@@@@@@@@.",
-                ".@@@@@@@@@@@@@@@..",
-                "..@@@@....@@@@@...");
-            var head = new PixelPart("head", P(1.5f, 3.5f), m, 0,
-                "..&&.......",
-                ".&&&&......",
-                "&&&&&&&&...",
-                "@@@f@@@@@@.",
-                "@@@@@@@@@@k",
-                ".@@@@@@@...",
-                "..@@b@b....");
-            var leg = new PixelPart("leg", P(1f, 7.5f), m, 0, "@@.", "@@@", ".@@", ".@@", ".@@", ".@@", ".@.", "k@@");
-            var tail = new PixelPart("tail", P(8.5f, 1.5f), m, 0, "&&&......", ".&&&&&&@@", "...@@@@@.");
+                ('&', R("#3a4456", "#5a6880", "#7e8ea6", "#a8b8cc", "#dce6f2")));
+            var body = new PixelPart("body", P(5f, 2f), m, 0,
+                "......&&&&&&&&&&&...",
+                "...&&&&&&&&&&&&&&&&.",
+                ".@@@&&&&&&&&&&&&&&&&",
+                "@@@@@@@@@@@@@@@@@&&&",
+                "@@@@@@@@@@@@@@@@@@&&",
+                ".@@@@@@@@@@@@@@@@@&.",
+                "..@@@@@.....@@@@@@..",
+                "...@@.........@@....");
+            var head = new PixelPart("head", P(2f, 3f), m, 0,
+                "..&...&.......",
+                "..&&.&&.......",
+                ".&&&&&&&......",
+                "&&&&&&&&&&....",
+                "@@@@f@@@@@@@@.",
+                "@@@@@@@@@@@@@k",
+                ".@@@@@@@@@@@..",
+                "..@@@@b@b.....",
+                "...@@.........");
+            var leg = new PixelPart("leg", P(1f, 9.5f), m, 0, "@@@", "@@@", ".@@", ".@@", ".@.", ".@.", ".@.", ".@.", ".@.", "k@@");
+            var tail = new PixelPart("tail", P(10.5f, 2f), m, 0,
+                "&&&&........",
+                ".&&&&&&.....",
+                "..@@@@@@@@@.",
+                "....@@@@@@@@",
+                ".......@@@..");
 
-            Frame Pose(float bob, float front, float back, float tilt = 0f, float nod = 0f, float tail2 = 0f, float fall = 0f, float shift = 0f)
+            Frame Pose(float bob, float front, float back, float tilt = 0f, float nod = 0f, float wag = 0f, float fall = 0f, float shift = 0f)
             {
-                var f = new Frame { BodyAngle = tilt, BodyPivot = P(30f, 16f), BodyOffset = P(shift, -fall) };
-                Vector2 hip = P(26f + shift * 0f, 18f + bob);
+                var f = new Frame { BodyAngle = tilt, BodyPivot = P(32f, 18f), BodyOffset = P(shift, -fall) };
+                Vector2 hip = P(24f, 20f + bob);
                 f.Add(leg, hip + P(1f, 0f), back, 2, -1);
                 f.Add(leg, hip + P(-1f, 0f), -back, 3);
-                f.Add(tail, hip + P(-3f, 2f), 10f + tail2, 1);
+                f.Add(tail, hip + P(-4f, 3f), 15f + wag, 1);
                 f.Add(body, hip, 0f, 5);
-                f.Add(leg, hip + P(11f, 0f), -front, 2, -1);
-                f.Add(leg, hip + P(9f, 0f), front, 4);
-                f.Add(head, hip + P(13f, 4f), nod, 6);
+                f.Add(leg, hip + P(13f, 0f), -front, 2, -1);
+                f.Add(leg, hip + P(11f, 0f), front, 4);
+                f.Add(head, hip + P(15f, 5f), nod, 6);
                 return f;
             }
 
-            Clip Run(string name, float fps, float amp, bool loop = true)
+            Clip Run(string name, float fps, float amp)
             {
-                var clip = new Clip(name, fps, loop);
+                var clip = new Clip(name, fps, true);
                 for (int i = 0; i < 6; i++)
                 {
                     float s = Mathf.Sin(i / 6f * Mathf.PI * 2f);
-                    clip.Frames.Add(Pose(Mathf.Round(Mathf.Abs(s) * (amp > 10f ? 1f : 0f)), amp * s, amp * s, 0f, -3f * s, 12f * s));
+                    clip.Frames.Add(Pose(Mathf.Round(Mathf.Abs(s)), amp * s, amp * s, 0f, -3f * s, 10f * s));
                 }
                 return clip;
             }
@@ -201,15 +216,16 @@ namespace Game.EditorTools.Art
             windup.Frames.Add(Pose(-2f, 20f, -30f, 9f, -14f));
             windup.Frames.Add(Pose(-2f, 22f, -32f, 10f, -15f));
             var strike = new Clip("strike", 14f, false);
-            strike.Frames.Add(Pose(2f, -50f, 45f, -12f, 10f, -20f, 0f, 2f));
-            strike.Frames.Add(Pose(2f, -55f, 50f, -14f, 12f, -25f, 0f, 3f));
+            strike.Frames.Add(Pose(2f, -55f, 45f, -12f, 10f, -20f, 0f, 2f));
+            strike.Frames.Add(Pose(2f, -60f, 50f, -14f, 12f, -25f, 0f, 3f));
             strike.Frames.Add(Pose(0f, -20f, 20f, -4f, 4f, 0f, 0f, 1f));
             var hurt = new Clip("hurt", 10f, false);
             hurt.Frames.Add(Pose(1f, 20f, -10f, 14f, 20f));
             hurt.Frames.Add(Pose(0f, 8f, -4f, 6f, 8f));
+            // Falls over onto its side.
             var death = new Clip("death", 10f, false);
-            for (int i = 0; i < 6; i++) death.Frames.Add(Pose(0f, 30f + i * 6f, -30f - i * 6f, i * 16f, 20f, -10f, Mathf.Min(5f, i)));
-            return new List<Clip> { idle, Run("walk", 14f, 32f), windup, strike, hurt, death };
+            for (int i = 0; i < 6; i++) death.Frames.Add(Pose(0f, 30f + i * 8f, -30f - i * 8f, -i * 16f, 20f, -10f, Mathf.Min(6f, i * 1.2f)));
+            return new List<Clip> { idle, Run("walk", 14f, 34f), windup, strike, hurt, death };
         }
 
         // ------------------------------------------------------------------ Burnt forge

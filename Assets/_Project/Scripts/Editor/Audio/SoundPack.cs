@@ -16,7 +16,7 @@ namespace Game.EditorTools.Audio
     {
         public const string SourceDir = "Assets/_Project/Audio/Pack/";
         /// <summary>Bump when the recipes change so the builder renders the pack again.</summary>
-        public const string Marker = "pack_v2.txt";
+        public const string Marker = "pack_v3.txt";
         private const int Rate = 44100;
 
         private struct Layer
@@ -46,6 +46,11 @@ namespace Game.EditorTools.Audio
             public float Start;
             public float Length;           // 0 = whole file (seamless loops stay seamless)
             public float FadeOut;
+            // Variations of a track for another land: tape speed (pitch and tempo together), a low-pass, an echo, drive.
+            public float Pitch = 1f;
+            public float LowPass;          // cutoff in Hz (0 = none)
+            public float Echo, EchoFeedback; // seconds, 0..1
+            public float Drive;            // soft saturation (0 = none)
         }
 
         private static Sfx S(string name, float loudness, params Layer[][] variants) => new() { Name = name, Loudness = loudness, Variants = variants };
@@ -135,6 +140,10 @@ namespace Game.EditorTools.Audio
             yield return new Track { Name = "music_crypt", File = D + "ofdn_in_darkness.ogg" };
             yield return new Track { Name = "music_chapel", File = D + "ofdn_zwischenwelt.ogg" };
             yield return new Track { Name = "music_abyss", File = D + "ofdn_throne_room.ogg" };
+            // The new lands play older pieces changed: slowed and drowned, quickened and cold, slowed and burnt.
+            yield return new Track { Name = "music_sunken", File = D + "ofdn_throne_room.ogg", Pitch = 0.84f, LowPass = 1600f, Echo = 0.34f, EchoFeedback = 0.38f };
+            yield return new Track { Name = "music_frost", File = D + "ofdn_zwischenwelt.ogg", Pitch = 1.12f, Echo = 0.52f, EchoFeedback = 0.42f };
+            yield return new Track { Name = "music_forge", File = D + "ofdn_in_darkness.ogg", Pitch = 0.89f, LowPass = 3200f, Drive = 1.8f };
             yield return new Track { Name = "music_boss", File = D + "helmet_boss_arcanos.mp3", Loudness = 0.18f };
             yield return new Track { Name = "music_victory", File = D + "ofdn_victory_stats.ogg", Loudness = 0.17f };
             yield return new Track { Name = "music_defeat", File = D + "ofdn_obscurium.ogg", Length = 9f, FadeOut = 4f, Loudness = 0.13f };
@@ -177,6 +186,7 @@ namespace Game.EditorTools.Audio
                     System.Array.Copy(data, from, cut, 0, count);
                     data = cut;
                 }
+                data = Vary(data, ch, clip.frequency, t);
                 if (t.FadeOut > 0f) FadeOut(data, Mathf.RoundToInt(t.FadeOut * clip.frequency), ch);
                 float rms = Rms(data, 0, data.Length);
                 float gain = t.Loudness / Mathf.Max(rms, 0.0001f);
@@ -211,6 +221,60 @@ namespace Game.EditorTools.Audio
         }
 
         // ------------------------------------------------------------------ DSP
+
+        /// <summary>
+        /// A track changed for another land (interleaved samples). Everything wraps around the end, so a seamless loop
+        /// stays seamless: the resampling reads past the end from the start, and the echo's tail falls on the beginning.
+        /// </summary>
+        private static float[] Vary(float[] data, int ch, int rate, Track t)
+        {
+            int frames = data.Length / ch;
+            if (Mathf.Abs(t.Pitch - 1f) > 0.001f)
+            {
+                int outFrames = Mathf.RoundToInt(frames / t.Pitch);
+                var resampled = new float[outFrames * ch];
+                for (int i = 0; i < outFrames; i++)
+                {
+                    float src = i * t.Pitch;
+                    int a = (int)src, b = (a + 1) % frames;
+                    float k = src - a;
+                    a %= frames;
+                    for (int c = 0; c < ch; c++) resampled[i * ch + c] = Mathf.Lerp(data[a * ch + c], data[b * ch + c], k);
+                }
+                data = resampled;
+                frames = outFrames;
+            }
+            if (t.LowPass > 0f)
+            {
+                float alpha = 1f - Mathf.Exp(-2f * Mathf.PI * t.LowPass / rate);
+                for (int c = 0; c < ch; c++)
+                {
+                    // Two passes round the loop so the filter has settled where the track starts.
+                    float y = 0f;
+                    for (int pass = 0; pass < 2; pass++)
+                        for (int i = 0; i < frames; i++)
+                        {
+                            y += alpha * (data[i * ch + c] - y);
+                            if (pass == 1) data[i * ch + c] = y;
+                        }
+                }
+            }
+            if (t.Echo > 0f && t.EchoFeedback > 0f)
+            {
+                int delay = Mathf.Max(1, Mathf.RoundToInt(t.Echo * rate));
+                var wet = new float[data.Length];
+                for (int pass = 0; pass < 3; pass++) // the tail wraps round several times
+                    for (int i = 0; i < frames; i++)
+                    {
+                        int from = ((i - delay) % frames + frames) % frames;
+                        for (int c = 0; c < ch; c++) wet[i * ch + c] = (data[from * ch + c] + wet[from * ch + c]) * t.EchoFeedback;
+                    }
+                for (int i = 0; i < data.Length; i++) data[i] += wet[i] * 0.8f;
+            }
+            if (t.Drive > 0f)
+                for (int i = 0; i < data.Length; i++) data[i] = Dsp.SoftClip(data[i] * t.Drive) / Dsp.SoftClip(t.Drive);
+            return data;
+        }
 
         private static AudioClip Load(string file)
         {

@@ -1,0 +1,1588 @@
+fileFormatVersion: 2
+guid: 0861c3fc5797a904c82fb77def43f8c2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5220274059770652396
+    second: slag_bloater_0
+  - first:
+      213: 9170288700158651735
+    second: slag_bloater_1
+  - first:
+      213: -3893038523325923016
+    second: slag_bloater_2
+  - first:
+      213: 2435912759853127963
+    second: slag_bloater_3
+  - first:
+      213: 38690543020306093
+    second: slag_bloater_4
+  - first:
+      213: 1534186778461235190
+    second: slag_bloater_5
+  - first:
+      213: -7490873874028491338
+    second: slag_bloater_6
+  - first:
+      213: -1894285304110940535
+    second: slag_bloater_7
+  - first:
+      213: 8004974900983145008
+    second: slag_bloater_8
+  - first:
+      213: 633905241015794018
+    second: slag_bloater_9
+  - first:
+      213: -2288264704371866823
+    second: slag_bloater_10
+  - first:
+      213: -5860846046666535396
+    second: slag_bloater_11
+  - first:
+      213: -1049149108454942848
+    second: slag_bloater_12
+  - first:
+      213: -240290061980402010
+    second: slag_bloater_13
+  - first:
+      213: -6013122018675457458
+    second: slag_bloater_14
+  - first:
+      213: -5873250813688752548
+    second: slag_bloater_15
+  - first:
+      213: 1412588751193503074
+    second: slag_bloater_16
+  - first:
+      213: 39308062363430829
+    second: slag_bloater_17
+  - first:
+      213: -8379441158251232257
+    second: slag_bloater_18
+  - first:
+      213: -6301966571032980088
+    second: slag_bloater_19
+  - first:
+      213: 6378406215126281684
+    second: slag_bloater_20
+  - first:
+      213: -4999731213832514519
+    second: slag_bloater_21
+  - first:
+      213: 6465319752082506281
+    second: slag_bloater_22
+  - first:
+      213: -3384684766771587275
+    second: slag_bloater_23
+  - first:
+      213: 818935896715260343
+    second: slag_bloater_24
+  - first:
+      213: 4672308830798948426
+    second: slag_bloater_25
+  - first:
+      213: 935586120143454468
+    second: slag_bloater_26
+  - first:
+      213: 3263887011857949479
+    second: slag_bloater_27
+  - first:
+      213: 8345608478906861702
+    second: slag_bloater_28
+  - first:
+      213: 1269083557166337155
+    second: slag_bloater_29
+  - first:
+      213: -4161063952895751558
+    second: slag_bloater_30
+  - first:
+      213: 7903870153746459094
+    second: slag_bloater_31
+  - first:
+      213: -1844817288715517808
+    second: slag_bloater_32
+  - first:
+      213: -2231363331559116399
+    second: slag_bloater_33
+  - first:
+      213: -4313837302028079187
+    second: slag_bloater_34
+  - first:
+      213: 3392112608523518485
+    second: slag_bloater_35
+  - first:
+      213: 600520299873700991
+    second: slag_bloater_36
+  - first:
+      213: -7998531843375581428
+    second: slag_bloater_37
+  - first:
+      213: -8877548308445679660
+    second: slag_bloater_38
+  - first:
+      213: 8376710481588613352
+    second: slag_bloater_39
+  - first:
+      213: 8050765632705856281
+    second: slag_bloater_40
+  - first:
+      213: -5116010884918039032
+    second: slag_bloater_41
+  - first:
+      213: -349324786970080973
+    second: slag_bloater_42
+  - first:
+      213: -1424272168197504045
+    second: slag_bloater_43
+  - first:
+      213: -1074713468137732598
+    second: slag_bloater_44
+  - first:
+      213: -6745731537614798952
+    second: slag_bloater_45
+  - first:
+      213: 5393995750921991600
+    second: slag_bloater_46
+  - first:
+      213: 2532879420760003972
+    second: slag_bloater_47
+  - first:
+      213: -874002771975960250
+    second: slag_bloater_48
+  - first:
+      213: -8797129285977694480
+    second: slag_bloater_49
+  - first:
+      213: 6793078994087569843
+    second: slag_bloater_50
+  - first:
+      213: -8528892087340141233
+    second: slag_bloater_51
+  - first:
+      213: -8969152077226529765
+    second: slag_bloater_52
+  - first:
+      213: 4698169687132975023
+    second: slag_bloater_53
+  - first:
+      213: 6044373527291470853
+    second: slag_bloater_54
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: slag_bloater_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4191f2d966cdd87b0800000000000000
+      internalID: -5220274059770652396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 327
+        width: 23
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75d2cbc8cf8634f70800000000000000
+      internalID: 9170288700158651735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 327
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8314f38d61629f9c0800000000000000
+      internalID: -3893038523325923016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_3
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1913e2cfb91ec120800000000000000
+      internalID: 2435912759853127963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_4
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dae64e808d4798000800000000000000
+      internalID: 38690543020306093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_5
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 265
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f7684d1fb68a4510800000000000000
+      internalID: 1534186778461235190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_6
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 265
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd074166e11b0890800000000000000
+      internalID: -7490873874028491338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_7
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98e79316d8526b5e0800000000000000
+      internalID: -1894285304110940535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_8
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 265
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 032a401a242671f60800000000000000
+      internalID: 8004974900983145008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_9
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 265
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 269310845751cc800800000000000000
+      internalID: 633905241015794018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 201
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 933c9d700637e30e0800000000000000
+      internalID: -2288264704371866823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_11
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 201
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1e403992971aaea0800000000000000
+      internalID: -5860846046666535396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_12
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 202
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 087102ac17ca071f0800000000000000
+      internalID: -1049149108454942848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_13
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 202
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aef99436715aacf0800000000000000
+      internalID: -240290061980402010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_14
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 139
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4205c502691d8ca0800000000000000
+      internalID: -6013122018675457458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_15
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 72
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c56de45b0850e7ea0800000000000000
+      internalID: -5873250813688752548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_16
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 72
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 265f9982cf58a9310800000000000000
+      internalID: 1412588751193503074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 11
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daf2bf57976ab8000800000000000000
+      internalID: 39308062363430829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_18
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 27
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff3c52aa9ae36bb80800000000000000
+      internalID: -8379441158251232257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_19
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 32
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 885513bfacaea88a0800000000000000
+      internalID: -6301966571032980088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_20
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 33
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ddeebd88a6a48850800000000000000
+      internalID: 6378406215126281684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_21
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 30
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 924941363f26d9ab0800000000000000
+      internalID: -4999731213832514519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_22
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 32
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 922c13e4f0e69b950800000000000000
+      internalID: 6465319752082506281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53757ef232f2701d0800000000000000
+      internalID: -3384684766771587275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_24
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 29
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b17781fbd17d5b00800000000000000
+      internalID: 818935896715260343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_25
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 28
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4821bc602067d040800000000000000
+      internalID: 4672308830798948426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_26
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 28
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 401cfeb8e9edbfc00800000000000000
+      internalID: 935586120143454468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_27
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 18
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 723edc8c1f7ab4d20800000000000000
+      internalID: 3263887011857949479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_28
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 22
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6884bb3d1be81d370800000000000000
+      internalID: 8345608478906861702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_29
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 25
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38c403775c0bc9110800000000000000
+      internalID: 1269083557166337155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_30
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 19
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7a47ff816ee046c0800000000000000
+      internalID: -4161063952895751558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_31
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 21
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d9aed0470030bd60800000000000000
+      internalID: 7903870153746459094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_32
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 25
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 090cc9e3374e566e0800000000000000
+      internalID: -1844817288715517808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_33
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 22
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19136994fda9801e0800000000000000
+      internalID: -2231363331559116399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_34
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 22
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daf69c954db2224c0800000000000000
+      internalID: -4313837302028079187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_35
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 8
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5120b2df174331f20800000000000000
+      internalID: 3392112608523518485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_36
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 17
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7c0262f70a755800800000000000000
+      internalID: 600520299873700991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_37
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 14
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c07b2fe9aa18ff090800000000000000
+      internalID: -7998531843375581428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_38
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 7
+        width: 18
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dfa9b649dc9cc480800000000000000
+      internalID: -8877548308445679660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_39
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 13
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e071612dcd004470800000000000000
+      internalID: 8376710481588613352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_40
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 6
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9130b5b20b01abf60800000000000000
+      internalID: 8050765632705856281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_41
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80ead69b4374009b0800000000000000
+      internalID: -5116010884918039032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_42
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 7
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 339c86105f2f62bf0800000000000000
+      internalID: -349324786970080973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_43
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 6
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d3cc175208fb3ce0800000000000000
+      internalID: -1424272168197504045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_44
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 18
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0682587bc9d511f0800000000000000
+      internalID: -1074713468137732598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_45
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 13
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89ff15e28e85262a0800000000000000
+      internalID: -6745731537614798952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_46
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 6
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b5fbad8e825bda40800000000000000
+      internalID: 5393995750921991600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_47
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 7
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4851c45d968962320800000000000000
+      internalID: 2532879420760003972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_48
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6498aab0c1beed3f0800000000000000
+      internalID: -874002771975960250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_49
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fe1d1a06815ae580800000000000000
+      internalID: -8797129285977694480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_50
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 7
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b9e1c59a5dd54e50800000000000000
+      internalID: 6793078994087569843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_51
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 7
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f457376a5d943a980800000000000000
+      internalID: -8528892087340141233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_52
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 5
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1ca474d4bb278380800000000000000
+      internalID: -8969152077226529765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_53
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fafa1104070433140800000000000000
+      internalID: 4698169687132975023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slag_bloater_54
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 7
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 504abf7d2bde1e350800000000000000
+      internalID: 6044373527291470853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      slag_bloater_0: -5220274059770652396
+      slag_bloater_1: 9170288700158651735
+      slag_bloater_10: -2288264704371866823
+      slag_bloater_11: -5860846046666535396
+      slag_bloater_12: -1049149108454942848
+      slag_bloater_13: -240290061980402010
+      slag_bloater_14: -6013122018675457458
+      slag_bloater_15: -5873250813688752548
+      slag_bloater_16: 1412588751193503074
+      slag_bloater_17: 39308062363430829
+      slag_bloater_18: -8379441158251232257
+      slag_bloater_19: -6301966571032980088
+      slag_bloater_2: -3893038523325923016
+      slag_bloater_20: 6378406215126281684
+      slag_bloater_21: -4999731213832514519
+      slag_bloater_22: 6465319752082506281
+      slag_bloater_23: -3384684766771587275
+      slag_bloater_24: 818935896715260343
+      slag_bloater_25: 4672308830798948426
+      slag_bloater_26: 935586120143454468
+      slag_bloater_27: 3263887011857949479
+      slag_bloater_28: 8345608478906861702
+      slag_bloater_29: 1269083557166337155
+      slag_bloater_3: 2435912759853127963
+      slag_bloater_30: -4161063952895751558
+      slag_bloater_31: 7903870153746459094
+      slag_bloater_32: -1844817288715517808
+      slag_bloater_33: -2231363331559116399
+      slag_bloater_34: -4313837302028079187
+      slag_bloater_35: 3392112608523518485
+      slag_bloater_36: 600520299873700991
+      slag_bloater_37: -7998531843375581428
+      slag_bloater_38: -8877548308445679660
+      slag_bloater_39: 8376710481588613352
+      slag_bloater_4: 38690543020306093
+      slag_bloater_40: 8050765632705856281
+      slag_bloater_41: -5116010884918039032
+      slag_bloater_42: -349324786970080973
+      slag_bloater_43: -1424272168197504045
+      slag_bloater_44: -1074713468137732598
+      slag_bloater_45: -6745731537614798952
+      slag_bloater_46: 5393995750921991600
+      slag_bloater_47: 2532879420760003972
+      slag_bloater_48: -874002771975960250
+      slag_bloater_49: -8797129285977694480
+      slag_bloater_5: 1534186778461235190
+      slag_bloater_50: 6793078994087569843
+      slag_bloater_51: -8528892087340141233
+      slag_bloater_52: -8969152077226529765
+      slag_bloater_53: 4698169687132975023
+      slag_bloater_54: 6044373527291470853
+      slag_bloater_6: -7490873874028491338
+      slag_bloater_7: -1894285304110940535
+      slag_bloater_8: 8004974900983145008
+      slag_bloater_9: 633905241015794018
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

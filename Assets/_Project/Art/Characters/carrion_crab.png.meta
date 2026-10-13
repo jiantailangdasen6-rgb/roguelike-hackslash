@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 4206bd85f2ede904ab903c295a394d6f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9093961376691000282
+    second: carrion_crab_0
+  - first:
+      213: 3107458582511321588
+    second: carrion_crab_1
+  - first:
+      213: -1824948601116680832
+    second: carrion_crab_2
+  - first:
+      213: 8053636823969152235
+    second: carrion_crab_3
+  - first:
+      213: 2676126286030456969
+    second: carrion_crab_4
+  - first:
+      213: 6548966261630294226
+    second: carrion_crab_5
+  - first:
+      213: 407545516664855945
+    second: carrion_crab_6
+  - first:
+      213: -4326935507127106089
+    second: carrion_crab_7
+  - first:
+      213: -8695246742256457309
+    second: carrion_crab_8
+  - first:
+      213: -8060271847737396609
+    second: carrion_crab_9
+  - first:
+      213: 7058833498966199144
+    second: carrion_crab_10
+  - first:
+      213: 3164168025996739381
+    second: carrion_crab_11
+  - first:
+      213: -5936571019685048920
+    second: carrion_crab_12
+  - first:
+      213: -1051081241702383117
+    second: carrion_crab_13
+  - first:
+      213: -1326314569126758667
+    second: carrion_crab_14
+  - first:
+      213: -7273173378967129175
+    second: carrion_crab_15
+  - first:
+      213: 3725004890295671903
+    second: carrion_crab_16
+  - first:
+      213: 372279340621189735
+    second: carrion_crab_17
+  - first:
+      213: 7379704898263599021
+    second: carrion_crab_18
+  - first:
+      213: 7285143908410451716
+    second: carrion_crab_19
+  - first:
+      213: 6210667114652721219
+    second: carrion_crab_20
+  - first:
+      213: -4459591615569385800
+    second: carrion_crab_21
+  - first:
+      213: 1106185841026060575
+    second: carrion_crab_22
+  - first:
+      213: 8791455347980891167
+    second: carrion_crab_23
+  - first:
+      213: -5669832663096497862
+    second: carrion_crab_24
+  - first:
+      213: -2697186629768990814
+    second: carrion_crab_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: carrion_crab_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 327
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad31ac2b0bd343e70800000000000000
+      internalID: 9093961376691000282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 328
+        width: 31
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f183d4ed19ef1b20800000000000000
+      internalID: 3107458582511321588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_2
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 328
+        width: 31
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08d18119aea7ca6e0800000000000000
+      internalID: -1824948601116680832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_3
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 327
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: becbfaa750444cf60800000000000000
+      internalID: 8053636823969152235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_4
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 325
+        width: 30
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9884eecada2832520800000000000000
+      internalID: 2676126286030456969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_5
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 325
+        width: 30
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d8dd76fd1a92ea50800000000000000
+      internalID: 6548966261630294226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_6
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 263
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d9c96fc74e7a500800000000000000
+      internalID: 407545516664855945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_7
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 264
+        width: 31
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d50aa3d413a3f3c0800000000000000
+      internalID: -4326935507127106089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_8
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 264
+        width: 31
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a96e654827445780800000000000000
+      internalID: -8695246742256457309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_9
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 263
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f72f78aa579242090800000000000000
+      internalID: -8060271847737396609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_10
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 262
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86b02820ba306f160800000000000000
+      internalID: 7058833498966199144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_11
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 262
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5334f2f1e0269eb20800000000000000
+      internalID: 3164168025996739381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_12
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 198
+        width: 31
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ad4bc36c101d9da0800000000000000
+      internalID: -5936571019685048920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_13
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 197
+        width: 30
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f1c046fd2fc961f0800000000000000
+      internalID: -1051081241702383117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_14
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 197
+        width: 30
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f636ce2debf79de0800000000000000
+      internalID: -1326314569126758667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_15
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 136
+        width: 31
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a336d4c85f701b90800000000000000
+      internalID: -7273173378967129175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_16
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 136
+        width: 34
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5c9aa83630e1b330800000000000000
+      internalID: 3725004890295671903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_17
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 135
+        width: 31
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76251fe761a9a2500800000000000000
+      internalID: 372279340621189735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_18
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 69
+        width: 32
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da74630718af96660800000000000000
+      internalID: 7379704898263599021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_19
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 70
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 407e76e49c70a1560800000000000000
+      internalID: 7285143908410451716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_20
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 7
+        width: 31
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3406313d5d8b03650800000000000000
+      internalID: 6210667114652721219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_21
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 0
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b62da6bd095c12c0800000000000000
+      internalID: -4459591615569385800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_22
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 0
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f11dced5926f95f00800000000000000
+      internalID: 1106185841026060575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_23
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 0
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f14fb135f06810a70800000000000000
+      internalID: 8791455347980891167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_24
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 28
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a39e934ab35b051b0800000000000000
+      internalID: -5669832663096497862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: carrion_crab_25
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 0
+        width: 29
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2afafafec0ba19ad0800000000000000
+      internalID: -2697186629768990814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      carrion_crab_0: 9093961376691000282
+      carrion_crab_1: 3107458582511321588
+      carrion_crab_10: 7058833498966199144
+      carrion_crab_11: 3164168025996739381
+      carrion_crab_12: -5936571019685048920
+      carrion_crab_13: -1051081241702383117
+      carrion_crab_14: -1326314569126758667
+      carrion_crab_15: -7273173378967129175
+      carrion_crab_16: 3725004890295671903
+      carrion_crab_17: 372279340621189735
+      carrion_crab_18: 7379704898263599021
+      carrion_crab_19: 7285143908410451716
+      carrion_crab_2: -1824948601116680832
+      carrion_crab_20: 6210667114652721219
+      carrion_crab_21: -4459591615569385800
+      carrion_crab_22: 1106185841026060575
+      carrion_crab_23: 8791455347980891167
+      carrion_crab_24: -5669832663096497862
+      carrion_crab_25: -2697186629768990814
+      carrion_crab_3: 8053636823969152235
+      carrion_crab_4: 2676126286030456969
+      carrion_crab_5: 6548966261630294226
+      carrion_crab_6: 407545516664855945
+      carrion_crab_7: -4326935507127106089
+      carrion_crab_8: -8695246742256457309
+      carrion_crab_9: -8060271847737396609
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

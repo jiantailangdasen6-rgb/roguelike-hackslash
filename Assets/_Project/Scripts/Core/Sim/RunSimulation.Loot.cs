@@ -73,7 +73,7 @@ namespace Game.Core
         /// <summary>A monster died: each player rolls their own drop.</summary>
         private void RollLoot(in Enemy e)
         {
-            float chance = Mathf.Min(1f, (e.Def.Boss ? 1f : e.Elite ? EliteDropChance : NormalDropChance) * DropChanceScale);
+            float chance = Mathf.Min(1f, (e.Def.Boss ? 1f : e.Elite ? EliteDropChance : NormalDropChance) * DropChanceScale * OmenLoot);
             float boost = e.Def.Boss ? 2.5f : e.Elite ? 1f : 0f;
             for (int i = 0; i < Players.Count; i++)
             {

@@ -97,7 +97,7 @@ namespace Game.EditorTools.Art
                 {
                     float dx = (x + 0.5f - cx) / 7f, dy = (y + 0.5f - cy) / 4f, d = dx * dx + dy * dy;
                     if (d > 1f + (Hash(x, y) - 0.5f) * 0.5f) continue;
-                    c.Set(x, y, d > 0.6f ? stone[1] : C("#0c1614"));
+                    c.Set(x, y, d > 0.6f ? stone[2] : stone[1]);
                 }
                 c.Set((int)cx + 2, (int)cy + 1, C("#3f8a7c"));
             }
@@ -143,7 +143,7 @@ namespace Game.EditorTools.Art
                 {
                     float dx = (x + 0.5f - cx) / 8f, dy = (y + 0.5f - cy) / 4.5f, d = dx * dx + dy * dy;
                     if (d > 1f + (Hash(x, y) - 0.5f) * 0.9f) continue;
-                    c.Set(x, y, d < 0.25f ? C("#6d82a6") : d < 0.6f ? C("#536888") : C("#3c4c68"));
+                    c.Set(x, y, d < 0.25f ? C("#3e4f6c") : d < 0.6f ? C("#35455f") : C("#2e3c55"));
                 }
             }
             if (variant == 3)
@@ -176,15 +176,13 @@ namespace Game.EditorTools.Art
             for (int i = 0; i < 14; i++) c.Set(rng.Range(1, 31), rng.Range(1, 31), C("#080504"));
             if (variant == 2)
             {
-                // A small iron drain over a faint red glow.
-                var iron = new[] { C("#151516"), C("#1f1f21"), C("#2b2b2e"), C("#3a3a3e") };
-                for (int y = 9; y < 23; y++)
-                for (int x = 9; x < 23; x++)
+                // A blot of soot where something burned (no edge: it fades into the brick).
+                float cx = rng.Range(10f, 22f), cy = rng.Range(10f, 22f);
+                for (int y = 0; y < 32; y++)
+                for (int x = 0; x < 32; x++)
                 {
-                    bool edge = x == 9 || y == 9 || x == 22 || y == 22;
-                    bool bar = (x - 9) % 3 == 0 || (y - 9) % 3 == 0;
-                    var col = edge ? iron[y == 22 ? 3 : 2] : bar ? iron[1] : ((x * 3 + y) % 7 == 0 ? C("#5a1e08") : C("#24100a"));
-                    c.Set(x, y, col);
+                    float d = Mathf.Sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy) * 1.6f);
+                    if (d < 9f && Hash(x, y) > d / 9f) c.Set(x, y, d < 4f ? C("#0a0605") : C("#120c09"));
                 }
             }
             if (variant == 3)

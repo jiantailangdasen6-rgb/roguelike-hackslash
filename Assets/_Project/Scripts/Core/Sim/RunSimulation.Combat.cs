@@ -769,9 +769,9 @@ namespace Game.Core
                 if (def.Type == EnemyType.TreasureImp) ImpCaught(e);
                 if (def.Type == EnemyType.Mimic) MimicSlain(e);
                 if (e.Cursed > 0f && e.CursedBy != 0) CursedFell(e); // rises as a servant
-                if (!def.Boss && DifficultyDef.Has(DifficultyMod.Vengeance))
+                if (!def.Boss && (DifficultyDef.Has(DifficultyMod.Vengeance) || OmenVengeance))
                     QueueBurst(e.Position, DifficultyCatalog.VengeanceRadius, DifficultyCatalog.VengeanceDelay, DifficultyCatalog.VengeanceDamage * EnemyDamageScale, AreaKind.SoulBurst);
-                int xp = def.Xp * (e.Elite ? EnemyCatalog.EliteXpMultiplier : 1);
+                int xp = OmenSouls(def.Xp * (e.Elite ? EnemyCatalog.EliteXpMultiplier : 1));
                 if (def.Boss)
                 {
                     BossesKilled++;

@@ -1,0 +1,782 @@
+fileFormatVersion: 2
+guid: 7c14fdaf494f00e4b8a0761f626cfbd9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7434388907670940706
+    second: frost_witch_flash_0
+  - first:
+      213: -4671889087575151037
+    second: frost_witch_flash_1
+  - first:
+      213: -1994761419755628530
+    second: frost_witch_flash_2
+  - first:
+      213: 1290478461739066636
+    second: frost_witch_flash_3
+  - first:
+      213: -267224864878120206
+    second: frost_witch_flash_4
+  - first:
+      213: 3280378829197892169
+    second: frost_witch_flash_5
+  - first:
+      213: 1319052373333641426
+    second: frost_witch_flash_6
+  - first:
+      213: -833149314942833707
+    second: frost_witch_flash_7
+  - first:
+      213: -432125331048203715
+    second: frost_witch_flash_8
+  - first:
+      213: -8862467528319049755
+    second: frost_witch_flash_9
+  - first:
+      213: -2566726683878960732
+    second: frost_witch_flash_10
+  - first:
+      213: 2715383438634231789
+    second: frost_witch_flash_11
+  - first:
+      213: -2887365756238470514
+    second: frost_witch_flash_12
+  - first:
+      213: 901196608074170820
+    second: frost_witch_flash_13
+  - first:
+      213: 4141364696593190456
+    second: frost_witch_flash_14
+  - first:
+      213: 6773076263033638907
+    second: frost_witch_flash_15
+  - first:
+      213: -3826968779840273032
+    second: frost_witch_flash_16
+  - first:
+      213: -8777924204959645682
+    second: frost_witch_flash_17
+  - first:
+      213: -2517556497415813552
+    second: frost_witch_flash_18
+  - first:
+      213: -6457954923259791333
+    second: frost_witch_flash_19
+  - first:
+      213: -497927562945402716
+    second: frost_witch_flash_20
+  - first:
+      213: 4640489864866150827
+    second: frost_witch_flash_21
+  - first:
+      213: 6762154486596122098
+    second: frost_witch_flash_22
+  - first:
+      213: -5209214482174206047
+    second: frost_witch_flash_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: frost_witch_flash_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 328
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22ca4db82514c2760800000000000000
+      internalID: 7434388907670940706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 328
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34e2f09a0ad1a2fb0800000000000000
+      internalID: -4671889087575151037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_2
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 327
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e08dfc3be0f2154e0800000000000000
+      internalID: -1994761419755628530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_3
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 327
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c05ef3ed253b8e110800000000000000
+      internalID: 1290478461739066636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_4
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 265
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f2b9c5b660aa4cf0800000000000000
+      internalID: -267224864878120206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_5
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 265
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94a5d0b3a2f368d20800000000000000
+      internalID: 3280378829197892169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_6
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 265
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d800b815273e4210800000000000000
+      internalID: 1319052373333641426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_7
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 265
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dbe8fdbc1f0074f0800000000000000
+      internalID: -833149314942833707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_8
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 265
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3a7c680d48c00af0800000000000000
+      internalID: -432125331048203715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_9
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 265
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5efdb150db0320580800000000000000
+      internalID: -8862467528319049755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_10
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 200
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a1d0eb1ea7216cd0800000000000000
+      internalID: -2566726683878960732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_11
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 201
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de7a5c8c9dafea520800000000000000
+      internalID: 2715383438634231789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_12
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 202
+        width: 19
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8267c284240ee7d0800000000000000
+      internalID: -2887365756238470514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_13
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 136
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c14c015a81b18c00800000000000000
+      internalID: 901196608074170820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_14
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 136
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83ec7c9ef35197930800000000000000
+      internalID: 4141364696593190456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_15
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 136
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bff00c6d9fccefd50800000000000000
+      internalID: 6773076263033638907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_16
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 72
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8754c1fbb20e3eac0800000000000000
+      internalID: -3826968779840273032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_17
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 72
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e00c31a617c8e2680800000000000000
+      internalID: -8777924204959645682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_18
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 8
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 056cd8544b7df0dd0800000000000000
+      internalID: -2517556497415813552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_19
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 8
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b187d97863cb066a0800000000000000
+      internalID: -6457954923259791333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_20
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 8
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a863c605810719f0800000000000000
+      internalID: -497927562945402716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_21
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 8
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba9b52b12f4566040800000000000000
+      internalID: 4640489864866150827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_22
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1
+        width: 32
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f530e99daff7dd50800000000000000
+      internalID: 6762154486596122098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_witch_flash_23
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 0
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af9f2f270725b7b0800000000000000
+      internalID: -5209214482174206047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      frost_witch_flash_0: 7434388907670940706
+      frost_witch_flash_1: -4671889087575151037
+      frost_witch_flash_10: -2566726683878960732
+      frost_witch_flash_11: 2715383438634231789
+      frost_witch_flash_12: -2887365756238470514
+      frost_witch_flash_13: 901196608074170820
+      frost_witch_flash_14: 4141364696593190456
+      frost_witch_flash_15: 6773076263033638907
+      frost_witch_flash_16: -3826968779840273032
+      frost_witch_flash_17: -8777924204959645682
+      frost_witch_flash_18: -2517556497415813552
+      frost_witch_flash_19: -6457954923259791333
+      frost_witch_flash_2: -1994761419755628530
+      frost_witch_flash_20: -497927562945402716
+      frost_witch_flash_21: 4640489864866150827
+      frost_witch_flash_22: 6762154486596122098
+      frost_witch_flash_23: -5209214482174206047
+      frost_witch_flash_3: 1290478461739066636
+      frost_witch_flash_4: -267224864878120206
+      frost_witch_flash_5: 3280378829197892169
+      frost_witch_flash_6: 1319052373333641426
+      frost_witch_flash_7: -833149314942833707
+      frost_witch_flash_8: -432125331048203715
+      frost_witch_flash_9: -8862467528319049755
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

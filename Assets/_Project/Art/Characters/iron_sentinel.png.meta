@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: a9249859769b3bf43a80171eb31f6ac2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7033594573230065727
+    second: iron_sentinel_0
+  - first:
+      213: 2215166574634327786
+    second: iron_sentinel_1
+  - first:
+      213: 7459680016751537769
+    second: iron_sentinel_2
+  - first:
+      213: 150832003021208826
+    second: iron_sentinel_3
+  - first:
+      213: -3460485918358147982
+    second: iron_sentinel_4
+  - first:
+      213: -1165197004845265976
+    second: iron_sentinel_5
+  - first:
+      213: -142510381953996242
+    second: iron_sentinel_6
+  - first:
+      213: -3647595234554498746
+    second: iron_sentinel_7
+  - first:
+      213: 941319624499726749
+    second: iron_sentinel_8
+  - first:
+      213: -984577182144416223
+    second: iron_sentinel_9
+  - first:
+      213: 3928100145943486522
+    second: iron_sentinel_10
+  - first:
+      213: -144319035222200049
+    second: iron_sentinel_11
+  - first:
+      213: 5879188240441375719
+    second: iron_sentinel_12
+  - first:
+      213: -1940771579046368435
+    second: iron_sentinel_13
+  - first:
+      213: -4517553349272133426
+    second: iron_sentinel_14
+  - first:
+      213: 6056165148686990820
+    second: iron_sentinel_15
+  - first:
+      213: -6915526949710393405
+    second: iron_sentinel_16
+  - first:
+      213: -454892639285821752
+    second: iron_sentinel_17
+  - first:
+      213: -4610530697758797649
+    second: iron_sentinel_18
+  - first:
+      213: 5034052311191837471
+    second: iron_sentinel_19
+  - first:
+      213: -1371460654613983898
+    second: iron_sentinel_20
+  - first:
+      213: 663877884305799439
+    second: iron_sentinel_21
+  - first:
+      213: -2986034882841647035
+    second: iron_sentinel_22
+  - first:
+      213: 3665779809243594735
+    second: iron_sentinel_23
+  - first:
+      213: 417991212227767534
+    second: iron_sentinel_24
+  - first:
+      213: 212225031088862490
+    second: iron_sentinel_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: iron_sentinel_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 328
+        width: 27
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c7b1805007a36e90800000000000000
+      internalID: -7033594573230065727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 328
+        width: 27
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeed56f534addbe10800000000000000
+      internalID: 2215166574634327786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 327
+        width: 27
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96e2e80c37b168760800000000000000
+      internalID: 7459680016751537769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 327
+        width: 28
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afcf6d858ecd71200800000000000000
+      internalID: 150832003021208826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_4
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 264
+        width: 28
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27c65064462e9ffc0800000000000000
+      internalID: -3460485918358147982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_5
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 263
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cb49d06f7364dfe0800000000000000
+      internalID: -1165197004845265976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_6
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 263
+        width: 30
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2aa3da0093b50ef0800000000000000
+      internalID: -142510381953996242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_7
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 264
+        width: 28
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 641b8ffb573216dc0800000000000000
+      internalID: -3647595234554498746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_8
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 263
+        width: 29
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d99096e063d301d00800000000000000
+      internalID: 941319624499726749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_9
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 263
+        width: 29
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 126b354f4441652f0800000000000000
+      internalID: -984577182144416223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_10
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 200
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a302f11554a638630800000000000000
+      internalID: 3928100145943486522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_11
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 201
+        width: 24
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f01f0432a964ffdf0800000000000000
+      internalID: -144319035222200049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_12
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 201
+        width: 24
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eb792f2e82179150800000000000000
+      internalID: 5879188240441375719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_13
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 136
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4b64c0188ef015e0800000000000000
+      internalID: -1940771579046368435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_14
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 132
+        width: 44
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec022c2f92d6e41c0800000000000000
+      internalID: -4517553349272133426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_15
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 130
+        width: 34
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4edb694ad12db0450800000000000000
+      internalID: 6056165148686990820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_16
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 133
+        width: 32
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cf0fd711ec1700a0800000000000000
+      internalID: -6915526949710393405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_17
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 72
+        width: 24
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cebd600e85efa9f0800000000000000
+      internalID: -454892639285821752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_18
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 72
+        width: 25
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa09d0e02ca1400c0800000000000000
+      internalID: -4610530697758797649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_19
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 8
+        width: 25
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1bd25dc7eb8cd540800000000000000
+      internalID: 5034052311191837471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_20
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 8
+        width: 31
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66d0f4a0dc797fce0800000000000000
+      internalID: -1371460654613983898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_21
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 8
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f09f84c1b61963900800000000000000
+      internalID: 663877884305799439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_22
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 4
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5486c4148197f86d0800000000000000
+      internalID: -2986034882841647035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_23
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 0
+        width: 31
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fef73ca70577fd230800000000000000
+      internalID: 3665779809243594735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_24
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 0
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eec221cfac00dc500800000000000000
+      internalID: 417991212227767534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: iron_sentinel_25
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 0
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a157f769a89f1f200800000000000000
+      internalID: 212225031088862490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      iron_sentinel_0: -7033594573230065727
+      iron_sentinel_1: 2215166574634327786
+      iron_sentinel_10: 3928100145943486522
+      iron_sentinel_11: -144319035222200049
+      iron_sentinel_12: 5879188240441375719
+      iron_sentinel_13: -1940771579046368435
+      iron_sentinel_14: -4517553349272133426
+      iron_sentinel_15: 6056165148686990820
+      iron_sentinel_16: -6915526949710393405
+      iron_sentinel_17: -454892639285821752
+      iron_sentinel_18: -4610530697758797649
+      iron_sentinel_19: 5034052311191837471
+      iron_sentinel_2: 7459680016751537769
+      iron_sentinel_20: -1371460654613983898
+      iron_sentinel_21: 663877884305799439
+      iron_sentinel_22: -2986034882841647035
+      iron_sentinel_23: 3665779809243594735
+      iron_sentinel_24: 417991212227767534
+      iron_sentinel_25: 212225031088862490
+      iron_sentinel_3: 150832003021208826
+      iron_sentinel_4: -3460485918358147982
+      iron_sentinel_5: -1165197004845265976
+      iron_sentinel_6: -142510381953996242
+      iron_sentinel_7: -3647595234554498746
+      iron_sentinel_8: 941319624499726749
+      iron_sentinel_9: -984577182144416223
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

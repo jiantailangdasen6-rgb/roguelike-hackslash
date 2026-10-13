@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 0f00afddd66f7114f98a9783d163bdd0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3457885629724218899
+    second: forge_colossus_0
+  - first:
+      213: 3276105687920110113
+    second: forge_colossus_1
+  - first:
+      213: 615770332709922939
+    second: forge_colossus_2
+  - first:
+      213: -1354558644174738368
+    second: forge_colossus_3
+  - first:
+      213: 6724321777909773977
+    second: forge_colossus_4
+  - first:
+      213: -8215613368109022543
+    second: forge_colossus_5
+  - first:
+      213: 6503533495174300787
+    second: forge_colossus_6
+  - first:
+      213: -5427233190951770439
+    second: forge_colossus_7
+  - first:
+      213: 4426396472940787884
+    second: forge_colossus_8
+  - first:
+      213: 4719905216838549367
+    second: forge_colossus_9
+  - first:
+      213: -7004164170563424121
+    second: forge_colossus_10
+  - first:
+      213: 3550684137884893249
+    second: forge_colossus_11
+  - first:
+      213: 1247933977677754431
+    second: forge_colossus_12
+  - first:
+      213: -6664281266761976114
+    second: forge_colossus_13
+  - first:
+      213: -3994725994116378633
+    second: forge_colossus_14
+  - first:
+      213: 3170222766333709731
+    second: forge_colossus_15
+  - first:
+      213: -4910072989212582363
+    second: forge_colossus_16
+  - first:
+      213: 2446739748466652371
+    second: forge_colossus_17
+  - first:
+      213: 3104082453090522961
+    second: forge_colossus_18
+  - first:
+      213: 907527885932661282
+    second: forge_colossus_19
+  - first:
+      213: 8597384149688351681
+    second: forge_colossus_20
+  - first:
+      213: -5192794570769853879
+    second: forge_colossus_21
+  - first:
+      213: -7852792718967226948
+    second: forge_colossus_22
+  - first:
+      213: 6550079597792643476
+    second: forge_colossus_23
+  - first:
+      213: 7553976091113354195
+    second: forge_colossus_24
+  - first:
+      213: 2277439272850279082
+    second: forge_colossus_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: forge_colossus_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 568
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 316d3a9d8a0ecff20800000000000000
+      internalID: 3457885629724218899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_1
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 568
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12a6d1ff3c0177d20800000000000000
+      internalID: 3276105687920110113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_2
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 567
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b782668ead7ab8800800000000000000
+      internalID: 615770332709922939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_3
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 567
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04ca7820714a33de0800000000000000
+      internalID: -1354558644174738368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_4
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 457
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9963cbfa707915d50800000000000000
+      internalID: 6724321777909773977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_5
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 457
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b249ed7b274cfd80800000000000000
+      internalID: -8215613368109022543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_6
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 457
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37408b4b141314a50800000000000000
+      internalID: 6503533495174300787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_7
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 457
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b62c14ea289ea4b0800000000000000
+      internalID: -5427233190951770439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_8
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 457
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca87dacd328bd6d30800000000000000
+      internalID: 4426396472940787884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_9
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 457
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77fbc2f99c8708140800000000000000
+      internalID: 4719905216838549367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_10
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 344
+        width: 51
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7807c09ebc53cce90800000000000000
+      internalID: -7004164170563424121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_11
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 345
+        width: 25
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1404e3c3960964130800000000000000
+      internalID: 3550684137884893249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_12
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 346
+        width: 26
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f307f92475d815110800000000000000
+      internalID: 1247933977677754431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_13
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 232
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec6bc5b2f77b383a0800000000000000
+      internalID: -6664281266761976114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_14
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 223
+        width: 68
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ff8ca19fd1ef88c0800000000000000
+      internalID: -3994725994116378633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_15
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 223
+        width: 53
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ad4d263fc4eefb20800000000000000
+      internalID: 3170222766333709731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_16
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 223
+        width: 46
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52e5eb881aaebdbb0800000000000000
+      internalID: -4910072989212582363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_17
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 120
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d4fe2d76d094f120800000000000000
+      internalID: 2446739748466652371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_18
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 120
+        width: 35
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 157dbf18b8ae31b20800000000000000
+      internalID: 3104082453090522961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_19
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 8
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22a07c0ddcf289c00800000000000000
+      internalID: 907527885932661282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_20
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 7
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cb7fbf455b005770800000000000000
+      internalID: 8597384149688351681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_21
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 6
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9429fa9b9dc7fe7b0800000000000000
+      internalID: -5192794570769853879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_22
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 5
+        width: 49
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbd3f23c0a6450390800000000000000
+      internalID: -7852792718967226948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_23
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 4
+        width: 53
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 499c6fcb0be86ea50800000000000000
+      internalID: 6550079597792643476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_24
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 0
+        width: 42
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d3fa907b3d15d860800000000000000
+      internalID: 7553976091113354195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forge_colossus_25
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 0
+        width: 41
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaac3c7c3f61b9f10800000000000000
+      internalID: 2277439272850279082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      forge_colossus_0: 3457885629724218899
+      forge_colossus_1: 3276105687920110113
+      forge_colossus_10: -7004164170563424121
+      forge_colossus_11: 3550684137884893249
+      forge_colossus_12: 1247933977677754431
+      forge_colossus_13: -6664281266761976114
+      forge_colossus_14: -3994725994116378633
+      forge_colossus_15: 3170222766333709731
+      forge_colossus_16: -4910072989212582363
+      forge_colossus_17: 2446739748466652371
+      forge_colossus_18: 3104082453090522961
+      forge_colossus_19: 907527885932661282
+      forge_colossus_2: 615770332709922939
+      forge_colossus_20: 8597384149688351681
+      forge_colossus_21: -5192794570769853879
+      forge_colossus_22: -7852792718967226948
+      forge_colossus_23: 6550079597792643476
+      forge_colossus_24: 7553976091113354195
+      forge_colossus_25: 2277439272850279082
+      forge_colossus_3: -1354558644174738368
+      forge_colossus_4: 6724321777909773977
+      forge_colossus_5: -8215613368109022543
+      forge_colossus_6: 6503533495174300787
+      forge_colossus_7: -5427233190951770439
+      forge_colossus_8: 4426396472940787884
+      forge_colossus_9: 4719905216838549367
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -150,7 +150,7 @@ namespace Game.Core
 
             float speed = def.Speed * (e.HitStun > 0f ? 0.25f : 1f) * (DifficultyDef.Has(DifficultyMod.Swiftness) ? DifficultyCatalog.SwiftnessSpeed : 1f) * (e.Haunted > 0f ? GhostSlow : 1f)
                           * (!def.Flying && Arena.InZone(Layout, GimmickKind.Water, e.Position) ? Arena.WaterSlowMonsters : 1f)
-                          * (def.Boss && ActiveTrial == BossTrial.Overheat ? OverheatSpeed : 1f);
+                          * (def.Boss && ActiveTrial == BossTrial.Overheat ? OverheatSpeed : 1f) * OmenSpeed;
             if (move != Vector2.zero)
             {
                 if (!def.Flying) move = Arena.Steer(Layout, e.Position, move, e.Radius, e.Id);

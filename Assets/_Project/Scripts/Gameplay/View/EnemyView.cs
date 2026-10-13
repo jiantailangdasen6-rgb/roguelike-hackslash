@@ -340,8 +340,8 @@ namespace Game.Gameplay
                 if (trial == BossTrial.Overheat)
                 {
                     float heat = 0.5f + 0.5f * Mathf.Sin(Time.time * 7f);
-                    tint = Color.Lerp(tint, new Color(1f, 0.42f, 0.18f), 0.5f + 0.2f * heat);
-                    if (v.Glow != null) { v.Glow.color = new Color(1f, 0.45f, 0.12f); v.Glow.intensity = 2.4f + heat; }
+                    tint = Color.Lerp(tint, new Color(1f, 0.32f, 0.12f), 0.45f + 0.15f * heat);
+                    if (v.Glow != null) { v.Glow.color = new Color(1f, 0.4f, 0.1f); v.Glow.intensity = 1.1f + 0.4f * heat; }
                 }
                 return;
             }
@@ -409,12 +409,20 @@ namespace Game.Gameplay
                 v.Glow.intensity = def.Boss ? 1.4f : def.Type is EnemyType.Wraith or EnemyType.ShadeStalker or EnemyType.AbyssEye && !elite ? 0.6f : 0.9f;
                 v.Glow.pointLightOuterRadius = def.Boss ? 4.5f : 2.2f;
                 v.Glow.pointLightInnerRadius = 0.2f;
+                v.Glow.transform.localPosition = new Vector3(0f, 0.6f);
                 // The new lands: drowned teal, cold blue, forge orange (a reflection glows just like the queen).
                 switch (def.Type)
                 {
                     case EnemyType.DrownedSaint: case EnemyType.TideWitch: v.Glow.color = new Color(0.35f, 1f, 0.85f); break;
                     case EnemyType.FrostQueen: case EnemyType.IceMirror: case EnemyType.FrostWitch: v.Glow.color = new Color(0.6f, 0.85f, 1f); break;
                     case EnemyType.ForgeColossus: case EnemyType.FireImp: case EnemyType.SlagBloater: v.Glow.color = new Color(1f, 0.5f, 0.15f); break;
+                }
+                // Small glowing monsters keep their light faint (a strong light on a small sprite washes it out).
+                if (!def.Boss && !elite && def.Type is EnemyType.TideWitch or EnemyType.FrostWitch or EnemyType.FireImp or EnemyType.SlagBloater)
+                {
+                    v.Glow.intensity = 0.45f;
+                    v.Glow.pointLightOuterRadius = 1.8f;
+                    v.Glow.transform.localPosition = new Vector3(0f, 1.2f);
                 }
                 if (def.Type == EnemyType.IceMirror)
                 {

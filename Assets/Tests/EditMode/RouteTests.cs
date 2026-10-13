@@ -121,6 +121,35 @@ namespace Game.Tests
         }
 
         [Test]
+        public void Omens_ComeWithTheVariedRoute_AndChangeTheRun()
+        {
+            Assert.AreEqual(Omen.None, new RunSimulation(4).Omen, "the classic route has none");
+            var seen = new HashSet<Omen>();
+            for (ulong seed = 1; seed <= 40; seed++)
+            {
+                var sim = new RunSimulation(seed);
+                sim.UseVariedRoute();
+                Assert.AreNotEqual(Omen.None, sim.Omen);
+                seen.Add(sim.Omen);
+            }
+            Assert.Greater(seen.Count, 3, "runs bring different omens");
+
+            var moon = new RunSimulation(4);
+            moon.UseVariedRoute();
+            moon.SetOmen(Omen.BloodMoon);
+            Assert.Greater(moon.EliteChance, new RunSimulation(4).EliteChance, "more elites under the blood moon");
+
+            var blessed = new RunSimulation(4);
+            blessed.UseVariedRoute();
+            blessed.SetOmen(Omen.Blessed);
+            var p = blessed.AddPlayer(0);
+            blessed.Start();
+            int picks = 0;
+            for (int i = 0; i < 10 && p.PendingOffer != null; i++, picks++) blessed.ChoosePerk(0, 0);
+            Assert.GreaterOrEqual(picks, 1, "a power to choose at the start");
+        }
+
+        [Test]
         public void PlannedRoute_IsFollowed()
         {
             var sim = new RunSimulation(8);

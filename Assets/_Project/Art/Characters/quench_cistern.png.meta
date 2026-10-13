@@ -1,0 +1,1146 @@
+fileFormatVersion: 2
+guid: b3092cc544618a44c892ffbd739818c8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6231226978736358876
+    second: quench_cistern_0
+  - first:
+      213: -5059773685389978892
+    second: quench_cistern_1
+  - first:
+      213: -4182240547286060477
+    second: quench_cistern_2
+  - first:
+      213: 6656961819425392418
+    second: quench_cistern_3
+  - first:
+      213: -1412559398181137286
+    second: quench_cistern_4
+  - first:
+      213: 4375920490085445187
+    second: quench_cistern_5
+  - first:
+      213: -4028934668044293571
+    second: quench_cistern_6
+  - first:
+      213: 1693600120926880579
+    second: quench_cistern_7
+  - first:
+      213: 4467435807631310525
+    second: quench_cistern_8
+  - first:
+      213: 4668120902093923139
+    second: quench_cistern_9
+  - first:
+      213: -7333737081358137598
+    second: quench_cistern_10
+  - first:
+      213: -8813509657168935467
+    second: quench_cistern_11
+  - first:
+      213: -3484960075995272278
+    second: quench_cistern_12
+  - first:
+      213: -6505331925065159767
+    second: quench_cistern_13
+  - first:
+      213: -8242204449087206496
+    second: quench_cistern_14
+  - first:
+      213: -6642257146750304405
+    second: quench_cistern_15
+  - first:
+      213: 9095857616505937372
+    second: quench_cistern_16
+  - first:
+      213: -5554591746186095976
+    second: quench_cistern_17
+  - first:
+      213: 7722715289329255901
+    second: quench_cistern_18
+  - first:
+      213: -7348341042617856938
+    second: quench_cistern_19
+  - first:
+      213: 7679929337709975627
+    second: quench_cistern_20
+  - first:
+      213: 8800936578080846658
+    second: quench_cistern_21
+  - first:
+      213: -5298583398818204043
+    second: quench_cistern_22
+  - first:
+      213: 534849997979872825
+    second: quench_cistern_23
+  - first:
+      213: 1982463364626638924
+    second: quench_cistern_24
+  - first:
+      213: -4282508452857038887
+    second: quench_cistern_25
+  - first:
+      213: 2408777429549985725
+    second: quench_cistern_26
+  - first:
+      213: 3371453802211171085
+    second: quench_cistern_27
+  - first:
+      213: -920348720448145014
+    second: quench_cistern_28
+  - first:
+      213: -743543811490426572
+    second: quench_cistern_29
+  - first:
+      213: -1236407291764019135
+    second: quench_cistern_30
+  - first:
+      213: -1278325294165492031
+    second: quench_cistern_31
+  - first:
+      213: 7497410573809604688
+    second: quench_cistern_32
+  - first:
+      213: 1703801336900303963
+    second: quench_cistern_33
+  - first:
+      213: -6397826642991558253
+    second: quench_cistern_34
+  - first:
+      213: 2963323691372010358
+    second: quench_cistern_35
+  - first:
+      213: 5314534711846995292
+    second: quench_cistern_36
+  - first:
+      213: -9132251067980129412
+    second: quench_cistern_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: quench_cistern_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 328
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd549663ce3c97650800000000000000
+      internalID: 6231226978736358876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 328
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f2167614a218c9b0800000000000000
+      internalID: -5059773685389978892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_2
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 264
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34277c57162b5f5c0800000000000000
+      internalID: -4182240547286060477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_3
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 264
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22740323187426c50800000000000000
+      internalID: 6656961819425392418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_4
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 200
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a74164f16b4956ce0800000000000000
+      internalID: -1412559398181137286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_5
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 200
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34e65e840846abc30800000000000000
+      internalID: 4375920490085445187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_6
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 136
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3aa6fff3495618c0800000000000000
+      internalID: -4028934668044293571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_7
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 136
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 343c76f3650e08710800000000000000
+      internalID: 1693600120926880579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_8
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 72
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbe79b292358ffd30800000000000000
+      internalID: 4467435807631310525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_9
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 72
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34362e94a3f78c040800000000000000
+      internalID: 4668120902093923139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_10
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 8
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 207c985faf4593a90800000000000000
+      internalID: -7333737081358137598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_11
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 15
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d588fba9af10b580800000000000000
+      internalID: -8813509657168935467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_12
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aab22e5664fe2afc0800000000000000
+      internalID: -3484960075995272278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 19
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9abab74b41b68b5a0800000000000000
+      internalID: -6505331925065159767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_14
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 14
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ab430ef8becd9d80800000000000000
+      internalID: -8242204449087206496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_15
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 14
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6ff5253156f1d3a0800000000000000
+      internalID: -6642257146750304405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_16
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 20
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd1e5f6f4afa3e70800000000000000
+      internalID: 9095857616505937372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_17
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 20
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 892d2408c302ae2b0800000000000000
+      internalID: -5554591746186095976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_18
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 13
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd5c2f193a89c2b60800000000000000
+      internalID: 7722715289329255901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_19
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 20
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65cc65241c2750a90800000000000000
+      internalID: -7348341042617856938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_20
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 19
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b48dd4aea07949a60800000000000000
+      internalID: 7679929337709975627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_21
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 19
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 243304b3035332a70800000000000000
+      internalID: 8800936578080846658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_22
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 18
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 576b8acc876a776b0800000000000000
+      internalID: -5298583398818204043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_23
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 8
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93e65b94d3b2c6700800000000000000
+      internalID: 534849997979872825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_24
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 8
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c48ebc43def138b10800000000000000
+      internalID: 1982463364626638924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_25
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d739d770497194c0800000000000000
+      internalID: -4282508452857038887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_26
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbf2e475f42bd6120800000000000000
+      internalID: 2408777429549985725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_27
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0bdf61de5fc9ce20800000000000000
+      internalID: 3371453802211171085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_28
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a89f33807b34a33f0800000000000000
+      internalID: -920348720448145014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_29
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4315c29c7d66ea5f0800000000000000
+      internalID: -743543811490426572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_30
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 13
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 140f3b07e1667dee0800000000000000
+      internalID: -1236407291764019135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_31
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ce7ed5fae9724ee0800000000000000
+      internalID: -1278325294165492031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_32
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 058dd23a1372c0860800000000000000
+      internalID: 7497410573809604688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_33
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 8
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5c37cde94e15a710800000000000000
+      internalID: 1703801336900303963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_34
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39155f9b09a5637a0800000000000000
+      internalID: -6397826642991558253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_35
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67b5aba6237df1920800000000000000
+      internalID: 2963323691372010358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_36
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c558f1ea92501c940800000000000000
+      internalID: 5314534711846995292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: quench_cistern_37
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 8
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7bdc55d90ab34180800000000000000
+      internalID: -9132251067980129412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      quench_cistern_0: 6231226978736358876
+      quench_cistern_1: -5059773685389978892
+      quench_cistern_10: -7333737081358137598
+      quench_cistern_11: -8813509657168935467
+      quench_cistern_12: -3484960075995272278
+      quench_cistern_13: -6505331925065159767
+      quench_cistern_14: -8242204449087206496
+      quench_cistern_15: -6642257146750304405
+      quench_cistern_16: 9095857616505937372
+      quench_cistern_17: -5554591746186095976
+      quench_cistern_18: 7722715289329255901
+      quench_cistern_19: -7348341042617856938
+      quench_cistern_2: -4182240547286060477
+      quench_cistern_20: 7679929337709975627
+      quench_cistern_21: 8800936578080846658
+      quench_cistern_22: -5298583398818204043
+      quench_cistern_23: 534849997979872825
+      quench_cistern_24: 1982463364626638924
+      quench_cistern_25: -4282508452857038887
+      quench_cistern_26: 2408777429549985725
+      quench_cistern_27: 3371453802211171085
+      quench_cistern_28: -920348720448145014
+      quench_cistern_29: -743543811490426572
+      quench_cistern_3: 6656961819425392418
+      quench_cistern_30: -1236407291764019135
+      quench_cistern_31: -1278325294165492031
+      quench_cistern_32: 7497410573809604688
+      quench_cistern_33: 1703801336900303963
+      quench_cistern_34: -6397826642991558253
+      quench_cistern_35: 2963323691372010358
+      quench_cistern_36: 5314534711846995292
+      quench_cistern_37: -9132251067980129412
+      quench_cistern_4: -1412559398181137286
+      quench_cistern_5: 4375920490085445187
+      quench_cistern_6: -4028934668044293571
+      quench_cistern_7: 1693600120926880579
+      quench_cistern_8: 4467435807631310525
+      quench_cistern_9: 4668120902093923139
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

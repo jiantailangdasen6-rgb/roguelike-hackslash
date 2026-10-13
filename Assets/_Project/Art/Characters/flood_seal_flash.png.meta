@@ -1,0 +1,1484 @@
+fileFormatVersion: 2
+guid: 2c6f74b5439056a4aad368c229ef8514
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6659185135624904283
+    second: flood_seal_flash_0
+  - first:
+      213: 7699255843213693927
+    second: flood_seal_flash_1
+  - first:
+      213: -8913426097092272674
+    second: flood_seal_flash_2
+  - first:
+      213: -8070779408617865355
+    second: flood_seal_flash_3
+  - first:
+      213: -4527640101547217575
+    second: flood_seal_flash_4
+  - first:
+      213: 3768962571036525459
+    second: flood_seal_flash_5
+  - first:
+      213: -8919913982988469658
+    second: flood_seal_flash_6
+  - first:
+      213: 6039545436502087203
+    second: flood_seal_flash_7
+  - first:
+      213: -4576782111601796011
+    second: flood_seal_flash_8
+  - first:
+      213: -8054288081065945718
+    second: flood_seal_flash_9
+  - first:
+      213: 5986925617543837629
+    second: flood_seal_flash_10
+  - first:
+      213: -1624471233953995846
+    second: flood_seal_flash_11
+  - first:
+      213: 3918528460029336346
+    second: flood_seal_flash_12
+  - first:
+      213: -4722536970230257740
+    second: flood_seal_flash_13
+  - first:
+      213: 2313140673957688729
+    second: flood_seal_flash_14
+  - first:
+      213: 8267357948962704473
+    second: flood_seal_flash_15
+  - first:
+      213: 4932387559008341990
+    second: flood_seal_flash_16
+  - first:
+      213: -5080344996477183215
+    second: flood_seal_flash_17
+  - first:
+      213: -4025476753127162504
+    second: flood_seal_flash_18
+  - first:
+      213: 5775039496614042248
+    second: flood_seal_flash_19
+  - first:
+      213: 8910784429911686670
+    second: flood_seal_flash_20
+  - first:
+      213: 5700135389065741253
+    second: flood_seal_flash_21
+  - first:
+      213: -7331633843554402166
+    second: flood_seal_flash_22
+  - first:
+      213: 5925344321425405847
+    second: flood_seal_flash_23
+  - first:
+      213: -816067144695451932
+    second: flood_seal_flash_24
+  - first:
+      213: 1360214672947436291
+    second: flood_seal_flash_25
+  - first:
+      213: -2683351123818280974
+    second: flood_seal_flash_26
+  - first:
+      213: -3281090139576698173
+    second: flood_seal_flash_27
+  - first:
+      213: 5361898601338802217
+    second: flood_seal_flash_28
+  - first:
+      213: 5468010698205714091
+    second: flood_seal_flash_29
+  - first:
+      213: 2549072769686056080
+    second: flood_seal_flash_30
+  - first:
+      213: 2836977764430258604
+    second: flood_seal_flash_31
+  - first:
+      213: 4085006599894567566
+    second: flood_seal_flash_32
+  - first:
+      213: -385119032373577384
+    second: flood_seal_flash_33
+  - first:
+      213: -3238562612931918136
+    second: flood_seal_flash_34
+  - first:
+      213: 5560322035603460239
+    second: flood_seal_flash_35
+  - first:
+      213: -2271241495266442336
+    second: flood_seal_flash_36
+  - first:
+      213: 213512861946690816
+    second: flood_seal_flash_37
+  - first:
+      213: -4913497918933134601
+    second: flood_seal_flash_38
+  - first:
+      213: -8448573413803566467
+    second: flood_seal_flash_39
+  - first:
+      213: -3916830592008426413
+    second: flood_seal_flash_40
+  - first:
+      213: -736696142323775120
+    second: flood_seal_flash_41
+  - first:
+      213: 5566921003947352982
+    second: flood_seal_flash_42
+  - first:
+      213: -4533391123060305828
+    second: flood_seal_flash_43
+  - first:
+      213: -2150227457123568528
+    second: flood_seal_flash_44
+  - first:
+      213: 264930623758187393
+    second: flood_seal_flash_45
+  - first:
+      213: -2270385766647520560
+    second: flood_seal_flash_46
+  - first:
+      213: -8732133710083909175
+    second: flood_seal_flash_47
+  - first:
+      213: 3699286179982936236
+    second: flood_seal_flash_48
+  - first:
+      213: -7861800293012581240
+    second: flood_seal_flash_49
+  - first:
+      213: 6443381099587591783
+    second: flood_seal_flash_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: flood_seal_flash_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 327
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a12489a662d593a0800000000000000
+      internalID: -6659185135624904283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 327
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e35a91a56049da60800000000000000
+      internalID: 7699255843213693927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 327
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edd5e17a0362d4480800000000000000
+      internalID: -8913426097092272674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_3
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 327
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57f7bc083e4deff80800000000000000
+      internalID: -8070779408617865355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_4
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 327
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95de67ce0579a21c0800000000000000
+      internalID: -4527640101547217575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_5
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 327
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39300625d7b0e4430800000000000000
+      internalID: 3768962571036525459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_6
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 263
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66abee00e79163480800000000000000
+      internalID: -8919913982988469658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_7
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 263
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 326d98b5396c0d350800000000000000
+      internalID: 6039545436502087203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_8
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 263
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55cdc971be00c70c0800000000000000
+      internalID: -4576782111601796011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_9
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 263
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a85d669e9ab693090800000000000000
+      internalID: -8054288081065945718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_10
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 263
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db7f26a0125d51350800000000000000
+      internalID: 5986925617543837629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_11
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 263
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab3e4500508b479e0800000000000000
+      internalID: -1624471233953995846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_12
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 199
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1b9e468fd8616630800000000000000
+      internalID: 3918528460029336346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_13
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 199
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b7a6ca85ad267eb0800000000000000
+      internalID: -4722536970230257740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_14
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 199
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99571caff2de91020800000000000000
+      internalID: 2313140673957688729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_15
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 199
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95c8ce2904e8bb270800000000000000
+      internalID: 8267357948962704473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_16
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 199
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ef8f3d1a5c537440800000000000000
+      internalID: 4932387559008341990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_17
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 199
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11b5b8c742dfe79b0800000000000000
+      internalID: -5080344996477183215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_18
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 135
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87d334e8832a228c0800000000000000
+      internalID: -4025476753127162504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_19
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 135
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88ad78f13df052050800000000000000
+      internalID: 5775039496614042248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_20
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 135
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0eb7f64a3779ab70800000000000000
+      internalID: 8910784429911686670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_21
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 135
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c385ec8fe2fa1f40800000000000000
+      internalID: 5700135389065741253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_22
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 135
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8045bb2dddc04a90800000000000000
+      internalID: -7331633843554402166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_23
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 135
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 797707a344d0b3250800000000000000
+      internalID: 5925344321425405847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_24
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 71
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ee6f8f614fbca4f0800000000000000
+      internalID: -816067144695451932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_25
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 71
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30b5e4fc90470e210800000000000000
+      internalID: 1360214672947436291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_26
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 15
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f78a21be52d2cad0800000000000000
+      internalID: -2683351123818280974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_27
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 22
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ca7e7ae6e93772d0800000000000000
+      internalID: -3281090139576698173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_28
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 15
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 920967e8e5a496a40800000000000000
+      internalID: 5361898601338802217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_29
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba6569e52c642eb40800000000000000
+      internalID: 5468010698205714091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_30
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 23
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09c22cfad20206320800000000000000
+      internalID: 2549072769686056080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_31
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 18
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca12c8cee38fe5720800000000000000
+      internalID: 2836977764430258604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_32
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 19
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8a87dbfbdbd0b830800000000000000
+      internalID: 4085006599894567566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_33
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 17
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 859712fc748c7aaf0800000000000000
+      internalID: -385119032373577384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_34
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 18
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c6055156705e03d0800000000000000
+      internalID: -3238562612931918136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_35
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 24
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f80dbe87e6b3a2d40800000000000000
+      internalID: 5560322035603460239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_36
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 23
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a34483c4edea70e0800000000000000
+      internalID: -2271241495266442336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_37
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 7
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00d3f4311dc86f200800000000000000
+      internalID: 213512861946690816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_38
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 11
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f29e51fcafbfcbb0800000000000000
+      internalID: -4913497918933134601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_39
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 8
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7add6b1e33a0ca80800000000000000
+      internalID: -8448573413803566467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_40
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 8
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35c64fd245f94a9c0800000000000000
+      internalID: -3916830592008426413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_41
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 8
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 079046103cab6c5f0800000000000000
+      internalID: -736696142323775120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_42
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69361f4882da14d40800000000000000
+      internalID: 5566921003947352982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_43
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 15
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c50d412eac82611c0800000000000000
+      internalID: -4533391123060305828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_44
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 074bbd7258bd822e0800000000000000
+      internalID: -2150227457123568528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_45
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18bba37aff83da300800000000000000
+      internalID: 264930623758187393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_46
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d22fdb9c28fd70e0800000000000000
+      internalID: -2270385766647520560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_47
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c91c3fc7aa31d680800000000000000
+      internalID: -8732133710083909175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_48
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 8
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca805685e21865330800000000000000
+      internalID: 3699286179982936236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_49
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8845cef794645e290800000000000000
+      internalID: -7861800293012581240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flood_seal_flash_50
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76e5269b8fc7b6950800000000000000
+      internalID: 6443381099587591783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      flood_seal_flash_0: -6659185135624904283
+      flood_seal_flash_1: 7699255843213693927
+      flood_seal_flash_10: 5986925617543837629
+      flood_seal_flash_11: -1624471233953995846
+      flood_seal_flash_12: 3918528460029336346
+      flood_seal_flash_13: -4722536970230257740
+      flood_seal_flash_14: 2313140673957688729
+      flood_seal_flash_15: 8267357948962704473
+      flood_seal_flash_16: 4932387559008341990
+      flood_seal_flash_17: -5080344996477183215
+      flood_seal_flash_18: -4025476753127162504
+      flood_seal_flash_19: 5775039496614042248
+      flood_seal_flash_2: -8913426097092272674
+      flood_seal_flash_20: 8910784429911686670
+      flood_seal_flash_21: 5700135389065741253
+      flood_seal_flash_22: -7331633843554402166
+      flood_seal_flash_23: 5925344321425405847
+      flood_seal_flash_24: -816067144695451932
+      flood_seal_flash_25: 1360214672947436291
+      flood_seal_flash_26: -2683351123818280974
+      flood_seal_flash_27: -3281090139576698173
+      flood_seal_flash_28: 5361898601338802217
+      flood_seal_flash_29: 5468010698205714091
+      flood_seal_flash_3: -8070779408617865355
+      flood_seal_flash_30: 2549072769686056080
+      flood_seal_flash_31: 2836977764430258604
+      flood_seal_flash_32: 4085006599894567566
+      flood_seal_flash_33: -385119032373577384
+      flood_seal_flash_34: -3238562612931918136
+      flood_seal_flash_35: 5560322035603460239
+      flood_seal_flash_36: -2271241495266442336
+      flood_seal_flash_37: 213512861946690816
+      flood_seal_flash_38: -4913497918933134601
+      flood_seal_flash_39: -8448573413803566467
+      flood_seal_flash_4: -4527640101547217575
+      flood_seal_flash_40: -3916830592008426413
+      flood_seal_flash_41: -736696142323775120
+      flood_seal_flash_42: 5566921003947352982
+      flood_seal_flash_43: -4533391123060305828
+      flood_seal_flash_44: -2150227457123568528
+      flood_seal_flash_45: 264930623758187393
+      flood_seal_flash_46: -2270385766647520560
+      flood_seal_flash_47: -8732133710083909175
+      flood_seal_flash_48: 3699286179982936236
+      flood_seal_flash_49: -7861800293012581240
+      flood_seal_flash_5: 3768962571036525459
+      flood_seal_flash_50: 6443381099587591783
+      flood_seal_flash_6: -8919913982988469658
+      flood_seal_flash_7: 6039545436502087203
+      flood_seal_flash_8: -4576782111601796011
+      flood_seal_flash_9: -8054288081065945718
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

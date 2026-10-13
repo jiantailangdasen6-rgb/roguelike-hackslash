@@ -39,6 +39,7 @@ namespace Game.Core
             VariedRoute = true;
             _plannedRoute = planned != null && planned.Length > 0 ? planned : null;
             _route.Clear();
+            PickOmen(); // RunSimulation.Omens.cs
             BuildArea(0);
         }
 

@@ -1,0 +1,886 @@
+fileFormatVersion: 2
+guid: e17aef54ae7c02046992587f3bb6b846
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3654040419475291311
+    second: frost_queen_flash_0
+  - first:
+      213: -2637029031687805994
+    second: frost_queen_flash_1
+  - first:
+      213: -8090075567821717991
+    second: frost_queen_flash_2
+  - first:
+      213: -5837154748697349833
+    second: frost_queen_flash_3
+  - first:
+      213: 8510215915252520111
+    second: frost_queen_flash_4
+  - first:
+      213: 6258343872355636209
+    second: frost_queen_flash_5
+  - first:
+      213: 6921172162633538936
+    second: frost_queen_flash_6
+  - first:
+      213: 662599219559695351
+    second: frost_queen_flash_7
+  - first:
+      213: -2359858634316837123
+    second: frost_queen_flash_8
+  - first:
+      213: 2529652631140333957
+    second: frost_queen_flash_9
+  - first:
+      213: 4317837379007203739
+    second: frost_queen_flash_10
+  - first:
+      213: 3300965727971998155
+    second: frost_queen_flash_11
+  - first:
+      213: 4072731259795230529
+    second: frost_queen_flash_12
+  - first:
+      213: -555498343306121434
+    second: frost_queen_flash_13
+  - first:
+      213: -6278045864475990161
+    second: frost_queen_flash_14
+  - first:
+      213: -7619575295886563038
+    second: frost_queen_flash_15
+  - first:
+      213: -2294989517889334387
+    second: frost_queen_flash_16
+  - first:
+      213: -4476923324682339616
+    second: frost_queen_flash_17
+  - first:
+      213: 355604958833785225
+    second: frost_queen_flash_18
+  - first:
+      213: 4207110625116239679
+    second: frost_queen_flash_19
+  - first:
+      213: -4839785367250014478
+    second: frost_queen_flash_20
+  - first:
+      213: -7738229982795524196
+    second: frost_queen_flash_21
+  - first:
+      213: -7540028561827160985
+    second: frost_queen_flash_22
+  - first:
+      213: -490123686815050650
+    second: frost_queen_flash_23
+  - first:
+      213: -6208582600263677402
+    second: frost_queen_flash_24
+  - first:
+      213: -4546885454714654859
+    second: frost_queen_flash_25
+  - first:
+      213: 2398157226985629484
+    second: frost_queen_flash_26
+  - first:
+      213: 2414246100899732074
+    second: frost_queen_flash_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: frost_queen_flash_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 573
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1538142399d3a4dc0800000000000000
+      internalID: -3654040419475291311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_1
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 575
+        width: 36
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d32bd73114676bd0800000000000000
+      internalID: -2637029031687805994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_2
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 575
+        width: 36
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91e7be552274abf80800000000000000
+      internalID: -8090075567821717991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_3
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 573
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 731f8e0cea24efea0800000000000000
+      internalID: -5837154748697349833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_4
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 570
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa4908e294c5a1670800000000000000
+      internalID: 8510215915252520111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_5
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 570
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f31002089a1ad650800000000000000
+      internalID: 6258343872355636209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_6
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 460
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87d18177961fc0060800000000000000
+      internalID: 6921172162633538936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_7
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 462
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f38e46ca76023900800000000000000
+      internalID: 662599219559695351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_8
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 462
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfe086d3319104fd0800000000000000
+      internalID: -2359858634316837123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_9
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 460
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58970445aa12b1320800000000000000
+      internalID: 2529652631140333957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_10
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 459
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b99c0a5283a0ceb30800000000000000
+      internalID: 4317837379007203739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_11
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 459
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc9728f17d26fcd20800000000000000
+      internalID: 3300965727971998155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_12
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 351
+        width: 39
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14f49b5a08f358830800000000000000
+      internalID: 4072731259795230529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_13
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 352
+        width: 29
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62fabed23397a48f0800000000000000
+      internalID: -555498343306121434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_14
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 353
+        width: 28
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f676c4c7c86efd8a0800000000000000
+      internalID: -6278045864475990161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_15
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 238
+        width: 58
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 229e65d73a4d14690800000000000000
+      internalID: -7619575295886563038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_16
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 236
+        width: 61
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8316fe513f8620e0800000000000000
+      internalID: -2294989517889334387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_17
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 237
+        width: 60
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eaf5a9b4f5ced1c0800000000000000
+      internalID: -4476923324682339616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_18
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 238
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 989b7a373dc5fe400800000000000000
+      internalID: 355604958833785225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_19
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 125
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3733d4c2d8a26a30800000000000000
+      internalID: 4207110625116239679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_20
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 126
+        width: 35
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2feedebc9d0a5dcb0800000000000000
+      internalID: -4839785367250014478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_21
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 13
+        width: 34
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c97123d54d84c9490800000000000000
+      internalID: -7738229982795524196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_22
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 13
+        width: 38
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76c1ef7c8ff6c5790800000000000000
+      internalID: -7540028561827160985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_23
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 11
+        width: 42
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66452678a1bb239f0800000000000000
+      internalID: -490123686815050650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_24
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 10
+        width: 45
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62acc90050fa6d9a0800000000000000
+      internalID: -6208582600263677402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_25
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 9
+        width: 50
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57fa755f4c736e0c0800000000000000
+      internalID: -4546885454714654859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_26
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 0
+        width: 42
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c27a30eba47f74120800000000000000
+      internalID: 2398157226985629484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frost_queen_flash_27
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 0
+        width: 40
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6a108c9900218120800000000000000
+      internalID: 2414246100899732074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      frost_queen_flash_0: -3654040419475291311
+      frost_queen_flash_1: -2637029031687805994
+      frost_queen_flash_10: 4317837379007203739
+      frost_queen_flash_11: 3300965727971998155
+      frost_queen_flash_12: 4072731259795230529
+      frost_queen_flash_13: -555498343306121434
+      frost_queen_flash_14: -6278045864475990161
+      frost_queen_flash_15: -7619575295886563038
+      frost_queen_flash_16: -2294989517889334387
+      frost_queen_flash_17: -4476923324682339616
+      frost_queen_flash_18: 355604958833785225
+      frost_queen_flash_19: 4207110625116239679
+      frost_queen_flash_2: -8090075567821717991
+      frost_queen_flash_20: -4839785367250014478
+      frost_queen_flash_21: -7738229982795524196
+      frost_queen_flash_22: -7540028561827160985
+      frost_queen_flash_23: -490123686815050650
+      frost_queen_flash_24: -6208582600263677402
+      frost_queen_flash_25: -4546885454714654859
+      frost_queen_flash_26: 2398157226985629484
+      frost_queen_flash_27: 2414246100899732074
+      frost_queen_flash_3: -5837154748697349833
+      frost_queen_flash_4: 8510215915252520111
+      frost_queen_flash_5: 6258343872355636209
+      frost_queen_flash_6: 6921172162633538936
+      frost_queen_flash_7: 662599219559695351
+      frost_queen_flash_8: -2359858634316837123
+      frost_queen_flash_9: 2529652631140333957
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

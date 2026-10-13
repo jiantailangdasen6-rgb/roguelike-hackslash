@@ -37,6 +37,9 @@ namespace Game.Gameplay
         /// <summary>The land of every area so far, 4 bits each (RunSimulation.Route), and the two ways after the lord (left | right << 4).</summary>
         public readonly NetworkVariable<ulong> RouteBits = new();
         public readonly NetworkVariable<int> Ways = new();
+        /// <summary>The run's omen (RunSimulation.Omens).</summary>
+        public readonly NetworkVariable<int> OmenId = new();
+        public Omen Omen => (Omen)OmenId.Value;
 
         /// <summary>The land of an area this run went through (or is in).</summary>
         public Biome BiomeOf(int area) => area >= 0 && area < 16 ? (Biome)((RouteBits.Value >> (area * 4)) & 0xF) : BiomeCatalog.Classic(area);
@@ -276,6 +279,8 @@ namespace Game.Gameplay
             foreach (var name in (CommandLine.GetValue("-route") ?? "").Split(','))
                 if (Enum.TryParse(name.Trim(), true, out Biome land)) planned.Add(land);
             Sim.UseVariedRoute(planned.ToArray());
+            // -omen bloodmoon|none... (screenshots, tests): this run's omen.
+            if (Enum.TryParse(CommandLine.GetValue("-omen") ?? "", true, out Omen omen)) Sim.SetOmen(omen);
             Sim.DropChanceScale = CommandLine.GetFloat("-lootrate", 1f);
             Sim.BossStartHealth = CommandLine.GetFloat("-bosshp", 1f);
             if (CommandLine.Has("-mimic")) Sim.MimicOdds = 1f;
@@ -501,6 +506,7 @@ namespace Game.Gameplay
             for (int i = 0; i < Sim.Route.Count && i < 16; i++) route |= (ulong)Sim.Route[i] << (i * 4);
             SetIfChanged(RouteBits, route);
             SetIfChanged(Ways, (int)Sim.NextWays[0] | (int)Sim.NextWays[1] << 4);
+            SetIfChanged(OmenId, (int)Sim.Omen);
             int visited = 0, cleared = 0, fighting = 0, unlocked = 0;
             float puzzle = 0f;
             float puzzleTime = 0f;

@@ -176,7 +176,8 @@ namespace Game.Tests
             Assert.AreEqual(1, vessel.Count);
             sim.DamageEnemy(vessel[0], 1e6f, null, HitFlags.None, Vector2.zero, 0f);
             Run(sim, 0.3f);
-            Assert.AreEqual(RunPhase.Victory, sim.Phase, "the vessel broke and the Lich fell (last room)");
+            Assert.IsTrue(sim.Conquered, "the vessel broke and the Lich fell (last room)");
+            Assert.IsTrue(sim.ExitOpen, "home or deeper");
         }
 
         [Test]

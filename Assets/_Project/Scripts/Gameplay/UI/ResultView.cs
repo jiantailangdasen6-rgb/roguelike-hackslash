@@ -80,8 +80,8 @@ namespace Game.Gameplay
         private void OnEvent(SimEvent e)
         {
             if (e.Type != SimEventType.RunEnded) return;
-            _victory = e.Int == 1;
-            _title.text = _victory ? "迷宮を踏破した" : "力尽きた…";
+            _victory = e.Int >= 1; // 2: fell in the deep layers after beating the Lich (still a conquest)
+            _title.text = e.Int == 2 ? "深層に散った" : _victory ? "迷宮を踏破した" : "力尽きた…";
             _title.color = _victory ? UIKit.AccentColor : new Color(0.75f, 0.15f, 0.15f);
             _shards = -1;
             _logged = false;
@@ -103,25 +103,27 @@ namespace Game.Gameplay
             float longest = 300f;
             foreach (var a in areas) if (a[3] >= 0) longest = Mathf.Max(longest, a[3] - a[0]);
             const float barMax = 700f;
+            float step = Mathf.Min(46f, 150f / Mathf.Max(1, areas.Count)); // the deep layers squeeze the bars together
+            float thick = Mathf.Min(26f, step - 8f);
             for (int i = 0; i < areas.Count; i++)
             {
                 var a = areas[i];
                 if (a[3] < 0) continue;
-                float y = -i * 46f;
-                var label = UIKit.Label(_graph, $"エリア{i + 1}", 22, TextAnchor.MiddleRight, UIKit.MutedText);
+                float y = -i * step;
+                var label = UIKit.Label(_graph, i < RunSimulation.AreaCount ? $"エリア{i + 1}" : $"深層{i - RunSimulation.AreaCount + 1}", step < 40f ? 18 : 22, TextAnchor.MiddleRight, UIKit.MutedText);
                 label.rectTransform.Place(new Vector2(0f, 1f), new Vector2(110f, 36f), new Vector2(0f, y));
                 var back = UIKit.Panel(_graph, "Back", new Color(0.12f, 0.1f, 0.1f, 1f));
-                back.rectTransform.Place(new Vector2(0f, 1f), new Vector2(barMax, 26f), new Vector2(124f, y - 5f));
+                back.rectTransform.Place(new Vector2(0f, 1f), new Vector2(barMax, thick), new Vector2(124f, y - 5f));
                 float total = a[3] - a[0];
                 var bar = UIKit.Panel(_graph, "Bar", new Color(0.86f, 0.66f, 0.3f, 1f));
                 bar.sprite = UIKit.GlossSprite;
-                bar.rectTransform.Place(new Vector2(0f, 1f), new Vector2(barMax * total / longest, 26f), new Vector2(124f, y - 5f));
+                bar.rectTransform.Place(new Vector2(0f, 1f), new Vector2(barMax * total / longest, thick), new Vector2(124f, y - 5f));
                 if (a[1] >= 0)
                 {
                     float bossStart = a[1] - a[0], bossEnd = (a[2] >= a[1] ? a[2] : a[3]) - a[0];
                     var boss = UIKit.Panel(_graph, "Boss", new Color(0.78f, 0.16f, 0.14f, 1f));
                     boss.sprite = UIKit.GlossSprite;
-                    boss.rectTransform.Place(new Vector2(0f, 1f), new Vector2(barMax * (bossEnd - bossStart) / longest, 26f), new Vector2(124f + barMax * bossStart / longest, y - 5f));
+                    boss.rectTransform.Place(new Vector2(0f, 1f), new Vector2(barMax * (bossEnd - bossStart) / longest, thick), new Vector2(124f + barMax * bossStart / longest, y - 5f));
                 }
                 string bossText = a[1] >= 0 && a[2] >= a[1] ? $"<color=#ff8070>主 {UIKit.FormatTime(a[2] - a[1])}</color>　" : "";
                 var time = UIKit.Label(_graph, bossText + UIKit.FormatTime(total), 22, TextAnchor.MiddleLeft, Color.white);

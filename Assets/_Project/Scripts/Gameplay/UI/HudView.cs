@@ -17,6 +17,11 @@ namespace Game.Gameplay
         public static readonly string[] AreaNames = { "朽ちた納骨堂", "血塗られた礼拝堂", "奈落の玉座" };
         private static readonly string[] LayerNames = { "第一層", "第二層", "第三層" };
 
+        /// <summary>An area's name; past the third (the deep layers after the Lich) "深層 第N階".</summary>
+        public static string AreaName(int area) => area < AreaNames.Length ? AreaNames[Mathf.Max(0, area)] : $"深層 第{area - AreaNames.Length + 1}階";
+
+        public static string LayerName(int area) => area < LayerNames.Length ? LayerNames[Mathf.Max(0, area)] : "踏破の先";
+
         private sealed class SkillSlot
         {
             public RectTransform Root;
@@ -365,12 +370,13 @@ namespace Game.Gameplay
         /// <summary>How far a run got (result screen): the area, or its lord's hall.</summary>
         public static string RoomTitle(int index)
         {
-            int area = Mathf.Min(index / RunSimulation.RoomsPerArea, AreaNames.Length - 1);
-            return index % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1 ? $"{AreaNames[area]} ─ 主の間" : AreaNames[area];
+            int area = index / RunSimulation.RoomsPerArea;
+            return index % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1 ? $"{AreaName(area)} ─ 主の間" : AreaName(area);
+
         }
 
         public static string RoomTitle(MapRoom room) =>
-            $"{AreaNames[Mathf.Clamp(room.Index / RunSimulation.RoomsPerArea, 0, AreaNames.Length - 1)]} ─ {RoomCatalog.Name(room.Kind)}";
+            $"{AreaName(room.Index / RunSimulation.RoomsPerArea)} ─ {RoomCatalog.Name(room.Kind)}";
 
         /// <summary>The banner under the boss bar: what to do now (empty when nothing special is going on).</summary>
         private static string TrialText(RunDirector d, NetPlayer local)
@@ -398,8 +404,8 @@ namespace Game.Gameplay
                 case SimEventType.RoomStarted:
                 {
                     // A new area: its name, then the map takes over.
-                    int area = Mathf.Clamp(e.Int / RunSimulation.RoomsPerArea, 0, AreaNames.Length - 1);
-                    _cinematics.Area(LayerNames[area], AreaNames[area]);
+                    int area = e.Int / RunSimulation.RoomsPerArea;
+                    _cinematics.Area(LayerName(area), AreaName(area));
                     break;
                 }
                 case SimEventType.TeamLevelUp:
@@ -450,6 +456,7 @@ namespace Game.Gameplay
                     if (e.Int == 0) Banner("主の扉が開いた", "覚悟はいいか", 2.4f);
                     else if (e.Int == 2) Banner("宝物庫の扉が開いた", "", 2f);
                     else if (e.Int == 3) Banner("隠し部屋を見つけた", "", 2.4f);
+                    else if (e.Int == 4) Banner("主を討った", "帰還するか、さらに深層へ", 3.2f);
                     else Banner("奥への道が開いた", "", 2.6f);
                     break;
                 case SimEventType.KeyGained:
@@ -834,7 +841,7 @@ namespace Game.Gameplay
                         return $"{(room.Dark ? "闇の群れ" : room.Kind == RoomKind.Elite ? "精鋭の群れ" : "魔物の群れ")}  第{Mathf.Max(1, d.WaveOf(room.Id))}波 / {RunSimulation.WaveCountFor(room.Kind, d.Area.Value)}{(room.Dark ? (d.LanternHolder.Value == 0 ? "　<color=#ffd08a>灯りを拾え</color>" : "　<color=#ffd08a>灯りのそばで戦え</color>") : "")}";
                     return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み</color>" : "";
                 case RoomKind.Boss:
-                    if (d.ExitOpen.Value) return Gather(team ? "全員で奥への道へ" : "奥への道へ");
+                    if (d.ExitOpen.Value) return Gather(RunSimulation.OffersHome(d.Area.Value) ? (team ? "全員で帰還か深層へ" : "帰還か深層へ") : team ? "全員で奥への道へ" : "奥への道へ");
                     return d.IsFighting(room.Id) ? $"{EnemyCatalog.Get(d.BossType.Value).Name}を討て" : "";
                 case RoomKind.MiniBoss:
                     if (d.IsFighting(room.Id)) return "精鋭の主を倒せ";
@@ -901,10 +908,10 @@ namespace Game.Gameplay
             if (_mapRoot.activeSelf)
             {
                 _bigMap.Update(d);
-                int area = Mathf.Clamp(d.Area.Value, 0, AreaNames.Length - 1);
+                int area = d.Area.Value;
                 string keys = d.Keys.Value > 0 ? $"　<size=28><color=#e6c766>鍵 ×{d.Keys.Value}</color></size>" : "";
                 string boss = d.BossDoorOpen.Value ? "" : "　<size=24><color=#bfb6aa>主の扉は全員がそろうと開く</color></size>";
-                _mapTitle.text = AreaNames[area] + keys + boss;
+                _mapTitle.text = AreaName(area) + keys + boss;
             }
             float k = (Time.time - _fadeStart) / FadeTime;
             _fade.color = new Color(0f, 0f, 0f, (k >= 1f ? 0f : 1f - k * k) * GameSettings.FlashScale);
@@ -923,6 +930,7 @@ namespace Game.Gameplay
             foreach (var g in room.Layout.Gimmicks) Codex.Record(CodexCatalog.GimmickEntry(g.Kind));
             if (room.Kind == RoomKind.Campfire && NetPlayer.All.Count > 1) Codex.Record(CodexCatalog.GimmickId("Bell"));
             if (room.Dark) Codex.Record(CodexCatalog.GimmickId("DarkHall"));
+            if (d.Area.Value >= RunSimulation.AreaCount) Codex.Record("room:Deep");
             if (room.Kind == RoomKind.Puzzle && room.Puzzle == PuzzleKind.Twin) Codex.Record(CodexCatalog.GimmickId("TwinPlates"));
             if (room.Kind == RoomKind.Start || !_roomsBannered.Add((d.Area.Value, room.Id))) return;
             string sub = room.Kind == RoomKind.Puzzle

@@ -331,13 +331,15 @@ namespace Game.Tests
             sim.Start(RunSimulation.TotalRooms - 1);
             AnswerPicks(sim);
             Run(sim, 2f);
-            for (int round = 0; round < 3 && sim.Phase == RunPhase.Playing; round++)
+            for (int round = 0; round < 3 && !sim.Conquered; round++)
             {
                 for (int i = 0; i < sim.Enemies.Count; i++)
                     if (!sim.Enemies[i].Dead && (sim.Enemies[i].Def.Boss || sim.Enemies[i].Type == EnemyType.SoulVessel))
                         sim.DamageEnemy(i, 1e7f, a, HitFlags.None, Vector2.zero, 0f);
                 Run(sim, 0.3f);
             }
+            Assert.IsTrue(sim.Conquered);
+            Run(sim, RunSimulation.ExitHoldTime + 0.5f, s => a.Position = s.HomePosition); // the way home
             Assert.AreEqual(RunPhase.Victory, sim.Phase);
         }
 

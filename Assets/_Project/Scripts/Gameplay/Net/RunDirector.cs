@@ -75,7 +75,7 @@ namespace Game.Gameplay
         /// <summary>How much of the Lich's floor has fallen (players' movement is clamped to what's left).</summary>
         public readonly NetworkVariable<int> CollapseStage = new();
         /// <summary>Area times and downs so far (RunSimulation.SplitsText), for the result screen.</summary>
-        public readonly NetworkVariable<FixedString128Bytes> RunSplits = new();
+        public readonly NetworkVariable<FixedString512Bytes> RunSplits = new();
         private int _splitsVersion = -1;
 
         /// <summary>Host only.</summary>
@@ -436,6 +436,13 @@ namespace Game.Gameplay
             foreach (var p in NetPlayer.All)
                 Sim.SetPlayerPosition(p.OwnerClientId, p.transform.position);
 
+            // -killbossat <s> (screenshots): from then on the lords (and the Lich's vessel) fall as soon as they stand.
+            float killAt = CommandLine.GetFloat("-killbossat", -1f);
+            if (killAt > 0f && Time.time - _startTime > killAt && !Sim.ExitOpen)
+                for (int i = 0; i < Sim.Enemies.Count; i++)
+                    if (!Sim.Enemies[i].Dead && (Sim.Enemies[i].Def.Boss || Sim.Enemies[i].Type == EnemyType.SoulVessel))
+                        Sim.DamageEnemy(i, 1e7f, null, HitFlags.DamageOverTime, Vector2.zero, 0f);
+
             Sim.Step(TickDt);
             _tick++;
 
@@ -526,7 +533,7 @@ namespace Game.Gameplay
             if (Sim.SplitsVersion != _splitsVersion)
             {
                 _splitsVersion = Sim.SplitsVersion;
-                RunSplits.Value = new FixedString128Bytes(Sim.SplitsText());
+                RunSplits.Value = new FixedString512Bytes(Sim.SplitsText());
             }
         }
 

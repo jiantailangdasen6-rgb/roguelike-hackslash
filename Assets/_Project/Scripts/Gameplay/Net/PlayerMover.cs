@@ -339,7 +339,9 @@ namespace Game.Gameplay
                 var map = director.Map;
                 Vector2 Toward(Vector2 at) => (at - pos).sqrMagnitude > 0.2f ? (at - pos).normalized : Vector2.zero;
 
-                if (room.Kind == RoomKind.Boss && director.ExitOpen.Value) return Toward(room.Origin + RunSimulation.ExitOffset);
+                // Past the Lich bots take the way home (automated runs end there) unless told to go deeper (-deep).
+                if (room.Kind == RoomKind.Boss && director.ExitOpen.Value)
+                    return Toward(room.Origin + (RunSimulation.OffersHome(director.Area.Value) && !CommandLine.Has("-deep") ? RunSimulation.HomeOffset : RunSimulation.ExitSpot(director.Area.Value)));
                 if (room.Kind == RoomKind.Campfire && CommandLine.Has("-tobell")) return Toward(room.Bounds.center + RunSimulation.BellSpot); // screenshots
                 bool used = (_player.UsedPedestals.Value & (1 << room.Id)) != 0;
                 if (RoomCatalog.HasPedestal(room.Kind) && !used) return Toward(RunSimulation.PedestalPosition(room.Bounds));

@@ -258,7 +258,7 @@ namespace Game.Gameplay
                     break;
                 case SimEventType.SpawnWarning: Play("telegraph", e.Pos, 0.6f, 0.6f); break;
                 case SimEventType.KeyGained: Play("levelup", e.Pos, 1.3f); Play("clank", e.Pos, 1.4f, 0.6f); break;
-                case SimEventType.DoorOpened: Play(e.Int >= 2 ? "explosion" : "clear", e.Pos, e.Int >= 2 ? 0.6f : 1.1f, 0.7f); break;
+                case SimEventType.DoorOpened: Play(e.Int is 2 or 3 ? "explosion" : "clear", e.Pos, e.Int is 2 or 3 ? 0.6f : 1.1f, 0.7f); break;
                 case SimEventType.PuzzleEnded: Play(e.Int == 1 ? "clear" : "shatter", e.Pos, e.Int == 1 ? 1.2f : 0.7f); break;
                 case SimEventType.BellRung: Play("bell"); break;
                 case SimEventType.RoomEvent:

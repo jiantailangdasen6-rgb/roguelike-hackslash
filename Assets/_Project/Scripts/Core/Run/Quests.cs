@@ -147,7 +147,7 @@ namespace Game.Core
                 case QuestGoal.ReachArea:
                     return e.Type == SimEventType.RoomStarted && e.Int / RunSimulation.RoomsPerArea >= q.Count ? 1 : 0;
                 case QuestGoal.Victory:
-                    return e.Type == SimEventType.RunEnded && e.Int == 1 ? 1 : 0;
+                    return e.Type == SimEventType.RunEnded && e.Int >= 1 ? 1 : 0;
                 default:
                     return 0;
             }

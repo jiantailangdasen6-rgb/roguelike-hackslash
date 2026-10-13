@@ -218,7 +218,7 @@ namespace Game.Gameplay
                     CameraShake.Add(0.12f);
                     break;
                 }
-                case SimEventType.DoorOpened when e.Int >= 2:
+                case SimEventType.DoorOpened when e.Int is 2 or 3:
                     for (int i = 0; i < 10; i++) Burst("fx_puff", e.Pos + Random.insideUnitCircle * 1.2f, Random.Range(8f, 12f), Random.Range(0.8f, 1.4f), new Color(0.7f, 0.65f, 0.6f, 0.85f));
                     CameraShake.Add(0.3f);
                     break;
@@ -1185,12 +1185,26 @@ namespace Game.Gameplay
             }
             if (room.Kind == RoomKind.Boss && director.ExitOpen.Value)
             {
-                var mark = CreateMark(room.Origin + RunSimulation.ExitOffset, new Color(1f, 0.9f, 0.6f), null, RunSimulation.ExitRadius * 1.6f,
-                    "奥への道\n<size=22><color=#e8e0d4>" + (NetPlayer.All.Count > 1 ? "全員でここに立つと次のエリアへ" : "ここに立つと次のエリアへ") + "</color></size>", false);
+                bool home = RunSimulation.OffersHome(area);
+                string all = NetPlayer.All.Count > 1 ? "全員で" : "";
+                // Past the Lich the way on leads into the deep layers (violet), and a golden way leads home.
+                var deepColor = new Color(0.72f, 0.5f, 1f);
+                var mark = CreateMark(room.Origin + RunSimulation.ExitSpot(area), home ? deepColor : new Color(1f, 0.9f, 0.6f), null, RunSimulation.ExitRadius * 1.6f,
+                    home ? $"深層へ\n<size=22><color=#e8e0d4>{all}ここに立つと、さらに深く（魔物はより強い）</color></size>"
+                         : $"奥への道\n<size=22><color=#e8e0d4>{all}ここに立つと次のエリアへ</color></size>", false);
                 mark.Gather = true;
                 mark.Scale = 2.2f;
-                AddLight(mark.Ring, new Color(1f, 0.85f, 0.5f), 2.5f, 6f);
+                AddLight(mark.Ring, home ? deepColor : new Color(1f, 0.85f, 0.5f), 2.5f, 6f);
                 _doors.Add(mark);
+                if (home)
+                {
+                    var back = CreateMark(room.Origin + RunSimulation.HomeOffset, new Color(1f, 0.85f, 0.45f), null, RunSimulation.ExitRadius * 1.6f,
+                        $"帰還\n<size=22><color=#e8e0d4>{all}ここに立つと踏破して拠点へ</color></size>", false);
+                    back.Gather = true;
+                    back.Scale = 2.2f;
+                    AddLight(back.Ring, new Color(1f, 0.85f, 0.5f), 2.5f, 6f);
+                    _doors.Add(back);
+                }
             }
         }
 

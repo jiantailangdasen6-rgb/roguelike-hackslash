@@ -99,7 +99,7 @@ namespace Game.Core
         public float EliteChance => DifficultyDef.EliteChance;
 
         /// <summary>The boss of the current area.</summary>
-        public EnemyType AreaBoss => EnemyCatalog.AreaBosses[Mathf.Min(Area, EnemyCatalog.AreaBosses.Length - 1)];
+        public EnemyType AreaBoss => LordOf(Area); // RunSimulation.Deep.cs
 
         // ------------------------------------------------------------------ Players
 
@@ -684,7 +684,7 @@ namespace Game.Core
             foreach (var p in Players) if (p.Alive) return;
             SplitRunEnded();
             Phase = RunPhase.Defeat;
-            Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 0 });
+            Events.Add(new SimEvent(SimEventType.RunEnded) { Int = Conquered ? 2 : 0 }); // 2: fell in the deep layers after conquering
         }
     }
 }

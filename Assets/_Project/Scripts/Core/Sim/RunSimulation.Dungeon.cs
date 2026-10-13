@@ -264,17 +264,12 @@ namespace Game.Core
                 RemoveTrialProps();
                 ActiveTrial = BossTrial.None;
                 ClearBursts();
-                if (Area >= AreaCount - 1)
-                {
-                    SplitRunEnded();
-                    Phase = RunPhase.Victory;
-                    Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 1 });
-                    return;
-                }
+                // The Lich (and every deep lord after it): the way home and the way deeper both open (RunSimulation.Deep.cs).
+                if (Area >= AreaCount - 1) Conquered = true;
                 GrantBlessings();
                 ExitOpen = true;
                 GatherHold = 0f;
-                Events.Add(new SimEvent(SimEventType.DoorOpened) { Int = 1, Pos = room.Center + ExitOffset });
+                Events.Add(new SimEvent(SimEventType.DoorOpened) { Int = OffersHome(Area) ? 4 : 1, Pos = room.Center + ExitSpot(Area) });
             }
             Events.Add(new SimEvent(SimEventType.RoomCleared) { Int = room.Index, Id = room.Id, Value = (int)room.Kind });
             OfferAll(); // the banked level-ups
@@ -295,7 +290,7 @@ namespace Game.Core
         }
 
         /// <summary>The way down in the boss room (after the boss).</summary>
-        public Vector2 ExitPosition => Map.Boss.Origin + ExitOffset;
+        public Vector2 ExitPosition => Map.Boss.Origin + ExitSpot(Area);
 
         /// <summary>
         /// The boss door opens when every living player stands at it together; the way down to the next area works
@@ -307,7 +302,18 @@ namespace Game.Core
             Vector2 spot;
             float radius;
             if (!BossDoorOpen) { spot = BossDoorPosition; radius = BossDoorRadius; }
-            else if (ExitOpen) { spot = ExitPosition; radius = ExitRadius * 1.6f; }
+            else if (ExitOpen)
+            {
+                // Past the Lich: everyone standing in the way home ends the run in victory.
+                if (OffersHome(Area) && AllAt(HomePosition, ExitRadius * 1.6f))
+                {
+                    GatherHold += dt;
+                    if (GatherHold >= ExitHoldTime) EndInVictory();
+                    return;
+                }
+                spot = ExitPosition;
+                radius = ExitRadius * 1.6f;
+            }
             else return;
 
             bool all = false;

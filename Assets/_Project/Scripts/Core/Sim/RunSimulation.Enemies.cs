@@ -483,6 +483,7 @@ namespace Game.Core
             p.Hp -= dealt;
             p.InvulnerableTimer = HitInvulnerability;
             Events.Add(new SimEvent(SimEventType.PlayerHurt) { ClientId = p.ClientId, Pos = p.Position, Value = dealt });
+            BlessingOnHurt(p);
             if (p.Hp > 0f) return;
 
             if (p.PerkLevel(PerkId.SecondWind) > 0 && !p.SecondWindUsed)
@@ -505,6 +506,7 @@ namespace Game.Core
             p.Shield = 0f;
             p.DashSlashTimer = 0f;
             CountDown();
+            BlessingOnDowned(p);
             Events.Add(new SimEvent(SimEventType.PlayerDowned) { ClientId = p.ClientId, Pos = p.Position });
         }
     }

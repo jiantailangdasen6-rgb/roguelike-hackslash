@@ -119,6 +119,7 @@ namespace Game.Gameplay
                 ChoiceKind.Boon => "<color=#ffcc5c>祝福</color>  力を選べ",
                 ChoiceKind.Upgrade => "<color=#8cd9ff>研磨</color>  強化する力を選べ",
                 ChoiceKind.Shop => $"<color=#f2d173>闇商人</color>  1つ買える  <size=30><color=#c9a8ff>手持ちの魂の欠片 {Purse()}</color></size>",
+                ChoiceKind.Blessing => "<color=#ffe3a0>神々の加護</color>  ひとつ授かる",
                 _ => "力を選べ",
             };
             int more = Mathf.RoundToInt(e.Value);
@@ -157,11 +158,25 @@ namespace Game.Gameplay
                     body += _affordable[i] ? $"\n\n<color=#c9a8ff>魂の欠片 {price}</color>" : $"\n\n<color=#8a7f80>魂の欠片 {price}（足りない）</color>";
                 }
                 _buttons[i].interactable = _affordable[i];
+                GodId? god = options[i].IsPerk ? PerkCatalog.Get((PerkId)options[i].Perk).God : null;
+                Color banner = ClassColor(cls);
+                _tags[i].text = cls.HasValue ? ClassCatalog.Get(cls.Value).Name + "の技" : "共通";
+                if (god.HasValue)
+                {
+                    // A god's blessing: the god's colour and name, and how close its favour is.
+                    var g = GodCatalog.Get(god.Value);
+                    Codex.Record(CodexCatalog.GodEntry(god.Value));
+                    banner = g.Color * new Color(0.75f, 0.75f, 0.75f, 1f);
+                    _tags[i].text = g.Name + "の加護";
+                    int have = GodPieces(god.Value);
+                    string hex = ColorUtility.ToHtmlStringRGB(Color.Lerp(g.Color, Color.white, 0.3f));
+                    string state = have + 1 >= GodCatalog.FavorPieces ? "これで寵愛が目覚める！" : $"同じ神をあと{GodCatalog.FavorPieces - have - 1}つで";
+                    body += $"\n\n<size=22><color=#{hex}>{g.FavorName}（{state}）\n{g.FavorText}</color></size>";
+                }
                 _titles[i].text = title;
                 _bodies[i].text = body;
-                _tags[i].text = cls.HasValue ? ClassCatalog.Get(cls.Value).Name + "の技" : "共通";
-                _edges[i].color = ClassColor(cls);
-                _halos[i].color = Color.Lerp(ClassColor(cls), new Color(1f, 0.85f, 0.5f), 0.5f) * new Color(1f, 1f, 1f, 0.4f);
+                _edges[i].color = banner;
+                _halos[i].color = Color.Lerp(banner, new Color(1f, 0.85f, 0.5f), god.HasValue ? 0.2f : 0.5f) * new Color(1f, 1f, 1f, god.HasValue ? 0.6f : 0.4f);
                 _icons[i].sprite = GameIcons.Perk(options[i]);
                 _icons[i].enabled = _icons[i].sprite != null;
             }
@@ -187,6 +202,15 @@ namespace Game.Gameplay
         {
             var d = RunDirector.Instance;
             return d == null ? 0 : RewardCatalog.Purse(d.RoomsCleared.Value, d.BossesKilled.Value, d.Kills.Value, d.DifficultyLevel.Value, d.BonusShards.Value);
+        }
+
+        /// <summary>Blessings of a god this player has taken this run.</summary>
+        public static int GodPieces(GodId god)
+        {
+            var seen = new HashSet<byte>();
+            foreach (var o in Taken)
+                if (o.IsPerk && PerkCatalog.Get((PerkId)o.Perk).God == god) seen.Add(o.Perk);
+            return seen.Count;
         }
 
         private static int Area() => RunDirector.Instance != null ? RunDirector.Instance.Area.Value : 0;

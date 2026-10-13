@@ -68,6 +68,20 @@ namespace Game.Core
         Remedy,
         Catalyst,
         TwinFlask,
+
+        // Blessings of the gods (GodCatalog): granted after a champion or a lord falls, never on level-ups
+        FlameBrand,
+        FlamePyre,
+        FlameStep,
+        FrostBite,
+        FrostWard,
+        FrostBreath,
+        StormFist,
+        StormStep,
+        StormJudgment,
+        LifeShare,
+        LifeVeil,
+        LifeRise,
     }
 
     /// <summary>
@@ -82,6 +96,8 @@ namespace Game.Core
         public ClassId? Class;
         public int MaxLevel = 1;
         public bool Locked;
+        /// <summary>A god's blessing (offered only by <see cref="ChoiceKind.Blessing"/>).</summary>
+        public GodId? God;
         public StatModifier? PerLevel;
         public string Text; // {0} is replaced with the level-scaled number when present
         public float Number;  // value per level used in the text
@@ -157,6 +173,20 @@ namespace Game.Core
             new() { Id = PerkId.Remedy, Name = "良薬", Class = ClassId.Alchemist, MaxLevel = 2, Text = "回復薬の回復量 +{0:0}%、浴びた仲間に10のシールド", Number = 40 },
             new() { Id = PerkId.Catalyst, Name = "触媒", Class = ClassId.Alchemist, MaxLevel = 2, Locked = true, Text = "燃えている・凍った敵へのダメージ +{0:0}%", Number = 20 },
             new() { Id = PerkId.TwinFlask, Name = "二本投げ", Class = ClassId.Alchemist, MaxLevel = 1, Locked = true, Text = "薬瓶を2本ずつ投げる", Number = 0 },
+
+            // ---------------- Blessings of the gods
+            new() { Id = PerkId.FlameBrand, Name = "焔の刻印", God = GodId.Flame, Text = "攻撃が当たった敵が燃える（毎秒 6 ダメージ×3秒）" },
+            new() { Id = PerkId.FlamePyre, Name = "火葬", God = GodId.Flame, Text = "燃えている敵を倒すと爆発し、周りの敵を焼く（威力 20）" },
+            new() { Id = PerkId.FlameStep, Name = "炎の足跡", God = GodId.Flame, Text = "回避すると、その場で炎が弾ける（威力 18・燃やす）" },
+            new() { Id = PerkId.FrostBite, Name = "凍てつく刃", God = GodId.Frost, Text = "攻撃が当たると 10% で敵が凍る（1.2秒。主には効かない）" },
+            new() { Id = PerkId.FrostWard, Name = "氷の守り", God = GodId.Frost, Text = "攻撃を受けると、周りの敵が凍る（8秒に1回）" },
+            new() { Id = PerkId.FrostBreath, Name = "冬の息吹", God = GodId.Frost, Text = "スキル2を使うと、周りの敵が凍る" },
+            new() { Id = PerkId.StormFist, Name = "雷の拳", God = GodId.Storm, Text = "通常攻撃4回ごとに、近くの敵3体へ雷が落ちる（威力 16）" },
+            new() { Id = PerkId.StormStep, Name = "雷の歩み", God = GodId.Storm, Text = "回避すると、近くの敵2体へ雷が落ちる（威力 16）" },
+            new() { Id = PerkId.StormJudgment, Name = "天の裁き", God = GodId.Storm, Text = "スキル1を使うと、狙った所へ大きな雷が落ちる（威力 30）" },
+            new() { Id = PerkId.LifeShare, Name = "分かち合う命", God = GodId.Life, Text = "敵を倒すと、自分と近くの仲間のHPが 2 回復" },
+            new() { Id = PerkId.LifeVeil, Name = "聖なる帳", God = GodId.Life, Text = "12秒ごとに最大HPの15%のシールドを得る" },
+            new() { Id = PerkId.LifeRise, Name = "再生の祈り", God = GodId.Life, Text = "倒れても1エリアに1回、3秒後に自力で起き上がる（HP40%）" },
         };
 
         private static Dictionary<PerkId, PerkDef> _byId;

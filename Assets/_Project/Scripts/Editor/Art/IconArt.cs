@@ -36,9 +36,10 @@ namespace Game.EditorTools.Art
             foreach (PerkId id in Enum.GetValues(typeof(PerkId)))
             {
                 var def = PerkCatalog.Get(id);
-                var c = Medallion(def.Class);
+                var c = def.God.HasValue ? Medallion(null, rim: GodRim(def.God.Value)) : Medallion(def.Class);
                 DrawPerk(c, id);
                 Finish(c);
+                if (def.God.HasValue) GodGem(c, def.God.Value);
                 icons.Add(c);
             }
             var rest = Medallion(null);
@@ -255,7 +256,116 @@ namespace Game.EditorTools.Art
                 case PerkId.Remedy: Vial(c, Green, White); Plus(c, 16, 15, White); break;
                 case PerkId.Catalyst: Snowflake(c); Flames(c, 17, 3, Red); break;
                 case PerkId.TwinFlask: Vial(c, Amber, White); Plus(c, 17, 16, Gold); break;
+                // Gods' blessings
+                case PerkId.FlameBrand: Flames(c, 16, 10, Red); Flames(c, 9, 4, Amber); Sword(c, 4, 4, 18, 18, White, Steel); c.Line(6, 7, 17, 18, Steel); c.Line(7, 7, 18, 18, C("#ffd0a0")); break;
+                case PerkId.FlamePyre: Flames(c, 5, 3, Red); Flames(c, 19, 3, Red); Skull(c); Flames(c, 12, 15, Amber); break;
+                case PerkId.FlameStep: Flames(c, 6, 3, Red, big: true); Boot(c); break;
+                case PerkId.FrostBite: Sword(c, 4, 4, 18, 18, White, BlueDark); c.Line(6, 7, 17, 18, Blue); c.Line(7, 7, 18, 18, C("#dff4ff")); MiniFlake(c, 16, 7); break;
+                case PerkId.FrostWard: Shield(c, Blue, BlueDark, White); MiniFlake(c, 12, 12); break;
+                case PerkId.FrostBreath: Snowflake(c); c.Ring(12, 12, 8.6f, 9.4f, C("#dff4ff")); break;
+                case PerkId.StormFist: Bolt(c, 12, 20, 12, 5); for (int k = 0; k < 4; k++) c.Disc(5.5f + k * 4.3f, 4.5f, 1.2f, k == 3 ? White : StormDark); break;
+                case PerkId.StormStep: Boot(c); Bolt(c, 6, 20, 5, 6, thin: true); break;
+                case PerkId.StormJudgment: Cloud(c); Bolt(c, 12, 14, 11, 3); break;
+                case PerkId.LifeShare: SmallHeart(c, 8, 13, C("#e04848")); SmallHeart(c, 16, 13, Green); c.Line(10, 7, 14, 7, Gold); c.Set(12, 6, Gold); c.Set(12, 8, Gold); break;
+                case PerkId.LifeVeil: Shield(c, C("#fff1c8"), Gold, White); Sparks(c, Green); break;
+                case PerkId.LifeRise: Ankh(c, Green, C("#e8ffe8")); Sparks(c, Gold); break;
             }
+        }
+
+        // ------------------------------------------------------------------ Gods' blessings
+
+        private static readonly Color32 Storm = C("#ffe066");
+        private static readonly Color32 StormDark = C("#a8801c");
+
+        private static Color32 GodRim(GodId god) => god switch
+        {
+            GodId.Flame => C("#d0561e"),
+            GodId.Frost => C("#58aee0"),
+            GodId.Storm => C("#dcb22c"),
+            _ => C("#4cb466"),
+        };
+
+        /// <summary>A small gem on top of the rim: blessings stand apart from ordinary powers.</summary>
+        private static void GodGem(PixelCanvas c, GodId god)
+        {
+            var gem = god switch
+            {
+                GodId.Flame => C("#ffb070"),
+                GodId.Frost => C("#e0f6ff"),
+                GodId.Storm => C("#fff3b0"),
+                _ => C("#c8ffd0"),
+            };
+            // An outlined diamond sitting on the rim at the top.
+            for (int dy = -3; dy <= 3; dy++)
+            {
+                int half = 3 - Mathf.Abs(dy);
+                c.Rect(12 - half, 21 + dy, 2 * half + 1, 1, Ink);
+            }
+            for (int dy = -2; dy <= 2; dy++)
+            {
+                int half = 2 - Mathf.Abs(dy);
+                c.Rect(12 - half, 21 + dy, 2 * half + 1, 1, gem);
+            }
+            c.Set(11, 22, White);
+        }
+
+        private static void MiniFlake(PixelCanvas c, int x, int y)
+        {
+            var ice = C("#dff4ff");
+            c.Line(x - 3, y, x + 3, y, ice);
+            c.Line(x, y - 3, x, y + 3, ice);
+            c.Line(x - 2, y - 2, x + 2, y + 2, Blue);
+            c.Line(x - 2, y + 2, x + 2, y - 2, Blue);
+            c.Set(x, y, White);
+        }
+
+        /// <summary>A jagged yellow bolt from top to bottom.</summary>
+        private static void Bolt(PixelCanvas c, int xTop, int yTop, int xBottom, int yBottom, bool thin = false)
+        {
+            float h = yTop - yBottom;
+            Vector2[] pts =
+            {
+                new(xTop + 2, yTop), new(xTop - 2, yTop - h * 0.42f), new(xTop + 2, yTop - h * 0.5f), new(xBottom - 1, yBottom),
+            };
+            for (int i = 0; i < pts.Length - 1; i++)
+            {
+                if (!thin)
+                {
+                    c.Line(pts[i].x - 1, pts[i].y, pts[i + 1].x - 1, pts[i + 1].y, StormDark);
+                    c.Line(pts[i].x + 1, pts[i].y, pts[i + 1].x + 1, pts[i + 1].y, Storm);
+                }
+                c.Line(pts[i].x, pts[i].y, pts[i + 1].x, pts[i + 1].y, thin ? Storm : White);
+            }
+        }
+
+        private static void Cloud(PixelCanvas c)
+        {
+            var cloud = C("#8a8aa0");
+            var light = C("#b8b8cc");
+            c.Disc(8, 16, 3.6f, cloud);
+            c.Disc(13, 17.5f, 4.4f, cloud);
+            c.Disc(17, 15.5f, 3.2f, cloud);
+            c.Rect(6, 13, 13, 3, cloud);
+            c.Disc(12, 18.5f, 2.4f, light);
+            c.Disc(7.5f, 16.5f, 1.6f, light);
+        }
+
+        private static void SmallHeart(PixelCanvas c, int x, int y, Color32 col)
+        {
+            c.Disc(x - 2, y + 1, 2.4f, col);
+            c.Disc(x + 2, y + 1, 2.4f, col);
+            for (int k = 0; k < 5; k++) c.Rect(x - 4 + k, y - k, 9 - 2 * k, 1, col);
+            c.Set(x - 2, y + 2, White);
+        }
+
+        private static void Ankh(PixelCanvas c, Color32 col, Color32 light)
+        {
+            c.Ring(12, 16, 2.2f, 3.6f, col);
+            c.Rect(6, 11, 13, 3, col);
+            c.Rect(11, 3, 3, 9, col);
+            c.Rect(11, 3, 1, 9, light);
+            c.Rect(6, 13, 13, 1, light);
+            c.Set(10, 18, light); c.Set(11, 19, light);
         }
 
         // ------------------------------------------------------------------ Symbols (round 3)

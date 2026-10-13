@@ -157,6 +157,7 @@ namespace Game.Core
                 player = new SimPlayer(clientId, Map.Start.Origin + StartPosition(Players.Count), loadout);
                 player.SetLevel(TeamLevel);
                 for (int level = 1; level < TeamLevel; level++) player.StockedChoices.Enqueue(ChoiceKind.LevelUp);
+                for (int b = 0; b < BlessingsGranted; b++) player.StockedChoices.Enqueue(ChoiceKind.Blessing);
                 player.Hp = player.MaxHp;
             }
             player.SetDifficulty(DifficultyDef);
@@ -245,6 +246,7 @@ namespace Game.Core
             UpdateObjectives(dt);
             StepPuzzles(dt);
             StepBell(dt);
+            StepGods(dt);
             UpdateDoors(dt);
             CheckDefeat();
             CheckLevelUp();
@@ -599,11 +601,12 @@ namespace Game.Core
             {
                 ChoiceKind.Upgrade => PerkRoller.RollUpgrade(_perkRng, p),
                 ChoiceKind.Shop => PerkRoller.RollShop(_perkRng, p),
+                ChoiceKind.Blessing => PerkRoller.RollBlessing(_perkRng, p),
                 _ => null,
             };
             if (p.PendingOffer == null)
             {
-                if (kind == ChoiceKind.Upgrade) shown = ChoiceKind.Boon; // nothing to upgrade yet: a new perk instead
+                if (kind is ChoiceKind.Upgrade or ChoiceKind.Blessing) shown = ChoiceKind.Boon; // nothing to upgrade (or every blessing taken): a new perk instead
                 p.PendingOffer = PerkRoller.Roll(_perkRng, p);
             }
             p.OfferKind = shown;
@@ -627,6 +630,7 @@ namespace Game.Core
             var option = p.PendingOffer[Mathf.Clamp(index, 0, p.PendingOffer.Length - 1)];
             p.PendingOffer = null;
             PerkRoller.Apply(p, option);
+            if (option.IsPerk) BlessingTaken(p, (PerkId)option.Perk);
             OfferNext(p);
         }
 

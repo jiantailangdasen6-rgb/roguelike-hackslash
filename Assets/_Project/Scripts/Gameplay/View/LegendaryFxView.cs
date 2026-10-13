@@ -13,6 +13,7 @@ namespace Game.Gameplay
     {
         private static readonly Color Legendary = new(1f, 0.6f, 0.2f);
         private static readonly Color Bolt = new(0.65f, 0.85f, 1f);
+        private static readonly Color StormColor = new(1f, 0.88f, 0.4f);
 
         private sealed class Fx
         {
@@ -38,9 +39,18 @@ namespace Game.Gameplay
 
         private void OnEvent(SimEvent e)
         {
+            if (e.Type == SimEventType.GodSign && (GodSignKind)e.Int == GodSignKind.Lightning)
+            {
+                // The storm god's lightning comes straight down from above the screen.
+                _dot ??= Sprite.Create(Texture2D.whiteTexture, new Rect(0f, 0f, 4f, 4f), new Vector2(0.5f, 0.5f), 4f); // a plain bar: crisp bolts
+                bool big = e.Value > 0f;
+                Vector2 sky = e.Pos + new Vector2(Random.Range(-1.2f, 1.2f), big ? 9f : 7f);
+                Lightning(sky, e.Pos, big ? new Color(1f, 0.85f, 0.3f) : StormColor, big ? 0.55f : 0.42f, big ? 1.25f : 0.8f, 8);
+                return;
+            }
             if (e.Type != SimEventType.LegendaryProc) return;
             _ring ??= SpriteSheet.Load("fx_revive_ring", quiet: true)?.First;
-            _dot ??= SpriteSheet.Load("fx_circle", quiet: true)?.First;
+            _dot ??= Sprite.Create(Texture2D.whiteTexture, new Rect(0f, 0f, 4f, 4f), new Vector2(0.5f, 0.5f), 4f); // a plain bar: crisp bolts
             var id = (LegendaryId)e.Int;
             bool chain = e.Vec.sqrMagnitude > 0.0001f && (id == LegendaryId.ThunderStaff || id == LegendaryId.None);
             if (chain) Lightning(e.Pos, e.Vec, id == LegendaryId.None ? Bolt : Color.Lerp(Bolt, Legendary, 0.35f));
@@ -62,11 +72,10 @@ namespace Game.Gameplay
         }
 
         /// <summary>A jagged bolt from one point to another, built from thin stretched dots.</summary>
-        private void Lightning(Vector2 from, Vector2 to, Color color)
+        private void Lightning(Vector2 from, Vector2 to, Color color, float jitter = 0.4f, float width = 1f, int joints = 6)
         {
             var fx = New(from, 0.32f, color);
             fx.Segments = new List<SpriteRenderer>();
-            const int joints = 6;
             Vector2 dir = to - from;
             Vector2 normal = new Vector2(-dir.y, dir.x).normalized;
             Vector2 prev = from;
@@ -74,7 +83,7 @@ namespace Game.Gameplay
             for (int k = 1; k <= joints; k++)
             {
                 float t = k / (float)joints;
-                Vector2 next = Vector2.Lerp(from, to, t) + (k < joints ? normal * Random.Range(-0.4f, 0.4f) : Vector2.zero);
+                Vector2 next = Vector2.Lerp(from, to, t) + (k < joints ? normal * Random.Range(-jitter, jitter) : Vector2.zero);
                 Vector2 d = next - prev;
                 // A pale glow around a white-hot core.
                 foreach (var (thickness, order) in new[] { (0.75f, 4050), (0.28f, 4051) })
@@ -82,7 +91,7 @@ namespace Game.Gameplay
                     var seg = Child(fx.Root, "Bolt", _dot, order);
                     seg.transform.position = (prev + next) * 0.5f;
                     seg.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
-                    seg.transform.localScale = new Vector3(d.magnitude / unit + 0.1f, thickness * 0.5f / unit, 1f);
+                    seg.transform.localScale = new Vector3(d.magnitude / unit + 0.1f, thickness * width * 0.5f / unit, 1f);
                     fx.Segments.Add(seg);
                 }
                 prev = next;

@@ -10,7 +10,7 @@ namespace Game.Gameplay
     /// Turns simulation events into visuals on every peer: projectiles, attack telegraphs, hit sparks,
     /// damage numbers, spell areas, souls, spawn runes, the exit portal and screen shake.
     /// </summary>
-    public sealed class EventPresenter : MonoBehaviour
+    public sealed partial class EventPresenter : MonoBehaviour
     {
         private const int MaxNumbers = 50;
         private static readonly Color DangerColor = new(1f, 0.16f, 0.12f, 1f);
@@ -196,6 +196,7 @@ namespace Game.Gameplay
                     break;
                 case SimEventType.Combo: OnCombo(e); break;
                 case SimEventType.TrialEvent: OnTrial(e); break;
+                case SimEventType.GodSign: OnGodSign(e); break; // EventPresenter.Gods.cs
                 case SimEventType.KeyGained:
                 {
                     var glint = Spawn("fx_holy", e.Pos + Vector2.up * 0.8f, 12f, 1f, 1.4f, 2.6f, new Color(1f, 0.85f, 0.45f));

@@ -91,7 +91,7 @@ namespace Game.Gameplay
 
             // Section tabs.
             var sections = (CodexSection[])System.Enum.GetValues(typeof(CodexSection));
-            float tabW = 200f, gap = 12f, x0 = 260f;
+            float tabW = 182f, gap = 10f, x0 = 260f;
             for (int i = 0; i < sections.Length; i++)
             {
                 var s = sections[i];

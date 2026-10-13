@@ -778,10 +778,21 @@ namespace Game.Gameplay
                 if (!levels.ContainsKey(o.Perk)) order.Add(o);
                 levels[o.Perk] = Mathf.Max(levels.TryGetValue(o.Perk, out int l) ? l : 0, o.Level);
             }
-            for (int i = 0; i < order.Count && i < 13; i++)
+            // Gods' blessings lead the row; a god whose favour is awake glows behind its blessings.
+            order.Sort((a, b) => (PerkCatalog.Get((PerkId)a.Perk).God.HasValue ? 0 : 1).CompareTo(PerkCatalog.Get((PerkId)b.Perk).God.HasValue ? 0 : 1));
+            for (int i = 0; i < order.Count && i < 15; i++)
             {
                 var rect = UIKit.Rect("Perk", _perkRow).Place(new Vector2(0f, 0.5f), new Vector2(32f, 32f), new Vector2(i * 34f, 0f));
-                var img = rect.gameObject.AddComponent<Image>();
+                var god = PerkCatalog.Get((PerkId)order[i].Perk).God;
+                if (god.HasValue && PerkView.GodPieces(god.Value) >= GodCatalog.FavorPieces)
+                {
+                    var glow = UIKit.Panel(rect, "Favor", GodCatalog.Get(god.Value).Color * new Color(1f, 1f, 1f, 0.75f));
+                    glow.sprite = UIKit.GlowSprite;
+                    glow.raycastTarget = false;
+                    glow.rectTransform.Stretch(-12f);
+                }
+                var img = UIKit.Rect("Icon", rect).gameObject.AddComponent<Image>();
+                img.rectTransform.Stretch();
                 img.sprite = GameIcons.Perk(order[i]);
                 img.raycastTarget = false;
                 int level = levels[order[i].Perk];

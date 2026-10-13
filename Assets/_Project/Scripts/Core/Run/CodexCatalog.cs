@@ -8,6 +8,7 @@ namespace Game.Core
         Lords,
         Gimmicks,
         Rooms,
+        Gods,
         Teamwork,
         Controls,
     }
@@ -48,6 +49,7 @@ namespace Game.Core
             CodexSection.Lords => "迷宮の主",
             CodexSection.Gimmicks => "仕掛け・罠",
             CodexSection.Rooms => "部屋",
+            CodexSection.Gods => "神々",
             CodexSection.Teamwork => "連携",
             _ => "操作",
         };
@@ -55,6 +57,7 @@ namespace Game.Core
         public static string MonsterId(EnemyType t) => "enemy:" + t;
         public static string RoomId(RoomKind k) => "room:" + k;
         public static string GimmickId(string name) => "gimmick:" + name;
+        public static string GodEntry(GodId god) => "god:" + god;
 
         private static Entry Monster(EnemyType t, string sub, string counter, params string[] traits)
         {
@@ -204,6 +207,20 @@ namespace Game.Core
                     Traits = new[] { c.How, "別々の人が操作する2つの職業がそろうと使える" },
                     Counter = "2人で息を合わせて狙う",
                 });
+
+            // ---------------------------------------------------------------- Gods (recorded when their blessing is first offered)
+            foreach (var god in GodCatalog.All)
+            {
+                var traits = new List<string>();
+                foreach (var b in GodCatalog.Blessings(god.Id)) traits.Add($"{b.Name}：{b.Text}");
+                traits.Add($"{god.FavorName}（同じ神の加護を{GodCatalog.FavorPieces}つ）：{god.FavorText}");
+                list.Add(new Entry
+                {
+                    Id = GodEntry(god.Id), Section = CodexSection.Gods, Name = god.Name, Sub = god.FavorName,
+                    IconSheet = "icons_perk", IconFrame = (int)GodCatalog.Blessings(god.Id)[0].Id, Traits = traits.ToArray(),
+                    Counter = "中ボスや主を倒すと、全員が神の加護をひとつ授かる。同じ神をそろえると寵愛が目覚める",
+                });
+            }
 
             // ---------------------------------------------------------------- Controls (always open)
             list.Add(Open(CodexSection.Controls, "control:Keyboard", "キーボードとマウス", "PC", "warrior", "照準はマウスの方向。回避中は無敵",

@@ -261,6 +261,18 @@ namespace Game.Gameplay
                 case SimEventType.DoorOpened: Play(e.Int >= 2 ? "explosion" : "clear", e.Pos, e.Int >= 2 ? 0.6f : 1.1f, 0.7f); break;
                 case SimEventType.PuzzleEnded: Play(e.Int == 1 ? "clear" : "shatter", e.Pos, e.Int == 1 ? 1.2f : 0.7f); break;
                 case SimEventType.BellRung: Play("bell"); break;
+                case SimEventType.GodSign:
+                    switch ((GodSignKind)e.Int)
+                    {
+                        case GodSignKind.Lightning: Play("bolt", e.Pos, e.Value > 0f ? 0.55f : 0.75f, e.Value > 0f ? 1f : 0.7f); Play("explosion", e.Pos, 1.6f, e.Value > 0f ? 0.6f : 0.3f); break;
+                        case GodSignKind.Fire: Play("flame", e.Pos, 1.1f, 0.8f); break;
+                        case GodSignKind.Frost: Play("nova", e.Pos, e.Value > 1f ? 1.15f : 1.4f, e.Value > 1f ? 0.8f : 0.45f); break;
+                        case GodSignKind.Taken: Play("levelup", e.Pos, 0.85f); Play("clear", e.Pos, 1.25f, 0.6f); break;
+                        case GodSignKind.Favor: Play("levelup", e.Pos, 0.7f); Play("roar", e.Pos, 1.4f, 0.5f); Play("nova", e.Pos, 0.8f, 0.7f); break;
+                        case GodSignKind.Veil: Play("heal", e.Pos, 1.3f, 0.5f); break;
+                        case GodSignKind.Rise: Play("revive", e.Pos, 1.1f); Play("levelup", e.Pos, 1.1f, 0.7f); break;
+                    }
+                    break;
                 case SimEventType.TrialEvent:
                     switch ((TrialMoment)e.Int)
                     {

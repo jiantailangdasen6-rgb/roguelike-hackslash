@@ -93,6 +93,7 @@ namespace Game.Core
             ResetHazards();
             ResetBossTrials();
             ResetPuzzles();
+            ResetGods();
         }
 
         /// <summary>The team arrives in an area (the first, or the next after a boss): everyone stands in <paramref name="arrival"/>.</summary>
@@ -265,6 +266,7 @@ namespace Game.Core
                     Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 1 });
                     return;
                 }
+                GrantBlessings();
                 ExitOpen = true;
                 GatherHold = 0f;
                 Events.Add(new SimEvent(SimEventType.DoorOpened) { Int = 1, Pos = room.Center + ExitOffset });

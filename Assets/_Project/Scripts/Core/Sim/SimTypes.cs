@@ -98,6 +98,7 @@ namespace Game.Core
         Boon,
         Upgrade,
         Shop,     // the merchant: priced cards plus "buy nothing"
+        Blessing, // a god's blessing after a champion or a lord (GodCatalog)
     }
 
     /// <summary>One room of the area map at run time. Several can be fought at once while the team explores apart.</summary>
@@ -312,6 +313,7 @@ namespace Game.Core
         KeyGained,       // Pos, Int = keys the team holds now, Id = room it came from
         PuzzleEnded,     // Id = room, Int = 1 solved / 0 failed, Pos
         BellRung,        // ClientId = who rang it, Pos = the bell, Int = players called to the campfire
+        GodSign,         // ClientId, Int = GodSignKind, Id = GodId, Pos, Vec (blessings at work: lightning, a favour awakening...)
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

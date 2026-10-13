@@ -207,6 +207,18 @@ namespace Game.Core
             Hp = Mathf.Min(Hp, MaxHp);
         }
 
+        /// <summary>Blessings of a god this player holds (two awaken its favour).</summary>
+        public int GodPieces(GodId god) => GodCatalog.Pieces(PerkLevels, god);
+        public bool Favored(GodId god) => GodPieces(god) >= GodCatalog.FavorPieces;
+        public bool Has(PerkId id) => PerkLevels[(int)id] > 0;
+
+        // Blessing counters (RunSimulation.Gods)
+        public int StormHits;
+        public float FrostWardTimer;
+        public float VeilTimer;
+        public bool RiseUsed;
+        public float RiseTimer;
+
         public bool CanTakePerk(PerkDef def) =>
             (!def.Class.HasValue || def.Class.Value == Class.Id)
             && (!def.Locked || UnlockedPerks.Contains(def.Id))
@@ -462,7 +474,7 @@ namespace Game.Core
             var candidates = new List<(PerkOption Option, int Weight)>();
             foreach (var def in PerkCatalog.All)
             {
-                if (!player.CanTakePerk(def)) continue;
+                if (def.God.HasValue || !player.CanTakePerk(def)) continue;
                 int weight = def.Class.HasValue ? 12 : 8;
                 if (player.PerkLevel(def.Id) > 0) weight += 4; // favour deepening a build
                 candidates.Add((new PerkOption((byte)def.Id, (byte)(player.PerkLevel(def.Id) + 1)), weight));
@@ -505,6 +517,41 @@ namespace Game.Core
             }
             if (owned.Count > OptionCount) owned.RemoveRange(OptionCount, owned.Count - OptionCount);
             return owned.ToArray();
+        }
+
+        /// <summary>
+        /// Gods' blessings: up to three, each from a different god. Gods with one blessing taken already are likelier
+        /// (their favour is one pick away). Null when every blessing is taken.
+        /// </summary>
+        public static PerkOption[] RollBlessing(GameRandom rng, SimPlayer player)
+        {
+            var gods = new List<(GodId God, int Weight)>();
+            foreach (var god in GodCatalog.All)
+            {
+                bool open = false;
+                foreach (var def in GodCatalog.Blessings(god.Id)) open |= player.CanTakePerk(def);
+                if (!open) continue;
+                int pieces = player.GodPieces(god.Id);
+                gods.Add((god.Id, pieces == GodCatalog.FavorPieces - 1 ? 30 : 10));
+            }
+            var result = new List<PerkOption>(OptionCount);
+            while (result.Count < OptionCount && gods.Count > 0)
+            {
+                int total = 0;
+                foreach (var g in gods) total += g.Weight;
+                int pick = rng.Range(0, total), index = 0;
+                while (pick >= gods[index].Weight)
+                {
+                    pick -= gods[index].Weight;
+                    index++;
+                }
+                var open = new List<PerkDef>();
+                foreach (var def in GodCatalog.Blessings(gods[index].God)) if (player.CanTakePerk(def)) open.Add(def);
+                var chosen = open[rng.Range(0, open.Count)];
+                result.Add(new PerkOption((byte)chosen.Id, 1));
+                gods.RemoveAt(index);
+            }
+            return result.Count > 0 ? result.ToArray() : null;
         }
 
         /// <summary>The merchant: two perks and either a piece of treasure or an elixir of life.</summary>

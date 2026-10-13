@@ -269,6 +269,14 @@ namespace Game.Gameplay
                     sp.Bag.Add(ItemGenerator.Generate((ulong)(sp.ClientId + 7), 3, 9f, sp.ClassId, Rarity.Legendary, EquipSlot.Weapon));
                     sp.Equip(sp.Bag.Count - 1);
                 }
+            // -blessings <FlameBrand,StormFist,...> / -offerblessing (screenshots, tests): gods' blessings from the start.
+            string blessings = CommandLine.GetValue("-blessings");
+            if (!string.IsNullOrEmpty(blessings))
+                foreach (var name in blessings.Split(','))
+                    if (Enum.TryParse(name.Trim(), true, out PerkId perk))
+                        foreach (var sp in Sim.Players) sp.AddPerk(perk);
+            if (CommandLine.Has("-offerblessing"))
+                foreach (var sp in Sim.Players) sp.StockedChoices.Enqueue(ChoiceKind.Blessing);
             foreach (var sp in Sim.Players) Sim.SyncGear(sp); // the gear everyone set out with (and any loaners)
             Started.Value = true;
             _startTime = Time.time;

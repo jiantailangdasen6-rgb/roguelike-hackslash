@@ -285,6 +285,7 @@ namespace Game.Core
         private void ChampionDefeated(RoomState room)
         {
             GainKey(room, room.Center);
+            GrantBlessings();
             foreach (var p in Players)
                 if (p.RoomId == room.Id) DropFor(p, RollItem(p, 2f, Rarity.Rare), room.Center + new Vector2(_lootRng.Range(-1.5f, 1.5f), _lootRng.Range(-1f, 1f)));
         }

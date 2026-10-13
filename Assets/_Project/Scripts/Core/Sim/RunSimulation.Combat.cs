@@ -84,6 +84,7 @@ namespace Game.Core
             p.DodgeCooldown = ClassCatalog.DodgeCooldown * (evasive ? 0.6f : 1f) * p.DodgeFactor;
             p.InvulnerableTimer = Mathf.Max(p.InvulnerableTimer, ClassCatalog.DodgeInvulnerability);
             if (evasive) p.EvasiveTimer = 0.5f;
+            BlessingOnDodge(p);
             if (p.Stats.Get(StatType.DodgeStrike) > 0f) p.DodgeStrikeTimer = 2f; // gear: the next blow lands harder
             Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Dodge, Pos = p.Position, Vec = AimDirection(p) });
         }
@@ -164,6 +165,7 @@ namespace Game.Core
                     BasicNewClass(p, dir, might, area); // RunSimulation.Classes.cs
                     break;
             }
+            BlessingOnBasic(p);
         }
 
         private void Skill1(SimPlayer p)
@@ -213,6 +215,7 @@ namespace Game.Core
             }
 
             p.Skill1Cooldown = cd;
+            BlessingOnSkill1(p);
             Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Skill1, Pos = p.Position, Vec = dir });
         }
 
@@ -311,6 +314,7 @@ namespace Game.Core
             }
 
             p.Skill2Cooldown = c.Skill2Cooldown * p.CooldownMultiplier;
+            BlessingOnSkill2(p);
             Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Skill2, Pos = p.Position, Vec = dir });
         }
 
@@ -592,6 +596,7 @@ namespace Game.Core
             if (e.Dead || e.Def.Untargetable) return;
 
             bool disabled = e.Frozen > 0f || e.Marked > 0f || e.Stunned > 0f;
+            bool wasFrozen = e.Frozen > 0f;
             if (attacker != null)
             {
                 bool direct = (flags & HitFlags.DamageOverTime) == 0;
@@ -610,6 +615,7 @@ namespace Game.Core
                 if (executioner > 0 && e.Health < e.MaxHealth * 0.35f) damage *= 1f + 0.3f * executioner;
                 int comradery = attacker.PerkLevel(PerkId.Comradery);
                 if (comradery > 0) damage *= 1f + 0.1f * comradery * AlliesNear(attacker, 6f);
+                damage *= FavorDamage(attacker, e);
                 if (attacker.PerkLevel(PerkId.Bloodlust) > 0 && (flags & HitFlags.DamageOverTime) == 0) attacker.AddBloodlust();
                 // Gear effects that ride on the class synergies.
                 if (e.Frozen > 0f) damage *= 1f + attacker.Stats.Get(StatType.FrozenDamage);
@@ -668,11 +674,18 @@ namespace Game.Core
                 e.HitStun = 0.14f;
             }
 
+            if (e.Health > 0f && attacker != null && (flags & HitFlags.DamageOverTime) == 0)
+            {
+                BlessingOnHit(index, attacker); // RunSimulation.Gods.cs
+                e = ref Enemies[index];
+            }
+
             if (e.Health <= 0f)
             {
                 e.Dead = true;
                 if (attacker != null && !e.Def.Prop)
                 {
+                    BlessingOnKill(attacker, e.Position, e.Burning > 0f, wasFrozen, _burstDepth);
                     float heal = 3f * attacker.PerkLevel(PerkId.Lifesteal) + attacker.HealOnKill + attacker.Stats.Get(StatType.KillHeal);
                     if (heal > 0f) attacker.Heal(heal);
                     float killShield = attacker.Stats.Get(StatType.KillShield);

@@ -301,7 +301,7 @@ namespace Game.Core
                     if (owner.HasLegendary(LegendaryId.BlessedRain)) Proc(owner, LegendaryId.BlessedRain, proj.Position);
                     foreach (var ally in Players)
                     {
-                        if ((ally.Position - proj.Position).sqrMagnitude > r * r) continue;
+                        if ((ally.FallenAt - proj.Position).sqrMagnitude > r * r) continue;
                         if (!ally.Alive)
                         {
                             ally.ReviveProgress += 0.5f;

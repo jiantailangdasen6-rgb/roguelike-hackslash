@@ -163,12 +163,12 @@ namespace Game.Gameplay
             {
                 if (slot >= _dots.Count) break;
                 var dot = _dots[slot];
-                var room = map.RoomAt(p.transform.position);
+                var room = map.RoomAt(p.FallenAt);
                 dot.enabled = room != null;
                 if (room != null)
                 {
                     // Where in the room they stand, squeezed into the map cell.
-                    Vector2 local = (Vector2)p.transform.position - room.Bounds.center;
+                    Vector2 local = p.FallenAt - room.Bounds.center;
                     Vector2 inCell = new(local.x / room.Bounds.width * (CellW - 10f), local.y / room.Bounds.height * (CellH - 10f));
                     if (_large) inCell.y -= CellH * 0.22f; // under the room's name
                     dot.rectTransform.anchoredPosition = CellCenter(room.Cell) + inCell;

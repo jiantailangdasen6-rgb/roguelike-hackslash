@@ -141,7 +141,7 @@ namespace Game.Core
                 move = dir;
             }
 
-            float speed = def.Speed * (e.HitStun > 0f ? 0.25f : 1f) * (DifficultyDef.Has(DifficultyMod.Swiftness) ? DifficultyCatalog.SwiftnessSpeed : 1f);
+            float speed = def.Speed * (e.HitStun > 0f ? 0.25f : 1f) * (DifficultyDef.Has(DifficultyMod.Swiftness) ? DifficultyCatalog.SwiftnessSpeed : 1f) * (e.Haunted > 0f ? GhostSlow : 1f);
             if (move != Vector2.zero)
             {
                 if (!def.Flying) move = Arena.Steer(Layout, e.Position, move, e.Radius, e.Id);
@@ -440,6 +440,7 @@ namespace Game.Core
             e.Frozen -= dt;
             e.Stunned -= dt;
             e.Marked -= dt;
+            e.Haunted -= dt;
 
             float dot = 0f;
             if (e.Burning > 0f)
@@ -501,6 +502,7 @@ namespace Game.Core
             }
 
             p.Hp = 0f;
+            LeaveBody(p);
             p.Downed = true;
             p.ReviveProgress = 0f;
             p.Shield = 0f;

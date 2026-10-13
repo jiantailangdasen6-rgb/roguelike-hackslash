@@ -192,6 +192,7 @@ namespace Game.Core
         Flask,       // alchemist basic: bursts where it lands or hits
         FireFlask,   // thrown to a spot (no collision), becomes a fire pool
         HealFlask,   // thrown to a spot (no collision), heals there
+        Wisp,        // a downed player's ghost: a small soul spark
     }
 
     public enum AttackAnim : byte

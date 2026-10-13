@@ -23,6 +23,10 @@ namespace Game.Gameplay
         public readonly NetworkVariable<float> MaxHp = new();
         public readonly NetworkVariable<float> Shield = new();
         public readonly NetworkVariable<bool> Downed = new();
+        /// <summary>Where the body lies while downed (the transform is the ghost, which drifts on).</summary>
+        public readonly NetworkVariable<Vector2> Body = new();
+        /// <summary>Where to go to help: the body while downed.</summary>
+        public Vector2 FallenAt => Downed.Value ? Body.Value : (Vector2)transform.position;
         public readonly NetworkVariable<float> ReviveProgress = new();
         public readonly NetworkVariable<float> MoveSpeed = new(4.6f);
         public readonly NetworkVariable<float> Skill1Cooldown = new();
@@ -84,7 +88,13 @@ namespace Game.Gameplay
             if (follow != null) follow.Follow = CameraTarget.Create(transform).transform;
         }
 
-        private void ApplySheet() => animator.SetSheet(SpriteSheet.Load(SkinCatalog.Sheet(Class.Value, Skin.Value)) ?? SpriteSheet.Load(ClassDef.Sheet));
+        private SpriteSheet _sheet;
+
+        private void ApplySheet()
+        {
+            _sheet = SpriteSheet.Load(SkinCatalog.Sheet(Class.Value, Skin.Value)) ?? SpriteSheet.Load(ClassDef.Sheet);
+            animator.SetSheet(_sheet);
+        }
 
         // ------------------------------------------------------------------ Downed: easy to find, clear how to help
 
@@ -111,6 +121,8 @@ namespace Game.Gameplay
             _reviveRing.transform.localScale = Vector3.one * RunSimulation.ReviveRadius;
             _reviveFill = Child("ReviveFill", "fx_circle", -481);
             _downedIcon = Child("DownedIcon", "fx_downed", 3500);
+            _corpse = Child("Body", "fx_shadow", 0);
+            _corpseShadow = Child("BodyShadow", "fx_shadow", -500);
 
             var lightGo = new GameObject("Beacon");
             lightGo.transform.SetParent(transform, false);
@@ -130,7 +142,7 @@ namespace Game.Gameplay
             {
                 foreach (var other in All)
                     if (other != this && !other.Downed.Value &&
-                        ((Vector2)(other.transform.position - transform.position)).sqrMagnitude <= RunSimulation.ReviveRadius * RunSimulation.ReviveRadius)
+                        ((Vector2)other.transform.position - FallenAt).sqrMagnitude <= RunSimulation.ReviveRadius * RunSimulation.ReviveRadius)
                         return true;
                 return false;
             }
@@ -138,14 +150,30 @@ namespace Game.Gameplay
 
         private float _shownProgress;
 
+        private SpriteRenderer _corpse;
+        private SpriteRenderer _corpseShadow;
+
         private void UpdateDownedVisuals(bool downed)
         {
-            _reviveRing.enabled = _reviveFill.enabled = _downedIcon.enabled = _beacon.enabled = downed;
+            _reviveRing.enabled = _reviveFill.enabled = _downedIcon.enabled = _beacon.enabled = _corpse.enabled = _corpseShadow.enabled = downed;
             if (!downed)
             {
                 _shownProgress = 0f;
                 return;
             }
+            // The body lies where it fell (the transform is the ghost): everything that says "help here" sits on it.
+            Vector3 body = Body.Value;
+            _reviveRing.transform.position = body;
+            _reviveFill.transform.position = body;
+            _downedIcon.transform.position = body + new Vector3(0f, 1.45f + 0.08f * Mathf.Sin(Time.time * 4f));
+            _beacon.transform.position = body + new Vector3(0f, 0.6f);
+            _corpse.transform.position = body;
+            _corpseShadow.transform.position = body;
+            var deathFrames = _sheet != null && _sheet.TryGetClip("death", out _) ? _sheet.Sprites("death") : null;
+            if (deathFrames != null && deathFrames.Length > 0) _corpse.sprite = deathFrames[deathFrames.Length - 1];
+            _corpse.flipX = animator.Renderer.flipX;
+            _corpse.sortingOrder = EnemyView.SortOrder(body.y);
+            _corpse.color = new Color(0.62f, 0.6f, 0.68f, 1f);
             bool helped = BeingRevived;
             float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * (helped ? 10f : 5f));
             _shownProgress = Mathf.MoveTowards(_shownProgress, ReviveProgress.Value, Time.deltaTime * 1.5f);
@@ -154,7 +182,6 @@ namespace Game.Gameplay
             _reviveRing.color = helped ? new Color(0.55f, 1f, 0.6f, 0.55f) : new Color(1f, 0.35f, 0.3f, 0.4f + 0.3f * pulse);
             _reviveFill.transform.localScale = Vector3.one * Mathf.Max(0.05f, _shownProgress) * RunSimulation.ReviveRadius;
             _reviveFill.color = new Color(0.45f, 1f, 0.55f, 0.25f);
-            _downedIcon.transform.localPosition = new Vector3(0f, 1.45f + 0.08f * Mathf.Sin(Time.time * 4f));
             _downedIcon.color = Color.Lerp(new Color(1f, 0.4f, 0.35f), Color.white, pulse * 0.6f);
             _beacon.intensity = 0.7f + 0.8f * pulse;
             _beacon.color = helped ? new Color(0.5f, 1f, 0.55f) : new Color(1f, 0.25f, 0.2f);
@@ -253,22 +280,19 @@ namespace Game.Gameplay
             if (IsOwner || Time.time > _actionUntil) r.flipX = FacingLeft.Value;
 
             bool downed = Downed.Value;
-            if (downed && !_wasDowned) animator.Play("death", force: true, hold: true);
+            if (downed && !_wasDowned) animator.Play("idle", force: true); // the body falls (drawn apart); the ghost floats on
             if (!downed && _wasDowned) animator.Play("idle", force: true);
             _wasDowned = downed;
 
             Vector3 delta = transform.position - _lastPosition;
             _lastPosition = transform.position;
-            if (!downed)
-            {
-                bool moving = delta.sqrMagnitude > 0.00004f * Mathf.Max(1f, Time.deltaTime * 60f);
-                animator.SetBase(moving ? "run" : "idle");
-            }
+            bool moving = delta.sqrMagnitude > 0.00004f * Mathf.Max(1f, Time.deltaTime * 60f);
+            animator.SetBase(moving ? "run" : "idle");
 
-            // Valor (war cry) glows gold; downed players fade.
-            r.color = downed ? new Color(0.7f, 0.7f, 0.75f, 0.85f) : Color.white;
-            glow.color = Valor.Value ? new Color(1f, 0.8f, 0.4f) : new Color(1f, 0.75f, 0.55f);
-            glow.intensity = Valor.Value ? 1.3f : 0.9f;
+            // Valor (war cry) glows gold; a ghost is pale, see-through and wavers, with a cold glow.
+            r.color = downed ? new Color(0.7f, 0.9f, 1f, 0.62f + 0.12f * Mathf.Sin(Time.time * 3.2f)) : Color.white;
+            glow.color = downed ? new Color(0.5f, 0.75f, 1f) : Valor.Value ? new Color(1f, 0.8f, 0.4f) : new Color(1f, 0.75f, 0.55f);
+            glow.intensity = downed ? 0.6f : Valor.Value ? 1.3f : 0.9f;
             if (Legendary.Value && !downed)
             {
                 // Legendary gear: a slow orange pulse and a faint warm rim on the sprite.

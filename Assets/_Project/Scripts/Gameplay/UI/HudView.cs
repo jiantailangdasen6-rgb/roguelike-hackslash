@@ -940,7 +940,7 @@ namespace Game.Gameplay
             if (local.Downed.Value)
                 return local.BeingRevived
                     ? $"仲間が助け起こしている…  {local.ReviveProgress.Value:P0}"
-                    : "倒れた…";
+                    : "倒れた…\n<size=26>幽霊のまま戦える。仲間が亡骸のそばに立つと起き上がる</size>";
             return "";
         }
     }

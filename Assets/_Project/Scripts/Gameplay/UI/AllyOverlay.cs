@@ -104,7 +104,7 @@ namespace Game.Gameplay
                 if (!_markers.TryGetValue(p, out var m)) _markers[p] = m = Create(p);
                 bool self = p == local;
                 bool downed = p.Downed.Value;
-                Vector3 world = p.transform.position + Vector3.up * 1.55f;
+                Vector3 world = (Vector3)p.FallenAt + Vector3.up * 1.55f; // a downed player: over the body (the ghost drifts)
                 Vector3 screen = _camera.WorldToScreenPoint(world);
                 bool onScreen = screen.z > 0f && screen.x > 0f && screen.x < Screen.width && screen.y > 0f && screen.y < Screen.height;
 

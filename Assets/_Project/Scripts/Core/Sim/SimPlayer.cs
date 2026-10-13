@@ -37,6 +37,11 @@ namespace Game.Core
         public float Hp;
         public float Shield;
         public bool Downed;
+        /// <summary>Where the body lies while downed; the player moves on as a ghost (RunSimulation.Ghosts).</summary>
+        public Vector2 BodyPosition;
+        /// <summary>Where teammates go to help: the body while downed.</summary>
+        public Vector2 FallenAt => Downed ? BodyPosition : Position;
+        public float GhostTimer;
         public float ReviveProgress;
         public float InvulnerableTimer;
         public bool SecondWindUsed;

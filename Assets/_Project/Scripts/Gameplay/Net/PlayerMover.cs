@@ -67,6 +67,19 @@ namespace Game.Gameplay
             }
         }
 
+        /// <summary>Downed: drifting on as a ghost (in the room where the body lies; no doors, through obstacles).</summary>
+        private bool CanHaunt
+        {
+            get
+            {
+                var director = RunDirector.Instance;
+                return director != null && director.IsRunning && !director.Halted && player.Downed.Value && !PauseMenuView.IsOpen && !PerkView.IsShowing && !BagView.IsOpen && !CodexView.IsOpen && !SettingsView.IsOpen;
+            }
+        }
+
+        /// <summary>A ghost drifts a little faster than it walked.</summary>
+        public const float GhostSpeed = 1.15f;
+
         /// <summary>In the camp nobody fights: walking around is all, while no preparation panel is open.</summary>
         private static bool CanWalkInCamp => PlayArea.InCamp && !PauseMenuView.IsOpen && !CampView.PanelOpen && !CodexView.IsOpen && !SettingsView.IsOpen;
 
@@ -158,6 +171,17 @@ namespace Game.Gameplay
                 // Walking into an open doorway takes you to the next room.
                 if (move.sqrMagnitude > 0.01f && !PlayArea.InCamp && TryDoor(pos, move)) return;
                 pos = Arena.Resolve(CurrentLayout, pos, r);
+                pos.x = Mathf.Clamp(pos.x, bounds.xMin + r, bounds.xMax - r);
+                pos.y = Mathf.Clamp(pos.y, bounds.yMin + r, bounds.yMax - r);
+                transform.position = pos;
+            }
+            else if (CanHaunt)
+            {
+                // A ghost: floats through obstacles but stays in the room where its body lies.
+                Vector2 move = _bot ? _botBrain.Move : Vector2.ClampMagnitude(input.Move, 1f);
+                Vector2 pos = (Vector2)transform.position + move * player.MoveSpeed.Value * GhostSpeed * Time.deltaTime;
+                var bounds = PlayArea.Bounds;
+                float r = SimPlayer.BodyRadius;
                 pos.x = Mathf.Clamp(pos.x, bounds.xMin + r, bounds.xMax - r);
                 pos.y = Mathf.Clamp(pos.y, bounds.yMin + r, bounds.yMax - r);
                 transform.position = pos;
@@ -256,7 +280,7 @@ namespace Game.Gameplay
         {
             _sendTimer = SendInterval;
             if (!player.IsSpawned) return;
-            player.SendInputRpc(_aim, _attackHeld && CanAct, _skill1, _skill2, _dodge);
+            player.SendInputRpc(_aim, _attackHeld && (CanAct || CanHaunt), _skill1, _skill2, _dodge);
         }
 
         // ------------------------------------------------------------------ Test bot
@@ -394,11 +418,25 @@ namespace Game.Gameplay
                 var room = director.LocalRoom;
                 bool fighting = director.IsFighting(room.Id);
 
+                // A ghost: hover by the nearest monster (it slows them) and throw sparks at it.
+                if (_player.Downed.Value)
+                {
+                    var near = EnemyView.Instance != null ? EnemyView.Instance.NearestWhere(pos, 14f, d => !d.Prop && !d.Untargetable) : null;
+                    if (near is Vector2 target)
+                    {
+                        Vector2 to = target - pos;
+                        Aim = to;
+                        Attack = true;
+                        Move = to.magnitude > 1.2f ? to.normalized : Vector2.zero;
+                    }
+                    return;
+                }
+
                 // Help downed allies in this room first.
                 foreach (var other in NetPlayer.All)
                 {
-                    if (other == _player || !other.Downed.Value || director.Map.RoomAt(other.transform.position) != room) continue;
-                    Vector2 toMate = (Vector2)other.transform.position - pos;
+                    if (other == _player || !other.Downed.Value || director.Map.RoomAt(other.FallenAt) != room) continue;
+                    Vector2 toMate = other.FallenAt - pos;
                     if (toMate.magnitude > 1f)
                     {
                         Move = toMate.normalized;

@@ -49,12 +49,14 @@ namespace Game.Core
                     p.LastSkill1 = p.Input.Skill1Count;
                     p.LastSkill2 = p.Input.Skill2Count;
                     p.LastDodge = p.Input.DodgeCount;
+                    StepGhost(p, dt); // RunSimulation.Ghosts.cs
                     continue;
                 }
 
                 if (p.Input.DodgeCount != p.LastDodge)
                 {
                     p.LastDodge = p.Input.DodgeCount;
+                    StepGhost(p, dt); // RunSimulation.Ghosts.cs
                     if (p.DodgeCooldown <= 0f) Dodge(p);
                 }
                 if (p.Input.Skill1Count != p.LastSkill1)
@@ -259,7 +261,7 @@ namespace Game.Core
                     float r = ClassCatalog.HealRadius * area;
                     foreach (var ally in Players)
                     {
-                        if ((ally.Position - p.Position).sqrMagnitude > r * r) continue;
+                        if ((ally.FallenAt - p.Position).sqrMagnitude > r * r) continue;
                         if (!ally.Alive)
                         {
                             ally.ReviveProgress += 0.5f;

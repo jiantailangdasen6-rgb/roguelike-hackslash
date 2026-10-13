@@ -126,9 +126,10 @@ namespace Game.Core
             {
                 var p = Players[i];
                 p.Position = arrival.Origin + StartPosition(i);
+                p.BodyPosition = p.Position;
                 p.RoomId = -1;
                 p.CagedBy = 0;
-                if (p.Downed) Revive(p, 0.35f, guardian: false); // everyone who makes it through gets back up
+                if (p.Downed) Revive(p, 0.35f, guardian: false, whereTheGhostIs: true); // everyone who makes it through gets back up
                 Events.Add(new SimEvent(SimEventType.Teleport) { ClientId = p.ClientId, Pos = p.Position });
             }
             UpdateRooms(0f);
@@ -415,6 +416,7 @@ namespace Game.Core
             {
                 var p = Players[i];
                 p.Position = room.Origin + StartPosition(i);
+                p.BodyPosition = p.Position;
                 Events.Add(new SimEvent(SimEventType.Teleport) { ClientId = p.ClientId, Pos = p.Position });
             }
         }
@@ -457,7 +459,7 @@ namespace Game.Core
                 if ((p.Position - fire).sqrMagnitude > RestHealRadius * RestHealRadius) continue;
                 if (!p.Alive)
                 {
-                    Revive(p, 0.35f, guardian: false);
+                    Revive(p, 0.35f, guardian: false, whereTheGhostIs: true); // the ghost came to the fire
                     continue;
                 }
                 float before = p.Hp;

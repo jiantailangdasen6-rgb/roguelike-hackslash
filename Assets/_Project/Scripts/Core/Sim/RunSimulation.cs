@@ -270,7 +270,7 @@ namespace Game.Core
                 float helpSpeed = 0f;
                 float helpRadius = ReviveRadius + ReviveGrace;
                 foreach (var other in Players)
-                    if (other != p && other.Alive && (other.Position - p.Position).sqrMagnitude <= helpRadius * helpRadius)
+                    if (other != p && other.Alive && (other.Position - p.FallenAt).sqrMagnitude <= helpRadius * helpRadius)
                         helpSpeed = Mathf.Max(helpSpeed, other.Stats.Get(StatType.ReviveSpeed));
                 if (DifficultyDef.Has(DifficultyMod.Mercy)) helpSpeed *= DifficultyCatalog.MercyRevive;
 
@@ -286,13 +286,20 @@ namespace Game.Core
         {
             foreach (var other in Players)
                 if (other != downed && other.Alive && other.PerkLevel(perk) > 0 &&
-                    (other.Position - downed.Position).sqrMagnitude <= ReviveRadius * ReviveRadius * 1.5f)
+                    (other.Position - downed.FallenAt).sqrMagnitude <= ReviveRadius * ReviveRadius * 1.5f)
                     return true;
             return false;
         }
 
-        private void Revive(SimPlayer p, float healthFraction, bool guardian)
+        /// <param name="whereTheGhostIs">Get up where the ghost hovers (a campfire, a new area) rather than in the body.</param>
+        private void Revive(SimPlayer p, float healthFraction, bool guardian, bool whereTheGhostIs = false)
         {
+            if (!whereTheGhostIs && (p.Position - p.BodyPosition).sqrMagnitude > 0.01f)
+            {
+                // The ghost goes back into its body.
+                p.Position = p.BodyPosition;
+                Events.Add(new SimEvent(SimEventType.Teleport) { ClientId = p.ClientId, Pos = p.Position });
+            }
             p.Downed = false;
             p.ReviveProgress = 0f;
             p.Hp = p.MaxHp * healthFraction;
@@ -532,7 +539,7 @@ namespace Game.Core
                 var soul = Souls[s];
                 foreach (var p in Players)
                 {
-                    if (!p.Alive) continue;
+                    // Ghosts (downed players) gather souls too.
                     float r = p.Stats.Get(StatType.PickupRange);
                     if ((p.Position - soul.Position).sqrMagnitude > r * r) continue;
                     TeamXp += soul.Value;

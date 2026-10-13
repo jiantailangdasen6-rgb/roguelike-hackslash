@@ -60,6 +60,8 @@ namespace Game.Core
         public float Frozen;
         public float Marked;
         public float Stunned;
+        /// <summary>A ghost (downed player) hovers close: slowed for this long.</summary>
+        public float Haunted;
         public float Burning;
         public float BurnDps;
         public float Poisoned;

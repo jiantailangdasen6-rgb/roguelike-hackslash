@@ -425,6 +425,9 @@ namespace Game.Core
             float r = SimPlayer.BodyRadius;
             foreach (var p in Players)
             {
+                // A body lying on the falling strip slides onto what is left of the floor.
+                if (p.Downed && p.RoomId == Room.Id && !area.Contains(p.BodyPosition))
+                    p.BodyPosition = new Vector2(Mathf.Clamp(p.BodyPosition.x, area.xMin + r + 0.4f, area.xMax - r - 0.4f), Mathf.Clamp(p.BodyPosition.y, area.yMin + r + 0.4f, area.yMax - r - 0.4f));
                 if (p.RoomId != Room.Id || area.Contains(p.Position)) continue;
                 var safe = new Vector2(Mathf.Clamp(p.Position.x, area.xMin + r + 0.4f, area.xMax - r - 0.4f), Mathf.Clamp(p.Position.y, area.yMin + r + 0.4f, area.yMax - r - 0.4f));
                 p.Position = Arena.Resolve(Layout, safe, r);

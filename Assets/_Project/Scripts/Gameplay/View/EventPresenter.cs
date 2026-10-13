@@ -736,6 +736,10 @@ namespace Game.Gameplay
                     fx = Spawn("fx_orb", e.Pos, 12f, e.Value + 0.05f, 1f, 1f, new Color(1f, 0.35f, 0.35f));
                     AddLight(fx, new Color(1f, 0.15f, 0.15f), 1f, 1.5f);
                     break;
+                case ProjectileKind.Wisp:
+                    fx = Spawn("fx_soul", e.Pos, 12f, e.Value + 0.05f, 0.7f, 0.5f, new Color(0.7f, 0.9f, 1f, 0.9f));
+                    AddLight(fx, new Color(0.45f, 0.75f, 1f), 0.8f, 1.4f);
+                    break;
                 case ProjectileKind.SoulOrb:
                     fx = Spawn("fx_orb", e.Pos, 12f, e.Value + 0.05f, 1f, 1f, new Color(0.55f, 0.95f, 1f));
                     AddLight(fx, new Color(0.4f, 0.8f, 1f), 1f, 1.5f);

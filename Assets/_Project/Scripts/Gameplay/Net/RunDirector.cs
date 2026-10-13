@@ -434,6 +434,7 @@ namespace Game.Gameplay
                 SetIfChanged(p.MaxHp, Mathf.Round(sp.MaxHp));
                 SetIfChanged(p.Shield, Mathf.Ceil(sp.Shield));
                 SetIfChanged(p.Downed, sp.Downed);
+                if (sp.Downed) SetIfChanged(p.Body, sp.BodyPosition);
                 SetIfChanged(p.ReviveProgress, Quantize(sp.ReviveProgress));
                 SetIfChanged(p.MoveSpeed, sp.Stats.Get(StatType.MoveSpeed));
                 SetIfChanged(p.Skill1Cooldown, Mathf.Max(0f, Quantize(sp.Skill1Cooldown)));

@@ -11,11 +11,11 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 8bb4c552（新規案 A〜J まで。Windows版と同じ版なので一緒に遊べる） |
-| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 8bb4c552）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 78b8b7a4（第1段階「毎回ちがう迷宮」まで。Windows版と同じ版なので一緒に遊べる） |
+| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 78b8b7a4）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
-| テスト | EditMode 138件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
+| テスト | EditMode 188件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
 | 最新コミット | git log を参照（改善案8つと記録のコミットが最新） |
 
 ---
@@ -426,7 +426,11 @@
 - **迷宮の異変**（`RunSimulation.Omens.cs`）：ランごとに1つ（血の月・豊穣の迷宮・狂乱・群れの季節・怨嗟・祝福の風、すべて代償と得のセット）。右上と開始4秒後の帯で表示、図鑑「迷宮の異変」。`-omen <名前>`
 - 撮影用：`-route sunken,frost,forge`（最初の層からの土地）・`-omen bloodmoon`
 - テスト：RouteTests（順路・2つの道・異変）・LandTests（3つの試練・氷漬けの砕け・2匹組・水・氷柱・図鑑）。EditMode 188件
+- ボット確認：狩人ソロで鍛冶場→水没→霊廟を9分19秒で踏破（主：巨人38秒・聖女14秒・女王27秒、例外なし）。聖女が短いので人の感想で強さを見る
+- 公開：ブラウザ版・Windows版（Releases）ver 78b8b7a4（NetTest・OnlineTest（ホスト4秒停止）・CrossTest 合格）
+- **次（第2段階 ② 見た目の世代交代）**：ドット絵の法線マップ自動生成で灯りの陰影、柱や像が影を落とす、壊せる物、霧・塵、倒れ方。ブラウザ用に画質設定（高／低）
 ### Claude が自分の判断で決めたこと（ユーザーが変更可）
+- 2026-10-14（第1段階）：新しい土地3つの名前・色・魔物9体と主3体の名前と数値・試練の中身（水が満ちる／氷の写し身／灼熱）、土地は何層目にも出る（同じ降り道で同じ土地は二度出ない）、道は左右2つ、異変6種の中身、新しい土地の曲は既存曲の加工
 - 2026-10-13（新規案）：神の名前・加護12種の中身と数値・寵愛の条件（2つ）と効果・授かる時（中ボスと主、全員）、闇の間の数（各エリア1つ）と灯りの半径・灯りの外のダメージ3割、
   双子の押し板の時間（協力4秒・ソロ4.5秒光る）、幽霊の速さ・足止め55%・火花の威力、
   ミミックの確率と強さ、霊の祠の代償（最大HP1割）、深層の構成（主が順番に再登場）、施設5つの効果と値段、新職業2つの全数値・名前・見た目、実績18個と称号、住人のせりふ
@@ -488,6 +492,7 @@
 
 ## 5. 次の候補（ユーザーの感想待ち）
 
+- **大掛かりな変更（6案）を進行中**：第1段階は 2026-10-14 公開済み。次は ② 見た目 → ① 物語と結末 → ④ ルーンと武器 → ③ 地続きの迷宮 → ⑥ Android とマッチング（2章「大掛かりな変更」）
 - **新規案 A〜J は 2026-10-13 にすべて実装済み**（2章「新規案をおすすめ順で全部」）。中身は Claude の判断なので、遊んだ感想で調整する
 - 今週の迷宮のオンラインランキング：Unity Cloud の管理画面で Leaderboards を有効にしてボードを作ってもらえれば、記録を送る処理を足せる
 - 新しい案の候補（未相談）：職業ごとの専用の連携技（死霊術師・聖騎士の組み合わせ技）／深層だけの魔物と主／住人の物語の続き（依頼と連動するイベント）

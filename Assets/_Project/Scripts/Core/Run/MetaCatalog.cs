@@ -213,6 +213,30 @@ namespace Game.Core
 
         public void RecordVictory(Difficulty d) => bestVictory = Math.Max(bestVictory, (int)d);
 
+        /// <summary>Set out into this week's labyrinth (the host's choice) instead of a fresh one.</summary>
+        public bool weekly;
+        /// <summary>This device's best in a week's labyrinth (Weekly): which week, how deep, how fast, cleared or not.</summary>
+        public int weeklyWeek = -1;
+        public int weeklyBestRoom = -1;
+        public float weeklyBestTime;
+        public bool weeklyCleared;
+
+        /// <summary>A run of week <paramref name="week"/> ended: true when it is this week's new best.</summary>
+        public bool RecordWeekly(int week, bool cleared, int room, float time)
+        {
+            if (weeklyWeek != week)
+            {
+                weeklyWeek = week;
+                weeklyBestRoom = -1;
+                weeklyCleared = false;
+            }
+            if (!Weekly.Better(cleared, room, time, weeklyCleared, weeklyBestRoom, weeklyBestTime)) return false;
+            weeklyBestRoom = room;
+            weeklyBestTime = time;
+            weeklyCleared = cleared;
+            return true;
+        }
+
         public bool TryBuy(string id, int cost)
         {
             if (IsUnlocked(id) || shards < cost) return false;

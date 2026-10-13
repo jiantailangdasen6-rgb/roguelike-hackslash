@@ -28,6 +28,7 @@ namespace Game.Gameplay
         private bool _victory;
         private int _shards = -1;
         private float _shownAt;
+        private string _weeklyNote = "";
 
         private void Awake()
         {
@@ -146,6 +147,12 @@ namespace Game.Gameplay
             {
                 _shards = MetaCatalog.ShardsForRun(d.RoomsCleared.Value, d.BossesKilled.Value, d.Kills.Value, _victory, d.DifficultyLevel.Value) + d.BonusShards.Value;
                 if (_victory) ProfileStore.Current.RecordVictory(d.DifficultyLevel.Value);
+                // This week's labyrinth: each device keeps its best of the week.
+                _weeklyNote = "";
+                if (d.WeeklyWeek.Value >= 0)
+                    _weeklyNote = ProfileStore.Current.RecordWeekly(d.WeeklyWeek.Value, _victory, d.RoomIndex.Value, d.Elapsed.Value)
+                        ? "　<color=#9fd8ff>今週の迷宮・自己ベスト更新！</color>"
+                        : "　<color=#9fd8ff>今週の迷宮</color>";
                 ProfileStore.Current.shards += _shards;
                 ProfileStore.Save();
             }
@@ -157,7 +164,7 @@ namespace Game.Gameplay
                 _logged = true; // pace from real runs: read back from Player.log
                 Debug.Log($"[RunStats] {(_victory ? "victory" : "defeat")} difficulty={d.DifficultyLevel.Value} players={NetPlayer.All.Count} elapsed={d.Elapsed.Value} splits={splits} kills={d.Kills.Value}");
             }
-            _summary.text = $"{HudView.RoomTitle(d.RoomIndex.Value)}まで　（{DifficultyCatalog.Get(d.DifficultyLevel.Value).Name}）";
+            _summary.text = $"{HudView.RoomTitle(d.RoomIndex.Value)}まで　（{DifficultyCatalog.Get(d.DifficultyLevel.Value).Name}）{_weeklyNote}";
             _stats[0].text = d.Kills.Value.ToString();
             _stats[1].text = UIKit.FormatTime(d.Elapsed.Value);
             _stats[2].text = RunSimulation.ParseSplits(splits).Downs.ToString();

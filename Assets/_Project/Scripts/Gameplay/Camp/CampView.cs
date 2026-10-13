@@ -231,7 +231,9 @@ namespace Game.Gameplay
             var gate = Camp.Get(CampStation.Gate);
             _gateText.rectTransform.position = ToScreen(gate.Front + Vector2.down * (Camp.GateRadius + 0.15f));
             int party = NetPlayer.All.Count;
-            string difficulty = $"<size=20><color=#bfb6aa>難易度：{DifficultyCatalog.Get(d.DifficultyLevel.Value).Name}</color></size>";
+            string difficulty = d.WeeklyRun.Value
+                ? $"<size=20><color=#9fd8ff>今週の迷宮（{Weekly.Label(Weekly.Current)}・標準）</color></size>"
+                : $"<size=20><color=#bfb6aa>難易度：{DifficultyCatalog.Get(d.DifficultyLevel.Value).Name}</color></size>";
             string status = departing > 0.02f
                 ? $"<color=#e0b45a>出発まで {Mathf.Max(1, Mathf.CeilToInt(Camp.DepartSeconds - d.DepartProgress.Value))}</color>"
                 : inGate > 0 ? $"<size=22>門の前 {inGate} / {party} 人</size>"

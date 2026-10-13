@@ -20,6 +20,8 @@ namespace Game.Gameplay
 
         /// <summary>The host's difficulty, shown to everyone at the gate.</summary>
         public readonly NetworkVariable<Difficulty> DifficultyLevel = new(Difficulty.Normal);
+        /// <summary>The host sets out into this week's labyrinth (Weekly).</summary>
+        public readonly NetworkVariable<bool> WeeklyRun = new();
         /// <summary>Seconds the whole party has been standing in the gate (0 while someone is missing).</summary>
         public readonly NetworkVariable<float> DepartProgress = new();
         public readonly NetworkVariable<int> InGate = new();
@@ -37,6 +39,7 @@ namespace Game.Gameplay
 
             _spawnTime = Time.time;
             DifficultyLevel.Value = ChosenDifficulty();
+            WeeklyRun.Value = ProfileStore.Current.weekly;
             NetworkManager.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
             NetworkManager.SceneManager.OnSceneEvent += OnSceneEvent;
         }
@@ -119,6 +122,7 @@ namespace Game.Gameplay
             if (IsServer)
             {
                 DifficultyLevel.Value = ChosenDifficulty();
+                WeeklyRun.Value = ProfileStore.Current.weekly;
                 var mine = AvatarOf(NetworkManager.LocalClientId);
                 if (mine != null) Apply(mine, ProfileStore.Current.ToLoadout());
             }

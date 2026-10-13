@@ -47,6 +47,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<bool> MapRevealed = new();
         public readonly NetworkVariable<float> PuzzleValue = new();
         public readonly NetworkVariable<float> PuzzleTime = new();
+        /// <summary>This week's labyrinth: the week (Weekly), -1 for an ordinary run.</summary>
+        public readonly NetworkVariable<int> WeeklyWeek = new(-1);
         public readonly NetworkVariable<ulong> LanternHolder = new();
         public readonly NetworkVariable<Vector2> LanternPos = new();
         public readonly NetworkVariable<bool> ExitOpen = new();
@@ -250,6 +252,14 @@ namespace Game.Gameplay
             };
             if (has != null)
                 for (int k = 0; k < 300 && !DungeonMap.Generate(new RunSimulation(seed).MapSeed, wantedArea).Rooms.Exists(has); k++) seed++;
+            // This week's labyrinth (the host's choice at the camp's tablet, or -weekly): the week's maps, standard difficulty.
+            if (ProfileStore.Current.weekly || CommandLine.Has("-weekly"))
+            {
+                WeeklyWeek.Value = Weekly.Current;
+                seed = Weekly.Seed(WeeklyWeek.Value);
+                DifficultyLevel.Value = Difficulty.Normal;
+            }
+            else WeeklyWeek.Value = -1;
             Sim = new RunSimulation(seed, DifficultyLevel.Value);
             Sim.DropChanceScale = CommandLine.GetFloat("-lootrate", 1f);
             Sim.BossStartHealth = CommandLine.GetFloat("-bosshp", 1f);

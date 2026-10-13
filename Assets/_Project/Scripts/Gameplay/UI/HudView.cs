@@ -635,7 +635,7 @@ namespace Game.Gameplay
                 _classText.text = local.ClassDef.Name + (banked > 0 && director.LocalFighting ? $"　<size=22><color=#e0b45a>★{banked}</color></size>" : "");
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
             string ping = local != null && !director.IsServer && local.Ping.Value > 0 ? $"通信 {PingText(local.Ping.Value)}　" : "";
-            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}";
+            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + (director.WeeklyWeek.Value >= 0 ? "<color=#9fd8ff>今週の迷宮</color>" : $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}");
             var here = director.LocalRoom;
             _roomText.text = RoomTitle(here) + (director.Keys.Value > 0 ? $"　<color=#e6c766>鍵 ×{director.Keys.Value}</color>" : "");
             _objectiveText.text = ObjectiveText(director, here);

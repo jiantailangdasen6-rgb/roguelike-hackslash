@@ -362,7 +362,7 @@ namespace Game.Gameplay
             // party can pick gear and classes for it.
             var chosenDef = DifficultyCatalog.Get(current);
             var detail = UIKit.Framed(_body, "Detail", new Color(0.045f, 0.035f, 0.05f, 1f), UIKit.GoldTrim * 0.7f);
-            detail.Outer().Place(new Vector2(0f, 1f), new Vector2(1124f, 290f), new Vector2(0f, -244f));
+            detail.Outer().Place(new Vector2(0f, 1f), new Vector2(1124f, 246f), new Vector2(0f, -244f));
             var head = UIKit.Title(detail.transform, $"「{chosenDef.Name}」で変わること", 28, TextAnchor.UpperLeft);
             head.rectTransform.Place(new Vector2(0f, 1f), new Vector2(600f, 40f), new Vector2(24f, -14f));
             var scale = UIKit.Label(detail.transform,
@@ -396,11 +396,37 @@ namespace Game.Gameplay
                 playerHead.rectTransform.Place(new Vector2(0f, 1f), new Vector2(400f, 30f), new Vector2(572f, -66f));
             }
 
-            var note = UIKit.Label(_body, host
+            // This week's labyrinth: the same maps for everyone this week, on the standard difficulty, and a best to beat.
+            bool weekly = host || CampDirector.Instance == null ? Profile.weekly : CampDirector.Instance.WeeklyRun.Value;
+            var strip = UIKit.Framed(_body, "Weekly", weekly ? new Color(0.05f, 0.1f, 0.16f, 1f) : new Color(0.045f, 0.035f, 0.05f, 1f),
+                weekly ? new Color(0.6f, 0.85f, 1f) : UIKit.GoldTrim * 0.7f);
+            strip.Outer().Place(new Vector2(0f, 1f), new Vector2(1124f, 96f), new Vector2(0f, -502f));
+            var weekTitle = UIKit.Title(strip.transform, $"今週の迷宮　<size=22><color=#9fd8ff>{Weekly.Label(Weekly.Current)}</color></size>", 30, TextAnchor.MiddleLeft);
+            weekTitle.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(520f, 50f), new Vector2(24f, 14f));
+            int week = Weekly.Current;
+            string best = Profile.weeklyWeek == week && Profile.weeklyBestRoom >= 0
+                ? $"今週の記録：{(Profile.weeklyCleared ? $"踏破 {UIKit.FormatTime(Profile.weeklyBestTime)}" : $"{HudView.RoomTitle(Profile.weeklyBestRoom)}まで（{UIKit.FormatTime(Profile.weeklyBestTime)}）")}"
+                : "今週の記録：まだない";
+            var sub = UIKit.Label(strip.transform, $"今週は誰が挑んでも同じ地図（難易度は標準）　{best}", 20, TextAnchor.MiddleLeft, UIKit.MutedText);
+            sub.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(800f, 34f), new Vector2(24f, -24f));
+            var toggle = UIKit.Button(strip.transform, weekly ? "挑む（オン）" : "挑まない（オフ）", 24, () =>
+            {
+                Profile.weekly = !Profile.weekly;
+                Save();
+            }, weekly ? new Color(0.2f, 0.45f, 0.7f) : (Color?)null);
+            toggle.GetComponent<RectTransform>().Place(new Vector2(1f, 0.5f), new Vector2(240f, 60f), new Vector2(-24f, 0f));
+            toggle.interactable = host;
+            if (!host)
+            {
+                var hostNote = UIKit.Label(strip.transform, "部屋を作った人が選ぶ", 18, TextAnchor.MiddleRight, UIKit.MutedText);
+                hostNote.rectTransform.Place(new Vector2(1f, 0.5f), new Vector2(240f, 30f), new Vector2(-24f, -40f));
+            }
+
+            var note = UIKit.Label(detail.transform, host
                     ? "仲間と遊ぶときも、あなた（部屋を作った人）の選んだ難易度になります"
                     : $"難易度は部屋を作った人が選びます（いまは「{DifficultyCatalog.Get(current).Name}」）",
-                22, TextAnchor.MiddleCenter, UIKit.MutedText);
-            note.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1100f, 40f), new Vector2(0f, -548f));
+                20, TextAnchor.MiddleCenter, UIKit.MutedText);
+            note.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1080f, 30f), new Vector2(0f, 10f));
         }
 
         // ------------------------------------------------------------------ Helpers

@@ -1,0 +1,1146 @@
+fileFormatVersion: 2
+guid: a3c72118f86a7e3478e811b76b7dab5f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -463172244863852234
+    second: bone_pile_flash_0
+  - first:
+      213: 4899167276641316850
+    second: bone_pile_flash_1
+  - first:
+      213: -6317035619680778827
+    second: bone_pile_flash_2
+  - first:
+      213: 3129340787849770176
+    second: bone_pile_flash_3
+  - first:
+      213: -8210156786587805438
+    second: bone_pile_flash_4
+  - first:
+      213: -8124906949526390963
+    second: bone_pile_flash_5
+  - first:
+      213: 6277332565272353240
+    second: bone_pile_flash_6
+  - first:
+      213: -2779460796912239480
+    second: bone_pile_flash_7
+  - first:
+      213: -7524484663875482493
+    second: bone_pile_flash_8
+  - first:
+      213: 7783964284743190968
+    second: bone_pile_flash_9
+  - first:
+      213: -7630124843329357486
+    second: bone_pile_flash_10
+  - first:
+      213: -1313276359632589255
+    second: bone_pile_flash_11
+  - first:
+      213: 6840403493972680796
+    second: bone_pile_flash_12
+  - first:
+      213: -7387292672832432738
+    second: bone_pile_flash_13
+  - first:
+      213: -5770967307279869185
+    second: bone_pile_flash_14
+  - first:
+      213: 6572287245080358796
+    second: bone_pile_flash_15
+  - first:
+      213: -6346395893748827157
+    second: bone_pile_flash_16
+  - first:
+      213: -4157828831734593715
+    second: bone_pile_flash_17
+  - first:
+      213: 1051131995428152919
+    second: bone_pile_flash_18
+  - first:
+      213: 3216608140958446431
+    second: bone_pile_flash_19
+  - first:
+      213: -3152039789791253551
+    second: bone_pile_flash_20
+  - first:
+      213: -239506759906818236
+    second: bone_pile_flash_21
+  - first:
+      213: -3571491988420637966
+    second: bone_pile_flash_22
+  - first:
+      213: 8952132524794442334
+    second: bone_pile_flash_23
+  - first:
+      213: 8274025115767764340
+    second: bone_pile_flash_24
+  - first:
+      213: 3168500988782874709
+    second: bone_pile_flash_25
+  - first:
+      213: -8329383898662707224
+    second: bone_pile_flash_26
+  - first:
+      213: -322907202085600441
+    second: bone_pile_flash_27
+  - first:
+      213: 4317634436982778550
+    second: bone_pile_flash_28
+  - first:
+      213: -5864758240291468561
+    second: bone_pile_flash_29
+  - first:
+      213: 2400959130993336628
+    second: bone_pile_flash_30
+  - first:
+      213: -735991576719130756
+    second: bone_pile_flash_31
+  - first:
+      213: -6244408960845653915
+    second: bone_pile_flash_32
+  - first:
+      213: -2395536581673425344
+    second: bone_pile_flash_33
+  - first:
+      213: -7481019244674892716
+    second: bone_pile_flash_34
+  - first:
+      213: -80191109977018276
+    second: bone_pile_flash_35
+  - first:
+      213: -5406825861858444995
+    second: bone_pile_flash_36
+  - first:
+      213: 2326224083748864102
+    second: bone_pile_flash_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bone_pile_flash_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 328
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 631e11b1c4b7299f0800000000000000
+      internalID: -463172244863852234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 328
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ff6c636ea65df340800000000000000
+      internalID: 4899167276641316850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 328
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b5007fa2916558a0800000000000000
+      internalID: -6317035619680778827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_3
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 328
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c43de8ddd6ad6b20800000000000000
+      internalID: 3129340787849770176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_4
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 328
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 209db21e6e9af0e80800000000000000
+      internalID: -8210156786587805438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_5
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 328
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4770605d288e3f80800000000000000
+      internalID: -8124906949526390963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_6
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 264
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d9dc0a95b09d1750800000000000000
+      internalID: 6277332565272353240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_7
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 264
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88cfbe4a12f5d69d0800000000000000
+      internalID: -2779460796912239480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_8
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 264
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38cc3db8019a39790800000000000000
+      internalID: -7524484663875482493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_9
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 264
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b902789642360c60800000000000000
+      internalID: 7783964284743190968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_10
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 264
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 259787191e95c1690800000000000000
+      internalID: -7630124843329357486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_11
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 264
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93e6e24eb1e46cde0800000000000000
+      internalID: -1313276359632589255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_12
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 200
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c50259a5cbefdee50800000000000000
+      internalID: 6840403493972680796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_13
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 200
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e951aff14701b7990800000000000000
+      internalID: -7387292672832432738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_14
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 200
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffad0375fc769efa0800000000000000
+      internalID: -5770967307279869185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_15
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 200
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8f68dc8d64753b50800000000000000
+      internalID: 6572287245080358796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_16
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 200
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beb7a1d2f821de7a0800000000000000
+      internalID: -6346395893748827157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_17
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 200
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d470597e4bc6c46c0800000000000000
+      internalID: -4157828831734593715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_18
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 136
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 756ea8f0bfe569e00800000000000000
+      internalID: 1051131995428152919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_19
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 136
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f533577df00b3ac20800000000000000
+      internalID: 3216608140958446431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_20
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 136
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1db689be284b144d0800000000000000
+      internalID: -3152039789791253551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_21
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 136
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 447037eeed91dacf0800000000000000
+      internalID: -239506759906818236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_22
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 136
+        width: 21
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fac80885f28f6ec0800000000000000
+      internalID: -3571491988420637966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_23
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 136
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e52f792d91d5c3c70800000000000000
+      internalID: 8952132524794442334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_24
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 72
+        width: 24
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4757fff410e33d270800000000000000
+      internalID: 8274025115767764340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_25
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 72
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55090e2acd6c8fb20800000000000000
+      internalID: 3168500988782874709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_26
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 6
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8efd952a975186c80800000000000000
+      internalID: -8329383898662707224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_27
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 6
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 743c54c4c9dc48bf0800000000000000
+      internalID: -322907202085600441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_28
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 6
+        width: 29
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ba2a5605a15beb30800000000000000
+      internalID: 4317634436982778550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_29
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 6
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: feac1e904713c9ea0800000000000000
+      internalID: -5864758240291468561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_30
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 15
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 431a61bdb9be15120800000000000000
+      internalID: 2400959130993336628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_31
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 6
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7ff9f77f8b39c5f0800000000000000
+      internalID: -735991576719130756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_32
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 15
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 568578862276759a0800000000000000
+      internalID: -6244408960845653915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_33
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 7
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 046e6eacb2851ced0800000000000000
+      internalID: -2395536581673425344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_34
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 6
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45cba4312a41e2890800000000000000
+      internalID: -7481019244674892716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_35
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 15
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c50fcaf3c9a13eef0800000000000000
+      internalID: -80191109977018276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_36
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 6
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d393885768817f4b0800000000000000
+      internalID: -5406825861858444995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_pile_flash_37
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 6
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6604fc3ba78684020800000000000000
+      internalID: 2326224083748864102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bone_pile_flash_0: -463172244863852234
+      bone_pile_flash_1: 4899167276641316850
+      bone_pile_flash_10: -7630124843329357486
+      bone_pile_flash_11: -1313276359632589255
+      bone_pile_flash_12: 6840403493972680796
+      bone_pile_flash_13: -7387292672832432738
+      bone_pile_flash_14: -5770967307279869185
+      bone_pile_flash_15: 6572287245080358796
+      bone_pile_flash_16: -6346395893748827157
+      bone_pile_flash_17: -4157828831734593715
+      bone_pile_flash_18: 1051131995428152919
+      bone_pile_flash_19: 3216608140958446431
+      bone_pile_flash_2: -6317035619680778827
+      bone_pile_flash_20: -3152039789791253551
+      bone_pile_flash_21: -239506759906818236
+      bone_pile_flash_22: -3571491988420637966
+      bone_pile_flash_23: 8952132524794442334
+      bone_pile_flash_24: 8274025115767764340
+      bone_pile_flash_25: 3168500988782874709
+      bone_pile_flash_26: -8329383898662707224
+      bone_pile_flash_27: -322907202085600441
+      bone_pile_flash_28: 4317634436982778550
+      bone_pile_flash_29: -5864758240291468561
+      bone_pile_flash_3: 3129340787849770176
+      bone_pile_flash_30: 2400959130993336628
+      bone_pile_flash_31: -735991576719130756
+      bone_pile_flash_32: -6244408960845653915
+      bone_pile_flash_33: -2395536581673425344
+      bone_pile_flash_34: -7481019244674892716
+      bone_pile_flash_35: -80191109977018276
+      bone_pile_flash_36: -5406825861858444995
+      bone_pile_flash_37: 2326224083748864102
+      bone_pile_flash_4: -8210156786587805438
+      bone_pile_flash_5: -8124906949526390963
+      bone_pile_flash_6: 6277332565272353240
+      bone_pile_flash_7: -2779460796912239480
+      bone_pile_flash_8: -7524484663875482493
+      bone_pile_flash_9: 7783964284743190968
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

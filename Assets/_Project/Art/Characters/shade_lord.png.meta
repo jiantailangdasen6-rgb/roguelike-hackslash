@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: c48b6223d31bd174dafe28a55deebed1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7709600322719395542
+    second: shade_lord_0
+  - first:
+      213: -6285615068813512343
+    second: shade_lord_1
+  - first:
+      213: 8449673550206841114
+    second: shade_lord_2
+  - first:
+      213: 7953673728146474179
+    second: shade_lord_3
+  - first:
+      213: -5855306767835546820
+    second: shade_lord_4
+  - first:
+      213: 2595107266868348508
+    second: shade_lord_5
+  - first:
+      213: -3714739843572371124
+    second: shade_lord_6
+  - first:
+      213: -6352025572302624486
+    second: shade_lord_7
+  - first:
+      213: -737130847923571354
+    second: shade_lord_8
+  - first:
+      213: -6080139961198478322
+    second: shade_lord_9
+  - first:
+      213: 4749836800841718797
+    second: shade_lord_10
+  - first:
+      213: 2283627301132801923
+    second: shade_lord_11
+  - first:
+      213: 887810267616953918
+    second: shade_lord_12
+  - first:
+      213: 6024968899577378962
+    second: shade_lord_13
+  - first:
+      213: -4536429303599732935
+    second: shade_lord_14
+  - first:
+      213: -312274865921305253
+    second: shade_lord_15
+  - first:
+      213: -5083044188221043413
+    second: shade_lord_16
+  - first:
+      213: -3947540508128770866
+    second: shade_lord_17
+  - first:
+      213: -2377803143249654685
+    second: shade_lord_18
+  - first:
+      213: 2561848382683948562
+    second: shade_lord_19
+  - first:
+      213: -4884216032550793789
+    second: shade_lord_20
+  - first:
+      213: -5221294129924238236
+    second: shade_lord_21
+  - first:
+      213: 7757169262676178674
+    second: shade_lord_22
+  - first:
+      213: 7074848410906988920
+    second: shade_lord_23
+  - first:
+      213: 1769536153239116322
+    second: shade_lord_24
+  - first:
+      213: 8548723329922128579
+    second: shade_lord_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: shade_lord_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 330
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a21d21c8a5ff10590800000000000000
+      internalID: -7709600322719395542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 332
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9613784c56205c8a0800000000000000
+      internalID: -6285615068813512343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 332
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a11b71c5355434570800000000000000
+      internalID: 8449673550206841114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_3
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 330
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c407898d10216e60800000000000000
+      internalID: 7953673728146474179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_4
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 328
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3bb8347485cdbea0800000000000000
+      internalID: -5855306767835546820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_5
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 328
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5609bb4f4ca30420800000000000000
+      internalID: 2595107266868348508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_6
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 266
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c41f0e63bc7927cc0800000000000000
+      internalID: -3714739843572371124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_7
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 268
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1964be756219d7a0800000000000000
+      internalID: -6352025572302624486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_8
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 268
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6657888366f25c5f0800000000000000
+      internalID: -737130847923571354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_9
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 266
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0c7b145be00f9ba0800000000000000
+      internalID: -6080139961198478322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_10
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 264
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0c9f37976fcae140800000000000000
+      internalID: 4749836800841718797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_11
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 264
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38797636ee211bf10800000000000000
+      internalID: 2283627301132801923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_12
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 204
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e36c04d0cb2225c00800000000000000
+      internalID: 887810267616953918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_13
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 205
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 298f512ea4dfc9350800000000000000
+      internalID: 6024968899577378962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_14
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 205
+        width: 20
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 937e34a559d5b01c0800000000000000
+      internalID: -4536429303599732935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_15
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 138
+        width: 33
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b555a78f9a39aabf0800000000000000
+      internalID: -312274865921305253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_16
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 137
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2d887fed366579b0800000000000000
+      internalID: -5083044188221043413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_17
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 137
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec40584a2d48739c0800000000000000
+      internalID: -3947540508128770866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_18
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 74
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36c0ccca3a8500fd0800000000000000
+      internalID: -2377803143249654685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_19
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 74
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2162942e7838d8320800000000000000
+      internalID: 2561848382683948562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_20
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 10
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cdca856567c73cb0800000000000000
+      internalID: -4884216032550793789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_21
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 8
+        width: 26
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 464980607ac3a87b0800000000000000
+      internalID: -5221294129924238236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_22
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 6
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f6746c585007ab60800000000000000
+      internalID: 7757169262676178674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_23
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 4
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87119d34529ee2260800000000000000
+      internalID: 7074848410906988920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_24
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 2
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22a570781c7ae8810800000000000000
+      internalID: 1769536153239116322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shade_lord_25
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 1
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ca5a13539a23a670800000000000000
+      internalID: 8548723329922128579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      shade_lord_0: -7709600322719395542
+      shade_lord_1: -6285615068813512343
+      shade_lord_10: 4749836800841718797
+      shade_lord_11: 2283627301132801923
+      shade_lord_12: 887810267616953918
+      shade_lord_13: 6024968899577378962
+      shade_lord_14: -4536429303599732935
+      shade_lord_15: -312274865921305253
+      shade_lord_16: -5083044188221043413
+      shade_lord_17: -3947540508128770866
+      shade_lord_18: -2377803143249654685
+      shade_lord_19: 2561848382683948562
+      shade_lord_2: 8449673550206841114
+      shade_lord_20: -4884216032550793789
+      shade_lord_21: -5221294129924238236
+      shade_lord_22: 7757169262676178674
+      shade_lord_23: 7074848410906988920
+      shade_lord_24: 1769536153239116322
+      shade_lord_25: 8548723329922128579
+      shade_lord_3: 7953673728146474179
+      shade_lord_4: -5855306767835546820
+      shade_lord_5: 2595107266868348508
+      shade_lord_6: -3714739843572371124
+      shade_lord_7: -6352025572302624486
+      shade_lord_8: -737130847923571354
+      shade_lord_9: -6080139961198478322
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

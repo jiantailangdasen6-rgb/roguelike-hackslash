@@ -156,7 +156,7 @@ namespace Game.Tests
             sim.UseVariedRoute(Biome.Abyss, Biome.Crypt);
             Assert.AreEqual(Biome.Abyss, sim.Biome);
             Assert.AreEqual(Biome.Crypt, sim.WayLand(0));
-            Assert.AreEqual(EnemyType.Necromancer, BiomeCatalog.Get(sim.Biome).Champion);
+            Assert.AreEqual(EnemyType.ShadeLord, BiomeCatalog.Get(sim.Biome).Champion);
         }
 
         [Test]

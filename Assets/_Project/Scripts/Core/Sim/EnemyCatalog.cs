@@ -65,6 +65,16 @@ namespace Game.Core
         Executioner,    // forge: rows of falling blades; break the chain posts
         Coffin,         // the reaper's coffins (one holds him)
         ChainPost,      // the executioner's chain posts
+        // Each land's own champion (round 10) and what they leave or throw
+        BoneDigger,     // crypt: falls into a bone pile and rises again unless the pile is smashed
+        BonePile,       // the digger's bones, gathering themselves
+        TwinAcolyte,    // chapel: come in twos; one raises the other unless both fall close together
+        ShadeLord,      // abyss: leaves shadow doubles that die to a single blow
+        ShadeDecoy,     // a shade lord's double
+        LeechMother,    // sunken: heals and hardens in water; draw her out of it
+        IceKnight,      // frost: an ice shell that cracks after enough blows, and grows back
+        Bombsmith,      // forge: throws lit kegs; their blasts hurt him too
+        LitKeg,         // a bombsmith's keg: bursts by itself after a short fuse
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -587,6 +597,86 @@ namespace Game.Core
             new()
             {
                 Type = EnemyType.ChainPost, Name = "鎖の杭", Sheet = "chain_post", Health = 70f, Speed = 0f, Radius = 0.55f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+
+            // ---------------------------------------------------------------- Champions of the lands (RunSimulation.Champions)
+            new()
+            {
+                Type = EnemyType.BoneDigger, Name = "骨継ぎの墓掘り", Sheet = "bone_digger", Health = 90f, Speed = 2.0f, Radius = 0.48f, Xp = 6,
+                AttackCooldown = 1.6f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 2.2f, SizeB = 120f, Range = 1.9f, Windup = 0.8f, Recover = 0.6f, Damage = 22f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.5f, SizeB = 1.1f, Range = 4.5f, Windup = 0.7f, Recover = 0.8f, Damage = 18f, ProjectileSpeed = 15f },
+                },
+            },
+            new()
+            {
+                // Not a prop: it keeps the room in the fight until it is smashed or stands up again.
+                Type = EnemyType.BonePile, Name = "骨の山", Sheet = "bone_pile", Health = 40f, Speed = 0f, Radius = 0.5f, Xp = 0, Flat = false,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                Type = EnemyType.TwinAcolyte, Name = "双子の侍祭", Sheet = "twin_acolyte", Health = 70f, Speed = 2.2f, Radius = 0.42f, Xp = 5,
+                PreferredDistance = 5f, AttackCooldown = 2.2f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 10f, SizeB = 0.5f, Range = 10f, Windup = 0.8f, Recover = 0.5f, Damage = 13f, ProjectileSpeed = 8f, Projectile = ProjectileKind.BloodOrb, Count = 3, Spread = 30f },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Circle, SizeA = 1.6f, Range = 9f, Windup = 1.0f, Recover = 0.5f, Damage = 22f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.ShadeLord, Name = "影の頭領", Sheet = "shade_lord", Health = 85f, Speed = 3.0f, Radius = 0.42f, Xp = 6,
+                AttackCooldown = 2.2f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Blink, Shape = AttackShape.Circle, SizeA = 1.4f, Range = 8f, Windup = 0.75f, Recover = 0.5f, Damage = 20f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.6f, SizeB = 1f, Range = 4.4f, Windup = 0.5f, Recover = 0.6f, Damage = 18f, ProjectileSpeed = 18f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.ShadeDecoy, Name = "影の頭領", Title = "影の写し", Sheet = "shade_lord", Health = 1f, Speed = 3.0f, Radius = 0.42f, Xp = 0,
+                AttackCooldown = 2.4f,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4f, SizeB = 0.9f, Range = 4f, Windup = 0.6f, Recover = 0.6f, Damage = 10f, ProjectileSpeed = 16f } },
+            },
+            new()
+            {
+                Type = EnemyType.LeechMother, Name = "蛭の母", Sheet = "leech_mother", Health = 120f, Speed = 1.6f, Radius = 0.55f, Xp = 6,
+                AttackCooldown = 1.9f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 2.0f, Range = 1.8f, Windup = 0.9f, Recover = 0.6f, Damage = 24f },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 9f, SizeB = 0.5f, Range = 9f, Windup = 0.8f, Recover = 0.5f, Damage = 12f, ProjectileSpeed = 8f, Projectile = ProjectileKind.WaterOrb, Count = 3, Spread = 30f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.IceKnight, Name = "氷殻の騎士", Sheet = "ice_knight", Health = 110f, Speed = 1.9f, Radius = 0.5f, Xp = 6,
+                AttackCooldown = 1.9f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 2.4f, SizeB = 110f, Range = 2.0f, Windup = 0.8f, Recover = 0.6f, Damage = 24f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 5f, SizeB = 1.2f, Range = 5f, Windup = 0.8f, Recover = 0.8f, Damage = 22f, ProjectileSpeed = 14f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Bombsmith, Name = "火薬の鍛冶師", Sheet = "bombsmith", Health = 90f, Speed = 1.8f, Radius = 0.45f, Xp = 6,
+                PreferredDistance = 6f, AttackCooldown = 2.4f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 2.0f, SizeB = 100f, Range = 1.8f, Windup = 0.7f, Recover = 0.6f, Damage = 18f },
+                    // Throws lit kegs where the players stand (RunSimulation.Champions): the telegraph is the blast to come.
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 2.6f, Range = 11f, Windup = 0.9f, Recover = 0.6f, Damage = 0f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.LitKeg, Name = "火の付いた樽", Sheet = "powder_keg", Health = 1f, Speed = 0f, Radius = 0.42f, Xp = 0, Prop = true,
                 Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };

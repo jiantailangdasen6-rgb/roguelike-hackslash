@@ -236,6 +236,7 @@ namespace Game.Core
             UpdateSpawning(dt);
             StepEnemies(dt);
             StepBossTrials(dt);
+            StepChampions(dt); // RunSimulation.Champions.cs
             StepPools(dt); // RunSimulation.Lands.cs
             StepPlayersCombat(dt);
             StepDelayedAreas(dt);

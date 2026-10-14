@@ -682,6 +682,11 @@ namespace Game.Core
                 damage = BossDamage(index, damage, ref flags);
                 e = ref Enemies[index];
             }
+            else if (IsChampionKind(e.Type))
+            {
+                damage = ChampionDamage(index, damage, ref flags); // RunSimulation.Champions.cs
+                e = ref Enemies[index];
+            }
 
             e.Health -= damage;
             Events.Add(new SimEvent(SimEventType.EnemyHit) { Id = e.Id, Pos = e.Position, Value = damage, Int = HitInfo.Pack(flags, attacker) });
@@ -751,7 +756,7 @@ namespace Game.Core
                 if (!giveXp) continue;
                 if (def.Prop)
                 {
-                    if (def.Type == EnemyType.PowderKeg) IgniteKeg(e);
+                    if (def.Type is EnemyType.PowderKeg or EnemyType.LitKeg) IgniteKeg(e);
                     else if (def.Type == EnemyType.TreasureChest) SpillChest(e);
                     else if (def.Type == EnemyType.CrackedWall) WallBroken(e);
                     else if (def.Type == EnemyType.Captive) CaptiveFreed(e);
@@ -766,6 +771,7 @@ namespace Game.Core
                     MirrorShattered(e); // a reflection: no reward
                     continue;
                 }
+                if (ChampionFell(e)) continue; // it will be back (or was only a double): RunSimulation.Champions.cs
                 Kills++;
                 LandMonsterFell(e);
                 RollLoot(e);

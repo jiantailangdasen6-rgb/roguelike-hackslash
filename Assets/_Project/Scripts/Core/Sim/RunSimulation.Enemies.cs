@@ -58,6 +58,11 @@ namespace Game.Core
                     e.Position = Confine(e.Position, e.Radius, def.Flying);
                     continue;
                 }
+                if (def.Attacks.Length == 0)
+                {
+                    e.Position = Confine(e.Position, e.Radius, def.Flying); // a bone pile: it only waits
+                    continue;
+                }
                 if (def.Boss && BossChannelling)
                 {
                     e.State = EnemyState.Chase;
@@ -341,6 +346,12 @@ namespace Game.Core
                     CloseCages(e.AimTarget, a.SizeA);
                     break;
                 case AttackKind.Rain:
+                    if (e.Type == EnemyType.Bombsmith)
+                    {
+                        if (_rainTargets.Remove(e.Id, out var kegs)) ThrowKegs(kegs, e.RoomId); // RunSimulation.Champions.cs
+                        e = ref Enemies[index];
+                        break;
+                    }
                     if (_rainTargets.Remove(e.Id, out var spots))
                         foreach (var s in spots)
                         {

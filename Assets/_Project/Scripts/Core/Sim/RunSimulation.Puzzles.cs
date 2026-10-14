@@ -90,6 +90,14 @@ namespace Game.Core
             var type = BiomeCatalog.Get(Biome).Champion;
             PendingSpawns.Add(new PendingSpawn { Room = Room.Id, Type = type, Position = Room.Center + new Vector2(0f, 2.5f), Timer = 1.2f, Elite = true, Champion = true });
             Events.Add(new SimEvent(SimEventType.SpawnWarning) { Pos = Room.Center + new Vector2(0f, 2.5f), Int = (int)type, Value = 1.2f });
+            if (type == EnemyType.TwinAcolyte)
+            {
+                // Twins come in twos (RunSimulation.Champions.cs): the second stands beside the first.
+                var first = PendingSpawns[PendingSpawns.Count - 1];
+                first.Position = Room.Center + new Vector2(-1.6f, 2.5f);
+                PendingSpawns[PendingSpawns.Count - 1] = first;
+                PendingSpawns.Add(new PendingSpawn { Room = Room.Id, Type = type, Position = Room.Center + new Vector2(1.6f, 2.5f), Timer = 1.2f, Elite = true, Champion = true });
+            }
             int escort = 1 + PlayersIn(Room) + Room.Area;
             for (int i = 0; i < escort; i++) QueueSpawn(RandomEnemyType(), false);
         }

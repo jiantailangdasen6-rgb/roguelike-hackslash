@@ -357,6 +357,9 @@ namespace Game.Gameplay
                 }
                 return;
             }
+            // Champions' things: a shade's double is half there; a thrown keg flickers red as its fuse burns.
+            if (s.Type == EnemyType.ShadeDecoy) tint = new Color(0.55f, 0.4f, 0.5f, 0.6f + 0.1f * Mathf.Sin(Time.time * 9f));
+            if (s.Type == EnemyType.LitKeg) tint = Color.Lerp(Color.white, new Color(1f, 0.35f, 0.2f), 0.5f + 0.5f * Mathf.Sin(Time.time * 18f));
             if (s.Type is EnemyType.BloodSigil or EnemyType.PressurePlate)
             {
                 bool lit = s.Anim == EnemyAnim.Walk;
@@ -433,6 +436,12 @@ namespace Game.Gameplay
                     case EnemyType.VoidEye: v.Glow.color = new Color(0.7f, 0.35f, 1f); v.Glow.intensity = 0.6f; break;
                     case EnemyType.GreatCrab: v.Glow.color = new Color(0.4f, 0.95f, 0.85f); break;
                     case EnemyType.GreatWolf: v.Glow.color = new Color(0.7f, 0.88f, 1f); break;
+                    case EnemyType.BoneDigger: v.Glow.color = new Color(0.6f, 1f, 0.55f); break;
+                    case EnemyType.TwinAcolyte: v.Glow.color = new Color(1f, 0.3f, 0.35f); break;
+                    case EnemyType.ShadeLord: v.Glow.color = new Color(0.9f, 0.2f, 0.3f); break;
+                    case EnemyType.LeechMother: v.Glow.color = new Color(0.35f, 1f, 0.85f); break;
+                    case EnemyType.IceKnight: v.Glow.color = new Color(0.6f, 0.85f, 1f); break;
+                    case EnemyType.Bombsmith: v.Glow.color = new Color(1f, 0.5f, 0.15f); break;
                     case EnemyType.FrostQueen: case EnemyType.IceMirror: case EnemyType.FrostWitch: v.Glow.color = new Color(0.6f, 0.85f, 1f); break;
                     case EnemyType.ForgeColossus: case EnemyType.FireImp: case EnemyType.SlagBloater: case EnemyType.AshenKing: v.Glow.color = new Color(1f, 0.5f, 0.15f); break;
                 }
@@ -475,6 +484,10 @@ namespace Game.Gameplay
             EnemyType.Executioner => 1.6f,
             EnemyType.GraveReaper => 1.45f,
             EnemyType.Coffin => 1.5f,
+            // The lands' champions stand a head taller than their kin (RunSimulation.Champions).
+            EnemyType.BoneDigger or EnemyType.TwinAcolyte or EnemyType.ShadeLord or EnemyType.ShadeDecoy or EnemyType.IceKnight or EnemyType.Bombsmith => 1.25f,
+            EnemyType.LeechMother => 1.35f,
+            EnemyType.BonePile => 1.2f,
             _ => def.Boss || type == EnemyType.IceMirror ? BossScale : 1f,
         };
 

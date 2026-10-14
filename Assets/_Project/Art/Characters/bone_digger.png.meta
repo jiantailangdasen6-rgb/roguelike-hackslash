@@ -1,0 +1,886 @@
+fileFormatVersion: 2
+guid: 6b8182cda6fb0344ebfe18e184f0d472
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7966165693674769637
+    second: bone_digger_0
+  - first:
+      213: -1408963950027880757
+    second: bone_digger_1
+  - first:
+      213: 7375181468102325414
+    second: bone_digger_2
+  - first:
+      213: 616580722149835457
+    second: bone_digger_3
+  - first:
+      213: 9121211111403749359
+    second: bone_digger_4
+  - first:
+      213: -89399934711417545
+    second: bone_digger_5
+  - first:
+      213: 5598272835864181181
+    second: bone_digger_6
+  - first:
+      213: -8788231675053586547
+    second: bone_digger_7
+  - first:
+      213: -147352605684532890
+    second: bone_digger_8
+  - first:
+      213: 2450269834513113000
+    second: bone_digger_9
+  - first:
+      213: 5174382939120019721
+    second: bone_digger_10
+  - first:
+      213: 1060166678284344114
+    second: bone_digger_11
+  - first:
+      213: -6964645878165227243
+    second: bone_digger_12
+  - first:
+      213: 3308412356775524918
+    second: bone_digger_13
+  - first:
+      213: -9209524551410005418
+    second: bone_digger_14
+  - first:
+      213: -8358666997689934796
+    second: bone_digger_15
+  - first:
+      213: 8666101243724074142
+    second: bone_digger_16
+  - first:
+      213: 3526323503262333032
+    second: bone_digger_17
+  - first:
+      213: -305919633283997910
+    second: bone_digger_18
+  - first:
+      213: 4674478223109355081
+    second: bone_digger_19
+  - first:
+      213: 3557282066706339820
+    second: bone_digger_20
+  - first:
+      213: 6963166325554165878
+    second: bone_digger_21
+  - first:
+      213: -491512406292842813
+    second: bone_digger_22
+  - first:
+      213: -3231868323358765040
+    second: bone_digger_23
+  - first:
+      213: -5390174229281992650
+    second: bone_digger_24
+  - first:
+      213: 8893762283888959758
+    second: bone_digger_25
+  - first:
+      213: 7809399958574046226
+    second: bone_digger_26
+  - first:
+      213: -6877041645351287898
+    second: bone_digger_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bone_digger_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 328
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ec4369ed718d8e60800000000000000
+      internalID: 7966165693674769637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 328
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc6c141a0ca527ce0800000000000000
+      internalID: -1408963950027880757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 327
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a478484878e95660800000000000000
+      internalID: 7375181468102325414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_3
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 327
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c2481766e88e8800800000000000000
+      internalID: 616580722149835457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_4
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 265
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: feff098fd2d059e70800000000000000
+      internalID: 9121211111403749359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_5
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 264
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7353598ab3362cef0800000000000000
+      internalID: -89399934711417545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_6
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 264
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db93769bb7f01bd40800000000000000
+      internalID: 5598272835864181181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_7
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 265
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8748948adde90680800000000000000
+      internalID: -8788231675053586547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_8
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 264
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 669f179f59f74fdf0800000000000000
+      internalID: -147352605684532890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_9
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 264
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8af5202be6b110220800000000000000
+      internalID: 2450269834513113000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_10
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 200
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 909271a3ed91fc740800000000000000
+      internalID: 5174382939120019721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_11
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 199
+        width: 17
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b18d51af776be00800000000000000
+      internalID: 1060166678284344114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_12
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 199
+        width: 17
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 519b29d597b985f90800000000000000
+      internalID: -6964645878165227243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_13
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 136
+        width: 32
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63a3e108287d9ed20800000000000000
+      internalID: 3308412356775524918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_14
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 133
+        width: 37
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65ac7f2f632313080800000000000000
+      internalID: -9209524551410005418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_15
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 133
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43c19e6d6ac000c80800000000000000
+      internalID: -8358666997689934796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_16
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 133
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9c8ebb8a2d244870800000000000000
+      internalID: 8666101243724074142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_17
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 72
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 868ff0ffa8400f030800000000000000
+      internalID: 3526323503262333032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_18
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 72
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2f1a40e6b721cbf0800000000000000
+      internalID: -305919633283997910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_19
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 8
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9467bbe6d251fd040800000000000000
+      internalID: 4674478223109355081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_20
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 6
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce716ef31310e5130800000000000000
+      internalID: 3557282066706339820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_21
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 4
+        width: 35
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6783e9271e222a060800000000000000
+      internalID: 6963166325554165878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_22
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 2
+        width: 39
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c6b734121ccd29f0800000000000000
+      internalID: -491512406292842813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_23
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 2
+        width: 40
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0101d5112e81623d0800000000000000
+      internalID: -3231868323358765040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_24
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 3
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6309e2ac8114235b0800000000000000
+      internalID: -5390174229281992650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_25
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 1
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e01e7ff0dadfc6b70800000000000000
+      internalID: 8893762283888959758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_26
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 2
+        width: 25
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21c91c7e2ef806c60800000000000000
+      internalID: 7809399958574046226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bone_digger_27
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 0
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a3c4474f07df80a0800000000000000
+      internalID: -6877041645351287898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bone_digger_0: 7966165693674769637
+      bone_digger_1: -1408963950027880757
+      bone_digger_10: 5174382939120019721
+      bone_digger_11: 1060166678284344114
+      bone_digger_12: -6964645878165227243
+      bone_digger_13: 3308412356775524918
+      bone_digger_14: -9209524551410005418
+      bone_digger_15: -8358666997689934796
+      bone_digger_16: 8666101243724074142
+      bone_digger_17: 3526323503262333032
+      bone_digger_18: -305919633283997910
+      bone_digger_19: 4674478223109355081
+      bone_digger_2: 7375181468102325414
+      bone_digger_20: 3557282066706339820
+      bone_digger_21: 6963166325554165878
+      bone_digger_22: -491512406292842813
+      bone_digger_23: -3231868323358765040
+      bone_digger_24: -5390174229281992650
+      bone_digger_25: 8893762283888959758
+      bone_digger_26: 7809399958574046226
+      bone_digger_27: -6877041645351287898
+      bone_digger_3: 616580722149835457
+      bone_digger_4: 9121211111403749359
+      bone_digger_5: -89399934711417545
+      bone_digger_6: 5598272835864181181
+      bone_digger_7: -8788231675053586547
+      bone_digger_8: -147352605684532890
+      bone_digger_9: 2450269834513113000
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

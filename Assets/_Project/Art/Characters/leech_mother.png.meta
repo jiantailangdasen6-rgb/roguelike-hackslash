@@ -1,0 +1,1588 @@
+fileFormatVersion: 2
+guid: 2b97fdfe0fdf0c34c8413b7bef5eda91
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2142448922813890105
+    second: leech_mother_0
+  - first:
+      213: 6158947395232724943
+    second: leech_mother_1
+  - first:
+      213: 8838395099276330658
+    second: leech_mother_2
+  - first:
+      213: 4054455287788146512
+    second: leech_mother_3
+  - first:
+      213: 8940639305089793096
+    second: leech_mother_4
+  - first:
+      213: -8066273240959359930
+    second: leech_mother_5
+  - first:
+      213: -3279007944237224735
+    second: leech_mother_6
+  - first:
+      213: -6237256423518701553
+    second: leech_mother_7
+  - first:
+      213: 7116346735667405643
+    second: leech_mother_8
+  - first:
+      213: 1460898587631536196
+    second: leech_mother_9
+  - first:
+      213: 1595593982814402992
+    second: leech_mother_10
+  - first:
+      213: -1699744603131078110
+    second: leech_mother_11
+  - first:
+      213: 7414332968724425214
+    second: leech_mother_12
+  - first:
+      213: -5088288717598199679
+    second: leech_mother_13
+  - first:
+      213: -3957502447851623297
+    second: leech_mother_14
+  - first:
+      213: -119497601670896298
+    second: leech_mother_15
+  - first:
+      213: 6885227475067700985
+    second: leech_mother_16
+  - first:
+      213: 4554731686695669502
+    second: leech_mother_17
+  - first:
+      213: 6714699284477730924
+    second: leech_mother_18
+  - first:
+      213: -1008248978501045754
+    second: leech_mother_19
+  - first:
+      213: 9123880770721809153
+    second: leech_mother_20
+  - first:
+      213: -3947735587981890950
+    second: leech_mother_21
+  - first:
+      213: 6050737406664837563
+    second: leech_mother_22
+  - first:
+      213: 2875761488390163574
+    second: leech_mother_23
+  - first:
+      213: 5760268237842740439
+    second: leech_mother_24
+  - first:
+      213: -6482321587121928736
+    second: leech_mother_25
+  - first:
+      213: -8174313346017695094
+    second: leech_mother_26
+  - first:
+      213: 9111126204310667597
+    second: leech_mother_27
+  - first:
+      213: -5310514291647749064
+    second: leech_mother_28
+  - first:
+      213: 1993515530435405339
+    second: leech_mother_29
+  - first:
+      213: -7485977114798903580
+    second: leech_mother_30
+  - first:
+      213: 4269015714247024945
+    second: leech_mother_31
+  - first:
+      213: 2102381026686232752
+    second: leech_mother_32
+  - first:
+      213: 2726576628214918965
+    second: leech_mother_33
+  - first:
+      213: 6389374126781860689
+    second: leech_mother_34
+  - first:
+      213: 7618423204146587439
+    second: leech_mother_35
+  - first:
+      213: -8271119622308975348
+    second: leech_mother_36
+  - first:
+      213: -7899012080115798524
+    second: leech_mother_37
+  - first:
+      213: 7805497407794978911
+    second: leech_mother_38
+  - first:
+      213: 9204266072832914681
+    second: leech_mother_39
+  - first:
+      213: -3664509542673074408
+    second: leech_mother_40
+  - first:
+      213: 4622853633160976153
+    second: leech_mother_41
+  - first:
+      213: -8043272095191318766
+    second: leech_mother_42
+  - first:
+      213: 539463189404449462
+    second: leech_mother_43
+  - first:
+      213: -7413940520827213900
+    second: leech_mother_44
+  - first:
+      213: -1658019162930542521
+    second: leech_mother_45
+  - first:
+      213: 4445583116199428589
+    second: leech_mother_46
+  - first:
+      213: 2656981960259777256
+    second: leech_mother_47
+  - first:
+      213: 5649439783426859305
+    second: leech_mother_48
+  - first:
+      213: 1050576247872471935
+    second: leech_mother_49
+  - first:
+      213: 6670849917664710705
+    second: leech_mother_50
+  - first:
+      213: 8514705386809282420
+    second: leech_mother_51
+  - first:
+      213: -6683202093011880160
+    second: leech_mother_52
+  - first:
+      213: -8082287375157648177
+    second: leech_mother_53
+  - first:
+      213: 8277470751512457627
+    second: leech_mother_54
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: leech_mother_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c1824e4e0e7442e0800000000000000
+      internalID: -2142448922813890105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 327
+        width: 23
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc7f923460af87550800000000000000
+      internalID: 6158947395232724943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 327
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a64be4d38948aa70800000000000000
+      internalID: 8838395099276330658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_3
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 328
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05f01525a91544830800000000000000
+      internalID: 4054455287788146512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_4
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84cb5c41418831c70800000000000000
+      internalID: 8940639305089793096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_5
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 265
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 644e06b6937de0090800000000000000
+      internalID: -8066273240959359930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_6
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 265
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ec6e0cc5af9e72d0800000000000000
+      internalID: -3279007944237224735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_7
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 264
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f08f4274450d079a0800000000000000
+      internalID: -6237256423518701553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_8
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 265
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4367fde6a752c260800000000000000
+      internalID: 7116346735667405643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_9
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 265
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 448c5a87687264410800000000000000
+      internalID: 1460898587631536196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 201
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b937670640b42610800000000000000
+      internalID: 1595593982814402992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_11
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 201
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22a1c710a4b4968e0800000000000000
+      internalID: -1699744603131078110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_12
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 202
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef9694f5d8005e660800000000000000
+      internalID: 7414332968724425214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_13
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 202
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1807ee8ce54c269b0800000000000000
+      internalID: -5088288717598199679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_14
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 139
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7ca01ecd702419c0800000000000000
+      internalID: -3957502447851623297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_15
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 72
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65525ec7095775ef0800000000000000
+      internalID: -119497601670896298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_16
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 72
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f68b29b8ed3d8f50800000000000000
+      internalID: 6885227475067700985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 11
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efe06b84658a53f30800000000000000
+      internalID: 4554731686695669502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_18
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 27
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c606dd85c676f2d50800000000000000
+      internalID: 6714699284477730924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_19
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 32
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6027b4f55eaf102f0800000000000000
+      internalID: -1008248978501045754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_20
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 33
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10304e778398e9e70800000000000000
+      internalID: 9123880770721809153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_21
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 30
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7aeb231663d639c0800000000000000
+      internalID: -3947735587981890950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_22
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 32
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb90d69fc9988f350800000000000000
+      internalID: 6050737406664837563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67c8e3656d1c8e720800000000000000
+      internalID: 2875761488390163574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_24
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 29
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d4f49f617590ff40800000000000000
+      internalID: 5760268237842740439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_25
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 28
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e540cf7cda2a06a0800000000000000
+      internalID: -6482321587121928736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_26
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 28
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8a61e732510f8e80800000000000000
+      internalID: -8174313346017695094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_27
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 18
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41c0bf8209317e70800000000000000
+      internalID: 9111126204310667597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_28
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 22
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83463b753634d46b0800000000000000
+      internalID: -5310514291647749064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_29
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 25
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b16a3d510d36aab10800000000000000
+      internalID: 1993515530435405339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_30
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 19
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ee25bbf9777c1890800000000000000
+      internalID: -7485977114798903580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_31
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 21
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13121448c279e3b30800000000000000
+      internalID: 4269015714247024945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_32
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 25
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b86726a7682d2d10800000000000000
+      internalID: 2102381026686232752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_33
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 22
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53fe1a15ffeb6d520800000000000000
+      internalID: 2726576628214918965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_34
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 22
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15b87eb7aed9ba850800000000000000
+      internalID: 6389374126781860689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_35
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 8
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2720cf3a831ab960800000000000000
+      internalID: 7618423204146587439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_36
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 17
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0da2899684173d80800000000000000
+      internalID: -8271119622308975348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_37
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 14
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40ead282d52116290800000000000000
+      internalID: -7899012080115798524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_38
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 7
+        width: 18
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f502ade7982b25c60800000000000000
+      internalID: 7805497407794978911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_39
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 13
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f4b2691a3f1cbf70800000000000000
+      internalID: 9204266072832914681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_40
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 6
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81731f08cfb052dc0800000000000000
+      internalID: -3664509542673074408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_41
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9171f2de2eca72040800000000000000
+      internalID: 4622853633160976153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_42
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 7
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21f3f4ef4ae806090800000000000000
+      internalID: -8043272095191318766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_43
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 6
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6baf9dd99ee8c7700800000000000000
+      internalID: 539463189404449462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_44
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 18
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b7283680646c1990800000000000000
+      internalID: -7413940520827213900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_45
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 13
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7480cba1b588df8e0800000000000000
+      internalID: -1658019162930542521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_46
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 6
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de18a8c5a42e1bd30800000000000000
+      internalID: 4445583116199428589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_47
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 7
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e2b7ebf30f7fd420800000000000000
+      internalID: 2656981960259777256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_48
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9212e1f0d87d66e40800000000000000
+      internalID: 5649439783426859305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_49
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f73c6eff785649e00800000000000000
+      internalID: 1050576247872471935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_50
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 7
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 130595c08ae939c50800000000000000
+      internalID: 6670849917664710705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_51
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 7
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47f4fdbbf6f4a2670800000000000000
+      internalID: 8514705386809282420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_52
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 5
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02731e30b1f7043a0800000000000000
+      internalID: -6683202093011880160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_53
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc4aa1f3472f5df80800000000000000
+      internalID: -8082287375157648177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leech_mother_54
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 7
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b91f596eacb7fd270800000000000000
+      internalID: 8277470751512457627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      leech_mother_0: -2142448922813890105
+      leech_mother_1: 6158947395232724943
+      leech_mother_10: 1595593982814402992
+      leech_mother_11: -1699744603131078110
+      leech_mother_12: 7414332968724425214
+      leech_mother_13: -5088288717598199679
+      leech_mother_14: -3957502447851623297
+      leech_mother_15: -119497601670896298
+      leech_mother_16: 6885227475067700985
+      leech_mother_17: 4554731686695669502
+      leech_mother_18: 6714699284477730924
+      leech_mother_19: -1008248978501045754
+      leech_mother_2: 8838395099276330658
+      leech_mother_20: 9123880770721809153
+      leech_mother_21: -3947735587981890950
+      leech_mother_22: 6050737406664837563
+      leech_mother_23: 2875761488390163574
+      leech_mother_24: 5760268237842740439
+      leech_mother_25: -6482321587121928736
+      leech_mother_26: -8174313346017695094
+      leech_mother_27: 9111126204310667597
+      leech_mother_28: -5310514291647749064
+      leech_mother_29: 1993515530435405339
+      leech_mother_3: 4054455287788146512
+      leech_mother_30: -7485977114798903580
+      leech_mother_31: 4269015714247024945
+      leech_mother_32: 2102381026686232752
+      leech_mother_33: 2726576628214918965
+      leech_mother_34: 6389374126781860689
+      leech_mother_35: 7618423204146587439
+      leech_mother_36: -8271119622308975348
+      leech_mother_37: -7899012080115798524
+      leech_mother_38: 7805497407794978911
+      leech_mother_39: 9204266072832914681
+      leech_mother_4: 8940639305089793096
+      leech_mother_40: -3664509542673074408
+      leech_mother_41: 4622853633160976153
+      leech_mother_42: -8043272095191318766
+      leech_mother_43: 539463189404449462
+      leech_mother_44: -7413940520827213900
+      leech_mother_45: -1658019162930542521
+      leech_mother_46: 4445583116199428589
+      leech_mother_47: 2656981960259777256
+      leech_mother_48: 5649439783426859305
+      leech_mother_49: 1050576247872471935
+      leech_mother_5: -8066273240959359930
+      leech_mother_50: 6670849917664710705
+      leech_mother_51: 8514705386809282420
+      leech_mother_52: -6683202093011880160
+      leech_mother_53: -8082287375157648177
+      leech_mother_54: 8277470751512457627
+      leech_mother_6: -3279007944237224735
+      leech_mother_7: -6237256423518701553
+      leech_mother_8: 7116346735667405643
+      leech_mother_9: 1460898587631536196
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

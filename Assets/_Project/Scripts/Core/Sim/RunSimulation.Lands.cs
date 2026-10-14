@@ -46,6 +46,7 @@ namespace Game.Core
             _lavaRain = 0f;
             _pools.Clear();
             ResetLords2(); // RunSimulation.Lords2.cs
+            ResetChampions(); // RunSimulation.Champions.cs
         }
 
         // ------------------------------------------------------------------ Choices
@@ -86,6 +87,18 @@ namespace Game.Core
                     return SecondLordAttack(def, distance, n, roomForMinions); // RunSimulation.Lords2.cs
                 case EnemyType.AshenKing:
                     return AshenAttack(distance, n, roomForMinions); // RunSimulation.Heart.cs
+                // The lands' champions (RunSimulation.Champions.cs)
+                case EnemyType.BoneDigger:
+                case EnemyType.IceKnight:
+                    return distance > 3f && n % 2 == 1 ? 1 : 0;     // charges in from afar
+                case EnemyType.TwinAcolyte:
+                    return n % 3 == 2 ? 1 : 0;                      // a circle of blood under the target now and then
+                case EnemyType.ShadeLord:
+                    return distance > 3f ? 0 : n % 2;               // steps in from afar, slashes up close
+                case EnemyType.LeechMother:
+                    return distance > 3f ? 1 : 0;
+                case EnemyType.Bombsmith:
+                    return distance < 2.4f && n % 2 == 0 ? 0 : 1;   // kegs, unless someone is at his anvil
                 case EnemyType.ForgeColossus:
                     // 0 hammer, 1 shockwave, 2 molten spray, 3 charge, 4 summon
                     if (distance < 3f && n % 3 == 0) return 1;

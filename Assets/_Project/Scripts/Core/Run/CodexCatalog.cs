@@ -141,6 +141,19 @@ namespace Game.Core
                     "2匹ずつ現れ、宙を舞う", "火の玉を投げる（線の予兆）"),
                 Monster(EnemyType.SlagBloater, "溶けた鉄で膨れた屍（燃え落ちた鍛冶場）", "離れて倒す。残った溶鉄の上に立たない",
                     "近づくと破裂する（魔物も巻き込む）", "破裂した跡に溶けた鉄が残り、しばらく燃える"),
+                // The lands' champions (RunSimulation.Champions): each guards its land's champion's lair.
+                Monster(EnemyType.BoneDigger, "骨を継ぎ直す墓掘り（朽ちた納骨堂の中ボス）", "倒れたら、骨の山が組み上がる前に叩き壊す",
+                    "倒れると骨の山になり、4秒で立ち上がる（体力は半分）", "骨の山を壊せば二度と立たない。立ち上がるのは一度だけ"),
+                Monster(EnemyType.TwinAcolyte, "祈りを分け合う双子（血塗られた礼拝堂の中ボス）", "片方を倒したら、すぐにもう片方へ。二人を続けて倒す",
+                    "二人で現れる", "片方が倒れても、もう片方が立っていれば4.5秒後に蘇らせる"),
+                Monster(EnemyType.ShadeLord, "影を従える頭領（奈落の玉座の中ボス）", "影の写しは一撃で消える。範囲攻撃でまとめて払う",
+                    "ときどき影を渡って姿を消し、影の写しを2体残す", "写しも斬りかかってくるが、6秒で消える"),
+                Monster(EnemyType.LeechMother, "水に棲む蛭の母（水没した地下墓地の中ボス）", "水から引きずり出してから叩く",
+                    "水の中では少しずつ回復する", "水の中では受けるダメージが半分になる"),
+                Monster(EnemyType.IceKnight, "氷の殻をまとう騎士（凍てつく霊廟の中ボス）", "手数の多い攻撃で殻を割り、割れた間に大技を",
+                    "氷の殻が攻撃のほとんどを防ぐ", "6回叩くと殻が割れてよろめき、7秒のあいだ攻撃が通る。殻はまた張り直す"),
+                Monster(EnemyType.Bombsmith, "火薬を投げる鍛冶師（燃え落ちた鍛冶場の中ボス）", "投げられた樽から離れ、鍛冶師を爆発に巻き込む",
+                    "火の付いた樽を皆の足元へ投げる（円の予兆）", "樽は少しして爆ぜる。叩けばすぐ爆ぜる。爆発は鍛冶師にも大きく効く"),
                 new()
                 {
                     Id = "enemy:Elite", Section = CodexSection.Monsters, Name = "精鋭", Sub = "大きく、強く、光る個体", Sheet = "dread_knight",
@@ -394,6 +407,9 @@ namespace Game.Core
             EnemyType.QuenchCistern => MonsterId(EnemyType.ForgeColossus),
             EnemyType.Coffin => MonsterId(EnemyType.GraveReaper),
             EnemyType.ChainPost => MonsterId(EnemyType.Executioner),
+            EnemyType.BonePile => MonsterId(EnemyType.BoneDigger),
+            EnemyType.ShadeDecoy => MonsterId(EnemyType.ShadeLord),
+            EnemyType.LitKeg => MonsterId(EnemyType.Bombsmith),
             _ => MonsterId(t),
         };
     }

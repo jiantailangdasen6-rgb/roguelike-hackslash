@@ -193,6 +193,7 @@ namespace Game.Core
             if (room.Objective == RoomObjective.Boss)
             {
                 room.SpawnTimer = 12f;
+                GatherIntoHall(room); // the gates close behind the whole team
                 SplitBossWoke();
                 ResetBossTrials();
                 Vector2 at = room.Center + new Vector2(0f, 3f);
@@ -350,6 +351,40 @@ namespace Game.Core
 
             BossDoorOpen = true;
             Events.Add(new SimEvent(SimEventType.DoorOpened) { Int = 0, Pos = spot });
+        }
+
+        /// <summary>The host's view of a door (as RunDirector.DoorOpen on the peers): the boss door, a sealed room, the lord's hall in a fight.</summary>
+        public bool DoorOpen(MapRoom from, MapRoom to)
+        {
+            if (to == null) return false;
+            if (to.Kind == RoomKind.Boss && !BossDoorOpen) return false;
+            if (to.Sealed && !RoomStates[to.Id].Unlocked) return false;
+            if (from.Kind == RoomKind.Boss && RoomStates[from.Id].Fighting) return false;
+            return true;
+        }
+
+        /// <summary>A corridor is open when the doors at both of its ends are.</summary>
+        public bool CorridorOpen(Corridor c) => DoorOpen(Map[c.A], Map[c.B]) && DoorOpen(Map[c.B], Map[c.A]);
+
+        /// <summary>
+        /// The lord's hall shuts when the fight begins: whoever of the living is not inside yet (still in the campfire or
+        /// the corridor) is brought in, so nobody is shut out of it.
+        /// </summary>
+        private void GatherIntoHall(RoomState hall)
+        {
+            var boss = Map[hall.Id];
+            int dir = -1;
+            for (int d = 0; d < 4; d++) if (boss.Neighbor[d] == Map.Campfire.Id) dir = d;
+            if (dir < 0) return;
+            Vector2 entry = DungeonMap.EntryPoint(boss, dir);
+            for (int i = 0; i < Players.Count; i++)
+            {
+                var p = Players[i];
+                if (!p.Alive || p.RoomId == hall.Id || hall.Bounds.Contains(p.Position)) continue;
+                p.Position = entry + new Vector2((i - 1) * 0.9f, 0f) - (Vector2)Dir.Step(dir) * 0.6f;
+                p.RoomId = hall.Id;
+                Events.Add(new SimEvent(SimEventType.Teleport) { ClientId = p.ClientId, Pos = p.Position });
+            }
         }
 
         /// <summary>Which way the team is gathering in after the lord (-1 none).</summary>

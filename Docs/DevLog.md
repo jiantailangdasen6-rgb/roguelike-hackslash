@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 5c91ca86（第3段階「物語と本当の結末」まで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 29b0ddaf（第5段階「地続きの迷宮」まで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
@@ -488,7 +488,14 @@
   - 描画は階層の全部屋を一度に（`ArenaView.Map.cs`：土地の見た目を部屋ごとに複製して通路の所の壁を開け、通路はタイルで敷き、壁に燭台）。カメラの外の灯りは消す（`CullLights`）。**まだ誰も入っていない部屋は暗く沈み**、入ると明るくなる
   - カメラは部屋ごとの切り替えをやめ、地図全体の外枠の中でプレイヤーを追う（`CameraTarget`）。ボットは通路を通って次の部屋へ
   - 撮影用：`-overview <大きさ>`（カメラを引いて地図全体を撮る）
-  - 公開：ブラウザ版・Windows版 ver 964d3da9（NetTest・CrossTest 合格、EditMode 224件）。次は C（魔物の追い方・通路での戦い方の調整）→ D（仕上げ）
+  - 公開：ブラウザ版・Windows版 ver 964d3da9（NetTest・CrossTest 合格、EditMode 224件）
+- **C+D（第2回の公開）**：
+  - 魔物は自分の部屋の開いた通路を**5マスまで**追ってくる（`DungeonMap.Leash`、`RunSimulation.LeashDepth`）。通路に逃げて安全に撃つ戦い方を防ぐ。主の間は追わない
+  - 通路の中でも弾が飛ぶ（以前は部屋の外に出た弾は消えていた、`DungeonMap.InCorridor`）
+  - 主の戦いが始まると、まだ外（焚き火の間・通路）にいる生きた仲間を主の間へ引き入れてから格子が下りる（`GatherIntoHall`。以前は扉で瞬間移動していたので遅れても入れた）
+  - 通路に土地ごとの小物（骨・壺・雪・鉱滓・茸・紙）を散らす。説明文（図鑑・最初の案内）を「通路を歩いて隣の部屋へ」に
+  - ホスト側にも扉と通路の判定（`RunSimulation.DoorOpen/CorridorOpen`）。テスト：`SeamlessTests`（通路・壁・弾・追跡・主の間）
+  - 公開：ブラウザ版・Windows版 ver 29b0ddaf（NetTest・OnlineTest（停止あり）・CrossTest 合格、EditMode 227件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

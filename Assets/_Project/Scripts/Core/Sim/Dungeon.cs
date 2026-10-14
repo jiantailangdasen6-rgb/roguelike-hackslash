@@ -144,6 +144,42 @@ namespace Game.Core
             return false;
         }
 
+        /// <summary>Inside any corridor (shots fly down them).</summary>
+        public bool InCorridor(Vector2 p, float margin = 0.3f)
+        {
+            foreach (var c in Corridors)
+            {
+                var k = c.Rect;
+                if (p.x >= k.xMin - margin && p.x <= k.xMax + margin && p.y >= k.yMin - margin && p.y <= k.yMax + margin) return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// How far a monster of <paramref name="room"/> may follow into one of its open corridors (the first
+        /// <paramref name="depth"/> units past the doorway): the point kept within that stretch, or null when the point is
+        /// not in one of them.
+        /// </summary>
+        public Vector2? Leash(MapRoom room, Vector2 p, float r, float depth, System.Func<Corridor, bool> open)
+        {
+            var b = room.Bounds;
+            foreach (var c in Corridors)
+            {
+                if ((c.A != room.Id && c.B != room.Id) || !open(c)) continue;
+                var k = c.Rect;
+                Rect band;
+                if (c.Vertical)
+                    band = c.A == room.Id ? new Rect(k.xMin, b.yMax - 1f, k.width, depth + 1f) : new Rect(k.xMin, b.yMin - depth, k.width, depth + 1f);
+                else
+                    band = c.A == room.Id ? new Rect(b.xMax - 1f, k.yMin, depth + 1f, k.height) : new Rect(b.xMin - depth, k.yMin, depth + 1f, k.height);
+                if (!band.Contains(p)) continue;
+                return c.Vertical
+                    ? new Vector2(Mathf.Clamp(p.x, band.xMin + r, band.xMax - r), p.y)
+                    : new Vector2(p.x, Mathf.Clamp(p.y, band.yMin + r, band.yMax - r));
+            }
+            return null;
+        }
+
         /// <summary>A step from <paramref name="from"/> toward <paramref name="to"/> that stays where one can stand (sliding along walls).</summary>
         public Vector2 Step(Vector2 from, Vector2 to, float r, System.Func<Corridor, bool> open, System.Func<MapRoom, Rect> floor)
         {

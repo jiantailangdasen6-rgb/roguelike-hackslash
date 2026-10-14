@@ -28,6 +28,9 @@ namespace Game.Gameplay
             "fx_candle", "fx_candle_red", "fx_candle_soul", "fx_candle_teal", "fx_candle_ice", "fx_candle_ember", "fx_candle_red", "fx_candle_spore", "fx_candle_violet",
         };
 
+        /// <summary>Each land's floor litter (the sheets PrototypeBuilder scatters along its walls).</summary>
+        private static readonly string[] ScatterOf = { "bones", "bones", "bones_2", "urns_3", "snow_4", "slag_5", "bones_2", "shrooms_7", "papers_8" };
+
         private void BuildMap(DungeonMap map, RunDirector director)
         {
             foreach (var go in _spawned) Destroy(go);
@@ -172,12 +175,29 @@ namespace Game.Gameplay
             string candle = CandleOf[Mathf.Clamp(_area, 0, CandleOf.Length - 1)];
             var torch = LandLook.Torch((Biome)Mathf.Max(0, _area));
 
+            // The land's litter is one of the look's own decorations (environment sprites, not sheets): borrow its picture.
+            string scatter = ScatterOf[Mathf.Clamp(_area, 0, ScatterOf.Length - 1)];
+            Sprite litterSprite = null;
+            var decorRoot = template.Find("Decor");
+            if (decorRoot != null)
+                foreach (Transform child in decorRoot)
+                    if (child.name == scatter && child.TryGetComponent<SpriteRenderer>(out var sr)) { litterSprite = sr.sprite; break; }
             foreach (var c in map.Corridors)
             {
                 var a = map[c.A];
                 var b = map[c.B];
                 if (hidden(a) || hidden(b)) continue;
                 int ox = Mathf.RoundToInt(a.Origin.x), oy = Mathf.RoundToInt(a.Origin.y);
+                // A little of the land's litter along the way (bones, urns, snow, slag, toadstools, pages).
+                for (int k = 0, n = litterSprite != null ? rng.Range(1, 3) : 0; k < n; k++)
+                {
+                    float along = rng.Range(0.2f, 0.8f), side = rng.Chance(0.5f) ? -1f : 1f;
+                    Vector2 at = c.Vertical
+                        ? new Vector2(ox + side * (Gap - 0.7f), Mathf.Lerp(c.Rect.yMin, c.Rect.yMax, along))
+                        : new Vector2(Mathf.Lerp(c.Rect.xMin, c.Rect.xMax, along), oy + side * (Gap - 0.8f));
+                    var litter = Sprite("Litter", litterSprite, at, -950);
+                    litter.flipX = rng.Chance(0.5f);
+                }
                 if (c.Vertical)
                 {
                     int y0 = oy + 11, y1 = Mathf.RoundToInt(b.Origin.y) - 10;

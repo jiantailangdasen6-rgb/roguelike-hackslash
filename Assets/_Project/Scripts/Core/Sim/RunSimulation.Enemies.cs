@@ -100,8 +100,14 @@ namespace Game.Core
             }
         }
 
+        /// <summary>How far monsters follow someone out of their room down a corridor (phase 5).</summary>
+        public const float LeashDepth = 5f;
+
         private Vector2 Confine(Vector2 p, float radius, bool flying)
         {
+            // Walkers may chase a little way down an open corridor of their own room, then no further.
+            if (!flying && Room.Kind != RoomKind.Boss && Map.Leash(Map[Room.Id], p, radius, LeashDepth, CorridorOpen) is Vector2 chased
+                && ClampToRoom(p, radius) != p) return chased; // only where the room's edge would stop it
             // Flyers may hover over the fallen floor; walkers keep to what is left of it.
             p = flying ? new Vector2(Mathf.Clamp(p.x, Bounds.xMin + radius, Bounds.xMax - radius), Mathf.Clamp(p.y, Bounds.yMin + radius, Bounds.yMax - radius)) : ClampToRoom(p, radius);
             return flying ? p : Arena.Resolve(Layout, p, radius);

@@ -505,7 +505,8 @@ namespace Game.Core
                 // Lobbed flasks sail over cover; everything else stops at it.
                 // Shots stop at the walls of the room they fly in (rooms sit apart on the map).
                 var inRoom = Map.RoomAt(proj.Position, 0f);
-                bool blocked = inRoom == null || (!FliesOver(proj.Kind) && Arena.BlocksShot(inRoom.Layout, proj.Position));
+                bool blocked = inRoom == null ? !Map.InCorridor(proj.Position) // shots fly down the corridors too
+                    : !FliesOver(proj.Kind) && Arena.BlocksShot(inRoom.Layout, proj.Position);
                 if (spent || proj.Life <= 0f || blocked)
                 {
                     if (!proj.Hostile && IsFlask(proj.Kind)) BreakFlask(proj); // RunSimulation.Classes.cs

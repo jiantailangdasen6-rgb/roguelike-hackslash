@@ -11,11 +11,11 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 65e6014b（第2段階「見た目の世代交代」まで。Windows版と同じ版なので一緒に遊べる） |
-| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 65e6014b）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 5c91ca86（第3段階「物語と本当の結末」まで。Windows版と同じ版なので一緒に遊べる） |
+| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
-| テスト | EditMode 189件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
+| テスト | EditMode 193件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
 | 最新コミット | git log を参照（改善案8つと記録のコミットが最新） |
 
 ---
@@ -451,6 +451,7 @@
 - **真の結末**：灰の王が倒れると `RunEnded Int=3`。`UI/EndingView.cs`（黒地に結末の文章が一行ずつ、火の粉、スタッフロール、4秒後から押して飛ばせる）→リザルト「心臓に火を灯した」。実績・称号「灯火を継ぐ者」
 - **拠点の変化**：結末を見たあとは拠点に夜明け（全体の光が暖かく明るい、`-dawn`）。住人のせりふが記憶の数（2・4・6）と結末で増える（6つ）
 - 不具合の修正：部屋数の少ない地図へ移るとき、前の土地の魔物の部屋番号で配列の外を読んでいた（ProcessDeaths）
+- 公開：ブラウザ版・Windows版 ver 5c91ca86（NetTest・CrossTest 合格、EditMode 193件）。次は第4段階 ④ ルーンと武器の種類
 - 撮影用：`-heartopen`（道を開く）・`-heart`（ボットが心臓へ）・`-route ...,heart -startroom 15`（心臓の主の間から）。`Start` の開始位置は深層・心臓まで
 ### Claude が自分の判断で決めたこと（ユーザーが変更可）
 - 2026-10-14（第1段階）：新しい土地3つの名前・色・魔物9体と主3体の名前と数値・試練の中身（水が満ちる／氷の写し身／灼熱）、土地は何層目にも出る（同じ降り道で同じ土地は二度出ない）、道は左右2つ、異変6種の中身、新しい土地の曲は既存曲の加工
@@ -515,7 +516,7 @@
 
 ## 5. 次の候補（ユーザーの感想待ち）
 
-- **大掛かりな変更（6案）を進行中**：第1・第2段階は 2026-10-14 公開済み。次は ① 物語と結末 → ④ ルーンと武器 → ③ 地続きの迷宮 → ⑥ Android とマッチング（2章「大掛かりな変更」）
+- **大掛かりな変更（6案）を進行中**：第1〜第3段階は 2026-10-14 公開済み。次は ④ ルーンと武器 → ③ 地続きの迷宮 → ⑥ Android とマッチング（2章「大掛かりな変更」）
 - **新規案 A〜J は 2026-10-13 にすべて実装済み**（2章「新規案をおすすめ順で全部」）。中身は Claude の判断なので、遊んだ感想で調整する
 - 今週の迷宮のオンラインランキング：Unity Cloud の管理画面で Leaderboards を有効にしてボードを作ってもらえれば、記録を送る処理を足せる
 - 新しい案の候補（未相談）：職業ごとの専用の連携技（死霊術師・聖騎士の組み合わせ技）／深層だけの魔物と主／住人の物語の続き（依頼と連動するイベント）

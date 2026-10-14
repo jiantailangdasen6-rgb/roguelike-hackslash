@@ -25,6 +25,9 @@ namespace Game.Core
         /// <summary>One line for the way-down signs (what waits there).</summary>
         public string Hint;
         public EnemyType Lord;
+        /// <summary>A second lord who may wait at the end instead (each run picks one; null for none).</summary>
+        public EnemyType? AltLord;
+        public EnemyType[] Lords => AltLord.HasValue ? new[] { Lord, AltLord.Value } : new[] { Lord };
         public EnemyType Champion;
         /// <summary>Who comes in its waves, and from which layer on (0 = from the first).</summary>
         public (EnemyType Type, int Weight, int MinLayer)[] Pool;
@@ -41,7 +44,7 @@ namespace Game.Core
         {
             new()
             {
-                Id = Biome.Crypt, Name = "朽ちた納骨堂", Hint = "骸骨の群れと騎士王", Lord = EnemyType.BoneKing, Champion = EnemyType.DreadKnight, Music = "music_crypt",
+                Id = Biome.Crypt, Name = "朽ちた納骨堂", Hint = "骸骨の群れと、二人の主のどちらか", Lord = EnemyType.BoneKing, AltLord = EnemyType.GraveReaper, Champion = EnemyType.DreadKnight, Music = "music_crypt",
                 Pool = new[]
                 {
                     (EnemyType.Skeleton, 38, 0), (EnemyType.SkeletonArcher, 20, 0), (EnemyType.Ghoul, 18, 0), (EnemyType.Bat, 9, 0),
@@ -51,7 +54,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Chapel, Name = "血塗られた礼拝堂", Hint = "狂信者の儀式と血の司教", Lord = EnemyType.BloodBishop, Champion = EnemyType.Ghoul, Music = "music_chapel",
+                Id = Biome.Chapel, Name = "血塗られた礼拝堂", Hint = "狂信者の儀式と、二人の主のどちらか", Lord = EnemyType.BloodBishop, AltLord = EnemyType.ChoirMistress, Champion = EnemyType.Ghoul, Music = "music_chapel",
                 Pool = new[]
                 {
                     (EnemyType.Skeleton, 20, 0), (EnemyType.SkeletonArcher, 15, 0), (EnemyType.Ghoul, 14, 0), (EnemyType.Cultist, 14, 0),
@@ -61,7 +64,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Abyss, Name = "奈落の玉座", Hint = "影と呪いと冥王", Lord = EnemyType.Lich, Champion = EnemyType.Necromancer, Music = "music_abyss",
+                Id = Biome.Abyss, Name = "奈落の玉座", Hint = "影と呪い、二人の主のどちらか", Lord = EnemyType.Lich, AltLord = EnemyType.VoidEye, Champion = EnemyType.Necromancer, Music = "music_abyss",
                 Pool = new[]
                 {
                     (EnemyType.Skeleton, 10, 0), (EnemyType.SkeletonArcher, 12, 0), (EnemyType.Ghoul, 12, 0), (EnemyType.Cultist, 11, 0),
@@ -72,7 +75,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Sunken, Name = "水没した地下墓地", Hint = "溺れた亡者と水底の聖女", Lord = EnemyType.DrownedSaint, Champion = EnemyType.Drowned, Music = "music_sunken",
+                Id = Biome.Sunken, Name = "水没した地下墓地", Hint = "溺れた亡者と、二人の主のどちらか", Lord = EnemyType.DrownedSaint, AltLord = EnemyType.GreatCrab, Champion = EnemyType.Drowned, Music = "music_sunken",
                 Pool = new[]
                 {
                     (EnemyType.Drowned, 28, 0), (EnemyType.CarrionCrab, 16, 0), (EnemyType.TideWitch, 12, 0), (EnemyType.Skeleton, 14, 0),
@@ -82,7 +85,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Frost, Name = "凍てつく霊廟", Hint = "雪狼の群れと凍てつく女王", Lord = EnemyType.FrostQueen, Champion = EnemyType.Icebound, Music = "music_frost",
+                Id = Biome.Frost, Name = "凍てつく霊廟", Hint = "雪狼の群れと、二人の主のどちらか", Lord = EnemyType.FrostQueen, AltLord = EnemyType.GreatWolf, Champion = EnemyType.Icebound, Music = "music_frost",
                 Pool = new[]
                 {
                     (EnemyType.FrostWolf, 18, 0), (EnemyType.Icebound, 18, 0), (EnemyType.FrostWitch, 12, 0), (EnemyType.Skeleton, 14, 0),
@@ -92,7 +95,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Forge, Name = "燃え落ちた鍛冶場", Hint = "鉄の番兵と炉の巨人", Lord = EnemyType.ForgeColossus, Champion = EnemyType.IronSentinel, Music = "music_forge",
+                Id = Biome.Forge, Name = "燃え落ちた鍛冶場", Hint = "鉄の番兵と、二人の主のどちらか", Lord = EnemyType.ForgeColossus, AltLord = EnemyType.Executioner, Champion = EnemyType.IronSentinel, Music = "music_forge",
                 Pool = new[]
                 {
                     (EnemyType.IronSentinel, 12, 0), (EnemyType.FireImp, 16, 0), (EnemyType.SlagBloater, 14, 0), (EnemyType.Skeleton, 16, 0),
@@ -127,7 +130,7 @@ namespace Game.Core
         /// <summary>The land whose lord this is (the crypt for anything else).</summary>
         public static Biome OfLord(EnemyType lord)
         {
-            foreach (var b in All) if (b.Lord == lord) return b.Id;
+            foreach (var b in All) if (b.Lord == lord || b.AltLord == lord) return b.Id;
             return Biome.Crypt;
         }
 

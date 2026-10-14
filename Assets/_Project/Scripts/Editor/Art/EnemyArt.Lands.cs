@@ -240,6 +240,35 @@ namespace Game.EditorTools.Art
         public static List<Clip> SlagBloater() => Swapped(Bloater,
             (Palette.Pustule, Molten), (Palette.Flesh, Charcoal), (KnightArmor, IronDark), (Palette.DarkSteel, IronDark), (Palette.Toxic, EmberGlow), (Palette.Rag, Soot));
 
+        // ------------------------------------------------------------------ Second lords (palette changes of other frames, drawn larger)
+
+        private static readonly PixelMaterial ReaperRobe = R("#08070a", "#121016", "#1c1922", "#292431", "#3a3445");
+        private static readonly PixelMaterial PaleGreen = new("#b8ffb0");
+        private static readonly PixelMaterial ChoirRobe = R("#3a3530", "#6b645a", "#a49c8e", "#d4ccbc", "#f4efe2");
+        private static readonly PixelMaterial VoidLid = R("#07040b", "#110a1a", "#1d1230", "#2c1c48", "#3e2a63");
+        private static readonly PixelMaterial CrabShell = R("#1c0806", "#3a120c", "#5e1e12", "#86301c", "#b04a2a");
+        private static readonly PixelMaterial CrabClaw = R("#24100a", "#4a2214", "#723a22", "#9a5634", "#c87a4c");
+        private static readonly PixelMaterial WolfFur = R("#3a4250", "#6a7486", "#9ea8ba", "#cad2de", "#eef2f8");
+        private static readonly PixelMaterial WolfRuff = R("#5a6478", "#8a96aa", "#bcc6d6", "#e2e8f0", "#ffffff");
+        private static readonly PixelMaterial BlackIron = R("#09090b", "#141418", "#202026", "#2e2e36", "#42424c");
+
+        public static List<Clip> GraveReaper() => Swapped(Necromancer,
+            (Palette.Robe, ReaperRobe), (Palette.Grave, ReaperRobe), (Palette.Hood, ReaperRobe), (Palette.Soul, PaleGreen), (Palette.Violet, ReaperRobe), (Palette.Gold, Palette.Bone));
+
+        public static List<Clip> ChoirMistress() => Swapped(BloodBishop,
+            (Palette.Crimson, ChoirRobe), (Palette.Red, Palette.Gold), (Palette.CultRobe, ChoirRobe), (Palette.Gem, PaleSilver), (Palette.EyeRed, EmberGlow));
+
+        public static List<Clip> VoidEye() => Swapped(AbyssEye, (Palette.Violet, VoidLid), (Palette.Ivory, R("#2a2418", "#4e4430", "#7a6c4a", "#a8966a", "#d4c08e")));
+
+        public static List<Clip> GreatCrab() => Swapped(CarrionCrab,
+            (R("#140e0c", "#2c1c16", "#4a3022", "#6e4a32", "#94684a"), CrabShell), (R("#1c1410", "#3a2a1e", "#5e442e", "#866248", "#b08a66"), CrabClaw));
+
+        public static List<Clip> GreatWolf() => Swapped(FrostWolf,
+            (R("#1a1e26", "#323a48", "#4e5a6c", "#76849a", "#a8b6c8"), WolfFur), (R("#3a4456", "#5a6880", "#7e8ea6", "#a8b8cc", "#dce6f2"), WolfRuff));
+
+        public static List<Clip> Executioner() => Swapped(DreadKnight,
+            (KnightArmor, BlackIron), (Palette.DarkSteel, BlackIron), (Palette.Steel, BlackIron), (Palette.Grave, Palette.Crimson), (Palette.Leather, Palette.Crimson));
+
         /// <summary>The Ashen King: the Lich's frame in ash and embers, a crown of gold gone to cinders.</summary>
         public static List<Clip> AshenKing() => Swapped(Lich,
             (Palette.Robe, Soot), (Palette.Violet, Charcoal), (Palette.Gold, Brass), (Palette.Bone, Charcoal), (Palette.Soul, EmberGlow),

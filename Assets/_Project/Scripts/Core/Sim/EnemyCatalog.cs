@@ -56,6 +56,15 @@ namespace Game.Core
         Urn,            // a burial urn: smash it, sometimes souls spill out
         // The heart of the labyrinth (round 8)
         AshenKing,      // the last lord: the six lords' moves and trials, in turn
+        // Each land's second lord (round 9) and their trial objects
+        GraveReaper,    // crypt: hides in one of the coffins
+        ChoirMistress,  // chapel: sweeping beams of holy light
+        VoidEye,        // abyss: a gaze that only pillars stop
+        GreatCrab,      // sunken: a shell only a powder keg cracks
+        GreatWolf,      // frost: charges the marked one; lure it into a pillar
+        Executioner,    // forge: rows of falling blades; break the chain posts
+        Coffin,         // the reaper's coffins (one holds him)
+        ChainPost,      // the executioner's chain posts
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -495,6 +504,90 @@ namespace Game.Core
                     new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 10f, SizeB = 1.8f, Range = 10f, Windup = 1.0f, Recover = 1.0f, Damage = 30f, ProjectileSpeed = 18f },
                     new EnemyAttack { Kind = AttackKind.Cage, Shape = AttackShape.Circle, SizeA = 1.15f, Range = 99f, Windup = 1.0f, Recover = 0.5f },
                 },
+            },
+
+            // ---------------------------------------------------------------- Second lords (RunSimulation.Lords2)
+            new()
+            {
+                Type = EnemyType.GraveReaper, Name = "墓守の大鎌", Title = "朽ちた納骨堂の主", Sheet = "grave_reaper", Health = 2600f, Speed = 2.0f, Radius = 0.8f, Xp = 40,
+                AttackCooldown = 0.9f, Boss = true, Flying = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 3.6f, SizeB = 160f, Range = 3f, Windup = 0.8f, Recover = 0.7f, Damage = 28f },
+                    new EnemyAttack { Kind = AttackKind.Blink, Shape = AttackShape.Circle, SizeA = 2.2f, Range = 99f, Windup = 0.9f, Recover = 0.7f, Damage = 24f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.6f, Range = 99f, Windup = 1.2f, Recover = 0.6f, Damage = 22f, Extra = 2 },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 3, Summon1 = EnemyType.Skeleton, Summon2 = EnemyType.Ghoul },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.ChoirMistress, Name = "堕ちた聖歌隊長", Title = "血塗られた礼拝堂の主", Sheet = "choir_mistress", Health = 2700f, Speed = 1.5f, Radius = 0.8f, Xp = 50,
+                PreferredDistance = 5.5f, AttackCooldown = 0.95f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 12f, SizeB = 0.5f, Range = 13f, Windup = 0.8f, Recover = 0.6f, Damage = 14f, ProjectileSpeed = 9f, Projectile = ProjectileKind.BloodOrb, Count = 7, Spread = 80f },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Line, SizeA = 10f, SizeB = 1.2f, Range = 10f, Windup = 0.9f, Recover = 0.7f, Damage = 26f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 2.0f, Range = 99f, Windup = 1.2f, Recover = 0.7f, Damage = 22f, Extra = 2 },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.Cultist, Summon2 = EnemyType.Flagellant },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.VoidEye, Name = "虚ろの眼", Title = "奈落の玉座の主", Sheet = "void_eye", Health = 2800f, Speed = 1.2f, Radius = 1.0f, Xp = 60,
+                PreferredDistance = 6f, AttackCooldown = 0.95f, Boss = true, Flying = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.SelfCircle, SizeA = 2.4f, Range = 99f, Windup = 1.0f, Recover = 0.7f, Damage = 15f, ProjectileSpeed = 6.5f, Projectile = ProjectileKind.SoulOrb, Count = 14, Spread = 360f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.6f, Range = 99f, Windup = 1.2f, Recover = 0.6f, Damage = 24f, Extra = 3 },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Line, SizeA = 12f, SizeB = 1.0f, Range = 12f, Windup = 1.1f, Recover = 0.8f, Damage = 30f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.AbyssEye, Summon2 = EnemyType.ShadeStalker },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.GreatCrab, Name = "沼の大蟹", Title = "水没した地下墓地の主", Sheet = "great_crab", Health = 2700f, Speed = 2.0f, Radius = 1.1f, Xp = 50,
+                AttackCooldown = 0.95f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 3.2f, SizeB = 120f, Range = 2.8f, Windup = 0.8f, Recover = 0.7f, Damage = 28f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 9f, SizeB = 2.0f, Range = 9f, Windup = 0.9f, Recover = 1.0f, Damage = 26f, ProjectileSpeed = 16f },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 11f, SizeB = 0.5f, Range = 11f, Windup = 0.8f, Recover = 0.6f, Damage = 14f, ProjectileSpeed = 8.5f, Projectile = ProjectileKind.WaterOrb, Count = 5, Spread = 50f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.CarrionCrab, Summon2 = EnemyType.Drowned },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.GreatWolf, Name = "白き大狼", Title = "凍てつく霊廟の主", Sheet = "great_wolf", Health = 2600f, Speed = 3.0f, Radius = 1.0f, Xp = 50,
+                AttackCooldown = 0.9f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 3f, SizeB = 100f, Range = 2.6f, Windup = 0.7f, Recover = 0.6f, Damage = 26f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 11f, SizeB = 1.8f, Range = 11f, Windup = 0.9f, Recover = 1.0f, Damage = 28f, ProjectileSpeed = 20f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.6f, Range = 99f, Windup = 1.2f, Recover = 0.6f, Damage = 22f, Extra = 2 },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.FrostWolf, Summon2 = EnemyType.FrostWolf },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Executioner, Name = "鎖の処刑人", Title = "燃え落ちた鍛冶場の主", Sheet = "executioner", Health = 3000f, Speed = 1.6f, Radius = 0.95f, Xp = 60,
+                AttackCooldown = 1.0f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Circle, SizeA = 2.2f, Range = 3.5f, Windup = 1.0f, Recover = 0.8f, Damage = 34f },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 4f, SizeB = 170f, Range = 3.2f, Windup = 1.1f, Recover = 0.9f, Damage = 28f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 8f, SizeB = 1.8f, Range = 8f, Windup = 1.0f, Recover = 1.0f, Damage = 26f, ProjectileSpeed = 16f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.IronSentinel, Summon2 = EnemyType.FireImp },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Coffin, Name = "棺", Sheet = "coffin", Health = 50f, Speed = 0f, Radius = 0.6f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                Type = EnemyType.ChainPost, Name = "鎖の杭", Sheet = "chain_post", Health = 70f, Speed = 0f, Radius = 0.55f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };
 

@@ -45,6 +45,7 @@ namespace Game.Core
             _floodTick = 0f;
             _lavaRain = 0f;
             _pools.Clear();
+            ResetLords2(); // RunSimulation.Lords2.cs
         }
 
         // ------------------------------------------------------------------ Choices
@@ -80,6 +81,9 @@ namespace Game.Core
                         case 3: return 3;
                         default: return roomForMinions ? 4 : 2;
                     }
+                case EnemyType.GraveReaper: case EnemyType.ChoirMistress: case EnemyType.VoidEye:
+                case EnemyType.GreatCrab: case EnemyType.GreatWolf: case EnemyType.Executioner:
+                    return SecondLordAttack(def, distance, n, roomForMinions); // RunSimulation.Lords2.cs
                 case EnemyType.AshenKing:
                     return AshenAttack(distance, n, roomForMinions); // RunSimulation.Heart.cs
                 case EnemyType.ForgeColossus:

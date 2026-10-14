@@ -757,6 +757,7 @@ namespace Game.Core
                     else if (def.Type == EnemyType.Captive) CaptiveFreed(e);
                     else if (def.Type == EnemyType.QuenchCistern) CisternBroken(e); // RunSimulation.Lands.cs
                     else if (def.Type == EnemyType.Urn) UrnBroken(e);
+                    else if (def.Type == EnemyType.Coffin) CoffinBroken(e); // RunSimulation.Lords2.cs
                     continue;
                 }
 

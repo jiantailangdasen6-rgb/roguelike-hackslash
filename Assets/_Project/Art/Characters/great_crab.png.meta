@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: ae38781333c0d184aa884c3465d5203b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2464415155348627920
+    second: great_crab_0
+  - first:
+      213: -637710473363064717
+    second: great_crab_1
+  - first:
+      213: -6485613502968275216
+    second: great_crab_2
+  - first:
+      213: 4679356725044663177
+    second: great_crab_3
+  - first:
+      213: -4480808739986454741
+    second: great_crab_4
+  - first:
+      213: -8859843275337338307
+    second: great_crab_5
+  - first:
+      213: -5615598017333486128
+    second: great_crab_6
+  - first:
+      213: -9127695864930890054
+    second: great_crab_7
+  - first:
+      213: 1138417804439406654
+    second: great_crab_8
+  - first:
+      213: -2205768645337158102
+    second: great_crab_9
+  - first:
+      213: -4177218801598145026
+    second: great_crab_10
+  - first:
+      213: -4780862995617295252
+    second: great_crab_11
+  - first:
+      213: 8410075893900151180
+    second: great_crab_12
+  - first:
+      213: 6443685936923564906
+    second: great_crab_13
+  - first:
+      213: -7994176395663874098
+    second: great_crab_14
+  - first:
+      213: -7291564991751835445
+    second: great_crab_15
+  - first:
+      213: 10441688228465924
+    second: great_crab_16
+  - first:
+      213: 8897237186945351671
+    second: great_crab_17
+  - first:
+      213: -538701138770555572
+    second: great_crab_18
+  - first:
+      213: 8535819199362513245
+    second: great_crab_19
+  - first:
+      213: -2163603086571955784
+    second: great_crab_20
+  - first:
+      213: -4574761952488428515
+    second: great_crab_21
+  - first:
+      213: 441937406824116961
+    second: great_crab_22
+  - first:
+      213: 5367169227854775107
+    second: great_crab_23
+  - first:
+      213: -2408404439542424101
+    second: great_crab_24
+  - first:
+      213: -4401955728326252290
+    second: great_crab_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: great_crab_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 328
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03e1b562973accdd0800000000000000
+      internalID: -2464415155348627920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 329
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 378f5a504b56627f0800000000000000
+      internalID: -637710473363064717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 329
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fe591d91e87ef5a0800000000000000
+      internalID: -6485613502968275216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 328
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9835f9d262a60f040800000000000000
+      internalID: 4679356725044663177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_4
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 327
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2744aaf038f0d1c0800000000000000
+      internalID: -4480808739986454741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_5
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 327
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3272e78b738b0580800000000000000
+      internalID: -8859843275337338307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_6
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 264
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dd137f1b536112b0800000000000000
+      internalID: -5615598017333486128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_7
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 265
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abe0ef0b8f8e35180800000000000000
+      internalID: -9127695864930890054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_8
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 265
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e38479726f87ccf00800000000000000
+      internalID: 1138417804439406654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_9
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 264
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2eebfd8a198361e0800000000000000
+      internalID: -2205768645337158102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_10
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 263
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efdd8adb1a98706c0800000000000000
+      internalID: -4177218801598145026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_11
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 263
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c64db628f66f6adb0800000000000000
+      internalID: -4780862995617295252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_12
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 199
+        width: 30
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c898efd877796b470800000000000000
+      internalID: 8410075893900151180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_13
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 198
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6b528238329c6950800000000000000
+      internalID: 6443685936923564906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_14
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 198
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec764a05ceafe0190800000000000000
+      internalID: -7994176395663874098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_15
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 136
+        width: 34
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc035f9b5482fca90800000000000000
+      internalID: -7291564991751835445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_16
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 137
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40d86bdf8a8152000800000000000000
+      internalID: 10441688228465924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_17
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 136
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fff54af416597b70800000000000000
+      internalID: 8897237186945351671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_18
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 72
+        width: 29
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4d8b7f1b262688f0800000000000000
+      internalID: -538701138770555572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_19
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 73
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5936fc4652557670800000000000000
+      internalID: 8535819199362513245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_20
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 8
+        width: 30
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b990fdb47659f1e0800000000000000
+      internalID: -2163603086571955784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_21
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 4
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1c64f90e3e2380c0800000000000000
+      internalID: -4574761952488428515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_22
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 2
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e275b2eab3122600800000000000000
+      internalID: 441937406824116961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_23
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 0
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34301bbe9f30c7a40800000000000000
+      internalID: 5367169227854775107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_24
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 0
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdd99992ce0a39ed0800000000000000
+      internalID: -2408404439542424101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_25
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 0
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef82e10769c19e2c0800000000000000
+      internalID: -4401955728326252290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      great_crab_0: -2464415155348627920
+      great_crab_1: -637710473363064717
+      great_crab_10: -4177218801598145026
+      great_crab_11: -4780862995617295252
+      great_crab_12: 8410075893900151180
+      great_crab_13: 6443685936923564906
+      great_crab_14: -7994176395663874098
+      great_crab_15: -7291564991751835445
+      great_crab_16: 10441688228465924
+      great_crab_17: 8897237186945351671
+      great_crab_18: -538701138770555572
+      great_crab_19: 8535819199362513245
+      great_crab_2: -6485613502968275216
+      great_crab_20: -2163603086571955784
+      great_crab_21: -4574761952488428515
+      great_crab_22: 441937406824116961
+      great_crab_23: 5367169227854775107
+      great_crab_24: -2408404439542424101
+      great_crab_25: -4401955728326252290
+      great_crab_3: 4679356725044663177
+      great_crab_4: -4480808739986454741
+      great_crab_5: -8859843275337338307
+      great_crab_6: -5615598017333486128
+      great_crab_7: -9127695864930890054
+      great_crab_8: 1138417804439406654
+      great_crab_9: -2205768645337158102
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

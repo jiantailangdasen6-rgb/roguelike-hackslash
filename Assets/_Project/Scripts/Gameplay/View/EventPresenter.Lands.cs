@@ -176,6 +176,9 @@ namespace Game.Gameplay
                     for (int i = 0; i < 10; i++) Shard(e.Pos + Vector2.up * 0.5f, i * 36f + Random.Range(0f, 20f), new Color(0.6f, 0.85f, 1f));
                     Burst("fx_puff", e.Pos + Vector2.up * 0.3f, 10f, 1.6f, new Color(0.7f, 0.85f, 1f, 0.8f));
                     break;
+                default:
+                    Lords2Trial(e); // EventPresenter.Lords2.cs
+                    break;
                 case TrialMoment.CooledDown:
                     ShowCallout(e.Pos + Vector2.up * 3f, "炉の怒り", new Color(1f, 0.5f, 0.2f), 48);
                     break;

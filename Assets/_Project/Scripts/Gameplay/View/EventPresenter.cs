@@ -1045,6 +1045,7 @@ namespace Game.Gameplay
             if (_camera == null) _camera = Camera.main;
             UpdateStains(); // EventPresenter.Remains.cs
             UpdateBossRage();
+            UpdateLords2(); // EventPresenter.Lords2.cs
 
             for (int i = _telegraphs.Count - 1; i >= 0; i--)
             {

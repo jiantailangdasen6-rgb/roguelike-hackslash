@@ -14,6 +14,12 @@ namespace Game.Core
         Flood,        // Drowned Saint, 60% / 30%: the hall floods (it hurts and slows) until its seals are broken
         Mirror,       // Frost Queen, 66% / 33%: two reflections with her face; shatter them while she is warded
         Overheat,     // Forge Colossus, 50%: red-hot and hard to hurt until lured into water from a broken cistern
+        Coffins,      // Grave Reaper, 60% / 30%: hides in one of four coffins (it rattles); the wrong ones let ghouls out
+        Beams,        // Choir Mistress, 66% / 33%: three beams of holy light sweep round the hall; outlast them
+        Gaze,         // Void Eye, 70% / 40%: four gazes at one player each; only a pillar stops them
+        Shell,        // Great Crab, 60% / 30%: shut in its shell until a powder keg bursts by it
+        Hunt,         // Great Wolf, 65% / 30%: marks a player and charges them; lure it into a pillar
+        Rows,         // Executioner, 50%: rows of falling blades across the hall until the three chain posts are broken
     }
 
     /// <summary>Moments of the trials, for the presentation (TrialEvent's Int).</summary>
@@ -44,6 +50,25 @@ namespace Game.Core
         CisternBroken, // Pos = the water left, Value = seconds it stays
         Quenched,      // Pos = boss
         CooledDown,    // Pos = boss (he cooled by himself)
+        CoffinsRise,   // Pos = the boss (gone into a coffin), Value = seconds
+        CoffinRattle,  // Pos = the coffin he hides in
+        CoffinWrong,   // Pos = an empty coffin broken (ghouls)
+        ReaperFound,   // Pos = boss (out of his coffin, reeling)
+        ReaperBursts,  // Pos = boss (too slow)
+        BeamsStart,    // Pos = the centre, Vec = the first beam's direction, Value = seconds, Id = turn speed (degrees/s)
+        BeamsEnd,      // Pos = boss (outlasted: she reels)
+        GazeAim,       // Pos = the eye, ClientId = the one it looks at, Value = seconds
+        GazeFire,      // Pos = where it struck, Id = 1 when a pillar took it
+        GazeEnd,       // Pos = boss (it reels)
+        ShellUp,       // Pos = boss, Value = seconds
+        ShellCracked,  // Pos = boss
+        ShellOpen,     // Pos = boss (too slow: it opens by itself)
+        HuntMark,      // Pos = the marked one, ClientId = them, Value = seconds to the charge
+        HuntCrash,     // Pos = boss (into a pillar)
+        HuntOver,      // Pos = boss (it gave up)
+        RowsStart,     // Pos = boss, Value = seconds
+        RowsBroken,    // Pos = boss
+        RowsSlam,      // Pos = boss (too slow)
     }
 
     /// <summary>
@@ -103,10 +128,11 @@ namespace Game.Core
         public Rect PlayRect => Room.Kind == RoomKind.Boss ? SafeArea(Bounds, CollapseStage) : Bounds;
 
         /// <summary>The boss is warded: hits do nothing.</summary>
-        private bool BossWarded => ActiveTrial is BossTrial.BoneWard or BossTrial.BloodRitual or BossTrial.Phylactery or BossTrial.Mirror;
+        private bool BossWarded => ActiveTrial is BossTrial.BoneWard or BossTrial.BloodRitual or BossTrial.Phylactery or BossTrial.Mirror
+                                   or BossTrial.Coffins or BossTrial.Beams or BossTrial.Rows;
 
         /// <summary>The boss stands still channelling (no attacks).</summary>
-        private bool BossChannelling => ActiveTrial == BossTrial.BloodRitual;
+        private bool BossChannelling => ActiveTrial is BossTrial.BloodRitual or BossTrial.Coffins or BossTrial.Beams or BossTrial.Gaze or BossTrial.Rows;
 
         private void ResetBossTrials()
         {
@@ -185,6 +211,10 @@ namespace Game.Core
                         case EnemyType.FrostQueen:
                             if (Threshold(0, hp, 0.66f) || Threshold(1, hp, 0.33f)) BeginMirrors(b);
                             break;
+                        case EnemyType.GraveReaper: case EnemyType.ChoirMistress: case EnemyType.VoidEye:
+                        case EnemyType.GreatCrab: case EnemyType.GreatWolf: case EnemyType.Executioner:
+                            SecondLordTrials(b, boss.Type, hp); // RunSimulation.Lords2.cs
+                            break;
                         case EnemyType.AshenKing:
                             AshenTrials(b, hp); // RunSimulation.Heart.cs
                             break;
@@ -198,6 +228,10 @@ namespace Game.Core
                     break;
                 case BossTrial.Mirror:
                     StepMirrors(b, dt);
+                    break;
+                case BossTrial.Coffins: case BossTrial.Beams: case BossTrial.Gaze:
+                case BossTrial.Shell: case BossTrial.Hunt: case BossTrial.Rows:
+                    StepSecondLordTrial(b, dt);
                     break;
                 case BossTrial.Overheat:
                     StepOverheat(b, dt);
@@ -512,6 +546,7 @@ namespace Game.Core
             }
             if (_exposed > 0f) damage *= 1f + ExposedBonus;
             if (ActiveTrial == BossTrial.Overheat && e.Def.Boss) damage *= OverheatArmor; // red-hot iron shrugs blows off
+            if (ActiveTrial == BossTrial.Shell && e.Def.Boss) damage *= ShellArmor;       // shut in its shell
             if (e.Type is EnemyType.Lich or EnemyType.AshenKing && e.Health - damage <= 0f)
             {
                 RaisePhylactery(index);

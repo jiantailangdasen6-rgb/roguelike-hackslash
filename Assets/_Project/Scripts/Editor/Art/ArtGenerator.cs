@@ -101,6 +101,14 @@ namespace Game.EditorTools.Art
             Character("quench_cistern", GimmickArt.QuenchCistern(), EnemyArt.FrameSize);
             Character("urn", GimmickArt.Urn(), EnemyArt.FrameSize);
             Character("ashen_king", EnemyArt.AshenKing(), EnemyArt.BossFrameSize);
+            Character("grave_reaper", EnemyArt.GraveReaper(), EnemyArt.FrameSize);
+            Character("choir_mistress", EnemyArt.ChoirMistress(), EnemyArt.BossFrameSize);
+            Character("void_eye", EnemyArt.VoidEye(), EnemyArt.FrameSize);
+            Character("great_crab", EnemyArt.GreatCrab(), EnemyArt.FrameSize);
+            Character("great_wolf", EnemyArt.GreatWolf(), EnemyArt.FrameSize);
+            Character("executioner", EnemyArt.Executioner(), EnemyArt.FrameSize);
+            Character("coffin", GimmickArt.Coffin(), EnemyArt.FrameSize);
+            Character("chain_post", GimmickArt.ChainPost(), EnemyArt.FrameSize);
             Effect("trap_icicle", GimmickArt.Icicle(), "trap_icicle", new Vector2(0.5f, 0.5f));
             Effect("trap_lava", GimmickArt.LavaCrack(), "trap_lava", new Vector2(0f, 0.5f));
 

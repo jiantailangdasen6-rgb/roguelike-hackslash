@@ -65,7 +65,7 @@ namespace Game.Tests
                 var sim = new RunSimulation(seed);
                 sim.UseVariedRoute();
                 firsts.Add(sim.Biome);
-                Assert.AreEqual(BiomeCatalog.Get(sim.Biome).Lord, sim.AreaBoss, $"seed {seed}: the land's own lord");
+                Assert.Contains(sim.AreaBoss, BiomeCatalog.Get(sim.Biome).Lords, $"seed {seed}: one of the land's own lords");
                 Assert.AreEqual(sim.Biome, sim.Map.Biome);
                 Assert.AreNotEqual(sim.Biome, sim.WayLand(0), $"seed {seed}");
                 Assert.AreNotEqual(sim.Biome, sim.WayLand(1), $"seed {seed}");
@@ -90,7 +90,7 @@ namespace Game.Tests
                 var events = Run(sim, RunSimulation.ExitHoldTime + 0.5f, s => { if (s.Area == 0) a.Position = side == 0 ? s.LeftWayPosition : s.ExitPosition; });
                 Assert.AreEqual(1, sim.Area, $"side {side}");
                 Assert.AreEqual(expected, sim.Biome, $"side {side}");
-                Assert.AreEqual(BiomeCatalog.Get(expected).Lord, sim.AreaBoss);
+                Assert.Contains(sim.AreaBoss, BiomeCatalog.Get(expected).Lords);
                 Assert.AreEqual(first, sim.BiomeOf(0), "the route remembers where the team has been");
                 var started = events.First(e => e.Type == SimEventType.RoomStarted);
                 Assert.AreEqual((int)expected, (int)started.Value, "the new area's event carries its land");

@@ -84,14 +84,14 @@ namespace Game.Gameplay
                 {
                     var land = BiomeCatalog.OfLord((EnemyType)e.Int);
                     int bit = Lore.MemoryBit(land);
-                    Codex.Record(Lore.MemoryId(land));
+                    Codex.Record(Lore.MemoryIdOf((EnemyType)e.Int));
                     if (bit == 0 || (profile.memories & bit) != 0) break;
                     profile.memories |= bit;
                     _dirty = true;
                     int count = Lore.Count(profile.memories);
                     HudView.Instance?.Toast(count >= 6
                         ? "<color=#ffd890>六つの記憶がそろった</color>　三つ目の主の先に、迷宮の心臓への道が開く"
-                        : $"<color=#ffd890>{Lore.Get(Lore.MemoryId(land))?.Name}</color>を得た（記憶 {count}/6、図鑑の「記録」）");
+                        : $"<color=#ffd890>{Lore.Get(Lore.MemoryIdOf((EnemyType)e.Int))?.Name}</color>を得た（記憶 {count}/6、図鑑の「記録」）");
                     break;
                 }
                 case SimEventType.RunEnded when e.Int == 3:

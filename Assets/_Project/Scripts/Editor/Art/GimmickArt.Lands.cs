@@ -128,6 +128,78 @@ namespace Game.EditorTools.Art
             return new List<Clip> { idle, Same("walk", idle), Same("windup", idle), Same("strike", idle), hurt, death };
         }
 
+        /// <summary>An upright coffin of black wood bound in iron, a cross on its lid.</summary>
+        public static List<Clip> Coffin()
+        {
+            var m = Palette.With(('a', new PixelMaterial(2, "#0e0a08", "#1c140e", "#2c2016", "#3e2e20", "#54402c")));
+            var box = new PixelPart("coffin", P(5f, 0f), m, 0,
+                "...aaaa...",
+                "..aaaaaa..",
+                ".aaaaaaaa.",
+                "aaaa##aaaa",
+                "aaaa##aaaa",
+                "aa######aa",
+                "aaaa##aaaa",
+                "aaaa##aaaa",
+                "aaaa##aaaa",
+                "#aaaaaaaa#",
+                ".aaaaaaaa.",
+                ".aaaaaaaa.",
+                "..aaaaaa..",
+                "..aaaaaa..",
+                "..#aaaa#..",
+                "...aaaa...");
+            Frame Pose(float shake)
+            {
+                var f = new Frame();
+                f.Add(box, P(32f + shake, 10f), 0f, 4);
+                return f;
+            }
+            var idle = new Clip("idle", 4f, true);
+            idle.Frames.Add(Pose(0f));
+            idle.Frames.Add(Pose(0f));
+            var hurt = new Clip("hurt", 16f, false);
+            hurt.Frames.Add(Pose(1.5f));
+            hurt.Frames.Add(Pose(-1.5f));
+            var plank = new PixelPart("plank", P(1f, 1f), m, 0, "aaa", "a#.");
+            var death = Shatter(new[] { plank, plank, plank, plank }, P(32f, 16f), 5);
+            return new List<Clip> { idle, Same("walk", idle), Same("windup", idle), Same("strike", idle), hurt, death };
+        }
+
+        /// <summary>An iron post driven into the floor, a heavy chain running from it toward the executioner.</summary>
+        public static List<Clip> ChainPost()
+        {
+            var m = Palette.Standard();
+            var post = new PixelPart("post", P(3f, 0f), m, 0,
+                ".##.",
+                "####",
+                ".##.",
+                ".##.",
+                ".##.",
+                ".##.",
+                ".##.",
+                "####",
+                "####",
+                "#zz#",
+                "####");
+            var link = new PixelPart("link", P(1f, 1f), m, 0, ".#.", "#.#", ".#.");
+            Frame Pose(float shake)
+            {
+                var f = new Frame();
+                f.Add(post, P(32f + shake, 10f), 0f, 4);
+                for (int k = 0; k < 4; k++) f.Add(link, P(35f + k * 3f, 18f + k), 0f, 3);
+                return f;
+            }
+            var idle = new Clip("idle", 4f, true);
+            idle.Frames.Add(Pose(0f));
+            idle.Frames.Add(Pose(0f));
+            var hurt = new Clip("hurt", 16f, false);
+            hurt.Frames.Add(Pose(1f));
+            hurt.Frames.Add(Pose(-1f));
+            var death = Shatter(new[] { link, link, link, link }, P(32f, 16f), 5);
+            return new List<Clip> { idle, Same("walk", idle), Same("windup", idle), Same("strike", idle), hurt, death };
+        }
+
         // ------------------------------------------------------------------ Floor traps (ArenaView frames)
 
         /// <summary>Where icicles hang overhead: 0 a ring of frost, 1 cracks spreading (warning), 2 shattered ice.</summary>

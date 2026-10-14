@@ -27,7 +27,7 @@ namespace Game.Core
         public int DeepLayer => Mathf.Max(0, Area - (AreaCount - 1));
 
         /// <summary>Every land has its lord (the deep layers go through the lands again).</summary>
-        private EnemyType LordOf(int area) => BiomeCatalog.Get(BiomeOf(area)).Lord;
+        private EnemyType LordOf(int area) => LordAt(area);
 
         /// <summary>Everyone alive stands within <paramref name="radius"/> of a spot.</summary>
         private bool AllAt(Vector2 spot, float radius)

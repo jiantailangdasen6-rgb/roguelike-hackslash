@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: bd8ace3b4a821de42adadc7ce56dc81e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5268302664894688616
+    second: great_crab_flash_0
+  - first:
+      213: 6513296155130799600
+    second: great_crab_flash_1
+  - first:
+      213: 3242837748607393210
+    second: great_crab_flash_2
+  - first:
+      213: 4080984095041604363
+    second: great_crab_flash_3
+  - first:
+      213: -4516954396805594987
+    second: great_crab_flash_4
+  - first:
+      213: 7963755231029418214
+    second: great_crab_flash_5
+  - first:
+      213: -6526276846168481595
+    second: great_crab_flash_6
+  - first:
+      213: 4246489776170973492
+    second: great_crab_flash_7
+  - first:
+      213: 2544690651471328017
+    second: great_crab_flash_8
+  - first:
+      213: 1149252234610246415
+    second: great_crab_flash_9
+  - first:
+      213: 7822772257214884536
+    second: great_crab_flash_10
+  - first:
+      213: -8139590756990392179
+    second: great_crab_flash_11
+  - first:
+      213: 3299584144522038795
+    second: great_crab_flash_12
+  - first:
+      213: 4625359521935918632
+    second: great_crab_flash_13
+  - first:
+      213: 1367809593289352389
+    second: great_crab_flash_14
+  - first:
+      213: 8440696668830944038
+    second: great_crab_flash_15
+  - first:
+      213: 1494310275700844304
+    second: great_crab_flash_16
+  - first:
+      213: 4980469085203564946
+    second: great_crab_flash_17
+  - first:
+      213: 3446490480910338591
+    second: great_crab_flash_18
+  - first:
+      213: -7871707742210486060
+    second: great_crab_flash_19
+  - first:
+      213: -5334805039158711190
+    second: great_crab_flash_20
+  - first:
+      213: 4871542881635465292
+    second: great_crab_flash_21
+  - first:
+      213: 6380366736490659638
+    second: great_crab_flash_22
+  - first:
+      213: 3803857947174629856
+    second: great_crab_flash_23
+  - first:
+      213: 626040348971584594
+    second: great_crab_flash_24
+  - first:
+      213: 8692637435915961410
+    second: great_crab_flash_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: great_crab_flash_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 328
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89255b193aa33e6b0800000000000000
+      internalID: -5268302664894688616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 329
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f52d7b1850e36a50800000000000000
+      internalID: 6513296155130799600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 329
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abd98f540cfd00d20800000000000000
+      internalID: 3242837748607393210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 328
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0b49f6996192a830800000000000000
+      internalID: 4080984095041604363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_4
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 327
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59083cf68ed8051c0800000000000000
+      internalID: -4516954396805594987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_5
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 327
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e8daa75031f48e60800000000000000
+      internalID: 7963755231029418214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_6
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 264
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c0654e39c10e65a0800000000000000
+      internalID: -6526276846168481595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_7
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 265
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 439bffad3ff8eea30800000000000000
+      internalID: 4246489776170973492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_8
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 265
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 113b4384aae805320800000000000000
+      internalID: 2544690651471328017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_9
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 264
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f03844181d6f2ff00800000000000000
+      internalID: 1149252234610246415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_10
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 263
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bae21ecbe1109c60800000000000000
+      internalID: 7822772257214884536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_11
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 263
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d88e888f45d5a0f80800000000000000
+      internalID: -8139590756990392179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_12
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 199
+        width: 30
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0e4fb82c4a7acd20800000000000000
+      internalID: 3299584144522038795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_13
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 198
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 826067f9af3903040800000000000000
+      internalID: 4625359521935918632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_14
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 198
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c42260049f6bf210800000000000000
+      internalID: 1367809593289352389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_15
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 136
+        width: 34
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62bcd7a46e0632570800000000000000
+      internalID: 8440696668830944038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_16
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 137
+        width: 35
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0176d5f474bdcb410800000000000000
+      internalID: 1494310275700844304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_17
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 136
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2998f5ece3e2e1540800000000000000
+      internalID: 4980469085203564946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_18
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 72
+        width: 29
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1a0d6405d464df20800000000000000
+      internalID: 3446490480910338591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_19
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 73
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d01ad9b38312c290800000000000000
+      internalID: -7871707742210486060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_20
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 8
+        width: 30
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6c2bf6f417f6f5b0800000000000000
+      internalID: -5334805039158711190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_21
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 4
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c48f6f7b0723b9340800000000000000
+      internalID: 4871542881635465292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_22
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 2
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63f7e310ebd9b8850800000000000000
+      internalID: 6380366736490659638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_23
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 0
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e1f36536a40ac430800000000000000
+      internalID: 3803857947174629856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_24
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 0
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25c4387616420b800800000000000000
+      internalID: 626040348971584594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_crab_flash_25
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 0
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 244880141b372a870800000000000000
+      internalID: 8692637435915961410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      great_crab_flash_0: -5268302664894688616
+      great_crab_flash_1: 6513296155130799600
+      great_crab_flash_10: 7822772257214884536
+      great_crab_flash_11: -8139590756990392179
+      great_crab_flash_12: 3299584144522038795
+      great_crab_flash_13: 4625359521935918632
+      great_crab_flash_14: 1367809593289352389
+      great_crab_flash_15: 8440696668830944038
+      great_crab_flash_16: 1494310275700844304
+      great_crab_flash_17: 4980469085203564946
+      great_crab_flash_18: 3446490480910338591
+      great_crab_flash_19: -7871707742210486060
+      great_crab_flash_2: 3242837748607393210
+      great_crab_flash_20: -5334805039158711190
+      great_crab_flash_21: 4871542881635465292
+      great_crab_flash_22: 6380366736490659638
+      great_crab_flash_23: 3803857947174629856
+      great_crab_flash_24: 626040348971584594
+      great_crab_flash_25: 8692637435915961410
+      great_crab_flash_3: 4080984095041604363
+      great_crab_flash_4: -4516954396805594987
+      great_crab_flash_5: 7963755231029418214
+      great_crab_flash_6: -6526276846168481595
+      great_crab_flash_7: 4246489776170973492
+      great_crab_flash_8: 2544690651471328017
+      great_crab_flash_9: 1149252234610246415
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

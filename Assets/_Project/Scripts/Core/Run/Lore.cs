@@ -25,6 +25,9 @@ namespace Game.Core
 
         public static string InscriptionId(Biome land) => "lore:land:" + land;
         public static string MemoryId(Biome land) => "lore:lord:" + land;
+        /// <summary>The memory a lord leaves: each land's first lord its land's, a second lord its own (both count for the land).</summary>
+        public static string MemoryIdOf(EnemyType lord) =>
+            BiomeCatalog.Get(BiomeCatalog.OfLord(lord)).Lord == lord ? MemoryId(BiomeCatalog.OfLord(lord)) : "lore:lord2:" + lord;
         public const string HeartId = "lore:heart";
         public const string EndingId = "lore:ending";
 
@@ -64,6 +67,19 @@ namespace Game.Core
                 "凍らせれば、終わらないと思った。終わらないことは、生きることではなかった。", "氷の外は、まだ春か？"),
             T(MemoryId(Biome.Forge), "巨人の記憶", "炉の巨人", "憶",
                 "炉は割れぬ。俺が打った炉だ。", "だが火は炉にではなく、運ぶ者の手に宿るものだった。……持っていけ。"),
+
+            T("lore:lord2:" + EnemyType.GraveReaper, "大鎌の記憶", "墓守の大鎌", "憶",
+                "私は死者を数える役目だった。数えきれなくなった日、鎌を取った。", "……もう、数えなくていいのか。"),
+            T("lore:lord2:" + EnemyType.ChoirMistress, "聖歌隊長の記憶", "堕ちた聖歌隊長", "憶",
+                "歌えば神に届くと信じていた。届いたのは、迷宮の底の灰の声だけ。", "最後にもう一度、昼の歌を聴かせて。"),
+            T("lore:lord2:" + EnemyType.VoidEye, "見張りの記憶", "虚ろの眼", "憶",
+                "私は宮廷の見張りだった。心臓の火を見つめ続けるうちに、目だけが残った。", "見るのは、もう疲れた。"),
+            T("lore:lord2:" + EnemyType.GreatCrab, "港の守りの記憶", "沼の大蟹", "憶",
+                "港の守り神と呼ばれた。巫女が沈んだ日から、その墓を抱いている。", "殻を割ったのはお前たちか。……巫女に、よろしく。"),
+            T("lore:lord2:" + EnemyType.GreatWolf, "猟犬の記憶", "白き大狼", "憶",
+                "女王の猟犬だった。凍った時の中で、主人の帰りを待ち続けた。", "……もう、待たなくていいのだな。"),
+            T("lore:lord2:" + EnemyType.Executioner, "処刑人の記憶", "鎖の処刑人", "憶",
+                "王の命で、心臓に近づく者を斬ってきた。最後に斬るはずだったのは、王自身だった。", "鎖を解いてくれて、礼を言う。"),
 
             T(HeartId, "迷宮の心臓", "六つの記憶の先", "心",
                 "脈打つ灰の大広間。神の心臓はここで眠り、悪夢を見ている。",

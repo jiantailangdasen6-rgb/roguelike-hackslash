@@ -405,6 +405,12 @@ namespace Game.Gameplay
                 BossTrial.Flood => $"<color=#8affe0>封じの栓を壊して水を引かせろ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 BossTrial.Mirror => $"<color=#bfe4ff>影のない写し身を砕け</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 BossTrial.Overheat => $"<color=#ffb070>水甕を壊し、巨人を水へ誘い込め</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Coffins => $"<color=#d8d0b8>揺れる棺を探して壊せ</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Beams => $"<color=#ffe8a0>回る光の帯を避けて耐えろ</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Gaze => $"<color=#d0a8ff>見つめられたら柱の陰へ</color>　<color=#ffffff>{done}/{total}</color>",
+                BossTrial.Shell => $"<color=#8affe0>火薬樽を大蟹のそばで爆ぜさせろ</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Hunt => $"<color=#bfe4ff>印の付いた者は、突進を柱にぶつけさせろ</color>　<color=#ffffff>{done}/{total}</color>",
+                BossTrial.Rows => $"<color=#ffb070>刃の切れ目を抜けて、鎖の杭を壊せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 _ => "",
             };
         }

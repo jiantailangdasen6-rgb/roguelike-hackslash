@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
+  m_Name: chain_post
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
+  Texture: {fileID: 2800000, guid: 0e2c39b25d678f346a55cd475f4ce292, type: 3}
+  FlashTexture: {fileID: 2800000, guid: c9ae15afd7ff3c845b6ec5714c297e38, type: 3}
+  NormalTexture: {fileID: 2800000, guid: 59c2ebc9e1794744abee79bdaec0fb71, type: 3}
+  FrameWidth: 64
+  FrameHeight: 64
+  Pivot: {x: 0.5, y: 0.15625}
+  PixelsPerUnit: 32
+  Clips:
+  - Name: idle
+    Row: 0
+    Frames: 2
+    Fps: 4
+    Loop: 1
+  - Name: walk
+    Row: 1
+    Frames: 2
+    Fps: 4
+    Loop: 1
+  - Name: windup
+    Row: 2
+    Frames: 2
+    Fps: 4
+    Loop: 1
+  - Name: strike
+    Row: 3
+    Frames: 2
+    Fps: 4
+    Loop: 1
+  - Name: hurt
+    Row: 4
+    Frames: 2
+    Fps: 16
+    Loop: 0
+  - Name: death
+    Row: 5
+    Frames: 5
+    Fps: 12
+    Loop: 0

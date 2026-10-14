@@ -228,6 +228,7 @@ namespace Game.Core
             float r = Arena.KegRadius;
             Events.Add(new SimEvent(SimEventType.HazardFire) { Id = x.Id, Int = (int)GimmickKind.PowderKeg, Pos = x.Position, Size = new Vector2(r, 0f) });
             Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.Explosion, Pos = x.Position, Value = r });
+            KegBurstNearCrab(x.Position); // RunSimulation.Lords2.cs
             foreach (var p in Players)
                 if (p.Alive && (p.Position - x.Position).sqrMagnitude <= (r + SimPlayer.BodyRadius) * (r + SimPlayer.BodyRadius))
                     HurtPlayer(p, Arena.KegDamageToPlayers * EnemyDamageScale);

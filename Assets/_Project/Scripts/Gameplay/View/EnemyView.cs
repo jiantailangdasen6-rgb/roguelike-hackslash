@@ -343,6 +343,10 @@ namespace Game.Gameplay
                     }
                 }
                 if (trial == BossTrial.Phylactery) tint = new Color(0.6f, 0.9f, 1f, 0.4f + 0.1f * Mathf.Sin(Time.time * 8f));
+                if (trial == BossTrial.Coffins) tint.a = 0f;                                  // hidden in a coffin
+                v.Shadow.enabled = trial != BossTrial.Coffins;
+                if (v.Glow != null) v.Glow.enabled = trial != BossTrial.Coffins;
+                if (trial == BossTrial.Shell) tint = Color.Lerp(tint, new Color(0.55f, 0.75f, 0.8f), 0.45f); // shut in its shell
                 if (v.Glow != null && trial == BossTrial.BloodRitual) v.Glow.intensity = 2f + Mathf.Sin(Time.time * 6f) * 0.6f;
                 // Red-hot iron: the colossus glows like a forge while he burns.
                 if (trial == BossTrial.Overheat)
@@ -396,7 +400,7 @@ namespace Game.Gameplay
 
             v.Root.SetActive(true);
             // The lords (and the queen's reflections) stand a head taller than their art: they should loom.
-            v.Root.transform.localScale = Vector3.one * (type == EnemyType.AshenKing ? 1.55f : def.Boss || type == EnemyType.IceMirror ? BossScale : 1f);
+            v.Root.transform.localScale = Vector3.one * ScaleOf(type, def);
             v.Anim = (EnemyAnim)255;
             v.Shadow.enabled = !def.Flat && type != EnemyType.IceMirror; // the queen's reflections cast no shadow
             v.Animator.Renderer.color = Color.white;
@@ -424,6 +428,11 @@ namespace Game.Gameplay
                 switch (def.Type)
                 {
                     case EnemyType.DrownedSaint: case EnemyType.TideWitch: v.Glow.color = new Color(0.35f, 1f, 0.85f); break;
+                    case EnemyType.GraveReaper: v.Glow.color = new Color(0.6f, 1f, 0.55f); break;
+                    case EnemyType.ChoirMistress: v.Glow.color = new Color(1f, 0.9f, 0.55f); break;
+                    case EnemyType.VoidEye: v.Glow.color = new Color(0.7f, 0.35f, 1f); v.Glow.intensity = 0.6f; break;
+                    case EnemyType.GreatCrab: v.Glow.color = new Color(0.4f, 0.95f, 0.85f); break;
+                    case EnemyType.GreatWolf: v.Glow.color = new Color(0.7f, 0.88f, 1f); break;
                     case EnemyType.FrostQueen: case EnemyType.IceMirror: case EnemyType.FrostWitch: v.Glow.color = new Color(0.6f, 0.85f, 1f); break;
                     case EnemyType.ForgeColossus: case EnemyType.FireImp: case EnemyType.SlagBloater: case EnemyType.AshenKing: v.Glow.color = new Color(1f, 0.5f, 0.15f); break;
                 }
@@ -455,6 +464,19 @@ namespace Game.Gameplay
         }
 
         private const float BossScale = 1.3f;
+
+        /// <summary>How big a monster is drawn: lords loom; the second lords made from smaller art more so.</summary>
+        private static float ScaleOf(EnemyType type, EnemyDef def) => type switch
+        {
+            EnemyType.AshenKing => 1.55f,
+            EnemyType.VoidEye => 2.4f,
+            EnemyType.GreatCrab => 2.2f,
+            EnemyType.GreatWolf => 2.0f,
+            EnemyType.Executioner => 1.6f,
+            EnemyType.GraveReaper => 1.45f,
+            EnemyType.Coffin => 1.5f,
+            _ => def.Boss || type == EnemyType.IceMirror ? BossScale : 1f,
+        };
 
         private static SpriteRenderer Child(Transform parent, string name, Sprite sprite, int order, Vector3 offset, float scale)
         {

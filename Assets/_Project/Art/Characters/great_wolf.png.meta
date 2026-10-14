@@ -1,0 +1,782 @@
+fileFormatVersion: 2
+guid: 855bd60297d45554c8e1cc66fe3f4625
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3850047792545843969
+    second: great_wolf_0
+  - first:
+      213: 5321055147287566461
+    second: great_wolf_1
+  - first:
+      213: -8175087927314944280
+    second: great_wolf_2
+  - first:
+      213: -4807774230375781968
+    second: great_wolf_3
+  - first:
+      213: 739298849979526970
+    second: great_wolf_4
+  - first:
+      213: -3374764414434729212
+    second: great_wolf_5
+  - first:
+      213: -5899118918591762384
+    second: great_wolf_6
+  - first:
+      213: -2228379543648000033
+    second: great_wolf_7
+  - first:
+      213: -2665630201733229499
+    second: great_wolf_8
+  - first:
+      213: -6228372270109639881
+    second: great_wolf_9
+  - first:
+      213: -5435861383899027670
+    second: great_wolf_10
+  - first:
+      213: 1418837991558122259
+    second: great_wolf_11
+  - first:
+      213: 4207095034335766470
+    second: great_wolf_12
+  - first:
+      213: -8517549151733385937
+    second: great_wolf_13
+  - first:
+      213: 3058440518865560012
+    second: great_wolf_14
+  - first:
+      213: -7255367453372773990
+    second: great_wolf_15
+  - first:
+      213: -5426821967559424601
+    second: great_wolf_16
+  - first:
+      213: -4494612984947754258
+    second: great_wolf_17
+  - first:
+      213: 1940800179535887887
+    second: great_wolf_18
+  - first:
+      213: 3508340791130077832
+    second: great_wolf_19
+  - first:
+      213: 7732725511315516600
+    second: great_wolf_20
+  - first:
+      213: -4664305076287335222
+    second: great_wolf_21
+  - first:
+      213: -8828496898921562671
+    second: great_wolf_22
+  - first:
+      213: -4353371632147106831
+    second: great_wolf_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: great_wolf_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 328
+        width: 46
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff4370d5ee1e19ac0800000000000000
+      internalID: -3850047792545843969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_1
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 327
+        width: 46
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d78d65cd67f28d940800000000000000
+      internalID: 5321055147287566461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_2
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 328
+        width: 45
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eeeec4f7d04c8e80800000000000000
+      internalID: -8175087927314944280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_3
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 327
+        width: 45
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b9ac266fca574db0800000000000000
+      internalID: -4807774230375781968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 264
+        width: 46
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3f62e71364824a00800000000000000
+      internalID: 739298849979526970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_5
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 266
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4032df435ad6a21d0800000000000000
+      internalID: -3374764414434729212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_6
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 266
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0303d81399e122ea0800000000000000
+      internalID: -5899118918591762384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_7
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 264
+        width: 46
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd72d1c8c943311e0800000000000000
+      internalID: -2228379543648000033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_8
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 266
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54453236477c10bd0800000000000000
+      internalID: -2665630201733229499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_9
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 266
+        width: 46
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73bb83f6b606099a0800000000000000
+      internalID: -6228372270109639881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_10
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 199
+        width: 45
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a276f6c2fd0ff84b0800000000000000
+      internalID: -5435861383899027670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_11
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 197
+        width: 45
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31b86a0d2a9b0b310800000000000000
+      internalID: 1418837991558122259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_12
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 197
+        width: 45
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c7a4e1c4aa926a30800000000000000
+      internalID: 4207095034335766470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_13
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 139
+        width: 45
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f257006ac269bc980800000000000000
+      internalID: -8517549151733385937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_14
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 140
+        width: 43
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc1a4a59273c17a20800000000000000
+      internalID: 3058440518865560012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_15
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 136
+        width: 45
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9909c2edb1cf4b90800000000000000
+      internalID: -7255367453372773990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_16
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 72
+        width: 43
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a5855c4c2e00b4b0800000000000000
+      internalID: -5426821967559424601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_17
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 72
+        width: 45
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeab45dbd4def91c0800000000000000
+      internalID: -4494612984947754258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_18
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 9
+        width: 45
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0e30410b7b1fea10800000000000000
+      internalID: 1940800179535887887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_19
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 7
+        width: 45
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88a325e8c5120b030800000000000000
+      internalID: 3508340791130077832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_20
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 4
+        width: 41
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bcef8ff1e8205b60800000000000000
+      internalID: 7732725511315516600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_21
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 2
+        width: 38
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac497d3ee3f054fb0800000000000000
+      internalID: -4664305076287335222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_22
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 33
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dd742788d0ea7580800000000000000
+      internalID: -8828496898921562671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_wolf_23
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 0
+        width: 26
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f3fb92d097b593c0800000000000000
+      internalID: -4353371632147106831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      great_wolf_0: -3850047792545843969
+      great_wolf_1: 5321055147287566461
+      great_wolf_10: -5435861383899027670
+      great_wolf_11: 1418837991558122259
+      great_wolf_12: 4207095034335766470
+      great_wolf_13: -8517549151733385937
+      great_wolf_14: 3058440518865560012
+      great_wolf_15: -7255367453372773990
+      great_wolf_16: -5426821967559424601
+      great_wolf_17: -4494612984947754258
+      great_wolf_18: 1940800179535887887
+      great_wolf_19: 3508340791130077832
+      great_wolf_2: -8175087927314944280
+      great_wolf_20: 7732725511315516600
+      great_wolf_21: -4664305076287335222
+      great_wolf_22: -8828496898921562671
+      great_wolf_23: -4353371632147106831
+      great_wolf_3: -4807774230375781968
+      great_wolf_4: 739298849979526970
+      great_wolf_5: -3374764414434729212
+      great_wolf_6: -5899118918591762384
+      great_wolf_7: -2228379543648000033
+      great_wolf_8: -2665630201733229499
+      great_wolf_9: -6228372270109639881
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

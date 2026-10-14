@@ -1,0 +1,1146 @@
+fileFormatVersion: 2
+guid: c9ae15afd7ff3c845b6ec5714c297e38
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2553383203824876943
+    second: chain_post_flash_0
+  - first:
+      213: -7781167486965079817
+    second: chain_post_flash_1
+  - first:
+      213: 8306791703276928393
+    second: chain_post_flash_2
+  - first:
+      213: -6354725193754028584
+    second: chain_post_flash_3
+  - first:
+      213: -8980222329618414647
+    second: chain_post_flash_4
+  - first:
+      213: 8895294560825304920
+    second: chain_post_flash_5
+  - first:
+      213: 7967842478122744881
+    second: chain_post_flash_6
+  - first:
+      213: 5935877718258823374
+    second: chain_post_flash_7
+  - first:
+      213: 8953093084575761327
+    second: chain_post_flash_8
+  - first:
+      213: 5932925102264363934
+    second: chain_post_flash_9
+  - first:
+      213: 815507310358268015
+    second: chain_post_flash_10
+  - first:
+      213: 6330598034432478037
+    second: chain_post_flash_11
+  - first:
+      213: 3380254747404258386
+    second: chain_post_flash_12
+  - first:
+      213: 2422722668066460987
+    second: chain_post_flash_13
+  - first:
+      213: 4067713545888932953
+    second: chain_post_flash_14
+  - first:
+      213: 8865869536338173472
+    second: chain_post_flash_15
+  - first:
+      213: 8526903328982568285
+    second: chain_post_flash_16
+  - first:
+      213: 3385540695110532303
+    second: chain_post_flash_17
+  - first:
+      213: 5590075067064977631
+    second: chain_post_flash_18
+  - first:
+      213: 251755161815456023
+    second: chain_post_flash_19
+  - first:
+      213: 8122612797801291199
+    second: chain_post_flash_20
+  - first:
+      213: -5926269080312316574
+    second: chain_post_flash_21
+  - first:
+      213: 737493343688005871
+    second: chain_post_flash_22
+  - first:
+      213: -4411789807732477591
+    second: chain_post_flash_23
+  - first:
+      213: -491010839708695260
+    second: chain_post_flash_24
+  - first:
+      213: 1350162438088520882
+    second: chain_post_flash_25
+  - first:
+      213: -3153803676045005876
+    second: chain_post_flash_26
+  - first:
+      213: 854427640447814737
+    second: chain_post_flash_27
+  - first:
+      213: 9197681239653778838
+    second: chain_post_flash_28
+  - first:
+      213: -706320745593916193
+    second: chain_post_flash_29
+  - first:
+      213: -7131057176712114170
+    second: chain_post_flash_30
+  - first:
+      213: -4175707698823103462
+    second: chain_post_flash_31
+  - first:
+      213: -9095866096829362400
+    second: chain_post_flash_32
+  - first:
+      213: 9204119469433030681
+    second: chain_post_flash_33
+  - first:
+      213: -7438538297223371053
+    second: chain_post_flash_34
+  - first:
+      213: 4434650222393027464
+    second: chain_post_flash_35
+  - first:
+      213: -7497942561488190058
+    second: chain_post_flash_36
+  - first:
+      213: 6713749351695719900
+    second: chain_post_flash_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: chain_post_flash_0
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 328
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 172c198218f809cd0800000000000000
+      internalID: -2553383203824876943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 328
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f0a0a1a56db30490800000000000000
+      internalID: -7781167486965079817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_2
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 264
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98dbbf8fa07a74370800000000000000
+      internalID: 8306791703276928393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_3
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 264
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d5d015ea1b7fc7a0800000000000000
+      internalID: -6354725193754028584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_4
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 200
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c34017de57df5380800000000000000
+      internalID: -8980222329618414647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_5
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 200
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 857e476164f627b70800000000000000
+      internalID: 8895294560825304920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_6
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 136
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c36c6b486739e60800000000000000
+      internalID: 7967842478122744881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_7
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 136
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec039fac559706250800000000000000
+      internalID: 5935877718258823374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_8
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 72
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa3052399b6cf3c70800000000000000
+      internalID: 8953093084575761327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_9
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 72
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9b277f42fbf55250800000000000000
+      internalID: 5932925102264363934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_10
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 15
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6883a9f393415b00800000000000000
+      internalID: 815507310358268015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_11
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 15
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55b42221f5dcad750800000000000000
+      internalID: 6330598034432478037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_12
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 18
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25ccb5d88c319ee20800000000000000
+      internalID: 3380254747404258386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 19
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3553633e6d3f9120800000000000000
+      internalID: 2422722668066460987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_14
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 15
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95421c61beb637830800000000000000
+      internalID: 4067713545888932953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_15
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 15
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02ed462be55e90b70800000000000000
+      internalID: 8865869536338173472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_16
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 19
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5d0a167665a55670800000000000000
+      internalID: 8526903328982568285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_17
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 20
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcc31b8235bdbfe20800000000000000
+      internalID: 3385540695110532303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_18
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd80d20f7afe39d40800000000000000
+      internalID: 5590075067064977631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_19
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 13
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 719916e5cf96e7300800000000000000
+      internalID: 251755161815456023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_20
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 19
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbddcfcdd4159b070800000000000000
+      internalID: 8122612797801291199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_21
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 19
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26d7a909ba9a1cda0800000000000000
+      internalID: -5926269080312316574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_22
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 18
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe81db6e94a1c3a00800000000000000
+      internalID: 737493343688005871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_23
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 18
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 961ba666b8c26c2c0800000000000000
+      internalID: -4411789807732477591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_24
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 7
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4250c462e349f29f0800000000000000
+      internalID: -491010839708695260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_25
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 7
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b4775f759dbcb210800000000000000
+      internalID: 1350162438088520882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_26
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 7
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccb240624407b34d0800000000000000
+      internalID: -3153803676045005876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_27
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 7
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15cca2b79698bdb00800000000000000
+      internalID: 854427640447814737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_28
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69586d62b5ab4af70800000000000000
+      internalID: 9197681239653778838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_29
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 7
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd4b26d2605a236f0800000000000000
+      internalID: -706320745593916193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_30
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600131d9745690d90800000000000000
+      internalID: -7131057176712114170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_31
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 8
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1cf8c5c8f7ec06c0800000000000000
+      internalID: -4175707698823103462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_32
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02f87f51afdf4c180800000000000000
+      internalID: -9095866096829362400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_33
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 7
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91800d554e99bbf70800000000000000
+      internalID: 9204119469433030681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_34
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d6acd964d005c890800000000000000
+      internalID: -7438538297223371053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_35
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88be7d8a1ea0b8d30800000000000000
+      internalID: 4434650222393027464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_36
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 695c63457f4f1f790800000000000000
+      internalID: -7497942561488190058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chain_post_flash_37
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 7
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd15d2e6770c2d50800000000000000
+      internalID: 6713749351695719900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      chain_post_flash_0: -2553383203824876943
+      chain_post_flash_1: -7781167486965079817
+      chain_post_flash_10: 815507310358268015
+      chain_post_flash_11: 6330598034432478037
+      chain_post_flash_12: 3380254747404258386
+      chain_post_flash_13: 2422722668066460987
+      chain_post_flash_14: 4067713545888932953
+      chain_post_flash_15: 8865869536338173472
+      chain_post_flash_16: 8526903328982568285
+      chain_post_flash_17: 3385540695110532303
+      chain_post_flash_18: 5590075067064977631
+      chain_post_flash_19: 251755161815456023
+      chain_post_flash_2: 8306791703276928393
+      chain_post_flash_20: 8122612797801291199
+      chain_post_flash_21: -5926269080312316574
+      chain_post_flash_22: 737493343688005871
+      chain_post_flash_23: -4411789807732477591
+      chain_post_flash_24: -491010839708695260
+      chain_post_flash_25: 1350162438088520882
+      chain_post_flash_26: -3153803676045005876
+      chain_post_flash_27: 854427640447814737
+      chain_post_flash_28: 9197681239653778838
+      chain_post_flash_29: -706320745593916193
+      chain_post_flash_3: -6354725193754028584
+      chain_post_flash_30: -7131057176712114170
+      chain_post_flash_31: -4175707698823103462
+      chain_post_flash_32: -9095866096829362400
+      chain_post_flash_33: 9204119469433030681
+      chain_post_flash_34: -7438538297223371053
+      chain_post_flash_35: 4434650222393027464
+      chain_post_flash_36: -7497942561488190058
+      chain_post_flash_37: 6713749351695719900
+      chain_post_flash_4: -8980222329618414647
+      chain_post_flash_5: 8895294560825304920
+      chain_post_flash_6: 7967842478122744881
+      chain_post_flash_7: 5935877718258823374
+      chain_post_flash_8: 8953093084575761327
+      chain_post_flash_9: 5932925102264363934
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

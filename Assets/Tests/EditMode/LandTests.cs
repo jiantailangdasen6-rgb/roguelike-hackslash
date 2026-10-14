@@ -28,6 +28,7 @@ namespace Game.Tests
         private static (RunSimulation Sim, SimPlayer Player) LordHall(Biome land)
         {
             var sim = new RunSimulation(91);
+            sim.MainLordsOnly = true; // the land's first lord (Lords2Tests has the second ones)
             sim.UseVariedRoute(land);
             var p = sim.AddPlayer(0, new Loadout { classId = ClassId.Warrior });
             sim.Start(RunSimulation.RoomsPerArea - 1);

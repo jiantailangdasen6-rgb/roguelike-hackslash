@@ -12,6 +12,24 @@ namespace Game.Core
     public sealed partial class RunSimulation
     {
         private readonly List<Biome> _route = new();
+        private readonly List<EnemyType> _lords = new();
+
+        /// <summary>Tests: always the land's first lord (its second one otherwise turns up half the time).</summary>
+        public bool MainLordsOnly;
+        /// <summary>Screenshots (-lord): this lord wherever its land comes.</summary>
+        public EnemyType? ForcedLord;
+
+        /// <summary>Which of the land's lords waits at the end of this area (from the seed; the classic route keeps the first).</summary>
+        private EnemyType PickLord(Biome land, int area)
+        {
+            var lords = BiomeCatalog.Get(land).Lords;
+            if (ForcedLord.HasValue && System.Array.IndexOf(lords, ForcedLord.Value) >= 0) return ForcedLord.Value;
+            if (!VariedRoute || MainLordsOnly || lords.Length == 1) return lords[0];
+            return lords[new GameRandom(Seed ^ (0x1A4D5EEDul * (ulong)(area + 3))).Range(0, lords.Length)];
+        }
+
+        /// <summary>The lord waiting at the end of an area.</summary>
+        public EnemyType LordAt(int area) => area >= 0 && area < _lords.Count ? _lords[area] : BiomeCatalog.Get(BiomeOf(area)).Lord;
         private Biome[] _plannedRoute;
         private List<(EnemyType Type, int Weight)> _pool;
 
@@ -39,6 +57,7 @@ namespace Game.Core
             VariedRoute = true;
             _plannedRoute = planned != null && planned.Length > 0 ? planned : null;
             _route.Clear();
+            _lords.Clear();
             PickOmen(); // RunSimulation.Omens.cs
             BuildArea(0);
         }
@@ -72,6 +91,9 @@ namespace Game.Core
             while (_route.Count < area) _route.Add(DefaultBiome(_route.Count));
             var b = biome ?? DefaultBiome(area);
             _route.Add(b);
+            while (_lords.Count > area) _lords.RemoveAt(_lords.Count - 1);
+            while (_lords.Count < area) _lords.Add(PickLord(_route[_lords.Count], _lords.Count));
+            _lords.Add(PickLord(b, area));
             _pool = BiomeCatalog.PoolAt(b, area);
             PickNextWays(area);
             return b;

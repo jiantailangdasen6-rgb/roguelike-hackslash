@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
+  m_Name: great_crab
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
+  Texture: {fileID: 2800000, guid: ae38781333c0d184aa884c3465d5203b, type: 3}
+  FlashTexture: {fileID: 2800000, guid: bd8ace3b4a821de42adadc7ce56dc81e, type: 3}
+  NormalTexture: {fileID: 2800000, guid: 6066493facc5d4a46b2d62c7dc353a43, type: 3}
+  FrameWidth: 64
+  FrameHeight: 64
+  Pivot: {x: 0.5, y: 0.15625}
+  PixelsPerUnit: 32
+  Clips:
+  - Name: idle
+    Row: 0
+    Frames: 6
+    Fps: 6
+    Loop: 1
+  - Name: walk
+    Row: 1
+    Frames: 6
+    Fps: 14
+    Loop: 1
+  - Name: windup
+    Row: 2
+    Frames: 3
+    Fps: 9
+    Loop: 0
+  - Name: strike
+    Row: 3
+    Frames: 3
+    Fps: 14
+    Loop: 0
+  - Name: hurt
+    Row: 4
+    Frames: 2
+    Fps: 10
+    Loop: 0
+  - Name: death
+    Row: 5
+    Frames: 6
+    Fps: 10
+    Loop: 0

@@ -153,6 +153,18 @@ namespace Game.Gameplay
             return true;
         }
 
+        /// <summary>A corridor can be walked when the doors at both of its ends are open.</summary>
+        public bool CorridorOpen(Corridor c) => DoorOpen(Map[c.A], Map[c.B]) && DoorOpen(Map[c.B], Map[c.A]);
+
+        /// <summary>The floor of a room as it stands (the Lich's hall shrinks as it falls).</summary>
+        public Rect FloorOf(MapRoom room) => room.Kind == RoomKind.Boss ? RunSimulation.SafeArea(room.Bounds, CollapseStage.Value) : room.Bounds;
+
+        /// <summary>A step on the map that stays on floors and in open corridors (sliding along walls).</summary>
+        public Vector2 Walk(Vector2 from, Vector2 to, float radius) => Map.Step(from, to, radius, CorridorOpen, FloorOf);
+
+        /// <summary>Can someone stand here (a room's floor or an open corridor)?</summary>
+        public bool Walkable(Vector2 at, float radius) => Map.Walkable(at, radius, CorridorOpen, FloorOf);
+
         /// <summary>The local player stands where a fight is going on (picks and gear swaps wait).</summary>
         public bool LocalFighting => IsFighting(LocalRoom.Id);
 

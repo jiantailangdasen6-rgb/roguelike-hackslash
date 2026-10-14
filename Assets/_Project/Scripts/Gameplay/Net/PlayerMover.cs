@@ -124,11 +124,21 @@ namespace Game.Gameplay
         {
             Vector2 from = transform.position;
             Vector2 to = from + Vector2.ClampMagnitude(_aim, ClassCatalog.ShadowStepRange);
-            var bounds = PlayArea.Bounds;
             float r = SimPlayer.BodyRadius;
             to = Arena.Resolve(CurrentLayout, to, r);
-            to.x = Mathf.Clamp(to.x, bounds.xMin + r, bounds.xMax - r);
-            to.y = Mathf.Clamp(to.y, bounds.yMin + r, bounds.yMax - r);
+            var director = RunDirector.Instance;
+            if (director != null && director.IsSpawned)
+            {
+                // Back along the line until there is floor to land on (no stepping through walls).
+                for (int k = 0; k < 12 && !director.Walkable(to, r); k++) to = Vector2.Lerp(to, from, 0.25f);
+                if (!director.Walkable(to, r)) to = from;
+            }
+            else
+            {
+                var bounds = PlayArea.Bounds;
+                to.x = Mathf.Clamp(to.x, bounds.xMin + r, bounds.xMax - r);
+                to.y = Mathf.Clamp(to.y, bounds.yMin + r, bounds.yMax - r);
+            }
             _dashUntil = 0f;
             // Teleport (not a slide): the others see the jump instead of interpolating across the room.
             var networkTransform = GetComponent<NetworkTransform>();
@@ -187,13 +197,22 @@ namespace Game.Gameplay
                 _slide = velocity;
                 Vector2 pos = here + velocity * Time.deltaTime;
 
-                var bounds = PlayArea.Bounds;
                 float r = SimPlayer.BodyRadius;
-                // Walking into an open doorway takes you to the next room.
-                if (move.sqrMagnitude > 0.01f && !PlayArea.InCamp && TryDoor(pos, move)) return;
-                pos = Arena.Resolve(CurrentLayout, pos, r);
-                pos.x = Mathf.Clamp(pos.x, bounds.xMin + r, bounds.xMax - r);
-                pos.y = Mathf.Clamp(pos.y, bounds.yMin + r, bounds.yMax - r);
+                var director = RunDirector.Instance;
+                if (!PlayArea.InCamp && director != null && director.IsSpawned)
+                {
+                    // The labyrinth in one piece: floors and open corridors, walked from room to room (phase 5).
+                    pos = director.Walk(here, pos, r);
+                    var resolved = Arena.Resolve(CurrentLayout, pos, r);
+                    pos = director.Walkable(resolved, r) ? resolved : pos;
+                }
+                else
+                {
+                    var bounds = PlayArea.Bounds;
+                    pos = Arena.Resolve(CurrentLayout, pos, r);
+                    pos.x = Mathf.Clamp(pos.x, bounds.xMin + r, bounds.xMax - r);
+                    pos.y = Mathf.Clamp(pos.y, bounds.yMin + r, bounds.yMax - r);
+                }
                 transform.position = pos;
             }
             else if (CanHaunt)
@@ -217,43 +236,6 @@ namespace Game.Gameplay
 
             _sendTimer -= Time.deltaTime;
             if (_sendTimer <= 0f) SendInput();
-        }
-
-        /// <summary>Half the width of a doorway (the gap in the wall you can walk through).</summary>
-        public const float DoorHalfWidth = 1.4f;
-
-        /// <summary>
-        /// Pressing against the wall inside a doorway steps through it: the player appears just inside the door of the
-        /// room on the other side. Returns false (blocked) for a door that is shut: the boss door until the whole team
-        /// has gathered, and the boss room's doors while the lord fights.
-        /// </summary>
-        private bool TryDoor(Vector2 wanted, Vector2 move)
-        {
-            var director = RunDirector.Instance;
-            if (director == null) return false;
-            var map = director.Map;
-            var room = director.LocalRoom;
-            var b = room.Bounds;
-            float r = SimPlayer.BodyRadius;
-            for (int d = 0; d < 4; d++)
-            {
-                if (!room.HasDoor(d)) continue;
-                Vector2 door = DungeonMap.DoorPosition(room, d);
-                bool pushing = d switch
-                {
-                    Dir.N => wanted.y > b.yMax - r && move.y > 0.3f,
-                    Dir.S => wanted.y < b.yMin + r && move.y < -0.3f,
-                    Dir.E => wanted.x > b.xMax - r && move.x > 0.3f,
-                    _ => wanted.x < b.xMin + r && move.x < -0.3f,
-                };
-                bool inGap = d is Dir.N or Dir.S ? Mathf.Abs(wanted.x - door.x) < DoorHalfWidth : Mathf.Abs(wanted.y - door.y) < DoorHalfWidth;
-                if (!pushing || !inGap) continue;
-                var next = map[room.Neighbor[d]];
-                if (!director.DoorOpen(room, next)) return false;
-                Teleport(DungeonMap.EntryPoint(next, Dir.Opposite(d)), network: true);
-                return true;
-            }
-            return false;
         }
 
         /// <summary>Jumps the player (not a slide: the others see the jump instead of interpolating across the map).</summary>
@@ -424,10 +406,11 @@ namespace Game.Gameplay
                     if (!seen[goal]) return Vector2.zero;
                 }
                 int dir = first[goal];
-                // Walk to the doorway and on through the wall.
+                // Walk to the doorway, then down the corridor into the next room.
                 Vector2 door = DungeonMap.DoorPosition(room, dir);
                 Vector2 inside = DungeonMap.EntryPoint(room, dir);
-                Vector2 beyond = door + (Vector2)Dir.Step(dir) * 1.5f;
+                var nextRoom = map[room.Neighbor[dir]];
+                Vector2 beyond = nextRoom != null ? DungeonMap.EntryPoint(nextRoom, Dir.Opposite(dir)) : door + (Vector2)Dir.Step(dir) * 1.5f;
                 bool lined = dir is Dir.N or Dir.S ? Mathf.Abs(pos.x - door.x) < 0.8f : Mathf.Abs(pos.y - door.y) < 0.8f;
                 return lined ? Toward(beyond) : Toward(inside);
             }

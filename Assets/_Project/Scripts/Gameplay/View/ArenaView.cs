@@ -35,9 +35,12 @@ namespace Game.Gameplay
 
         private sealed class DoorVisual
         {
-            public MapRoom To;
+            public Corridor Corridor;
             public SpriteRenderer Bars;
         }
+
+        /// <summary>The area's boss hall (its collapsing floor, the flood, the spore fog are drawn over it).</summary>
+        private MapRoom _boss;
 
         private readonly List<DoorVisual> _doors = new();
 
@@ -76,17 +79,22 @@ namespace Game.Gameplay
             var director = RunDirector.Instance;
             if (director != null && director.IsSpawned)
             {
-                // Draw the room the local player stands in (another one after a door or a new area).
+                // The whole area map is drawn at once (phase 5: the labyrinth in one piece); it is built again for a new
+                // area, and when a sealed room opens (its corridor appears).
                 ShowArea((int)director.Biome);
-                var room = director.LocalRoom;
                 var key = (director.MapSeed.Value, director.Area.Value * 16 + (int)director.Biome, director.UnlockedRooms.Value);
-                if (room.Id != _roomId || key != _mapKey)
+                if (key != _mapKey)
                 {
                     _mapKey = key;
-                    BuildRoom(room);
+                    BuildMap(director.Map, director); // ArenaView.Map.cs
                 }
+                _room = director.LocalRoom;
+                _roomId = _room.Id;
+                _boss = director.Map.Boss;
                 foreach (var d in _doors)
-                    if (d.Bars != null) d.Bars.enabled = !director.DoorOpen(_room, d.To);
+                    if (d.Bars != null) d.Bars.enabled = !director.CorridorOpen(d.Corridor);
+                CullLights(); // ArenaView.Map.cs
+                UpdateShrouds(director);
             }
 
             foreach (var g in _gimmicks.Values) Animate(g);
@@ -105,7 +113,7 @@ namespace Game.Gameplay
         private void UpdateAbyss(RunDirector director)
         {
             // Only the boss room falls; it is drawn when you stand in it.
-            bool inBossRoom = _room != null && _room.Kind == RoomKind.Boss;
+            bool inBossRoom = _boss != null; // the boss hall is drawn with the rest of the map
             int stage = director != null && director.IsSpawned && inBossRoom ? director.CollapseStage.Value : 0;
             if (stage != _abyssStage)
             {
@@ -135,7 +143,7 @@ namespace Game.Gameplay
             if (texture == null) return;
             var go = new GameObject("Abyss");
             go.transform.SetParent(transform, false);
-            go.transform.localPosition = _room != null ? _room.Bounds.min : RunSimulation.DefaultBounds.min;
+            go.transform.localPosition = _boss != null ? _boss.Bounds.min : RunSimulation.DefaultBounds.min;
             renderer = go.AddComponent<SpriteRenderer>();
             renderer.sprite = UnityEngine.Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, AbyssPixelsPerUnit);
             renderer.sortingOrder = order;
@@ -215,22 +223,12 @@ namespace Game.Gameplay
                 globalLight.intensity = LandLook.AmbientIntensity((Biome)area) * (GameSettings.HighQuality ? HighQualityAmbient : 1f);
             }
             LandLook.ApplyGrading((Biome)area);
-            if (_room != null) BuildRoom(_room); // props use the land's palette
+            _mapKey = default; // props use the land's palette: build the map again
         }
 
-        /// <summary>The room's floor and walls (the area look moved to its spot), obstacles, traps and doorways.</summary>
-        private void BuildRoom(MapRoom room)
+        /// <summary>One room's dressing, obstacles and traps (its floor and walls come from the land's look, ArenaView.Map.cs).</summary>
+        private void BuildRoomContents(MapRoom room)
         {
-            _room = room;
-            _roomId = room.Id;
-            foreach (var go in _spawned) Destroy(go);
-            _spawned.Clear();
-            _gimmicks.Clear();
-            _doors.Clear();
-            if (areaRoots != null)
-                foreach (var root in areaRoots)
-                    if (root != null) root.localPosition = room.Origin;
-            BuildDoors(room);
             AddRoomDecor(room);
             AddFloorFeatures(room);
             AddKeyLights(room); // ArenaView.Lands.cs
@@ -436,39 +434,6 @@ namespace Game.Gameplay
                     l.transform.localPosition = Vector3.zero;
                     if (sheet is "decal_slag" or "decal_rift") l.gameObject.AddComponent<LightFlicker>().Configure(intensity, 0.18f);
                 }
-            }
-        }
-
-        /// <summary>An arch or a gap in the wall for every door of the room, and the bone bars of a shut one.</summary>
-        private void BuildDoors(MapRoom room)
-        {
-            var director = RunDirector.Instance;
-            int area = Mathf.Max(0, _area);
-            for (int d = 0; d < 4; d++)
-            {
-                if (!room.HasDoor(d)) continue;
-                // A secret room's door is just wall until the cracked wall in front of it is broken.
-                var behind = director != null ? director.Map[room.Neighbor[d]] : null;
-                if (behind != null && behind.Kind == RoomKind.Secret && !director.IsUnlocked(behind.Id)) continue;
-                Vector2 at = DungeonMap.DoorPosition(room, d);
-                string kind = d == Dir.N ? "n" : d == Dir.S ? "s" : "side";
-                // The arch stands in the back wall above the floor; the others sit in the black wall tops
-                // (the side sheet is drawn for the east and mirrored for the west, around its right-edge pivot).
-                Vector2 spot = d switch
-                {
-                    Dir.E => at + new Vector2(1.25f, 0f),
-                    Dir.W => at - new Vector2(1.25f, 0f),
-                    _ => at,
-                };
-                var r = Sprite("Door", SpriteSheet.Load($"door_{kind}_{area}")?.First, spot, d == Dir.N ? -985 : 905);
-                r.flipX = d == Dir.W;
-                var light = AddLight(r.gameObject, LandLook.Torch((Biome)area), 0.9f, 3.2f);
-                light.transform.position = at;
-                var bars = Sprite("Bars", SpriteSheet.Load($"door_bars_{kind}")?.First, r.transform.localPosition, r.sortingOrder + 1);
-                bars.flipX = d == Dir.W;
-                var to = director != null ? director.Map[room.Neighbor[d]] : null;
-                bars.enabled = director != null && !director.DoorOpen(room, to);
-                _doors.Add(new DoorVisual { To = to, Bars = bars });
             }
         }
 

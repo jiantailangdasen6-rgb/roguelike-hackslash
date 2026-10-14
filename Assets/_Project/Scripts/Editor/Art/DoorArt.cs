@@ -39,6 +39,9 @@ namespace Game.EditorTools.Art
             sheets["door_bars_n"] = One(BarsNorth(), new Vector2(0.5f, 0f));
             sheets["door_bars_s"] = One(BarsFlat(horizontal: true), new Vector2(0.5f, 1f));
             sheets["door_bars_side"] = One(BarsFlat(horizontal: false), new Vector2(1f, 0.5f));
+            sheets["gate_n"] = One(Gate(upright: true, horizontal: true), new Vector2(0.5f, 0f));
+            sheets["gate_h"] = One(Gate(upright: false, horizontal: true), new Vector2(0.5f, 0.5f));
+            sheets["gate_v"] = One(Gate(upright: false, horizontal: false), new Vector2(0.5f, 0.5f));
             return sheets;
         }
 
@@ -220,6 +223,46 @@ namespace Game.EditorTools.Art
             {
                 if (horizontal) { c.Set(t, 20, bone[2]); c.Set(t, 21, bone[1]); }
                 else { c.Set(20, t, bone[2]); c.Set(21, t, bone[1]); }
+            }
+            OutlineShape(c);
+            return c;
+        }
+
+        /// <summary>
+        /// Gates across a corridor's end (phase 5, four tiles wide): a portcullis of bone hanging in the back wall
+        /// ("gate_n"), and seen from above, a row of bars across the floor ("gate_h" for the bottom, "gate_v" the sides).
+        /// </summary>
+        private static PixelCanvas Gate(bool upright, bool horizontal)
+        {
+            var bone = new[] { C("#3b352b"), C("#6b6250"), C("#a59a80"), C("#d6ccb0"), C("#f0e8d2") };
+            const int span = 128;
+            int w = upright || horizontal ? span : 32, h = upright ? 84 : horizontal ? 32 : span;
+            var c = new PixelCanvas(w, h);
+            int length = upright ? h - 2 : 30;
+            for (int bar = 0; bar < 9; bar++)
+            {
+                int at = 8 + bar * 14;
+                for (int t = 1; t < length; t++)
+                {
+                    if (upright || horizontal) { c.Set(at - 1, t, bone[1]); c.Set(at, t, bone[3]); c.Set(at + 1, t, bone[2]); }
+                    else { c.Set(t, at - 1, bone[1]); c.Set(t, at, bone[3]); c.Set(t, at + 1, bone[2]); }
+                    if (upright && t == length - 1) { c.Set(at, t, bone[4]); c.Set(at, t - 1, bone[4]); } // spikes at the top
+                }
+            }
+            // Cross bars, and on the portcullis a skull lock with red eyes.
+            foreach (int k in upright ? new[] { 18, 48, 74 } : new[] { 10, 21 })
+                for (int t = 4; t < span - 4; t++)
+                {
+                    if (upright || horizontal) { c.Set(t, k, bone[2]); c.Set(t, k + 1, bone[1]); }
+                    else { c.Set(k, t, bone[2]); c.Set(k + 1, t, bone[1]); }
+                }
+            if (upright)
+            {
+                for (int y = 26; y < 40; y++)
+                for (int x = 56; x <= 72; x++)
+                    if ((x - 64) * (x - 64) + (y - 33) * (y - 33) * 1.3f < 52f) c.Set(x, y, bone[3]);
+                c.Set(61, 33, C("#ff3b2f")); c.Set(67, 33, C("#ff3b2f"));
+                c.Set(62, 29, bone[0]); c.Set(66, 29, bone[0]);
             }
             OutlineShape(c);
             return c;

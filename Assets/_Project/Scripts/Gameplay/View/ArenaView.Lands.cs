@@ -349,7 +349,7 @@ namespace Game.Gameplay
         /// <summary>The Mycelium Mother's spore fog: a green haze drifting over her hall while it lasts.</summary>
         private void UpdateSporeFog(RunDirector director)
         {
-            bool on = director != null && director.IsSpawned && director.Trial.Value == BossTrial.Fog && _room != null && _room.Kind == RoomKind.Boss;
+            bool on = director != null && director.IsSpawned && director.Trial.Value == BossTrial.Fog && _boss != null;
             _sporeAlpha = Mathf.MoveTowards(_sporeAlpha, on ? 1f : 0f, Time.deltaTime * 0.9f);
             if (_sporeAlpha <= 0f)
             {
@@ -365,7 +365,7 @@ namespace Game.Gameplay
                 _sporeFog.sortingOrder = 2500;
             }
             _sporeFog.enabled = true;
-            var b = _room.Bounds;
+            var b = _boss.Bounds;
             float tile = FogSize / (float)FogPpu;
             _sporeFog.transform.localPosition = new Vector3(b.xMin - 4f + Mathf.Repeat(Time.time * 0.6f, 4f), b.yMin - 4f, 0f);
             _sporeFog.transform.localScale = new Vector3((b.width + 8f) / tile, (b.height + 8f) / tile, 1f);
@@ -377,11 +377,11 @@ namespace Game.Gameplay
             UpdateFog();
             UpdateSporeFog(director);
             // The flood rises over the saint's hall while her seals hold (seen by whoever stands in it).
-            bool flood = director != null && director.IsSpawned && director.Trial.Value == BossTrial.Flood && _room != null && _room.Kind == RoomKind.Boss;
+            bool flood = director != null && director.IsSpawned && director.Trial.Value == BossTrial.Flood && _boss != null;
             _floodAlpha = Mathf.MoveTowards(_floodAlpha, flood ? 1f : 0f, Time.deltaTime * 0.8f);
-            if (_floodAlpha > 0f && _flood == null && _room != null)
+            if (_floodAlpha > 0f && _flood == null && _boss != null)
             {
-                var b = _room.Bounds;
+                var b = _boss.Bounds;
                 var go = new GameObject("Flood");
                 go.transform.SetParent(transform, false);
                 go.transform.localPosition = b.min;
@@ -398,7 +398,7 @@ namespace Game.Gameplay
                 }
                 else
                 {
-                    var frames = ZoneFrames(GimmickKind.Water, _room != null ? _room.Bounds.size : RunSimulation.DefaultBounds.size);
+                    var frames = ZoneFrames(GimmickKind.Water, _boss != null ? _boss.Bounds.size : RunSimulation.DefaultBounds.size);
                     _flood.sprite = frames[Mathf.FloorToInt(Time.time * 2.5f) % frames.Length];
                     _flood.color = new Color(1f, 1f, 1f, 0.75f * _floodAlpha);
                 }

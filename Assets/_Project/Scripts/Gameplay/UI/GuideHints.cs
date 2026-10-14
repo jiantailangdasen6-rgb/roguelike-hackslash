@@ -84,7 +84,7 @@ namespace Game.Gameplay
                 else if (!d.IsFighting(room.Id) && NearDoor(room, me, 6f))
                 {
                     key = "door";
-                    text = "扉の切れ目で壁に向かって歩くと、隣の部屋へ進める";
+                    text = "壁の切れ目から通路を歩いて、隣の部屋へ進める";
                     return;
                 }
             }

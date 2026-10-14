@@ -79,12 +79,96 @@ namespace Game.Core
     }
 
     /// <summary>
-    /// An area of the labyrinth: 8-10 rooms joined by doors on a 5 x 5 grid, generated from the run's seed so every
-    /// peer builds the same map. Rooms sit far apart in the world (walking through a door moves you to the next one),
-    /// so the simulation can run several rooms at once while players explore apart.
+    /// The passage between two neighbouring rooms (A to B, B lies <see cref="Dir"/> of A): a straight strip of floor from
+    /// A's wall to B's, as wide as a doorway. Walked through on foot (phase 5: the labyrinth in one piece).
+    /// </summary>
+    public sealed class Corridor
+    {
+        public int A, B, Dir;
+        public Rect Rect;
+        public bool Vertical => Dir == Game.Core.Dir.N;
+    }
+
+    /// <summary>
+    /// An area of the labyrinth: 8-10 rooms on a 5 x 5 grid, generated from the run's seed so every peer builds the same
+    /// map. Rooms sit apart in the world and short corridors join the neighbours, so the team walks from room to room;
+    /// the simulation runs several rooms at once while players explore apart.
     /// </summary>
     public sealed class DungeonMap
     {
+        /// <summary>Half the width of a corridor (four tiles across).</summary>
+        public const float CorridorHalf = 2f;
+
+        public readonly List<Corridor> Corridors = new();
+
+        /// <summary>The corridor between two rooms (either way round), or null.</summary>
+        public Corridor CorridorBetween(int a, int b) =>
+            Corridors.Find(c => (c.A == a && c.B == b) || (c.A == b && c.B == a));
+
+        /// <summary>Joins every pair of neighbours with a corridor (north and east of each room).</summary>
+        private void BuildCorridors()
+        {
+            Corridors.Clear();
+            foreach (var a in Rooms)
+                foreach (int d in new[] { Game.Core.Dir.N, Game.Core.Dir.E })
+                {
+                    var b = this[a.Neighbor[d]];
+                    if (b == null) continue;
+                    Rect ra = a.Bounds, rb = b.Bounds;
+                    var rect = d == Game.Core.Dir.N
+                        ? new Rect(ra.center.x - CorridorHalf, ra.yMax, 2f * CorridorHalf, rb.yMin - ra.yMax)
+                        : new Rect(ra.xMax, ra.center.y - CorridorHalf, rb.xMin - ra.xMax, 2f * CorridorHalf);
+                    Corridors.Add(new Corridor { A = a.Id, B = b.Id, Dir = d, Rect = rect });
+                }
+        }
+
+        /// <summary>
+        /// Can a body of this radius stand here: on a room's floor (<paramref name="floor"/> gives it, so the Lich's hall
+        /// can shrink), or in an open corridor (its ends reach a little into both rooms so the step across is smooth).
+        /// </summary>
+        public bool Walkable(Vector2 p, float r, System.Func<Corridor, bool> open, System.Func<MapRoom, Rect> floor)
+        {
+            foreach (var room in Rooms)
+            {
+                var f = floor(room);
+                if (p.x >= f.xMin + r && p.x <= f.xMax - r && p.y >= f.yMin + r && p.y <= f.yMax - r) return true;
+            }
+            foreach (var c in Corridors)
+            {
+                var k = c.Rect;
+                bool inside = c.Vertical
+                    ? p.x >= k.xMin + r && p.x <= k.xMax - r && p.y >= k.yMin - 1f && p.y <= k.yMax + 1f
+                    : p.y >= k.yMin + r && p.y <= k.yMax - r && p.x >= k.xMin - 1f && p.x <= k.xMax + 1f;
+                if (inside && open(c)) return true;
+            }
+            return false;
+        }
+
+        /// <summary>A step from <paramref name="from"/> toward <paramref name="to"/> that stays where one can stand (sliding along walls).</summary>
+        public Vector2 Step(Vector2 from, Vector2 to, float r, System.Func<Corridor, bool> open, System.Func<MapRoom, Rect> floor)
+        {
+            if (!Walkable(from, r, open, floor) || Walkable(to, r, open, floor)) return to; // stuck in a closed place: let them out
+            var slideX = new Vector2(to.x, from.y);
+            if (Walkable(slideX, r, open, floor)) return slideX;
+            var slideY = new Vector2(from.x, to.y);
+            return Walkable(slideY, r, open, floor) ? slideY : from;
+        }
+
+        /// <summary>Everything the map's floors and corridors cover (for the camera).</summary>
+        public Rect Extent
+        {
+            get
+            {
+                var e = Rooms[0].Bounds;
+                foreach (var r in Rooms)
+                {
+                    var b = r.Bounds;
+                    e = Rect.MinMaxRect(Mathf.Min(e.xMin, b.xMin), Mathf.Min(e.yMin, b.yMin), Mathf.Max(e.xMax, b.xMax), Mathf.Max(e.yMax, b.yMax));
+                }
+                return e;
+            }
+        }
+
         public const int Size = 5;
         public const float PitchX = 44f, PitchY = 30f;
         /// <summary>Everything any room of any map can reach (for the monster grid).</summary>
@@ -160,12 +244,14 @@ namespace Game.Core
                     map.AssignLayouts(rng);
                     map.PickDarkHall(new GameRandom(seed ^ (0xDA4C1E55u * (ulong)(area + 1))));
                     map.PickCaptive(new GameRandom(seed ^ (0xCA9715EEu * (ulong)(area + 1))));
+                    map.BuildCorridors();
                     return map;
                 }
             }
             var fallback = new DungeonMap(area, biome);
             fallback.BuildLine();
             fallback.AssignLayouts(rng);
+            fallback.BuildCorridors();
             return fallback;
         }
 

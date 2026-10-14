@@ -68,7 +68,19 @@ namespace Game.Core
         public static SkinDef GetById(string id) => All.FirstOrDefault(s => s.Id == id);
 
         /// <summary>Sprite sheet for a class in a skin ("warrior", "warrior_s1", ...).</summary>
-        public static string Sheet(ClassId c, int index) =>
-            index <= 0 || index >= PerClass ? ClassCatalog.Get(c).Sheet : $"{ClassCatalog.Get(c).Sheet}_s{index}";
+        public static string Sheet(ClassId c, int index, int weapon = 0) =>
+            (index <= 0 || index >= PerClass ? ClassCatalog.Get(c).Sheet : $"{ClassCatalog.Get(c).Sheet}_s{index}") + (weapon == 1 ? "_w1" : "");
+
+        /// <summary>The kind of weapon a loadout carries (0 usual, 1 the class's other weapon).</summary>
+        public static int WeaponOf(Loadout loadout)
+        {
+            if (loadout?.gear == null) return 0;
+            foreach (var hex in loadout.gear)
+            {
+                var item = GearVault.Unpack(hex);
+                if (item != null && item.Slot == EquipSlot.Weapon) return item.baseId == "weapon_alt" ? 1 : 0;
+            }
+            return 0;
+        }
     }
 }

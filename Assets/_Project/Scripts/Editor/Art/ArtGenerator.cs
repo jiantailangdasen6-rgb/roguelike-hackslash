@@ -49,6 +49,29 @@ namespace Game.EditorTools.Art
                 Character($"paladin_s{skin}", HeroArt.Paladin(SkinArt.Palette(Game.Core.ClassId.Paladin, skin)), HeroArt.FrameSize, paladinFlash);
             }
 
+            // Each class with its other weapon ("_w1", HeroArt.Weapons), in every skin (the skins share the weapon's flash).
+            foreach (Game.Core.ClassId cls in System.Enum.GetValues(typeof(Game.Core.ClassId)))
+            {
+                List<Clip> Make(Dictionary<char, PixelMaterial> palette) => cls switch
+                {
+                    Game.Core.ClassId.Warrior => HeroArt.Warrior(palette),
+                    Game.Core.ClassId.Mage => HeroArt.Mage(palette),
+                    Game.Core.ClassId.Ranger => HeroArt.Ranger(palette),
+                    Game.Core.ClassId.Guardian => HeroArt.Guardian(palette),
+                    Game.Core.ClassId.Assassin => HeroArt.Assassin(palette),
+                    Game.Core.ClassId.Alchemist => HeroArt.Alchemist(palette),
+                    Game.Core.ClassId.Deathcaller => HeroArt.Deathcaller(palette),
+                    _ => HeroArt.Paladin(palette),
+                };
+                string sheet = Game.Core.ClassCatalog.Get(cls).Sheet;
+                var flash = Character($"{sheet}_w1", HeroArt.WithAltWeapon(cls, () => Make(null)), HeroArt.FrameSize);
+                for (int skin = 1; skin < Game.Core.SkinCatalog.PerClass; skin++)
+                {
+                    var palette = SkinArt.Palette(cls, skin);
+                    Character($"{sheet}_s{skin}_w1", HeroArt.WithAltWeapon(cls, () => Make(palette)), HeroArt.FrameSize, flash);
+                }
+            }
+
             Character("skeleton", EnemyArt.Skeleton(), EnemyArt.FrameSize);
             Character("bone_servant", EnemyArt.Skeleton(), EnemyArt.FrameSize); // a deathcaller's summon (tinted green at runtime)
             Character("skeleton_archer", EnemyArt.SkeletonArcher(), EnemyArt.FrameSize);

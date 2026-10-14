@@ -47,7 +47,7 @@ namespace Game.Core
         {
             for (int s = 0; s < SimPlayer.SlotCount; s++)
             {
-                if (p.Equipped[s] != null) continue;
+                if (p.Equipped[s] != null || s >= (int)EquipSlot.Rune1) continue; // runes are never lent
                 // The camp's forge lends better pieces (fine, then rare).
                 var least = p.ForgeLevel >= 2 ? Rarity.Rare : p.ForgeLevel >= 1 ? Rarity.Magic : Rarity.Common;
                 var most = p.ForgeLevel >= 2 ? Rarity.Rare : Rarity.Magic;

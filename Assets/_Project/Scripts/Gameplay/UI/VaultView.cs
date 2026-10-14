@@ -86,8 +86,8 @@ namespace Game.Gameplay
                 caption.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(WornCell + 20f, 30f), new Vector2(0f, -32f));
                 _worn.Add((cell.Frame, cell.Icon));
             }
-            var note = UIKit.Label(frame.transform, "冒険で手に入れた装備は\n全部ここに持ち帰る。\n深い部屋の装備ほど強いが、\n浅い部屋では力が抑えられる。\n空いた枠には冒険中だけ\n貸し出し品が入る。", 20, TextAnchor.UpperLeft, UIKit.MutedText);
-            note.rectTransform.Place(new Vector2(0f, 1f), new Vector2(290f, 220f), new Vector2(40f, -480f));
+            var note = UIKit.Label(frame.transform, "手に入れた装備は全部ここへ。\nルーンは技に宿り、技を変える。\n空いた枠（ルーン以外）には\n冒険中だけ貸し出し品が入る。", 20, TextAnchor.UpperLeft, UIKit.MutedText);
+            note.rectTransform.Place(new Vector2(0f, 1f), new Vector2(290f, 220f), new Vector2(40f, -146f - 3f * (WornCell + 46f) + 6f));
 
             var stashLabel = UIKit.Label(frame.transform, "倉庫", 26, TextAnchor.UpperLeft, UIKit.AccentColor);
             stashLabel.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 36f), new Vector2(350f, -100f));

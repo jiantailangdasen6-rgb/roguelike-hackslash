@@ -1,0 +1,1198 @@
+fileFormatVersion: 2
+guid: 2c69c8ffb96867c45be43b958c2428a2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3856720064430753368
+    second: mage_w1_flash_0
+  - first:
+      213: 2404364641348147519
+    second: mage_w1_flash_1
+  - first:
+      213: -2036447692268063831
+    second: mage_w1_flash_2
+  - first:
+      213: -8425372556443478568
+    second: mage_w1_flash_3
+  - first:
+      213: -2515336401841930705
+    second: mage_w1_flash_4
+  - first:
+      213: -6180956100440469294
+    second: mage_w1_flash_5
+  - first:
+      213: -2215557052305298118
+    second: mage_w1_flash_6
+  - first:
+      213: -7478014901073596774
+    second: mage_w1_flash_7
+  - first:
+      213: 9109299775490045795
+    second: mage_w1_flash_8
+  - first:
+      213: 3335822708801690211
+    second: mage_w1_flash_9
+  - first:
+      213: 5269588204067038391
+    second: mage_w1_flash_10
+  - first:
+      213: -7142398779558830952
+    second: mage_w1_flash_11
+  - first:
+      213: -3718658011147332989
+    second: mage_w1_flash_12
+  - first:
+      213: 4664138700847602083
+    second: mage_w1_flash_13
+  - first:
+      213: -7636544134556799849
+    second: mage_w1_flash_14
+  - first:
+      213: -7571641265267944484
+    second: mage_w1_flash_15
+  - first:
+      213: -4362822713293744485
+    second: mage_w1_flash_16
+  - first:
+      213: -1108812003008581460
+    second: mage_w1_flash_17
+  - first:
+      213: -8069624154880128783
+    second: mage_w1_flash_18
+  - first:
+      213: 7656199761920522287
+    second: mage_w1_flash_19
+  - first:
+      213: 3125484754770003344
+    second: mage_w1_flash_20
+  - first:
+      213: -6449682096599143876
+    second: mage_w1_flash_21
+  - first:
+      213: -5664103077059232567
+    second: mage_w1_flash_22
+  - first:
+      213: 5160017247448092899
+    second: mage_w1_flash_23
+  - first:
+      213: 8784921812786851828
+    second: mage_w1_flash_24
+  - first:
+      213: 374683636535586177
+    second: mage_w1_flash_25
+  - first:
+      213: -4921970101626534809
+    second: mage_w1_flash_26
+  - first:
+      213: 3528453824564881596
+    second: mage_w1_flash_27
+  - first:
+      213: -4297758395431260901
+    second: mage_w1_flash_28
+  - first:
+      213: 5288889392603468687
+    second: mage_w1_flash_29
+  - first:
+      213: 1309168291451088380
+    second: mage_w1_flash_30
+  - first:
+      213: -4442925432380523238
+    second: mage_w1_flash_31
+  - first:
+      213: -7233295866891107535
+    second: mage_w1_flash_32
+  - first:
+      213: -6162394409076583483
+    second: mage_w1_flash_33
+  - first:
+      213: 4287365174282968071
+    second: mage_w1_flash_34
+  - first:
+      213: -2958590059608223888
+    second: mage_w1_flash_35
+  - first:
+      213: 6979287180983247334
+    second: mage_w1_flash_36
+  - first:
+      213: 2899452567069427646
+    second: mage_w1_flash_37
+  - first:
+      213: -5864284949584422849
+    second: mage_w1_flash_38
+  - first:
+      213: 2044954590906460099
+    second: mage_w1_flash_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mage_w1_flash_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 520
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 856448ef672d58530800000000000000
+      internalID: 3856720064430753368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 520
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f39d01607e40e5120800000000000000
+      internalID: 2404364641348147519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 519
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a3b2ba0d951db3e0800000000000000
+      internalID: -2036447692268063831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 519
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d59cd8ac40131b80800000000000000
+      internalID: -8425372556443478568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_4
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 457
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2e3a9d8edab71dd0800000000000000
+      internalID: -2515336401841930705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_5
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 457
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d056fcbc25d83aa0800000000000000
+      internalID: -6180956100440469294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_6
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 457
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3d2bb57992c041e0800000000000000
+      internalID: -2215557052305298118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_7
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 457
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9e2e645111c83890800000000000000
+      internalID: -7478014901073596774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_8
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 457
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36731a6f1ebba6e70800000000000000
+      internalID: 9109299775490045795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_9
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 457
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36a5ec764193b4e20800000000000000
+      internalID: 3335822708801690211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_10
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 392
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b421085d86512940800000000000000
+      internalID: 5269588204067038391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_11
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 392
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89c563ce62a11ec90800000000000000
+      internalID: -7142398779558830952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_12
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 392
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 382176cbd3ca46cc0800000000000000
+      internalID: -3718658011147332989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_13
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 392
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a95c2fcf695ab040800000000000000
+      internalID: 4664138700847602083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_14
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 328
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79c262cd19b850690800000000000000
+      internalID: -7636544134556799849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_15
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 328
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd3d301b2602ce690800000000000000
+      internalID: -7571641265267944484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_16
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 328
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b96de148bd32473c0800000000000000
+      internalID: -4362822713293744485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_17
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 328
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca0fbf5ab55bc90f0800000000000000
+      internalID: -1108812003008581460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_18
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 263
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f84579f59fe20090800000000000000
+      internalID: -8069624154880128783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_19
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 265
+        width: 21
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f28f3b28e19404a60800000000000000
+      internalID: 7656199761920522287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_20
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 266
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09507fe23d3ff5b20800000000000000
+      internalID: 3125484754770003344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_21
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 266
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3ae2061e402e76a0800000000000000
+      internalID: -6449682096599143876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_22
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 264
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ccffa8d2401561b0800000000000000
+      internalID: -5664103077059232567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_23
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 199
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e0580df8501c9740800000000000000
+      internalID: 5160017247448092899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_24
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 201
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ffadbe18df4ae970800000000000000
+      internalID: 8784921812786851828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_25
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 202
+        width: 20
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18dead248c4233500800000000000000
+      internalID: 374683636535586177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_26
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 202
+        width: 20
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76405713546a1bbb0800000000000000
+      internalID: -4921970101626534809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_27
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 200
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb8ee831f0697f030800000000000000
+      internalID: 3528453824564881596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_28
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 132
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1dedd5828b4b54c0800000000000000
+      internalID: -4297758395431260901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_29
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 127
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f83167e71e8e56940800000000000000
+      internalID: 5288889392603468687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_30
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 130
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfda523ff991b2210800000000000000
+      internalID: 1309168291451088380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_31
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 133
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1df86fdbde8752c0800000000000000
+      internalID: -4442925432380523238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_32
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 72
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13387a29bbb2e9b90800000000000000
+      internalID: -7233295866891107535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_33
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 72
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c313294fe6ca7aa0800000000000000
+      internalID: -6162394409076583483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_34
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 8
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70c548b19e7cf7b30800000000000000
+      internalID: 4287365174282968071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_35
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 8
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07fcc0d140af0f6d0800000000000000
+      internalID: -2958590059608223888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_36
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 8
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e1a1f796b86bd060800000000000000
+      internalID: 6979287180983247334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_37
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 7
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb7844f6fbcec3820800000000000000
+      internalID: 2899452567069427646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_38
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 31
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f38d95e98efdd9ea0800000000000000
+      internalID: -5864284949584422849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mage_w1_flash_39
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 0
+        width: 30
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c7a8c4ad53216c10800000000000000
+      internalID: 2044954590906460099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      mage_w1_flash_0: 3856720064430753368
+      mage_w1_flash_1: 2404364641348147519
+      mage_w1_flash_10: 5269588204067038391
+      mage_w1_flash_11: -7142398779558830952
+      mage_w1_flash_12: -3718658011147332989
+      mage_w1_flash_13: 4664138700847602083
+      mage_w1_flash_14: -7636544134556799849
+      mage_w1_flash_15: -7571641265267944484
+      mage_w1_flash_16: -4362822713293744485
+      mage_w1_flash_17: -1108812003008581460
+      mage_w1_flash_18: -8069624154880128783
+      mage_w1_flash_19: 7656199761920522287
+      mage_w1_flash_2: -2036447692268063831
+      mage_w1_flash_20: 3125484754770003344
+      mage_w1_flash_21: -6449682096599143876
+      mage_w1_flash_22: -5664103077059232567
+      mage_w1_flash_23: 5160017247448092899
+      mage_w1_flash_24: 8784921812786851828
+      mage_w1_flash_25: 374683636535586177
+      mage_w1_flash_26: -4921970101626534809
+      mage_w1_flash_27: 3528453824564881596
+      mage_w1_flash_28: -4297758395431260901
+      mage_w1_flash_29: 5288889392603468687
+      mage_w1_flash_3: -8425372556443478568
+      mage_w1_flash_30: 1309168291451088380
+      mage_w1_flash_31: -4442925432380523238
+      mage_w1_flash_32: -7233295866891107535
+      mage_w1_flash_33: -6162394409076583483
+      mage_w1_flash_34: 4287365174282968071
+      mage_w1_flash_35: -2958590059608223888
+      mage_w1_flash_36: 6979287180983247334
+      mage_w1_flash_37: 2899452567069427646
+      mage_w1_flash_38: -5864284949584422849
+      mage_w1_flash_39: 2044954590906460099
+      mage_w1_flash_4: -2515336401841930705
+      mage_w1_flash_5: -6180956100440469294
+      mage_w1_flash_6: -2215557052305298118
+      mage_w1_flash_7: -7478014901073596774
+      mage_w1_flash_8: 9109299775490045795
+      mage_w1_flash_9: 3335822708801690211
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

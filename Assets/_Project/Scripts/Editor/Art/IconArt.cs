@@ -9,7 +9,7 @@ namespace Game.EditorTools.Art
     /// 24x24 pixel icons: one per perk (PerkId order, then "rest") and one per trinket (catalog order).
     /// Each sits on a dark medallion whose rim shows who can take it (gold common, red warrior, blue mage, green ranger).
     /// </summary>
-    public static class IconArt
+    public static partial class IconArt
     {
         public const int Size = 24;
         private static Color32 C(string hex) => PixelMaterial.Hex(hex);
@@ -511,6 +511,9 @@ namespace Game.EditorTools.Art
             Add(c => Sword(c, 4, 4, 19, 19, rust, C("#e8dcb0")));                          // worn arming sword
             Add(c => { Staff(c, C("#2a2030"), C("#7dff9a"), C("#e0ffe0")); Sparks(c, C("#b6ff9a")); }); // soul-flame staff
             Add(c => { Sword(c, 4, 4, 19, 19, C("#f0f4ff"), Gold); Sparks(c, C("#fff3c0")); }); // holy sword
+            // Phase 4: the other weapon of each class (by ClassId), then the eight runes (IconArt.Weapons.cs).
+            for (int k = 0; k < 8; k++) { int w = k; Add(c => AltWeapon(c, w)); }
+            for (int k = 1; k <= 8; k++) { int r = k; Add(c => RuneStone(c, r)); }
             return icons;
         }
 

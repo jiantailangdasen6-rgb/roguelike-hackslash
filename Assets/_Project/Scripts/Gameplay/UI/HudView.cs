@@ -39,6 +39,7 @@ namespace Game.Gameplay
             public Text Time;
             public Text Key;
             public RectTransform KeyCap;
+            public Image Rune; // the rune set into this skill (phase 4), top-right corner
             public float Last;
             public float FlashAt = -10f;
         }
@@ -89,6 +90,23 @@ namespace Game.Gameplay
             _levelText.rectTransform.Stretch();
         }
 
+        /// <summary>Runes sit on the corner of their skill; the other weapon shows on the basic attack (phase 4).</summary>
+        private void ShowGearOnSkills(int slot, ItemInstance item)
+        {
+            if (slot == (int)EquipSlot.Rune1 || slot == (int)EquipSlot.Rune2)
+            {
+                var image = _skills[slot == (int)EquipSlot.Rune1 ? 1 : 2].Rune;
+                image.sprite = item != null ? GameIcons.Rune(item.rune) : null;
+                image.enabled = image.sprite != null;
+            }
+            else if (slot == (int)EquipSlot.Weapon)
+            {
+                var image = _skills[0].Rune;
+                image.sprite = item != null && item.baseId == "weapon_alt" ? GameIcons.Item(item) : null;
+                image.enabled = image.sprite != null;
+            }
+        }
+
         private SkillSlot CreateSkillSlot(Transform root, int i)
         {
             var slot = UIKit.Framed(root, "Skill" + i, new Color(0.03f, 0.025f, 0.03f, 0.95f));
@@ -118,7 +136,11 @@ namespace Game.Gameplay
             // A key cap sitting on the bottom edge.
             var capRect = UIKit.KeyCap(rect, MouseKeys[i], i == 0 || i == 3 ? 17 : 20, out var key);
             capRect.Place(new Vector2(0.5f, 0f), new Vector2(i == 0 || i == 3 ? 86f : 44f, 30f), new Vector2(0f, -18f));
-            return new SkillSlot { Root = rect, Icon = icon, Cool = cool, Flash = flash, Time = time, Key = key, KeyCap = capRect };
+            var rune = UIKit.Panel(slot.transform, "Rune", Color.white);
+            rune.rectTransform.Place(new Vector2(1f, 1f), new Vector2(40f, 40f), new Vector2(10f, 10f));
+            rune.raycastTarget = false;
+            rune.enabled = false;
+            return new SkillSlot { Root = rect, Icon = icon, Cool = cool, Flash = flash, Time = time, Key = key, KeyCap = capRect, Rune = rune };
         }
 
         private sealed class TeamFrame
@@ -423,6 +445,9 @@ namespace Game.Gameplay
         {
             switch (e.Type)
             {
+                case SimEventType.GearSlot when NetPlayer.Local != null && e.ClientId == NetPlayer.Local.OwnerClientId && e.Int < SimPlayer.SlotCount:
+                    ShowGearOnSkills(e.Int, ItemCodec.Unpack(e.Seed));
+                    break;
                 case SimEventType.RoomStarted:
                 {
                     // A new area: its name, then the map takes over.
@@ -713,7 +738,7 @@ namespace Game.Gameplay
                 if (hp < _lastHp - 0.001f) _trailHoldUntil = Time.time + 0.45f;
                 _lastHp = hp;
                 _hpTrail.Fill = _trailValue;
-                string sheet = SkinCatalog.Sheet(def.Id, local.Skin.Value);
+                string sheet = SkinCatalog.Sheet(def.Id, local.Skin.Value, local.Weapon.Value);
                 if (sheet != _portraitSheet)
                 {
                     _portraitSheet = sheet;
@@ -773,7 +798,7 @@ namespace Game.Gameplay
                 var f = _team[slot++];
                 UIKit.Toggle(f.Root, true);
                 f.Edge.color = p.Color;
-                string faceSheet = SkinCatalog.Sheet(p.Class.Value, p.Skin.Value);
+                string faceSheet = SkinCatalog.Sheet(p.Class.Value, p.Skin.Value, p.Weapon.Value);
                 if (f.FaceSheet != faceSheet)
                 {
                     f.FaceSheet = faceSheet;

@@ -38,6 +38,12 @@ namespace Game.Core
                 Rarity.Magic => 1,
                 _ => 2,
             };
+            if (baseDef.Slot is EquipSlot.Rune1 or EquipSlot.Rune2)
+            {
+                // A rune: its effect instead of rolled properties; rarity is how strongly it works.
+                item.rune = ItemCatalog.Runes[rng.Range(0, ItemCatalog.Runes.Length)].Id;
+                return item;
+            }
             RollAffixes(rng, item, affixCount);
 
             if (rarity == Rarity.Legendary)
@@ -130,6 +136,7 @@ namespace Game.Core
             Put((int)item.legendary >> 3, 1);
             Put(baseIndex >> 4, 1);
             Put((int)item.legendary >> 4, 1); // added later (old items read 0)
+            Put((int)item.rune, 4);           // phase 4: runes (old items read 0 = none)
             return v;
         }
 
@@ -163,6 +170,7 @@ namespace Game.Core
             int legendary = legendaryLow | Take(1) << 3;
             int baseIndex = baseLow | Take(1) << 4;
             legendary |= Take(1) << 4;
+            int rune = Take(4);
             if (baseIndex >= ItemCatalog.Bases.Length) return null;
 
             var item = new ItemInstance
@@ -174,6 +182,7 @@ namespace Game.Core
                 legendary = (LegendaryId)legendary,
                 itemLevel = itemLevel,
                 loaner = loaner,
+                rune = (RuneId)rune,
             };
             foreach (var (affix, roll) in affixes)
                 if (affix < ItemCatalog.Affixes.Length) item.AddAffix(ItemCatalog.Affixes[affix], roll);

@@ -94,6 +94,7 @@ namespace Game.Gameplay
         {
             p.Class.Value = loadout.classId;
             p.Skin.Value = (byte)loadout.skin;
+            p.Weapon.Value = (byte)SkinCatalog.WeaponOf(loadout);
             p.Title.Value = loadout.title ?? "";
             p.MoveSpeed.Value = ClassCatalog.Get(loadout.classId).MoveSpeed;
         }

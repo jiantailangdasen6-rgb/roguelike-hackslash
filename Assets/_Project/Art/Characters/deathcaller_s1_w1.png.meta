@@ -1,0 +1,1198 @@
+fileFormatVersion: 2
+guid: 2f974fa6ac495d14d9d684d79ce33f84
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2270235690198590226
+    second: deathcaller_s1_w1_0
+  - first:
+      213: 7222460294359094354
+    second: deathcaller_s1_w1_1
+  - first:
+      213: -926267361767113858
+    second: deathcaller_s1_w1_2
+  - first:
+      213: -2057896999065901724
+    second: deathcaller_s1_w1_3
+  - first:
+      213: 4453050710644048223
+    second: deathcaller_s1_w1_4
+  - first:
+      213: -2635690818221961152
+    second: deathcaller_s1_w1_5
+  - first:
+      213: 9052631861034306532
+    second: deathcaller_s1_w1_6
+  - first:
+      213: 3534634249939937155
+    second: deathcaller_s1_w1_7
+  - first:
+      213: -8276573809664583586
+    second: deathcaller_s1_w1_8
+  - first:
+      213: -2428311538499569680
+    second: deathcaller_s1_w1_9
+  - first:
+      213: -3615097082373196119
+    second: deathcaller_s1_w1_10
+  - first:
+      213: -5556670061972656704
+    second: deathcaller_s1_w1_11
+  - first:
+      213: 8627791063079108568
+    second: deathcaller_s1_w1_12
+  - first:
+      213: -904029637727510706
+    second: deathcaller_s1_w1_13
+  - first:
+      213: 6105195621406201566
+    second: deathcaller_s1_w1_14
+  - first:
+      213: 8198515422100756245
+    second: deathcaller_s1_w1_15
+  - first:
+      213: 4659193254556112689
+    second: deathcaller_s1_w1_16
+  - first:
+      213: -8720595449746737773
+    second: deathcaller_s1_w1_17
+  - first:
+      213: -4385124692377493541
+    second: deathcaller_s1_w1_18
+  - first:
+      213: -7167114431045887753
+    second: deathcaller_s1_w1_19
+  - first:
+      213: -8673305397198436721
+    second: deathcaller_s1_w1_20
+  - first:
+      213: 2959383568986595110
+    second: deathcaller_s1_w1_21
+  - first:
+      213: -702259098259467051
+    second: deathcaller_s1_w1_22
+  - first:
+      213: 4371896966304736721
+    second: deathcaller_s1_w1_23
+  - first:
+      213: 7779631916060005982
+    second: deathcaller_s1_w1_24
+  - first:
+      213: 7948063465668436522
+    second: deathcaller_s1_w1_25
+  - first:
+      213: 257652000301608760
+    second: deathcaller_s1_w1_26
+  - first:
+      213: -3981717855519122846
+    second: deathcaller_s1_w1_27
+  - first:
+      213: 287774032700578824
+    second: deathcaller_s1_w1_28
+  - first:
+      213: 8525307504734330857
+    second: deathcaller_s1_w1_29
+  - first:
+      213: 5483218962875616617
+    second: deathcaller_s1_w1_30
+  - first:
+      213: 4688130661592899017
+    second: deathcaller_s1_w1_31
+  - first:
+      213: 3395502314570387572
+    second: deathcaller_s1_w1_32
+  - first:
+      213: -6419588938405769111
+    second: deathcaller_s1_w1_33
+  - first:
+      213: 5857870755127085955
+    second: deathcaller_s1_w1_34
+  - first:
+      213: -7454234153873179700
+    second: deathcaller_s1_w1_35
+  - first:
+      213: 7697808334233143942
+    second: deathcaller_s1_w1_36
+  - first:
+      213: 611876903896384145
+    second: deathcaller_s1_w1_37
+  - first:
+      213: -4995025571169136817
+    second: deathcaller_s1_w1_38
+  - first:
+      213: 9135763276670951286
+    second: deathcaller_s1_w1_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 520
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eec9c410ba08e70e0800000000000000
+      internalID: -2270235690198590226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 520
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25413a91f555b3460800000000000000
+      internalID: 7222460294359094354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 519
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7b35d6fdbc3523f0800000000000000
+      internalID: -926267361767113858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 519
+        width: 19
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 465a5522591e073e0800000000000000
+      internalID: -2057896999065901724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_4
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 457
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f514dbe270a6ccd30800000000000000
+      internalID: 4453050710644048223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_5
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 457
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0401f125a252c6bd0800000000000000
+      internalID: -2635690818221961152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_6
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 457
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4eb4557f6b861ad70800000000000000
+      internalID: 9052631861034306532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_7
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 457
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 387699e7f1b8d0130800000000000000
+      internalID: 3534634249939937155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_8
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 457
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5814a5a8f3b32d80800000000000000
+      internalID: -8276573809664583586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_9
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 457
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f730cf7587ec4ed0800000000000000
+      internalID: -2428311538499569680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_10
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 392
+        width: 18
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a638907b5894ddc0800000000000000
+      internalID: -3615097082373196119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_11
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 392
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cd6216e40eb2e2b0800000000000000
+      internalID: -5556670061972656704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_12
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 392
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dfbe1782421cb770800000000000000
+      internalID: 8627791063079108568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_13
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 392
+        width: 25
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4f93d095dd3473f0800000000000000
+      internalID: -904029637727510706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_14
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 328
+        width: 18
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed6df2a22130ab450800000000000000
+      internalID: 6105195621406201566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_15
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 328
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51790ebb65af6c170800000000000000
+      internalID: 8198515422100756245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_16
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 328
+        width: 35
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13796bd5497c8a040800000000000000
+      internalID: 4659193254556112689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_17
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 328
+        width: 25
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39535f364a83af680800000000000000
+      internalID: -8720595449746737773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_18
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 263
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdf9b0f5358e423c0800000000000000
+      internalID: -4385124692377493541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_19
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 265
+        width: 21
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f81fe0e56b498c90800000000000000
+      internalID: -7167114431045887753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_20
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 266
+        width: 20
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f864283c1ba32a780800000000000000
+      internalID: -8673305397198436721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_21
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 266
+        width: 20
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62fd29f2da7d11920800000000000000
+      internalID: 2959383568986595110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_22
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 264
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d455f322131146f0800000000000000
+      internalID: -702259098259467051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_23
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 199
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d5a337a0291cac30800000000000000
+      internalID: 4371896966304736721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_24
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 201
+        width: 24
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e565c08620ec6fb60800000000000000
+      internalID: 7779631916060005982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_25
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 202
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a226d638c913d4e60800000000000000
+      internalID: 7948063465668436522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_26
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 202
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83f65a1112d539300800000000000000
+      internalID: 257652000301608760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_27
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 200
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26ad3f9d4b81eb8c0800000000000000
+      internalID: -3981717855519122846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_28
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 132
+        width: 25
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80c13b245f06ef300800000000000000
+      internalID: 287774032700578824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_29
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 129
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ef59aca10aff4670800000000000000
+      internalID: 8525307504734330857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_30
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 129
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96d03eb689e481c40800000000000000
+      internalID: 5483218962875616617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_31
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 133
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cd9cd87ff59f0140800000000000000
+      internalID: 4688130661592899017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_32
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 72
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4701cfd6d5f3f1f20800000000000000
+      internalID: 3395502314570387572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_33
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 72
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9601c4a7fd909e6a0800000000000000
+      internalID: -6419588938405769111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_34
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 8
+        width: 25
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38bcf7b5a665b4150800000000000000
+      internalID: 5857870755127085955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_35
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 8
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccbfdc1088d3d8890800000000000000
+      internalID: -7454234153873179700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_36
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 8
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68a020f25eb14da60800000000000000
+      internalID: 7697808334233143942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_37
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 6
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 192820f5dc2dd7800800000000000000
+      internalID: 611876903896384145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_38
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4f887235ba1eaab0800000000000000
+      internalID: -4995025571169136817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: deathcaller_s1_w1_39
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67fd70afb40c8ce70800000000000000
+      internalID: 9135763276670951286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      deathcaller_s1_w1_0: -2270235690198590226
+      deathcaller_s1_w1_1: 7222460294359094354
+      deathcaller_s1_w1_10: -3615097082373196119
+      deathcaller_s1_w1_11: -5556670061972656704
+      deathcaller_s1_w1_12: 8627791063079108568
+      deathcaller_s1_w1_13: -904029637727510706
+      deathcaller_s1_w1_14: 6105195621406201566
+      deathcaller_s1_w1_15: 8198515422100756245
+      deathcaller_s1_w1_16: 4659193254556112689
+      deathcaller_s1_w1_17: -8720595449746737773
+      deathcaller_s1_w1_18: -4385124692377493541
+      deathcaller_s1_w1_19: -7167114431045887753
+      deathcaller_s1_w1_2: -926267361767113858
+      deathcaller_s1_w1_20: -8673305397198436721
+      deathcaller_s1_w1_21: 2959383568986595110
+      deathcaller_s1_w1_22: -702259098259467051
+      deathcaller_s1_w1_23: 4371896966304736721
+      deathcaller_s1_w1_24: 7779631916060005982
+      deathcaller_s1_w1_25: 7948063465668436522
+      deathcaller_s1_w1_26: 257652000301608760
+      deathcaller_s1_w1_27: -3981717855519122846
+      deathcaller_s1_w1_28: 287774032700578824
+      deathcaller_s1_w1_29: 8525307504734330857
+      deathcaller_s1_w1_3: -2057896999065901724
+      deathcaller_s1_w1_30: 5483218962875616617
+      deathcaller_s1_w1_31: 4688130661592899017
+      deathcaller_s1_w1_32: 3395502314570387572
+      deathcaller_s1_w1_33: -6419588938405769111
+      deathcaller_s1_w1_34: 5857870755127085955
+      deathcaller_s1_w1_35: -7454234153873179700
+      deathcaller_s1_w1_36: 7697808334233143942
+      deathcaller_s1_w1_37: 611876903896384145
+      deathcaller_s1_w1_38: -4995025571169136817
+      deathcaller_s1_w1_39: 9135763276670951286
+      deathcaller_s1_w1_4: 4453050710644048223
+      deathcaller_s1_w1_5: -2635690818221961152
+      deathcaller_s1_w1_6: 9052631861034306532
+      deathcaller_s1_w1_7: 3534634249939937155
+      deathcaller_s1_w1_8: -8276573809664583586
+      deathcaller_s1_w1_9: -2428311538499569680
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

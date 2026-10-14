@@ -204,6 +204,8 @@ namespace Game.Core
         FireBolt,    // forge monsters
         SporeOrb,    // grotto monsters
         Page,        // library monsters
+        Bomb,        // alchemist's other weapon: bursts wide where it hits or lands
+        Dagger,      // assassin's other weapon: a thrown dagger
     }
 
     public enum AttackAnim : byte
@@ -247,6 +249,9 @@ namespace Game.Core
         Steam,        // the colossus quenched in water
         SporeCloud,   // spores hanging in the air (Value = radius, Size.x = seconds)
         InkBurst,     // ink erupting from the floor
+        Thrust,       // a lance thrust (Vec = direction, Value = length)
+        Lightning,    // a rune's lightning striking a monster (Pos = from, Vec = to)
+        RuneFlare,    // a rune answering its skill (Int2 in Size.x = RuneId, Value = radius)
     }
 
     /// <summary>Owner input sent to the host each network tick. Button presses are counters so a lost packet never loses a press.</summary>

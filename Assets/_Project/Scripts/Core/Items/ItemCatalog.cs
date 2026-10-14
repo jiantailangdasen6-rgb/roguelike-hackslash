@@ -16,6 +16,8 @@ namespace Game.Core
         Armor,
         Amulet,
         Ring,
+        Rune1, // a rune set into the first skill
+        Rune2, // a rune set into the second skill
     }
 
     /// <summary>Unique effects of legendary gear: each changes one class skill.</summary>
@@ -38,6 +40,28 @@ namespace Game.Core
         Underworld,     // deathcaller: a wider curse, and every cursed monster rises as a servant
         Scales,         // paladin: devotion binds two teammates
         Sunburst,       // paladin: judgment falls three times
+    }
+
+    /// <summary>What a rune adds to the skill it is set into (RunSimulation.Runes). Order is part of the wire format.</summary>
+    public enum RuneId : byte
+    {
+        None,
+        Ember,  // 炎: the skill leaves burning ground where it lands (along a dash or a shot: a trail of fire)
+        Frost,  // 氷: the skill freezes what it lands on
+        Storm,  // 雷: lightning leaps from where it lands to monsters around
+        Vital,  // 命: the skill heals you and those close by
+        Echo,   // 響: now and then the skill is ready again at once
+        Swift,  // 疾: the skill comes back much sooner
+        Shadow, // 影: after the skill, the dodge is ready and every blow is critical for a moment
+        Soul,   // 魂: souls burst out where the skill lands and fly at monsters
+    }
+
+    public sealed class RuneDef
+    {
+        public RuneId Id;
+        public string Name;   // "炎のルーン"
+        public string Mark;   // one kanji for the icon and the HUD
+        public string Text;   // what it does
     }
 
     /// <summary>A random property an item can roll. Values scale up with item level.</summary>
@@ -123,7 +147,8 @@ namespace Game.Core
 
         // By ClassId: warrior, mage, ranger, guardian, assassin, alchemist, deathcaller, paladin.
         private static readonly string[] WornWeapon = { "古びた長剣", "古びた杖", "古びた弓", "古びた戦鎚", "古びた双剣", "使い古しの薬瓶", "古びた骨の杖", "古びた片手剣" };
-        private static readonly string[] KeenWeapon = { "鋭い戦斧", "水晶の杖", "狩人の長弓", "聖なる戦鎚", "影の双剣", "賢者の薬瓶", "魂火の杖", "聖剣" };
+        private static readonly string[] AltWeapon = { "戦士の大斧", "古き魔導書", "狩人の弩", "守りの大槍", "投げ短剣", "爆薬瓶", "死神の大鎌", "聖なる大剣" };
+        private static readonly string[] KeenWeapon ={ "鋭い戦斧", "水晶の杖", "狩人の長弓", "聖なる戦鎚", "影の双剣", "賢者の薬瓶", "魂火の杖", "聖剣" };
 
         /// <summary>Two bases per slot. Order is part of the wire format.</summary>
         public static readonly ItemBaseDef[] Bases =
@@ -136,7 +161,32 @@ namespace Game.Core
             new("moon_charm", "月の護符", EquipSlot.Amulet, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.05f)),
             new("copper_ring", "銅の指輪", EquipSlot.Ring, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.04f)),
             new("silver_ring", "銀の指輪", EquipSlot.Ring, new StatModifier(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.04f)),
+            // Phase 4: each class's other weapon (WeaponCatalog: its basic attack changes) and runes for the two skills.
+            new("weapon_alt", "異形の武器", EquipSlot.Weapon, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.05f), AltWeapon),
+            new("rune_1", "技1のルーン", EquipSlot.Rune1, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.02f)),
+            new("rune_2", "技2のルーン", EquipSlot.Rune2, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.02f)),
         };
+
+        public static readonly RuneDef[] Runes =
+        {
+            new() { Id = RuneId.Ember, Name = "炎のルーン", Mark = "炎", Text = "技の当たる場所に燃える床を残す（突進や矢なら通り道に火の道）" },
+            new() { Id = RuneId.Frost, Name = "氷のルーン", Mark = "氷", Text = "技の当たる場所の敵を凍らせる（凍った敵は砕ける）" },
+            new() { Id = RuneId.Storm, Name = "雷のルーン", Mark = "雷", Text = "技の当たる場所から近くの敵へ雷が飛ぶ" },
+            new() { Id = RuneId.Vital, Name = "命のルーン", Mark = "命", Text = "技を使うと自分と近くの仲間が回復する" },
+            new() { Id = RuneId.Echo, Name = "響のルーン", Mark = "響", Text = "技を使うと、ときどきすぐにもう一度使える" },
+            new() { Id = RuneId.Swift, Name = "疾のルーン", Mark = "疾", Text = "技の再使用時間が大きく縮む" },
+            new() { Id = RuneId.Shadow, Name = "影のルーン", Mark = "影", Text = "技を使うと回避がすぐ使え、少しのあいだ攻撃がすべて会心になる" },
+            new() { Id = RuneId.Soul, Name = "魂のルーン", Mark = "魂", Text = "技の当たる場所から魂が四方へ飛び散り、敵を打つ" },
+        };
+
+        public static RuneDef GetRune(RuneId id)
+        {
+            foreach (var def in Runes) if (def.Id == id) return def;
+            return null;
+        }
+
+        /// <summary>How strong a rune works by its rarity (並 1, 上質 1.3, 希少 1.6, 伝説 1.9).</summary>
+        public static float RunePower(Rarity rarity) => 1f + 0.3f * (int)rarity;
 
         public static readonly LegendaryDef[] Legendaries =
         {

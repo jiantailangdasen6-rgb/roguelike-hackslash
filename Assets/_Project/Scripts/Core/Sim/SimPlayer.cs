@@ -342,13 +342,23 @@ namespace Game.Core
         // ------------------------------------------------------------------ Gear (personal loot)
 
         public const int BagSize = 12;
-        public const int SlotCount = 4;
+        public const int SlotCount = 6; // weapon, armour, amulet, ring, and a rune for each skill
 
         /// <summary>Picked-up items waiting to be equipped (between rooms) or given to a teammate.</summary>
         public readonly List<ItemInstance> Bag = new();
         /// <summary>Indexed by <see cref="EquipSlot"/>.</summary>
         public readonly ItemInstance[] Equipped = new ItemInstance[SlotCount];
-        private readonly object[] _gearSources = { new(), new(), new(), new() };
+        private readonly object[] _gearSources = { new(), new(), new(), new(), new(), new() };
+
+        /// <summary>The kind of weapon worn: 0 the class's usual one, 1 its other one (WeaponCatalog, "weapon_alt").</summary>
+        public int WeaponKind => Equipped[(int)EquipSlot.Weapon]?.baseId == "weapon_alt" ? 1 : 0;
+
+        /// <summary>The rune set into a skill (1 or 2) and how strongly it works.</summary>
+        public (RuneId Rune, float Power) RuneIn(int skill)
+        {
+            var item = Equipped[skill == 1 ? (int)EquipSlot.Rune1 : (int)EquipSlot.Rune2];
+            return item == null ? (RuneId.None, 0f) : (item.rune, ItemCatalog.RunePower(item.rarity));
+        }
         /// <summary>Gear "迅雷": the first hit within this window after a dodge deals extra damage.</summary>
         public float DodgeStrikeTimer;
 

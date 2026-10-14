@@ -509,6 +509,11 @@ namespace Game.Gameplay
                 case AreaKind.Steam:
                     LandArea(e); // EventPresenter.Lands.cs
                     break;
+                case AreaKind.Thrust:
+                case AreaKind.Lightning:
+                case AreaKind.RuneFlare:
+                    RuneArea(e); // EventPresenter.Runes.cs
+                    break;
                 case AreaKind.SporeCloud:
                 case AreaKind.InkBurst:
                     Lands2Area(e); // EventPresenter.Lands2.cs
@@ -845,6 +850,16 @@ namespace Game.Gameplay
                     angle = 0f;
                     break;
                 }
+                case ProjectileKind.Bomb:
+                    // A black bottle with a lit fuse, tumbling.
+                    fx = Spawn("fx_flask", e.Pos, 16f, e.Value + 0.05f, 1.35f, 1.35f, new Color(0.45f, 0.42f, 0.5f));
+                    AddLight(fx, new Color(1f, 0.6f, 0.25f), 1.2f, 1.6f);
+                    angle = 0f;
+                    break;
+                case ProjectileKind.Dagger:
+                    fx = Spawn("fx_shard", e.Pos, 0f, e.Value + 0.05f, 1.3f, 1.3f, new Color(0.85f, 0.88f, 0.95f));
+                    angle -= 45f; // the shard sheet points up-right
+                    break;
                 default:
                     fx = Spawn("fx_bonearrow", e.Pos, 0f, e.Value + 0.05f, 1f, 1f, Color.white);
                     AddLight(fx, new Color(1f, 0.25f, 0.2f), 0.6f, 1f);

@@ -1,0 +1,1224 @@
+fileFormatVersion: 2
+guid: d41e2141c8c2173488f9f64ab7f2e492
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8406132144679968040
+    second: ranger_s1_w1_0
+  - first:
+      213: 7368698409371065429
+    second: ranger_s1_w1_1
+  - first:
+      213: -7969357349309962912
+    second: ranger_s1_w1_2
+  - first:
+      213: -5169750594223002273
+    second: ranger_s1_w1_3
+  - first:
+      213: -2143531759158813797
+    second: ranger_s1_w1_4
+  - first:
+      213: 5247509647913496492
+    second: ranger_s1_w1_5
+  - first:
+      213: -5738821140969199823
+    second: ranger_s1_w1_6
+  - first:
+      213: 690449920229462475
+    second: ranger_s1_w1_7
+  - first:
+      213: -5523847510612467029
+    second: ranger_s1_w1_8
+  - first:
+      213: -1338992381501340746
+    second: ranger_s1_w1_9
+  - first:
+      213: -8001314455037326584
+    second: ranger_s1_w1_10
+  - first:
+      213: -1135025748959156425
+    second: ranger_s1_w1_11
+  - first:
+      213: -6335600396903229451
+    second: ranger_s1_w1_12
+  - first:
+      213: -9092766807851289032
+    second: ranger_s1_w1_13
+  - first:
+      213: 8695267499649542147
+    second: ranger_s1_w1_14
+  - first:
+      213: -4536842425176689087
+    second: ranger_s1_w1_15
+  - first:
+      213: 8147060589264959952
+    second: ranger_s1_w1_16
+  - first:
+      213: -4352113537285406677
+    second: ranger_s1_w1_17
+  - first:
+      213: 7219586014654260907
+    second: ranger_s1_w1_18
+  - first:
+      213: 3905521437829311204
+    second: ranger_s1_w1_19
+  - first:
+      213: -2620618070834587773
+    second: ranger_s1_w1_20
+  - first:
+      213: -5588657107794291403
+    second: ranger_s1_w1_21
+  - first:
+      213: -200312044406963151
+    second: ranger_s1_w1_22
+  - first:
+      213: -2902855711655604178
+    second: ranger_s1_w1_23
+  - first:
+      213: 4459400270766688718
+    second: ranger_s1_w1_24
+  - first:
+      213: 7251043844177495182
+    second: ranger_s1_w1_25
+  - first:
+      213: -5080475788141477938
+    second: ranger_s1_w1_26
+  - first:
+      213: 311887916133285819
+    second: ranger_s1_w1_27
+  - first:
+      213: -8631113917159616057
+    second: ranger_s1_w1_28
+  - first:
+      213: 6508117759728989024
+    second: ranger_s1_w1_29
+  - first:
+      213: -7925260480466988917
+    second: ranger_s1_w1_30
+  - first:
+      213: 301094454133243242
+    second: ranger_s1_w1_31
+  - first:
+      213: -3086267995687906340
+    second: ranger_s1_w1_32
+  - first:
+      213: 9082555064814100479
+    second: ranger_s1_w1_33
+  - first:
+      213: -4939322856780515371
+    second: ranger_s1_w1_34
+  - first:
+      213: 1452971378045753537
+    second: ranger_s1_w1_35
+  - first:
+      213: 1286056764207118846
+    second: ranger_s1_w1_36
+  - first:
+      213: -3287641774890543694
+    second: ranger_s1_w1_37
+  - first:
+      213: -1724017544743625758
+    second: ranger_s1_w1_38
+  - first:
+      213: 7374175172177715431
+    second: ranger_s1_w1_39
+  - first:
+      213: 1413447073341112978
+    second: ranger_s1_w1_40
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ranger_s1_w1_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 520
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d2ab5d1a5b675b80800000000000000
+      internalID: -8406132144679968040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 520
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55c5c8b8920e24660800000000000000
+      internalID: 7368698409371065429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 519
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0652b3ad6b7276190800000000000000
+      internalID: -7969357349309962912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 519
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5d29fd993b5148b0800000000000000
+      internalID: -5169750594223002273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_4
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 457
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9b1292d835a042e0800000000000000
+      internalID: -2143531759158813797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 457
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cafa157e836e2d840800000000000000
+      internalID: 5247509647913496492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_6
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 457
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 137670fe39c9b50b0800000000000000
+      internalID: -5738821140969199823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_7
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 457
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc159765b88f49900800000000000000
+      internalID: 690449920229462475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_8
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 457
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2a488a4f95753b0800000000000000
+      internalID: -5523847510612467029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_9
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 457
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b388a7f581fa6de0800000000000000
+      internalID: -1338992381501340746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_10
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 392
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80b4d4b55ee95f090800000000000000
+      internalID: -8001314455037326584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_11
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 392
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7372e5e48149f30f0800000000000000
+      internalID: -1135025748959156425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_12
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 392
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f752c7a10d6318a0800000000000000
+      internalID: -6335600396903229451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_13
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 392
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 836bf8883c000d180800000000000000
+      internalID: -9092766807851289032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_14
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 392
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3082c9fa8bbcba870800000000000000
+      internalID: 8695267499649542147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_15
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 328
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 146fb6df9d5e901c0800000000000000
+      internalID: -4536842425176689087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_16
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 328
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d9f8b2e07c201170800000000000000
+      internalID: 8147060589264959952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_17
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 328
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b204febdbcf2a93c0800000000000000
+      internalID: -4352113537285406677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_18
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 328
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba668d4ba3f113460800000000000000
+      internalID: 7219586014654260907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_19
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 328
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ea2d7c2e03333630800000000000000
+      internalID: 3905521437829311204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_20
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 264
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3875febcfb1b1abd0800000000000000
+      internalID: -2620618070834587773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_21
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 264
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 535957e68f91172b0800000000000000
+      internalID: -5588657107794291403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_22
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 264
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13404e4c149583df0800000000000000
+      internalID: -200312044406963151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_23
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 264
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e20dd883c1cf6b7d0800000000000000
+      internalID: -2902855711655604178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_24
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 264
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec9445a5be8f2ed30800000000000000
+      internalID: 4459400270766688718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_25
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 197
+        width: 37
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e848bf665f1e0a460800000000000000
+      internalID: 7251043844177495182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_26
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 191
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecfbadd20368e79b0800000000000000
+      internalID: -5080475788141477938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_27
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 194
+        width: 37
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbf7cd2486c045400800000000000000
+      internalID: 311887916133285819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_28
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 196
+        width: 27
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c155c73f9f183880800000000000000
+      internalID: -8631113917159616057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_29
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 133
+        width: 37
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 063be09fe9a715a50800000000000000
+      internalID: 6508117759728989024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_30
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 127
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b80d2553591d30290800000000000000
+      internalID: -7925260480466988917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_31
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 130
+        width: 37
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6db37e8fc3bd2400800000000000000
+      internalID: 301094454133243242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_32
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 132
+        width: 27
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd39d531c9f5b25d0800000000000000
+      internalID: -3086267995687906340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_33
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 72
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff5b23c5b7bb0e70800000000000000
+      internalID: 9082555064814100479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_34
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 72
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d731aa0800047bb0800000000000000
+      internalID: -4939322856780515371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_35
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 8
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c81a3925cdf92410800000000000000
+      internalID: 1452971378045753537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_36
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 8
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef9bd8f20ddf8d110800000000000000
+      internalID: 1286056764207118846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_37
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 8
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b51ae27933ff52d0800000000000000
+      internalID: -3287641774890543694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_38
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 7
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ebd3036d2f0318e0800000000000000
+      internalID: -1724017544743625758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_39
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 0
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e06821cf35565660800000000000000
+      internalID: 7374175172177715431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ranger_s1_w1_40
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 0
+        width: 30
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 292005bdf929d9310800000000000000
+      internalID: 1413447073341112978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ranger_s1_w1_0: -8406132144679968040
+      ranger_s1_w1_1: 7368698409371065429
+      ranger_s1_w1_10: -8001314455037326584
+      ranger_s1_w1_11: -1135025748959156425
+      ranger_s1_w1_12: -6335600396903229451
+      ranger_s1_w1_13: -9092766807851289032
+      ranger_s1_w1_14: 8695267499649542147
+      ranger_s1_w1_15: -4536842425176689087
+      ranger_s1_w1_16: 8147060589264959952
+      ranger_s1_w1_17: -4352113537285406677
+      ranger_s1_w1_18: 7219586014654260907
+      ranger_s1_w1_19: 3905521437829311204
+      ranger_s1_w1_2: -7969357349309962912
+      ranger_s1_w1_20: -2620618070834587773
+      ranger_s1_w1_21: -5588657107794291403
+      ranger_s1_w1_22: -200312044406963151
+      ranger_s1_w1_23: -2902855711655604178
+      ranger_s1_w1_24: 4459400270766688718
+      ranger_s1_w1_25: 7251043844177495182
+      ranger_s1_w1_26: -5080475788141477938
+      ranger_s1_w1_27: 311887916133285819
+      ranger_s1_w1_28: -8631113917159616057
+      ranger_s1_w1_29: 6508117759728989024
+      ranger_s1_w1_3: -5169750594223002273
+      ranger_s1_w1_30: -7925260480466988917
+      ranger_s1_w1_31: 301094454133243242
+      ranger_s1_w1_32: -3086267995687906340
+      ranger_s1_w1_33: 9082555064814100479
+      ranger_s1_w1_34: -4939322856780515371
+      ranger_s1_w1_35: 1452971378045753537
+      ranger_s1_w1_36: 1286056764207118846
+      ranger_s1_w1_37: -3287641774890543694
+      ranger_s1_w1_38: -1724017544743625758
+      ranger_s1_w1_39: 7374175172177715431
+      ranger_s1_w1_4: -2143531759158813797
+      ranger_s1_w1_40: 1413447073341112978
+      ranger_s1_w1_5: 5247509647913496492
+      ranger_s1_w1_6: -5738821140969199823
+      ranger_s1_w1_7: 690449920229462475
+      ranger_s1_w1_8: -5523847510612467029
+      ranger_s1_w1_9: -1338992381501340746
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

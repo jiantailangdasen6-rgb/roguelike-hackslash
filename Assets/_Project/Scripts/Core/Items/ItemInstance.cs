@@ -28,6 +28,8 @@ namespace Game.Core
         public int itemLevel;
         public ClassId classId;
         public LegendaryId legendary;
+        /// <summary>A rune's effect (rune items only).</summary>
+        public RuneId rune;
         /// <summary>Lent for this run to fill an empty slot: never taken home, given away or salvaged for shards.</summary>
         public bool loaner;
         public List<RolledAffix> affixes = new();

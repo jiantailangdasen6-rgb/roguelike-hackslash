@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
+  m_Name: assassin_s1_w1
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
+  Texture: {fileID: 2800000, guid: 6bd901b82b36be04594f6c5f895f7d57, type: 3}
+  FlashTexture: {fileID: 2800000, guid: da767c07f2fd95446af9bbdff5790a9e, type: 3}
+  NormalTexture: {fileID: 2800000, guid: ad6cedd11b5ba924eb908e10cfb7dd4d, type: 3}
+  FrameWidth: 64
+  FrameHeight: 64
+  Pivot: {x: 0.5, y: 0.15625}
+  PixelsPerUnit: 32
+  Clips:
+  - Name: idle
+    Row: 0
+    Frames: 4
+    Fps: 7
+    Loop: 1
+  - Name: run
+    Row: 1
+    Frames: 6
+    Fps: 14
+    Loop: 1
+  - Name: attack
+    Row: 2
+    Frames: 6
+    Fps: 22
+    Loop: 0
+  - Name: attack2
+    Row: 3
+    Frames: 6
+    Fps: 22
+    Loop: 0
+  - Name: skill1
+    Row: 4
+    Frames: 4
+    Fps: 16
+    Loop: 0
+  - Name: skill2
+    Row: 5
+    Frames: 5
+    Fps: 12
+    Loop: 0
+  - Name: dodge
+    Row: 6
+    Frames: 4
+    Fps: 18
+    Loop: 0
+  - Name: hurt
+    Row: 7
+    Frames: 2
+    Fps: 10
+    Loop: 0
+  - Name: death
+    Row: 8
+    Frames: 6
+    Fps: 9
+    Loop: 0

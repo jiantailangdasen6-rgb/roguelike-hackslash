@@ -270,6 +270,9 @@ namespace Game.Core
             float area = owner.Stats.Get(StatType.Area);
             switch (proj.Kind)
             {
+                case ProjectileKind.Bomb:
+                    BurstBomb(proj, owner); // RunSimulation.Weapons.cs
+                    break;
                 case ProjectileKind.Flask:
                 {
                     float r = ClassCatalog.FlaskBurstRadius * area * (1f + 0.25f * owner.PerkLevel(PerkId.VolatileMix));
@@ -319,7 +322,7 @@ namespace Game.Core
             }
         }
 
-        private static bool IsFlask(ProjectileKind kind) => kind is ProjectileKind.Flask or ProjectileKind.FireFlask or ProjectileKind.HealFlask;
+        private static bool IsFlask(ProjectileKind kind) => kind is ProjectileKind.Flask or ProjectileKind.FireFlask or ProjectileKind.HealFlask or ProjectileKind.Bomb;
 
         /// <summary>Lobbed flasks fly over monsters; only the basic flask breaks on the first one it meets.</summary>
         private static bool FliesOver(ProjectileKind kind) => kind is ProjectileKind.FireFlask or ProjectileKind.HealFlask;
@@ -377,7 +380,7 @@ namespace Game.Core
 
         /// <summary>Critical hits: the assassin never misses one on crippled prey (or while the smoke lasts).</summary>
         private bool RollCrit(SimPlayer attacker, bool crippled) =>
-            (attacker.ClassId == ClassId.Assassin && (crippled || attacker.SureCritTimer > 0f))
+            (attacker.ClassId == ClassId.Assassin && crippled) || attacker.SureCritTimer > 0f // smoke bomb, or a shadow rune
             || _combatRng.Chance(attacker.Stats.Get(StatType.CritChance));
 
         private static float CritMultiplier(SimPlayer attacker) => 2f + 0.5f * attacker.PerkLevel(PerkId.Finisher);

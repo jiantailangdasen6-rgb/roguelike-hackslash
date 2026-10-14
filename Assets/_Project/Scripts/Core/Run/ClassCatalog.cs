@@ -53,6 +53,18 @@ namespace Game.Core
         public float Skill2Cooldown;
     }
 
+    /// <summary>A class's other weapon: its own basic attack (Arc doubles as width or burst radius where it fits).</summary>
+    public sealed class WeaponDef
+    {
+        public string Name;
+        public string BasicName;
+        public string Text;
+        public float Damage;
+        public float Interval;
+        public float Range;
+        public float Arc;
+    }
+
     public static class ClassCatalog
     {
         public const float DodgeCooldown = 0.9f;
@@ -214,6 +226,27 @@ namespace Game.Core
                 Skill2Name = "献身", Skill2Text = "近くの仲間と光の鎖でつながる（6秒）。仲間の受けるダメージの半分を肩代わりし、2人にシールド", Skill2Cooldown = 15f,
             },
         };
+
+        /// <summary>
+        /// Each class's other weapon ("weapon_alt" gear, RunSimulation.Weapons): it changes the basic attack and the
+        /// character's look. By ClassId.
+        /// </summary>
+        public static readonly WeaponDef[] AltWeapons =
+        {
+            new() { Name = "大斧", BasicName = "大振り", Text = "遅いが重い一撃を広く振るう。凍った敵を砕き、敵を大きく吹き飛ばす", Damage = 34f, Interval = 0.78f, Range = 2.4f, Arc = 170f },
+            new() { Name = "魔導書", BasicName = "三連の魔弾", Text = "魔弾を3方向へ同時に放つ。届く距離は短い", Damage = 6.5f, Interval = 0.46f, Range = 7f, Arc = 26f },
+            new() { Name = "弩", BasicName = "重い矢", Text = "ゆっくりだが、敵を2体まで貫く重い矢を放つ", Damage = 27f, Interval = 0.72f, Range = 12f },
+            new() { Name = "大槍", BasicName = "突き", Text = "まっすぐ長く突き、線の上の敵をすべて打つ", Damage = 18f, Interval = 0.5f, Range = 3.3f, Arc = 0.9f },
+            new() { Name = "投げ短剣", BasicName = "投げ短剣", Text = "短剣を投げて離れて戦う。凍結・気絶・印の敵には必ず会心", Damage = 7.5f, Interval = 0.26f, Range = 7.5f },
+            new() { Name = "爆薬瓶", BasicName = "爆薬瓶", Text = "ゆっくりだが、大きく爆ぜる瓶を投げる。凍った敵を砕く", Damage = 21f, Interval = 0.85f, Range = 8f, Arc = 2.2f },
+            new() { Name = "大鎌", BasicName = "薙ぎ払い", Text = "近くを大きく薙ぎ払い、当たった敵の数だけ少し回復する", Damage = 15f, Interval = 0.6f, Range = 2.4f, Arc = 150f },
+            new() { Name = "大剣", BasicName = "大振り", Text = "遅いが重い一撃。当てるたびに少しのシールドを得る", Damage = 33f, Interval = 0.8f, Range = 2.3f, Arc = 160f },
+        };
+
+        public static WeaponDef AltWeapon(ClassId id) => AltWeapons[(int)id];
+
+        /// <summary>The basic attack's name with this weapon kind (0 usual, 1 the other weapon).</summary>
+        public static string BasicName(ClassId id, int weaponKind) => weaponKind == 1 ? AltWeapon(id).BasicName : Get(id).BasicName;
 
         /// <summary>Frame of an ability in the icons_skill sheet: the first six classes, then the dodge and the bag, then the rest.</summary>
         public static int SkillIcon(ClassId id, int slot) => (int)id < 6 ? (int)id * 3 + slot : 20 + ((int)id - 6) * 3 + slot;

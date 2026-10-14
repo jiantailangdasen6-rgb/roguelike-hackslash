@@ -321,6 +321,24 @@ namespace Game.Gameplay
                     sp.Bag.Add(ItemGenerator.Generate((ulong)(sp.ClientId + 7), 3, 9f, sp.ClassId, Rarity.Legendary, EquipSlot.Weapon));
                     sp.Equip(sp.Bag.Count - 1);
                 }
+            // -altweapon / -rune1 Ember -rune2 Storm (screenshots, tests): everyone starts with the other weapon or these runes.
+            foreach (var sp in Sim.Players)
+            {
+                if (CommandLine.Has("-altweapon")) Wear(sp, ItemGenerator.Generate((ulong)(sp.ClientId + 11), 3, 2f, sp.ClassId, Rarity.Rare, EquipSlot.Weapon), "weapon_alt", RuneId.None);
+                for (int skill = 1; skill <= 2; skill++)
+                    if (Enum.TryParse(CommandLine.GetValue("-rune" + skill) ?? "", true, out RuneId rune))
+                        Wear(sp, ItemGenerator.Generate(sp.ClientId + 13ul + (ulong)skill, 3, 2f, sp.ClassId, Rarity.Rare, skill == 1 ? EquipSlot.Rune1 : EquipSlot.Rune2), null, rune);
+            }
+            static void Wear(SimPlayer sp, ItemInstance item, string baseId, RuneId rune)
+            {
+                if (baseId != null) item.baseId = baseId;
+                if (rune != RuneId.None) item.rune = rune;
+                item.classId = sp.ClassId;
+                sp.Bag.Add(item);
+                int index = sp.Bag.Count - 1;
+                sp.Equip(index);
+                if (sp.Bag.Count > index) sp.Bag.RemoveAt(index); // the replaced piece is not kept (bots would put a rarer one back on)
+            }
             // -blessings <FlameBrand,StormFist,...> / -offerblessing (screenshots, tests): gods' blessings from the start.
             string blessings = CommandLine.GetValue("-blessings");
             if (!string.IsNullOrEmpty(blessings))
@@ -349,6 +367,7 @@ namespace Game.Gameplay
             netPlayer.Slot.Value = slot;
             netPlayer.Class.Value = simPlayer.ClassId;
             netPlayer.Skin.Value = (byte)loadout.skin;
+            netPlayer.Weapon.Value = (byte)simPlayer.WeaponKind;
             netPlayer.Title.Value = loadout.title ?? "";
             netPlayer.Hp.Value = simPlayer.Hp;
             netPlayer.MaxHp.Value = simPlayer.MaxHp;
@@ -499,6 +518,7 @@ namespace Game.Gameplay
                 SetIfChanged(p.Valor, sp.ValorTimer > 0f);
                 SetIfChanged(p.Picks, sp.PicksLeft);
                 SetIfChanged(p.Legendary, sp.AnyLegendaryEquipped);
+                SetIfChanged(p.Weapon, (byte)sp.WeaponKind);
                 SetIfChanged(p.Caged, sp.CagedBy != 0);
                 SetIfChanged(p.Curses, RewardCatalog.PackCurses(sp.CurseStacks));
                 SetIfChanged(p.UsedPedestals, Sim.PedestalsUsedBy(sp));

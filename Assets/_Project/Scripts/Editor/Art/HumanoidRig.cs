@@ -44,6 +44,17 @@ namespace Game.EditorTools.Art
         public int WeaponZ = 7;                            // 7 = behind the front arm, 9 = in front of it
         public Color32 SmearColor = PixelMaterial.Hex("#c9d2dc");
 
+        /// <summary>While set, every rig holds this weapon instead of its own (a class's other weapon, HeroArt.Weapons).</summary>
+        public static AltWeapon Override;
+
+        public sealed class AltWeapon
+        {
+            public PixelPart Part;
+            public float Reach;
+            public int Z;
+            public Color32 Smear;
+        }
+
         private static Vector2 Rotate(Vector2 v, float degrees)
         {
             float r = degrees * Mathf.Deg2Rad, c = Mathf.Cos(r), s = Mathf.Sin(r);
@@ -77,7 +88,8 @@ namespace Game.EditorTools.Art
             Vector2 shoulder = OnTorso(ShoulderFront);
             Vector2 hand = shoulder + Rotate(new Vector2(0f, -ArmLength), p.ArmFront);
             frame.Add(ArmFront, shoulder, p.ArmFront, 8);
-            if (Weapon != null) frame.Add(Weapon, hand, p.WeaponAbsolute ?? WeaponAngle(p.ArmFront, p.WeaponTilt), WeaponZ);
+            var weapon = Override?.Part ?? Weapon;
+            if (weapon != null) frame.Add(weapon, hand, p.WeaponAbsolute ?? WeaponAngle(p.ArmFront, p.WeaponTilt), Override?.Z ?? WeaponZ);
 
             if (p.Smear)
             {
@@ -86,11 +98,11 @@ namespace Game.EditorTools.Art
                 frame.Smears.Add(new Smear
                 {
                     Center = shoulder,
-                    InnerRadius = ArmLength + WeaponReach * 0.55f,
-                    OuterRadius = ArmLength + WeaponReach,
+                    InnerRadius = ArmLength + (Override?.Reach ?? WeaponReach) * 0.55f,
+                    OuterRadius = ArmLength + (Override?.Reach ?? WeaponReach),
                     FromAngle = tipFrom,
                     Sweep = p.SmearTo - p.SmearFrom,
-                    Color = SmearColor,
+                    Color = Override?.Smear ?? SmearColor,
                 });
             }
             return frame;

@@ -19,6 +19,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<int> Slot = new();
         public readonly NetworkVariable<ClassId> Class = new();
         public readonly NetworkVariable<byte> Skin = new();
+        /// <summary>The kind of weapon worn (0 usual, 1 the class's other weapon): it changes the look.</summary>
+        public readonly NetworkVariable<byte> Weapon = new();
         /// <summary>An earned title worn next to the name (AchievementCatalog).</summary>
         public readonly NetworkVariable<Unity.Collections.FixedString64Bytes> Title = new();
         public readonly NetworkVariable<float> Hp = new();
@@ -75,6 +77,7 @@ namespace Game.Gameplay
             ApplySheet();
             Class.OnValueChanged += (_, _) => ApplySheet();
             Skin.OnValueChanged += (_, _) => ApplySheet();
+            Weapon.OnValueChanged += (_, _) => ApplySheet();
             shadow.sprite = SpriteSheet.Load("fx_shadow")?.First;
             marker.sprite = SpriteSheet.Load("fx_circle")?.First;
             marker.color = new Color(Color.r, Color.g, Color.b, 0.35f);
@@ -96,7 +99,8 @@ namespace Game.Gameplay
 
         private void ApplySheet()
         {
-            _sheet = SpriteSheet.Load(SkinCatalog.Sheet(Class.Value, Skin.Value)) ?? SpriteSheet.Load(ClassDef.Sheet);
+            _sheet = SpriteSheet.Load(SkinCatalog.Sheet(Class.Value, Skin.Value, Weapon.Value), quiet: true)
+                     ?? SpriteSheet.Load(SkinCatalog.Sheet(Class.Value, Skin.Value)) ?? SpriteSheet.Load(ClassDef.Sheet);
             animator.SetSheet(_sheet);
         }
 

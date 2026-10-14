@@ -98,7 +98,7 @@ namespace Game.Tests
             for (ulong seed = 1; seed < 4000 && found < 20; seed++)
             {
                 var item = ItemGenerator.Generate(seed, 5, 3f, ClassId.Mage);
-                if (item.rarity != Rarity.Legendary) continue;
+                if (item.rarity != Rarity.Legendary || item.rune != RuneId.None) continue;
                 found++;
                 Assert.AreEqual(ClassId.Mage, ItemCatalog.GetLegendary(item.legendary).Class);
                 Assert.That(ItemText.Name(item), Does.StartWith(ItemCatalog.GetLegendary(item.legendary).Name));
@@ -273,7 +273,7 @@ namespace Game.Tests
             Assert.AreEqual(12, p.Equipped[(int)EquipSlot.Ring].itemLevel);
             Assert.IsFalse(p.Equipped[(int)EquipSlot.Ring].loaner);
             for (int s = 0; s < SimPlayer.SlotCount; s++)
-                if (s != (int)EquipSlot.Ring) Assert.IsTrue(p.Equipped[s].loaner, $"slot {s} gets a loaner");
+                if (s != (int)EquipSlot.Ring && s < (int)EquipSlot.Rune1) Assert.IsTrue(p.Equipped[s].loaner, $"slot {s} gets a loaner");
             Assert.AreEqual(1 + RunSimulation.GearLevelGrace, p.GearLevelCap);
 
             float early = strong.GetModifiers(p.GearLevelCap).First().Value;

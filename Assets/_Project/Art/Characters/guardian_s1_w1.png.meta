@@ -1,0 +1,1302 @@
+fileFormatVersion: 2
+guid: 76b0b17380b6cb242b61b3b87ae3298c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6147056762487074132
+    second: guardian_s1_w1_0
+  - first:
+      213: -2627365936648474146
+    second: guardian_s1_w1_1
+  - first:
+      213: -1017823771268724510
+    second: guardian_s1_w1_2
+  - first:
+      213: -2183938406792219326
+    second: guardian_s1_w1_3
+  - first:
+      213: 263339536613864666
+    second: guardian_s1_w1_4
+  - first:
+      213: -2031906618341376226
+    second: guardian_s1_w1_5
+  - first:
+      213: 2808709493359748414
+    second: guardian_s1_w1_6
+  - first:
+      213: 2465535517763107376
+    second: guardian_s1_w1_7
+  - first:
+      213: -8372622842681464096
+    second: guardian_s1_w1_8
+  - first:
+      213: -4628526365872062286
+    second: guardian_s1_w1_9
+  - first:
+      213: 1268400325001947862
+    second: guardian_s1_w1_10
+  - first:
+      213: 4116406247095186338
+    second: guardian_s1_w1_11
+  - first:
+      213: -1643671309565542037
+    second: guardian_s1_w1_12
+  - first:
+      213: 3107252871304076935
+    second: guardian_s1_w1_13
+  - first:
+      213: 1692705479034075202
+    second: guardian_s1_w1_14
+  - first:
+      213: 2321479763091847513
+    second: guardian_s1_w1_15
+  - first:
+      213: 2355395609581463943
+    second: guardian_s1_w1_16
+  - first:
+      213: 3087711478999209303
+    second: guardian_s1_w1_17
+  - first:
+      213: 6187100900675511996
+    second: guardian_s1_w1_18
+  - first:
+      213: 1916970454629926358
+    second: guardian_s1_w1_19
+  - first:
+      213: -7104867191563115190
+    second: guardian_s1_w1_20
+  - first:
+      213: 5274532514287317390
+    second: guardian_s1_w1_21
+  - first:
+      213: 2379162919048311220
+    second: guardian_s1_w1_22
+  - first:
+      213: 253361231111437787
+    second: guardian_s1_w1_23
+  - first:
+      213: 209244477517999221
+    second: guardian_s1_w1_24
+  - first:
+      213: -1839805778115767700
+    second: guardian_s1_w1_25
+  - first:
+      213: -893465983953350038
+    second: guardian_s1_w1_26
+  - first:
+      213: -7965212836761467098
+    second: guardian_s1_w1_27
+  - first:
+      213: -8920884825695477646
+    second: guardian_s1_w1_28
+  - first:
+      213: -5936975326607408167
+    second: guardian_s1_w1_29
+  - first:
+      213: 2508276419881638605
+    second: guardian_s1_w1_30
+  - first:
+      213: 2864490561060321058
+    second: guardian_s1_w1_31
+  - first:
+      213: 323279133771019574
+    second: guardian_s1_w1_32
+  - first:
+      213: -4192620788248935632
+    second: guardian_s1_w1_33
+  - first:
+      213: -2737510254433087298
+    second: guardian_s1_w1_34
+  - first:
+      213: -3256100792796123690
+    second: guardian_s1_w1_35
+  - first:
+      213: -1971382498286441546
+    second: guardian_s1_w1_36
+  - first:
+      213: -9129701281176029954
+    second: guardian_s1_w1_37
+  - first:
+      213: -4394516019329245691
+    second: guardian_s1_w1_38
+  - first:
+      213: -2439088411734485407
+    second: guardian_s1_w1_39
+  - first:
+      213: -2878665504538531807
+    second: guardian_s1_w1_40
+  - first:
+      213: -228000006590130848
+    second: guardian_s1_w1_41
+  - first:
+      213: -8052657564862381639
+    second: guardian_s1_w1_42
+  - first:
+      213: 5200073939765983319
+    second: guardian_s1_w1_43
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: guardian_s1_w1_0
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 520
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca29bc9617441baa0800000000000000
+      internalID: -6147056762487074132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_1
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 520
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed13b1bd998b98bd0800000000000000
+      internalID: -2627365936648474146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_2
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 519
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e844953ca6ffd1f0800000000000000
+      internalID: -1017823771268724510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_3
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 519
+        width: 24
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24531db079711b1e0800000000000000
+      internalID: -2183938406792219326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_4
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 457
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad47f2fc9e197a300800000000000000
+      internalID: 263339536613864666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_5
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 457
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1f3ff432b73dc3e0800000000000000
+      internalID: -2031906618341376226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_6
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 457
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e35a9fc276a8af620800000000000000
+      internalID: 2808709493359748414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_7
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 457
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03af06d8d77573220800000000000000
+      internalID: 2465535517763107376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_8
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 457
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ea66a772e77ecb80800000000000000
+      internalID: -8372622842681464096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_9
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 457
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b08aa01bcb24cfb0800000000000000
+      internalID: -4628526365872062286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_10
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 392
+        width: 22
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6da2bb410634a9110800000000000000
+      internalID: 1268400325001947862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_11
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 391
+        width: 25
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a3be4d0ca9602930800000000000000
+      internalID: 4116406247095186338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_12
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 392
+        width: 50
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6148d907a18039e0800000000000000
+      internalID: -1643671309565542037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_13
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 383
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78e5465060e2f1b20800000000000000
+      internalID: 3107252871304076935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_14
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 387
+        width: 27
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 248fe233aa2bd7710800000000000000
+      internalID: 1692705479034075202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_15
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 386
+        width: 24
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 959f8587b8d873020800000000000000
+      internalID: 2321479763091847513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_16
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 328
+        width: 22
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7892e96d3db00b020800000000000000
+      internalID: 2355395609581463943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_17
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 327
+        width: 25
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 755d4a21b31c9da20800000000000000
+      internalID: 3087711478999209303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_18
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 328
+        width: 45
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb6634e0d7ffcd550800000000000000
+      internalID: 6187100900675511996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_19
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 319
+        width: 41
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d5c221d8727a9a10800000000000000
+      internalID: 1916970454629926358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_20
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 321
+        width: 23
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a45ad86bee0766d90800000000000000
+      internalID: -7104867191563115190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_21
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 321
+        width: 22
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e81f7564067e23940800000000000000
+      internalID: 5274532514287317390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_22
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 263
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b1f7acc11c740120800000000000000
+      internalID: 2379162919048311220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_23
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 264
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bddb04482be148300800000000000000
+      internalID: 253361231111437787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_24
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 264
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57c2ca16eb267e200800000000000000
+      internalID: 209244477517999221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_25
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 264
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c62d2bb7462b776e0800000000000000
+      internalID: -1839805778115767700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_26
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 264
+        width: 25
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a62d09fdb65c993f0800000000000000
+      internalID: -893465983953350038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_27
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 199
+        width: 36
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62783706021e57190800000000000000
+      internalID: -7965212836761467098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_28
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 201
+        width: 27
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 270af321486a23480800000000000000
+      internalID: -8920884825695477646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_29
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 202
+        width: 27
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d38e495560ab9da0800000000000000
+      internalID: -5936975326607408167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_30
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 202
+        width: 27
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dca988d4d103fc220800000000000000
+      internalID: 2508276419881638605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_31
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 200
+        width: 38
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 227b5721df6b0c720800000000000000
+      internalID: 2864490561060321058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_32
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 133
+        width: 35
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 635b7bbc8a48c7400800000000000000
+      internalID: 323279133771019574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_33
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 127
+        width: 29
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03301864b91d0d5c0800000000000000
+      internalID: -4192620788248935632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_34
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 129
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb0d6837de8620ad0800000000000000
+      internalID: -2737510254433087298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_35
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 136
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dde48c949100d2d0800000000000000
+      internalID: -3256100792796123690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_36
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 72
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bbe639001e34a4e0800000000000000
+      internalID: -1971382498286441546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_37
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 72
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef4f2165e09cc4180800000000000000
+      internalID: -9129701281176029954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_38
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1
+        width: 27
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50edd1ca6fa8303c0800000000000000
+      internalID: -4394516019329245691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_39
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 8
+        width: 40
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1665bca230e962ed0800000000000000
+      internalID: -2439088411734485407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_40
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 7
+        width: 39
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1286fc6b9fcec08d0800000000000000
+      internalID: -2878665504538531807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_41
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 2
+        width: 33
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0659866b33bf5dcf0800000000000000
+      internalID: -228000006590130848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_42
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 0
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b1048c0c963f3090800000000000000
+      internalID: -8052657564862381639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: guardian_s1_w1_43
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 0
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 758748172bf5a2840800000000000000
+      internalID: 5200073939765983319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      guardian_s1_w1_0: -6147056762487074132
+      guardian_s1_w1_1: -2627365936648474146
+      guardian_s1_w1_10: 1268400325001947862
+      guardian_s1_w1_11: 4116406247095186338
+      guardian_s1_w1_12: -1643671309565542037
+      guardian_s1_w1_13: 3107252871304076935
+      guardian_s1_w1_14: 1692705479034075202
+      guardian_s1_w1_15: 2321479763091847513
+      guardian_s1_w1_16: 2355395609581463943
+      guardian_s1_w1_17: 3087711478999209303
+      guardian_s1_w1_18: 6187100900675511996
+      guardian_s1_w1_19: 1916970454629926358
+      guardian_s1_w1_2: -1017823771268724510
+      guardian_s1_w1_20: -7104867191563115190
+      guardian_s1_w1_21: 5274532514287317390
+      guardian_s1_w1_22: 2379162919048311220
+      guardian_s1_w1_23: 253361231111437787
+      guardian_s1_w1_24: 209244477517999221
+      guardian_s1_w1_25: -1839805778115767700
+      guardian_s1_w1_26: -893465983953350038
+      guardian_s1_w1_27: -7965212836761467098
+      guardian_s1_w1_28: -8920884825695477646
+      guardian_s1_w1_29: -5936975326607408167
+      guardian_s1_w1_3: -2183938406792219326
+      guardian_s1_w1_30: 2508276419881638605
+      guardian_s1_w1_31: 2864490561060321058
+      guardian_s1_w1_32: 323279133771019574
+      guardian_s1_w1_33: -4192620788248935632
+      guardian_s1_w1_34: -2737510254433087298
+      guardian_s1_w1_35: -3256100792796123690
+      guardian_s1_w1_36: -1971382498286441546
+      guardian_s1_w1_37: -9129701281176029954
+      guardian_s1_w1_38: -4394516019329245691
+      guardian_s1_w1_39: -2439088411734485407
+      guardian_s1_w1_4: 263339536613864666
+      guardian_s1_w1_40: -2878665504538531807
+      guardian_s1_w1_41: -228000006590130848
+      guardian_s1_w1_42: -8052657564862381639
+      guardian_s1_w1_43: 5200073939765983319
+      guardian_s1_w1_5: -2031906618341376226
+      guardian_s1_w1_6: 2808709493359748414
+      guardian_s1_w1_7: 2465535517763107376
+      guardian_s1_w1_8: -8372622842681464096
+      guardian_s1_w1_9: -4628526365872062286
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -13,6 +13,7 @@ namespace Game.Core
         Achievements,
         Teamwork,
         Controls,
+        Gear,     // phase 4: each class's other weapon and the runes (always open)
     }
 
     /// <summary>
@@ -55,6 +56,7 @@ namespace Game.Core
             CodexSection.Gods => "神々",
             CodexSection.Achievements => "実績",
             CodexSection.Teamwork => "連携",
+            CodexSection.Gear => "武器とルーン",
             _ => "操作",
         };
 
@@ -317,6 +319,15 @@ namespace Game.Core
                 Room(RoomKind.Campfire, "主の手前のひと休み", "全員がそろってから主の扉へ",
                     "焚き火のそばで体力が回復し、倒れた仲間も起き上がる", "集合の鐘で仲間を呼べる", "主の扉は生きている全員がそろうと開く"),
                 Room(RoomKind.Boss, "エリアの主", "試練を越えて隙を作る", "主が戦っている間は扉が閉まる", "倒すと奥への道が開く（全員で立つと次のエリアへ）"),
+
+                // ---------------------------------------------------------------- Weapons and runes (always open, phase 4)
+                Open(CodexSection.Gear, "gear:AltWeapon", "異形の武器", "職業ごとのもう一つの武器", "icons_item", "拾ったら一度持ち替えてみる。袋の説明で通常攻撃の変わり方が分かる",
+                    "どの職業にも、いつもと違う武器がある（大斧・魔導書・弩・大槍・投げ短剣・爆薬瓶・大鎌・大剣）",
+                    "持つと通常攻撃の形が変わり、見た目も変わる", "宝箱や魔物の落とし物から、ときどき見つかる"),
+                Open(CodexSection.Gear, "gear:Rune", "ルーン", "技に宿る石", "icons_item", "技1・技2の枠にはめる。珍しいルーンほど強く効く",
+                    "技1のルーン・技2のルーンの枠にはめると、その技を使うたびに力を貸す",
+                    "炎（燃える床）・氷（凍らせる）・雷（近くの敵へ）・命（回復）・響（すぐもう一度）・疾（再使用が早い）・影（回避と会心）・魂（魂が飛び散る）",
+                    "突進や貫く矢なら通り道に沿って効く（炎の道など）。冒険中は貸し出されない"),
 
                 // ---------------------------------------------------------------- Teamwork (always open)
                 Open(CodexSection.Teamwork, "team:Shatter", "砕き", "凍結×強打", "fx_ice", "魔法使いの氷結陣のあと、戦士や狩人が強打を合わせる",

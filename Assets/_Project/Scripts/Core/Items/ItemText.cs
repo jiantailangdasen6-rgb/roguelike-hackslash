@@ -28,8 +28,30 @@ namespace Game.Core
             EquipSlot.Weapon => "武器",
             EquipSlot.Armor => "防具",
             EquipSlot.Amulet => "首飾り",
+            EquipSlot.Rune1 => "技1のルーン",
+            EquipSlot.Rune2 => "技2のルーン",
             _ => "指輪",
         };
+
+        /// <summary>The skill a rune slot belongs to, by class ("突進斬り").</summary>
+        public static string RuneSkill(EquipSlot slot, ClassId cls) =>
+            ClassCatalog.AbilityName(cls, slot == EquipSlot.Rune1 ? AbilitySlot.Skill1 : AbilitySlot.Skill2);
+
+        /// <summary>What sets this piece apart beyond its numbers: a rune's effect, or the other weapon's attack.</summary>
+        public static IEnumerable<string> SpecialLines(ItemInstance item)
+        {
+            var rune = ItemCatalog.GetRune(item.rune);
+            if (rune != null)
+            {
+                yield return $"<color=#c9a8ff>◇ 「{RuneSkill(item.Slot, item.classId)}」に宿る：{rune.Text}</color>";
+                yield return $"<color=#bfb6aa>効き目 ×{ItemCatalog.RunePower(item.rarity):0.0}（珍しいほど強い）</color>";
+            }
+            if (item.baseId == "weapon_alt")
+            {
+                var w = ClassCatalog.AltWeapon(item.classId);
+                yield return $"<color=#9fe0ff>◇ 通常攻撃が「{w.BasicName}」に：{w.Text}</color>";
+            }
+        }
 
         public static string StatName(StatType stat) => stat switch
         {
@@ -77,6 +99,8 @@ namespace Game.Core
         {
             var def = item.Base;
             if (def == null) return item.baseId;
+            var rune = ItemCatalog.GetRune(item.rune);
+            if (rune != null) return rune.Name;
             string name = def.ClassNames != null && (int)item.classId < def.ClassNames.Length ? def.ClassNames[(int)item.classId] : def.Name;
             var legendary = ItemCatalog.GetLegendary(item.legendary);
             return legendary != null ? legendary.Name + name : name;
@@ -89,6 +113,7 @@ namespace Game.Core
         /// <param name="levelCap">Show values as they work in the current room (gear from home is held back early on).</param>
         public static IEnumerable<string> PropertyLines(ItemInstance item, int levelCap = int.MaxValue)
         {
+            foreach (var line in SpecialLines(item)) yield return line;
             foreach (var mod in item.GetModifiers(levelCap)) yield return Describe(mod);
             if (item.itemLevel > levelCap)
                 yield return $"<color=#bfb6aa>（この部屋ではLv{levelCap}相当の力。深く進むと本来の力に）</color>";
@@ -136,6 +161,11 @@ namespace Game.Core
             var lost = ItemCatalog.GetLegendary(worn?.legendary ?? LegendaryId.None);
             if (gained != null && gained != lost) result.Add($"<color={BetterColor}>▲ ◆ {gained.Text}</color>");
             if (lost != null && lost != gained) result.Add($"<color={WorseColor}>▼ ◆ {lost.Text}（失う）</color>");
+            // A different rune or weapon kind: say what changes.
+            if (candidate != null && (candidate.rune != (worn?.rune ?? RuneId.None) || (candidate.baseId == "weapon_alt") != (worn?.baseId == "weapon_alt")))
+                foreach (var line in SpecialLines(candidate)) result.Insert(0, line);
+            if (candidate != null && candidate.Slot == EquipSlot.Weapon && candidate.baseId != "weapon_alt" && worn?.baseId == "weapon_alt")
+                result.Insert(0, $"<color=#9fe0ff>◇ 通常攻撃が「{ClassCatalog.Get(candidate.classId).BasicName}」に戻る</color>");
             if (result.Count == 0) result.Add("<color=#bfb6aa>性能は変わらない</color>");
             return result;
         }

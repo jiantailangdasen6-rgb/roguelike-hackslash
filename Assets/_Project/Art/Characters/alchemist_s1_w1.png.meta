@@ -1,0 +1,1250 @@
+fileFormatVersion: 2
+guid: 4631665222906f8418c410c653f02d94
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2062221959245640659
+    second: alchemist_s1_w1_0
+  - first:
+      213: 6250779859972647902
+    second: alchemist_s1_w1_1
+  - first:
+      213: 4829209170516601171
+    second: alchemist_s1_w1_2
+  - first:
+      213: -4183117074823102884
+    second: alchemist_s1_w1_3
+  - first:
+      213: -35121173163837863
+    second: alchemist_s1_w1_4
+  - first:
+      213: 6737171283745217154
+    second: alchemist_s1_w1_5
+  - first:
+      213: -3207652906117978753
+    second: alchemist_s1_w1_6
+  - first:
+      213: -2481172588375870005
+    second: alchemist_s1_w1_7
+  - first:
+      213: -1380157728766346155
+    second: alchemist_s1_w1_8
+  - first:
+      213: -6571975913720346462
+    second: alchemist_s1_w1_9
+  - first:
+      213: 5996856502062499139
+    second: alchemist_s1_w1_10
+  - first:
+      213: 8534350722440807407
+    second: alchemist_s1_w1_11
+  - first:
+      213: -2759560514539079411
+    second: alchemist_s1_w1_12
+  - first:
+      213: -2946659790942830630
+    second: alchemist_s1_w1_13
+  - first:
+      213: 1415749496194482734
+    second: alchemist_s1_w1_14
+  - first:
+      213: -5378647292121496300
+    second: alchemist_s1_w1_15
+  - first:
+      213: 8454787384085991219
+    second: alchemist_s1_w1_16
+  - first:
+      213: 4003949602194553396
+    second: alchemist_s1_w1_17
+  - first:
+      213: 3649255877476395199
+    second: alchemist_s1_w1_18
+  - first:
+      213: -6942431664721359550
+    second: alchemist_s1_w1_19
+  - first:
+      213: 1201210713478421307
+    second: alchemist_s1_w1_20
+  - first:
+      213: 2306180821409602209
+    second: alchemist_s1_w1_21
+  - first:
+      213: -2066587661887816241
+    second: alchemist_s1_w1_22
+  - first:
+      213: -4034554383348580393
+    second: alchemist_s1_w1_23
+  - first:
+      213: -1429928677561388361
+    second: alchemist_s1_w1_24
+  - first:
+      213: 1633436503321568354
+    second: alchemist_s1_w1_25
+  - first:
+      213: 6092762826397330751
+    second: alchemist_s1_w1_26
+  - first:
+      213: 7262447926838677218
+    second: alchemist_s1_w1_27
+  - first:
+      213: 2422658901792627401
+    second: alchemist_s1_w1_28
+  - first:
+      213: -6346565453889400530
+    second: alchemist_s1_w1_29
+  - first:
+      213: 8433686769967950679
+    second: alchemist_s1_w1_30
+  - first:
+      213: -4868837349958326460
+    second: alchemist_s1_w1_31
+  - first:
+      213: 1818485301051319723
+    second: alchemist_s1_w1_32
+  - first:
+      213: -1119731870176704670
+    second: alchemist_s1_w1_33
+  - first:
+      213: -8271067214983681186
+    second: alchemist_s1_w1_34
+  - first:
+      213: 5443820061920228109
+    second: alchemist_s1_w1_35
+  - first:
+      213: -4591008423244344378
+    second: alchemist_s1_w1_36
+  - first:
+      213: -4178756036427260028
+    second: alchemist_s1_w1_37
+  - first:
+      213: -864694195780700158
+    second: alchemist_s1_w1_38
+  - first:
+      213: 795753049900188459
+    second: alchemist_s1_w1_39
+  - first:
+      213: 9012937901644983347
+    second: alchemist_s1_w1_40
+  - first:
+      213: 8175799601786666550
+    second: alchemist_s1_w1_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: alchemist_s1_w1_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 520
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2c472fdd048163e0800000000000000
+      internalID: -2062221959245640659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 520
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edbe5d22a2b3fb650800000000000000
+      internalID: 6250779859972647902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 519
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35963b2872cc40340800000000000000
+      internalID: 4829209170516601171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 519
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5e3c4dfe2592f5c0800000000000000
+      internalID: -4183117074823102884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_4
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 457
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9567975aa79338ff0800000000000000
+      internalID: -35121173163837863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_5
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 457
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a9896669d3f7d50800000000000000
+      internalID: 6737171283745217154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_6
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 457
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f75a6104da02c73d0800000000000000
+      internalID: -3207652906117978753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_7
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 457
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc57b6b3daa119dd0800000000000000
+      internalID: -2481172588375870005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_8
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 457
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55c3fdaabd1b8dce0800000000000000
+      internalID: -1380157728766346155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_9
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 457
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a8864ee9b6abc4a0800000000000000
+      internalID: -6571975913720346462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_10
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 392
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3454d66473d193350800000000000000
+      internalID: 5996856502062499139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_11
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 391
+        width: 20
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe3ceafd3ca107670800000000000000
+      internalID: 8534350722440807407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_12
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 393
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0934b2355214b9d0800000000000000
+      internalID: -2759560514539079411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_13
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 393
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adffcee388c5b17d0800000000000000
+      internalID: -2946659790942830630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_14
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 392
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e224c937aa0c5a310800000000000000
+      internalID: 1415749496194482734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_15
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 328
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4154bfcf8c43b55b0800000000000000
+      internalID: -5378647292121496300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_16
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 327
+        width: 20
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33f46e79450755570800000000000000
+      internalID: 8454787384085991219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_17
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 329
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43a7f5903f2e09730800000000000000
+      internalID: 4003949602194553396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_18
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 329
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb8ac7fc2e2c4a230800000000000000
+      internalID: 3649255877476395199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_19
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 328
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24d0cdafe2787af90800000000000000
+      internalID: -6942431664721359550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_20
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 264
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b564597ce8ba010800000000000000
+      internalID: 1201210713478421307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_21
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 263
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aa10f70d33310020800000000000000
+      internalID: 2306180821409602209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_22
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 265
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcdb8f388710253e0800000000000000
+      internalID: -2066587661887816241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_23
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 265
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7df33811a226208c0800000000000000
+      internalID: -4034554383348580393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_24
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 264
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b23fcf917fd72ce0800000000000000
+      internalID: -1429928677561388361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_25
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 199
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26463af68d12ba610800000000000000
+      internalID: 1633436503321568354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_26
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 198
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3d2e108287dd8450800000000000000
+      internalID: 6092762826397330751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_27
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 200
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eecdfe49e569c460800000000000000
+      internalID: 7262447926838677218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_28
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 200
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ca99457f630f9120800000000000000
+      internalID: 2422658901792627401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_29
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 200
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e21182168587ce7a0800000000000000
+      internalID: -6346565453889400530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_30
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 133
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75be9d60f697a0570800000000000000
+      internalID: 8433686769967950679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_31
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 129
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4476496f93a6e6cb0800000000000000
+      internalID: -4868837349958326460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_32
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 130
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba5ee6e1fbe8c3910800000000000000
+      internalID: 1818485301051319723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_33
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 134
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2670f62fbc9e570f0800000000000000
+      internalID: -1119731870176704670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_34
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 72
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5ba481a034473d80800000000000000
+      internalID: -8271067214983681186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_35
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 72
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0376e3f0855c8b40800000000000000
+      internalID: 5443820061920228109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_36
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 8
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c3d1bbc9267940c0800000000000000
+      internalID: -4591008423244344378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_37
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 8
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48fdbbd56831206c0800000000000000
+      internalID: -4178756036427260028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_38
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 8
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2083625d53dfff3f0800000000000000
+      internalID: -864694195780700158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_39
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 7
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b230c3cce251b0b00800000000000000
+      internalID: 795753049900188459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_40
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 0
+        width: 30
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33c243ad443641d70800000000000000
+      internalID: 9012937901644983347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: alchemist_s1_w1_41
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 31
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63e364bab66467170800000000000000
+      internalID: 8175799601786666550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      alchemist_s1_w1_0: -2062221959245640659
+      alchemist_s1_w1_1: 6250779859972647902
+      alchemist_s1_w1_10: 5996856502062499139
+      alchemist_s1_w1_11: 8534350722440807407
+      alchemist_s1_w1_12: -2759560514539079411
+      alchemist_s1_w1_13: -2946659790942830630
+      alchemist_s1_w1_14: 1415749496194482734
+      alchemist_s1_w1_15: -5378647292121496300
+      alchemist_s1_w1_16: 8454787384085991219
+      alchemist_s1_w1_17: 4003949602194553396
+      alchemist_s1_w1_18: 3649255877476395199
+      alchemist_s1_w1_19: -6942431664721359550
+      alchemist_s1_w1_2: 4829209170516601171
+      alchemist_s1_w1_20: 1201210713478421307
+      alchemist_s1_w1_21: 2306180821409602209
+      alchemist_s1_w1_22: -2066587661887816241
+      alchemist_s1_w1_23: -4034554383348580393
+      alchemist_s1_w1_24: -1429928677561388361
+      alchemist_s1_w1_25: 1633436503321568354
+      alchemist_s1_w1_26: 6092762826397330751
+      alchemist_s1_w1_27: 7262447926838677218
+      alchemist_s1_w1_28: 2422658901792627401
+      alchemist_s1_w1_29: -6346565453889400530
+      alchemist_s1_w1_3: -4183117074823102884
+      alchemist_s1_w1_30: 8433686769967950679
+      alchemist_s1_w1_31: -4868837349958326460
+      alchemist_s1_w1_32: 1818485301051319723
+      alchemist_s1_w1_33: -1119731870176704670
+      alchemist_s1_w1_34: -8271067214983681186
+      alchemist_s1_w1_35: 5443820061920228109
+      alchemist_s1_w1_36: -4591008423244344378
+      alchemist_s1_w1_37: -4178756036427260028
+      alchemist_s1_w1_38: -864694195780700158
+      alchemist_s1_w1_39: 795753049900188459
+      alchemist_s1_w1_4: -35121173163837863
+      alchemist_s1_w1_40: 9012937901644983347
+      alchemist_s1_w1_41: 8175799601786666550
+      alchemist_s1_w1_5: 6737171283745217154
+      alchemist_s1_w1_6: -3207652906117978753
+      alchemist_s1_w1_7: -2481172588375870005
+      alchemist_s1_w1_8: -1380157728766346155
+      alchemist_s1_w1_9: -6571975913720346462
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

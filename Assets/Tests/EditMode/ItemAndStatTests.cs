@@ -49,6 +49,7 @@ namespace Game.Tests
             for (ulong seed = 1; seed < 500; seed++)
             {
                 var item = ItemGenerator.Generate(seed, 3, 1f);
+                if (item.rune != RuneId.None) continue; // runes carry their effect instead (WeaponRuneTests)
                 int count = item.affixes.Count;
                 switch (item.rarity)
                 {

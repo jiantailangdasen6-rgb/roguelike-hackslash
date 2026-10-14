@@ -27,6 +27,11 @@ namespace Game.Gameplay
 
         /// <summary>Weapon pictures per base in IconArt.Items (one per class, six classes).</summary>
         private const int WeaponLooks = 6;
+        /// <summary>Where the phase-4 icons begin in icons_item (after the 22 older ones).</summary>
+        private const int PhaseFourIcons = 22;
+
+        /// <summary>A rune by kind (for the HUD's skill slots).</summary>
+        public static Sprite Rune(RuneId rune) => rune == RuneId.None ? null : Frame("icons_item", PhaseFourIcons + 8 + (int)rune - 1);
 
         /// <summary>Gear: the two weapon bases have a picture per class (see IconArt.Items), the rest one each.</summary>
         public static Sprite Item(ItemInstance item)
@@ -34,6 +39,9 @@ namespace Game.Gameplay
             if (item == null) return null;
             int b = ItemCatalog.BaseIndex(item.baseId);
             int cls = Mathf.Max(0, (int)item.classId);
+            // Phase 4 (IconArt.Weapons): the other weapons by class, then the runes by kind.
+            if (item.rune != RuneId.None) return Frame("icons_item", PhaseFourIcons + 8 + (int)item.rune - 1);
+            if (item.baseId == "weapon_alt") return Frame("icons_item", PhaseFourIcons + Mathf.Min(cls, 7));
             // The deathcaller and the paladin (classes 6, 7) have their weapons after the other bases (IconArt.Items).
             if (b <= 1 && cls >= WeaponLooks) return Frame("icons_item", 2 * WeaponLooks + 6 + b * 2 + Mathf.Min(cls - WeaponLooks, 1));
             int frame = b switch

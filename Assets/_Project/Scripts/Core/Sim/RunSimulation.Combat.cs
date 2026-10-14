@@ -94,7 +94,8 @@ namespace Game.Core
         private float AttackInterval(SimPlayer p)
         {
             float speed = p.Stats.Get(StatType.AttackSpeed) * (p.EvasiveTimer > 0f ? 2f : 1f);
-            return p.Class.BasicInterval / Mathf.Max(0.2f, speed);
+            float interval = p.WeaponKind == 1 ? ClassCatalog.AltWeapon(p.ClassId).Interval : p.Class.BasicInterval; // RunSimulation.Weapons.cs
+            return interval / Mathf.Max(0.2f, speed);
         }
 
         private void Basic(SimPlayer p)
@@ -104,6 +105,12 @@ namespace Game.Core
             float might = p.Stats.Get(StatType.Might);
             float area = p.Stats.Get(StatType.Area);
             var c = p.Class;
+            if (p.WeaponKind == 1)
+            {
+                BasicAlt(p, dir, might, area); // the class's other weapon (RunSimulation.Weapons.cs)
+                BlessingOnBasic(p);
+                return;
+            }
 
             switch (c.Id)
             {
@@ -217,7 +224,8 @@ namespace Game.Core
                     break;
             }
 
-            p.Skill1Cooldown = cd;
+            p.Skill1Cooldown = RuneCooldown(p, 1, cd);
+            RuneCast(p, 1, dir); // RunSimulation.Runes.cs
             BlessingOnSkill1(p);
             Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Skill1, Pos = p.Position, Vec = dir });
         }
@@ -317,7 +325,8 @@ namespace Game.Core
                     break;
             }
 
-            p.Skill2Cooldown = c.Skill2Cooldown * p.CooldownMultiplier;
+            p.Skill2Cooldown = RuneCooldown(p, 2, c.Skill2Cooldown * p.CooldownMultiplier);
+            RuneCast(p, 2, dir); // RunSimulation.Runes.cs
             BlessingOnSkill2(p);
             Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Skill2, Pos = p.Position, Vec = dir });
         }
@@ -509,7 +518,7 @@ namespace Game.Core
         private void OnProjectileHit(Projectile proj, SimPlayer owner, int index)
         {
             Vector2 dir = proj.Velocity.normalized;
-            if (proj.Kind == ProjectileKind.Flask) return; // it bursts instead (BreakFlask)
+            if (proj.Kind is ProjectileKind.Flask or ProjectileKind.Bomb) return; // it bursts instead (BreakFlask)
             DamageEnemy(index, proj.Damage, owner, proj.Flags, dir, proj.Kind == ProjectileKind.PierceArrow ? 5f : 1.5f);
             if (owner == null) return;
             ref var e = ref Enemies[index];

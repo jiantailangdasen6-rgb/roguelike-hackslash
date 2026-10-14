@@ -91,11 +91,12 @@ namespace Game.Gameplay
 
             // Section tabs.
             var sections = (CodexSection[])System.Enum.GetValues(typeof(CodexSection));
-            float tabW = 162f, gap = 8f, x0 = 260f;
+            float gap = 6f, x0 = 236f;
+            float tabW = (1700f - x0 - 30f - gap * (sections.Length - 1)) / sections.Length; // all tabs fit the book
             for (int i = 0; i < sections.Length; i++)
             {
                 var s = sections[i];
-                var tab = UIKit.Button(p, CodexCatalog.SectionName(s), 26, () => Show(s));
+                var tab = UIKit.Button(p, CodexCatalog.SectionName(s), 22, () => Show(s));
                 tab.GetComponent<RectTransform>().Place(new Vector2(0f, 1f), new Vector2(tabW, 58f), new Vector2(x0 + i * (tabW + gap), -32f));
                 _tabs.Add((tab, tab.GetComponent<Image>(), s));
             }

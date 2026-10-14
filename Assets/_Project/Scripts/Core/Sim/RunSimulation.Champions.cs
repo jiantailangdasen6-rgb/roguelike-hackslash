@@ -70,6 +70,9 @@ namespace Game.Core
                         return true;
                     }
                     return false;
+                case EnemyType.Bookworm:
+                    SplitWorm(e); // RunSimulation.Lands2.cs
+                    return false;
                 default:
                     return false;
             }
@@ -237,12 +240,15 @@ namespace Game.Core
                     flags |= HitFlags.Blocked;
                     return damage * 0.15f;
                 }
+                case EnemyType.GreatCap:
+                    CapPuff(index, flags); // RunSimulation.Lands2.cs
+                    return damage;
                 default:
                     return damage;
             }
         }
 
-        private static bool IsChampionKind(EnemyType t) => t is EnemyType.LeechMother or EnemyType.IceKnight;
+        private static bool IsChampionKind(EnemyType t) => t is EnemyType.LeechMother or EnemyType.IceKnight or EnemyType.GreatCap;
 
         /// <summary>The bombsmith's throw: a lit keg lands where each target stood.</summary>
         private void ThrowKegs(List<Vector2> spots, int room)

@@ -75,6 +75,24 @@ namespace Game.Core
         IceKnight,      // frost: an ice shell that cracks after enough blows, and grows back
         Bombsmith,      // forge: throws lit kegs; their blasts hurt him too
         LitKeg,         // a bombsmith's keg: bursts by itself after a short fuse
+        // Two more lands (round 11): the fungal grotto and the cursed library, each with monsters, two lords, a champion
+        Sporeling,      // grotto: a hopping toadstool that leaves a cloud of spores where it falls
+        Mycelid,        // grotto: a corpse threaded with fungus, lunges
+        MossShaman,     // grotto: throws spores from afar
+        MyceliumMother, // grotto lord: the spore fog (stand by the glowing caps)
+        RotGiant,       // grotto lord: the parasite that jumps between friends (cure it at the lilies)
+        GreatCap,       // grotto champion: puffs spores at whoever strikes it up close
+        Glowcap,        // the mother's fog: clean air around it while it glows (cannot be hit)
+        Lily,           // the giant's parasite: stand by one to be cured (cannot be hit)
+        LivingTome,     // library: a flying book that shoots its pages
+        InkWraith,      // library: a wraith of ink
+        Scribe,         // library: writes curses under players
+        Archivist,      // library lord: strike the forbidden tomes in the order they shone
+        InkBeast,       // library lord: dives into the ink; light the candelabra to drive it out
+        Bookworm,       // library champion: splits in two when it falls
+        Wormling,       // a bookworm's half
+        ForbiddenTome,  // the archivist's tomes on their lecterns (struck, never broken)
+        Candelabra,     // the ink beast's candelabra: stand by one to light it (cannot be hit)
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -677,6 +695,154 @@ namespace Game.Core
             new()
             {
                 Type = EnemyType.LitKeg, Name = "火の付いた樽", Sheet = "powder_keg", Health = 1f, Speed = 0f, Radius = 0.42f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+
+            // ---------------------------------------------------------------- Fungal grotto (RunSimulation.Lands2)
+            new()
+            {
+                // Hops at its prey and bites; where it falls it leaves a cloud of spores for a while.
+                Type = EnemyType.Sporeling, Name = "胞子茸", Sheet = "sporeling", Health = 34f, Speed = 3.0f, Radius = 0.36f, Xp = 2,
+                AttackCooldown = 1.6f,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 3.4f, SizeB = 0.8f, Range = 3.2f, Windup = 0.5f, Recover = 0.6f, Damage = 10f, ProjectileSpeed = 14f } },
+            },
+            new()
+            {
+                Type = EnemyType.Mycelid, Name = "菌糸の亡者", Sheet = "mycelid", Health = 80f, Speed = 2.3f, Radius = 0.44f, Xp = 4,
+                AttackCooldown = 1.9f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 2.1f, SizeB = 110f, Range = 1.8f, Windup = 0.75f, Recover = 0.6f, Damage = 18f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4.6f, SizeB = 1.0f, Range = 4.4f, Windup = 0.65f, Recover = 0.7f, Damage = 16f, ProjectileSpeed = 16f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.MossShaman, Name = "苔の呪術師", Sheet = "moss_shaman", Health = 58f, Speed = 1.8f, Radius = 0.4f, Xp = 5,
+                PreferredDistance = 7f, AttackCooldown = 2.8f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 10f, SizeB = 0.5f, Range = 10f, Windup = 0.9f, Recover = 0.5f, Damage = 12f, ProjectileSpeed = 6.5f, Projectile = ProjectileKind.SporeOrb, Count = 3, Spread = 34f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.6f, Range = 11f, Windup = 1.15f, Recover = 0.6f, Damage = 18f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.MyceliumMother, Name = "菌糸の母", Title = "菌糸の洞窟の主", Sheet = "mycelium_mother", Health = 2700f, Speed = 1.4f, Radius = 0.9f, Xp = 50,
+                PreferredDistance = 5f, AttackCooldown = 0.95f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 12f, SizeB = 0.5f, Range = 13f, Windup = 0.85f, Recover = 0.6f, Damage = 13f, ProjectileSpeed = 7.5f, Projectile = ProjectileKind.SporeOrb, Count = 9, Spread = 100f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.9f, Range = 99f, Windup = 1.2f, Recover = 0.7f, Damage = 22f, Extra = 2 },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 3.2f, Range = 2.9f, Windup = 1.0f, Recover = 0.8f, Damage = 28f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 3, Summon1 = EnemyType.Sporeling, Summon2 = EnemyType.Mycelid },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.RotGiant, Name = "腐れの巨人", Title = "菌糸の洞窟の主", Sheet = "rot_giant", Health = 2900f, Speed = 1.5f, Radius = 1.0f, Xp = 55,
+                AttackCooldown = 1.0f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Circle, SizeA = 2.4f, Range = 3.6f, Windup = 1.1f, Recover = 0.8f, Damage = 32f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 9f, SizeB = 1.9f, Range = 9f, Windup = 1.0f, Recover = 1.0f, Damage = 26f, ProjectileSpeed = 15f },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 4f, Range = 3.4f, Windup = 1.25f, Recover = 1.0f, Damage = 26f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 3, Summon1 = EnemyType.Sporeling, Summon2 = EnemyType.Sporeling },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.GreatCap, Name = "大笠茸", Sheet = "great_cap", Health = 110f, Speed = 1.6f, Radius = 0.55f, Xp = 6,
+                AttackCooldown = 2.0f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.SelfCircle, SizeA = 2.2f, Range = 1.9f, Windup = 0.9f, Recover = 0.6f, Damage = 22f },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 9f, SizeB = 0.5f, Range = 9f, Windup = 0.8f, Recover = 0.5f, Damage = 12f, ProjectileSpeed = 7f, Projectile = ProjectileKind.SporeOrb, Count = 5, Spread = 60f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Glowcap, Name = "光る茸", Sheet = "glowcap", Health = 1f, Speed = 0f, Radius = 0.45f, Xp = 0, Prop = true, Untargetable = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                Type = EnemyType.Lily, Name = "清めの百合", Sheet = "lily", Health = 1f, Speed = 0f, Radius = 0.4f, Xp = 0, Prop = true, Untargetable = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+
+            // ---------------------------------------------------------------- Cursed library (RunSimulation.Lands2)
+            new()
+            {
+                Type = EnemyType.LivingTome, Name = "生きた魔導書", Sheet = "living_tome", Health = 36f, Speed = 3.2f, Radius = 0.36f, Xp = 3,
+                PreferredDistance = 6f, AttackCooldown = 2.2f, Flying = true,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 9f, SizeB = 0.4f, Range = 9f, Windup = 0.7f, Recover = 0.4f, Damage = 10f, ProjectileSpeed = 10f, Projectile = ProjectileKind.Page, Count = 2, Spread = 16f } },
+            },
+            new()
+            {
+                Type = EnemyType.InkWraith, Name = "墨の亡霊", Sheet = "ink_wraith", Health = 62f, Speed = 2.7f, Radius = 0.4f, Xp = 5,
+                AttackCooldown = 2.5f, Flying = true,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Blink, Shape = AttackShape.Circle, SizeA = 1.6f, Range = 8f, Windup = 0.8f, Recover = 0.6f, Damage = 20f } },
+            },
+            new()
+            {
+                Type = EnemyType.Scribe, Name = "呪いの写字生", Sheet = "scribe", Health = 56f, Speed = 1.8f, Radius = 0.4f, Xp = 5,
+                PreferredDistance = 7f, AttackCooldown = 3f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.5f, Range = 11f, Windup = 1.1f, Recover = 0.6f, Damage = 19f, Extra = 1 },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 10f, SizeB = 0.4f, Range = 10f, Windup = 0.8f, Recover = 0.5f, Damage = 11f, ProjectileSpeed = 9f, Projectile = ProjectileKind.Page, Count = 3, Spread = 26f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Archivist, Name = "大司書", Title = "呪われた書庫の主", Sheet = "archivist", Health = 2800f, Speed = 1.4f, Radius = 0.85f, Xp = 55,
+                PreferredDistance = 5.5f, AttackCooldown = 0.95f, Boss = true, Flying = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.SelfCircle, SizeA = 2.4f, Range = 99f, Windup = 1.0f, Recover = 0.7f, Damage = 14f, ProjectileSpeed = 7f, Projectile = ProjectileKind.Page, Count = 16, Spread = 360f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.7f, Range = 99f, Windup = 1.2f, Recover = 0.6f, Damage = 24f, Extra = 3 },
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Line, SizeA = 11f, SizeB = 1.1f, Range = 11f, Windup = 1.0f, Recover = 0.8f, Damage = 28f },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 3, Summon1 = EnemyType.LivingTome, Summon2 = EnemyType.Scribe },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.InkBeast, Name = "墨の獣", Title = "呪われた書庫の主", Sheet = "ink_beast", Health = 2700f, Speed = 2.8f, Radius = 1.0f, Xp = 55,
+                AttackCooldown = 0.9f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 3f, SizeB = 110f, Range = 2.6f, Windup = 0.7f, Recover = 0.6f, Damage = 26f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 10f, SizeB = 1.8f, Range = 10f, Windup = 0.9f, Recover = 1.0f, Damage = 26f, ProjectileSpeed = 19f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.7f, Range = 99f, Windup = 1.2f, Recover = 0.6f, Damage = 22f, Extra = 2 },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.InkWraith, Summon2 = EnemyType.LivingTome },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Bookworm, Name = "紙魚の大蟲", Sheet = "bookworm", Health = 100f, Speed = 2.2f, Radius = 0.55f, Xp = 6,
+                AttackCooldown = 1.8f,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 2.2f, SizeB = 120f, Range = 1.9f, Windup = 0.75f, Recover = 0.6f, Damage = 20f },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 5f, SizeB = 1.1f, Range = 5f, Windup = 0.7f, Recover = 0.8f, Damage = 18f, ProjectileSpeed = 15f },
+                },
+            },
+            new()
+            {
+                Type = EnemyType.Wormling, Name = "紙魚の大蟲", Title = "分かれた半身", Sheet = "bookworm", Health = 100f, Speed = 2.8f, Radius = 0.42f, Xp = 2,
+                AttackCooldown = 1.6f,
+                Attacks = new[] { new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 4f, SizeB = 0.9f, Range = 4f, Windup = 0.6f, Recover = 0.7f, Damage = 13f, ProjectileSpeed = 15f } },
+            },
+            new()
+            {
+                // Struck to read it (RunSimulation.Lands2): it takes no harm.
+                Type = EnemyType.ForbiddenTome, Name = "禁書", Sheet = "forbidden_tome", Health = 1f, Speed = 0f, Radius = 0.55f, Xp = 0, Prop = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                Type = EnemyType.Candelabra, Name = "燭台", Sheet = "candelabra", Health = 1f, Speed = 0f, Radius = 0.45f, Xp = 0, Prop = true, Untargetable = true,
                 Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };

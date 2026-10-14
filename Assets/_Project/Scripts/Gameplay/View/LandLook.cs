@@ -46,6 +46,12 @@ namespace Game.Gameplay
             // heart: ash-red with ember gold
             new(new Color(0.95f, 0.7f, 0.62f), 0.72f, new Color(1f, 0.55f, 0.25f), new Color(1f, 0.5f, 0.25f),
                 new Color(1f, 0.92f, 0.88f), new Vector4(1.04f, 0.97f, 0.96f, 0f), new Vector4(1.05f, 0.98f, 0.94f, 0f)),
+            // grotto: damp green with a sickly glow
+            new(new Color(0.84f, 0.9f, 0.8f), 0.72f, new Color(0.6f, 1f, 0.4f), new Color(0.65f, 1f, 0.45f),
+                new Color(0.97f, 1f, 0.96f), new Vector4(0.99f, 1.01f, 0.98f, 0f), new Vector4(0.99f, 1.02f, 0.98f, 0f)),
+            // library: candlelit violet over old wood
+            new(new Color(0.95f, 0.86f, 0.82f), 0.74f, new Color(0.72f, 0.58f, 1f), new Color(0.78f, 0.65f, 1f),
+                new Color(1f, 0.97f, 0.97f), new Vector4(1.02f, 0.99f, 1.0f, 0f), new Vector4(1.02f, 0.99f, 1.0f, 0f)),
         };
 
         private static int Index(Biome b) => Mathf.Clamp((int)b, 0, Looks.Length - 1);

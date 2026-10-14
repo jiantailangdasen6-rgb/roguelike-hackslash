@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 3e6d9332b1492fe41b3c98cec6316602
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3499615808080850033
+    second: rot_giant_0
+  - first:
+      213: -7991294756741098534
+    second: rot_giant_1
+  - first:
+      213: 4646794412863383429
+    second: rot_giant_2
+  - first:
+      213: -4906892953309219347
+    second: rot_giant_3
+  - first:
+      213: -3788509238704656273
+    second: rot_giant_4
+  - first:
+      213: -8781007025095652738
+    second: rot_giant_5
+  - first:
+      213: -3666303412049263423
+    second: rot_giant_6
+  - first:
+      213: -8157908175703340981
+    second: rot_giant_7
+  - first:
+      213: 4105170197903414290
+    second: rot_giant_8
+  - first:
+      213: 8267718764417612994
+    second: rot_giant_9
+  - first:
+      213: -4090563890840998262
+    second: rot_giant_10
+  - first:
+      213: -543435937045676554
+    second: rot_giant_11
+  - first:
+      213: -8149476567384827203
+    second: rot_giant_12
+  - first:
+      213: -1409421848450649562
+    second: rot_giant_13
+  - first:
+      213: 7607596013400726397
+    second: rot_giant_14
+  - first:
+      213: -5228826059687862249
+    second: rot_giant_15
+  - first:
+      213: 4782620952098775333
+    second: rot_giant_16
+  - first:
+      213: -3074530386923344823
+    second: rot_giant_17
+  - first:
+      213: -2098569906470418166
+    second: rot_giant_18
+  - first:
+      213: -5778250334166130392
+    second: rot_giant_19
+  - first:
+      213: -6004615422261381619
+    second: rot_giant_20
+  - first:
+      213: -7484528418042109380
+    second: rot_giant_21
+  - first:
+      213: -6104176284228715917
+    second: rot_giant_22
+  - first:
+      213: -3476950873651083523
+    second: rot_giant_23
+  - first:
+      213: 4611916519545634278
+    second: rot_giant_24
+  - first:
+      213: 3512739203308819240
+    second: rot_giant_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rot_giant_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 568
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17c20032902219030800000000000000
+      internalID: 3499615808080850033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_1
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 568
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad3510922c7391190800000000000000
+      internalID: -7991294756741098534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_2
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 567
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587edf216eabc7040800000000000000
+      internalID: 4646794412863383429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_3
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 567
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de5f2275bd637ebb0800000000000000
+      internalID: -4906892953309219347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_4
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 457
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6039b67be28c6bc0800000000000000
+      internalID: -3788509238704656273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_5
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 457
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7ac6fa62a8932680800000000000000
+      internalID: -8781007025095652738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_6
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 457
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c4400eb87cae1dc0800000000000000
+      internalID: -3666303412049263423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_7
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 457
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4882f49cb949ce80800000000000000
+      internalID: -8157908175703340981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_8
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 457
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2149d8c7b8e78f830800000000000000
+      internalID: 4105170197903414290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_9
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 457
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cc71f77966dcb270800000000000000
+      internalID: 8267718764417612994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_10
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 344
+        width: 51
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8ee16360d56b37c0800000000000000
+      internalID: -4090563890840998262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_11
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 345
+        width: 25
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fdf53ef4e35578f0800000000000000
+      internalID: -543435937045676554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_12
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 346
+        width: 26
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dba58af5d3e37ee80800000000000000
+      internalID: -8149476567384827203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_13
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 232
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 622bc68db4ab07ce0800000000000000
+      internalID: -1409421848450649562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_14
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 223
+        width: 68
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7b9d65744c939960800000000000000
+      internalID: 7607596013400726397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_15
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 223
+        width: 53
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 710eff7f66a7f67b0800000000000000
+      internalID: -5228826059687862249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_16
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 223
+        width: 46
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5212031aa684f5240800000000000000
+      internalID: 4782620952098775333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_17
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 120
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94c2a4417e21555d0800000000000000
+      internalID: -3074530386923344823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_18
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 120
+        width: 35
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a09818ce9c160e2e0800000000000000
+      internalID: -2098569906470418166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_19
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 8
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 821eeb08fe78fcfa0800000000000000
+      internalID: -5778250334166130392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_20
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 7
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d06374756125baca0800000000000000
+      internalID: -6004615422261381619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_21
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 6
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c32a84bfe0d912890800000000000000
+      internalID: -7484528418042109380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_22
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 5
+        width: 49
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37afe24c20c994ba0800000000000000
+      internalID: -6104176284228715917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_23
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 4
+        width: 53
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df60b822a936fbfc0800000000000000
+      internalID: -3476950873651083523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_24
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 0
+        width: 42
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6edf549b3a1d00040800000000000000
+      internalID: 4611916519545634278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_25
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 0
+        width: 41
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8239fc1b1b1cfb030800000000000000
+      internalID: 3512739203308819240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      rot_giant_0: 3499615808080850033
+      rot_giant_1: -7991294756741098534
+      rot_giant_10: -4090563890840998262
+      rot_giant_11: -543435937045676554
+      rot_giant_12: -8149476567384827203
+      rot_giant_13: -1409421848450649562
+      rot_giant_14: 7607596013400726397
+      rot_giant_15: -5228826059687862249
+      rot_giant_16: 4782620952098775333
+      rot_giant_17: -3074530386923344823
+      rot_giant_18: -2098569906470418166
+      rot_giant_19: -5778250334166130392
+      rot_giant_2: 4646794412863383429
+      rot_giant_20: -6004615422261381619
+      rot_giant_21: -7484528418042109380
+      rot_giant_22: -6104176284228715917
+      rot_giant_23: -3476950873651083523
+      rot_giant_24: 4611916519545634278
+      rot_giant_25: 3512739203308819240
+      rot_giant_3: -4906892953309219347
+      rot_giant_4: -3788509238704656273
+      rot_giant_5: -8781007025095652738
+      rot_giant_6: -3666303412049263423
+      rot_giant_7: -8157908175703340981
+      rot_giant_8: 4105170197903414290
+      rot_giant_9: 8267718764417612994
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

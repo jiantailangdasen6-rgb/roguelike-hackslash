@@ -16,6 +16,8 @@ namespace Game.Core
         Frost,  // 凍てつく霊廟: ice-crusted marble, snow, a frozen court
         Forge,  // 燃え落ちた鍛冶場: charred brick and iron, molten cracks
         Heart,  // 迷宮の心臓: the bottom of it all (only through the way the six lords' memories open)
+        Grotto,  // 菌糸の洞窟: damp rock, glowing fungus, spore clouds
+        Library, // 呪われた書庫: dark wood, books to the ceiling, spilt ink
     }
 
     public sealed class BiomeDef
@@ -114,6 +116,26 @@ namespace Game.Core
                     (EnemyType.FireImp, 8, 0), (EnemyType.Necromancer, 6, 0), (EnemyType.Skeleton, 10, 0),
                 },
                 FightLayouts = new[] { 2, 9, 15, 18, 21, 4 },
+            },
+            new()
+            {
+                Id = Biome.Grotto, Name = "菌糸の洞窟", Hint = "胞子の群れと、二人の主のどちらか", Lord = EnemyType.MyceliumMother, AltLord = EnemyType.RotGiant, Champion = EnemyType.GreatCap, Music = "music_grotto",
+                Pool = new[]
+                {
+                    (EnemyType.Sporeling, 24, 0), (EnemyType.Mycelid, 22, 0), (EnemyType.MossShaman, 12, 0), (EnemyType.Ghoul, 10, 0),
+                    (EnemyType.Bat, 8, 0), (EnemyType.Bloater, 8, 0), (EnemyType.Skeleton, 8, 0), (EnemyType.DreadKnight, 6, 1),
+                },
+                FightLayouts = new[] { 24, 25, 26, 24, 1, 3 },
+            },
+            new()
+            {
+                Id = Biome.Library, Name = "呪われた書庫", Hint = "生きた書物と、二人の主のどちらか", Lord = EnemyType.Archivist, AltLord = EnemyType.InkBeast, Champion = EnemyType.Bookworm, Music = "music_library",
+                Pool = new[]
+                {
+                    (EnemyType.LivingTome, 22, 0), (EnemyType.InkWraith, 16, 0), (EnemyType.Scribe, 14, 0), (EnemyType.Skeleton, 14, 0),
+                    (EnemyType.Cultist, 10, 0), (EnemyType.SkeletonArcher, 10, 0), (EnemyType.Necromancer, 6, 1), (EnemyType.DreadKnight, 6, 2),
+                },
+                FightLayouts = new[] { 27, 28, 29, 27, 2, 7 },
             },
         };
 

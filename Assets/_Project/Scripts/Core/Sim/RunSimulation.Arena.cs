@@ -53,7 +53,7 @@ namespace Game.Core
             {
                 var g = room.Layout.Gimmicks[i];
                 if (g.Kind is GimmickKind.PowderKeg or GimmickKind.TreasureChest or GimmickKind.Water or GimmickKind.Ice) continue;
-                float period = g.Kind switch { GimmickKind.FlameJet => Arena.FlamePeriod, GimmickKind.Icicle => Arena.IciclePeriod, GimmickKind.LavaCrack => Arena.LavaPeriod, _ => Arena.SpikePeriod };
+                float period = g.Kind switch { GimmickKind.FlameJet => Arena.FlamePeriod, GimmickKind.Icicle => Arena.IciclePeriod, GimmickKind.LavaCrack => Arena.LavaPeriod, GimmickKind.SporeVent => Arena.SporePeriod, _ => Arena.SpikePeriod };
                 _hazards.Add(new Hazard { Id = room.Id * HazardIdsPerRoom + i, Room = room.Id, Def = g, Clock = g.Phase * period - HazardGrace });
             }
         }
@@ -127,6 +127,17 @@ namespace Game.Core
                         break;
                     case GimmickKind.HealingFont:
                         StepFont(h, dt);
+                        break;
+                    case GimmickKind.SporeVent:
+                        CycleTrap(h, dt, Arena.SporePeriod, Arena.SporeWarn, Arena.SporeActive, new Vector2(Arena.SporeRadius, Arena.SporeRadius));
+                        if (h.Phase == 2 && (h.Tick -= dt) <= 0f)
+                        {
+                            h.Tick = Arena.SporeTick;
+                            FlameHits(h, Arena.SporeDamage);
+                        }
+                        break;
+                    case GimmickKind.Glyph:
+                        StepGlyph(h, dt); // RunSimulation.Lands2.cs
                         break;
                     case GimmickKind.Icicle:
                         CycleTrap(h, dt, Arena.IciclePeriod, Arena.IcicleWarn, Arena.IcicleActive, new Vector2(Arena.IcicleRadius, Arena.IcicleRadius));

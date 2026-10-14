@@ -509,6 +509,10 @@ namespace Game.Gameplay
                 case AreaKind.Steam:
                     LandArea(e); // EventPresenter.Lands.cs
                     break;
+                case AreaKind.SporeCloud:
+                case AreaKind.InkBurst:
+                    Lands2Area(e); // EventPresenter.Lands2.cs
+                    break;
                 case AreaKind.FrostNova:
                 {
                     var fx = Spawn("fx_nova", e.Pos, 1f, 0.45f, r * 0.3f, r, Color.white);
@@ -720,6 +724,8 @@ namespace Game.Gameplay
             {
                 case GimmickKind.Icicle:
                 case GimmickKind.LavaCrack:
+                case GimmickKind.SporeVent:
+                case GimmickKind.Glyph:
                     LandHazardWarn(e); // EventPresenter.Lands.cs
                     break;
                 case GimmickKind.SpikeTrap:
@@ -747,6 +753,8 @@ namespace Game.Gameplay
             {
                 case GimmickKind.Icicle:
                 case GimmickKind.LavaCrack:
+                case GimmickKind.SporeVent:
+                case GimmickKind.Glyph:
                     LandHazardFire(e); // EventPresenter.Lands.cs
                     break;
                 case GimmickKind.FlameJet:
@@ -808,6 +816,10 @@ namespace Game.Gameplay
                 case ProjectileKind.IceShard:
                 case ProjectileKind.FireBolt:
                     fx = LandProjectile(kind, e, ref angle); // EventPresenter.Lands.cs
+                    break;
+                case ProjectileKind.SporeOrb:
+                case ProjectileKind.Page:
+                    fx = Lands2Projectile(kind, e, ref angle); // EventPresenter.Lands2.cs
                     break;
                 case ProjectileKind.SoulBolt:
                     fx = Spawn("fx_orb", e.Pos, 14f, e.Value + 0.05f, 0.85f, 0.85f, new Color(0.55f, 1f, 0.65f));
@@ -1046,6 +1058,7 @@ namespace Game.Gameplay
             UpdateStains(); // EventPresenter.Remains.cs
             UpdateBossRage();
             UpdateLords2(); // EventPresenter.Lords2.cs
+            UpdateLands2(); // EventPresenter.Lands2.cs
 
             for (int i = _telegraphs.Count - 1; i >= 0; i--)
             {

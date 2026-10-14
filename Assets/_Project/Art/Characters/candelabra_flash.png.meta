@@ -1,0 +1,990 @@
+fileFormatVersion: 2
+guid: b87266c207f6a5c41ba95cc16ee097ce
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4476699500954704807
+    second: candelabra_flash_0
+  - first:
+      213: 8415969092612916439
+    second: candelabra_flash_1
+  - first:
+      213: 8995376996906985331
+    second: candelabra_flash_2
+  - first:
+      213: 6240302227730596825
+    second: candelabra_flash_3
+  - first:
+      213: -8150425822098062824
+    second: candelabra_flash_4
+  - first:
+      213: -1689474312435763416
+    second: candelabra_flash_5
+  - first:
+      213: 4998816074387379824
+    second: candelabra_flash_6
+  - first:
+      213: 7840604205431975728
+    second: candelabra_flash_7
+  - first:
+      213: 7019172581305767510
+    second: candelabra_flash_8
+  - first:
+      213: 263816686122628166
+    second: candelabra_flash_9
+  - first:
+      213: 1095755970269769830
+    second: candelabra_flash_10
+  - first:
+      213: -5243911108832722189
+    second: candelabra_flash_11
+  - first:
+      213: 1902828101210884358
+    second: candelabra_flash_12
+  - first:
+      213: -4527321996429977219
+    second: candelabra_flash_13
+  - first:
+      213: -5266052478324983129
+    second: candelabra_flash_14
+  - first:
+      213: -8508958988752708717
+    second: candelabra_flash_15
+  - first:
+      213: -3757691259649584642
+    second: candelabra_flash_16
+  - first:
+      213: 6087041438951089216
+    second: candelabra_flash_17
+  - first:
+      213: 5279835719295058273
+    second: candelabra_flash_18
+  - first:
+      213: 125454082620760450
+    second: candelabra_flash_19
+  - first:
+      213: -2450595340446272534
+    second: candelabra_flash_20
+  - first:
+      213: 3215629515312847939
+    second: candelabra_flash_21
+  - first:
+      213: 637316538224082918
+    second: candelabra_flash_22
+  - first:
+      213: 5551227666167920146
+    second: candelabra_flash_23
+  - first:
+      213: -7477398158505560280
+    second: candelabra_flash_24
+  - first:
+      213: 934919870285846530
+    second: candelabra_flash_25
+  - first:
+      213: 532152956009862270
+    second: candelabra_flash_26
+  - first:
+      213: -4963421676097790989
+    second: candelabra_flash_27
+  - first:
+      213: -8290434088656000936
+    second: candelabra_flash_28
+  - first:
+      213: 1843433190487064449
+    second: candelabra_flash_29
+  - first:
+      213: 2906247653328882183
+    second: candelabra_flash_30
+  - first:
+      213: -4690702773302880787
+    second: candelabra_flash_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: candelabra_flash_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 327
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9542d6fb5819fd1c0800000000000000
+      internalID: -4476699500954704807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 263
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d40cddcc478bc470800000000000000
+      internalID: 8415969092612916439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_2
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 263
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3776c5918bff5dc70800000000000000
+      internalID: 8995376996906985331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_3
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 263
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d306f640d10a9650800000000000000
+      internalID: 6240302227730596825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_4
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 263
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8128ca9c5eed3ee80800000000000000
+      internalID: -8150425822098062824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_5
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 199
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8277e166018cd88e0800000000000000
+      internalID: -1689474312435763416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_6
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 135
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0765f5b1cbc5f5540800000000000000
+      internalID: 4998816074387379824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_7
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 71
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03fe439cbfb6fcc60800000000000000
+      internalID: 7840604205431975728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_8
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 15
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65654e5064c196160800000000000000
+      internalID: 7019172581305767510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_9
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 18
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 644f826d0e349a300800000000000000
+      internalID: 263816686122628166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_10
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 15
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6607178df38e43f00800000000000000
+      internalID: 1095755970269769830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_11
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 15
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f20d4441a2e937b0800000000000000
+      internalID: -5243911108832722189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_12
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6094e419314386a10800000000000000
+      internalID: 1902828101210884358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_13
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 20
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d799afa81a8bb21c0800000000000000
+      internalID: -4527321996429977219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_14
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 14
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7aabfd4fb293be6b0800000000000000
+      internalID: -5266052478324983129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_15
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 14
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39b1703d1ea1ae980800000000000000
+      internalID: -8508958988752708717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_16
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef11ffc55bff9dbc0800000000000000
+      internalID: -3757691259649584642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_17
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 20
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04423cd20f3897450800000000000000
+      internalID: 6087041438951089216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_18
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1614009ec9eb54940800000000000000
+      internalID: 5279835719295058273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_19
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 19
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 281ab3ec2d3bdb100800000000000000
+      internalID: 125454082620760450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_20
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 7
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae3f87c858cbdfdd0800000000000000
+      internalID: -2450595340446272534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_21
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 7
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34cdb7dc10630ac20800000000000000
+      internalID: 3215629515312847939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_22
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6eff35ec30438d800800000000000000
+      internalID: 637316538224082918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_23
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2167245962ce90d40800000000000000
+      internalID: 5551227666167920146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_24
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 827bd16edf1fa3890800000000000000
+      internalID: -7477398158505560280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_25
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 7
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20897d92ba089fc00800000000000000
+      internalID: 934919870285846530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_26
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7454254b46926700800000000000000
+      internalID: 532152956009862270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_27
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 8
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fb97bd68426e1bb0800000000000000
+      internalID: -4963421676097790989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_28
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 9
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 858aed7fe1672fc80800000000000000
+      internalID: -8290434088656000936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_29
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18f752648b0359910800000000000000
+      internalID: 1843433190487064449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_30
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70a0bfdb7d0155820800000000000000
+      internalID: 2906247653328882183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candelabra_flash_31
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 7
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de5975a1ea647eeb0800000000000000
+      internalID: -4690702773302880787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      candelabra_flash_0: -4476699500954704807
+      candelabra_flash_1: 8415969092612916439
+      candelabra_flash_10: 1095755970269769830
+      candelabra_flash_11: -5243911108832722189
+      candelabra_flash_12: 1902828101210884358
+      candelabra_flash_13: -4527321996429977219
+      candelabra_flash_14: -5266052478324983129
+      candelabra_flash_15: -8508958988752708717
+      candelabra_flash_16: -3757691259649584642
+      candelabra_flash_17: 6087041438951089216
+      candelabra_flash_18: 5279835719295058273
+      candelabra_flash_19: 125454082620760450
+      candelabra_flash_2: 8995376996906985331
+      candelabra_flash_20: -2450595340446272534
+      candelabra_flash_21: 3215629515312847939
+      candelabra_flash_22: 637316538224082918
+      candelabra_flash_23: 5551227666167920146
+      candelabra_flash_24: -7477398158505560280
+      candelabra_flash_25: 934919870285846530
+      candelabra_flash_26: 532152956009862270
+      candelabra_flash_27: -4963421676097790989
+      candelabra_flash_28: -8290434088656000936
+      candelabra_flash_29: 1843433190487064449
+      candelabra_flash_3: 6240302227730596825
+      candelabra_flash_30: 2906247653328882183
+      candelabra_flash_31: -4690702773302880787
+      candelabra_flash_4: -8150425822098062824
+      candelabra_flash_5: -1689474312435763416
+      candelabra_flash_6: 4998816074387379824
+      candelabra_flash_7: 7840604205431975728
+      candelabra_flash_8: 7019172581305767510
+      candelabra_flash_9: 263816686122628166
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

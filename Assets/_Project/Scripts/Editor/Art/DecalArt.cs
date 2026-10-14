@@ -8,7 +8,7 @@ namespace Game.EditorTools.Art
     /// land's set): pools of water, frozen sheets, spilled slag, glowing rifts, rugs, rubble, cracks and blood.
     /// Flat, drawn on the floor under everything. 32 px = 1 tile.
     /// </summary>
-    public static class DecalArt
+    public static partial class DecalArt
     {
         private static Color32 C(string hex) => PixelMaterial.Hex(hex);
         private static Color32 A(Color32 c, byte a) => new(c.r, c.g, c.b, a);
@@ -30,6 +30,11 @@ namespace Game.EditorTools.Art
             ["decal_blood"] = One(Blood()),
             ["decal_rubble"] = One(Rubble()),
             ["decal_crack"] = One(Crack()),
+            ["decal_moss"] = One(MossPatch()),          // DecalArt.Lands2.cs
+            ["decal_mycelium"] = One(Mycelium()),
+            ["decal_ink"] = One(InkStain()),
+            ["decal_books"] = One(FallenBooks()),
+            ["decal_rug_navy"] = One(Rug(new[] { C("#0a0a18"), C("#101024"), C("#161830"), C("#1e203c") }, C("#87641c"))),
         };
 
         private static PropArt.Sheet One(PixelCanvas c) => new() { Frames = new List<PixelCanvas> { c }, Pivot = new Vector2(0.5f, 0.5f) };

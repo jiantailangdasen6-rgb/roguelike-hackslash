@@ -1,0 +1,756 @@
+fileFormatVersion: 2
+guid: d35f72f767e867d4b8caabc47cc0902c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6169345531060823929
+    second: sporeling_flash_0
+  - first:
+      213: -8688025676629702803
+    second: sporeling_flash_1
+  - first:
+      213: 7377480965391630586
+    second: sporeling_flash_2
+  - first:
+      213: 1922530881962766715
+    second: sporeling_flash_3
+  - first:
+      213: 5184291382247540224
+    second: sporeling_flash_4
+  - first:
+      213: -9070009284936486050
+    second: sporeling_flash_5
+  - first:
+      213: -5454695059492660585
+    second: sporeling_flash_6
+  - first:
+      213: -6602992393654796478
+    second: sporeling_flash_7
+  - first:
+      213: -7882336556984009579
+    second: sporeling_flash_8
+  - first:
+      213: -7681343438517595485
+    second: sporeling_flash_9
+  - first:
+      213: 5842473721431206229
+    second: sporeling_flash_10
+  - first:
+      213: -8386577654559861434
+    second: sporeling_flash_11
+  - first:
+      213: 1434684673060495895
+    second: sporeling_flash_12
+  - first:
+      213: -6809359334182385063
+    second: sporeling_flash_13
+  - first:
+      213: -1893398254159060469
+    second: sporeling_flash_14
+  - first:
+      213: -7792447202877433260
+    second: sporeling_flash_15
+  - first:
+      213: -2633532431036354494
+    second: sporeling_flash_16
+  - first:
+      213: 8552957017217807067
+    second: sporeling_flash_17
+  - first:
+      213: -3198854837990908023
+    second: sporeling_flash_18
+  - first:
+      213: 8714442967833619685
+    second: sporeling_flash_19
+  - first:
+      213: 1526268480462344881
+    second: sporeling_flash_20
+  - first:
+      213: 1051638902098562414
+    second: sporeling_flash_21
+  - first:
+      213: 2434980926688368754
+    second: sporeling_flash_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sporeling_flash_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 326
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 788d9741de4126aa0800000000000000
+      internalID: -6169345531060823929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_1
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 326
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d678301adaeed6780800000000000000
+      internalID: -8688025676629702803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_2
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 326
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af0cf57b9d3126660800000000000000
+      internalID: 7377480965391630586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_3
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 326
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b71fb11b6a33eaa10800000000000000
+      internalID: 1922530881962766715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_4
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 262
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 006cbfa6b8d42f740800000000000000
+      internalID: 5184291382247540224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_5
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 264
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e53bddd3c9ad02280800000000000000
+      internalID: -9070009284936486050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_6
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 267
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79a9cdc5eb70d44b0800000000000000
+      internalID: -5454695059492660585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_7
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 265
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24f7991f6657d54a0800000000000000
+      internalID: -6602992393654796478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_8
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 263
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59c74e0f9a05c9290800000000000000
+      internalID: -7882336556984009579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_9
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 262
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a2916517d2666590800000000000000
+      internalID: -7681343438517595485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_10
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 198
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 559267715e2a41150800000000000000
+      internalID: 5842473721431206229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_11
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 197
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6451bb2ae04ec9b80800000000000000
+      internalID: -8386577654559861434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_12
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 137
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 712e77edb1609e310800000000000000
+      internalID: 1434684673060495895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_13
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 136
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95a811a53cb4081a0800000000000000
+      internalID: -6809359334182385063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_14
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 134
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b02218ac15c49b5e0800000000000000
+      internalID: -1893398254159060469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_15
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 69
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45a118d1e8aabd390800000000000000
+      internalID: -7792447202877433260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_16
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 70
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2407b9ff430d37bd0800000000000000
+      internalID: -2633532431036354494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_17
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 5
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd2b376771532b670800000000000000
+      internalID: 8552957017217807067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_18
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 4
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98f138d19726b93d0800000000000000
+      internalID: -3198854837990908023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_19
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 3
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ecaf1945bbefe870800000000000000
+      internalID: 8714442967833619685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_20
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 1
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b255d1b8156e2510800000000000000
+      internalID: 1526268480462344881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_21
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 0
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6d0197720c289e00800000000000000
+      internalID: 1051638902098562414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sporeling_flash_22
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 0
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2789c12704acac120800000000000000
+      internalID: 2434980926688368754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sporeling_flash_0: -6169345531060823929
+      sporeling_flash_1: -8688025676629702803
+      sporeling_flash_10: 5842473721431206229
+      sporeling_flash_11: -8386577654559861434
+      sporeling_flash_12: 1434684673060495895
+      sporeling_flash_13: -6809359334182385063
+      sporeling_flash_14: -1893398254159060469
+      sporeling_flash_15: -7792447202877433260
+      sporeling_flash_16: -2633532431036354494
+      sporeling_flash_17: 8552957017217807067
+      sporeling_flash_18: -3198854837990908023
+      sporeling_flash_19: 8714442967833619685
+      sporeling_flash_2: 7377480965391630586
+      sporeling_flash_20: 1526268480462344881
+      sporeling_flash_21: 1051638902098562414
+      sporeling_flash_22: 2434980926688368754
+      sporeling_flash_3: 1922530881962766715
+      sporeling_flash_4: 5184291382247540224
+      sporeling_flash_5: -9070009284936486050
+      sporeling_flash_6: -5454695059492660585
+      sporeling_flash_7: -6602992393654796478
+      sporeling_flash_8: -7882336556984009579
+      sporeling_flash_9: -7681343438517595485
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

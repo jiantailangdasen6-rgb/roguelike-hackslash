@@ -143,7 +143,7 @@ namespace Game.Tests
                 Assert.IsNotNull(Lore.Get(Lore.InscriptionId(land.Id)), land.Name);
                 Assert.IsNotNull(Lore.Get(Lore.MemoryId(land.Id)), land.Name);
                 Assert.IsNotNull(CodexCatalog.Get(Lore.MemoryId(land.Id)));
-                Assert.AreNotEqual(0, Lore.MemoryBit(land.Id));
+                if ((int)land.Id < 6) Assert.AreNotEqual(0, Lore.MemoryBit(land.Id)); // the six first lands open the heart
             }
             Assert.AreEqual(Lore.AllMemories, BiomeCatalog.Routable.Aggregate(0, (m, l) => m | Lore.MemoryBit(l.Id)));
         }

@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 1a99c090e045d7d428a7be27057140a6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4414186549229531055
+    second: rot_giant_flash_0
+  - first:
+      213: -9148109672193077477
+    second: rot_giant_flash_1
+  - first:
+      213: -3838352996165936922
+    second: rot_giant_flash_2
+  - first:
+      213: 856043395559267087
+    second: rot_giant_flash_3
+  - first:
+      213: 5593862004759337785
+    second: rot_giant_flash_4
+  - first:
+      213: 8434929803330799370
+    second: rot_giant_flash_5
+  - first:
+      213: 902708531947753044
+    second: rot_giant_flash_6
+  - first:
+      213: 4416337142081941179
+    second: rot_giant_flash_7
+  - first:
+      213: -5897185977835408659
+    second: rot_giant_flash_8
+  - first:
+      213: -3816188127860104792
+    second: rot_giant_flash_9
+  - first:
+      213: 4035631130411231083
+    second: rot_giant_flash_10
+  - first:
+      213: 8588180559730119741
+    second: rot_giant_flash_11
+  - first:
+      213: 6699598007760684858
+    second: rot_giant_flash_12
+  - first:
+      213: -6882836478972934364
+    second: rot_giant_flash_13
+  - first:
+      213: -905547597967290312
+    second: rot_giant_flash_14
+  - first:
+      213: 4590785700871589958
+    second: rot_giant_flash_15
+  - first:
+      213: 4704065720254057540
+    second: rot_giant_flash_16
+  - first:
+      213: -1935027682506989394
+    second: rot_giant_flash_17
+  - first:
+      213: -1523237811424604266
+    second: rot_giant_flash_18
+  - first:
+      213: 364793686194484821
+    second: rot_giant_flash_19
+  - first:
+      213: -8922264490760092932
+    second: rot_giant_flash_20
+  - first:
+      213: -5430658588548792367
+    second: rot_giant_flash_21
+  - first:
+      213: 6384833470064236465
+    second: rot_giant_flash_22
+  - first:
+      213: 3097356282213849342
+    second: rot_giant_flash_23
+  - first:
+      213: 8266090507109228779
+    second: rot_giant_flash_24
+  - first:
+      213: -5149045636393968939
+    second: rot_giant_flash_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rot_giant_flash_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 568
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 150ddd888b8adb2c0800000000000000
+      internalID: -4414186549229531055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_1
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 568
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1fcd9ec8b26b0180800000000000000
+      internalID: -9148109672193077477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_2
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 567
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e819f4594e6bbac0800000000000000
+      internalID: -3838352996165936922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_3
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 567
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0b11a8cee641eb00800000000000000
+      internalID: 856043395559267087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_4
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 457
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93b1c341bd361ad40800000000000000
+      internalID: 5593862004759337785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_5
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 457
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0743e847f3ee0570800000000000000
+      internalID: 8434929803330799370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_6
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 457
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45ec57680a0178c00800000000000000
+      internalID: 902708531947753044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_7
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 457
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbe68226b3bf94d30800000000000000
+      internalID: 4416337142081941179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_8
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 457
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de2b4b8099cf82ea0800000000000000
+      internalID: -5897185977835408659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_9
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 457
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a1e5d2ed1d2a0bc0800000000000000
+      internalID: -3816188127860104792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_10
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 344
+        width: 51
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b676ba4a121710830800000000000000
+      internalID: 4035631130411231083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_11
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 345
+        width: 25
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3411a987b85f2770800000000000000
+      internalID: 8588180559730119741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_12
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 346
+        width: 26
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a378d7e54e0c9fc50800000000000000
+      internalID: 6699598007760684858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_13
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 232
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 427c7bf60b04b70a0800000000000000
+      internalID: -6882836478972934364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_14
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 223
+        width: 68
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83093f7e149de63f0800000000000000
+      internalID: -905547597967290312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_15
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 223
+        width: 53
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 640d46c954fb5bf30800000000000000
+      internalID: 4590785700871589958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_16
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 223
+        width: 46
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44cc5df69d2384140800000000000000
+      internalID: 4704065720254057540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_17
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 120
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea0af9133966525e0800000000000000
+      internalID: -1935027682506989394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_18
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 120
+        width: 35
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69fc79de74f5cdae0800000000000000
+      internalID: -1523237811424604266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_19
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 8
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5567de1cce1001500800000000000000
+      internalID: 364793686194484821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_20
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 7
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf2c924c7bfbd2480800000000000000
+      internalID: -8922264490760092932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_21
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 6
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dfff1d59cc62a4b0800000000000000
+      internalID: -5430658588548792367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_22
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 5
+        width: 49
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b71435763c7b9850800000000000000
+      internalID: 6384833470064236465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_23
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 4
+        width: 53
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef85e20d0250cfa20800000000000000
+      internalID: 3097356282213849342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_24
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 0
+        width: 42
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be06975458d07b270800000000000000
+      internalID: 8266090507109228779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rot_giant_flash_25
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 0
+        width: 41
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5da5676464aea88b0800000000000000
+      internalID: -5149045636393968939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      rot_giant_flash_0: -4414186549229531055
+      rot_giant_flash_1: -9148109672193077477
+      rot_giant_flash_10: 4035631130411231083
+      rot_giant_flash_11: 8588180559730119741
+      rot_giant_flash_12: 6699598007760684858
+      rot_giant_flash_13: -6882836478972934364
+      rot_giant_flash_14: -905547597967290312
+      rot_giant_flash_15: 4590785700871589958
+      rot_giant_flash_16: 4704065720254057540
+      rot_giant_flash_17: -1935027682506989394
+      rot_giant_flash_18: -1523237811424604266
+      rot_giant_flash_19: 364793686194484821
+      rot_giant_flash_2: -3838352996165936922
+      rot_giant_flash_20: -8922264490760092932
+      rot_giant_flash_21: -5430658588548792367
+      rot_giant_flash_22: 6384833470064236465
+      rot_giant_flash_23: 3097356282213849342
+      rot_giant_flash_24: 8266090507109228779
+      rot_giant_flash_25: -5149045636393968939
+      rot_giant_flash_3: 856043395559267087
+      rot_giant_flash_4: 5593862004759337785
+      rot_giant_flash_5: 8434929803330799370
+      rot_giant_flash_6: 902708531947753044
+      rot_giant_flash_7: 4416337142081941179
+      rot_giant_flash_8: -5897185977835408659
+      rot_giant_flash_9: -3816188127860104792
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

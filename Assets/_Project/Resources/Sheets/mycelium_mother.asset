@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
+  m_Name: mycelium_mother
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
+  Texture: {fileID: 2800000, guid: 447c999fd4b1baa4b8f30cd1598afa23, type: 3}
+  FlashTexture: {fileID: 2800000, guid: 47c437a979daad441be0f7482166cc77, type: 3}
+  NormalTexture: {fileID: 2800000, guid: 5474779f9881dbf46a23a677f0e19de1, type: 3}
+  FrameWidth: 112
+  FrameHeight: 112
+  Pivot: {x: 0.5, y: 0.08928572}
+  PixelsPerUnit: 32
+  Clips:
+  - Name: idle
+    Row: 0
+    Frames: 6
+    Fps: 5
+    Loop: 1
+  - Name: walk
+    Row: 1
+    Frames: 6
+    Fps: 7
+    Loop: 1
+  - Name: windup
+    Row: 2
+    Frames: 3
+    Fps: 6
+    Loop: 0
+  - Name: strike
+    Row: 3
+    Frames: 4
+    Fps: 12
+    Loop: 0
+  - Name: hurt
+    Row: 4
+    Frames: 2
+    Fps: 10
+    Loop: 0
+  - Name: death
+    Row: 5
+    Frames: 7
+    Fps: 6
+    Loop: 0

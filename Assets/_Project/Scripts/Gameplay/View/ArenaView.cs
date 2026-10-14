@@ -398,6 +398,8 @@ namespace Game.Gameplay
             new[] { ("decal_ice", new Color(0.6f, 0.82f, 1f), 0.4f), ("decal_frozen", default, 0f), ("decal_crack", default, 0f), ("decal_rubble", default, 0f) },
             new[] { ("decal_slag", new Color(1f, 0.5f, 0.15f), 0.9f), ("decal_tools", default, 0f), ("decal_crack", default, 0f), ("decal_rubble", default, 0f) },
             new[] { ("decal_rift", new Color(1f, 0.45f, 0.15f), 0.8f), ("decal_slag", new Color(1f, 0.5f, 0.15f), 0.8f), ("decal_blood", default, 0f), ("decal_chainpile", default, 0f) },
+            new[] { ("decal_moss", new Color(0.55f, 1f, 0.35f), 0.35f), ("decal_mycelium", default(Color), 0f), ("decal_moss", new Color(0.55f, 1f, 0.35f), 0.35f), ("decal_rubble", default, 0f) },
+            new[] { ("decal_rug_navy", default(Color), 0f), ("decal_ink", new Color(0.55f, 0.4f, 1f), 0.3f), ("decal_books", default, 0f), ("decal_crack", default, 0f) },
         };
 
         /// <summary>

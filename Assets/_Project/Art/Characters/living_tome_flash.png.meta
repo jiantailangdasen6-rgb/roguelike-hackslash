@@ -1,0 +1,782 @@
+fileFormatVersion: 2
+guid: d5983be21c5a10f4190e454dc6a33f1f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 83102299427519740
+    second: living_tome_flash_0
+  - first:
+      213: -5971410075382742690
+    second: living_tome_flash_1
+  - first:
+      213: -2717592104366623872
+    second: living_tome_flash_2
+  - first:
+      213: -1615310715669970335
+    second: living_tome_flash_3
+  - first:
+      213: 9043389338432803310
+    second: living_tome_flash_4
+  - first:
+      213: -496068945939572137
+    second: living_tome_flash_5
+  - first:
+      213: -2983746611192314947
+    second: living_tome_flash_6
+  - first:
+      213: -2542450610662952526
+    second: living_tome_flash_7
+  - first:
+      213: -8784925828996510557
+    second: living_tome_flash_8
+  - first:
+      213: -2035848364458224126
+    second: living_tome_flash_9
+  - first:
+      213: -1153698279557315081
+    second: living_tome_flash_10
+  - first:
+      213: 3819140235862830383
+    second: living_tome_flash_11
+  - first:
+      213: -7378439114440372440
+    second: living_tome_flash_12
+  - first:
+      213: 6426688372012572142
+    second: living_tome_flash_13
+  - first:
+      213: 8331512473044652853
+    second: living_tome_flash_14
+  - first:
+      213: -1242070093656872458
+    second: living_tome_flash_15
+  - first:
+      213: 5833359300422283351
+    second: living_tome_flash_16
+  - first:
+      213: -5972002310639339386
+    second: living_tome_flash_17
+  - first:
+      213: 2156723026299725055
+    second: living_tome_flash_18
+  - first:
+      213: 5411535006079874270
+    second: living_tome_flash_19
+  - first:
+      213: -6095176711658948695
+    second: living_tome_flash_20
+  - first:
+      213: -5516642737039157534
+    second: living_tome_flash_21
+  - first:
+      213: 2609756899965100603
+    second: living_tome_flash_22
+  - first:
+      213: 1082373132496008250
+    second: living_tome_flash_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: living_tome_flash_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 333
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfc356dd91d372100800000000000000
+      internalID: 83102299427519740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 335
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e518f90ac2a412da0800000000000000
+      internalID: -5971410075382742690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 335
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08332d6216c294ad0800000000000000
+      internalID: -2717592104366623872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_3
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 333
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1620c9e56734599e0800000000000000
+      internalID: -1615310715669970335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_4
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 332
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee197da70b2908d70800000000000000
+      internalID: 9043389338432803310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_5
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 332
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75a5b250ceb9d19f0800000000000000
+      internalID: -496068945939572137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_6
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 269
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db34b14044a9796d0800000000000000
+      internalID: -2983746611192314947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_7
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 272
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b1b57cd3a667bcd0800000000000000
+      internalID: -2542450610662952526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_8
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 272
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ac4288c08ca51680800000000000000
+      internalID: -8784925828996510557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_9
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 269
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20658ebe2b63fb3e0800000000000000
+      internalID: -2035848364458224126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_10
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 268
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f5c10df68d3dffe0800000000000000
+      internalID: -1153698279557315081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_11
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 268
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2d61025fcf400530800000000000000
+      internalID: 3819140235862830383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_12
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 208
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82f0fe2d7b48a9990800000000000000
+      internalID: -7378439114440372440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_13
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 207
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eed51f7360f203950800000000000000
+      internalID: 6426688372012572142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_14
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 141
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5331095b37a7f9370800000000000000
+      internalID: 8331512473044652853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_15
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 141
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f92271a4d743cee0800000000000000
+      internalID: -1242070093656872458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_16
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 78
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75034e4906144f050800000000000000
+      internalID: 5833359300422283351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_17
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 77
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 688b78c1a8f2f1da0800000000000000
+      internalID: -5972002310639339386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_18
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 13
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff420856a283eed10800000000000000
+      internalID: 2156723026299725055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_19
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 5
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed47bfe9a62a91b40800000000000000
+      internalID: 5411535006079874270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_20
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a7b55a0315996ba0800000000000000
+      internalID: -6095176711658948695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_21
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 0
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e6da0ab8a2f073b0800000000000000
+      internalID: -5516642737039157534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_22
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 0
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b326b8cc218b73420800000000000000
+      internalID: 2609756899965100603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: living_tome_flash_23
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 0
+        width: 24
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a34f9dc11ac550f00800000000000000
+      internalID: 1082373132496008250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      living_tome_flash_0: 83102299427519740
+      living_tome_flash_1: -5971410075382742690
+      living_tome_flash_10: -1153698279557315081
+      living_tome_flash_11: 3819140235862830383
+      living_tome_flash_12: -7378439114440372440
+      living_tome_flash_13: 6426688372012572142
+      living_tome_flash_14: 8331512473044652853
+      living_tome_flash_15: -1242070093656872458
+      living_tome_flash_16: 5833359300422283351
+      living_tome_flash_17: -5972002310639339386
+      living_tome_flash_18: 2156723026299725055
+      living_tome_flash_19: 5411535006079874270
+      living_tome_flash_2: -2717592104366623872
+      living_tome_flash_20: -6095176711658948695
+      living_tome_flash_21: -5516642737039157534
+      living_tome_flash_22: 2609756899965100603
+      living_tome_flash_23: 1082373132496008250
+      living_tome_flash_3: -1615310715669970335
+      living_tome_flash_4: 9043389338432803310
+      living_tome_flash_5: -496068945939572137
+      living_tome_flash_6: -2983746611192314947
+      living_tome_flash_7: -2542450610662952526
+      living_tome_flash_8: -8784925828996510557
+      living_tome_flash_9: -2035848364458224126
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

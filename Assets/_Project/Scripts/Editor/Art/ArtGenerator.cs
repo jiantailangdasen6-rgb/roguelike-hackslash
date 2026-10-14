@@ -116,6 +116,22 @@ namespace Game.EditorTools.Art
             Character("leech_mother", EnemyArt.LeechMother(), EnemyArt.FrameSize);
             Character("ice_knight", EnemyArt.IceKnight(), EnemyArt.FrameSize);
             Character("bombsmith", EnemyArt.Bombsmith(), EnemyArt.FrameSize);
+            Character("sporeling", EnemyArt.Sporeling(), EnemyArt.FrameSize);
+            Character("mycelid", EnemyArt.Mycelid(), EnemyArt.FrameSize);
+            Character("moss_shaman", EnemyArt.MossShaman(), EnemyArt.FrameSize);
+            Character("mycelium_mother", EnemyArt.MyceliumMother(), EnemyArt.BossFrameSize);
+            Character("rot_giant", EnemyArt.RotGiant(), EnemyArt.BossFrameSize);
+            Character("great_cap", EnemyArt.GreatCap(), EnemyArt.FrameSize);
+            Character("glowcap", GimmickArt.Glowcap(), EnemyArt.FrameSize);
+            Character("lily", GimmickArt.Lily(), EnemyArt.FrameSize);
+            Character("living_tome", EnemyArt.LivingTome(), EnemyArt.FrameSize);
+            Character("ink_wraith", EnemyArt.InkWraith(), EnemyArt.FrameSize);
+            Character("scribe", EnemyArt.Scribe(), EnemyArt.FrameSize);
+            Character("archivist", EnemyArt.Archivist(), EnemyArt.BossFrameSize);
+            Character("ink_beast", EnemyArt.InkBeast(), EnemyArt.FrameSize);
+            Character("bookworm", EnemyArt.Bookworm(), EnemyArt.FrameSize);
+            Character("forbidden_tome", GimmickArt.ForbiddenTome(), EnemyArt.FrameSize);
+            Character("candelabra", GimmickArt.Candelabra(), EnemyArt.FrameSize);
             Effect("trap_icicle", GimmickArt.Icicle(), "trap_icicle", new Vector2(0.5f, 0.5f));
             Effect("trap_lava", GimmickArt.LavaCrack(), "trap_lava", new Vector2(0f, 0.5f));
 

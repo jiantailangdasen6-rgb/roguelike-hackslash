@@ -1,0 +1,834 @@
+fileFormatVersion: 2
+guid: 48bb081a2acbc5e4ab219957cc5201ba
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4831079507398260549
+    second: ink_wraith_0
+  - first:
+      213: -605997011789182901
+    second: ink_wraith_1
+  - first:
+      213: -4001199601089897433
+    second: ink_wraith_2
+  - first:
+      213: 8407686652600492325
+    second: ink_wraith_3
+  - first:
+      213: -5529389445450717048
+    second: ink_wraith_4
+  - first:
+      213: -3154967168199878345
+    second: ink_wraith_5
+  - first:
+      213: 7623312296985335595
+    second: ink_wraith_6
+  - first:
+      213: -4378414556987499473
+    second: ink_wraith_7
+  - first:
+      213: 5975337785119904726
+    second: ink_wraith_8
+  - first:
+      213: -7097313156012591601
+    second: ink_wraith_9
+  - first:
+      213: 1735290010533007440
+    second: ink_wraith_10
+  - first:
+      213: -1796579666897599720
+    second: ink_wraith_11
+  - first:
+      213: 6722499341560844370
+    second: ink_wraith_12
+  - first:
+      213: -1277866861554705559
+    second: ink_wraith_13
+  - first:
+      213: 3094038642143300420
+    second: ink_wraith_14
+  - first:
+      213: -4307430416664832499
+    second: ink_wraith_15
+  - first:
+      213: -1080624253296916183
+    second: ink_wraith_16
+  - first:
+      213: 3358005337716026723
+    second: ink_wraith_17
+  - first:
+      213: 685090400712149635
+    second: ink_wraith_18
+  - first:
+      213: 5415471784283554670
+    second: ink_wraith_19
+  - first:
+      213: -5339558386845002740
+    second: ink_wraith_20
+  - first:
+      213: 6893811929257216227
+    second: ink_wraith_21
+  - first:
+      213: 7485961171198053266
+    second: ink_wraith_22
+  - first:
+      213: 9114170031987523008
+    second: ink_wraith_23
+  - first:
+      213: -3231356324504326165
+    second: ink_wraith_24
+  - first:
+      213: 8528217565568938359
+    second: ink_wraith_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ink_wraith_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 330
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb88bdfb8ce84fcb0800000000000000
+      internalID: -4831079507398260549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 332
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b488b51bde01797f0800000000000000
+      internalID: -605997011789182901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 332
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72c1a9d7922e878c0800000000000000
+      internalID: -4001199601089897433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_3
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 330
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 521ab07f67a1ea470800000000000000
+      internalID: 8407686652600492325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_4
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 328
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 888ad176899a343b0800000000000000
+      internalID: -5529389445450717048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_5
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 328
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7391d65831e4734d0800000000000000
+      internalID: -3154967168199878345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_6
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 266
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b279da1e4227bc960800000000000000
+      internalID: 7623312296985335595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_7
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 268
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2c5c53882fbc33c0800000000000000
+      internalID: -4378414556987499473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_8
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 268
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d39a0f8e0aace250800000000000000
+      internalID: 5975337785119904726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_9
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 266
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f06b92ca947418d90800000000000000
+      internalID: -7097313156012591601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_10
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 264
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0509a14121df41810800000000000000
+      internalID: 1735290010533007440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_11
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 264
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81301e7cf444117e0800000000000000
+      internalID: -1796579666897599720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_12
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 204
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2501888a88d1b4d50800000000000000
+      internalID: 6722499341560844370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_13
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 205
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96bd9ce1cda144ee0800000000000000
+      internalID: -1277866861554705559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_14
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 205
+        width: 20
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44b884a80cb30fa20800000000000000
+      internalID: 3094038642143300420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_15
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 138
+        width: 33
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d06daf79bdee834c0800000000000000
+      internalID: -4307430416664832499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_16
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 137
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 929c09e87f9d001f0800000000000000
+      internalID: -1080624253296916183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_17
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 137
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36ded6c20180a9e20800000000000000
+      internalID: 3358005337716026723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_18
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 74
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38a4a75f61ee18900800000000000000
+      internalID: 685090400712149635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_19
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 74
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e634f5935ee972b40800000000000000
+      internalID: 5415471784283554670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_20
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 10
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0455a6ffe316e5b0800000000000000
+      internalID: -5339558386845002740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_21
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 8
+        width: 26
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e80ab7bc6dbbaf50800000000000000
+      internalID: 6893811929257216227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_22
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 6
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29b80abd50a73e760800000000000000
+      internalID: 7485961171198053266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_23
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 4
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cd702bea590c7e70800000000000000
+      internalID: 9114170031987523008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_24
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 2
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bef25371b8ae723d0800000000000000
+      internalID: -3231356324504326165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ink_wraith_25
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 1
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 771bbf201b05a5670800000000000000
+      internalID: 8528217565568938359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ink_wraith_0: -4831079507398260549
+      ink_wraith_1: -605997011789182901
+      ink_wraith_10: 1735290010533007440
+      ink_wraith_11: -1796579666897599720
+      ink_wraith_12: 6722499341560844370
+      ink_wraith_13: -1277866861554705559
+      ink_wraith_14: 3094038642143300420
+      ink_wraith_15: -4307430416664832499
+      ink_wraith_16: -1080624253296916183
+      ink_wraith_17: 3358005337716026723
+      ink_wraith_18: 685090400712149635
+      ink_wraith_19: 5415471784283554670
+      ink_wraith_2: -4001199601089897433
+      ink_wraith_20: -5339558386845002740
+      ink_wraith_21: 6893811929257216227
+      ink_wraith_22: 7485961171198053266
+      ink_wraith_23: 9114170031987523008
+      ink_wraith_24: -3231356324504326165
+      ink_wraith_25: 8528217565568938359
+      ink_wraith_3: 8407686652600492325
+      ink_wraith_4: -5529389445450717048
+      ink_wraith_5: -3154967168199878345
+      ink_wraith_6: 7623312296985335595
+      ink_wraith_7: -4378414556987499473
+      ink_wraith_8: 5975337785119904726
+      ink_wraith_9: -7097313156012591601
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

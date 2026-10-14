@@ -35,6 +35,7 @@ namespace Game.Core
             public float Timer;
             public float Tick;
             public bool Hot;   // molten slag (hurts) or water (quenches the colossus)
+            public bool Spore; // a hot pool that is a cloud of spores (RunSimulation.Lands2.cs)
             public int Room;
         }
 
@@ -47,6 +48,7 @@ namespace Game.Core
             _pools.Clear();
             ResetLords2(); // RunSimulation.Lords2.cs
             ResetChampions(); // RunSimulation.Champions.cs
+            ResetLands2(); // RunSimulation.Lands2.cs
         }
 
         // ------------------------------------------------------------------ Choices
@@ -87,6 +89,9 @@ namespace Game.Core
                     return SecondLordAttack(def, distance, n, roomForMinions); // RunSimulation.Lords2.cs
                 case EnemyType.AshenKing:
                     return AshenAttack(distance, n, roomForMinions); // RunSimulation.Heart.cs
+                case EnemyType.Mycelid: case EnemyType.MossShaman: case EnemyType.GreatCap: case EnemyType.Scribe: case EnemyType.Bookworm:
+                case EnemyType.MyceliumMother: case EnemyType.RotGiant: case EnemyType.Archivist: case EnemyType.InkBeast:
+                    return NewLandAttack(def, distance, n, roomForMinions); // RunSimulation.Lands2.cs
                 // The lands' champions (RunSimulation.Champions.cs)
                 case EnemyType.BoneDigger:
                 case EnemyType.IceKnight:
@@ -127,13 +132,17 @@ namespace Game.Core
                 case EnemyType.SlagBloater:
                     AddPool(e.Position, SlagPoolRadius, SlagPoolTime, hot: true);
                     break;
+                case EnemyType.Sporeling:
+                    AddPool(e.Position, SporeCloudRadius, SporeCloudTime, hot: true, spore: true);
+                    break;
             }
         }
 
-        private void AddPool(Vector2 at, float radius, float seconds, bool hot)
+        private void AddPool(Vector2 at, float radius, float seconds, bool hot, bool spore = false)
         {
-            _pools.Add(new LandPool { Position = at, Radius = radius, Timer = seconds, Hot = hot, Room = Room.Id });
-            if (hot) Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.SlagPool, Pos = at, Value = radius, Size = new Vector2(seconds, 0f) });
+            _pools.Add(new LandPool { Position = at, Radius = radius, Timer = seconds, Hot = hot, Spore = spore, Room = Room.Id });
+            if (spore) Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.SporeCloud, Pos = at, Value = radius, Size = new Vector2(seconds, 0f) });
+            else if (hot) Events.Add(new SimEvent(SimEventType.AreaEffect) { Int = (int)AreaKind.SlagPool, Pos = at, Value = radius, Size = new Vector2(seconds, 0f) });
         }
 
         /// <summary>Puddles of slag hurt whoever stands in them; water from a cistern waits for the colossus.</summary>

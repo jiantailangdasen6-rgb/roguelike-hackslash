@@ -1,0 +1,886 @@
+fileFormatVersion: 2
+guid: 47c437a979daad441be0f7482166cc77
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7809514502000804779
+    second: mycelium_mother_flash_0
+  - first:
+      213: 1975242090006363412
+    second: mycelium_mother_flash_1
+  - first:
+      213: -2381857123384130816
+    second: mycelium_mother_flash_2
+  - first:
+      213: -7525901285339904781
+    second: mycelium_mother_flash_3
+  - first:
+      213: -6852028425549120481
+    second: mycelium_mother_flash_4
+  - first:
+      213: 702509282311839876
+    second: mycelium_mother_flash_5
+  - first:
+      213: -8325800434053675976
+    second: mycelium_mother_flash_6
+  - first:
+      213: 4732213707221957839
+    second: mycelium_mother_flash_7
+  - first:
+      213: -8934769125279662048
+    second: mycelium_mother_flash_8
+  - first:
+      213: 5148849243225266602
+    second: mycelium_mother_flash_9
+  - first:
+      213: -3052106371598614716
+    second: mycelium_mother_flash_10
+  - first:
+      213: -3820447507842646013
+    second: mycelium_mother_flash_11
+  - first:
+      213: -5311393951138918694
+    second: mycelium_mother_flash_12
+  - first:
+      213: 8847710596185932871
+    second: mycelium_mother_flash_13
+  - first:
+      213: -1700162184748223010
+    second: mycelium_mother_flash_14
+  - first:
+      213: 6446271611444544060
+    second: mycelium_mother_flash_15
+  - first:
+      213: -6476352466800505275
+    second: mycelium_mother_flash_16
+  - first:
+      213: -7246773086448811835
+    second: mycelium_mother_flash_17
+  - first:
+      213: -8440132190245751312
+    second: mycelium_mother_flash_18
+  - first:
+      213: -2435700029014176784
+    second: mycelium_mother_flash_19
+  - first:
+      213: 6269642115618249724
+    second: mycelium_mother_flash_20
+  - first:
+      213: -4624824348569264977
+    second: mycelium_mother_flash_21
+  - first:
+      213: -1059502032661021245
+    second: mycelium_mother_flash_22
+  - first:
+      213: -9183061248937817015
+    second: mycelium_mother_flash_23
+  - first:
+      213: 8266546517512176083
+    second: mycelium_mother_flash_24
+  - first:
+      213: 5484402900621476491
+    second: mycelium_mother_flash_25
+  - first:
+      213: -1712990374341835273
+    second: mycelium_mother_flash_26
+  - first:
+      213: 8197808768438563931
+    second: mycelium_mother_flash_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mycelium_mother_flash_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 567
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba305002018f06c60800000000000000
+      internalID: 7809514502000804779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_1
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 568
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41dba303738796b10800000000000000
+      internalID: 1975242090006363412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_2
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 568
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00384fed091f1fed0800000000000000
+      internalID: -2381857123384130816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_3
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 567
+        width: 37
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f4c8a8a7a0ae8790800000000000000
+      internalID: -7525901285339904781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_4
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 566
+        width: 36
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1cf3485374b8e0a0800000000000000
+      internalID: -6852028425549120481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_5
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 566
+        width: 36
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 480ac9f5870dfb900800000000000000
+      internalID: 702509282311839876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_6
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 455
+        width: 42
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83400710e90d47c80800000000000000
+      internalID: -8325800434053675976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_7
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 456
+        width: 43
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fccf23c5b433ca140800000000000000
+      internalID: 4732213707221957839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 456
+        width: 43
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0200499a1d2510480800000000000000
+      internalID: -8934769125279662048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_9
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 455
+        width: 42
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa91b706b13647740800000000000000
+      internalID: 5148849243225266602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_10
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 453
+        width: 42
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44f78200d6db4a5d0800000000000000
+      internalID: -3052106371598614716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_11
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 453
+        width: 42
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3004304bb3b0bfac0800000000000000
+      internalID: -3820447507842646013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_12
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 343
+        width: 39
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adec438a7532a46b0800000000000000
+      internalID: -5311393951138918694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_13
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 343
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7444f19f8e169ca70800000000000000
+      internalID: 8847710596185932871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_14
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 344
+        width: 30
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed5b785308fc768e0800000000000000
+      internalID: -1700162184748223010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_15
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 230
+        width: 57
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3246d570e1c57950800000000000000
+      internalID: 6446271611444544060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_16
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 228
+        width: 64
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54e8120aebf5f16a0800000000000000
+      internalID: -6476352466800505275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_17
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 228
+        width: 62
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c08b5ed54a4e6b90800000000000000
+      internalID: -7246773086448811835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_18
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 231
+        width: 44
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f5ff0f9d70aeda80800000000000000
+      internalID: -8440132190245751312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_19
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 118
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fb833f7ab7a23ed0800000000000000
+      internalID: -2435700029014176784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_20
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 118
+        width: 34
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfb1142494e320750800000000000000
+      internalID: 6269642115618249724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_21
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 7
+        width: 34
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fac93f222c251dfb0800000000000000
+      internalID: -4624824348569264977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_22
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 6
+        width: 38
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cd7f68c384eb41f0800000000000000
+      internalID: -1059502032661021245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_23
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 4
+        width: 42
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94c0862b2763f8080800000000000000
+      internalID: -9183061248937817015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_24
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 3
+        width: 47
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d14e87724ca8b270800000000000000
+      internalID: 8266546517512176083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_25
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 2
+        width: 50
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b824aa861638c1c40800000000000000
+      internalID: 5484402900621476491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_26
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 48
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f501b1945c3a38e0800000000000000
+      internalID: -1712990374341835273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelium_mother_flash_27
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 0
+        width: 46
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b54fc5b14a774c170800000000000000
+      internalID: 8197808768438563931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      mycelium_mother_flash_0: 7809514502000804779
+      mycelium_mother_flash_1: 1975242090006363412
+      mycelium_mother_flash_10: -3052106371598614716
+      mycelium_mother_flash_11: -3820447507842646013
+      mycelium_mother_flash_12: -5311393951138918694
+      mycelium_mother_flash_13: 8847710596185932871
+      mycelium_mother_flash_14: -1700162184748223010
+      mycelium_mother_flash_15: 6446271611444544060
+      mycelium_mother_flash_16: -6476352466800505275
+      mycelium_mother_flash_17: -7246773086448811835
+      mycelium_mother_flash_18: -8440132190245751312
+      mycelium_mother_flash_19: -2435700029014176784
+      mycelium_mother_flash_2: -2381857123384130816
+      mycelium_mother_flash_20: 6269642115618249724
+      mycelium_mother_flash_21: -4624824348569264977
+      mycelium_mother_flash_22: -1059502032661021245
+      mycelium_mother_flash_23: -9183061248937817015
+      mycelium_mother_flash_24: 8266546517512176083
+      mycelium_mother_flash_25: 5484402900621476491
+      mycelium_mother_flash_26: -1712990374341835273
+      mycelium_mother_flash_27: 8197808768438563931
+      mycelium_mother_flash_3: -7525901285339904781
+      mycelium_mother_flash_4: -6852028425549120481
+      mycelium_mother_flash_5: 702509282311839876
+      mycelium_mother_flash_6: -8325800434053675976
+      mycelium_mother_flash_7: 4732213707221957839
+      mycelium_mother_flash_8: -8934769125279662048
+      mycelium_mother_flash_9: 5148849243225266602
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

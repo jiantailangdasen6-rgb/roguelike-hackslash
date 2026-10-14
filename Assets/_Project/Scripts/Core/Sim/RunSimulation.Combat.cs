@@ -605,6 +605,11 @@ namespace Game.Core
                 WakeMimic(ref e); // the chest was a mimic (RunSimulation.Events.cs)
                 return;
             }
+            if (e.Type == EnemyType.ForbiddenTome)
+            {
+                if (attacker != null && (flags & HitFlags.DamageOverTime) == 0) TomeStruck(index); // read, never broken (RunSimulation.Lands2.cs)
+                return;
+            }
 
             bool disabled = e.Frozen > 0f || e.Marked > 0f || e.Stunned > 0f;
             bool wasFrozen = e.Frozen > 0f;

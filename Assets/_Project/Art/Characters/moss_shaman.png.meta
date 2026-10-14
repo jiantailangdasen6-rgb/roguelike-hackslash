@@ -1,0 +1,782 @@
+fileFormatVersion: 2
+guid: 13d843d19d6512749adba59b59140fee
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5580480947357719715
+    second: moss_shaman_0
+  - first:
+      213: -7676579970861829035
+    second: moss_shaman_1
+  - first:
+      213: 8843848780444530858
+    second: moss_shaman_2
+  - first:
+      213: -2133712066590418543
+    second: moss_shaman_3
+  - first:
+      213: 6945346578591446993
+    second: moss_shaman_4
+  - first:
+      213: 7110752448692866029
+    second: moss_shaman_5
+  - first:
+      213: -3161166612967648612
+    second: moss_shaman_6
+  - first:
+      213: -5587175543206621211
+    second: moss_shaman_7
+  - first:
+      213: 4326673618859882247
+    second: moss_shaman_8
+  - first:
+      213: -7724165964983143398
+    second: moss_shaman_9
+  - first:
+      213: 2829795487362277286
+    second: moss_shaman_10
+  - first:
+      213: 8724507576187860169
+    second: moss_shaman_11
+  - first:
+      213: -8433442469151421624
+    second: moss_shaman_12
+  - first:
+      213: 3766295053546585576
+    second: moss_shaman_13
+  - first:
+      213: -5897333513505903170
+    second: moss_shaman_14
+  - first:
+      213: -735277930146821887
+    second: moss_shaman_15
+  - first:
+      213: -8861352845731871974
+    second: moss_shaman_16
+  - first:
+      213: 6749117163505218724
+    second: moss_shaman_17
+  - first:
+      213: -4403093153112918819
+    second: moss_shaman_18
+  - first:
+      213: 2867558832470176497
+    second: moss_shaman_19
+  - first:
+      213: 3842531647124246985
+    second: moss_shaman_20
+  - first:
+      213: -5770754501184109427
+    second: moss_shaman_21
+  - first:
+      213: 5486157557730501983
+    second: moss_shaman_22
+  - first:
+      213: 6474839218254257509
+    second: moss_shaman_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: moss_shaman_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 328
+        width: 20
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ac971fdad9d17d40800000000000000
+      internalID: 5580480947357719715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 328
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 554f6e2503f477590800000000000000
+      internalID: -7676579970861829035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 327
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa8faadeb99abba70800000000000000
+      internalID: 8843848780444530858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 327
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 199d9e92e288362e0800000000000000
+      internalID: -2133712066590418543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_4
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 265
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d7faea4ae3d26060800000000000000
+      internalID: 6945346578591446993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_5
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 264
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: debc31e7da77ea260800000000000000
+      internalID: 7110752448692866029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_6
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 264
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c921d3ec6b74124d0800000000000000
+      internalID: -3161166612967648612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_7
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 265
+        width: 20
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ef4b61127d5672b0800000000000000
+      internalID: -5587175543206621211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_8
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 265
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 707723f8bbe6b0c30800000000000000
+      internalID: 4326673618859882247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_9
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 265
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a14740faaff3ec490800000000000000
+      internalID: -7724165964983143398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_10
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 200
+        width: 26
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6af5b3bb004754720800000000000000
+      internalID: 2829795487362277286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_11
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 201
+        width: 21
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c4b1e68a6da31970800000000000000
+      internalID: 8724507576187860169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_12
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 202
+        width: 19
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84b4980b1c466fa80800000000000000
+      internalID: -8433442469151421624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_13
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 136
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ed74f18561944430800000000000000
+      internalID: 3766295053546585576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_14
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 136
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebd69753a66782ea0800000000000000
+      internalID: -5897333513505903170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_15
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 136
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1090a624e94cbc5f0800000000000000
+      internalID: -735277930146821887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_16
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 72
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1341c84986260580800000000000000
+      internalID: -8861352845731871974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_17
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 72
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a478364d4ea9ad50800000000000000
+      internalID: 6749117163505218724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_18
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 3
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd4ffb71b1215e2c0800000000000000
+      internalID: -4403093153112918819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_19
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 8
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f23beda09d9bc720800000000000000
+      internalID: 2867558832470176497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_20
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 8
+        width: 36
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c19909ac2a635530800000000000000
+      internalID: 3842531647124246985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_21
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 8
+        width: 30
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d844fee1b592aefa0800000000000000
+      internalID: -5770754501184109427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_22
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f55e95a5b3fb22c40800000000000000
+      internalID: 5486157557730501983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moss_shaman_23
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 0
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56d10ddb6ff3bd950800000000000000
+      internalID: 6474839218254257509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      moss_shaman_0: 5580480947357719715
+      moss_shaman_1: -7676579970861829035
+      moss_shaman_10: 2829795487362277286
+      moss_shaman_11: 8724507576187860169
+      moss_shaman_12: -8433442469151421624
+      moss_shaman_13: 3766295053546585576
+      moss_shaman_14: -5897333513505903170
+      moss_shaman_15: -735277930146821887
+      moss_shaman_16: -8861352845731871974
+      moss_shaman_17: 6749117163505218724
+      moss_shaman_18: -4403093153112918819
+      moss_shaman_19: 2867558832470176497
+      moss_shaman_2: 8843848780444530858
+      moss_shaman_20: 3842531647124246985
+      moss_shaman_21: -5770754501184109427
+      moss_shaman_22: 5486157557730501983
+      moss_shaman_23: 6474839218254257509
+      moss_shaman_3: -2133712066590418543
+      moss_shaman_4: 6945346578591446993
+      moss_shaman_5: 7110752448692866029
+      moss_shaman_6: -3161166612967648612
+      moss_shaman_7: -5587175543206621211
+      moss_shaman_8: 4326673618859882247
+      moss_shaman_9: -7724165964983143398
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -26,6 +26,8 @@ namespace Game.EditorTools.Art
             new[] { C("#0e1320"), C("#1a2336"), C("#2a3752"), C("#3e4f72"), C("#5a6f94"), C("#8aa2c4") }, // frost: ice-crusted marble
             new[] { C("#100a08"), C("#1d1410"), C("#2b1f18"), C("#3b2b21"), C("#4e3a2c"), C("#66503e") }, // forge: charred stone
             new[] { C("#0c0506"), C("#1a090b"), C("#2a0f12"), C("#3c161a"), C("#521f24"), C("#6e2c30") }, // heart: ash-red stone
+            new[] { C("#0a0d08"), C("#151c11"), C("#212b1a"), C("#2f3c25"), C("#415234"), C("#5a6e48") }, // grotto: mossy rock
+            new[] { C("#0f0a08"), C("#1c130e"), C("#2b1e16"), C("#3d2b1f"), C("#523b2a"), C("#6e5038") }, // library: dark oak
         };
         private static readonly Color32[] Gold = { C("#2e1f0a"), C("#573d12"), C("#87641c"), C("#bb912f"), C("#e6c766") };
         private static readonly Color32[] Crimson = { C("#25060a"), C("#4a0c13"), C("#76121d"), C("#a31d28"), C("#cf3a3a") };
@@ -40,6 +42,8 @@ namespace Game.EditorTools.Art
             C("#a8e4ff"), // frost: cold blue
             C("#ff7a1f"), // forge: molten orange
             C("#ffae42"), // heart: embers
+            C("#9cff6a"), // grotto: glowing fungus
+            C("#b49cff"), // library: cursed candle violet
         };
 
         public struct Sheet
@@ -69,6 +73,9 @@ namespace Game.EditorTools.Art
             sheets["prop_lantern"] = new Sheet { Frames = Lantern(), Pivot = new Vector2(0.5f, 0.08f) };
             sheets["trap_spikes"] = new Sheet { Frames = Spikes(), Pivot = new Vector2(0.5f, 0.5f) };
             sheets["trap_vent"] = new Sheet { Frames = Vent(), Pivot = new Vector2(0.5f, 0.1f) };
+            sheets["prop_bookshelf"] = One(LandArt.Bookshelf(), new Vector2(0.5f, 0.08f));
+            sheets["trap_spore"] = new Sheet { Frames = LandArt.SporeVent(), Pivot = new Vector2(0.5f, 0.5f) };
+            sheets["trap_glyph"] = new Sheet { Frames = LandArt.Glyph(), Pivot = new Vector2(0.5f, 0.5f) };
             return sheets;
         }
 
@@ -107,6 +114,7 @@ namespace Game.EditorTools.Art
 
         private static PixelCanvas Pillar(int area)
         {
+            if (area >= 7) return LandArt.Pillar2(area); // LandArt.Lands2.cs
             var s = StoneRamp[area];
             var c = new PixelCanvas(32, 64);
             var rng = new GameRandom((ulong)(100 + area));
@@ -226,6 +234,7 @@ namespace Game.EditorTools.Art
 
         private static PixelCanvas Statue(int area)
         {
+            if (area >= 7) return LandArt.Statue2(area); // LandArt.Lands2.cs
             var m = EnvMaterials(area);
             PixelPart part = area switch
             {

@@ -1,0 +1,886 @@
+fileFormatVersion: 2
+guid: a737cb19370ea1443bdea9481dee478f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 433808030010002043
+    second: archivist_0
+  - first:
+      213: -1849811701529357021
+    second: archivist_1
+  - first:
+      213: -4077030443158664223
+    second: archivist_2
+  - first:
+      213: -5484870190485199595
+    second: archivist_3
+  - first:
+      213: 7173021475203792803
+    second: archivist_4
+  - first:
+      213: -1836575064103206954
+    second: archivist_5
+  - first:
+      213: -6164774158404156591
+    second: archivist_6
+  - first:
+      213: -6839058289842739625
+    second: archivist_7
+  - first:
+      213: -1491080155290537791
+    second: archivist_8
+  - first:
+      213: -8030888729986840881
+    second: archivist_9
+  - first:
+      213: 780438547101114211
+    second: archivist_10
+  - first:
+      213: -7142108800124343156
+    second: archivist_11
+  - first:
+      213: -3971653942216792175
+    second: archivist_12
+  - first:
+      213: 2117067422085968539
+    second: archivist_13
+  - first:
+      213: -1200779980042138159
+    second: archivist_14
+  - first:
+      213: 3485688554929411545
+    second: archivist_15
+  - first:
+      213: 7757519524681140113
+    second: archivist_16
+  - first:
+      213: -3140803046382773435
+    second: archivist_17
+  - first:
+      213: -8378605678352988139
+    second: archivist_18
+  - first:
+      213: 3406015897491633041
+    second: archivist_19
+  - first:
+      213: 1156823220696595689
+    second: archivist_20
+  - first:
+      213: -1469563566193781475
+    second: archivist_21
+  - first:
+      213: 1917136665848900493
+    second: archivist_22
+  - first:
+      213: -1430378684526063489
+    second: archivist_23
+  - first:
+      213: -7505196458864503665
+    second: archivist_24
+  - first:
+      213: -7163340720209141377
+    second: archivist_25
+  - first:
+      213: 5974355018493670362
+    second: archivist_26
+  - first:
+      213: 5996855719336629067
+    second: archivist_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: archivist_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 573
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7a4579da12350600800000000000000
+      internalID: 433808030010002043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_1
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 575
+        width: 36
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3255bf4ee062456e0800000000000000
+      internalID: -1849811701529357021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_2
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 575
+        width: 36
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eb0319b96a7b67c0800000000000000
+      internalID: -4077030443158664223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_3
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 573
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51520013f93d1e3b0800000000000000
+      internalID: -5484870190485199595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_4
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 570
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3af35c30701bb8360800000000000000
+      internalID: 7173021475203792803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_5
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 570
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dfb9c4b5bc2386e0800000000000000
+      internalID: -1836575064103206954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_6
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 460
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15300d7b092527aa0800000000000000
+      internalID: -6164774158404156591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_7
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 462
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 756abb368b8c611a0800000000000000
+      internalID: -6839058289842739625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_8
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 462
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c0f544bf7e9e4be0800000000000000
+      internalID: -1491080155290537791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_9
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 460
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc64272ef3d8c8090800000000000000
+      internalID: -8030888729986840881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_10
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 459
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36fdbf049bca4da00800000000000000
+      internalID: 780438547101114211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_11
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 459
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8ca56503e122ec90800000000000000
+      internalID: -7142108800124343156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_12
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 351
+        width: 39
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 197636348c9d1e8c0800000000000000
+      internalID: -3971653942216792175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_13
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 352
+        width: 29
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b927cfa8a95516d10800000000000000
+      internalID: 2117067422085968539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_14
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 353
+        width: 28
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dd003c58f8f55fe0800000000000000
+      internalID: -1200779980042138159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_15
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 238
+        width: 58
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d55632d547af5030800000000000000
+      internalID: 3485688554929411545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_16
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 236
+        width: 61
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 197c6c618ee38ab60800000000000000
+      internalID: 7757519524681140113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_17
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 237
+        width: 60
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54bd3ee1540a964d0800000000000000
+      internalID: -3140803046382773435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_18
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 238
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51803bcf68639bb80800000000000000
+      internalID: -8378605678352988139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_19
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 125
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1937255b969944f20800000000000000
+      internalID: 3406015897491633041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_20
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 126
+        width: 35
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ec3b81179cdd0010800000000000000
+      internalID: 1156823220696595689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_21
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 13
+        width: 34
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d15d92ef8bf0b9be0800000000000000
+      internalID: -1469563566193781475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_22
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 13
+        width: 38
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8becc1e3a90b9a10800000000000000
+      internalID: 1917136665848900493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_23
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 11
+        width: 42
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7098863a26462ce0800000000000000
+      internalID: -1430378684526063489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_24
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 10
+        width: 45
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f849cdbb59f28d790800000000000000
+      internalID: -7505196458864503665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_25
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 9
+        width: 50
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f71e7d66193b69c90800000000000000
+      internalID: -7163340720209141377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_26
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 0
+        width: 42
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad3336f5c3c29e250800000000000000
+      internalID: 5974355018493670362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archivist_27
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 0
+        width: 40
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b435458018c193350800000000000000
+      internalID: 5996855719336629067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      archivist_0: 433808030010002043
+      archivist_1: -1849811701529357021
+      archivist_10: 780438547101114211
+      archivist_11: -7142108800124343156
+      archivist_12: -3971653942216792175
+      archivist_13: 2117067422085968539
+      archivist_14: -1200779980042138159
+      archivist_15: 3485688554929411545
+      archivist_16: 7757519524681140113
+      archivist_17: -3140803046382773435
+      archivist_18: -8378605678352988139
+      archivist_19: 3406015897491633041
+      archivist_2: -4077030443158664223
+      archivist_20: 1156823220696595689
+      archivist_21: -1469563566193781475
+      archivist_22: 1917136665848900493
+      archivist_23: -1430378684526063489
+      archivist_24: -7505196458864503665
+      archivist_25: -7163340720209141377
+      archivist_26: 5974355018493670362
+      archivist_27: 5996855719336629067
+      archivist_3: -5484870190485199595
+      archivist_4: 7173021475203792803
+      archivist_5: -1836575064103206954
+      archivist_6: -6164774158404156591
+      archivist_7: -6839058289842739625
+      archivist_8: -1491080155290537791
+      archivist_9: -8030888729986840881
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

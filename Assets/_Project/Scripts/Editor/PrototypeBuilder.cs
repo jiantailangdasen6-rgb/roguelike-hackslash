@@ -749,6 +749,26 @@ namespace Game.EditorTools
                     candleSheet = "fx_candle_red";
                     candleLight = new Color(1f, 0.45f, 0.25f);
                     break;
+                case 7:
+                    // Fungal grotto: glowing roots down the rock, mossy rags, toadstools along the walls, a green haze.
+                    foreach (float x in new[] { -12.5f, -3.4f, 3.4f, 12.5f }) Prop(props, "vines_7", new Vector2(x, yMax + 0.4f), 1f, order: -982);
+                    foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_7", new Vector2(x, yMax + 0.5f), 1f, order: -980);
+                    for (int i = 0; i < 8; i++) Prop(props, "shrooms_7", ScatterNearWalls(rng, xMin, xMax, yMin, yMax), 1f, order: -950);
+                    foreach (float x in new[] { -8f, 0f, 8f })
+                        Light(props, new Vector2(x, yMax - 0.8f), new Color(0.55f, 1f, 0.35f), 0.4f, 5f); // fungus glowing on the wall
+                    candleSheet = "fx_candle_spore";
+                    candleLight = new Color(0.6f, 1f, 0.4f);
+                    break;
+                case 8:
+                    // Cursed library: candle stands by the shelves, navy banners, pages strewn over the parquet.
+                    foreach (float x in new[] { -12f, -3.4f, 3.4f, 12f }) Prop(props, "candles_8", new Vector2(x, yMax - 0.3f), 1f, order: -979);
+                    foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_8", new Vector2(x, yMax + 0.5f), 1f, order: -980);
+                    for (int i = 0; i < 7; i++) Prop(props, "papers_8", ScatterNearWalls(rng, xMin, xMax, yMin, yMax), 1f, order: -950);
+                    foreach (float x in new[] { -12f, -3.4f, 3.4f, 12f })
+                        Light(props, new Vector2(x, yMax - 0.1f), new Color(0.7f, 0.55f, 1f), 0.5f, 4f);
+                    candleSheet = "fx_candle_violet";
+                    candleLight = new Color(0.72f, 0.58f, 1f);
+                    break;
                 default: // 5: the forge
                     // Burnt forge: weapon racks, soot-black banners, slag cooling on the floor, the glow of the furnaces.
                     foreach (float x in new[] { -11.5f, 11.5f }) Prop(props, "rack_5", new Vector2(x, yMax + 0.2f), 1f, order: -980);

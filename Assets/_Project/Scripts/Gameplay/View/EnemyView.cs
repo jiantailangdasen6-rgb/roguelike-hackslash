@@ -343,9 +343,10 @@ namespace Game.Gameplay
                     }
                 }
                 if (trial == BossTrial.Phylactery) tint = new Color(0.6f, 0.9f, 1f, 0.4f + 0.1f * Mathf.Sin(Time.time * 8f));
-                if (trial == BossTrial.Coffins) tint.a = 0f;                                  // hidden in a coffin
-                v.Shadow.enabled = trial != BossTrial.Coffins;
-                if (v.Glow != null) v.Glow.enabled = trial != BossTrial.Coffins;
+                bool hidden = trial is BossTrial.Coffins or BossTrial.Dive;                    // in a coffin, under the ink
+                if (hidden) tint.a = 0f;
+                v.Shadow.enabled = !hidden;
+                if (v.Glow != null) v.Glow.enabled = !hidden;
                 if (trial == BossTrial.Shell) tint = Color.Lerp(tint, new Color(0.55f, 0.75f, 0.8f), 0.45f); // shut in its shell
                 if (v.Glow != null && trial == BossTrial.BloodRitual) v.Glow.intensity = 2f + Mathf.Sin(Time.time * 6f) * 0.6f;
                 // Red-hot iron: the colossus glows like a forge while he burns.
@@ -360,6 +361,26 @@ namespace Game.Gameplay
             // Champions' things: a shade's double is half there; a thrown keg flickers red as its fuse burns.
             if (s.Type == EnemyType.ShadeDecoy) tint = new Color(0.55f, 0.4f, 0.5f, 0.6f + 0.1f * Mathf.Sin(Time.time * 9f));
             if (s.Type == EnemyType.LitKeg) tint = Color.Lerp(Color.white, new Color(1f, 0.35f, 0.2f), 0.5f + 0.5f * Mathf.Sin(Time.time * 18f));
+            // The new lords' trial things: caps and lilies glow while they live, tomes and candles light up (EnemyAnim.Walk).
+            if (s.Type is EnemyType.Glowcap or EnemyType.Lily or EnemyType.Candelabra or EnemyType.ForbiddenTome)
+            {
+                bool lit = s.Anim == EnemyAnim.Walk;
+                float breathe = 0.5f + 0.5f * Mathf.Sin(Time.time * 3f + s.Position.x);
+                if (s.Type is EnemyType.Candelabra or EnemyType.ForbiddenTome) tint = lit ? Color.white : new Color(0.62f, 0.6f, 0.7f, 1f);
+                if (v.Glow != null)
+                {
+                    v.Glow.enabled = lit || s.Type is EnemyType.Glowcap or EnemyType.Lily;
+                    v.Glow.color = s.Type switch
+                    {
+                        EnemyType.Glowcap => new Color(0.6f, 1f, 0.45f),
+                        EnemyType.Lily => new Color(1f, 0.95f, 0.8f),
+                        EnemyType.Candelabra => new Color(1f, 0.75f, 0.4f),
+                        _ => new Color(0.7f, 0.55f, 1f),
+                    };
+                    v.Glow.intensity = (s.Type == EnemyType.Glowcap ? 1.3f : 1f) + 0.3f * breathe;
+                    v.Glow.pointLightOuterRadius = s.Type == EnemyType.Glowcap ? RunSimulation.CapRadius + 0.6f : 2.6f;
+                }
+            }
             if (s.Type is EnemyType.BloodSigil or EnemyType.PressurePlate)
             {
                 bool lit = s.Anim == EnemyAnim.Walk;
@@ -409,7 +430,8 @@ namespace Game.Gameplay
             v.Animator.Renderer.color = Color.white;
             v.Animator.Play("idle", force: true);
 
-            bool trialProp = type is EnemyType.BoneBrazier or EnemyType.BloodSigil or EnemyType.SoulVessel or EnemyType.PressurePlate or EnemyType.WardCrystal;
+            bool trialProp = type is EnemyType.BoneBrazier or EnemyType.BloodSigil or EnemyType.SoulVessel or EnemyType.PressurePlate or EnemyType.WardCrystal
+                             or EnemyType.Glowcap or EnemyType.Lily or EnemyType.Candelabra or EnemyType.ForbiddenTome;
             bool glows = def.Type is EnemyType.Wraith or EnemyType.ShadeStalker or EnemyType.AbyssEye or EnemyType.TideWitch or EnemyType.FrostWitch or EnemyType.FireImp or EnemyType.SlagBloater or EnemyType.IceMirror;
             if (elite || def.Boss || glows || trialProp)
             {
@@ -442,6 +464,8 @@ namespace Game.Gameplay
                     case EnemyType.LeechMother: v.Glow.color = new Color(0.35f, 1f, 0.85f); break;
                     case EnemyType.IceKnight: v.Glow.color = new Color(0.6f, 0.85f, 1f); break;
                     case EnemyType.Bombsmith: v.Glow.color = new Color(1f, 0.5f, 0.15f); break;
+                    case EnemyType.MyceliumMother: case EnemyType.RotGiant: case EnemyType.GreatCap: case EnemyType.MossShaman: v.Glow.color = new Color(0.55f, 1f, 0.35f); break;
+                    case EnemyType.Archivist: case EnemyType.InkBeast: case EnemyType.InkWraith: case EnemyType.Bookworm: v.Glow.color = new Color(0.6f, 0.45f, 1f); break;
                     case EnemyType.FrostQueen: case EnemyType.IceMirror: case EnemyType.FrostWitch: v.Glow.color = new Color(0.6f, 0.85f, 1f); break;
                     case EnemyType.ForgeColossus: case EnemyType.FireImp: case EnemyType.SlagBloater: case EnemyType.AshenKing: v.Glow.color = new Color(1f, 0.5f, 0.15f); break;
                 }
@@ -488,6 +512,10 @@ namespace Game.Gameplay
             EnemyType.BoneDigger or EnemyType.TwinAcolyte or EnemyType.ShadeLord or EnemyType.ShadeDecoy or EnemyType.IceKnight or EnemyType.Bombsmith => 1.25f,
             EnemyType.LeechMother => 1.35f,
             EnemyType.BonePile => 1.2f,
+            EnemyType.GreatCap or EnemyType.Bookworm => 1.3f,
+            EnemyType.InkBeast => 2.0f,
+            EnemyType.RotGiant => 1.5f,
+            EnemyType.Glowcap or EnemyType.Candelabra or EnemyType.ForbiddenTome or EnemyType.Lily => 1.5f,
             _ => def.Boss || type == EnemyType.IceMirror ? BossScale : 1f,
         };
 

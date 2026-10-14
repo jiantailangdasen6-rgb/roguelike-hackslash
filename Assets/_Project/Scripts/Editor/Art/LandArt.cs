@@ -9,10 +9,10 @@ namespace Game.EditorTools.Art
     /// catacombs (wet green stone, puddles, roots), the frozen mausoleum (frosted tiles, snow, icicles) and the
     /// burnt forge (scorched brick, iron grates, glowing cracks). 32 px = 1 tile, named "floor{v}_{land}" like the others.
     /// </summary>
-    public static class LandArt
+    public static partial class LandArt
     {
         /// <summary>Lands with a look (BuildAreaLook makes one root per land).</summary>
-        public const int Count = 7;
+        public const int Count = 9;
 
         private static Color32 C(string hex) => PixelMaterial.Hex(hex);
         private static Color32 A(Color32 c, byte a) => new(c.r, c.g, c.b, a);
@@ -30,17 +30,19 @@ namespace Game.EditorTools.Art
                 tiles[$"floor{v}_4"] = FrostFloor((ulong)(83 + v), v);
                 tiles[$"floor{v}_5"] = ForgeFloor((ulong)(97 + v), v);
                 tiles[$"floor{v}_6"] = HeartFloor((ulong)(113 + v), v);
+                tiles[$"floor{v}_7"] = GrottoFloor((ulong)(127 + v), v); // LandArt.Lands2.cs
+                tiles[$"floor{v}_8"] = LibraryFloor((ulong)(139 + v), v);
             }
             for (int land = 3; land < Count; land++)
             {
-                tiles[$"wall_{land}"] = Wall(land, 5);
-                tiles[$"wall_alt_{land}"] = Wall(land, 6);
+                tiles[$"wall_{land}"] = land >= 7 ? Wall2(land, 5) : Wall(land, 5);
+                tiles[$"wall_alt_{land}"] = land >= 7 ? Wall2(land, 6) : Wall(land, 6);
             }
             return tiles;
         }
 
         /// <summary>Wall decorations (anchored at the bottom centre) and floor scatter of the new lands.</summary>
-        public static Dictionary<string, PixelCanvas> Decor() => new()
+        public static Dictionary<string, PixelCanvas> Decor() => WithDecor2(new Dictionary<string, PixelCanvas>
         {
             ["roots_3"] = Roots(),
             ["banner_3"] = Tatters(new[] { C("#081211"), C("#0f201e"), C("#17302c"), C("#22443e"), C("#2f5c53") }, C("#6f5a2c")),
@@ -51,7 +53,7 @@ namespace Game.EditorTools.Art
             ["rack_5"] = WeaponRack(),
             ["banner_5"] = Tatters(new[] { C("#0b0807"), C("#151010"), C("#201817"), C("#2c2220"), C("#3a2e2a") }, ForgeGlow),
             ["slag_5"] = Slag(),
-        };
+        });
 
         // ------------------------------------------------------------------ Floors
 

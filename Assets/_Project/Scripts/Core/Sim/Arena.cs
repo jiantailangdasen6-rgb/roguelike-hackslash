@@ -14,6 +14,7 @@ namespace Game.Core
         Crates,
         Crystal,
         Campfire,   // the rest room's fire (heals, see RunSimulation.WarmByTheFire)
+        Bookshelf,  // library: a tall case of books (cover)
     }
 
     /// <summary>Room gimmicks. Traps hurt players and monsters alike, so luring enemies into them pays off.</summary>
@@ -29,6 +30,8 @@ namespace Game.Core
         Ice,         // frost: a frozen sheet, players slide on it
         Icicle,      // frost: icicles fall from the ceiling on a cycle (a shadow grows first)
         LavaCrack,   // forge: a crack in the floor that erupts along a line
+        SporeVent,   // grotto: a vent in the floor that puffs a lingering cloud of spores
+        Glyph,       // library: a written page on the floor that bursts a moment after someone steps on it
     }
 
     public struct Obstacle
@@ -38,7 +41,7 @@ namespace Game.Core
         public Vector2 Size;     // collision footprint
 
         public Rect Box => new(Position.x - Size.x * 0.5f, Position.y - Size.y * 0.5f, Size.x, Size.y);
-        public bool BlocksProjectiles => Kind is ObstacleKind.Pillar or ObstacleKind.Statue or ObstacleKind.Crystal;
+        public bool BlocksProjectiles => Kind is ObstacleKind.Pillar or ObstacleKind.Statue or ObstacleKind.Crystal or ObstacleKind.Bookshelf;
     }
 
     public struct GimmickDef
@@ -118,6 +121,19 @@ namespace Game.Core
         public const float LavaTick = 0.35f;
         public const float LavaDamage = 9f;
 
+        public const float SporeRadius = 1.9f;
+        public const float SporePeriod = 6f;
+        public const float SporeWarn = 1.1f;
+        public const float SporeActive = 2.4f;
+        public const float SporeTick = 0.45f;
+        public const float SporeDamage = 6f;
+
+        public const float GlyphTrigger = 0.9f;
+        public const float GlyphRadius = 1.7f;
+        public const float GlyphWarn = 0.7f;
+        public const float GlyphRearm = 4f;
+        public const float GlyphDamage = 20f;
+
         private static Obstacle O(ObstacleKind kind, float x, float y) => new()
         {
             Kind = kind,
@@ -131,6 +147,7 @@ namespace Game.Core
                 ObstacleKind.Pew => new Vector2(3.2f, 0.6f),
                 ObstacleKind.Crates => new Vector2(1.3f, 0.9f),
                 ObstacleKind.Campfire => new Vector2(1.5f, 0.8f),
+                ObstacleKind.Bookshelf => new Vector2(2.6f, 0.8f),
                 _ => new Vector2(1.0f, 0.8f),
             },
         };
@@ -364,7 +381,54 @@ namespace Game.Core
                     G(Keg, -12f, 0.6f), G(Keg, 12f, 0.6f), G(Font, 0f, -5.6f),
                 },
             },
+
+            // ---------------------------------------------------------------- Fungal grotto (spore vents puff lingering clouds)
+            new()
+            {
+                Id = 24, Name = "spore_hollow",
+                Obstacles = new[] { O(P, -8f, 3.6f), O(P, 8f, 3.6f), O(P, -8f, -3.2f), O(P, 8f, -3.2f) },
+                Gimmicks = new[] { G(Vent, 0f, 0.6f, 0f), G(Vent, -11.5f, 0.4f, 0.5f), G(Vent, 11.5f, 0.4f, 0.5f) },
+            },
+            new()
+            {
+                // Toadstools as tall as a man, and between them the vents and a damp hollow.
+                Id = 25, Name = "root_tangle",
+                Obstacles = new[] { O(ObstacleKind.Statue, -5f, 4.4f), O(ObstacleKind.Statue, 5f, 4.4f), O(P, -10.5f, -3.6f), O(P, 10.5f, -3.6f) },
+                Gimmicks = new[] { G(Vent, -5f, -1.5f, 0f), G(Vent, 5f, -1.5f, 0.5f), Z(Pool, 0f, 1.6f, 6f, 2.6f) },
+            },
+            new()
+            {
+                Id = 26, Name = "fungal_pit",
+                Obstacles = new[] { O(P, -11f, 4.2f), O(P, 11f, 4.2f), O(ObstacleKind.Statue, -3.5f, -0.4f), O(ObstacleKind.Statue, 3.5f, -0.4f) },
+                Gimmicks = new[] { G(Vent, -7f, 2.6f, 0f), G(Vent, 7f, 2.6f, 0.33f), G(Vent, 0f, 0.4f, 0.66f), G(Font, -12f, -5f) },
+            },
+
+            // ---------------------------------------------------------------- Cursed library (bookshelves, pages that burst, ink)
+            new()
+            {
+                Id = 27, Name = "reading_hall",
+                Obstacles = new[] { O(Shelf, -8f, 3.8f), O(Shelf, 8f, 3.8f), O(Shelf, -8f, -3f), O(Shelf, 8f, -3f) },
+                Gimmicks = new[] { G(Page, -3.5f, 0.6f), G(Page, 3.5f, 0.6f), G(Page, 0f, -1.8f) },
+            },
+            new()
+            {
+                // Stacks down both sides; the pages lie where readers would stand.
+                Id = 28, Name = "archive_stacks",
+                Obstacles = new[] { O(Shelf, -10.5f, 4.4f), O(Shelf, -10.5f, -2.4f), O(Shelf, 10.5f, 4.4f), O(Shelf, 10.5f, -2.4f), O(Shelf, -5f, -3.4f), O(Shelf, 5f, -3.4f) },
+                Gimmicks = new[] { G(Page, -7f, -1.4f), G(Page, 7f, -1.4f), G(Page, 0f, 2.4f) },
+            },
+            new()
+            {
+                // A spilt lake of ink in the middle (it slows like water), pages around it.
+                Id = 29, Name = "ink_gallery",
+                Obstacles = new[] { O(Shelf, -11f, 4.4f), O(Shelf, 11f, 4.4f), O(P, -7f, -4f), O(P, 7f, -4f) },
+                Gimmicks = new[] { Z(Pool, 0f, 0.6f, 12f, 4f), G(Page, -11f, -1f), G(Page, 11f, -1f), G(Font, 12f, -5.4f) },
+            },
         };
+
+        private const GimmickKind Vent = GimmickKind.SporeVent;
+        private const GimmickKind Page = GimmickKind.Glyph;
+        private const ObstacleKind Shelf = ObstacleKind.Bookshelf;
 
         private const GimmickKind Pool = GimmickKind.Water;
         private const GimmickKind Frozen = GimmickKind.Ice;
@@ -490,6 +554,10 @@ namespace Game.Core
                 }
                 case GimmickKind.Icicle:
                     return (p - g.Position).sqrMagnitude <= (IcicleRadius + margin) * (IcicleRadius + margin);
+                case GimmickKind.SporeVent:
+                    return (p - g.Position).sqrMagnitude <= (SporeRadius + margin) * (SporeRadius + margin);
+                case GimmickKind.Glyph:
+                    return (p - g.Position).sqrMagnitude <= (GlyphRadius + margin) * (GlyphRadius + margin);
                 case GimmickKind.Water:
                 case GimmickKind.Ice:
                     return false; // not a danger: see InZone

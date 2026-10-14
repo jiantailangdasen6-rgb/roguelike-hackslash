@@ -1,0 +1,1042 @@
+fileFormatVersion: 2
+guid: 40af43987ec74c348bfc9c31f6bc38d9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3237991792542701292
+    second: forbidden_tome_0
+  - first:
+      213: -8255854342951435340
+    second: forbidden_tome_1
+  - first:
+      213: -6118147257671583878
+    second: forbidden_tome_2
+  - first:
+      213: -5142486043117646057
+    second: forbidden_tome_3
+  - first:
+      213: -8414741298698100494
+    second: forbidden_tome_4
+  - first:
+      213: 7435283613968995387
+    second: forbidden_tome_5
+  - first:
+      213: -206201496936009113
+    second: forbidden_tome_6
+  - first:
+      213: -5328657373901424888
+    second: forbidden_tome_7
+  - first:
+      213: -6497238813202616264
+    second: forbidden_tome_8
+  - first:
+      213: -8514995073212472176
+    second: forbidden_tome_9
+  - first:
+      213: 1188048837579726599
+    second: forbidden_tome_10
+  - first:
+      213: 7966688639930739278
+    second: forbidden_tome_11
+  - first:
+      213: -3364817507743065548
+    second: forbidden_tome_12
+  - first:
+      213: 4701155867544840539
+    second: forbidden_tome_13
+  - first:
+      213: 7707450405204208522
+    second: forbidden_tome_14
+  - first:
+      213: -8268255020617537956
+    second: forbidden_tome_15
+  - first:
+      213: 4452444584408504031
+    second: forbidden_tome_16
+  - first:
+      213: 2731225946022858907
+    second: forbidden_tome_17
+  - first:
+      213: -8751041657186099100
+    second: forbidden_tome_18
+  - first:
+      213: 6281003369425741914
+    second: forbidden_tome_19
+  - first:
+      213: 5815492664699664261
+    second: forbidden_tome_20
+  - first:
+      213: -4861628984323576377
+    second: forbidden_tome_21
+  - first:
+      213: -3599664869306650650
+    second: forbidden_tome_22
+  - first:
+      213: -7505583679049330309
+    second: forbidden_tome_23
+  - first:
+      213: 7786648192996233212
+    second: forbidden_tome_24
+  - first:
+      213: -8052929189070255022
+    second: forbidden_tome_25
+  - first:
+      213: -4212760094492873587
+    second: forbidden_tome_26
+  - first:
+      213: 6157359269899845776
+    second: forbidden_tome_27
+  - first:
+      213: 5739651499591501804
+    second: forbidden_tome_28
+  - first:
+      213: 2439288905658439828
+    second: forbidden_tome_29
+  - first:
+      213: -2649391410667364696
+    second: forbidden_tome_30
+  - first:
+      213: 742725517618408173
+    second: forbidden_tome_31
+  - first:
+      213: 8768447040355247003
+    second: forbidden_tome_32
+  - first:
+      213: -312613136337631351
+    second: forbidden_tome_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: forbidden_tome_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 327
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 419acdbce975013d0800000000000000
+      internalID: -3237991792542701292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 263
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b3830b67305d6d80800000000000000
+      internalID: -8255854342951435340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_2
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 263
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7774f60c79f71ba0800000000000000
+      internalID: -6118147257671583878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_3
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 263
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71f8199903832a8b0800000000000000
+      internalID: -5142486043117646057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_4
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 263
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f06a4e3f55d83b80800000000000000
+      internalID: -8414741298698100494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_5
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 199
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3497e69d0f6f2760800000000000000
+      internalID: 7435283613968995387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_6
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 135
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 762b9feb4dc632df0800000000000000
+      internalID: -206201496936009113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_7
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 71
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 807f6d2d95ecc06b0800000000000000
+      internalID: -5328657373901424888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_8
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 71
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8307d2629bb25d5a0800000000000000
+      internalID: -6497238813202616264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_9
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 19
+        width: 19
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09428f46819a4d980800000000000000
+      internalID: -8514995073212472176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_10
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 19
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70f51cb8f1ccc7010800000000000000
+      internalID: 1188048837579726599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_11
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 23
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4a2633db1d5f8e60800000000000000
+      internalID: 7966688639930739278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_12
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 24
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43a95f4ed44cd41d0800000000000000
+      internalID: -3364817507743065548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_13
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 18
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59e0ce8a5cdd3140800000000000000
+      internalID: 4701155867544840539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_14
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 18
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b2326ce4d56fa60800000000000000
+      internalID: 7707450405204208522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_15
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 23
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5660c7add1414d80800000000000000
+      internalID: -8268255020617537956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_16
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 24
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd6d7cb62c24acd30800000000000000
+      internalID: 4452444584408504031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_17
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 22
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b90d50af68347e520800000000000000
+      internalID: 2731225946022858907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_18
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 22
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 460e6c05afd0e8680800000000000000
+      internalID: -8751041657186099100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_19
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 10
+        width: 19
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5827ab494b9a2750800000000000000
+      internalID: 6281003369425741914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_20
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 11
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587305944c7c4b050800000000000000
+      internalID: 5815492664699664261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_21
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 10
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cd66af5236088cb0800000000000000
+      internalID: -4861628984323576377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_22
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 16
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ef268a8fdb6b0ec0800000000000000
+      internalID: -3599664869306650650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_23
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 15
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b719b42096fc6d790800000000000000
+      internalID: -7505583679049330309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_24
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 13
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cff4a7ea64bbf0c60800000000000000
+      internalID: 7786648192996233212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_25
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25cc71c919f3e3090800000000000000
+      internalID: -8052929189070255022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_26
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8cafc3a3054985c0800000000000000
+      internalID: -4212760094492873587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_27
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 7
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 090c6d402a5537550800000000000000
+      internalID: 6157359269899845776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_28
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce780bff0a657af40800000000000000
+      internalID: 5739651499591501804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_29
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 7
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4989256f5581ad120800000000000000
+      internalID: 2439288905658439828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_30
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ae53309c887b3bd0800000000000000
+      internalID: -2649391410667364696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_31
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 8
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dea63435ce0be4a00800000000000000
+      internalID: 742725517618408173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_32
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 8
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9323304028cfa970800000000000000
+      internalID: 8768447040355247003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: forbidden_tome_33
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 7
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9878970420069abf0800000000000000
+      internalID: -312613136337631351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      forbidden_tome_0: -3237991792542701292
+      forbidden_tome_1: -8255854342951435340
+      forbidden_tome_10: 1188048837579726599
+      forbidden_tome_11: 7966688639930739278
+      forbidden_tome_12: -3364817507743065548
+      forbidden_tome_13: 4701155867544840539
+      forbidden_tome_14: 7707450405204208522
+      forbidden_tome_15: -8268255020617537956
+      forbidden_tome_16: 4452444584408504031
+      forbidden_tome_17: 2731225946022858907
+      forbidden_tome_18: -8751041657186099100
+      forbidden_tome_19: 6281003369425741914
+      forbidden_tome_2: -6118147257671583878
+      forbidden_tome_20: 5815492664699664261
+      forbidden_tome_21: -4861628984323576377
+      forbidden_tome_22: -3599664869306650650
+      forbidden_tome_23: -7505583679049330309
+      forbidden_tome_24: 7786648192996233212
+      forbidden_tome_25: -8052929189070255022
+      forbidden_tome_26: -4212760094492873587
+      forbidden_tome_27: 6157359269899845776
+      forbidden_tome_28: 5739651499591501804
+      forbidden_tome_29: 2439288905658439828
+      forbidden_tome_3: -5142486043117646057
+      forbidden_tome_30: -2649391410667364696
+      forbidden_tome_31: 742725517618408173
+      forbidden_tome_32: 8768447040355247003
+      forbidden_tome_33: -312613136337631351
+      forbidden_tome_4: -8414741298698100494
+      forbidden_tome_5: 7435283613968995387
+      forbidden_tome_6: -206201496936009113
+      forbidden_tome_7: -5328657373901424888
+      forbidden_tome_8: -6497238813202616264
+      forbidden_tome_9: -8514995073212472176
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

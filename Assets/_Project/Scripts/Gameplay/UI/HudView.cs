@@ -411,6 +411,10 @@ namespace Game.Gameplay
                 BossTrial.Shell => $"<color=#8affe0>火薬樽を大蟹のそばで爆ぜさせろ</color>　<color=#ffffff>残り {seconds}秒</color>",
                 BossTrial.Hunt => $"<color=#bfe4ff>印の付いた者は、突進を柱にぶつけさせろ</color>　<color=#ffffff>{done}/{total}</color>",
                 BossTrial.Rows => $"<color=#ffb070>刃の切れ目を抜けて、鎖の杭を壊せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Fog => $"<color=#b4ff8a>光る茸のそばで霧をしのげ</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Parasite => $"<color=#b4ff8a>寄生された者は百合のそばへ。ほかの者は離れろ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Sequence => $"<color=#cdb8ff>光った順に禁書を叩け</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Dive => $"<color=#ffd890>燭台のそばに立って火を灯せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 _ => "",
             };
         }

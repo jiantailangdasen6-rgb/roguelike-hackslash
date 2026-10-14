@@ -16,7 +16,7 @@ namespace Game.EditorTools.Audio
     {
         public const string SourceDir = "Assets/_Project/Audio/Pack/";
         /// <summary>Bump when the recipes change so the builder renders the pack again.</summary>
-        public const string Marker = "pack_v4.txt";
+        public const string Marker = "pack_v5.txt";
         private const int Rate = 44100;
 
         private struct Layer
@@ -144,6 +144,9 @@ namespace Game.EditorTools.Audio
             yield return new Track { Name = "music_sunken", File = D + "ofdn_throne_room.ogg", Pitch = 0.84f, LowPass = 1600f, Echo = 0.34f, EchoFeedback = 0.38f };
             yield return new Track { Name = "music_frost", File = D + "ofdn_zwischenwelt.ogg", Pitch = 1.12f, Echo = 0.52f, EchoFeedback = 0.42f };
             yield return new Track { Name = "music_forge", File = D + "ofdn_in_darkness.ogg", Pitch = 0.89f, LowPass = 3200f, Drive = 1.8f };
+            // The grotto: the camp's pavane slowed and smothered; the library: the throne room quickened, far away.
+            yield return new Track { Name = "music_grotto", File = D + "ofdn_pavane.ogg", Pitch = 0.8f, LowPass = 1400f, Echo = 0.4f, EchoFeedback = 0.42f, Loudness = 0.16f };
+            yield return new Track { Name = "music_library", File = D + "ofdn_throne_room.ogg", Pitch = 1.06f, LowPass = 2400f, Echo = 0.5f, EchoFeedback = 0.3f };
             // The heart: the long dark piece (only its opening plays on defeat), slowed and echoing.
             yield return new Track { Name = "music_heart", File = D + "ofdn_obscurium.ogg", Pitch = 0.9f, LowPass = 2600f, Echo = 0.45f, EchoFeedback = 0.36f };
             yield return new Track { Name = "music_boss", File = D + "helmet_boss_arcanos.mp3", Loudness = 0.18f };

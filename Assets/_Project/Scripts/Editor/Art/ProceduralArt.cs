@@ -124,6 +124,8 @@ namespace Game.EditorTools.Art
             ["candle_teal"] = () => CandleTinted(C("#4fd8b8"), C("#dffff6"), C("#7d958f")),
             ["candle_ice"] = () => CandleTinted(C("#7cc4ff"), C("#f0faff"), C("#b8c8dc")),
             ["candle_ember"] = () => CandleTinted(C("#ff6a1a"), C("#ffd08a"), C("#5a4636")),
+            ["candle_spore"] = () => CandleTinted(C("#8ef05a"), C("#efffd8"), C("#7a8a64")),
+            ["candle_violet"] = () => CandleTinted(C("#b48cff"), C("#f0e8ff"), C("#b0a890")),
             ["square"] = () => new List<PixelCanvas> { TelegraphSquare() },
             ["flame"] = FlameJet,
             ["explosion"] = Explosion,

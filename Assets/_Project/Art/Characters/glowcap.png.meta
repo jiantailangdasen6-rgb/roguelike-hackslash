@@ -1,0 +1,860 @@
+fileFormatVersion: 2
+guid: 2c95fdc6880e9684d8823ca92dffac11
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1708030341884739378
+    second: glowcap_0
+  - first:
+      213: -6000708455535242029
+    second: glowcap_1
+  - first:
+      213: -3010146924395953876
+    second: glowcap_2
+  - first:
+      213: 8199966485679110233
+    second: glowcap_3
+  - first:
+      213: 1031205800517220976
+    second: glowcap_4
+  - first:
+      213: 7641598514833071482
+    second: glowcap_5
+  - first:
+      213: 4648028808490821382
+    second: glowcap_6
+  - first:
+      213: -787394289759731886
+    second: glowcap_7
+  - first:
+      213: -3553122677030573337
+    second: glowcap_8
+  - first:
+      213: -1932983547384033591
+    second: glowcap_9
+  - first:
+      213: 6701694161009509531
+    second: glowcap_10
+  - first:
+      213: 4480761984432261733
+    second: glowcap_11
+  - first:
+      213: -5470570258321880105
+    second: glowcap_12
+  - first:
+      213: 4829670399016200028
+    second: glowcap_13
+  - first:
+      213: 5135942618176972917
+    second: glowcap_14
+  - first:
+      213: -633541724597854541
+    second: glowcap_15
+  - first:
+      213: -8539866624132823711
+    second: glowcap_16
+  - first:
+      213: 7525138708466646537
+    second: glowcap_17
+  - first:
+      213: -4360126697395708398
+    second: glowcap_18
+  - first:
+      213: 2276151372866847303
+    second: glowcap_19
+  - first:
+      213: -6105694231601247369
+    second: glowcap_20
+  - first:
+      213: -4452612357019220044
+    second: glowcap_21
+  - first:
+      213: 3873817614463482612
+    second: glowcap_22
+  - first:
+      213: 1140511492887354019
+    second: glowcap_23
+  - first:
+      213: -1484660154094238248
+    second: glowcap_24
+  - first:
+      213: 2591421774354819936
+    second: glowcap_25
+  - first:
+      213: -5006805370295184047
+    second: glowcap_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: glowcap_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 327
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec00f5e147bdb48e0800000000000000
+      internalID: -1708030341884739378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 327
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d4932be37339bca0800000000000000
+      internalID: -6000708455535242029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 327
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2105a9125fc936d0800000000000000
+      internalID: -3010146924395953876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 327
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 958f20dc2122cc170800000000000000
+      internalID: 8199966485679110233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_4
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 263
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07ab62646349f4e00800000000000000
+      internalID: 1031205800517220976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_5
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 263
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7d17c0cc596c0a60800000000000000
+      internalID: 7641598514833071482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_6
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 263
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 607a0e3339d118040800000000000000
+      internalID: 4648028808490821382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_7
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 263
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25f33b4b01d9215f0800000000000000
+      internalID: -787394289759731886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_8
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 199
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ea253020c5c0bec0800000000000000
+      internalID: -3553122677030573337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_9
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 199
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ce008d74b9ac25e0800000000000000
+      internalID: -1932983547384033591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_10
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 199
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9408441553310d50800000000000000
+      internalID: 6701694161009509531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_11
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 199
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56ac825e84dde2e30800000000000000
+      internalID: 4480761984432261733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_12
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 135
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7db48e99551a414b0800000000000000
+      internalID: -5470570258321880105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_13
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 135
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c576493a3af660340800000000000000
+      internalID: 4829670399016200028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_14
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 135
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5786a3f8998864740800000000000000
+      internalID: 5135942618176972917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_15
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 135
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bed4fa78253537f0800000000000000
+      internalID: -633541724597854541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_16
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 71
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 165495f2d8c4c7980800000000000000
+      internalID: -8539866624132823711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_17
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 4
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90e32b319c9ae6860800000000000000
+      internalID: 7525138708466646537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_18
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 3
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21e1802aed7bd73c0800000000000000
+      internalID: -4360126697395708398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_19
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 4
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7420fb23d93869f10800000000000000
+      internalID: 2276151372866847303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_20
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 5
+        width: 27
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77b814a1277344ba0800000000000000
+      internalID: -6105694231601247369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_21
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 17
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b7ca59f6a42532c0800000000000000
+      internalID: -4452612357019220044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_22
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 5
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fa3fb2989092c530800000000000000
+      internalID: 3873817614463482612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_23
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 14
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa1dcbf829e3df00800000000000000
+      internalID: 1140511492887354019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_24
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 7
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d54907b47d656be0800000000000000
+      internalID: -1484660154094238248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_25
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 15
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06ba1a3bf5496f320800000000000000
+      internalID: 2591421774354819936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: glowcap_26
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 3
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 155990cfa01448ab0800000000000000
+      internalID: -5006805370295184047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      glowcap_0: -1708030341884739378
+      glowcap_1: -6000708455535242029
+      glowcap_10: 6701694161009509531
+      glowcap_11: 4480761984432261733
+      glowcap_12: -5470570258321880105
+      glowcap_13: 4829670399016200028
+      glowcap_14: 5135942618176972917
+      glowcap_15: -633541724597854541
+      glowcap_16: -8539866624132823711
+      glowcap_17: 7525138708466646537
+      glowcap_18: -4360126697395708398
+      glowcap_19: 2276151372866847303
+      glowcap_2: -3010146924395953876
+      glowcap_20: -6105694231601247369
+      glowcap_21: -4452612357019220044
+      glowcap_22: 3873817614463482612
+      glowcap_23: 1140511492887354019
+      glowcap_24: -1484660154094238248
+      glowcap_25: 2591421774354819936
+      glowcap_26: -5006805370295184047
+      glowcap_3: 8199966485679110233
+      glowcap_4: 1031205800517220976
+      glowcap_5: 7641598514833071482
+      glowcap_6: 4648028808490821382
+      glowcap_7: -787394289759731886
+      glowcap_8: -3553122677030573337
+      glowcap_9: -1932983547384033591
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

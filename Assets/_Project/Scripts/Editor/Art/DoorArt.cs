@@ -22,8 +22,10 @@ namespace Game.EditorTools.Art
             new[] { C("#0c1220"), C("#182235"), C("#27354f"), C("#3a4b6c"), C("#566b90"), C("#86a0c4") }, // frost
             new[] { C("#0e0907"), C("#1b130e"), C("#291d16"), C("#392a1f"), C("#4b392b"), C("#634c3a") }, // forge
             new[] { C("#0c0506"), C("#1a090b"), C("#2a0f12"), C("#3c161a"), C("#521f24"), C("#6e2c30") }, // heart
+            new[] { C("#090c07"), C("#141a10"), C("#202918"), C("#2e3a23"), C("#405033"), C("#586b46") }, // grotto
+            new[] { C("#0e0907"), C("#1b120d"), C("#2a1d15"), C("#3b2a1e"), C("#503a29"), C("#6b4e37") }, // library
         };
-        private static readonly Color32[] Torch = { C("#ff9a3c"), C("#ff4a3a"), C("#c58bff"), C("#5fe8c8"), C("#a8e4ff"), C("#ff8a2a"), C("#ffae42") };
+        private static readonly Color32[] Torch = { C("#ff9a3c"), C("#ff4a3a"), C("#c58bff"), C("#5fe8c8"), C("#a8e4ff"), C("#ff8a2a"), C("#ffae42"), C("#9cff6a"), C("#b49cff") };
 
         public static Dictionary<string, PropArt.Sheet> Sheets()
         {

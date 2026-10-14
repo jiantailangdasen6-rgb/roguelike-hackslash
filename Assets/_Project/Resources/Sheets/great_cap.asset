@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
+  m_Name: great_cap
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
+  Texture: {fileID: 2800000, guid: fda27390184d85c4785b7a2182de3c2a, type: 3}
+  FlashTexture: {fileID: 2800000, guid: 3a52f76c45adecc42acd2c7a22d89c9f, type: 3}
+  NormalTexture: {fileID: 2800000, guid: 87b94f6101edc004ebecc0324b34384e, type: 3}
+  FrameWidth: 64
+  FrameHeight: 64
+  Pivot: {x: 0.5, y: 0.15625}
+  PixelsPerUnit: 32
+  Clips:
+  - Name: idle
+    Row: 0
+    Frames: 4
+    Fps: 6
+    Loop: 1
+  - Name: walk
+    Row: 1
+    Frames: 6
+    Fps: 10
+    Loop: 1
+  - Name: windup
+    Row: 2
+    Frames: 2
+    Fps: 9
+    Loop: 0
+  - Name: strike
+    Row: 3
+    Frames: 3
+    Fps: 14
+    Loop: 0
+  - Name: hurt
+    Row: 4
+    Frames: 2
+    Fps: 10
+    Loop: 0
+  - Name: death
+    Row: 5
+    Frames: 6
+    Fps: 10
+    Loop: 0

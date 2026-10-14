@@ -1,0 +1,782 @@
+fileFormatVersion: 2
+guid: de40a84325c0c9d48a4b3b2e3d4b2984
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4126982795938987376
+    second: mycelid_0
+  - first:
+      213: 195766096233344822
+    second: mycelid_1
+  - first:
+      213: -104956758220310163
+    second: mycelid_2
+  - first:
+      213: 6002181950405636912
+    second: mycelid_3
+  - first:
+      213: 7129816643304590441
+    second: mycelid_4
+  - first:
+      213: -1673378030700254065
+    second: mycelid_5
+  - first:
+      213: 2009747286970148572
+    second: mycelid_6
+  - first:
+      213: 340206855951256724
+    second: mycelid_7
+  - first:
+      213: -5792100508573082800
+    second: mycelid_8
+  - first:
+      213: 6577432672884488981
+    second: mycelid_9
+  - first:
+      213: -2739757248669365341
+    second: mycelid_10
+  - first:
+      213: 3603959611751810914
+    second: mycelid_11
+  - first:
+      213: -6831070777119118521
+    second: mycelid_12
+  - first:
+      213: 5711855415651410379
+    second: mycelid_13
+  - first:
+      213: -2998646591075021558
+    second: mycelid_14
+  - first:
+      213: -792781815295166796
+    second: mycelid_15
+  - first:
+      213: 5812800471551623093
+    second: mycelid_16
+  - first:
+      213: 6782287250706862773
+    second: mycelid_17
+  - first:
+      213: -5074890467425657968
+    second: mycelid_18
+  - first:
+      213: -2875395816046231766
+    second: mycelid_19
+  - first:
+      213: 8766386582840488432
+    second: mycelid_20
+  - first:
+      213: -4190677613747909515
+    second: mycelid_21
+  - first:
+      213: -4138099940799755442
+    second: mycelid_22
+  - first:
+      213: 5316363359936592280
+    second: mycelid_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mycelid_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 327
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07d771abcfcf54930800000000000000
+      internalID: 4126982795938987376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 327
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63fad013a3087b200800000000000000
+      internalID: 195766096233344822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 326
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d69708d626e1b8ef0800000000000000
+      internalID: -104956758220310163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_3
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 326
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0337037dea80c4350800000000000000
+      internalID: 6002181950405636912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_4
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 263
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96c86d1367232f260800000000000000
+      internalID: 7129816643304590441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_5
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 265
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8c2b290c87f6c8e0800000000000000
+      internalID: -1673378030700254065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_6
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 265
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd62928628e04eb10800000000000000
+      internalID: 2009747286970148572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_7
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 263
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49c802f3558a8b400800000000000000
+      internalID: 340206855951256724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_8
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 265
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05b542b76435e9fa0800000000000000
+      internalID: -5792100508573082800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_9
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 265
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51bf351da2cb74b50800000000000000
+      internalID: 6577432672884488981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_10
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 197
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3abc2465c4d6af9d0800000000000000
+      internalID: -2739757248669365341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_11
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 197
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 267425b1c26d30230800000000000000
+      internalID: 3603959611751810914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_12
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 197
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74b634e12592331a0800000000000000
+      internalID: -6831070777119118521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_13
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 140
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc12b42ec36944f40800000000000000
+      internalID: 5711855415651410379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_14
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 136
+        width: 33
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0d890c10daa266d0800000000000000
+      internalID: -2998646591075021558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_15
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 136
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b631faa3297ff4f0800000000000000
+      internalID: -792781815295166796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_16
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 71
+        width: 28
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bfbe093b373ba050800000000000000
+      internalID: 5812800471551623093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_17
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 71
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b21b0702568f1e50800000000000000
+      internalID: 6782287250706862773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_18
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 7
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09bd31ff10e5299b0800000000000000
+      internalID: -5074890467425657968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_19
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 7
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2f7be36dba8818d0800000000000000
+      internalID: -2875395816046231766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_20
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 4
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f135f9962678a970800000000000000
+      internalID: 8766386582840488432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_21
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57ccf58d9e8b7d5c0800000000000000
+      internalID: -4190677613747909515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_22
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4bc09747048296c0800000000000000
+      internalID: -4138099940799755442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mycelid_23
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 0
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8993cedfe4487c940800000000000000
+      internalID: 5316363359936592280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      mycelid_0: 4126982795938987376
+      mycelid_1: 195766096233344822
+      mycelid_10: -2739757248669365341
+      mycelid_11: 3603959611751810914
+      mycelid_12: -6831070777119118521
+      mycelid_13: 5711855415651410379
+      mycelid_14: -2998646591075021558
+      mycelid_15: -792781815295166796
+      mycelid_16: 5812800471551623093
+      mycelid_17: 6782287250706862773
+      mycelid_18: -5074890467425657968
+      mycelid_19: -2875395816046231766
+      mycelid_2: -104956758220310163
+      mycelid_20: 8766386582840488432
+      mycelid_21: -4190677613747909515
+      mycelid_22: -4138099940799755442
+      mycelid_23: 5316363359936592280
+      mycelid_3: 6002181950405636912
+      mycelid_4: 7129816643304590441
+      mycelid_5: -1673378030700254065
+      mycelid_6: 2009747286970148572
+      mycelid_7: 340206855951256724
+      mycelid_8: -5792100508573082800
+      mycelid_9: 6577432672884488981
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

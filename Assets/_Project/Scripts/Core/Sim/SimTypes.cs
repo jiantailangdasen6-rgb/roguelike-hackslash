@@ -202,6 +202,8 @@ namespace Game.Core
         WaterOrb,    // sunken monsters
         IceShard,    // frost monsters
         FireBolt,    // forge monsters
+        SporeOrb,    // grotto monsters
+        Page,        // library monsters
     }
 
     public enum AttackAnim : byte
@@ -243,6 +245,8 @@ namespace Game.Core
         BloodTorrent, // the Blood Bishop's ritual completed
         SlagPool,     // molten slag left burning (Value = radius, Size.x = seconds)
         Steam,        // the colossus quenched in water
+        SporeCloud,   // spores hanging in the air (Value = radius, Size.x = seconds)
+        InkBurst,     // ink erupting from the floor
     }
 
     /// <summary>Owner input sent to the host each network tick. Button presses are counters so a lost packet never loses a press.</summary>

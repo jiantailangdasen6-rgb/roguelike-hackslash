@@ -1,0 +1,756 @@
+fileFormatVersion: 2
+guid: fda27390184d85c4785b7a2182de3c2a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3633915149213417597
+    second: great_cap_0
+  - first:
+      213: 5728185013245738142
+    second: great_cap_1
+  - first:
+      213: -7854063264204195166
+    second: great_cap_2
+  - first:
+      213: -3322168346295806492
+    second: great_cap_3
+  - first:
+      213: -2858506356624011568
+    second: great_cap_4
+  - first:
+      213: -7488336899517882058
+    second: great_cap_5
+  - first:
+      213: -6670964701931013440
+    second: great_cap_6
+  - first:
+      213: -8935958304658372734
+    second: great_cap_7
+  - first:
+      213: -6199962010429738737
+    second: great_cap_8
+  - first:
+      213: 1980253315772815836
+    second: great_cap_9
+  - first:
+      213: 5027039739292603966
+    second: great_cap_10
+  - first:
+      213: -3943660295963268079
+    second: great_cap_11
+  - first:
+      213: -7142109632058324413
+    second: great_cap_12
+  - first:
+      213: 7774846641854656176
+    second: great_cap_13
+  - first:
+      213: -2287564244786962942
+    second: great_cap_14
+  - first:
+      213: 1743486402708518506
+    second: great_cap_15
+  - first:
+      213: 1655445495879102889
+    second: great_cap_16
+  - first:
+      213: 3565681147220260900
+    second: great_cap_17
+  - first:
+      213: 4021326301675806730
+    second: great_cap_18
+  - first:
+      213: 4353987569608718633
+    second: great_cap_19
+  - first:
+      213: 1220667684054477201
+    second: great_cap_20
+  - first:
+      213: 4964547940910654448
+    second: great_cap_21
+  - first:
+      213: 4559028172625575388
+    second: great_cap_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: great_cap_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 326
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38f3933dc6db19dc0800000000000000
+      internalID: -3633915149213417597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 326
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9c7a3a9be99e7f40800000000000000
+      internalID: 5728185013245738142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 326
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aaf9a5e213c00390800000000000000
+      internalID: -7854063264204195166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 326
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e5ddfa9d7945e1d0800000000000000
+      internalID: -3322168346295806492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_4
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 262
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0deca391d9b8458d0800000000000000
+      internalID: -2858506356624011568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_5
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 265
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63169c9c345141890800000000000000
+      internalID: -7488336899517882058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_6
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 269
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ca7b38a2f8fb63a0800000000000000
+      internalID: -6670964701931013440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_7
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 267
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 287c22344491df380800000000000000
+      internalID: -8935958304658372734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_8
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 264
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f013b6b766f45f9a0800000000000000
+      internalID: -6199962010429738737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_9
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 262
+        width: 26
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd99deb16e54b7b10800000000000000
+      internalID: 1980253315772815836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_10
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 198
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e36de4c2202a3c540800000000000000
+      internalID: 5027039739292603966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_11
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 197
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11c2c40fadd4549c0800000000000000
+      internalID: -3943660295963268079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_12
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 138
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34a8442512122ec90800000000000000
+      internalID: -7142109632058324413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_13
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 137
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bea2eee3ddc5eb60800000000000000
+      internalID: 7774846641854656176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_14
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 134
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20e969c7070f040e0800000000000000
+      internalID: -2287564244786962942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_15
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 69
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a663a2855ab123810800000000000000
+      internalID: 1743486402708518506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_16
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 70
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a1f4e658e259f610800000000000000
+      internalID: 1655445495879102889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 5
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 428fe529c18db7130800000000000000
+      internalID: 3565681147220260900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_18
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 3
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a00625927fe9ec730800000000000000
+      internalID: 4021326301675806730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_19
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 2
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9297efa40a87c6c30800000000000000
+      internalID: 4353987569608718633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_20
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 199add09acea0f010800000000000000
+      internalID: 1220667684054477201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_21
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 0
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f360688c0e95e440800000000000000
+      internalID: 4964547940910654448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: great_cap_22
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd785ed7fbe44f30800000000000000
+      internalID: 4559028172625575388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      great_cap_0: -3633915149213417597
+      great_cap_1: 5728185013245738142
+      great_cap_10: 5027039739292603966
+      great_cap_11: -3943660295963268079
+      great_cap_12: -7142109632058324413
+      great_cap_13: 7774846641854656176
+      great_cap_14: -2287564244786962942
+      great_cap_15: 1743486402708518506
+      great_cap_16: 1655445495879102889
+      great_cap_17: 3565681147220260900
+      great_cap_18: 4021326301675806730
+      great_cap_19: 4353987569608718633
+      great_cap_2: -7854063264204195166
+      great_cap_20: 1220667684054477201
+      great_cap_21: 4964547940910654448
+      great_cap_22: 4559028172625575388
+      great_cap_3: -3322168346295806492
+      great_cap_4: -2858506356624011568
+      great_cap_5: -7488336899517882058
+      great_cap_6: -6670964701931013440
+      great_cap_7: -8935958304658372734
+      great_cap_8: -6199962010429738737
+      great_cap_9: 1980253315772815836
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

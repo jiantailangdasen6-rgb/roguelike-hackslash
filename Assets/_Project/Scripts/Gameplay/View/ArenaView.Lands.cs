@@ -72,7 +72,10 @@ namespace Game.Gameplay
             Key(new Vector2(b.xMax - 5f, b.yMax - 1.5f), 0.75f, 12f);
             Key(new Vector2(b.center.x, b.yMin + 1f), 0.4f, 10f);
         }
-        private static readonly Dictionary<(GimmickKind, int, int), Sprite[]> ZoneCache = new();
+        private static readonly Dictionary<(GimmickKind, int, int, bool), Sprite[]> ZoneCache = new();
+
+        /// <summary>The library's water is spilt ink.</summary>
+        private bool InkLand => _area == (int)Biome.Library;
 
         private void AddLandGimmick(GimmickDef def, int id)
         {
@@ -81,9 +84,10 @@ namespace Game.Gameplay
                 case GimmickKind.Water:
                 case GimmickKind.Ice:
                 {
-                    var frames = ZoneFrames(def.Kind, def.Direction);
+                    bool ink = def.Kind == GimmickKind.Water && InkLand;
+                    var frames = ZoneFrames(def.Kind, def.Direction, ink);
                     var r = Sprite(def.Kind == GimmickKind.Water ? "Water" : "Ice", frames[0], def.Position - def.Direction * 0.5f, -996);
-                    var light = AddLight(r.gameObject, def.Kind == GimmickKind.Water ? new Color(0.35f, 0.9f, 0.8f) : new Color(0.6f, 0.82f, 1f), 0.35f,
+                    var light = AddLight(r.gameObject, ink ? new Color(0.55f, 0.4f, 1f) : def.Kind == GimmickKind.Water ? new Color(0.35f, 0.9f, 0.8f) : new Color(0.6f, 0.82f, 1f), 0.35f,
                         Mathf.Max(def.Direction.x, def.Direction.y) * 0.55f);
                     light.transform.localPosition = def.Direction * 0.5f;
                     _gimmicks[id] = new GimmickVisual { Def = def, Renderer = r, Frames = frames, Light = light };
@@ -103,6 +107,16 @@ namespace Game.Gameplay
                     r.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(def.Direction.y, def.Direction.x) * Mathf.Rad2Deg);
                     var light = AddLight(r.gameObject, new Color(1f, 0.45f, 0.12f), 0.3f, 3f);
                     light.transform.localPosition = new Vector3(Arena.LavaLength * 0.5f, 0f);
+                    _gimmicks[id] = new GimmickVisual { Def = def, Renderer = r, Frames = sheet?.Sprites("default"), Light = light };
+                    break;
+                }
+                case GimmickKind.SporeVent:
+                case GimmickKind.Glyph:
+                {
+                    bool spore = def.Kind == GimmickKind.SporeVent;
+                    var sheet = SpriteSheet.Load(spore ? "trap_spore" : "trap_glyph", quiet: true);
+                    var r = Sprite(spore ? "SporeVent" : "Glyph", sheet?.First, def.Position, -958);
+                    var light = AddLight(r.gameObject, spore ? new Color(0.55f, 1f, 0.35f) : new Color(0.6f, 0.45f, 1f), 0.3f, 2.4f);
                     _gimmicks[id] = new GimmickVisual { Def = def, Renderer = r, Frames = sheet?.Sprites("default"), Light = light };
                     break;
                 }
@@ -134,16 +148,35 @@ namespace Game.Gameplay
                     g.Light.intensity = active ? 1.8f + Mathf.Sin(now * 30f) * 0.3f : warn ? 0.7f + 0.5f * Mathf.Sin(now * 22f) : 0.3f + 0.08f * Mathf.Sin(now * 3f);
                     break;
                 }
+                case GimmickKind.SporeVent:
+                {
+                    // 0 a crusted vent, 1 swelling (warning), 2-3 puffing
+                    bool active = now < g.ActiveUntil, warn = now < g.WarnUntil;
+                    int frame = active ? 2 + Mathf.FloorToInt(now * 6f) % 2 : warn ? 1 : 0;
+                    if (g.Frames != null) g.Renderer.sprite = g.Frames[Mathf.Min(frame, g.Frames.Length - 1)];
+                    g.Light.intensity = active ? 1.1f + Mathf.Sin(now * 9f) * 0.2f : warn ? 0.6f + 0.4f * Mathf.Sin(now * 20f) : 0.25f + 0.08f * Mathf.Sin(now * 2f + g.Def.Position.x);
+                    break;
+                }
+                case GimmickKind.Glyph:
+                {
+                    // 0 a page with faint writing, 1 the writing burning (warning), 2 scorched (just burst)
+                    bool spent = g.ActiveUntil > 0f && now < g.ActiveUntil + Arena.GlyphRearm;
+                    bool warn = now < g.WarnUntil;
+                    int frame = warn ? 1 : spent ? 2 : 0;
+                    if (g.Frames != null) g.Renderer.sprite = g.Frames[Mathf.Min(frame, g.Frames.Length - 1)];
+                    g.Light.intensity = warn ? 1.2f + 0.5f * Mathf.Sin(now * 30f) : spent ? 0.05f : 0.3f + 0.1f * Mathf.Sin(now * 2.5f + g.Def.Position.y);
+                    break;
+                }
             }
         }
 
         // ------------------------------------------------------------------ Zone textures
 
         /// <summary>Two frames of a water or ice zone, drawn pixel by pixel to its size (cached per size).</summary>
-        private static Sprite[] ZoneFrames(GimmickKind kind, Vector2 size)
+        private static Sprite[] ZoneFrames(GimmickKind kind, Vector2 size, bool ink = false)
         {
             int w = Mathf.Max(4, Mathf.RoundToInt(size.x * ZonePpu)), h = Mathf.Max(4, Mathf.RoundToInt(size.y * ZonePpu));
-            var key = (kind, w, h);
+            var key = (kind, w, h, ink);
             if (ZoneCache.TryGetValue(key, out var cached) && cached[0] != null) return cached;
             var frames = new Sprite[2];
             for (int f = 0; f < 2; f++)
@@ -155,7 +188,7 @@ namespace Game.Gameplay
                     // Distance to the edge, roughened so the shore is not ruled.
                     float d = Mathf.Min(Mathf.Min(x, w - 1 - x), Mathf.Min(y, h - 1 - y)) + (Hash(x / 2, y / 2, 3) - 0.5f) * 3f;
                     if (d < 0f) continue;
-                    pixels[y * w + x] = kind == GimmickKind.Water ? WaterPixel(x, y, d, f) : IcePixel(x, y, d, f);
+                    pixels[y * w + x] = ink ? InkPixel(x, y, d, f) : kind == GimmickKind.Water ? WaterPixel(x, y, d, f) : IcePixel(x, y, d, f);
                 }
                 var tex = new Texture2D(w, h, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
                 tex.SetPixels32(pixels);
@@ -173,6 +206,15 @@ namespace Game.Gameplay
             var c = new Color32(12, 36, 36, 180);                                 // still water
             if ((x + y * 3 + frame * 5) % 31 == 0 && Hash(x, y, frame) > 0.4f) c = new Color32(60, 140, 126, 205); // ripples
             if (Hash(x, y, 9 + frame) > 0.997f) c = new Color32(150, 240, 220, 230); // glints of the drowned light
+            return c;
+        }
+
+        private static Color32 InkPixel(int x, int y, float d, int frame)
+        {
+            if (d < 1.5f) return new Color32(46, 34, 78, 210);                    // the stained edge
+            var c = new Color32(10, 8, 22, 215);                                  // black ink
+            if ((x * 2 + y + frame * 7) % 29 == 0 && Hash(x, y, 4 + frame) > 0.45f) c = new Color32(52, 40, 96, 220); // a slow sheen
+            if (Hash(x, y, 13 + frame) > 0.997f) c = new Color32(150, 120, 240, 235); // a glint of the curse
             return c;
         }
 
@@ -233,6 +275,8 @@ namespace Game.Gameplay
             Biome.Frost => (new Color(0.85f, 0.92f, 1f), 0.12f),
             Biome.Forge => (new Color(0.35f, 0.3f, 0.28f), 0.12f),
             Biome.Heart => (new Color(0.6f, 0.25f, 0.2f), 0.12f),
+            Biome.Grotto => (new Color(0.4f, 0.55f, 0.35f), 0.08f),
+            Biome.Library => (new Color(0.45f, 0.38f, 0.7f), 0.09f),
             _ => (new Color(0.6f, 0.62f, 0.72f), 0.08f),
         };
 
@@ -299,9 +343,39 @@ namespace Game.Gameplay
             }
         }
 
+        private SpriteRenderer _sporeFog;
+        private float _sporeAlpha;
+
+        /// <summary>The Mycelium Mother's spore fog: a green haze drifting over her hall while it lasts.</summary>
+        private void UpdateSporeFog(RunDirector director)
+        {
+            bool on = director != null && director.IsSpawned && director.Trial.Value == BossTrial.Fog && _room != null && _room.Kind == RoomKind.Boss;
+            _sporeAlpha = Mathf.MoveTowards(_sporeAlpha, on ? 1f : 0f, Time.deltaTime * 0.9f);
+            if (_sporeAlpha <= 0f)
+            {
+                if (_sporeFog != null) _sporeFog.enabled = false;
+                return;
+            }
+            if (_sporeFog == null)
+            {
+                var go = new GameObject("SporeFog");
+                go.transform.SetParent(transform, false);
+                _sporeFog = go.AddComponent<SpriteRenderer>();
+                _sporeFog.sprite = FogSprite();
+                _sporeFog.sortingOrder = 2500;
+            }
+            _sporeFog.enabled = true;
+            var b = _room.Bounds;
+            float tile = FogSize / (float)FogPpu;
+            _sporeFog.transform.localPosition = new Vector3(b.xMin - 4f + Mathf.Repeat(Time.time * 0.6f, 4f), b.yMin - 4f, 0f);
+            _sporeFog.transform.localScale = new Vector3((b.width + 8f) / tile, (b.height + 8f) / tile, 1f);
+            _sporeFog.color = new Color(0.55f, 0.85f, 0.35f, 0.32f * _sporeAlpha);
+        }
+
         private void UpdateLands(RunDirector director)
         {
             UpdateFog();
+            UpdateSporeFog(director);
             // The flood rises over the saint's hall while her seals hold (seen by whoever stands in it).
             bool flood = director != null && director.IsSpawned && director.Trial.Value == BossTrial.Flood && _room != null && _room.Kind == RoomKind.Boss;
             _floodAlpha = Mathf.MoveTowards(_floodAlpha, flood ? 1f : 0f, Time.deltaTime * 0.8f);

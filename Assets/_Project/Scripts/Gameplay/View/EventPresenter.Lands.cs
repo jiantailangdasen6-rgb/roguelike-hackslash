@@ -41,6 +41,10 @@ namespace Game.Gameplay
                 case GimmickKind.LavaCrack:
                     AddTelegraph(new SimEvent { Id = HazardKey(e.Id), Int = (int)AttackShape.Line, Pos = e.Pos, Vec = e.Vec, Size = e.Size, Value = e.Value });
                     break;
+                case GimmickKind.SporeVent:
+                case GimmickKind.Glyph:
+                    AddTelegraph(new SimEvent { Id = HazardKey(e.Id), Int = (int)AttackShape.Circle, Pos = e.Pos, Size = e.Size, Value = e.Value });
+                    break;
             }
         }
 
@@ -75,6 +79,10 @@ namespace Game.Gameplay
                     AddLight(glow, new Color(1f, 0.5f, 0.15f), 2.4f, e.Size.x * 0.6f);
                     break;
                 }
+                case GimmickKind.SporeVent:
+                case GimmickKind.Glyph:
+                    Lands2HazardFire(e); // EventPresenter.Lands2.cs
+                    break;
             }
         }
 
@@ -177,7 +185,7 @@ namespace Game.Gameplay
                     Burst("fx_puff", e.Pos + Vector2.up * 0.3f, 10f, 1.6f, new Color(0.7f, 0.85f, 1f, 0.8f));
                     break;
                 default:
-                    Lords2Trial(e); // EventPresenter.Lords2.cs
+                    if (!Lands2Trial(e)) Lords2Trial(e); // EventPresenter.Lands2.cs, EventPresenter.Lords2.cs
                     break;
                 case TrialMoment.CooledDown:
                     ShowCallout(e.Pos + Vector2.up * 3f, "炉の怒り", new Color(1f, 0.5f, 0.2f), 48);

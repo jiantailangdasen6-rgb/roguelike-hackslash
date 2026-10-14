@@ -20,6 +20,10 @@ namespace Game.Core
         Shell,        // Great Crab, 60% / 30%: shut in its shell until a powder keg bursts by it
         Hunt,         // Great Wolf, 65% / 30%: marks a player and charges them; lure it into a pillar
         Rows,         // Executioner, 50%: rows of falling blades across the hall until the three chain posts are broken
+        Fog,          // Mycelium Mother, 65% / 30%: spore fog fills the hall; only the air around the glowing caps is clean
+        Parasite,     // Rot Giant, 60% / 30%: a parasite that jumps between friends; cured at the lilies
+        Sequence,     // Archivist, 66% / 33%: the forbidden tomes shine in turn; strike them in that order
+        Dive,         // Ink Beast, 60% / 30%: it dives into the ink and bursts up under players until the candelabra are lit
     }
 
     /// <summary>Moments of the trials, for the presentation (TrialEvent's Int).</summary>
@@ -69,6 +73,24 @@ namespace Game.Core
         RowsStart,     // Pos = boss, Value = seconds
         RowsBroken,    // Pos = boss
         RowsSlam,      // Pos = boss (too slow)
+        FogStart,      // Pos = boss, Value = seconds
+        CapWilt,       // Pos = the cap
+        CapSprout,     // Pos = the cap
+        FogClears,     // Pos = boss (outlasted: she reels)
+        ParasiteMark,  // Pos = the host, ClientId = them
+        ParasiteJump,  // Pos = from, ClientId = the new host
+        ParasiteCured, // Pos = them, ClientId = them
+        ParasiteGone,  // Pos = boss (every host cured: he reels)
+        ParasiteBurst, // Pos = boss (too slow)
+        TomeShine,     // Pos = the tome, Id = its place in the order (1..)
+        TomeRight,     // Pos = the tome, Id = how many are read
+        TomeWrong,     // Pos = the tome
+        TomesRead,     // Pos = boss
+        TomesFail,     // Pos = boss (too slow)
+        InkDive,       // Pos = boss, Value = seconds
+        CandleLit,     // Pos = the candelabrum
+        InkDriven,     // Pos = boss (every candle lit: it is driven out)
+        InkFlood,      // Pos = boss (too slow)
     }
 
     /// <summary>
@@ -129,10 +151,11 @@ namespace Game.Core
 
         /// <summary>The boss is warded: hits do nothing.</summary>
         private bool BossWarded => ActiveTrial is BossTrial.BoneWard or BossTrial.BloodRitual or BossTrial.Phylactery or BossTrial.Mirror
-                                   or BossTrial.Coffins or BossTrial.Beams or BossTrial.Rows;
+                                   or BossTrial.Coffins or BossTrial.Beams or BossTrial.Rows or BossTrial.Sequence or BossTrial.Dive;
 
         /// <summary>The boss stands still channelling (no attacks).</summary>
-        private bool BossChannelling => ActiveTrial is BossTrial.BloodRitual or BossTrial.Coffins or BossTrial.Beams or BossTrial.Gaze or BossTrial.Rows;
+        private bool BossChannelling => ActiveTrial is BossTrial.BloodRitual or BossTrial.Coffins or BossTrial.Beams or BossTrial.Gaze or BossTrial.Rows
+                                        or BossTrial.Sequence or BossTrial.Dive;
 
         private void ResetBossTrials()
         {
@@ -218,6 +241,9 @@ namespace Game.Core
                         case EnemyType.AshenKing:
                             AshenTrials(b, hp); // RunSimulation.Heart.cs
                             break;
+                        case EnemyType.MyceliumMother: case EnemyType.RotGiant: case EnemyType.Archivist: case EnemyType.InkBeast:
+                            NewLordTrials(b, boss.Type, hp); // RunSimulation.Lands2.cs
+                            break;
                         case EnemyType.ForgeColossus:
                             if (Threshold(0, hp, Wrath ? 0.6f : 0.5f)) BeginOverheat(b);
                             break;
@@ -232,6 +258,9 @@ namespace Game.Core
                 case BossTrial.Coffins: case BossTrial.Beams: case BossTrial.Gaze:
                 case BossTrial.Shell: case BossTrial.Hunt: case BossTrial.Rows:
                     StepSecondLordTrial(b, dt);
+                    break;
+                case BossTrial.Fog: case BossTrial.Parasite: case BossTrial.Sequence: case BossTrial.Dive:
+                    StepNewLordTrial(b, dt); // RunSimulation.Lands2.cs
                     break;
                 case BossTrial.Overheat:
                     StepOverheat(b, dt);

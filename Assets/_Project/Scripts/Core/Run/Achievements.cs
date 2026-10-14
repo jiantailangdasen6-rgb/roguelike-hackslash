@@ -32,6 +32,7 @@ namespace Game.Core
             A("a_saint", "水底の鎮魂", "水底の聖女を討つ", QuestGoal.KillBoss, 1, "水底を鎮めし者", EnemyType.DrownedSaint),
             A("a_queen", "春を呼ぶ", "凍てつく女王を討つ", QuestGoal.KillBoss, 1, "霜を割る者", EnemyType.FrostQueen),
             A("a_colossus", "炉の火を消す", "炉の巨人を討つ", QuestGoal.KillBoss, 1, "炉を鎮めし者", EnemyType.ForgeColossus),
+            A("a_heart", "灯火を継ぐ者", "迷宮の心臓で灰の王を討つ", QuestGoal.KillBoss, 1, "灯火を継ぐ者", EnemyType.AshenKing),
             A("a_win1", "踏破", "迷宮を踏破する", QuestGoal.Victory, 1, "迷宮踏破者"),
             A("a_win5", "覇者", "迷宮を5回踏破する", QuestGoal.Victory, 5, "迷宮の覇者"),
             A("a_deep", "深淵", "深層にたどり着く", QuestGoal.ReachArea, RunSimulation.AreaCount, "深淵を覗く者"),

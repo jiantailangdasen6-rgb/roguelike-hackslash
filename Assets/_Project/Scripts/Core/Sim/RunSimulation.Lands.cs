@@ -80,6 +80,8 @@ namespace Game.Core
                         case 3: return 3;
                         default: return roomForMinions ? 4 : 2;
                     }
+                case EnemyType.AshenKing:
+                    return AshenAttack(distance, n, roomForMinions); // RunSimulation.Heart.cs
                 case EnemyType.ForgeColossus:
                     // 0 hammer, 1 shockwave, 2 molten spray, 3 charge, 4 summon
                     if (distance < 3f && n % 3 == 0) return 1;

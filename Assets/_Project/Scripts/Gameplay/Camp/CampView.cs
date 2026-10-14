@@ -60,6 +60,14 @@ namespace Game.Gameplay
                 foreach (var def in CampUpgrades.All) ProfileStore.Current.camp.Add(def.MaxLevel);
             }
             gameObject.AddComponent<CampUpgradeView>(); // what has been built at the hearth
+            // Once the heart was lit (the true ending; -dawn for screenshots), dawn comes to the camp: warmer and brighter.
+            if (ProfileStore.Current.heartLit > 0 || CommandLine.Has("-dawn"))
+                foreach (var light in FindObjectsByType<UnityEngine.Rendering.Universal.Light2D>(FindObjectsSortMode.None))
+                    if (light.lightType == UnityEngine.Rendering.Universal.Light2D.LightType.Global)
+                    {
+                        light.color = Color.Lerp(light.color, new Color(1f, 0.82f, 0.62f), 0.6f);
+                        light.intensity *= 1.35f;
+                    }
             _root = (RectTransform)UIKit.CreateCanvas("Camp", 20, transform).transform;
 
             foreach (var station in Camp.Stations)

@@ -54,6 +54,8 @@ namespace Game.Core
         QuenchCistern,  // the colossus' overheat: break it to flood the floor and lure him in
         // Room dressing that breaks (round 7)
         Urn,            // a burial urn: smash it, sometimes souls spill out
+        // The heart of the labyrinth (round 8)
+        AshenKing,      // the last lord: the six lords' moves and trials, in turn
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -477,6 +479,22 @@ namespace Game.Core
                 // A few stand by the walls of most rooms: one blow breaks them (RunSimulation.Lands).
                 Type = EnemyType.Urn, Name = "壺", Sheet = "urn", Health = 6f, Speed = 0f, Radius = 0.38f, Xp = 0, Prop = true,
                 Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // What the heart's nightmare made of the old king: he fights with every lord's arts (RunSimulation.Heart).
+                Type = EnemyType.AshenKing, Name = "灰の王", Title = "迷宮の心臓に巣食うもの", Sheet = "ashen_king", Health = 3400f, Speed = 1.6f, Radius = 1.0f, Xp = 90,
+                PreferredDistance = 4f, AttackCooldown = 0.85f, Boss = true,
+                Attacks = new[]
+                {
+                    new EnemyAttack { Kind = AttackKind.Melee, Shape = AttackShape.Cone, SizeA = 3.8f, SizeB = 150f, Range = 3.2f, Windup = 0.85f, Recover = 0.7f, Damage = 30f },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.Line, SizeA = 12f, SizeB = 0.5f, Range = 13f, Windup = 0.85f, Recover = 0.6f, Damage = 15f, ProjectileSpeed = 9f, Projectile = ProjectileKind.BloodOrb, Count = 9, Spread = 90f },
+                    new EnemyAttack { Kind = AttackKind.Projectile, Shape = AttackShape.SelfCircle, SizeA = 2.4f, Range = 99f, Windup = 1.0f, Recover = 0.7f, Damage = 16f, ProjectileSpeed = 6.5f, Projectile = ProjectileKind.SoulOrb, Count = 18, Spread = 360f },
+                    new EnemyAttack { Kind = AttackKind.Rain, Shape = AttackShape.Circle, SizeA = 1.8f, Range = 99f, Windup = 1.2f, Recover = 0.6f, Damage = 26f, Extra = 3 },
+                    new EnemyAttack { Kind = AttackKind.Summon, Shape = AttackShape.SelfCircle, SizeA = 2f, Range = 99f, Windup = 1.0f, Recover = 0.6f, SummonCount = 2, Summon1 = EnemyType.Wraith, Summon2 = EnemyType.IronSentinel },
+                    new EnemyAttack { Kind = AttackKind.Lunge, Shape = AttackShape.Line, SizeA = 10f, SizeB = 1.8f, Range = 10f, Windup = 1.0f, Recover = 1.0f, Damage = 30f, ProjectileSpeed = 18f },
+                    new EnemyAttack { Kind = AttackKind.Cage, Shape = AttackShape.Circle, SizeA = 1.15f, Range = 99f, Windup = 1.0f, Recover = 0.5f },
+                },
             },
         };
 

@@ -472,12 +472,12 @@ namespace Game.Gameplay
                     pillar.FadeOut = true;
                     AddLight(pillar, new Color(0.5f, 0.9f, 1f), 3f, 6f);
                     HitStop.Freeze(0.1f, -1, major: true);
-                    ShowCallout(e.Pos + Vector2.up * 2.4f, "魂の器", new Color(0.6f, 0.95f, 1f), 46);
+                    ShowCallout(e.Pos + Vector2.up * 2.4f, AshenFight ? "灰の心臓" : "魂の器", new Color(0.6f, 0.95f, 1f), 46);
                     break;
                 }
                 case TrialMoment.LichRises:
                     CameraShake.Add(0.6f);
-                    ShowCallout(e.Pos + Vector2.up * 3f, "冥王の復活", new Color(0.6f, 0.95f, 1f), 46);
+                    ShowCallout(e.Pos + Vector2.up * 3f, AshenFight ? "灰の王の復活" : "冥王の復活", new Color(0.6f, 0.95f, 1f), 46);
                     break;
                 default:
                     LandTrial(e); // EventPresenter.Lands.cs
@@ -1180,7 +1180,7 @@ namespace Game.Gameplay
             var room = open ? director.LocalRoom : null;
             bool used = room != null && NetPlayer.Local != null && (NetPlayer.Local.UsedPedestals.Value & (1 << room.Id)) != 0;
             int key = room == null ? 0
-                : (room.Id + 1) * 1000 + director.Area.Value * 100 + director.Ways.Value * 1009 + (used ? 1 : 0) + (director.BossDoorOpen.Value ? 2 : 0) + (director.ExitOpen.Value ? 4 : 0)
+                : (room.Id + 1) * 1000 + director.Area.Value * 100 + director.Ways.Value * 1009 + (director.HeartOpen.Value ? 77 : 0) + (used ? 1 : 0) + (director.BossDoorOpen.Value ? 2 : 0) + (director.ExitOpen.Value ? 4 : 0)
                   + (int)(director.MapSeed.Value % 97) * 10000 + director.Keys.Value * 7 + director.UnlockedRooms.Value * 131;
             if (key != _doorsKey)
             {
@@ -1281,6 +1281,9 @@ namespace Game.Gameplay
                 {
                     Way(RunSimulation.DeepOffset, new Color(0.72f, 0.5f, 1f), "深層へ", $"{right.Name}\n{all}ここに立つと、さらに深く（魔物はより強い）");
                     Way(RunSimulation.HomeOffset, new Color(1f, 0.85f, 0.45f), "帰還", $"{all}ここに立つと踏破して拠点へ");
+                    // The six memories are together: the way down to the heart (the end of the story) in the middle.
+                    if (director.HeartOpen.Value && director.Biome != Biome.Heart)
+                        Way(RunSimulation.HeartOffset, new Color(1f, 0.45f, 0.25f), "迷宮の心臓へ", $"灰の王が待つ\n{all}ここに立って降りる");
                 }
                 else
                 {

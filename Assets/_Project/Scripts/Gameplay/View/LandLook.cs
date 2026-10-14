@@ -43,6 +43,9 @@ namespace Game.Gameplay
             // forge: ember orange
             new(new Color(0.96f, 0.82f, 0.72f), 0.8f, new Color(1f, 0.55f, 0.22f), new Color(1f, 0.6f, 0.3f),
                 new Color(1f, 0.95f, 0.9f), new Vector4(1.03f, 0.99f, 0.96f, 0f), new Vector4(1.04f, 0.99f, 0.95f, 0f)),
+            // heart: ash-red with ember gold
+            new(new Color(0.95f, 0.7f, 0.62f), 0.72f, new Color(1f, 0.55f, 0.25f), new Color(1f, 0.5f, 0.25f),
+                new Color(1f, 0.92f, 0.88f), new Vector4(1.04f, 0.97f, 0.96f, 0f), new Vector4(1.05f, 0.98f, 0.94f, 0f)),
         };
 
         private static int Index(Biome b) => Mathf.Clamp((int)b, 0, Looks.Length - 1);

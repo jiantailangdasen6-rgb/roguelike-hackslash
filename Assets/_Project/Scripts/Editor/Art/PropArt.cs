@@ -25,6 +25,7 @@ namespace Game.EditorTools.Art
             new[] { C("#0a1110"), C("#132020"), C("#1c2e2c"), C("#284039"), C("#36544c"), C("#4a6e64") }, // sunken: wet green stone
             new[] { C("#0e1320"), C("#1a2336"), C("#2a3752"), C("#3e4f72"), C("#5a6f94"), C("#8aa2c4") }, // frost: ice-crusted marble
             new[] { C("#100a08"), C("#1d1410"), C("#2b1f18"), C("#3b2b21"), C("#4e3a2c"), C("#66503e") }, // forge: charred stone
+            new[] { C("#0c0506"), C("#1a090b"), C("#2a0f12"), C("#3c161a"), C("#521f24"), C("#6e2c30") }, // heart: ash-red stone
         };
         private static readonly Color32[] Gold = { C("#2e1f0a"), C("#573d12"), C("#87641c"), C("#bb912f"), C("#e6c766") };
         private static readonly Color32[] Crimson = { C("#25060a"), C("#4a0c13"), C("#76121d"), C("#a31d28"), C("#cf3a3a") };
@@ -38,6 +39,7 @@ namespace Game.EditorTools.Art
             C("#5fe8c8"), // sunken: drowned lantern teal
             C("#a8e4ff"), // frost: cold blue
             C("#ff7a1f"), // forge: molten orange
+            C("#ffae42"), // heart: embers
         };
 
         public struct Sheet
@@ -180,14 +182,14 @@ namespace Game.EditorTools.Art
                         if ((x * 13 + y * 7) % 5 == 0) c.Set(x, y, C("#0a0605"));
                     break;
                 default:
-                    // Obsidian with glowing violet runes and a spiked crown.
+                    // Obsidian (the abyss) or ash-red stone (the heart) with glowing runes and a spiked crown.
                     for (int x = x0 - 1; x <= x1; x += 3) c.Rect(x, top, 2, 3 + (x % 2) * 3, s[3]);
                     for (int y = 9; y < top - 4; y += 6)
                     {
-                        c.Set(15, y, Glow[2]); c.Set(16, y + 1, Glow[2]); c.Set(15, y + 2, Glow[2]);
-                        c.Set(17, y + 2, A(Glow[2], 160));
+                        c.Set(15, y, Glow[area]); c.Set(16, y + 1, Glow[area]); c.Set(15, y + 2, Glow[area]);
+                        c.Set(17, y + 2, A(Glow[area], 160));
                     }
-                    for (int i = 0; i < 6; i++) c.Set(rng.Range(x0, x1), rng.Range(6, top), A(Glow[2], 120));
+                    for (int i = 0; i < 6; i++) c.Set(rng.Range(x0, x1), rng.Range(6, top), A(Glow[area], 120));
                     break;
             }
             c.Outline(Outline);
@@ -714,6 +716,7 @@ namespace Game.EditorTools.Art
                 ["pillar_3"] = Pillar(3),
                 ["pillar_4"] = Pillar(4),
                 ["pillar_5"] = Pillar(5),
+                ["pillar_6"] = Pillar(6),
             };
         }
 

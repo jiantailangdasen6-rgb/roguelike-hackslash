@@ -267,6 +267,12 @@ namespace Game.Core
                 ClearBursts();
                 // The third lord (and every deep lord after it): the way home and the way deeper both open (RunSimulation.Deep.cs).
                 if (Area >= AreaCount - 1) Conquered = true;
+                if (Biome == Biome.Heart)
+                {
+                    Events.Add(new SimEvent(SimEventType.RoomCleared) { Int = room.Index, Id = room.Id, Value = (int)room.Kind });
+                    HeartLit(); // the Ashen King is down: the true ending (RunSimulation.Heart)
+                    return;
+                }
                 GrantBlessings();
                 ExitOpen = true;
                 GatherHold = 0f;
@@ -306,7 +312,8 @@ namespace Game.Core
             else if (ExitOpen)
             {
                 // Two ways: the left one (home past the third lord, otherwise a land) and the right one. Everyone in one.
-                int way = AllAt(HomePosition, ExitRadius * 1.6f) ? 0 : AllAt(ExitPosition, ExitRadius * 1.6f) ? 1 : -1;
+                int way = AllAt(HomePosition, ExitRadius * 1.6f) ? 0 : AllAt(ExitPosition, ExitRadius * 1.6f) ? 1
+                    : OffersHeart(Area) && AllAt(HeartPosition, ExitRadius * 1.6f) ? 2 : -1; // the middle way: the heart (RunSimulation.Heart)
                 if (way != _gatherWay) GatherHold = 0f;
                 _gatherWay = way;
                 if (way < 0) return;
@@ -319,7 +326,7 @@ namespace Game.Core
                     EndInVictory();
                     return;
                 }
-                BuildArea(Area + 1, WayLand(way));
+                BuildArea(Area + 1, way == 2 ? Biome.Heart : WayLand(way));
                 EnterArea(Map.Start);
                 CheckLevelUp();
                 return;

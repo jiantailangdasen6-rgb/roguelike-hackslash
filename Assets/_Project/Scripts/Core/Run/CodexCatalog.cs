@@ -6,6 +6,7 @@ namespace Game.Core
     {
         Monsters,
         Lords,
+        Records,  // the story: inscriptions, the lords' memories, the heart (Lore)
         Gimmicks,
         Rooms,
         Gods,
@@ -48,6 +49,7 @@ namespace Game.Core
         {
             CodexSection.Monsters => "魔物",
             CodexSection.Lords => "迷宮の主",
+            CodexSection.Records => "記録",
             CodexSection.Gimmicks => "仕掛け・罠",
             CodexSection.Rooms => "部屋",
             CodexSection.Gods => "神々",
@@ -177,6 +179,10 @@ namespace Game.Core
                     "大槌の振り下ろし・周りへの衝撃波・溶鉄の散弾・突進・小鬼と番兵の召喚",
                     "試練「灼熱」：HP50%で赤く焼けた体になり、攻撃がほとんど通らない。溶けた鉄が降り注ぐ",
                     "部屋の両側の水甕を壊すと水たまりができる。巨人が水を踏むと冷えてよろめく。冷めるのを待つと大爆発"),
+                Monster(EnemyType.AshenKing, "", "試練が来るたびに役割を分ける。最後は心臓を探して砕く",
+                    "六人の主の技を次々に使う：薙ぎ払い・血の弾・魂の輪・雨・突進・骨の檻・召喚",
+                    "試練は騎士王の加護（75%）→司教の儀式（50%）→奈落の崩落（25%）の順に来る",
+                    "倒しても心臓へ逃げる。時間内に灰の心臓を壊すと、灰の王は崩れ落ちる"),
                 Open(CodexSection.Lords, "lord:Trial", "主の試練", "どの主にもある", "fx_holy", "試練は避けずに越える。仲間と役割を分けると早い",
                     "主は体力の節目で「試練」を始める", "越えると主が4.5秒よろめき「隙あり！」（受けるダメージ+50%）",
                     "冥府の難易度では試練が厳しくなる"),
@@ -308,6 +314,9 @@ namespace Game.Core
                 "3つのエリアを抜ける。各エリアは部屋が扉でつながっている", "焚き火の間の奥に主の間。主を倒すと次のエリアへ",
                 "力の選択と装備の付け替えは、戦闘中でない部屋で", "倒れても、拠点へ戻れば装備と魂の欠片は残る"));
             UseSkillIcons(list);
+            // The story (Lore): each text as lines, recorded as it is found.
+            foreach (var t in Lore.All)
+                list.Add(new Entry { Id = t.Id, Section = CodexSection.Records, Name = t.Name, Sub = t.Sub, Mark = t.Mark, Traits = t.Lines });
             return list;
         }
 

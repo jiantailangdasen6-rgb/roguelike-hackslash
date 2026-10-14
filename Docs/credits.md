@@ -13,6 +13,8 @@
 ## 音楽（CC-BY 4.0、https://creativecommons.org/licenses/by/4.0/）
 
 素材は `Assets/_Project/Audio/Pack/music/`。音量をそろえ、敗北の曲は冒頭を切り出して使っている（`Editor/Audio/SoundPack.cs`）。
+水没した地下墓地・凍てつく霊廟・燃え落ちた鍛冶場・迷宮の心臓の曲は、上の曲の速さ・音程・こもり・反響・歪みを変えた改変版（同じ CC-BY 4.0）。
+エンディングのスタッフロールにも作者名を表示している（`UI/EndingView.cs`）。
 
 | ゲームでの用途 | 曲 | 作者 | 入手元 |
 |---|---|---|---|

@@ -57,10 +57,10 @@ namespace Game.Core
         private List<Biome> Unvisited(int exclude)
         {
             var list = new List<Biome>();
-            foreach (var b in BiomeCatalog.All)
+            foreach (var b in BiomeCatalog.Routable)
                 if (!_route.Contains(b.Id)) list.Add(b.Id);
             if (list.Count == 0)
-                foreach (var b in BiomeCatalog.All)
+                foreach (var b in BiomeCatalog.Routable)
                     if ((int)b.Id != exclude) list.Add(b.Id);
             return list;
         }
@@ -92,7 +92,7 @@ namespace Game.Core
             Shuffle(fresh, rng);
             // Fewer new lands than ways: the other way leads somewhere seen before (but never back into this one).
             var seen = new List<Biome>();
-            foreach (var b in BiomeCatalog.All)
+            foreach (var b in BiomeCatalog.Routable)
                 if (b.Id != current && !fresh.Contains(b.Id)) seen.Add(b.Id);
             Shuffle(seen, rng);
             fresh.AddRange(seen);

@@ -185,6 +185,9 @@ namespace Game.Core
                         case EnemyType.FrostQueen:
                             if (Threshold(0, hp, 0.66f) || Threshold(1, hp, 0.33f)) BeginMirrors(b);
                             break;
+                        case EnemyType.AshenKing:
+                            AshenTrials(b, hp); // RunSimulation.Heart.cs
+                            break;
                         case EnemyType.ForgeColossus:
                             if (Threshold(0, hp, Wrath ? 0.6f : 0.5f)) BeginOverheat(b);
                             break;
@@ -509,7 +512,7 @@ namespace Game.Core
             }
             if (_exposed > 0f) damage *= 1f + ExposedBonus;
             if (ActiveTrial == BossTrial.Overheat && e.Def.Boss) damage *= OverheatArmor; // red-hot iron shrugs blows off
-            if (e.Type == EnemyType.Lich && e.Health - damage <= 0f)
+            if (e.Type is EnemyType.Lich or EnemyType.AshenKing && e.Health - damage <= 0f)
             {
                 RaisePhylactery(index);
                 return 0f;

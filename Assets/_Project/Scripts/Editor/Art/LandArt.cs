@@ -12,7 +12,7 @@ namespace Game.EditorTools.Art
     public static class LandArt
     {
         /// <summary>Lands with a look (BuildAreaLook makes one root per land).</summary>
-        public const int Count = 6;
+        public const int Count = 7;
 
         private static Color32 C(string hex) => PixelMaterial.Hex(hex);
         private static Color32 A(Color32 c, byte a) => new(c.r, c.g, c.b, a);
@@ -29,6 +29,7 @@ namespace Game.EditorTools.Art
                 tiles[$"floor{v}_3"] = SunkenFloor((ulong)(71 + v), v);
                 tiles[$"floor{v}_4"] = FrostFloor((ulong)(83 + v), v);
                 tiles[$"floor{v}_5"] = ForgeFloor((ulong)(97 + v), v);
+                tiles[$"floor{v}_6"] = HeartFloor((ulong)(113 + v), v);
             }
             for (int land = 3; land < Count; land++)
             {
@@ -200,6 +201,39 @@ namespace Game.EditorTools.Art
             return c;
         }
 
+        public static readonly Color32 HeartGlow = C("#ffae42");
+
+        /// <summary>The heart: black-red stone like old ash, veins of embers through it (more on variants 2 and 3).</summary>
+        private static PixelCanvas HeartFloor(ulong seed, int variant)
+        {
+            var rng = new GameRandom(seed * 5381);
+            var stone = new[] { C("#0a0405"), C("#120607"), C("#1a090a"), C("#220c0d"), C("#2c1112") };
+            var c = new PixelCanvas(32, 32);
+            int sx = 8 + rng.Range(0, 16), sy = 8 + rng.Range(0, 16);
+            for (int y = 0; y < 32; y++)
+            for (int x = 0; x < 32; x++)
+            {
+                bool seam = x == 0 || y == 0 || (y == sy && x > sx / 2) || (x == sx && y < sy);
+                int shade = seam ? 0 : 2;
+                if (!seam && rng.Value() < 0.13f) shade = 1;
+                if (!seam && rng.Value() < 0.04f) shade = 3;
+                if (!seam && (y == sy - 1 || y == 31 || x == 1)) shade = 3;
+                c.Set(x, y, stone[shade]);
+            }
+            int veins = variant >= 2 ? variant : variant == 1 ? 1 : 0;
+            for (int v = 0; v < veins; v++)
+            {
+                int x = rng.Range(2, 30), y = rng.Range(2, 30);
+                for (int k = 0; k < 14; k++)
+                {
+                    c.Set(x, y, k % 6 == 3 ? HeartGlow : k % 2 == 0 ? C("#8a2410") : C("#5a1608"));
+                    x = Mathf.Clamp(x + rng.Range(-1, 2), 1, 30);
+                    y = Mathf.Clamp(y + (rng.Chance(0.5f) ? 1 : 0), 1, 30);
+                }
+            }
+            return c;
+        }
+
         // ------------------------------------------------------------------ Walls
 
         private static PixelCanvas Wall(int land, ulong seed)
@@ -210,6 +244,7 @@ namespace Game.EditorTools.Art
             {
                 3 => new[] { C("#060b0b"), C("#0e1716"), C("#152220"), C("#1d2d2a"), C("#273b37") },
                 4 => new[] { C("#0a0e17"), C("#131a28"), C("#1c2639"), C("#27334b"), C("#35435e") },
+                6 => new[] { C("#0c0405"), C("#180809"), C("#240c0d"), C("#311112"), C("#401818") },
                 _ => new[] { C("#0a0605"), C("#150e0b"), C("#201510"), C("#2b1d15"), C("#37261c") },
             };
             for (int y = 0; y < 32; y++)
@@ -249,6 +284,19 @@ namespace Game.EditorTools.Art
                             int len = 2 + (int)(Hash(x, 1) * 5);
                             for (int k = 0; k < len; k++) c.Set(x, 22 - k, k == len - 1 ? C("#a8d0f0") : C("#7a9cc4"));
                         }
+                    break;
+                case 6:
+                    // The heart: dark red stone with ember veins that branch through the joints.
+                    for (int v = 0; v < (alt ? 3 : 1); v++)
+                    {
+                        int x = rng.Range(2, 30), y = 31;
+                        for (int k = 0; k < 24 && y > 0; k++)
+                        {
+                            c.Set(x, y, k % 5 == 0 ? HeartGlow : C("#7a1c10"));
+                            x = Mathf.Clamp(x + rng.Range(-1, 2), 0, 31);
+                            y--;
+                        }
+                    }
                     break;
                 default:
                     // Soot climbing from below; on the alternate block a seam glowing hot.

@@ -40,6 +40,8 @@ namespace Game.Gameplay
         /// <summary>The run's omen (RunSimulation.Omens).</summary>
         public readonly NetworkVariable<int> OmenId = new();
         public Omen Omen => (Omen)OmenId.Value;
+        /// <summary>The way to the heart opens past the third lord (someone carries all six memories).</summary>
+        public readonly NetworkVariable<bool> HeartOpen = new();
 
         /// <summary>The land of an area this run went through (or is in).</summary>
         public Biome BiomeOf(int area) => area >= 0 && area < 16 ? (Biome)((RouteBits.Value >> (area * 4)) & 0xF) : BiomeCatalog.Classic(area);
@@ -326,6 +328,10 @@ namespace Game.Gameplay
             if (CommandLine.Has("-offerblessing"))
                 foreach (var sp in Sim.Players) sp.StockedChoices.Enqueue(ChoiceKind.Blessing);
             foreach (var sp in Sim.Players) Sim.SyncGear(sp); // the gear everyone set out with (and any loaners)
+            // Someone carries the six lords' memories: the heart can be reached this run (-heartopen for screenshots).
+            foreach (ulong clientId in NetworkManager.ConnectedClientsIds)
+                if ((GameSession.LoadoutFor(clientId).memories & Lore.AllMemories) == Lore.AllMemories) Sim.HeartOpen = true;
+            if (CommandLine.Has("-heartopen")) Sim.HeartOpen = true;
             Started.Value = true;
             _startTime = Time.time;
             Debug.Log($"[RunDirector] Run started with {Sim.Players.Count} player(s)");
@@ -507,6 +513,7 @@ namespace Game.Gameplay
             SetIfChanged(RouteBits, route);
             SetIfChanged(Ways, (int)Sim.NextWays[0] | (int)Sim.NextWays[1] << 4);
             SetIfChanged(OmenId, (int)Sim.Omen);
+            SetIfChanged(HeartOpen, Sim.HeartOpen);
             int visited = 0, cleared = 0, fighting = 0, unlocked = 0;
             float puzzle = 0f;
             float puzzleTime = 0f;

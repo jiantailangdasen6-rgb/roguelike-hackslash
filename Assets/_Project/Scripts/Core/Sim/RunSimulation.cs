@@ -213,7 +213,7 @@ namespace Game.Core
         /// </param>
         public void Start(int firstRoom = 0)
         {
-            firstRoom = Mathf.Clamp(firstRoom, 0, TotalRooms - 1);
+            firstRoom = Mathf.Clamp(firstRoom, 0, RoomsPerArea * (AreaCount + 4) - 1); // debug starts may go into the deep or the heart
             int area = firstRoom / RoomsPerArea, tier = firstRoom % RoomsPerArea;
             if (area != Area) BuildArea(area);
             EnterArea(tier == 3 ? Map.Boss : tier == 2 ? Map.Campfire : Map.Start);

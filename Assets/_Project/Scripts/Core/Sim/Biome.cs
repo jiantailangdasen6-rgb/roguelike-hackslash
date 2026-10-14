@@ -15,6 +15,7 @@ namespace Game.Core
         Sunken, // 水没した地下墓地: wet green stone, shallow water, drowned dead
         Frost,  // 凍てつく霊廟: ice-crusted marble, snow, a frozen court
         Forge,  // 燃え落ちた鍛冶場: charred brick and iron, molten cracks
+        Heart,  // 迷宮の心臓: the bottom of it all (only through the way the six lords' memories open)
     }
 
     public sealed class BiomeDef
@@ -30,6 +31,8 @@ namespace Game.Core
         /// <summary>Fight-room layouts that suit it (Arena ids; repeats weigh more).</summary>
         public int[] FightLayouts;
         public string Music;
+        /// <summary>Never picked for a route (the heart is reached by its own way).</summary>
+        public bool Special;
     }
 
     public static class BiomeCatalog
@@ -97,7 +100,22 @@ namespace Game.Core
                 },
                 FightLayouts = new[] { 21, 22, 23, 21, 5, 6 },
             },
+            new()
+            {
+                // The heart of the labyrinth: every land's dead walk here, and the Ashen King waits at the bottom.
+                Id = Biome.Heart, Name = "迷宮の心臓", Hint = "灰の王が待つ", Lord = EnemyType.AshenKing, Champion = EnemyType.DreadKnight, Music = "music_heart", Special = true,
+                Pool = new[]
+                {
+                    (EnemyType.Drowned, 10, 0), (EnemyType.FrostWolf, 10, 0), (EnemyType.IronSentinel, 8, 0), (EnemyType.ShadeStalker, 10, 0),
+                    (EnemyType.Wraith, 10, 0), (EnemyType.Cultist, 8, 0), (EnemyType.DreadKnight, 8, 0), (EnemyType.Icebound, 8, 0),
+                    (EnemyType.FireImp, 8, 0), (EnemyType.Necromancer, 6, 0), (EnemyType.Skeleton, 10, 0),
+                },
+                FightLayouts = new[] { 2, 9, 15, 18, 21, 4 },
+            },
         };
+
+        /// <summary>Lands a route can lead through (all but the heart).</summary>
+        public static readonly BiomeDef[] Routable = System.Array.FindAll(All, b => !b.Special);
 
         public static int Count => All.Length;
 

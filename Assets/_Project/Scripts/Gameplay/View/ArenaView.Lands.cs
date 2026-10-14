@@ -232,6 +232,7 @@ namespace Game.Gameplay
             Biome.Sunken => (new Color(0.45f, 0.85f, 0.75f), 0.13f),
             Biome.Frost => (new Color(0.85f, 0.92f, 1f), 0.12f),
             Biome.Forge => (new Color(0.35f, 0.3f, 0.28f), 0.12f),
+            Biome.Heart => (new Color(0.6f, 0.25f, 0.2f), 0.12f),
             _ => (new Color(0.6f, 0.62f, 0.72f), 0.08f),
         };
 

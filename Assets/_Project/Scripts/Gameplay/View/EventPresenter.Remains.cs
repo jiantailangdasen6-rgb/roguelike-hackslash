@@ -70,6 +70,9 @@ namespace Game.Gameplay
 
         private float _lastBossHealth = -1f;
 
+        /// <summary>The lord in the fight is the Ashen King (his trials borrow the other lords' words).</summary>
+        private static bool AshenFight => RunDirector.Instance != null && RunDirector.Instance.BossType.Value == EnemyType.AshenKing;
+
         /// <summary>
         /// A lord below half health fights faster (RunSimulation.BossEnraged): the moment it happens is shown, with a
         /// red shock wave, a roar of light and its name for the new phase.

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
+  m_Name: prop_pillar_6
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
+  Texture: {fileID: 2800000, guid: 27bba985f3f2e244cbd5e780a4e55592, type: 3}
+  FlashTexture: {fileID: 0}
+  NormalTexture: {fileID: 2800000, guid: 1086da0bbd842bb498dbfa63884f5b59, type: 3}
+  FrameWidth: 32
+  FrameHeight: 64
+  Pivot: {x: 0.5, y: 0.06}
+  PixelsPerUnit: 32
+  Clips:
+  - Name: default
+    Row: 0
+    Frames: 1
+    Fps: 12
+    Loop: 1

@@ -240,6 +240,11 @@ namespace Game.EditorTools.Art
         public static List<Clip> SlagBloater() => Swapped(Bloater,
             (Palette.Pustule, Molten), (Palette.Flesh, Charcoal), (KnightArmor, IronDark), (Palette.DarkSteel, IronDark), (Palette.Toxic, EmberGlow), (Palette.Rag, Soot));
 
+        /// <summary>The Ashen King: the Lich's frame in ash and embers, a crown of gold gone to cinders.</summary>
+        public static List<Clip> AshenKing() => Swapped(Lich,
+            (Palette.Robe, Soot), (Palette.Violet, Charcoal), (Palette.Gold, Brass), (Palette.Bone, Charcoal), (Palette.Soul, EmberGlow),
+            (Palette.SoulCore, EmberGlow), (Palette.Rag, Soot), (Palette.Red, Molten), (Palette.Crimson, Molten), (Palette.EyeRed, EmberGlow));
+
         public static List<Clip> ForgeColossus() => Swapped(BoneKing,
             (Palette.Bone, Charcoal), (Palette.Steel, IronDark), (Palette.DarkSteel, IronDark), (Palette.Gold, Brass), (Palette.Red, Soot),
             (Palette.Rag, Soot), (Palette.Blade, Molten), (Palette.EyeRed, EmberGlow), (Palette.Leather, Soot), (Palette.Rust, Brass));

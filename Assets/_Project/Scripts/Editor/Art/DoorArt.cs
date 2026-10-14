@@ -21,8 +21,9 @@ namespace Game.EditorTools.Art
             new[] { C("#081010"), C("#111d1c"), C("#1b2c2a"), C("#273e3a"), C("#35524c"), C("#4a6c64") }, // sunken
             new[] { C("#0c1220"), C("#182235"), C("#27354f"), C("#3a4b6c"), C("#566b90"), C("#86a0c4") }, // frost
             new[] { C("#0e0907"), C("#1b130e"), C("#291d16"), C("#392a1f"), C("#4b392b"), C("#634c3a") }, // forge
+            new[] { C("#0c0506"), C("#1a090b"), C("#2a0f12"), C("#3c161a"), C("#521f24"), C("#6e2c30") }, // heart
         };
-        private static readonly Color32[] Torch = { C("#ff9a3c"), C("#ff4a3a"), C("#c58bff"), C("#5fe8c8"), C("#a8e4ff"), C("#ff8a2a") };
+        private static readonly Color32[] Torch = { C("#ff9a3c"), C("#ff4a3a"), C("#c58bff"), C("#5fe8c8"), C("#a8e4ff"), C("#ff8a2a"), C("#ffae42") };
 
         public static Dictionary<string, PropArt.Sheet> Sheets()
         {

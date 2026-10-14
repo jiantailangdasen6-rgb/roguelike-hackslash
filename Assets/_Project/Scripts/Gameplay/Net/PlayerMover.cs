@@ -364,6 +364,9 @@ namespace Game.Gameplay
                 // before it they all agree on a way from the map's seed (so different runs see different lands).
                 if (room.Kind == RoomKind.Boss && director.ExitOpen.Value)
                 {
+                    // -heart: bots take the middle way down to the heart when it is open (screenshots, tests).
+                    if (CommandLine.Has("-heart") && director.HeartOpen.Value && RunSimulation.OffersHome(director.Area.Value) && director.Biome != Biome.Heart)
+                        return Toward(room.Origin + RunSimulation.HeartOffset);
                     bool left = RunSimulation.OffersHome(director.Area.Value) ? !CommandLine.Has("-deep") : (director.MapSeed.Value + (ulong)director.Area.Value) % 2 == 0;
                     return Toward(room.Origin + (left ? RunSimulation.HomeOffset : RunSimulation.DeepOffset));
                 }

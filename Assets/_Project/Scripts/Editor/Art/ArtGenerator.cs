@@ -100,6 +100,7 @@ namespace Game.EditorTools.Art
             Character("forge_colossus", EnemyArt.ForgeColossus(), EnemyArt.BossFrameSize);
             Character("quench_cistern", GimmickArt.QuenchCistern(), EnemyArt.FrameSize);
             Character("urn", GimmickArt.Urn(), EnemyArt.FrameSize);
+            Character("ashen_king", EnemyArt.AshenKing(), EnemyArt.BossFrameSize);
             Effect("trap_icicle", GimmickArt.Icicle(), "trap_icicle", new Vector2(0.5f, 0.5f));
             Effect("trap_lava", GimmickArt.LavaCrack(), "trap_lava", new Vector2(0f, 0.5f));
 

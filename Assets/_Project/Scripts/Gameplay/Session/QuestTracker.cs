@@ -61,7 +61,45 @@ namespace Game.Gameplay
                 HudView.Instance?.Toast($"<color=#e6c766>実績「{a.Name}」</color>　称号「{AchievementCatalog.TitleOf(a)}」を得た（拠点の鏡で付けられる）");
                 SfxPlayer.Instance?.Play("levelup", null, 0.95f);
             }
+            RecordStory(e);
             if (e.Type is SimEventType.RoomCleared or SimEventType.RunEnded or SimEventType.RoomStarted) SaveIfDirty();
+        }
+
+        /// <summary>
+        /// The story (Lore): a land's inscription when the team arrives in it, a lord's memory when it falls (kept in the
+        /// profile: all six open the way to the heart), the heart and the ending.
+        /// </summary>
+        private void RecordStory(SimEvent e)
+        {
+            var profile = ProfileStore.Current;
+            switch (e.Type)
+            {
+                case SimEventType.RoomStarted:
+                {
+                    var land = (Biome)Mathf.RoundToInt(e.Value);
+                    Codex.Record(land == Biome.Heart ? Lore.HeartId : Lore.InscriptionId(land));
+                    break;
+                }
+                case SimEventType.EnemyDied when e.Value < 0.5f && EnemyCatalog.Get((EnemyType)e.Int).Boss && (EnemyType)e.Int != EnemyType.AshenKing:
+                {
+                    var land = BiomeCatalog.OfLord((EnemyType)e.Int);
+                    int bit = Lore.MemoryBit(land);
+                    Codex.Record(Lore.MemoryId(land));
+                    if (bit == 0 || (profile.memories & bit) != 0) break;
+                    profile.memories |= bit;
+                    _dirty = true;
+                    int count = Lore.Count(profile.memories);
+                    HudView.Instance?.Toast(count >= 6
+                        ? "<color=#ffd890>六つの記憶がそろった</color>　三つ目の主の先に、迷宮の心臓への道が開く"
+                        : $"<color=#ffd890>{Lore.Get(Lore.MemoryId(land))?.Name}</color>を得た（記憶 {count}/6、図鑑の「記録」）");
+                    break;
+                }
+                case SimEventType.RunEnded when e.Int == 3:
+                    profile.heartLit++;
+                    _dirty = true;
+                    Codex.Record(Lore.EndingId);
+                    break;
+            }
         }
 
         /// <summary>The unfinished request closest to done, for a one-line reminder (null when none has started).</summary>

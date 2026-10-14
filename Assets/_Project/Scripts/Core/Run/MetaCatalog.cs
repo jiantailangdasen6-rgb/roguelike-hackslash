@@ -152,6 +152,8 @@ namespace Game.Core
         public List<string> gear = new();
         /// <summary>Levels of the camp's facilities (CampUpgrade order), grown at the hearth.</summary>
         public List<int> camp = new();
+        /// <summary>The lords' memories this player carries (Lore bits): all six open the way to the heart.</summary>
+        public int memories;
         /// <summary>The title worn next to the name (an earned achievement's; empty for none).</summary>
         public string title = "";
 
@@ -237,6 +239,10 @@ namespace Game.Core
 
         public void RecordVictory(Difficulty d) => bestVictory = Math.Max(bestVictory, (int)d);
 
+        /// <summary>The lords' memories won (Lore bits, 1 &lt;&lt; land) and how many times the heart was lit (the true ending).</summary>
+        public int memories;
+        public int heartLit;
+
         /// <summary>Lines of the camp's people already told (CampStories).</summary>
         public List<string> storyRead = new();
 
@@ -310,6 +316,7 @@ namespace Game.Core
             playerKey = playerKey,
             gear = GearVault.LoadoutGear(this.gear = GearVault.Normalize(this.gear)),
             camp = new List<int>(camp ?? new List<int>()),
+            memories = memories,
             title = !string.IsNullOrEmpty(title) && achievements != null && achievements.Titles().Contains(title) ? title : "",
         };
 

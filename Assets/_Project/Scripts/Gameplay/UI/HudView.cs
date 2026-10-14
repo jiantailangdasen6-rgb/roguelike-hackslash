@@ -24,7 +24,9 @@ namespace Game.Gameplay
         }
 
         /// <summary>An area's name: its land, and past the third lord the deep layer too ("深層2・凍てつく霊廟").</summary>
-        public static string AreaName(int area) => area < RunSimulation.AreaCount ? LandName(area) : $"深層{area - RunSimulation.AreaCount + 1}・{LandName(area)}";
+        public static string AreaName(int area) => area < RunSimulation.AreaCount || IsHeart(area) ? LandName(area) : $"深層{area - RunSimulation.AreaCount + 1}・{LandName(area)}";
+
+        private static bool IsHeart(int area) => RunDirector.Instance != null && RunDirector.Instance.IsSpawned && RunDirector.Instance.BiomeOf(area) == Biome.Heart;
 
         public static string LayerName(int area) => area < LayerNames.Length ? LayerNames[Mathf.Max(0, area)] : $"深層 第{area - LayerNames.Length + 1}階";
 
@@ -399,7 +401,7 @@ namespace Game.Gameplay
                 BossTrial.BoneWard => $"骨の燭台を壊して加護を破れ　<color=#ffffff>{done}/{total}</color>",
                 BossTrial.BloodRitual => $"<color=#ff8a7a>血の紋章の上に立って、すべて灯せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 BossTrial.Collapse => $"<color=#c8b0ff>床が崩れる！ 中央へ　{seconds}</color>",
-                BossTrial.Phylactery => $"<color=#9ae8ff>魂の器を壊せ！</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Phylactery => $"<color=#9ae8ff>{(d.BossType.Value == EnemyType.AshenKing ? "灰の心臓" : "魂の器")}を壊せ！</color>　<color=#ffffff>残り {seconds}秒</color>",
                 BossTrial.Flood => $"<color=#8affe0>封じの栓を壊して水を引かせろ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 BossTrial.Mirror => $"<color=#bfe4ff>影のない写し身を砕け</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 BossTrial.Overheat => $"<color=#ffb070>水甕を壊し、巨人を水へ誘い込め</color>　<color=#ffffff>残り {seconds}秒</color>",
@@ -416,7 +418,8 @@ namespace Game.Gameplay
                     // A new area: its name, then the map takes over.
                     int area = e.Int / RunSimulation.RoomsPerArea;
                     // The land comes with the event (the synced route may arrive a moment later).
-                    _cinematics.Area(LayerName(area), BiomeCatalog.Get((Biome)Mathf.RoundToInt(e.Value)).Name);
+                    var land = (Biome)Mathf.RoundToInt(e.Value);
+                    _cinematics.Area(land == Biome.Heart ? "最深部" : LayerName(area), BiomeCatalog.Get(land).Name);
                     break;
                 }
                 case SimEventType.TeamLevelUp:

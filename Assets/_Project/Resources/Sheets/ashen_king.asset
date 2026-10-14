@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
+  m_Name: ashen_king
+  m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
+  Texture: {fileID: 2800000, guid: dd90636962f7eb445bd67a26b15bb064, type: 3}
+  FlashTexture: {fileID: 2800000, guid: b25f2bf2590ac3847b852b11b2921159, type: 3}
+  NormalTexture: {fileID: 2800000, guid: 8931aadd11f05d444a55ee50d964a6d0, type: 3}
+  FrameWidth: 112
+  FrameHeight: 112
+  Pivot: {x: 0.5, y: 0.08928572}
+  PixelsPerUnit: 32
+  Clips:
+  - Name: idle
+    Row: 0
+    Frames: 6
+    Fps: 5
+    Loop: 1
+  - Name: walk
+    Row: 1
+    Frames: 6
+    Fps: 6
+    Loop: 1
+  - Name: windup
+    Row: 2
+    Frames: 3
+    Fps: 6
+    Loop: 0
+  - Name: strike
+    Row: 3
+    Frames: 4
+    Fps: 12
+    Loop: 0
+  - Name: hurt
+    Row: 4
+    Frames: 2
+    Fps: 10
+    Loop: 0
+  - Name: death
+    Row: 5
+    Frames: 7
+    Fps: 6
+    Loop: 0

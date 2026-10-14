@@ -71,6 +71,7 @@ namespace Game.Gameplay
 
             _panel.SetActive(false);
             RunDirector.EventReceived += OnEvent;
+            gameObject.AddComponent<EndingView>(); // the true ending plays over this screen first
         }
 
         private void OnDestroy() => RunDirector.EventReceived -= OnEvent;
@@ -81,7 +82,7 @@ namespace Game.Gameplay
         {
             if (e.Type != SimEventType.RunEnded) return;
             _victory = e.Int >= 1; // 2: fell in the deep layers after beating the Lich (still a conquest)
-            _title.text = e.Int == 2 ? "深層に散った" : _victory ? "迷宮を踏破した" : "力尽きた…";
+            _title.text = e.Int == 3 ? "心臓に火を灯した" : e.Int == 2 ? "深層に散った" : _victory ? "迷宮を踏破した" : "力尽きた…";
             _title.color = _victory ? UIKit.AccentColor : new Color(0.75f, 0.15f, 0.15f);
             _shards = -1;
             _logged = false;
@@ -110,7 +111,7 @@ namespace Game.Gameplay
                 var a = areas[i];
                 if (a[3] < 0) continue;
                 float y = -i * step;
-                var label = UIKit.Label(_graph, i < RunSimulation.AreaCount ? HudView.LandName(i) : $"深層{i - RunSimulation.AreaCount + 1}・{HudView.LandName(i)}", step < 40f ? 16 : 20, TextAnchor.MiddleRight, UIKit.MutedText);
+                var label = UIKit.Label(_graph, HudView.AreaName(i), step < 40f ? 16 : 20, TextAnchor.MiddleRight, UIKit.MutedText);
                 label.rectTransform.Place(new Vector2(0f, 1f), new Vector2(left - 14f, 36f), new Vector2(0f, y));
                 var back = UIKit.Panel(_graph, "Back", new Color(0.12f, 0.1f, 0.1f, 1f));
                 back.rectTransform.Place(new Vector2(0f, 1f), new Vector2(barMax, thick), new Vector2(left, y - 5f));

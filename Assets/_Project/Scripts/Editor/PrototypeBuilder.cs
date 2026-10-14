@@ -739,7 +739,17 @@ namespace Game.EditorTools
                     candleSheet = "fx_candle_ice";
                     candleLight = new Color(0.55f, 0.8f, 1f);
                     break;
-                default:
+                case 6:
+                    // The heart: chains hanging over ash-red stone, bones of every land, embers glowing in the walls.
+                    foreach (float x in new[] { -12f, -4f, 4f, 12f }) Prop(props, "chains_2", new Vector2(x, yMax + 0.2f), 1f, order: -980);
+                    foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_5", new Vector2(x, yMax + 0.5f), 1f, order: -980);
+                    for (int i = 0; i < 8; i++) Prop(props, "bones_2", ScatterNearWalls(rng, xMin, xMax, yMin, yMax), 1f, order: -950);
+                    foreach (float x in new[] { -10f, 0f, 10f })
+                        Light(props, new Vector2(x, yMax - 0.6f), new Color(1f, 0.55f, 0.2f), 0.55f, 5f);
+                    candleSheet = "fx_candle_red";
+                    candleLight = new Color(1f, 0.45f, 0.25f);
+                    break;
+                default: // 5: the forge
                     // Burnt forge: weapon racks, soot-black banners, slag cooling on the floor, the glow of the furnaces.
                     foreach (float x in new[] { -11.5f, 11.5f }) Prop(props, "rack_5", new Vector2(x, yMax + 0.2f), 1f, order: -980);
                     foreach (float x in new[] { -7.5f, 7.5f }) Prop(props, "banner_5", new Vector2(x, yMax + 0.5f), 1f, order: -980);

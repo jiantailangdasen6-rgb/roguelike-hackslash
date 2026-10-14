@@ -396,7 +396,7 @@ namespace Game.Gameplay
 
             v.Root.SetActive(true);
             // The lords (and the queen's reflections) stand a head taller than their art: they should loom.
-            v.Root.transform.localScale = Vector3.one * (def.Boss || type == EnemyType.IceMirror ? BossScale : 1f);
+            v.Root.transform.localScale = Vector3.one * (type == EnemyType.AshenKing ? 1.55f : def.Boss || type == EnemyType.IceMirror ? BossScale : 1f);
             v.Anim = (EnemyAnim)255;
             v.Shadow.enabled = !def.Flat && type != EnemyType.IceMirror; // the queen's reflections cast no shadow
             v.Animator.Renderer.color = Color.white;
@@ -425,7 +425,7 @@ namespace Game.Gameplay
                 {
                     case EnemyType.DrownedSaint: case EnemyType.TideWitch: v.Glow.color = new Color(0.35f, 1f, 0.85f); break;
                     case EnemyType.FrostQueen: case EnemyType.IceMirror: case EnemyType.FrostWitch: v.Glow.color = new Color(0.6f, 0.85f, 1f); break;
-                    case EnemyType.ForgeColossus: case EnemyType.FireImp: case EnemyType.SlagBloater: v.Glow.color = new Color(1f, 0.5f, 0.15f); break;
+                    case EnemyType.ForgeColossus: case EnemyType.FireImp: case EnemyType.SlagBloater: case EnemyType.AshenKing: v.Glow.color = new Color(1f, 0.5f, 0.15f); break;
                 }
                 // Small glowing monsters keep their light faint (a strong light on a small sprite washes it out).
                 if (!def.Boss && !elite && def.Type is EnemyType.TideWitch or EnemyType.FrostWitch or EnemyType.FireImp or EnemyType.SlagBloater)

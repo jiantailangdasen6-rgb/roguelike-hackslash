@@ -155,7 +155,7 @@ namespace Game.Core
             for (int attempt = 0; attempt < 40; attempt++)
             {
                 var map = new DungeonMap(area, biome);
-                if (map.TryBuild(rng, 11 + (area > 0 ? 1 : 0)))
+                if (map.TryBuild(rng, biome == Biome.Heart ? 8 : 11 + (area > 0 ? 1 : 0))) // the heart is a short land
                 {
                     map.AssignLayouts(rng);
                     map.PickDarkHall(new GameRandom(seed ^ (0xDA4C1E55u * (ulong)(area + 1))));

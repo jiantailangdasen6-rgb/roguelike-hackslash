@@ -738,7 +738,8 @@ namespace Game.Core
                 ref var e = ref Enemies[i];
                 if (!e.Dead) continue;
                 var def = e.Def;
-                Room = RoomStates[e.RoomId];
+                // Left over from the area just left (whose map may have had more rooms): keep the current room.
+                if (e.RoomId >= 0 && e.RoomId < RoomStates.Count) Room = RoomStates[e.RoomId];
                 bool vanished = _vanished.Remove(e.Id); // a mimic's chest: no treasure, the mimic stands in its place
                 Events.Add(new SimEvent(SimEventType.EnemyDied) { Id = e.Id, Pos = e.Position, Int = (int)e.Type, Value = giveXp && !vanished ? 0f : 1f });
                 if (vanished) continue;

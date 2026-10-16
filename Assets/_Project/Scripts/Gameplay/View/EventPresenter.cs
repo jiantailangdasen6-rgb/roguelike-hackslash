@@ -332,6 +332,11 @@ namespace Game.Gameplay
         /// <summary>Two classes' abilities met: the name of the technique, a burst in its colours, a beat of hit stop.</summary>
         private void OnCombo(in SimEvent e)
         {
+            if ((ComboKind)e.Int == ComboKind.Union)
+            {
+                OnUnion(e); // EventPresenter.Unions.cs
+                return;
+            }
             float r = Mathf.Max(1f, e.Value);
             switch ((ComboKind)e.Int)
             {

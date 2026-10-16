@@ -70,7 +70,7 @@ namespace Game.Gameplay
             Set(SimEventType.ItemGiven, F.Client | F.Id | F.Int);
             Set(SimEventType.ItemSalvaged, F.Client | F.Value);
             Set(SimEventType.LegendaryProc, F.Client | F.Int | F.Pos | F.Vec);
-            Set(SimEventType.Combo, F.Client | F.Int | F.Pos | F.Value);
+            Set(SimEventType.Combo, F.Client | F.Int | F.Pos | F.Value | F.Id | F.Vec | F.Size); // a union: Id = the pair, Vec/Size = the two players
             Set(SimEventType.TrialEvent, F.Int | F.Pos | F.Value | F.Client | F.Id);
             Set(SimEventType.RoomEntered, F.Client | F.Id | F.Int | F.Value); // Value = RoomKind
             Set(SimEventType.PedestalUsed, F.Client | F.Id | F.Int | F.Value | F.Pos);

@@ -39,6 +39,9 @@ namespace Game.Core
         public Vector2 Aim = Vector2.right;
         public float Hp;
         public float Shield;
+        /// <summary>When this player last used a skill (sim time), and when it may take part in a union again (RunSimulation.Unions).</summary>
+        public float LastSkillAt = -99f;
+        public float UnionReadyAt;
         public bool Downed;
         /// <summary>Where the body lies while downed; the player moves on as a ghost (RunSimulation.Ghosts).</summary>
         public Vector2 BodyPosition;

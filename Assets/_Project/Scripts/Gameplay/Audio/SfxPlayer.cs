@@ -200,6 +200,7 @@ namespace Game.Gameplay
                         case AreaKind.WarCry: Play("warcry", e.Pos); break;
                         case AreaKind.Mark: Play("bolt", e.Pos, 0.5f); break;
                         case AreaKind.Slam: Play("slam", e.Pos); break;
+                        case AreaKind.HallQuake: Play("explosion", e.Pos, 0.85f, 0.55f); Play("slam", e.Pos, 0.7f, 0.5f); break;
                         case AreaKind.Explosion: Play("explosion", e.Pos); break;
                         case AreaKind.HolyLight: Play("heal", e.Pos, 0.8f, 1.3f); break;
                         case AreaKind.Raise: Play("roar", e.Pos, 1.8f, e.Value > 1f ? 0.5f : 0.3f); break;
@@ -262,6 +263,7 @@ namespace Game.Gameplay
                         case ComboKind.ShadowExecution: Play("shatter", e.Pos, 0.75f); Play("blink", e.Pos, 0.6f); break;
                         case ComboKind.HolyWarCry: Play("levelup", e.Pos, 0.8f); Play("slam", e.Pos, 1.2f, 0.7f); break;
                         case ComboKind.FlameCharge: Play("flame", e.Pos, 1.2f); break;
+                        case ComboKind.Union: Play("nova", e.Pos, 0.9f); Play("levelup", e.Pos, 0.85f, 0.8f); Play("explosion", e.Pos, 1.2f, 0.6f); break;
                     }
                     break;
                 case SimEventType.SpawnWarning: Play("telegraph", e.Pos, 0.6f, 0.6f); break;
@@ -293,6 +295,8 @@ namespace Game.Gameplay
                     switch ((TrialMoment)e.Int)
                     {
                         case TrialMoment.CageClosed: Play("clank", e.Pos, 0.6f); Play("slam", e.Pos, 1.3f, 0.6f); break;
+                        case TrialMoment.StageRage: Play("roar", null, 0.85f); Play("slam", e.Pos, 0.8f, 0.8f); break;
+                        case TrialMoment.StageLast: Play("roar", null, 0.7f); Play("explosion", e.Pos, 0.7f, 0.8f); break;
                         case TrialMoment.CageBroken: Play("shatter", e.Pos, 0.8f); break;
                         case TrialMoment.CageCrushed: Play("heavyhit", e.Pos, 0.7f); break;
                         case TrialMoment.WardUp: Play("roar", null, 0.9f); Play("nova", e.Pos, 0.6f); break;

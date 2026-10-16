@@ -32,7 +32,7 @@ namespace Game.Core
         public static string Name(ComboKind kind)
         {
             foreach (var c in All) if (c.Kind == kind) return c.Name;
-            return "";
+            return kind == ComboKind.Union ? "合体技" : ""; // any two players (UnionCatalog names each pair)
         }
 
         /// <summary>The techniques this party can perform (both classes present, played by different people).</summary>

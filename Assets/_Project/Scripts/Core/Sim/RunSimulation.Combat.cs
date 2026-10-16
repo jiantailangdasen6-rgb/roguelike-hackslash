@@ -226,6 +226,7 @@ namespace Game.Core
 
             p.Skill1Cooldown = RuneCooldown(p, 1, cd);
             RuneCast(p, 1, dir); // RunSimulation.Runes.cs
+            TryUnion(p); // RunSimulation.Unions.cs
             BlessingOnSkill1(p);
             Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Skill1, Pos = p.Position, Vec = dir });
         }
@@ -327,6 +328,7 @@ namespace Game.Core
 
             p.Skill2Cooldown = RuneCooldown(p, 2, c.Skill2Cooldown * p.CooldownMultiplier);
             RuneCast(p, 2, dir); // RunSimulation.Runes.cs
+            TryUnion(p); // RunSimulation.Unions.cs
             BlessingOnSkill2(p);
             Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Skill2, Pos = p.Position, Vec = dir });
         }

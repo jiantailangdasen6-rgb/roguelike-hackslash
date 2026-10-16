@@ -360,6 +360,7 @@ namespace Game.Core
         ShadowExecution, // shadow step onto a marked enemy
         HolyWarCry,      // war cry inside holy ground
         FlameCharge,     // shield charge through burning ground
+        Union,           // two players' skills at once (Id = UnionCatalog pair, Vec/Size = the two players)
     }
 
     /// <summary>Something that happened during a tick; the network layer sends these to clients for presentation.</summary>

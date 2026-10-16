@@ -20,6 +20,7 @@ namespace Game.Gameplay
         private float _freezeAt;
         private float _failAt;
         private bool _bossHpSet;
+        private float _fakeUnionAt;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Install()
@@ -107,6 +108,14 @@ namespace Game.Gameplay
                     Debug.Log($"[AutoTest] lord set to {boss.Health:0} hp");
                     break;
                 }
+            }
+            // -fakeunion <s>: the look of a union technique beside the local player (screenshots; one player can't make one).
+            if (_fakeUnionAt == 0f && CommandLine.Has("-fakeunion")) _fakeUnionAt = Time.time + CommandLine.GetFloat("-fakeunion", 20f);
+            if (_fakeUnionAt > 0f && Time.time >= _fakeUnionAt && NetPlayer.Local != null && EventPresenter.Instance != null)
+            {
+                _fakeUnionAt = -1f;
+                Vector2 at = NetPlayer.Local.transform.position;
+                EventPresenter.Instance.ShowUnion(at, at + new Vector2(3.5f, 0.5f), Game.Core.UnionCatalog.Pair(Game.Core.ClassId.Mage, Game.Core.ClassId.Alchemist));
             }
             // -wipeat <s> (host): the whole party falls, to test the result screen and going back to the camp together.
             if (_wipeAt > 0f && Time.time >= _wipeAt && RunDirector.Instance?.Sim != null && RunDirector.Instance.IsRunning)

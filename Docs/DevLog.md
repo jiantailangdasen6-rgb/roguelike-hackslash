@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver c94ecc4f（第5段階「地続きの迷宮」、軽量化、動きと手触り、主の段階、合体技、精鋭の特性、鍛冶と組装備、出来事の間まで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver ec2b3424（第5段階「地続きの迷宮」と、次の8案（軽量化・動きと手触り・主の段階・合体技・精鋭の特性・鍛冶と組装備・出来事の間・契約）まで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
@@ -547,6 +547,14 @@
   - 地図：泉／研磨台の枠が60%で出来事の間に置き換わる（戦闘部屋の数は変わらない）。種類は地図とは別の乱数で決めるので、他の部屋の並びは以前と同じ
   - 見た目：像（土地ごと）・フードの人影・泉などの置物と燭台、2つの円と選択肢の文字、題名。決まると光と文字（賭けは「勝ち！」「負け…」）、HUDに結果。図鑑（部屋）に「出来事の間」。撮影用 `-startin encounter`
   - 公開：ブラウザ版・Windows版 ver c94ecc4f（NetTest・OnlineTest（停止あり）・CrossTest 合格、EditMode 248件）
+- **7 契約の段位制（実装）**：拠点の迷宮の碑に「契約」のページ（`ContractCatalog`、`CampPanels.BuildContract`）。部屋を作った人が結ぶ
+  - 条項12（鋭い牙・厚い皮 各3段、大群・精鋭の道 各2段：1段1点／獰猛・俊敏・怨念・鉄の守り・主の怒り・渇き・衰え・疲れ：各2点）。合計が段位（最大26）。難易度で既に有効な枷は0点
+  - 効果：難易度の数値と枷に重ねる（`ContractCatalog.Apply` で作った難易度でランが動く）。魂の欠片 ×(1+0.06×段位)
+  - 記録：最高段位（`ProfileData.bestContract`、踏破時）。実績「契約の誓い」（段位5）・「血の契約」（10）・「奈落の契約」（20）と称号。終了イベントに段位を載せた（`RunEnded.Id`、`QuestGoal.Contract`）
+  - HUD に「契約 段位N」。今週の迷宮では契約なし。図鑑（部屋）に「契約」
+  - 契約は ProfileData.contract（条項ごと2ビット）。拠点では CampDirector.Contract、冒険中は RunDirector.ContractBits/ContractRank で全員に見える
+  - 撮影・テスト用：`-contract <ビット>`、`-contractpage`（碑を契約のページで開く）、`-campwait <秒>`（拠点に留まる）
+  - 公開：ブラウザ版・Windows版 ver ec2b3424（NetTest・CampTest・OnlineTest（停止あり）・CrossTest 合格、EditMode 251件）。これで8案すべて公開
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

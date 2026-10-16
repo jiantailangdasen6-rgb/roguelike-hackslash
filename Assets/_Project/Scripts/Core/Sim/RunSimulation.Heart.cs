@@ -31,7 +31,7 @@ namespace Game.Core
             Conquered = true;
             SplitRunEnded();
             Phase = RunPhase.Victory;
-            Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 3 });
+            Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 3, Id = ContractRank });
         }
 
         /// <summary>The Ashen King's trials: the first three lords' in turn, and a heart to break at the end.</summary>

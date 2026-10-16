@@ -47,6 +47,8 @@ namespace Game.Core
 
         public readonly Difficulty Difficulty;
         public readonly DifficultyDef DifficultyDef;
+        public readonly int Contract;
+        public readonly int ContractRank;
 
         /// <summary>
         /// The room being worked on right now: spawning, monster strength and collision all read it. The loops set
@@ -67,12 +69,15 @@ namespace Game.Core
         public int RoomsCleared { get; private set; }
         public float XpToNext => XpRequired(TeamLevel, Players.Count);
 
-        public RunSimulation(ulong seed, Difficulty difficulty = Difficulty.Normal)
+        /// <param name="contract">The host's contract (ContractCatalog): its clauses change the difficulty this run plays at.</param>
+        public RunSimulation(ulong seed, Difficulty difficulty = Difficulty.Normal, int contract = 0)
         {
             Seed = seed;
             Enemies = new EnemySimulation(DungeonMap.WorldBounds);
             Difficulty = difficulty;
-            DifficultyDef = DifficultyCatalog.Get(difficulty);
+            Contract = contract;
+            ContractRank = ContractCatalog.Rank(contract, DifficultyCatalog.Get(difficulty));
+            DifficultyDef = ContractCatalog.Apply(DifficultyCatalog.Get(difficulty), contract);
             var root = new GameRandom(seed);
             _spawnRng = root.Fork(1);
             _perkRng = root.Fork(2);
@@ -626,7 +631,7 @@ namespace Game.Core
         public const int ShopSkip = PerkRoller.OptionCount;
 
         /// <summary>Soul shards the team would take home now: the merchant is paid out of this.</summary>
-        public int Purse => RewardCatalog.Purse(RoomsCleared, BossesKilled, Kills, Difficulty, BonusShards);
+        public int Purse => RewardCatalog.Purse(RoomsCleared, BossesKilled, Kills, Difficulty, BonusShards, ContractRank);
 
         private void Buy(SimPlayer p, PerkOption ware)
         {
@@ -662,7 +667,7 @@ namespace Game.Core
             foreach (var p in Players) if (p.Alive) return;
             SplitRunEnded();
             Phase = RunPhase.Defeat;
-            Events.Add(new SimEvent(SimEventType.RunEnded) { Int = Conquered ? 2 : 0 }); // 2: fell in the deep layers after conquering
+            Events.Add(new SimEvent(SimEventType.RunEnded) { Int = Conquered ? 2 : 0, Id = ContractRank }); // 2: fell in the deep layers after conquering
         }
     }
 }

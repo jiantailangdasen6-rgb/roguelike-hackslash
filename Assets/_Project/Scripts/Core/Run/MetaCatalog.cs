@@ -134,8 +134,8 @@ namespace Game.Core
         public static IEnumerable<MasteryNode> NodesFor(ClassId c) => Mastery.Where(n => n.Class == c);
 
         /// <summary>Soul shards earned for a run.</summary>
-        public static int ShardsForRun(int roomsCleared, int bossesKilled, int kills, bool victory, Difficulty difficulty = Difficulty.Normal) =>
-            Mathf.RoundToInt((roomsCleared * 6 + bossesKilled * 20 + kills / 8 + (victory ? 40 : 0)) * DifficultyCatalog.Get(difficulty).Shards);
+        public static int ShardsForRun(int roomsCleared, int bossesKilled, int kills, bool victory, Difficulty difficulty = Difficulty.Normal, int contractRank = 0) =>
+            Mathf.RoundToInt((roomsCleared * 6 + bossesKilled * 20 + kills / 8 + (victory ? 40 : 0)) * DifficultyCatalog.Get(difficulty).Shards * (1f + ContractCatalog.ShardsPerRank * contractRank));
     }
 
     /// <summary>What a player brings into a run. Sent to the host when connecting.</summary>
@@ -200,6 +200,9 @@ namespace Game.Core
         public Difficulty difficulty = Difficulty.Normal;
         /// <summary>Highest difficulty won so far (-1 = none).</summary>
         public int bestVictory = -1;
+        /// <summary>The contract signed at the tablet (ContractCatalog bits), and the best contract rank won with (-1 = none).</summary>
+        public int contract;
+        public int bestContract = -1;
         /// <summary>Random id made once per profile (see Loadout.playerKey).</summary>
         public string playerKey = "";
         /// <summary>Requests from the camp's people (Quests.cs).</summary>

@@ -41,6 +41,9 @@ namespace Game.Core
             A("a_deep3", "深淵の底", "深層 第3階にたどり着く", QuestGoal.ReachArea, RunSimulation.AreaCount + 2, "奈落の旅人"),
             A("a_favor", "神の寵愛", "神の寵愛を目覚めさせる（仲間でもよい）", QuestGoal.Favor, 1, "神に愛されし者"),
             A("a_rest", "火の番人", "焚き火の間に30回たどり着く", QuestGoal.Rest, 30, "火の番人"),
+            A("a_pact5", "契約の誓い", "契約の段位5以上で迷宮を踏破する", QuestGoal.Contract, 5, "契約者"),
+            A("a_pact10", "血の契約", "契約の段位10以上で迷宮を踏破する", QuestGoal.Contract, 10, "血盟の者"),
+            A("a_pact20", "奈落の契約", "契約の段位20以上で迷宮を踏破する", QuestGoal.Contract, 20, "奈落と契りし者"),
         };
 
         public static QuestDef Get(string id) => Array.Find(All, a => a.Id == id);

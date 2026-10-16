@@ -79,6 +79,9 @@ namespace Game.Gameplay
         public readonly NetworkVariable<float> BossHealth = new(-1f);
         /// <summary>The lord's stage (RunSimulation.BossStage): 0 outside its fight, 2 raging, 3 its last stand.</summary>
         public readonly NetworkVariable<int> BossStage = new();
+        /// <summary>The host's contract this run (ContractCatalog bits) and its rank, for the HUD and the result.</summary>
+        public readonly NetworkVariable<int> ContractBits = new();
+        public readonly NetworkVariable<int> ContractRank = new();
         public readonly NetworkVariable<bool> Started = new();
         public readonly NetworkVariable<int> Kills = new();
         public readonly NetworkVariable<int> BossesKilled = new();
@@ -250,6 +253,8 @@ namespace Game.Gameplay
             if (mine == null) return false;
             Sim = run.Sim;
             DifficultyLevel.Value = Sim.Difficulty;
+            ContractBits.Value = Sim.Contract;
+            ContractRank.Value = Sim.ContractRank;
             foreach (var (key, slot) in run.Slots) _slotByKey[key] = slot;
             var loadout = GameSession.LoadoutFor(me);
             int mySlot = _slotByKey.TryGetValue(loadout.playerKey, out int s) ? s : 0;
@@ -290,7 +295,9 @@ namespace Game.Gameplay
                 DifficultyLevel.Value = Difficulty.Normal;
             }
             else WeeklyWeek.Value = -1;
-            Sim = new RunSimulation(seed, DifficultyLevel.Value);
+            Sim = new RunSimulation(seed, DifficultyLevel.Value, WeeklyWeek.Value >= 0 ? 0 : ChosenContract());
+            ContractBits.Value = Sim.Contract;
+            ContractRank.Value = Sim.ContractRank;
             // The lands: the first from the seed, the next chosen by the team. -route crypt,frost,... fixes them (screenshots).
             var planned = new List<Biome>();
             foreach (var name in (CommandLine.GetValue("-route") ?? "").Split(','))
@@ -421,6 +428,9 @@ namespace Game.Gameplay
         }
 
         /// <summary>The host's pick in the camp (automated runs: -difficulty easy|normal|hard|nightmare).</summary>
+        /// <summary>The host's contract from the camp's tablet (automated runs: -contract <bits>).</summary>
+        public static int ChosenContract() => CommandLine.Has("-contract") ? (int)CommandLine.GetFloat("-contract", 0f) : ProfileStore.Current.contract;
+
         private static Difficulty ChosenDifficulty()
         {
             string flag = CommandLine.GetValue("-difficulty");

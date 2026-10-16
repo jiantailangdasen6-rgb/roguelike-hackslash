@@ -22,6 +22,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<Difficulty> DifficultyLevel = new(Difficulty.Normal);
         /// <summary>The host sets out into this week's labyrinth (Weekly).</summary>
         public readonly NetworkVariable<bool> WeeklyRun = new();
+        /// <summary>The host's contract (ContractCatalog bits), shown at the tablet.</summary>
+        public readonly NetworkVariable<int> Contract = new();
         /// <summary>Seconds the whole party has been standing in the gate (0 while someone is missing).</summary>
         public readonly NetworkVariable<float> DepartProgress = new();
         public readonly NetworkVariable<int> InGate = new();
@@ -40,6 +42,7 @@ namespace Game.Gameplay
             _spawnTime = Time.time;
             DifficultyLevel.Value = ChosenDifficulty();
             WeeklyRun.Value = ProfileStore.Current.weekly;
+            Contract.Value = RunDirector.ChosenContract();
             NetworkManager.SceneManager.OnLoadEventCompleted += OnLoadEventCompleted;
             NetworkManager.SceneManager.OnSceneEvent += OnSceneEvent;
         }
@@ -125,6 +128,7 @@ namespace Game.Gameplay
             {
                 DifficultyLevel.Value = ChosenDifficulty();
                 WeeklyRun.Value = ProfileStore.Current.weekly;
+            Contract.Value = RunDirector.ChosenContract();
                 var mine = AvatarOf(NetworkManager.LocalClientId);
                 if (mine != null) Apply(mine, ProfileStore.Current.ToLoadout());
             }

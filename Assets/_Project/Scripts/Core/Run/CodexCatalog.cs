@@ -333,6 +333,17 @@ namespace Game.Core
                     Traits = new[] { "3つ目の主を倒すと「帰還」と「深層へ」の2つの道が開く", "深層は階を重ねるほど魔物が強く、最後にまた迷宮の主が待つ", "3つ目の主を倒した時点で踏破。深層で力尽きても踏破として数える" },
                     Counter = "余力があるうちに深く潜り、危なくなる前に帰還する",
                 },
+                new()
+                {
+                    Id = "room:Contract", Section = CodexSection.Rooms, Name = "契約", Sub = "拠点の迷宮の碑で", Mark = "契", RewardIcon = -1, AlwaysKnown = true,
+                    Traits = new[]
+                    {
+                        "難易度の上に、魔物の強化や枷を自分で重ねる（部屋を作った人が結ぶ）",
+                        "条項ごとの点数の合計が段位。段位1つにつき魂の欠片 +6%",
+                        "段位5・10・20で踏破すると称号（実績）。最高記録は碑に残る。今週の迷宮では無効",
+                    },
+                    Counter = "勝てるようになったら1つずつ足す",
+                },
                 Room(RoomKind.Encounter, "道で出会う何か", "仲間と相談して選ぶ。急ぐなら損の少ない方を",
                     "2つの円のどちらかに、部屋にいる全員で立つと選んだことになる（1人なら1人で）。1つの部屋で1回",
                     $"{EncounterCatalog.Name(EncounterKind.LostSoul)}：{EncounterCatalog.Choice(EncounterKind.LostSoul, 0)}（{EncounterCatalog.Effect(EncounterKind.LostSoul, 0)}）／{EncounterCatalog.Choice(EncounterKind.LostSoul, 1)}（{EncounterCatalog.Effect(EncounterKind.LostSoul, 1)}）",

@@ -112,7 +112,7 @@ namespace Game.Core
             : 18 + 6 * area;
 
         /// <summary>Soul shards the team would take home if the run ended now (what the merchant can be paid from).</summary>
-        public static int Purse(int roomsCleared, int bossesKilled, int kills, Difficulty difficulty, int bonusShards) =>
-            Mathf.Max(0, MetaCatalog.ShardsForRun(roomsCleared, bossesKilled, kills, false, difficulty) + bonusShards);
+        public static int Purse(int roomsCleared, int bossesKilled, int kills, Difficulty difficulty, int bonusShards, int contractRank = 0) =>
+            Mathf.Max(0, MetaCatalog.ShardsForRun(roomsCleared, bossesKilled, kills, false, difficulty, contractRank) + bonusShards);
     }
 }

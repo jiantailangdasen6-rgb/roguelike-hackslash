@@ -53,7 +53,7 @@ namespace Game.Gameplay
             Set(SimEventType.Teleport, F.Client | F.Pos);
             Set(SimEventType.RoomStarted, F.Int | F.Id | F.Seed | F.Value); // a new area: Int = its first room index, Id = arrival room, Seed = map seed, Value = its land
             Set(SimEventType.RoomCleared, F.Int | F.Id | F.Value); // Value = RoomKind
-            Set(SimEventType.RunEnded, F.Int);
+            Set(SimEventType.RunEnded, F.Int | F.Id); // Id = the contract rank (achievements)
             Set(SimEventType.BossSpawned, F.Id | F.Pos | F.Int);
             Set(SimEventType.PerkOffer, F.Client | F.Seed | F.Int | F.Value);
             Set(SimEventType.WaveStarted, F.Int | F.Value | F.Id);

@@ -701,7 +701,7 @@ namespace Game.Gameplay
                 _classText.text = local.ClassDef.Name + (banked > 0 && director.LocalFighting ? $"　<size=22><color=#e0b45a>★{banked}</color></size>" : "");
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
             string ping = local != null && !director.IsServer && local.Ping.Value > 0 ? $"通信 {PingText(local.Ping.Value)}　" : "";
-            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + (director.WeeklyWeek.Value >= 0 ? "<color=#9fd8ff>今週の迷宮</color>" : $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}") + (director.Omen != Omen.None ? $"　<color=#e08a7a>異変：{OmenCatalog.Name(director.Omen)}</color>" : "");
+            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + (director.WeeklyWeek.Value >= 0 ? "<color=#9fd8ff>今週の迷宮</color>" : $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}" + (director.ContractRank.Value > 0 ? $"　<color=#e0b45a>契約 段位{director.ContractRank.Value}</color>" : "")) + (director.Omen != Omen.None ? $"　<color=#e08a7a>異変：{OmenCatalog.Name(director.Omen)}</color>" : "");
             // The run's omen is announced once, after the first area's title has faded.
             if (director.Omen != Omen.None && !_omenShown && director.Elapsed.Value >= 4f)
             {

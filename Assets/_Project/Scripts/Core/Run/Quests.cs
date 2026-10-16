@@ -26,6 +26,7 @@ namespace Game.Core
         ReachArea,   // reach area Count (1 = blood chapel, 2 = abyss); done once
         Victory,     // labyrinth cleared
         Favor,       // a god's favour awakened (achievements)
+        Contract,    // the labyrinth won under a contract of at least rank Count (achievements; done once)
     }
 
     public sealed class QuestDef
@@ -43,7 +44,7 @@ namespace Game.Core
         public string UnlockName;
 
         /// <summary>ReachArea is a yes/no goal: its Count is the area, the bar shows 0/1.</summary>
-        public int Target => Goal == QuestGoal.ReachArea ? 1 : Count;
+        public int Target => Goal is QuestGoal.ReachArea or QuestGoal.Contract ? 1 : Count;
     }
 
     public static class QuestCatalog
@@ -151,6 +152,8 @@ namespace Game.Core
                     return e.Type == SimEventType.GodSign && (GodSignKind)e.Int == GodSignKind.Favor ? 1 : 0;
                 case QuestGoal.Victory:
                     return e.Type == SimEventType.RunEnded && e.Int >= 1 ? 1 : 0;
+                case QuestGoal.Contract:
+                    return e.Type == SimEventType.RunEnded && e.Int >= 1 && e.Id >= q.Count ? 1 : 0;
                 default:
                     return 0;
             }

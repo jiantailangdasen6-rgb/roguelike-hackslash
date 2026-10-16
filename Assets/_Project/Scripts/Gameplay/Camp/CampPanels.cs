@@ -87,6 +87,7 @@ namespace Game.Gameplay
         public void Show(CampStation station)
         {
             Open = station;
+            _contractPage = station == CampStation.Tablet && CommandLine.Has("-contractpage"); // screenshots
             _status.text = "";
             _dim.SetActive(true);
             Rebuild();
@@ -154,7 +155,7 @@ namespace Game.Gameplay
                 case CampStation.Mirror: BuildMirror(); break;
                 case CampStation.Master: BuildMastery(); break;
                 case CampStation.Charms: BuildCharms(); break;
-                case CampStation.Tablet: BuildDifficulty(); break;
+                case CampStation.Tablet: if (_contractPage) BuildContract(); else BuildDifficulty(); break;
                 case CampStation.Board: BuildQuests(); break;
                 case CampStation.Hearth: BuildHearth(); break;
             }
@@ -476,6 +477,13 @@ namespace Game.Gameplay
             var nm = Unity.Netcode.NetworkManager.Singleton;
             bool host = nm != null && nm.IsServer;
             var current = host || CampDirector.Instance == null ? CampDirector.ChosenDifficulty() : CampDirector.Instance.DifficultyLevel.Value;
+            int signed = host || CampDirector.Instance == null ? RunDirector.ChosenContract() : CampDirector.Instance.Contract.Value;
+            var toContract = UIKit.Button(_body, $"契約 →（段位 {ContractCatalog.Rank(signed, DifficultyCatalog.Get(current))}）", 22, () =>
+            {
+                _contractPage = true;
+                Rebuild();
+            }, UIKit.BloodColor);
+            toContract.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(240f, 48f), new Vector2(0f, 62f));
             for (int i = 0; i < DifficultyCatalog.All.Length; i++)
             {
                 var def = DifficultyCatalog.All[i];
@@ -571,6 +579,75 @@ namespace Game.Gameplay
                     : $"難易度は部屋を作った人が選びます（いまは「{DifficultyCatalog.Get(current).Name}」）",
                 20, TextAnchor.MiddleCenter, UIKit.MutedText);
             note.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1080f, 30f), new Vector2(0f, 10f));
+        }
+
+        // ------------------------------------------------------------------ Tablet: contracts
+
+        private bool _contractPage;
+
+        /// <summary>
+        /// Contracts (ContractCatalog): clauses signed on top of the difficulty. Each level is worth points; their sum is
+        /// the rank, which makes the labyrinth harder and the soul shards richer. The host signs for everyone.
+        /// </summary>
+        private void BuildContract()
+        {
+            var nm = Unity.Netcode.NetworkManager.Singleton;
+            bool host = nm == null || nm.IsServer;
+            int contract = host || CampDirector.Instance == null ? RunDirector.ChosenContract() : CampDirector.Instance.Contract.Value;
+            var difficulty = DifficultyCatalog.Get(host || CampDirector.Instance == null ? CampDirector.ChosenDifficulty() : CampDirector.Instance.DifficultyLevel.Value);
+            int rank = ContractCatalog.Rank(contract, difficulty);
+            _title.text = $"迷宮の碑　<size=28><color=#bfb6aa>契約　段位 {rank}</color></size>";
+
+            var back = UIKit.Button(_body, "← 難易度へ", 22, () =>
+            {
+                _contractPage = false;
+                Rebuild();
+            });
+            back.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(200f, 48f), new Vector2(0f, 4f));
+            string best = Profile.bestContract >= 0 ? $"最高記録：段位 {Profile.bestContract} で踏破" : "最高記録：まだない";
+            var head = UIKit.Label(_body,
+                $"段位 {rank} / {ContractCatalog.MaxRank}　魂の欠片 ×{1f + ContractCatalog.ShardsPerRank * rank:0.00}　（難易度「{difficulty.Name}」の上に重ねる）　{best}",
+                21, TextAnchor.MiddleLeft, UIKit.MutedText);
+            head.rectTransform.Place(new Vector2(0f, 1f), new Vector2(900f, 40f), new Vector2(0f, 0f));
+
+            for (int i = 0; i < ContractCatalog.All.Length; i++)
+            {
+                var clause = ContractCatalog.All[i];
+                int level = ContractCatalog.Level(contract, i);
+                bool given = clause.Mod != DifficultyMod.None && difficulty.Has(clause.Mod);
+                var row = UIKit.Framed(_body, clause.Name, level > 0 ? new Color(0.2f, 0.06f, 0.06f, 1f) : new Color(0.06f, 0.05f, 0.07f, 1f),
+                    level > 0 ? UIKit.AccentColor : UIKit.GoldTrim * 0.5f);
+                row.Outer().Place(new Vector2(0f, 1f), new Vector2(364f, 106f), new Vector2(i % 3 * 380f, -50f - i / 3 * 114f));
+                string pips = new string('■', level) + new string('□', clause.MaxLevel - level);
+                var name = UIKit.Title(row.transform, $"{clause.Name}　<size=20><color=#e0b45a>{pips}</color></size>", 26, TextAnchor.MiddleLeft);
+                name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(240f, 34f), new Vector2(12f, -6f));
+                var points = UIKit.Label(row.transform, given ? "0点" : $"1段 {clause.PointsPerLevel}点", 17, TextAnchor.MiddleRight, new Color(0.88f, 0.7f, 0.35f));
+                points.rectTransform.Place(new Vector2(1f, 1f), new Vector2(100f, 30f), new Vector2(-12f, -8f));
+                var text = UIKit.Label(row.transform,
+                    given ? $"{clause.Text}（難易度で既に有効）" : clause.Text,
+                    17, TextAnchor.UpperLeft, UIKit.MutedText);
+                text.rectTransform.Place(new Vector2(0f, 0f), new Vector2(222f, 44f), new Vector2(12f, 6f));
+                int index = i;
+                var minus = UIKit.Button(row.transform, "−", 28, () => SignClause(index, -1));
+                minus.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(52f, 44f), new Vector2(-70f, 8f));
+                minus.interactable = host && level > 0;
+                var plus = UIKit.Button(row.transform, "＋", 28, () => SignClause(index, +1));
+                plus.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(52f, 44f), new Vector2(-12f, 8f));
+                plus.interactable = host && level < clause.MaxLevel;
+            }
+
+            var note = UIKit.Label(_body, host
+                    ? "段位が高いほど魂の欠片が増える。段位5・10・20で踏破すると称号（実績）。今週の迷宮では契約は無効"
+                    : "契約は部屋を作った人が結ぶ",
+                20, TextAnchor.MiddleCenter, UIKit.MutedText);
+            note.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1080f, 30f), new Vector2(0f, -4f));
+        }
+
+        private void SignClause(int clause, int delta)
+        {
+            int level = ContractCatalog.Level(Profile.contract, clause) + delta;
+            Profile.contract = ContractCatalog.WithLevel(Profile.contract, clause, level);
+            Save();
         }
 
         // ------------------------------------------------------------------ Helpers

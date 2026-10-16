@@ -46,7 +46,7 @@ namespace Game.Core
         {
             SplitRunEnded();
             Phase = RunPhase.Victory;
-            Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 1 });
+            Events.Add(new SimEvent(SimEventType.RunEnded) { Int = 1, Id = ContractRank });
         }
     }
 }

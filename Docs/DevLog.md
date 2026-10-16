@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 1c1d2f11（第5段階「地続きの迷宮」、軽量化、動きと手触り、主の段階、合体技まで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 6dfe8d82（第5段階「地続きの迷宮」、軽量化、動きと手触り、主の段階、合体技、精鋭の特性まで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
@@ -528,6 +528,12 @@
   - 通信：組み合わせ技のイベントに Id・Vec・Size を足した（`NetCodecs`）。撮影用 `-fakeunion <秒>`（1人でも演出だけ出す）
   - 既存の「組み合わせ技」（蒸気爆発など4つ、技と床の組み合わせ）はそのまま
   - 公開：ブラウザ版・Windows版 ver 1c1d2f11（NetTest・OnlineTest（停止あり）・CrossTest 合格、EditMode 234件）
+- **4 精鋭の特性（実装）**：精鋭（中ボスの主は除く）がランダムな特性を持つ（`RunSimulation.Affixes.cs`、`EliteAffix`、`EliteAffixCatalog`）。数は標準1・熟練2・冥府3
+  - 俊足（移動×1.4・攻撃間隔×0.75）、再生（2秒攻撃されないと毎秒最大HPの3%回復）、爆発（倒れると0.9秒後に半径2の爆発・18ダメージ×難易度）、分裂（倒れると体力35%の普通の個体2体）、召喚（8秒ごとに土地の弱い魔物を呼ぶ、2体まで）、守護（最大HPの25%の膜。6秒攻撃されないと戻る）
+  - 見た目：頭上に特性の名前（「俊足・分裂」）、守護の淡い膜（割れると水色の破片、戻ると輪）、俊足の残像、召喚の紫の光。音も
+  - 通信：イベント `EliteAffixes`（出現時）と `EliteShield`（膜が割れた／戻った／召喚）。図鑑「精鋭の特性」
+  - 撮影用：`-allelite`（出る魔物をすべて精鋭に）、`-spawnelite <秒>`（自分のそばに特性付きの精鋭を3体）
+  - 公開：ブラウザ版・Windows版 ver 6dfe8d82（NetTest・OnlineTest（停止あり）・CrossTest 合格、EditMode 239件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

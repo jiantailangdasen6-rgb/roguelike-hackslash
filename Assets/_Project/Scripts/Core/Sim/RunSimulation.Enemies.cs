@@ -88,7 +88,7 @@ namespace Game.Core
                         if (e.StateTimer <= 0f)
                         {
                             e.State = EnemyState.Chase;
-                            e.Cooldown = def.AttackCooldown * _aiRng.Range(0.8f, 1.25f) * (def.Boss ? StageCooldown : 1f) * (def.Boss && BossWarded ? 1.3f : 1f);
+                            e.Cooldown = def.AttackCooldown * _aiRng.Range(0.8f, 1.25f) * (def.Boss ? StageCooldown : (e.Affixes & EliteAffix.Swift) != 0 ? SwiftCooldown : 1f) * (def.Boss && BossWarded ? 1.3f : 1f);
                         }
                         break;
                 }
@@ -160,7 +160,7 @@ namespace Game.Core
 
             float speed = def.Speed * (e.HitStun > 0f ? 0.25f : 1f) * (DifficultyDef.Has(DifficultyMod.Swiftness) ? DifficultyCatalog.SwiftnessSpeed : 1f) * (e.Haunted > 0f ? GhostSlow : 1f)
                           * (!def.Flying && Arena.InZone(Layout, GimmickKind.Water, e.Position) ? Arena.WaterSlowMonsters : 1f)
-                          * (def.Boss && ActiveTrial == BossTrial.Overheat ? OverheatSpeed : 1f) * OmenSpeed;
+                          * (def.Boss && ActiveTrial == BossTrial.Overheat ? OverheatSpeed : 1f) * OmenSpeed * ((e.Affixes & EliteAffix.Swift) != 0 ? SwiftSpeed : 1f);
             if (move != Vector2.zero)
             {
                 if (!def.Flying) move = Arena.Steer(Layout, e.Position, move, e.Radius, e.Id);

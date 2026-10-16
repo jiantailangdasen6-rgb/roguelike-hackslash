@@ -21,6 +21,7 @@ namespace Game.Gameplay
         private float _failAt;
         private bool _bossHpSet;
         private float _fakeUnionAt;
+        private float _spawnEliteAt;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Install()
@@ -116,6 +117,23 @@ namespace Game.Gameplay
                 _fakeUnionAt = -1f;
                 Vector2 at = NetPlayer.Local.transform.position;
                 EventPresenter.Instance.ShowUnion(at, at + new Vector2(3.5f, 0.5f), Game.Core.UnionCatalog.Pair(Game.Core.ClassId.Mage, Game.Core.ClassId.Alchemist));
+            }
+            // -spawnelite <s> (host): three elites with affixes beside the local player (screenshots of the affixes).
+            if (_spawnEliteAt == 0f && CommandLine.Has("-spawnelite")) _spawnEliteAt = Time.time + CommandLine.GetFloat("-spawnelite", 10f);
+            if (_spawnEliteAt > 0f && Time.time >= _spawnEliteAt && NetPlayer.Local != null && RunDirector.Instance?.Sim != null)
+            {
+                _spawnEliteAt = -1f;
+                var sim = RunDirector.Instance.Sim;
+                Vector2 at = NetPlayer.Local.transform.position;
+                var room = sim.Map.RoomAt(at);
+                foreach (var (type, offset) in new[] { (Game.Core.EnemyType.Skeleton, new Vector2(3f, 1f)), (Game.Core.EnemyType.Ghoul, new Vector2(-3f, 1.5f)), (Game.Core.EnemyType.SkeletonArcher, new Vector2(0f, 3.5f)) })
+                {
+                    int id = sim.Enemies.Spawn(type, at + offset, sim.EnemyHealthScale, sim.EnemyDamageScale, true);
+                    int i = sim.Enemies.IndexOf(id);
+                    if (room != null) sim.Enemies[i].RoomId = room.Id;
+                    sim.GiveAffixes(id);
+                }
+                Debug.Log("[AutoTest] spawned elites");
             }
             // -wipeat <s> (host): the whole party falls, to test the result screen and going back to the camp together.
             if (_wipeAt > 0f && Time.time >= _wipeAt && RunDirector.Instance?.Sim != null && RunDirector.Instance.IsRunning)

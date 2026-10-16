@@ -351,6 +351,8 @@ namespace Game.Core
         Lantern,         // Id = dark hall, Int = 1 picked up (ClientId) / 0 dropped, Pos
         RoomEvent,       // Int = RoomEventKind, Pos, Id = map room id
         GodSign,         // ClientId, Int = GodSignKind, Id = GodId, Pos, Vec (blessings at work: lightning, a favour awakening...)
+        EliteAffixes,    // Id = the elite, Int = its EliteAffix bits, Pos
+        EliteShield,     // Id = the elite, Int = 0 its ward broke / 1 came back / 2 a summoner's call, Pos
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

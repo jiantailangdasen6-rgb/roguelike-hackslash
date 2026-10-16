@@ -296,6 +296,7 @@ namespace Game.Gameplay
                 if (Enum.TryParse(name.Trim(), true, out Biome land)) planned.Add(land);
             // -lord GraveReaper... (screenshots): that lord wherever its land comes.
             if (Enum.TryParse(CommandLine.GetValue("-lord") ?? "", true, out EnemyType forcedLord)) Sim.ForcedLord = forcedLord;
+            if (CommandLine.Has("-allelite")) Sim.ExtraElites = 1f; // screenshots of elite affixes
             Sim.UseVariedRoute(planned.ToArray());
             // -omen bloodmoon|none... (screenshots, tests): this run's omen.
             if (Enum.TryParse(CommandLine.GetValue("-omen") ?? "", true, out Omen omen)) Sim.SetOmen(omen);

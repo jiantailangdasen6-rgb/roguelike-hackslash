@@ -31,6 +31,8 @@ namespace Game.Gameplay
             public Vector2 SnapPos;
             public Vector2 Velocity;
             public Vector3 RestPos; // where it was drawn when a hit stop began
+            public SpriteRenderer Ward2; // an elite's ward (affix): a pale bubble
+            public float GhostAt;
         }
 
         /// <summary>How far ahead of the last snapshot clients draw enemies (covers snapshot spacing and half the ping).</summary>
@@ -125,6 +127,22 @@ namespace Game.Gameplay
             return best;
         }
 
+        /// <summary>Just over the head of what is drawn (labels).</summary>
+        public bool TryGetTop(int id, out Vector2 top)
+        {
+            if (_visuals.TryGetValue((ushort)id, out var v) && v.Root.activeSelf)
+            {
+                top = (Vector2)v.Root.transform.position + Vector2.up * (EnemyCatalog.Get(v.Type).Boss ? 3.2f : 1.55f * v.Root.transform.localScale.y);
+                return true;
+            }
+            top = default;
+            return false;
+        }
+
+        // Elite affixes (RunSimulation.Affixes): which each elite has, and whose ward is up.
+        private readonly Dictionary<ushort, EliteAffix> _affixes = new();
+        private readonly HashSet<ushort> _wards = new();
+
         public bool TryGetPosition(int id, out Vector2 position)
         {
             if (_visuals.TryGetValue((ushort)id, out var v))
@@ -152,9 +170,20 @@ namespace Game.Gameplay
                             Squash.Kick(v.Root.transform, hitDef.Boss ? (heavy ? -0.08f : -0.04f) : heavy ? -0.3f : -0.18f);
                     }
                     break;
+                case SimEventType.EliteAffixes:
+                    _affixes[(ushort)e.Id] = (EliteAffix)e.Int;
+                    if (((EliteAffix)e.Int & EliteAffix.Shielded) != 0) _wards.Add((ushort)e.Id);
+                    break;
+                case SimEventType.EliteShield:
+                    if (e.Int == 1) _wards.Add((ushort)e.Id);
+                    else if (e.Int == 0) _wards.Remove((ushort)e.Id);
+                    break;
                 case SimEventType.EnemyDied:
+                    _affixes.Remove((ushort)e.Id);
+                    _wards.Remove((ushort)e.Id);
                     if (_visuals.Remove((ushort)e.Id, out var dead))
                     {
+                        if (dead.Ward2 != null) dead.Ward2.enabled = false;
                         dead.Animator.Frozen = false;
                         dead.Animator.Renderer.color = Color.white;
                         dead.Animator.Play("death", force: true, hold: true);
@@ -319,6 +348,26 @@ namespace Game.Gameplay
                 v.Icon.sortingOrder = r.sortingOrder + 2;
             }
             v.Ice.sortingOrder = r.sortingOrder + 1;
+
+            // Elite affixes: a ward's pale bubble, a swift one's afterimages.
+            _affixes.TryGetValue(s.Id, out var affixes);
+            bool ward = _wards.Contains(s.Id);
+            if (ward && v.Ward2 == null) v.Ward2 = Child(v.Root.transform, "Ward", SpriteSheet.Load("fx_circle").First, 0, new Vector3(0f, 0.55f), 1f);
+            if (v.Ward2 != null)
+            {
+                v.Ward2.enabled = ward;
+                if (ward)
+                {
+                    float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 4f);
+                    v.Ward2.color = new Color(0.55f, 0.9f, 1f, 0.12f + 0.1f * pulse);
+                    v.Ward2.sortingOrder = r.sortingOrder + 1;
+                }
+            }
+            if ((affixes & EliteAffix.Swift) != 0 && s.Anim == EnemyAnim.Walk && Time.time >= v.GhostAt)
+            {
+                v.GhostAt = Time.time + 0.09f;
+                Juice.AfterImage(r, new Color(1f, 0.62f, 0.3f, 0.18f), 0.18f);
+            }
         }
 
         /// <summary>

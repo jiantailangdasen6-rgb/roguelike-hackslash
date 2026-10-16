@@ -196,6 +196,8 @@ namespace Game.Gameplay
                     CameraShake.Add(0.6f);
                     break;
                 case SimEventType.Combo: OnCombo(e); break;
+                case SimEventType.EliteAffixes: OnEliteAffixes(e); break; // EventPresenter.Affixes.cs
+                case SimEventType.EliteShield: OnEliteShield(e); break;
                 case SimEventType.TrialEvent: OnTrial(e); break;
                 case SimEventType.GodSign: OnGodSign(e); break; // EventPresenter.Gods.cs
                 case SimEventType.RoomEvent: OnRoomEvent(e); break; // EventPresenter.Gods.cs
@@ -1080,6 +1082,7 @@ namespace Game.Gameplay
             if (_camera == null) _camera = Camera.main;
             UpdateStains(); // EventPresenter.Remains.cs
             UpdateBossRage();
+            UpdateAffixLabels();
             UpdateLords2(); // EventPresenter.Lords2.cs
             UpdateLands2(); // EventPresenter.Lands2.cs
 

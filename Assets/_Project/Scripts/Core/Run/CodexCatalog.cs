@@ -191,6 +191,18 @@ namespace Game.Core
                     Traits = new[] { "体力60%で「怒り」：攻撃が速くなり、主の間の床が裂けて印の場所が弾ける", "体力25%で「最後のあがき」：さらに速く、弾ける場所も増える", "試練の最中は変わらない（試練が終わってから）" },
                     Counter = "床に印が出たらすぐ離れる。印のひとつは誰かの足元を狙う",
                 },
+                new()
+                {
+                    Id = "enemy:Affixes", Section = CodexSection.Monsters, Name = "精鋭の特性", Sub = "精鋭は特性を持つ（頭上に名前）", Sheet = "dread_knight", AlwaysKnown = true,
+                    Traits = new[]
+                    {
+                        "数：標準は1つ、難しいは2つ、悪夢は3つ",
+                        "俊足：" + EliteAffixCatalog.Description(EliteAffix.Swift), "再生：" + EliteAffixCatalog.Description(EliteAffix.Regenerating),
+                        "爆発：" + EliteAffixCatalog.Description(EliteAffix.Volatile), "分裂：" + EliteAffixCatalog.Description(EliteAffix.Splitting),
+                        "召喚：" + EliteAffixCatalog.Description(EliteAffix.Summoner), "守護：" + EliteAffixCatalog.Description(EliteAffix.Shielded),
+                    },
+                    Counter = "再生と守護は手を休めずに攻め続ける。爆発は倒したら離れる。召喚は先に倒す",
+                },
 
                 // ---------------------------------------------------------------- Lords
                 Monster(EnemyType.BoneKing, "", "突進を柱で受け止め、檻は仲間が壊す。加護の間は燭台を優先",

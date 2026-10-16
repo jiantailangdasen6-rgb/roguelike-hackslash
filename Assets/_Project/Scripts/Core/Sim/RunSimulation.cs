@@ -96,7 +96,9 @@ namespace Game.Core
         /// <summary>Monster health for the current room, the players in it and the difficulty.</summary>
         public float EnemyHealthScale => HealthMultiplier(Room.Index, PlayersIn(Room)) * DifficultyDef.EnemyHealth;
         public float EnemyDamageScale => DamageMultiplier(Room.Index) * DifficultyDef.EnemyDamage;
-        public float EliteChance => DifficultyDef.EliteChance + OmenElite;
+        public float EliteChance => ExtraElites + DifficultyDef.EliteChance + OmenElite;
+        /// <summary>Screenshots and tests (-allelite): added to the chance of an elite.</summary>
+        public float ExtraElites;
 
         /// <summary>The boss of the current area.</summary>
         public EnemyType AreaBoss => LordOf(Area); // RunSimulation.Deep.cs
@@ -237,6 +239,7 @@ namespace Game.Core
             StepEnemies(dt);
             StepBossTrials(dt);
             StepChampions(dt); // RunSimulation.Champions.cs
+            StepAffixes(dt); // RunSimulation.Affixes.cs
             StepPools(dt); // RunSimulation.Lands.cs
             StepPlayersCombat(dt);
             StepDelayedAreas(dt);
@@ -331,6 +334,7 @@ namespace Game.Core
                 var def = EnemyCatalog.Get(s.Type);
                 Vector2 at = def.Flying ? s.Position : Arena.Resolve(Layout, s.Position, def.Radius);
                 int id = Enemies.Spawn(s.Type, at, EnemyHealthScale * OmenHealth(def), EnemyDamageScale, s.Elite); // RunSimulation.Omens.cs
+                if (s.Elite && !s.Champion) GiveAffixes(id); // RunSimulation.Affixes.cs
                 Enemies[Enemies.IndexOf(id)].RoomId = s.Room;
                 if (s.Champion) MakeChampion(Enemies.IndexOf(id));
                 if (def.Boss)

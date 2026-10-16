@@ -704,6 +704,11 @@ namespace Game.Core
                 damage = ChampionDamage(index, damage, ref flags); // RunSimulation.Champions.cs
                 e = ref Enemies[index];
             }
+            if (e.Affixes != EliteAffix.None)
+            {
+                damage = AffixDamage(index, damage, ref flags); // RunSimulation.Affixes.cs
+                e = ref Enemies[index];
+            }
 
             e.Health -= damage;
             Events.Add(new SimEvent(SimEventType.EnemyHit) { Id = e.Id, Pos = e.Position, Value = damage, Int = HitInfo.Pack(flags, attacker) });
@@ -789,6 +794,7 @@ namespace Game.Core
                     continue;
                 }
                 if (ChampionFell(e)) continue; // it will be back (or was only a double): RunSimulation.Champions.cs
+                if (e.Affixes != EliteAffix.None) AffixFell(e); // RunSimulation.Affixes.cs
                 Kills++;
                 LandMonsterFell(e);
                 RollLoot(e);

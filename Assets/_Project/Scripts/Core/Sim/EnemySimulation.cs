@@ -41,6 +41,11 @@ namespace Game.Core
         public float MaxHealth;
         public float Radius;
         public float DamageMultiplier;
+        /// <summary>An elite's affixes (RunSimulation.Affixes), its ward, a timer for its calls, and when it was last struck (sim time).</summary>
+        public EliteAffix Affixes;
+        public float AffixShield;
+        public float AffixTimer;
+        public float LastHurt;
         public bool Dead;
 
         // AI

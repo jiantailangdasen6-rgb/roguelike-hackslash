@@ -256,6 +256,11 @@ namespace Game.Gameplay
                     else if ((RoomReward)e.Int == RoomReward.Shards) Play("soul", null, 0.75f);
                     break;
                 case SimEventType.BossSpawned: Play("roar"); break;
+                case SimEventType.EliteShield:
+                    if (e.Int == 0) Play("shatter", e.Pos, 1.25f, 0.6f);
+                    else if (e.Int == 1) Play("nova", e.Pos, 1.4f, 0.35f);
+                    else Play("roar", e.Pos, 1.6f, 0.35f);
+                    break;
                 case SimEventType.Combo:
                     switch ((ComboKind)e.Int)
                     {

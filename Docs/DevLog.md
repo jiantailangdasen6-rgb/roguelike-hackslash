@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 29b0ddaf（第5段階「地続きの迷宮」まで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 82042fcf（第5段階「地続きの迷宮」と軽量化まで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
@@ -496,6 +496,17 @@
   - 通路に土地ごとの小物（骨・壺・雪・鉱滓・茸・紙）を散らす。説明文（図鑑・最初の案内）を「通路を歩いて隣の部屋へ」に
   - ホスト側にも扉と通路の判定（`RunSimulation.DoorOpen/CorridorOpen`）。テスト：`SeamlessTests`（通路・壁・弾・追跡・主の間）
   - 公開：ブラウザ版・Windows版 ver 29b0ddaf（NetTest・OnlineTest（停止あり）・CrossTest 合格、EditMode 227件）
+### 次の8案（2026-10-15、第6段階（Android・ロビー）は保留。Claude の提案にユーザー「おすすめ順で全部」）
+- 順番：**8 軽さと読み込み → 1 ドット絵を一段上げる → 2 主の戦いを段階のある大舞台に → 3 協力の合体技 → 4 精鋭の特性 → 5 鍛冶屋と組装備 → 6 迷宮の中の出来事 → 7 契約の段位制**。1案ごとに公開
+- 8 の調査（ver 29b0ddaf の WebGL ビルド）：素材は非圧縮で約300MB、うち絵が274MB（キャラ264MB：被弾の白い複製 `_flash` 70MB、職業の色違い `_s1〜3` とその凹凸）、曲23MB。起動時に全シートを読み込む（`SpriteSheet.PreloadAll`）ので、そのままメモリに乗る
+- 計測：`-perf`（5秒ごとに `[Perf]` 行：平均フレーム・遅いフレームの割合・描画中の絵と灯りの数・メモリ）、`Tools/WebPerf.ps1`（ローカルのブラウザ版をヘッドレス Edge でソロ・ボット実行して計測）。ヘッドレスではフレーム時間が頭打ち（約10ms）で比べられないので、メモリとサイズで比べる
+- **8 軽さと読み込み（実装）**：
+  - 被弾の白い光は、白い複製の絵をやめて専用の描き方（`Shaders/SpriteFlash.shader`、`Resources/SpriteFlash.mat`、`PixelAnimator` が数フレームだけ差し替え）。光は灯りの影響を受けない真っ白
+  - 職業の色違い（48枚）は絵を持たず、起動後に元の絵から色を置き換えて作る（`SpriteSheet.RecolorOf/RecolorFrom/RecolorTo/FixPixels`。置き換え表で合わない数百〜1500ドットは個別に補正）。ビルダーが作るたびに元の色違いと1ドットも違わないことを確かめる。凹凸（ノーマルマップ）は元の絵のものを使う。元の絵は読み取り可能にしてある
+  - 使い終わった曲を手放す（`MusicPlayer`。ブラウザは読み込んだ曲を展開したまま持つので、冒険の間に曲が溜まっていた）
+  - 結果：絵 274MB→132MB（実行中の絵のメモリ 275MB→134MB）、ダウンロード 47.6MB→44.8MB、キャラの画像ファイル 381→190 枚。全体のヒープは 77MB→90MB（元の絵の読み取り用の写し）
+  - 撮影用：`-skin <n>`（色違いで出発）
+  - 公開：ブラウザ版・Windows版 ver 82042fcf（NetTest・CrossTest 合格、EditMode 227件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

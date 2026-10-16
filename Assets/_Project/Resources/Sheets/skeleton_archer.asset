@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: skeleton_archer
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 2f763cbd58b88794681b21795e537313, type: 3}
-  FlashTexture: {fileID: 2800000, guid: d77fc76cde93d8b4cb9c8958a5eb4740, type: 3}
   NormalTexture: {fileID: 2800000, guid: 31013dac92411374dbf81b20b99e54a3, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 7
     Fps: 11
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: moss_shaman
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 13d843d19d6512749adba59b59140fee, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 658b0565824be1c43a624fcd6b2ff6e9, type: 3}
   NormalTexture: {fileID: 2800000, guid: 82e2298ceab865442868fbecf46d7ca8, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

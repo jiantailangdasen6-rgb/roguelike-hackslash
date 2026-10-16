@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
   m_Name: alchemist_s2
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
-  Texture: {fileID: 2800000, guid: c6dac6ee82b577e4db51cb44ed04f3ea, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 6052a06f3562875489074343da305857, type: 3}
-  NormalTexture: {fileID: 2800000, guid: 86f86f8f50799c34883d0b1a95525ce3, type: 3}
+  Texture: {fileID: 0}
+  NormalTexture: {fileID: 0}
   FrameWidth: 64
   FrameHeight: 64
   Pivot: {x: 0.5, y: 0.15625}
@@ -65,3 +64,112 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 11400000, guid: 6e260a0fb45c2eb4a83dae5d669c5191, type: 2}
+  RecolorFrom:
+  - serializedVersion: 2
+    rgba: 4279045395
+  - serializedVersion: 2
+    rgba: 4279243033
+  - serializedVersion: 2
+    rgba: 4279837749
+  - serializedVersion: 2
+    rgba: 4279310114
+  - serializedVersion: 2
+    rgba: 4279506720
+  - serializedVersion: 2
+    rgba: 4283105206
+  - serializedVersion: 2
+    rgba: 4278717459
+  - serializedVersion: 2
+    rgba: 4282540423
+  - serializedVersion: 2
+    rgba: 4281419878
+  - serializedVersion: 2
+    rgba: 4280562506
+  - serializedVersion: 2
+    rgba: 4279770409
+  - serializedVersion: 2
+    rgba: 4278847757
+  - serializedVersion: 2
+    rgba: 4279771184
+  - serializedVersion: 2
+    rgba: 4282670958
+  - serializedVersion: 2
+    rgba: 4278981147
+  - serializedVersion: 2
+    rgba: 4279242775
+  - serializedVersion: 2
+    rgba: 4280231469
+  - serializedVersion: 2
+    rgba: 4281288033
+  - serializedVersion: 2
+    rgba: 4280496969
+  - serializedVersion: 2
+    rgba: 4279506721
+  - serializedVersion: 2
+    rgba: 4281089866
+  - serializedVersion: 2
+    rgba: 4291887088
+  - serializedVersion: 2
+    rgba: 4279770666
+  - serializedVersion: 2
+    rgba: 4280376902
+  - serializedVersion: 2
+    rgba: 4278979344
+  - serializedVersion: 2
+    rgba: 4280166198
+  RecolorTo:
+  - serializedVersion: 2
+    rgba: 4279307023
+  - serializedVersion: 2
+    rgba: 4279635475
+  - serializedVersion: 2
+    rgba: 4280884004
+  - serializedVersion: 2
+    rgba: 4279963927
+  - serializedVersion: 2
+    rgba: 4279964185
+  - serializedVersion: 2
+    rgba: 4294937304
+  - serializedVersion: 2
+    rgba: 4279175436
+  - serializedVersion: 2
+    rgba: 4285024350
+  - serializedVersion: 2
+    rgba: 4283381319
+  - serializedVersion: 2
+    rgba: 4282000947
+  - serializedVersion: 2
+    rgba: 4280358686
+  - serializedVersion: 2
+    rgba: 4279044107
+  - serializedVersion: 2
+    rgba: 4280686625
+  - serializedVersion: 2
+    rgba: 4284227386
+  - serializedVersion: 2
+    rgba: 4279635218
+  - serializedVersion: 2
+    rgba: 4279569682
+  - serializedVersion: 2
+    rgba: 4280815643
+  - serializedVersion: 2
+    rgba: 4283052867
+  - serializedVersion: 2
+    rgba: 4281869875
+  - serializedVersion: 2
+    rgba: 4280029721
+  - serializedVersion: 2
+    rgba: 4281996068
+  - serializedVersion: 2
+    rgba: 4294960886
+  - serializedVersion: 2
+    rgba: 4280490016
+  - serializedVersion: 2
+    rgba: 4284560722
+  - serializedVersion: 2
+    rgba: 4279175437
+  - serializedVersion: 2
+    rgba: 4281081384
+  FixPixels: 
+  FixColors: []

@@ -67,6 +67,7 @@ namespace Game.EditorTools
             if (!File.Exists(Audio.AudioGenerator.Dir + "/music_boss.wav")) Audio.AudioGenerator.Generate(); // slow: only when missing
             else if (!File.Exists(Audio.AudioGenerator.Dir + "/" + Audio.SoundPack.Marker)) Audio.SoundPack.Build();
             CreateGameArt();
+            FlashMaterial();
             var actions = LoadOrCreateInputActions();
             var player = CreatePlayerPrefab(actions);
             CreateNetworkManagerPrefab(player);
@@ -332,6 +333,15 @@ namespace Game.EditorTools
             mat = new Material(shader);
             AssetDatabase.CreateAsset(mat, path);
             return mat;
+        }
+
+        /// <summary>The white hit flash (Shaders/SpriteFlash), loaded by PixelAnimator from Resources.</summary>
+        private static void FlashMaterial()
+        {
+            const string path = ResourcesDir + "/SpriteFlash.mat";
+            if (AssetDatabase.LoadAssetAtPath<Material>(path) != null) return;
+            var shader = Shader.Find("Game/SpriteFlash") ?? throw new InvalidOperationException("Game/SpriteFlash shader not found");
+            AssetDatabase.CreateAsset(new Material(shader), path);
         }
 
         private static void CreatePostVolume(VolumeProfile profile)

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: frost_wolf
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 596aae1981dbba44a99b70bf730c75ac, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 06db6c9c507196644b53473a76a639f3, type: 3}
   NormalTexture: {fileID: 2800000, guid: 2fcacce080e84694cbe64b9a4911040f, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 10
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

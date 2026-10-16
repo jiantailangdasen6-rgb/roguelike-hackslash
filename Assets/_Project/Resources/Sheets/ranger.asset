@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ranger
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 525e1fe429506f14685a49ae1da20d8f, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 9b7566aa8f88ca04bad9247a839d73fc, type: 3}
   NormalTexture: {fileID: 2800000, guid: eda2bb74a106e1c41aa786c33f0c797c, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -65,3 +64,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

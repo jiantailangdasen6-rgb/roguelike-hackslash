@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
   m_Name: mage_s2
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
-  Texture: {fileID: 2800000, guid: f07a68248520c184a94202f26ca01d83, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 357786a45ecd652479e3765ac7caa3b4, type: 3}
-  NormalTexture: {fileID: 2800000, guid: 316d523c6e24f7f4597830d0337f3de0, type: 3}
+  Texture: {fileID: 0}
+  NormalTexture: {fileID: 0}
   FrameWidth: 64
   FrameHeight: 64
   Pivot: {x: 0.5, y: 0.15625}
@@ -65,3 +64,96 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 11400000, guid: 033c4bcdf00d15b45aaa62cd42909673, type: 2}
+  RecolorFrom:
+  - serializedVersion: 2
+    rgba: 4288632676
+  - serializedVersion: 2
+    rgba: 4280750615
+  - serializedVersion: 2
+    rgba: 4286201160
+  - serializedVersion: 2
+    rgba: 4283836978
+  - serializedVersion: 2
+    rgba: 4280094483
+  - serializedVersion: 2
+    rgba: 4282195492
+  - serializedVersion: 2
+    rgba: 4280685593
+  - serializedVersion: 2
+    rgba: 4279569167
+  - serializedVersion: 2
+    rgba: 4282327850
+  - serializedVersion: 2
+    rgba: 4281801248
+  - serializedVersion: 2
+    rgba: 4294955919
+  - serializedVersion: 2
+    rgba: 4280619800
+  - serializedVersion: 2
+    rgba: 4280094225
+  - serializedVersion: 2
+    rgba: 4281473568
+  - serializedVersion: 2
+    rgba: 4283902771
+  - serializedVersion: 2
+    rgba: 4279963154
+  - serializedVersion: 2
+    rgba: 4294965999
+  - serializedVersion: 2
+    rgba: 4279306765
+  - serializedVersion: 2
+    rgba: 4281276960
+  - serializedVersion: 2
+    rgba: 4285677128
+  - serializedVersion: 2
+    rgba: 4284567353
+  - serializedVersion: 2
+    rgba: 4279503372
+  RecolorTo:
+  - serializedVersion: 2
+    rgba: 4280965332
+  - serializedVersion: 2
+    rgba: 4278913845
+  - serializedVersion: 2
+    rgba: 4279775912
+  - serializedVersion: 2
+    rgba: 4279377018
+  - serializedVersion: 2
+    rgba: 4278979621
+  - serializedVersion: 2
+    rgba: 4278981719
+  - serializedVersion: 2
+    rgba: 4279046449
+  - serializedVersion: 2
+    rgba: 4278913305
+  - serializedVersion: 2
+    rgba: 4279641169
+  - serializedVersion: 2
+    rgba: 4279242826
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4279111473
+  - serializedVersion: 2
+    rgba: 4278716454
+  - serializedVersion: 2
+    rgba: 4279244353
+  - serializedVersion: 2
+    rgba: 4279313528
+  - serializedVersion: 2
+    rgba: 4279044641
+  - serializedVersion: 2
+    rgba: 4291358975
+  - serializedVersion: 2
+    rgba: 4278847508
+  - serializedVersion: 2
+    rgba: 4279376700
+  - serializedVersion: 2
+    rgba: 4280172440
+  - serializedVersion: 2
+    rgba: 4280369760
+  - serializedVersion: 2
+    rgba: 4278519067
+  FixPixels: 
+  FixColors: []

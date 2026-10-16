@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: npc_keeper
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 534150b9f345b5a4b955865d1c7c1656, type: 3}
-  FlashTexture: {fileID: 2800000, guid: ac618aa98c51b3345a2883c81ba5e14c, type: 3}
   NormalTexture: {fileID: 2800000, guid: 46e665d1c248d0d40a6241dca8cb6e74, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 4
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: scribe
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: e36b9db76e7f6634a9614b5b3e151d1e, type: 3}
-  FlashTexture: {fileID: 2800000, guid: d0fc0ae01ff17ef42a59cc8f800ec0af, type: 3}
   NormalTexture: {fileID: 2800000, guid: a82086af607876647b62900e1780c24d, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

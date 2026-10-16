@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: lily
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 84b66c578a358854a938303eb9098612, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 7635c58e9fa9df746b45765845a2700f, type: 3}
   NormalTexture: {fileID: 2800000, guid: 75078d5f38040c548b25612cf3a4b53f, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 5
     Fps: 12
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

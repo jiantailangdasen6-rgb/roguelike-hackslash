@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: trap_spikes
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: dbf3f2545c18db749a4d5dc08e83faac, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 0}
   FrameWidth: 52
   FrameHeight: 52
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 4
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

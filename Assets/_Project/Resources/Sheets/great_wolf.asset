@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: great_wolf
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 855bd60297d45554c8e1cc66fe3f4625, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 59afdbccd3e037b4f9e630ec36413ba7, type: 3}
   NormalTexture: {fileID: 2800000, guid: b619f197f987c924fbfca88fe0fcaf04, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 10
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

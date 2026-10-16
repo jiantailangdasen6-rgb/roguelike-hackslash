@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
   m_Name: mage_s1
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
-  Texture: {fileID: 2800000, guid: 82cfae6deae0ab643b5df95a9e123a5b, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 357786a45ecd652479e3765ac7caa3b4, type: 3}
-  NormalTexture: {fileID: 2800000, guid: 17320bad9fc94a34e8e855ee76c6abdf, type: 3}
+  Texture: {fileID: 0}
+  NormalTexture: {fileID: 0}
   FrameWidth: 64
   FrameHeight: 64
   Pivot: {x: 0.5, y: 0.15625}
@@ -65,3 +64,108 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 11400000, guid: 033c4bcdf00d15b45aaa62cd42909673, type: 2}
+  RecolorFrom:
+  - serializedVersion: 2
+    rgba: 4288632676
+  - serializedVersion: 2
+    rgba: 4280750615
+  - serializedVersion: 2
+    rgba: 4286201160
+  - serializedVersion: 2
+    rgba: 4283836978
+  - serializedVersion: 2
+    rgba: 4280094483
+  - serializedVersion: 2
+    rgba: 4282195492
+  - serializedVersion: 2
+    rgba: 4280685593
+  - serializedVersion: 2
+    rgba: 4279569167
+  - serializedVersion: 2
+    rgba: 4282327850
+  - serializedVersion: 2
+    rgba: 4281801248
+  - serializedVersion: 2
+    rgba: 4280050823
+  - serializedVersion: 2
+    rgba: 4280619800
+  - serializedVersion: 2
+    rgba: 4279114277
+  - serializedVersion: 2
+    rgba: 4280094225
+  - serializedVersion: 2
+    rgba: 4281473568
+  - serializedVersion: 2
+    rgba: 4283902771
+  - serializedVersion: 2
+    rgba: 4279963154
+  - serializedVersion: 2
+    rgba: 4281307579
+  - serializedVersion: 2
+    rgba: 4279385431
+  - serializedVersion: 2
+    rgba: 4279314486
+  - serializedVersion: 2
+    rgba: 4279306765
+  - serializedVersion: 2
+    rgba: 4281276960
+  - serializedVersion: 2
+    rgba: 4278915095
+  - serializedVersion: 2
+    rgba: 4285677128
+  - serializedVersion: 2
+    rgba: 4279503372
+  RecolorTo:
+  - serializedVersion: 2
+    rgba: 4293317824
+  - serializedVersion: 2
+    rgba: 4282528293
+  - serializedVersion: 2
+    rgba: 4290749062
+  - serializedVersion: 2
+    rgba: 4287524950
+  - serializedVersion: 2
+    rgba: 4281016604
+  - serializedVersion: 2
+    rgba: 4284895293
+  - serializedVersion: 2
+    rgba: 4281806120
+  - serializedVersion: 2
+    rgba: 4280161812
+  - serializedVersion: 2
+    rgba: 4283977546
+  - serializedVersion: 2
+    rgba: 4284237364
+  - serializedVersion: 2
+    rgba: 4287003766
+  - serializedVersion: 2
+    rgba: 4281936933
+  - serializedVersion: 2
+    rgba: 4280623137
+  - serializedVersion: 2
+    rgba: 4281542172
+  - serializedVersion: 2
+    rgba: 4283055414
+  - serializedVersion: 2
+    rgba: 4287198304
+  - serializedVersion: 2
+    rgba: 4280818969
+  - serializedVersion: 2
+    rgba: 4290161572
+  - serializedVersion: 2
+    rgba: 4283780682
+  - serializedVersion: 2
+    rgba: 4281741360
+  - serializedVersion: 2
+    rgba: 4279833104
+  - serializedVersion: 2
+    rgba: 4282464823
+  - serializedVersion: 2
+    rgba: 4279768085
+  - serializedVersion: 2
+    rgba: 4289042570
+  - serializedVersion: 2
+    rgba: 4280556308
+  FixPixels: 
+  FixColors: []

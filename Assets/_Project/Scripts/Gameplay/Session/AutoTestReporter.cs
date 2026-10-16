@@ -62,9 +62,12 @@ namespace Game.Gameplay
         }
 
         private float _longestFrame;
+        private float _frameSum;
+        private int _frames, _slowFrames;
 
         private void Update()
         {
+            Measure();
             // Hitches: the longest frame of each report period, and every frame over a quarter second on its own.
             float frame = Time.unscaledDeltaTime;
             _longestFrame = Mathf.Max(_longestFrame, frame);
@@ -139,6 +142,33 @@ namespace Game.Gameplay
                 Application.Quit();
             }
         }
+
+        /// <summary>-perf: every 5 s a [Perf] line (average frame, share of slow frames, what is drawn, memory), for Tools/WebPerf.ps1.</summary>
+        private void Measure()
+        {
+            if (!CommandLine.Has("-perf") || Time.frameCount < 10) return;
+            float frame = Time.unscaledDeltaTime;
+            _frameSum += frame;
+            _frames++;
+            if (frame > 1f / 30f) _slowFrames++;
+            if (Time.time < _nextPerf) return;
+            _nextPerf = Time.time + 5f;
+            int sprites = 0, visible = 0, lights = 0;
+            foreach (var r in FindObjectsByType<SpriteRenderer>(FindObjectsSortMode.None))
+            {
+                if (!r.enabled || !r.gameObject.activeInHierarchy) continue;
+                sprites++;
+                if (r.isVisible) visible++;
+            }
+            foreach (var l in FindObjectsByType<UnityEngine.Rendering.Universal.Light2D>(FindObjectsSortMode.None))
+                if (l.enabled && l.gameObject.activeInHierarchy) lights++;
+            float avg = _frames > 0 ? _frameSum / _frames * 1000f : 0f;
+            BrowserBridge.ConsoleLog($"[Perf] t={Time.realtimeSinceStartup:0} avg={avg:0.0}ms slow={(_frames > 0 ? 100f * _slowFrames / _frames : 0f):0}% sprites={sprites} visible={visible} lights={lights} " +
+                $"tex={Texture.currentTextureMemory / 1048576}MB mono={UnityEngine.Profiling.Profiler.GetMonoUsedSizeLong() / 1048576}MB total={UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong() / 1048576}MB");
+            _frameSum = 0f;
+            _frames = _slowFrames = 0;
+        }
+        private float _nextPerf;
 
         private string Status()
         {

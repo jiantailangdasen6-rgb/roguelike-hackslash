@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
   m_Name: assassin_s2
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
-  Texture: {fileID: 2800000, guid: d562d309c8dc46849b8a3db9dbe31712, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 676faa7a765290146b920ab4e1d8b4ed, type: 3}
-  NormalTexture: {fileID: 2800000, guid: 82ee23317e69cb84f8db0edb12d26475, type: 3}
+  Texture: {fileID: 0}
+  NormalTexture: {fileID: 0}
   FrameWidth: 64
   FrameHeight: 64
   Pivot: {x: 0.5, y: 0.15625}
@@ -65,3 +64,190 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 11400000, guid: 45500c5df0b66e844be0d13ab23b98b7, type: 2}
+  RecolorFrom:
+  - serializedVersion: 2
+    rgba: 4287393390
+  - serializedVersion: 2
+    rgba: 4279110930
+  - serializedVersion: 2
+    rgba: 4284894798
+  - serializedVersion: 2
+    rgba: 4282922550
+  - serializedVersion: 2
+    rgba: 4280358938
+  - serializedVersion: 2
+    rgba: 4278913293
+  - serializedVersion: 2
+    rgba: 4279374104
+  - serializedVersion: 2
+    rgba: 4283457402
+  - serializedVersion: 2
+    rgba: 4282074974
+  - serializedVersion: 2
+    rgba: 4280165425
+  - serializedVersion: 2
+    rgba: 4280955717
+  - serializedVersion: 2
+    rgba: 4280955715
+  - serializedVersion: 2
+    rgba: 4279506977
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4281016354
+  - serializedVersion: 2
+    rgba: 4279967013
+  - serializedVersion: 2
+    rgba: 4281871149
+  - serializedVersion: 2
+    rgba: 4279243546
+  - serializedVersion: 2
+    rgba: 4280033838
+  - serializedVersion: 2
+    rgba: 4281213474
+  - serializedVersion: 2
+    rgba: 4278914322
+  - serializedVersion: 2
+    rgba: 4279637791
+  - serializedVersion: 2
+    rgba: 4279637790
+  - serializedVersion: 2
+    rgba: 4280032808
+  - serializedVersion: 2
+    rgba: 4279898642
+  - serializedVersion: 2
+    rgba: 4280493617
+  - serializedVersion: 2
+    rgba: 4279308567
+  - serializedVersion: 2
+    rgba: 4279044880
+  - serializedVersion: 2
+    rgba: 4279241485
+  - serializedVersion: 2
+    rgba: 4281943127
+  RecolorTo:
+  - serializedVersion: 2
+    rgba: 4291608768
+  - serializedVersion: 2
+    rgba: 4279373843
+  - serializedVersion: 2
+    rgba: 4288713619
+  - serializedVersion: 2
+    rgba: 4285688426
+  - serializedVersion: 2
+    rgba: 4281281068
+  - serializedVersion: 2
+    rgba: 4279110414
+  - serializedVersion: 2
+    rgba: 4279702809
+  - serializedVersion: 2
+    rgba: 4285560447
+  - serializedVersion: 2
+    rgba: 4283783777
+  - serializedVersion: 2
+    rgba: 4281151283
+  - serializedVersion: 2
+    rgba: 4282335815
+  - serializedVersion: 2
+    rgba: 4282204229
+  - serializedVersion: 2
+    rgba: 4280229922
+  - serializedVersion: 2
+    rgba: 4280426016
+  - serializedVersion: 2
+    rgba: 4282333242
+  - serializedVersion: 2
+    rgba: 4280492583
+  - serializedVersion: 2
+    rgba: 4283385930
+  - serializedVersion: 2
+    rgba: 4279900700
+  - serializedVersion: 2
+    rgba: 4281085232
+  - serializedVersion: 2
+    rgba: 4283254599
+  - serializedVersion: 2
+    rgba: 4279374356
+  - serializedVersion: 2
+    rgba: 4280097824
+  - serializedVersion: 2
+    rgba: 4280097567
+  - serializedVersion: 2
+    rgba: 4280624169
+  - serializedVersion: 2
+    rgba: 4281215530
+  - serializedVersion: 2
+    rgba: 4281282099
+  - serializedVersion: 2
+    rgba: 4279702551
+  - serializedVersion: 2
+    rgba: 4279242256
+  - serializedVersion: 2
+    rgba: 4279702293
+  - serializedVersion: 2
+    rgba: 4283454555
+  FixPixels: d70b0000591100001a1400004d1400005b150000d8d6000067da00001c3501001d3601009c3601001c3701005c370100d8960100679a01005df601001cf701009df70100dc5502005d5602001c5702005c5702001a61020020b6020060b602009cb602005ab802009ab802001b1103005b1103001b1203005b120300i
+  FixColors:
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779

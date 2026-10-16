@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
   m_Name: paladin_s1
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
-  Texture: {fileID: 2800000, guid: bdfebb7f7a6bc1d42afeb0cb89628ca5, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 2d36afae078895445b39a4d67cec5a00, type: 3}
-  NormalTexture: {fileID: 2800000, guid: 259942f893867af45888c8073b2a410c, type: 3}
+  Texture: {fileID: 0}
+  NormalTexture: {fileID: 0}
   FrameWidth: 64
   FrameHeight: 64
   Pivot: {x: 0.5, y: 0.15625}
@@ -65,3 +64,40 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 11400000, guid: 4fc9c7de4767502418a7b4b4f9d5c7dd, type: 2}
+  RecolorFrom:
+  - serializedVersion: 2
+    rgba: 4282524695
+  - serializedVersion: 2
+    rgba: 4289222704
+  - serializedVersion: 2
+    rgba: 4280357133
+  - serializedVersion: 2
+    rgba: 4281407762
+  - serializedVersion: 2
+    rgba: 4286069279
+  - serializedVersion: 2
+    rgba: 4280685066
+  - serializedVersion: 2
+    rgba: 4283048467
+  - serializedVersion: 2
+    rgba: 4279569162
+  RecolorTo:
+  - serializedVersion: 2
+    rgba: 4279570487
+  - serializedVersion: 2
+    rgba: 4280754058
+  - serializedVersion: 2
+    rgba: 4279110171
+  - serializedVersion: 2
+    rgba: 4279307304
+  - serializedVersion: 2
+    rgba: 4280096095
+  - serializedVersion: 2
+    rgba: 4278978588
+  - serializedVersion: 2
+    rgba: 4279504442
+  - serializedVersion: 2
+    rgba: 4278978576
+  FixPixels: 
+  FixColors: []

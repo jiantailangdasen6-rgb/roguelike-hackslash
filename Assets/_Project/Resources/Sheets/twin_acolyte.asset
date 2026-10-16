@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: twin_acolyte
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 4c0a967c187989c4d97988bc2ddf9f1f, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 7c8c3d3f85bd7b14eabaeb6d22ff484f, type: 3}
   NormalTexture: {fileID: 2800000, guid: 496b2bdeb0ecc3d4892686691140b5e7, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

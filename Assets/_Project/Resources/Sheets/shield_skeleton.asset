@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: shield_skeleton
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 4f707632ae20a0c41829ded7380647dc, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 68a082b4e19d34e47aa3702fe134b647, type: 3}
   NormalTexture: {fileID: 2800000, guid: 7a0b890e9fb93ce4e9dec5d257463cec, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 7
     Fps: 11
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

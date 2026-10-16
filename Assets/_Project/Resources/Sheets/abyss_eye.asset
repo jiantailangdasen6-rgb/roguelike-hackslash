@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: abyss_eye
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 4e2c5d959f9aa134786b5b56dfaa4520, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 4cab19377d3f03d44919d6ad71315c39, type: 3}
   NormalTexture: {fileID: 2800000, guid: 50c77051c52d6aa44ab0c6f09e6fa20d, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

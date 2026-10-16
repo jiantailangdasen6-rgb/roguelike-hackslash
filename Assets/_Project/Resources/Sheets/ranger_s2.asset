@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
   m_Name: ranger_s2
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
-  Texture: {fileID: 2800000, guid: 6488ccfbab6bc0c43bafb9947e8e4e63, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 9b7566aa8f88ca04bad9247a839d73fc, type: 3}
-  NormalTexture: {fileID: 2800000, guid: 853d9d4aff784c64488d4f5de5ee1818, type: 3}
+  Texture: {fileID: 0}
+  NormalTexture: {fileID: 0}
   FrameWidth: 64
   FrameHeight: 64
   Pivot: {x: 0.5, y: 0.15625}
@@ -65,3 +64,168 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 11400000, guid: 9de15f7b2f1bb844d99241c5c632d101, type: 2}
+  RecolorFrom:
+  - serializedVersion: 2
+    rgba: 4282406460
+  - serializedVersion: 2
+    rgba: 4283987285
+  - serializedVersion: 2
+    rgba: 4281220394
+  - serializedVersion: 2
+    rgba: 4279045395
+  - serializedVersion: 2
+    rgba: 4279837749
+  - serializedVersion: 2
+    rgba: 4279310114
+  - serializedVersion: 2
+    rgba: 4279243033
+  - serializedVersion: 2
+    rgba: 4278913546
+  - serializedVersion: 2
+    rgba: 4279440401
+  - serializedVersion: 2
+    rgba: 4280692260
+  - serializedVersion: 2
+    rgba: 4281220395
+  - serializedVersion: 2
+    rgba: 4280496969
+  - serializedVersion: 2
+    rgba: 4280165148
+  - serializedVersion: 2
+    rgba: 4279704085
+  - serializedVersion: 2
+    rgba: 4280562506
+  - serializedVersion: 2
+    rgba: 4279506721
+  - serializedVersion: 2
+    rgba: 4279770409
+  - serializedVersion: 2
+    rgba: 4279704086
+  - serializedVersion: 2
+    rgba: 4281419878
+  - serializedVersion: 2
+    rgba: 4279242775
+  - serializedVersion: 2
+    rgba: 4279045132
+  - serializedVersion: 2
+    rgba: 4279111437
+  - serializedVersion: 2
+    rgba: 4279771184
+  - serializedVersion: 2
+    rgba: 4278981147
+  - serializedVersion: 2
+    rgba: 4279178510
+  - serializedVersion: 2
+    rgba: 4278717459
+  - serializedVersion: 2
+    rgba: 4282540423
+  - serializedVersion: 2
+    rgba: 4279309072
+  - serializedVersion: 2
+    rgba: 4280035354
+  - serializedVersion: 2
+    rgba: 4280166198
+  - serializedVersion: 2
+    rgba: 4279770666
+  - serializedVersion: 2
+    rgba: 4279506720
+  - serializedVersion: 2
+    rgba: 4278847757
+  - serializedVersion: 2
+    rgba: 4280099356
+  - serializedVersion: 2
+    rgba: 4279507986
+  - serializedVersion: 2
+    rgba: 4282340413
+  - serializedVersion: 2
+    rgba: 4278979344
+  - serializedVersion: 2
+    rgba: 4280363806
+  - serializedVersion: 2
+    rgba: 4278849290
+  - serializedVersion: 2
+    rgba: 4281288033
+  RecolorTo:
+  - serializedVersion: 2
+    rgba: 4280175500
+  - serializedVersion: 2
+    rgba: 4281166264
+  - serializedVersion: 2
+    rgba: 4279513955
+  - serializedVersion: 2
+    rgba: 4279111961
+  - serializedVersion: 2
+    rgba: 4280235599
+  - serializedVersion: 2
+    rgba: 4279510069
+  - serializedVersion: 2
+    rgba: 4279375906
+  - serializedVersion: 2
+    rgba: 4278781966
+  - serializedVersion: 2
+    rgba: 4278980896
+  - serializedVersion: 2
+    rgba: 4279707975
+  - serializedVersion: 2
+    rgba: 4279580260
+  - serializedVersion: 2
+    rgba: 4281092714
+  - serializedVersion: 2
+    rgba: 4279377720
+  - serializedVersion: 2
+    rgba: 4279113513
+  - serializedVersion: 2
+    rgba: 4281093230
+  - serializedVersion: 2
+    rgba: 4279705389
+  - serializedVersion: 2
+    rgba: 4280100661
+  - serializedVersion: 2
+    rgba: 4279179306
+  - serializedVersion: 2
+    rgba: 4282280084
+  - serializedVersion: 2
+    rgba: 4279309857
+  - serializedVersion: 2
+    rgba: 4278782482
+  - serializedVersion: 2
+    rgba: 4278848534
+  - serializedVersion: 2
+    rgba: 4280037962
+  - serializedVersion: 2
+    rgba: 4279245866
+  - serializedVersion: 2
+    rgba: 4278587167
+  - serializedVersion: 2
+    rgba: 4278916126
+  - serializedVersion: 2
+    rgba: 4283861688
+  - serializedVersion: 2
+    rgba: 4278980636
+  - serializedVersion: 2
+    rgba: 4278984509
+  - serializedVersion: 2
+    rgba: 4280628551
+  - serializedVersion: 2
+    rgba: 4280101178
+  - serializedVersion: 2
+    rgba: 4279705388
+  - serializedVersion: 2
+    rgba: 4278914065
+  - serializedVersion: 2
+    rgba: 4279443253
+  - serializedVersion: 2
+    rgba: 4278720043
+  - serializedVersion: 2
+    rgba: 4280306564
+  - serializedVersion: 2
+    rgba: 4279045909
+  - serializedVersion: 2
+    rgba: 4279116871
+  - serializedVersion: 2
+    rgba: 4278454806
+  - serializedVersion: 2
+    rgba: 4282213252
+  FixPixels: 
+  FixColors: []

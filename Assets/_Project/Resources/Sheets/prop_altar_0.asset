@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: prop_altar_0
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 670868525b722dd4eade6a5d812b6e6f, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 2800000, guid: 51c6be1e6ae08af4c82cd879304cb846, type: 3}
   FrameWidth: 84
   FrameHeight: 48
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 1
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

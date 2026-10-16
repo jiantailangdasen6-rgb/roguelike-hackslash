@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: fx_hit
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 21d5b243149e1114e803e2d311da8cad, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 0}
   FrameWidth: 24
   FrameHeight: 24
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 5
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

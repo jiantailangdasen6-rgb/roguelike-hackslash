@@ -378,7 +378,7 @@ namespace Game.Gameplay
             var netPlayer = instance.GetComponent<NetPlayer>();
             netPlayer.Slot.Value = slot;
             netPlayer.Class.Value = simPlayer.ClassId;
-            netPlayer.Skin.Value = (byte)loadout.skin;
+            netPlayer.Skin.Value = (byte)(CommandLine.Has("-skin") ? (int)CommandLine.GetFloat("-skin", 0f) : loadout.skin); // -skin <n>: screenshots of a skin
             netPlayer.Weapon.Value = (byte)simPlayer.WeaponKind;
             netPlayer.Title.Value = loadout.title ?? "";
             netPlayer.Hp.Value = simPlayer.Hp;

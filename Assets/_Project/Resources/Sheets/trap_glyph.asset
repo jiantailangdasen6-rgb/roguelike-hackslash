@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: trap_glyph
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: e7a594d266da7d34dba06cb655417633, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 0}
   FrameWidth: 44
   FrameHeight: 36
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 3
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

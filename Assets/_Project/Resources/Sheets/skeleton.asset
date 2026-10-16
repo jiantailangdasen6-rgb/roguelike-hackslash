@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: skeleton
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: bca9a74641e4dcb4e805037dd6ca0e98, type: 3}
-  FlashTexture: {fileID: 2800000, guid: f6d3b06b557c8414dbfcaa424488a52e, type: 3}
   NormalTexture: {fileID: 2800000, guid: 6a7e37fed6f3ebe4683653f1ec4acf3f, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 7
     Fps: 11
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: decal_mycelium
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 374e4c8a7e49d9847bd06acee8194c59, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 2800000, guid: 0f728495274027343859fd8f306a3a04, type: 3}
   FrameWidth: 80
   FrameHeight: 50
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 1
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ice_knight
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: e885e08842275eb4f85bb1d093d8e31d, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 08872124b095bd947bd89b921f66c985, type: 3}
   NormalTexture: {fileID: 2800000, guid: 3bada183f27dfed4bb5b0b99b1aebdad, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: gate_n
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 1446b7d1c64d72541ac912026e58fad9, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 0}
   FrameWidth: 128
   FrameHeight: 84
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 1
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

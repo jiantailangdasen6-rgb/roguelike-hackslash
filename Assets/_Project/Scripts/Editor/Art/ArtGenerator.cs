@@ -28,28 +28,8 @@ namespace Game.EditorTools.Art
         {
             foreach (var dir in new[] { CharacterDir, EffectDir, TileDir, SheetDir, PreviewDir }) Directory.CreateDirectory(dir);
 
-            var warriorFlash = Character("warrior", HeroArt.Warrior(), HeroArt.FrameSize);
-            var mageFlash = Character("mage", HeroArt.Mage(), HeroArt.FrameSize);
-            var rangerFlash = Character("ranger", HeroArt.Ranger(), HeroArt.FrameSize);
-            var guardianFlash = Character("guardian", HeroArt.Guardian(), HeroArt.FrameSize);
-            var assassinFlash = Character("assassin", HeroArt.Assassin(), HeroArt.FrameSize);
-            var alchemistFlash = Character("alchemist", HeroArt.Alchemist(), HeroArt.FrameSize);
-            var deathcallerFlash = Character("deathcaller", HeroArt.Deathcaller(), HeroArt.FrameSize);
-            var paladinFlash = Character("paladin", HeroArt.Paladin(), HeroArt.FrameSize);
-            // Skins are palette swaps: same silhouettes, so they share the class's white flash sheet.
-            for (int skin = 1; skin < Game.Core.SkinCatalog.PerClass; skin++)
-            {
-                Character($"warrior_s{skin}", HeroArt.Warrior(SkinArt.Palette(Game.Core.ClassId.Warrior, skin)), HeroArt.FrameSize, warriorFlash);
-                Character($"mage_s{skin}", HeroArt.Mage(SkinArt.Palette(Game.Core.ClassId.Mage, skin)), HeroArt.FrameSize, mageFlash);
-                Character($"ranger_s{skin}", HeroArt.Ranger(SkinArt.Palette(Game.Core.ClassId.Ranger, skin)), HeroArt.FrameSize, rangerFlash);
-                Character($"guardian_s{skin}", HeroArt.Guardian(SkinArt.Palette(Game.Core.ClassId.Guardian, skin)), HeroArt.FrameSize, guardianFlash);
-                Character($"assassin_s{skin}", HeroArt.Assassin(SkinArt.Palette(Game.Core.ClassId.Assassin, skin)), HeroArt.FrameSize, assassinFlash);
-                Character($"alchemist_s{skin}", HeroArt.Alchemist(SkinArt.Palette(Game.Core.ClassId.Alchemist, skin)), HeroArt.FrameSize, alchemistFlash);
-                Character($"deathcaller_s{skin}", HeroArt.Deathcaller(SkinArt.Palette(Game.Core.ClassId.Deathcaller, skin)), HeroArt.FrameSize, deathcallerFlash);
-                Character($"paladin_s{skin}", HeroArt.Paladin(SkinArt.Palette(Game.Core.ClassId.Paladin, skin)), HeroArt.FrameSize, paladinFlash);
-            }
-
-            // Each class with its other weapon ("_w1", HeroArt.Weapons), in every skin (the skins share the weapon's flash).
+            // Each class with its usual and its other weapon ("_w1", HeroArt.Weapons). Skins are palette swaps, made at
+            // runtime from these sheets (SpriteSheet.RecolorOf): the build carries one sheet per class and weapon.
             foreach (Game.Core.ClassId cls in System.Enum.GetValues(typeof(Game.Core.ClassId)))
             {
                 List<Clip> Make(Dictionary<char, PixelMaterial> palette) => cls switch
@@ -64,11 +44,13 @@ namespace Game.EditorTools.Art
                     _ => HeroArt.Paladin(palette),
                 };
                 string sheet = Game.Core.ClassCatalog.Get(cls).Sheet;
-                var flash = Character($"{sheet}_w1", HeroArt.WithAltWeapon(cls, () => Make(null)), HeroArt.FrameSize);
+                Character(sheet, Make(null), HeroArt.FrameSize, readable: true);
+                Character($"{sheet}_w1", HeroArt.WithAltWeapon(cls, () => Make(null)), HeroArt.FrameSize, readable: true);
                 for (int skin = 1; skin < Game.Core.SkinCatalog.PerClass; skin++)
                 {
                     var palette = SkinArt.Palette(cls, skin);
-                    Character($"{sheet}_s{skin}_w1", HeroArt.WithAltWeapon(cls, () => Make(palette)), HeroArt.FrameSize, flash);
+                    Skin($"{sheet}_s{skin}", sheet, Make(palette), HeroArt.FrameSize);
+                    Skin($"{sheet}_s{skin}_w1", $"{sheet}_w1", HeroArt.WithAltWeapon(cls, () => Make(palette)), HeroArt.FrameSize);
                 }
             }
 
@@ -249,25 +231,26 @@ namespace Game.EditorTools.Art
             UnityEngine.Object.DestroyImmediate(tex);
         }
 
-        /// <returns>The flash texture (white silhouettes), for sharing with skins.</returns>
-        private static Texture2D Character(string name, List<Clip> clips, int frameSize, Texture2D sharedFlash = null)
+        /// <param name="readable">Skins are repainted from it at runtime (SpriteSheet.RecolorOf).</param>
+        private static void Character(string name, List<Clip> clips, int frameSize, bool readable = false)
         {
             string path = $"{CharacterDir}/{name}.png";
             PixelRenderer.WriteSheet(path, clips, frameSize);
             PixelRenderer.WritePreview($"{PreviewDir}/{name}.png", clips, frameSize, frameSize > 64 ? 3 : 4);
-            var texture = Import(path, null);
-            var flashTexture = sharedFlash;
-            if (flashTexture == null)
-            {
-                string flashPath = $"{CharacterDir}/{name}_flash.png";
-                PixelRenderer.WriteSheet(flashPath, clips, frameSize, flash: true);
-                flashTexture = Import(flashPath, null);
-            }
+            var texture = Import(path, null, readable: readable);
+            AssetDatabase.DeleteAsset($"{CharacterDir}/{name}_flash.png"); // the white flash is a material now (SpriteFlash)
 
             var sheet = LoadOrCreateSheet(name);
             sheet.Texture = texture;
-            sheet.FlashTexture = flashTexture;
             sheet.NormalTexture = NormalMaps.Make(path, tiles: false, dome: 1f, relief: 0.7f);
+            sheet.RecolorOf = null;
+            sheet.RecolorFrom = sheet.RecolorTo = sheet.FixColors = null;
+            sheet.FixPixels = null;
+            Layout(sheet, clips, frameSize);
+        }
+
+        private static void Layout(SpriteSheet sheet, List<Clip> clips, int frameSize)
+        {
             sheet.FrameWidth = frameSize;
             sheet.FrameHeight = frameSize;
             sheet.Pivot = new Vector2(0.5f, (float)GroundY / frameSize);
@@ -276,7 +259,89 @@ namespace Game.EditorTools.Art
             for (int i = 0; i < clips.Count; i++)
                 sheet.Clips.Add(new SpriteSheet.ClipInfo { Name = clips[i].Name, Row = i, Frames = clips[i].Frames.Count, Fps = clips[i].Fps, Loop = clips[i].Loop });
             EditorUtility.SetDirty(sheet);
-            return flashTexture;
+        }
+
+        /// <summary>
+        /// A palette swap of <paramref name="baseName"/>: rendered here only to learn which colour becomes which
+        /// (plus the few pixels that map gets wrong); the game repaints the base sheet with it at runtime.
+        /// </summary>
+        private static void Skin(string name, string baseName, List<Clip> clips, int frameSize)
+        {
+            string temp = $"Temp/skins/{name}.png";
+            PixelRenderer.WriteSheet(temp, clips, frameSize);
+            PixelRenderer.WritePreview($"{PreviewDir}/{name}.png", clips, frameSize, frameSize > 64 ? 3 : 4);
+            var skin = ReadPixels(temp);
+            var source = ReadPixels($"{CharacterDir}/{baseName}.png");
+            if (skin.Length != source.Length) throw new InvalidOperationException($"skin {name} does not match {baseName}");
+
+            // The most common repaint of each colour; the pixels it gets wrong are listed one by one.
+            var votes = new Dictionary<int, Dictionary<int, int>>();
+            var colours = new Dictionary<int, Color32>();
+            for (int i = 0; i < source.Length; i++)
+            {
+                if (source[i].a == 0) continue;
+                int from = SpriteSheet.Key(source[i]), to = SpriteSheet.Key(skin[i]);
+                colours[from] = source[i];
+                colours[to] = skin[i];
+                if (!votes.TryGetValue(from, out var v)) votes[from] = v = new Dictionary<int, int>();
+                v[to] = v.TryGetValue(to, out int n) ? n + 1 : 1;
+            }
+            var map = new Dictionary<int, int>();
+            var fromList = new List<Color32>();
+            var toList = new List<Color32>();
+            foreach (var (from, v) in votes)
+            {
+                int best = from, count = -1;
+                foreach (var (to, n) in v)
+                    if (n > count)
+                    {
+                        best = to;
+                        count = n;
+                    }
+                map[from] = best;
+                if (best == from) continue;
+                fromList.Add(colours[from]);
+                toList.Add(colours[best]);
+            }
+            var fixPixels = new List<int>();
+            var fixColors = new List<Color32>();
+            for (int i = 0; i < source.Length; i++)
+            {
+                bool wrong = source[i].a == 0 ? skin[i].a != 0 : map[SpriteSheet.Key(source[i])] != SpriteSheet.Key(skin[i]);
+                if (!wrong) continue;
+                fixPixels.Add(i);
+                fixColors.Add(skin[i]);
+            }
+            // The same repaint as SpriteSheet.Recolor must give back exactly the rendered skin.
+            var check = (Color32[])source.Clone();
+            for (int i = 0; i < check.Length; i++)
+                if (check[i].a != 0) check[i] = colours[map[SpriteSheet.Key(check[i])]];
+            for (int i = 0; i < fixPixels.Count; i++) check[fixPixels[i]] = fixColors[i];
+            for (int i = 0; i < check.Length; i++)
+                if (SpriteSheet.Key(check[i]) != SpriteSheet.Key(skin[i]) && (check[i].a != 0 || skin[i].a != 0))
+                    throw new InvalidOperationException($"skin {name}: the repaint differs at pixel {i}");
+            Debug.Log($"[ArtGenerator] skin {name}: {fromList.Count} colours repainted, {fixPixels.Count} pixels fixed");
+
+            AssetDatabase.DeleteAsset($"{CharacterDir}/{name}.png");
+            AssetDatabase.DeleteAsset($"{CharacterDir}/{name}{NormalMaps.Suffix}.png");
+            var sheet = LoadOrCreateSheet(name);
+            sheet.Texture = null;
+            sheet.NormalTexture = null;
+            sheet.RecolorOf = LoadOrCreateSheet(baseName);
+            sheet.RecolorFrom = fromList.ToArray();
+            sheet.RecolorTo = toList.ToArray();
+            sheet.FixPixels = fixPixels.ToArray();
+            sheet.FixColors = fixColors.ToArray();
+            Layout(sheet, clips, frameSize);
+        }
+
+        private static Color32[] ReadPixels(string path)
+        {
+            var t = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            t.LoadImage(File.ReadAllBytes(path));
+            var px = t.GetPixels32();
+            UnityEngine.Object.DestroyImmediate(t);
+            return px;
         }
 
         private static Vector2 EffectPivot(string name) => name switch
@@ -319,7 +384,7 @@ namespace Game.EditorTools.Art
         }
 
         /// <summary>Imports as a crisp, uncompressed texture; with a pivot it is also a single sprite (tiles/props).</summary>
-        private static Texture2D Import(string path, Vector2? spritePivot, Texture2D normal = null)
+        private static Texture2D Import(string path, Vector2? spritePivot, Texture2D normal = null, bool readable = false)
         {
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport);
             var importer = (TextureImporter)AssetImporter.GetAtPath(path);
@@ -330,7 +395,7 @@ namespace Game.EditorTools.Art
             importer.mipmapEnabled = false;
             importer.alphaIsTransparency = true;
             importer.textureCompression = TextureImporterCompression.Uncompressed;
-            importer.isReadable = false;
+            importer.isReadable = readable;
             importer.wrapMode = TextureWrapMode.Clamp;
             if (spritePivot.HasValue)
             {

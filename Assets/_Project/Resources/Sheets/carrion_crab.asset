@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: carrion_crab
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 4206bd85f2ede904ab903c295a394d6f, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 2d04a977062ca7e468ff6d9e7b882d56, type: 3}
   NormalTexture: {fileID: 2800000, guid: b5824d09b2fe82f41adec6c67be9cb18, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 10
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

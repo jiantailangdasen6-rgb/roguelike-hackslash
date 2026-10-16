@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: deathcaller_w1
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 862b2362c311f0a45ab2f7a4d10678ef, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 1d206f397192d4546b8225f88c41dd63, type: 3}
   NormalTexture: {fileID: 2800000, guid: b58b84d568b3cc54fb6a3860aa7d4438, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -65,3 +64,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

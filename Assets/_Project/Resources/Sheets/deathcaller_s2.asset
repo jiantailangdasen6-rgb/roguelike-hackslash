@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
   m_Name: deathcaller_s2
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
-  Texture: {fileID: 2800000, guid: 1ad5dd6f0c4577a4cb5feb03c43be13a, type: 3}
-  FlashTexture: {fileID: 2800000, guid: d6761ab7f9960e4499ca693139106f47, type: 3}
-  NormalTexture: {fileID: 2800000, guid: d52bb7354322a8941a30dba6ae4155d9, type: 3}
+  Texture: {fileID: 0}
+  NormalTexture: {fileID: 0}
   FrameWidth: 64
   FrameHeight: 64
   Pivot: {x: 0.5, y: 0.15625}
@@ -65,3 +64,136 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 11400000, guid: d19db1773d0e2e44aa686366bc5723e0, type: 2}
+  RecolorFrom:
+  - serializedVersion: 2
+    rgba: 4280954914
+  - serializedVersion: 2
+    rgba: 4280099352
+  - serializedVersion: 2
+    rgba: 4281876526
+  - serializedVersion: 2
+    rgba: 4279176461
+  - serializedVersion: 2
+    rgba: 4280363033
+  - serializedVersion: 2
+    rgba: 4279572753
+  - serializedVersion: 2
+    rgba: 4279440143
+  - serializedVersion: 2
+    rgba: 4279309326
+  - serializedVersion: 2
+    rgba: 4288348029
+  - serializedVersion: 2
+    rgba: 4283722310
+  - serializedVersion: 2
+    rgba: 4282339379
+  - serializedVersion: 2
+    rgba: 4281219108
+  - serializedVersion: 2
+    rgba: 4280625695
+  - serializedVersion: 2
+    rgba: 4279703571
+  - serializedVersion: 2
+    rgba: 4279308559
+  - serializedVersion: 2
+    rgba: 4279045132
+  - serializedVersion: 2
+    rgba: 4280165400
+  - serializedVersion: 2
+    rgba: 4278847497
+  - serializedVersion: 2
+    rgba: 4279309325
+  - serializedVersion: 2
+    rgba: 4280099097
+  - serializedVersion: 2
+    rgba: 4281153828
+  - serializedVersion: 2
+    rgba: 4278650886
+  - serializedVersion: 2
+    rgba: 4279703827
+  - serializedVersion: 2
+    rgba: 4279374095
+  - serializedVersion: 2
+    rgba: 4293328864
+  - serializedVersion: 2
+    rgba: 4280033048
+  - serializedVersion: 2
+    rgba: 4279045131
+  - serializedVersion: 2
+    rgba: 4282141746
+  - serializedVersion: 2
+    rgba: 4282211890
+  - serializedVersion: 2
+    rgba: 4278980105
+  - serializedVersion: 2
+    rgba: 4279966487
+  - serializedVersion: 2
+    rgba: 4279637523
+  RecolorTo:
+  - serializedVersion: 2
+    rgba: 4285293154
+  - serializedVersion: 2
+    rgba: 4283319878
+  - serializedVersion: 2
+    rgba: 4287529602
+  - serializedVersion: 2
+    rgba: 4279833879
+  - serializedVersion: 2
+    rgba: 4283254856
+  - serializedVersion: 2
+    rgba: 4281544495
+  - serializedVersion: 2
+    rgba: 4280426016
+  - serializedVersion: 2
+    rgba: 4281609774
+  - serializedVersion: 2
+    rgba: 4294961343
+  - serializedVersion: 2
+    rgba: 4291082424
+  - serializedVersion: 2
+    rgba: 4288056460
+  - serializedVersion: 2
+    rgba: 4285293668
+  - serializedVersion: 2
+    rgba: 4283188551
+  - serializedVersion: 2
+    rgba: 4281149482
+  - serializedVersion: 2
+    rgba: 4280491295
+  - serializedVersion: 2
+    rgba: 4279899415
+  - serializedVersion: 2
+    rgba: 4282925634
+  - serializedVersion: 2
+    rgba: 4279373328
+  - serializedVersion: 2
+    rgba: 4280952358
+  - serializedVersion: 2
+    rgba: 4282136120
+  - serializedVersion: 2
+    rgba: 4285293668
+  - serializedVersion: 2
+    rgba: 4280162842
+  - serializedVersion: 2
+    rgba: 4281149482
+  - serializedVersion: 2
+    rgba: 4280359966
+  - serializedVersion: 2
+    rgba: 4294966000
+  - serializedVersion: 2
+    rgba: 4281938741
+  - serializedVersion: 2
+    rgba: 4279636500
+  - serializedVersion: 2
+    rgba: 4287464580
+  - serializedVersion: 2
+    rgba: 4284569162
+  - serializedVersion: 2
+    rgba: 4280163099
+  - serializedVersion: 2
+    rgba: 4281938484
+  - serializedVersion: 2
+    rgba: 4281149225
+  FixPixels: 
+  FixColors: []

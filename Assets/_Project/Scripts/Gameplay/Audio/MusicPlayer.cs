@@ -148,7 +148,14 @@ namespace Game.Gameplay
             {
                 float goal = s == _current ? target : 0f;
                 s.volume = Mathf.MoveTowards(s.volume, goal, step * Mathf.Max(0.2f, target));
-                if (s != _current && s.volume <= 0.001f && s.isPlaying) s.Stop();
+                if (s != _current && s.volume <= 0.001f && s.clip != null)
+                {
+                    // A faded-out track is let go: browsers keep every loaded track decoded in memory (tens of MB each).
+                    var old = s.clip;
+                    s.Stop();
+                    s.clip = null;
+                    if (old != _current.clip) Resources.UnloadAsset(old);
+                }
             }
         }
     }

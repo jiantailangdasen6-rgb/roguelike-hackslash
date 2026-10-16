@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: archivist
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: a737cb19370ea1443bdea9481dee478f, type: 3}
-  FlashTexture: {fileID: 2800000, guid: a79a2ff7030b47b4abd4876f624910c5, type: 3}
   NormalTexture: {fileID: 2800000, guid: d4579974d77280647a482f339181f58a, type: 3}
   FrameWidth: 112
   FrameHeight: 112
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 7
     Fps: 6
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

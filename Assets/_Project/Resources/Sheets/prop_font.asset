@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: prop_font
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 073674e48bdaefd48b25c807ca3fb1b3, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 2800000, guid: 807bed20d67760643a14902e0a2f25ec, type: 3}
   FrameWidth: 48
   FrameHeight: 44
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 4
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

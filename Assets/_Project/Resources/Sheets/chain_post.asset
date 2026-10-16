@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: chain_post
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 0e2c39b25d678f346a55cd475f4ce292, type: 3}
-  FlashTexture: {fileID: 2800000, guid: c9ae15afd7ff3c845b6ec5714c297e38, type: 3}
   NormalTexture: {fileID: 2800000, guid: 59c2ebc9e1794744abee79bdaec0fb71, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 5
     Fps: 12
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

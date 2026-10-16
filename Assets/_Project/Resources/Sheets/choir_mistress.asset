@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: choir_mistress
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: a7512dd834c384d4e9cf4dce5b303a2d, type: 3}
-  FlashTexture: {fileID: 2800000, guid: c0a1642639c8a0a48ac268c7c92a2419, type: 3}
   NormalTexture: {fileID: 2800000, guid: 2c81e18d5b898464d88ab6aab8f60105, type: 3}
   FrameWidth: 112
   FrameHeight: 112
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 7
     Fps: 6
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

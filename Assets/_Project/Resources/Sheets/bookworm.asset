@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: bookworm
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 0e70e1f355b274a4c98c2634339ebea1, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 3545bb0233d4acd4ba3c9ea2695d2d16, type: 3}
   NormalTexture: {fileID: 2800000, guid: c3c1a7693986d5d459c4cfe1da32b7ff, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 10
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

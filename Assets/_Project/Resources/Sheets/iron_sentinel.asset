@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: iron_sentinel
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: a9249859769b3bf43a80171eb31f6ac2, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 8ba86f0433878ee478c38246170cc918, type: 3}
   NormalTexture: {fileID: 2800000, guid: eab37e54dd4e0fa48a68ea142f16300b, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 7
     Fps: 8
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

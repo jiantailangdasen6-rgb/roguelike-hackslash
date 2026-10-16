@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: forbidden_tome
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 40af43987ec74c348bfc9c31f6bc38d9, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 37b1a30657ccf7945bc80777e33401ed, type: 3}
   NormalTexture: {fileID: 2800000, guid: 7eb7e16189ee61142b0558fb39a4d6bc, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 4
     Fps: 12
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

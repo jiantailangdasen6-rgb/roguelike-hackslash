@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: mycelid
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: de40a84325c0c9d48a4b3b2e3d4b2984, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 5c0ad63f96af2654ab58b2ecf67f3ea2, type: 3}
   NormalTexture: {fileID: 2800000, guid: 78deabf8447638440acb1cb614af8269, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 10
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

@@ -55,6 +55,33 @@ namespace Game.Gameplay
 
         public void Flash(float seconds = 0.08f) => _flash = seconds;
 
+        /// <summary>The white flash is drawn by swapping in Resources/SpriteFlash.mat for a few frames.</summary>
+        private static Material _flashMaterial;
+        private static bool _flashLoaded;
+        private Material _restMaterial;
+
+        private void ShowFlash(bool on)
+        {
+            if (!_flashLoaded)
+            {
+                _flashLoaded = true;
+                _flashMaterial = Resources.Load<Material>("SpriteFlash");
+            }
+            if (_flashMaterial == null || on == (_restMaterial != null)) return;
+            if (on)
+            {
+                _restMaterial = Renderer.sharedMaterial;
+                Renderer.sharedMaterial = _flashMaterial;
+            }
+            else
+            {
+                Renderer.sharedMaterial = _restMaterial;
+                _restMaterial = null;
+            }
+        }
+
+        private void OnDisable() => ShowFlash(false);
+
         private void Update()
         {
             if (_sheet == null) return;
@@ -72,7 +99,8 @@ namespace Game.Gameplay
 
         private void Apply()
         {
-            var sprites = _sheet.Sprites(_clip, _flash > 0f);
+            var sprites = _sheet.Sprites(_clip);
+            ShowFlash(_flash > 0f);
             if (sprites == null || sprites.Length == 0) return;
             int frame = Mathf.FloorToInt(_time * _info.Fps);
             frame = _info.Loop ? frame % sprites.Length : Mathf.Min(frame, sprites.Length - 1);

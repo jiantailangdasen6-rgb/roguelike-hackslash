@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: pressure_plate
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 3b17894e0aa0d1148a294e648315d215, type: 3}
-  FlashTexture: {fileID: 2800000, guid: be29da7678dc8414f8106d5d73bdf291, type: 3}
   NormalTexture: {fileID: 2800000, guid: 152c256e250d65549b74e14af7b43f3b, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 1
     Fps: 10
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

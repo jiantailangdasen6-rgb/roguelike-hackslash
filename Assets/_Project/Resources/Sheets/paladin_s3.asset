@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c3bf9563df6c46b00ba8fb74de7a9, type: 3}
   m_Name: paladin_s3
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
-  Texture: {fileID: 2800000, guid: 65b19727aad4fd6409357aa6f7412986, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 2d36afae078895445b39a4d67cec5a00, type: 3}
-  NormalTexture: {fileID: 2800000, guid: bfdd6ea26f9d0224cb9a7b25d84c50aa, type: 3}
+  Texture: {fileID: 0}
+  NormalTexture: {fileID: 0}
   FrameWidth: 64
   FrameHeight: 64
   Pivot: {x: 0.5, y: 0.15625}
@@ -65,3 +64,80 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 11400000, guid: 4fc9c7de4767502418a7b4b4f9d5c7dd, type: 2}
+  RecolorFrom:
+  - serializedVersion: 2
+    rgba: 4281307579
+  - serializedVersion: 2
+    rgba: 4280050823
+  - serializedVersion: 2
+    rgba: 4284925926
+  - serializedVersion: 2
+    rgba: 4282524695
+  - serializedVersion: 2
+    rgba: 4289222704
+  - serializedVersion: 2
+    rgba: 4280357133
+  - serializedVersion: 2
+    rgba: 4281407762
+  - serializedVersion: 2
+    rgba: 4286069279
+  - serializedVersion: 2
+    rgba: 4279385431
+  - serializedVersion: 2
+    rgba: 4279114277
+  - serializedVersion: 2
+    rgba: 4280685066
+  - serializedVersion: 2
+    rgba: 4279314486
+  - serializedVersion: 2
+    rgba: 4283048467
+  - serializedVersion: 2
+    rgba: 4279569162
+  - serializedVersion: 2
+    rgba: 4278853422
+  - serializedVersion: 2
+    rgba: 4279777096
+  - serializedVersion: 2
+    rgba: 4278915095
+  - serializedVersion: 2
+    rgba: 4281027159
+  RecolorTo:
+  - serializedVersion: 2
+    rgba: 4286233284
+  - serializedVersion: 2
+    rgba: 4283466378
+  - serializedVersion: 2
+    rgba: 4289784048
+  - serializedVersion: 2
+    rgba: 4282927694
+  - serializedVersion: 2
+    rgba: 4290299339
+  - serializedVersion: 2
+    rgba: 4280756268
+  - serializedVersion: 2
+    rgba: 4281874749
+  - serializedVersion: 2
+    rgba: 4287272348
+  - serializedVersion: 2
+    rgba: 4281225302
+  - serializedVersion: 2
+    rgba: 4279705893
+  - serializedVersion: 2
+    rgba: 4281349434
+  - serializedVersion: 2
+    rgba: 4280496695
+  - serializedVersion: 2
+    rgba: 4284114027
+  - serializedVersion: 2
+    rgba: 4279768859
+  - serializedVersion: 2
+    rgba: 4279904814
+  - serializedVersion: 2
+    rgba: 4281484875
+  - serializedVersion: 2
+    rgba: 4279243543
+  - serializedVersion: 2
+    rgba: 4282734171
+  FixPixels: 
+  FixColors: []

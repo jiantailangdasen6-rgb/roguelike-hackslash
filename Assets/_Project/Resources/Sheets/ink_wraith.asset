@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ink_wraith
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 48bb081a2acbc5e4ab219957cc5201ba, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 0036777c40757ab4abd93d8fd0853ade, type: 3}
   NormalTexture: {fileID: 2800000, guid: 1f5cf3def4dcc364ab7404b33c4c64b0, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

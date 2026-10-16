@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: camp_urn
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 0d1b82a93b51cbd48ac33140e694be51, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 2800000, guid: 20ff5bcf98a8fdf4d906ff160c44e4d1, type: 3}
   FrameWidth: 36
   FrameHeight: 56
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 4
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

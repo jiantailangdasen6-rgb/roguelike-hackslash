@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: door_bars_side
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: c0ab510954ef3e04a979ab3bf4570cde, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 2800000, guid: 16ca6a95efc3dd040ac8a6450d22bee5, type: 3}
   FrameWidth: 40
   FrameHeight: 112
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 1
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

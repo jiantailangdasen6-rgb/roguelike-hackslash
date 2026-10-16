@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: great_cap
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: fda27390184d85c4785b7a2182de3c2a, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 3a52f76c45adecc42acd2c7a22d89c9f, type: 3}
   NormalTexture: {fileID: 2800000, guid: 87b94f6101edc004ebecc0324b34384e, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 10
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

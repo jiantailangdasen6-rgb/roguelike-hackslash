@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: grave_reaper
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 39ee9fd4a297c1c46aaa0d29bbdab621, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 46f976272119cfa409ca58d678b1f8ee, type: 3}
   NormalTexture: {fileID: 2800000, guid: 2171ee3b48f54ec4e9d6abbc6a41b0d8, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 9
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

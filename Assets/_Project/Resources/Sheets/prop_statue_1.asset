@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: prop_statue_1
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: afe2109989ba291448fb0caf212a46bc, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 2800000, guid: 2980041a0bf6d7e44b00771fe391db60, type: 3}
   FrameWidth: 32
   FrameHeight: 36
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 1
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

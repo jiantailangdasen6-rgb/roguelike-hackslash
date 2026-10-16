@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: icons_perk
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 3f8e14ceb07e8c34abb4f3b451fd417e, type: 3}
-  FlashTexture: {fileID: 0}
   NormalTexture: {fileID: 0}
   FrameWidth: 24
   FrameHeight: 24
@@ -25,3 +24,8 @@ MonoBehaviour:
     Frames: 72
     Fps: 12
     Loop: 1
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

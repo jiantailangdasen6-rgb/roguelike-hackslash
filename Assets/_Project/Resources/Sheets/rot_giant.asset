@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: rot_giant
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: 3e6d9332b1492fe41b3c98cec6316602, type: 3}
-  FlashTexture: {fileID: 2800000, guid: 1a99c090e045d7d428a7be27057140a6, type: 3}
   NormalTexture: {fileID: 2800000, guid: c3c5e4545f02ed2419e676da3fb73616, type: 3}
   FrameWidth: 112
   FrameHeight: 112
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 7
     Fps: 6
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

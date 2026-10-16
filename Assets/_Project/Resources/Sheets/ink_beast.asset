@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: ink_beast
   m_EditorClassIdentifier: Game.Gameplay::Game.Gameplay.SpriteSheet
   Texture: {fileID: 2800000, guid: bdf566a04784e844db4df163f9c00f5a, type: 3}
-  FlashTexture: {fileID: 2800000, guid: b6d20537657b36d4c95071da14b3b500, type: 3}
   NormalTexture: {fileID: 2800000, guid: 1bac1d6846997d3439ba73ff8a998b95, type: 3}
   FrameWidth: 64
   FrameHeight: 64
@@ -50,3 +49,8 @@ MonoBehaviour:
     Frames: 6
     Fps: 10
     Loop: 0
+  RecolorOf: {fileID: 0}
+  RecolorFrom: []
+  RecolorTo: []
+  FixPixels: 
+  FixColors: []

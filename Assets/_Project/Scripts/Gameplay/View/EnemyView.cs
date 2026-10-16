@@ -337,6 +337,7 @@ namespace Game.Gameplay
             if (s.Cursed) tint = Color.Lerp(tint, new Color(0.78f, 0.55f, 1f), 0.55f); // a deathcaller's curse
             // A bone servant (on the players' side): pale green, a little see-through.
             if (def.Friendly) tint = new Color(0.62f, 1f, 0.72f, 0.88f);
+            if (s.Type == EnemyType.SummonTotem) tint = new Color(0.82f, 0.62f, 1f); // a calling pillar (RunSimulation.Waves)
             // Wraiths are half-there, and nearly vanish while gathering for a blink.
             if (s.Type is EnemyType.Wraith or EnemyType.ShadeStalker) tint.a = s.Anim == EnemyAnim.Windup ? 0.3f : 0.78f;
             TrialLook(v, s, def, ref tint);
@@ -506,7 +507,7 @@ namespace Game.Gameplay
             v.Animator.Play("idle", force: true);
 
             bool trialProp = type is EnemyType.BoneBrazier or EnemyType.BloodSigil or EnemyType.SoulVessel or EnemyType.PressurePlate or EnemyType.WardCrystal
-                             or EnemyType.Glowcap or EnemyType.Lily or EnemyType.Candelabra or EnemyType.ForbiddenTome;
+                             or EnemyType.Glowcap or EnemyType.Lily or EnemyType.Candelabra or EnemyType.ForbiddenTome or EnemyType.SummonTotem;
             bool glows = def.Type is EnemyType.Wraith or EnemyType.ShadeStalker or EnemyType.AbyssEye or EnemyType.TideWitch or EnemyType.FrostWitch or EnemyType.FireImp or EnemyType.SlagBloater or EnemyType.IceMirror;
             if (elite || def.Boss || glows || trialProp)
             {

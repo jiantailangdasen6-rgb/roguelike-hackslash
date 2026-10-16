@@ -305,6 +305,8 @@ namespace Game.Core
         public Vector2 Position;
         public float Timer;
         public bool Elite;
+        /// <summary>Health beyond the room's scale (a swarm's frail ones; 0 = as usual).</summary>
+        public float HealthMul;
     }
 
     public enum SimEventType : byte

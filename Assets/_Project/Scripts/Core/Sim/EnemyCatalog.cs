@@ -93,6 +93,7 @@ namespace Game.Core
         Wormling,       // a bookworm's half
         ForbiddenTome,  // the archivist's tomes on their lecterns (struck, never broken)
         Candelabra,     // the ink beast's candelabra: stand by one to light it (cannot be hit)
+        SummonTotem,    // a calling pillar (RunSimulation.Waves): calls monsters until broken
     }
 
     /// <summary>Shape of an attack's danger zone, drawn as a telegraph before it lands.</summary>
@@ -843,6 +844,12 @@ namespace Game.Core
             new()
             {
                 Type = EnemyType.Candelabra, Name = "燭台", Sheet = "candelabra", Health = 1f, Speed = 0f, Radius = 0.45f, Xp = 0, Prop = true, Untargetable = true,
+                Attacks = System.Array.Empty<EnemyAttack>(),
+            },
+            new()
+            {
+                // A wave's calling pillar (RunSimulation.Waves): stands still and calls monsters until broken.
+                Type = EnemyType.SummonTotem, Name = "呼び声の柱", Sheet = "bone_brazier", Health = 90f, Speed = 0f, Radius = 0.55f, Xp = 3, Prop = true,
                 Attacks = System.Array.Empty<EnemyAttack>(),
             },
         };

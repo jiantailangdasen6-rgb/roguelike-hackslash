@@ -56,7 +56,7 @@ namespace Game.Gameplay
             Set(SimEventType.RunEnded, F.Int | F.Id); // Id = the contract rank (achievements)
             Set(SimEventType.BossSpawned, F.Id | F.Pos | F.Int);
             Set(SimEventType.PerkOffer, F.Client | F.Seed | F.Int | F.Value);
-            Set(SimEventType.WaveStarted, F.Int | F.Value | F.Id);
+            Set(SimEventType.WaveStarted, F.Int | F.Value | F.Id | F.Size); // Size.x = WaveKind
             Set(SimEventType.HazardWarn, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
             Set(SimEventType.HazardFire, F.Id | F.Int | F.Pos | F.Vec | F.Size | F.Value);
             Set(SimEventType.RewardGranted, F.Id | F.Int | F.Value);

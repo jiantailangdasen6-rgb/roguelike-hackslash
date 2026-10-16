@@ -547,7 +547,11 @@ namespace Game.Gameplay
                     break;
                 }
                 case SimEventType.WaveStarted when e.Int > 1 && RunDirector.Instance != null && RunDirector.Instance.LocalRoom.Id == e.Id:
-                    Toast($"第{e.Int}波 襲来！");
+                {
+                    var wave = (WaveKind)Mathf.RoundToInt(e.Size.x);
+                    if (wave == WaveKind.Normal) Toast($"第{e.Int}波 襲来！");
+                    else Banner($"第{e.Int}波　{WaveCatalog.Name(wave)}", WaveCatalog.Hint(wave), 2.6f);
+                }
                     break;
                 case SimEventType.PlayerDowned:
                     if (NetPlayer.Local != null && e.ClientId != NetPlayer.Local.OwnerClientId)

@@ -240,7 +240,7 @@ namespace Game.Core
 
             // Leftover monsters crumble (no XP) and their pending spawns are cancelled.
             for (int i = 0; i < Enemies.Count; i++)
-                if (Enemies[i].RoomId == room.Id && !Enemies[i].Def.Prop) Enemies[i].Dead = true;
+                if (Enemies[i].RoomId == room.Id && (!Enemies[i].Def.Prop || Enemies[i].Type == EnemyType.SummonTotem)) Enemies[i].Dead = true;
             ProcessDeaths(giveXp: false);
             PendingSpawns.RemoveAll(s => s.Room == room.Id);
             for (int i = Projectiles.Count - 1; i >= 0; i--)

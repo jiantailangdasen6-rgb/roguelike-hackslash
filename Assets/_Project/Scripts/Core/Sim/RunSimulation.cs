@@ -246,6 +246,7 @@ namespace Game.Core
             StepChampions(dt); // RunSimulation.Champions.cs
             StepAffixes(dt); // RunSimulation.Affixes.cs
             StepPoise(dt); // RunSimulation.Break.cs
+            StepTotems(dt); // RunSimulation.Waves.cs
             StepPools(dt); // RunSimulation.Lands.cs
             StepPlayersCombat(dt);
             StepDelayedAreas(dt);
@@ -339,7 +340,7 @@ namespace Game.Core
                 if (Room.Cleared) continue;
                 var def = EnemyCatalog.Get(s.Type);
                 Vector2 at = def.Flying ? s.Position : Arena.Resolve(Layout, s.Position, def.Radius);
-                int id = Enemies.Spawn(s.Type, at, EnemyHealthScale * OmenHealth(def), EnemyDamageScale, s.Elite); // RunSimulation.Omens.cs
+                int id = Enemies.Spawn(s.Type, at, EnemyHealthScale * OmenHealth(def) * (s.HealthMul > 0f ? s.HealthMul : 1f), EnemyDamageScale, s.Elite); // RunSimulation.Omens.cs
                 if (s.Elite && !s.Champion) GiveAffixes(id); // RunSimulation.Affixes.cs
                 Enemies[Enemies.IndexOf(id)].RoomId = s.Room;
                 if (s.Champion) MakeChampion(Enemies.IndexOf(id));
@@ -419,7 +420,7 @@ namespace Game.Core
             for (int i = 0; i < Enemies.Count; i++)
             {
                 ref var e = ref Enemies[i];
-                if (!e.Dead && e.RoomId == room.Id && !e.Def.Prop && !e.Def.Friendly) n++;
+                if (!e.Dead && e.RoomId == room.Id && (!e.Def.Prop || e.Type == EnemyType.SummonTotem) && !e.Def.Friendly) n++; // a calling pillar holds the room
             }
             return n;
         }
@@ -447,9 +448,9 @@ namespace Game.Core
             int size = Mathf.RoundToInt((5f + Room.Index * 0.5f + Room.Area * 1.5f) * PlayerScale * DifficultyDef.EnemyCount * OmenWave);
             Room.LastWaveSize = size;
             bool eliteRoom = Room.Kind == RoomKind.Elite;
-            for (int i = 0; i < size; i++)
-                QueueSpawn(RandomEnemyType(), (eliteRoom && i == 0) || _spawnRng.Chance(EliteChance));
-            Events.Add(new SimEvent(SimEventType.WaveStarted) { Int = Room.Wave, Value = Room.WaveCount, Id = Room.Id });
+            var kind = PickWave(Room); // RunSimulation.Waves.cs
+            SpawnWave(kind, size, eliteRoom);
+            Events.Add(new SimEvent(SimEventType.WaveStarted) { Int = Room.Wave, Value = Room.WaveCount, Id = Room.Id, Size = new Vector2((int)kind, 0f) });
         }
 
         /// <summary>A monster appears in <see cref="Room"/> after a warning rune (at a random free spot unless given).</summary>

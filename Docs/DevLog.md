@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 9c4c5196（次の8案のあと、戦闘の大改善の回避・必殺技・体勢崩しまで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 292fb9ed（次の8案のあと、戦闘の大改善の回避・必殺技・体勢崩し・波の種類まで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
@@ -568,6 +568,10 @@
 - **3 体勢崩し（実装）**：精鋭（体力の40%）・精鋭の主（30%）・主（18%）が「体勢」を持つ（`RunSimulation.Break.cs`、`Enemy.Poise/PoiseMax/Broken`）。攻撃で削れる（強打 ×2.5、砕き ×3、連携 ×1.5、必殺技 ×2、毒・炎は削らない）。3秒攻撃されないと毎秒18%ずつ戻る
   - 削り切ると「崩し」：2.6秒（主は3.2秒）気絶し、受けるダメージ +50%。立ち直ると体勢は満タンに戻り、主は崩すたびに体勢が20%固くなる
   - 見た目：金色の光の輪と破片、「崩し！」、ヒットストップ、魔物が潰れる。主の体力の下に金色の体勢の線（`RunDirector.BossPoise`）、主の名前の横に「崩れた！／怒り／最後のあがき」（以前の「激昂」表示を段階に合わせた）。図鑑（協力）に「体勢崩し」。公開：ver 9c4c5196（NetTest・CrossTest 合格、EditMode 260件）
+- **4 波の種類（実装）**：戦いの間の2波目から、波ごとに出方が変わる（`RunSimulation.Waves.cs`、`WaveKind`、`WaveCatalog`）。普通3：奇襲2：大群2：包囲2：呼び声の柱2（柱は部屋の段が1以上）
+  - 奇襲：部屋の入口（扉の内側）から出る／大群：その土地で一番速い魔物が1.8倍の数、体力45%（`PendingSpawn.HealthMul`）／包囲：仲間の一人の周り半径4.5の輪に出る／呼び声の柱：柱（`EnemyType.SummonTotem`、骨の燭台の絵を紫に）が1〜2本と半分の数の魔物。柱は4.5秒ごとに魔物を呼ぶ（部屋の魔物が10×人数未満のとき）。柱が残っている間は部屋が終わらない
+  - 波の始めに大きな文字で「第2波　奇襲」と一言（`WaveStarted.Size.x` に種類）。図鑑（部屋）に「波の種類」。撮影用 `-wave <種類>`、`-startin combat`
+  - 公開：ver 292fb9ed（NetTest・CrossTest 合格、EditMode 263件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

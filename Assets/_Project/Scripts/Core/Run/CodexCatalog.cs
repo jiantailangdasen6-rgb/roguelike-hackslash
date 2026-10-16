@@ -335,6 +335,18 @@ namespace Game.Core
                 },
                 new()
                 {
+                    Id = "room:Waves", Section = CodexSection.Rooms, Name = "波の種類", Sub = "戦いの間の2波目から", Mark = "波", RewardIcon = -1, AlwaysKnown = true,
+                    Traits = new[]
+                    {
+                        $"{WaveCatalog.Name(WaveKind.Ambush)}：{WaveCatalog.Hint(WaveKind.Ambush)}",
+                        $"{WaveCatalog.Name(WaveKind.Swarm)}：{WaveCatalog.Hint(WaveKind.Swarm)}",
+                        $"{WaveCatalog.Name(WaveKind.Encircle)}：{WaveCatalog.Hint(WaveKind.Encircle)}",
+                        $"{WaveCatalog.Name(WaveKind.Totem)}：{WaveCatalog.Hint(WaveKind.Totem)}（柱が残っている間は部屋が終わらない）",
+                    },
+                    Counter = "波の始めに出る名前を見て、動き方を変える",
+                },
+                new()
+                {
                     Id = "room:Contract", Section = CodexSection.Rooms, Name = "契約", Sub = "拠点の迷宮の碑で", Mark = "契", RewardIcon = -1, AlwaysKnown = true,
                     Traits = new[]
                     {

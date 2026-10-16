@@ -232,6 +232,8 @@ namespace Game.Gameplay
                 _ => "dodge",
             };
             animator.Play(clip, force: true, speed: anim == AttackAnim.Dodge ? 1.2f : 1f);
+            // A swing pulls the body up a little; spells and dodges a little more.
+            Squash.Kick(animator, anim switch { AttackAnim.Dodge => -0.16f, AttackAnim.Skill1 or AttackAnim.Skill2 => 0.14f, _ => 0.07f });
             _actionUntil = Time.time + 0.35f;
         }
 
@@ -273,12 +275,46 @@ namespace Game.Gameplay
                 }
                 case SimEventType.PlayerHurt:
                     animator.Flash(0.1f);
+                    Squash.Kick(animator, -0.2f);
                     if (Time.time > _actionUntil) animator.Play("hurt", force: true);
                     break;
                 case SimEventType.Teleport when IsOwner:
                     mover.Teleport(e.Pos);
                     break;
             }
+        }
+
+        private float _stride;
+        private float _ghostAt;
+        private bool _wasFast;
+
+        /// <summary>Dust under running feet; afterimages in the player's colour while dodging or dashing (anything much faster than a run).</summary>
+        private void Footsteps(Vector3 delta, bool moving)
+        {
+            float dt = Mathf.Max(Time.deltaTime, 0.0001f);
+            float travelled = delta.magnitude;
+            bool fast = travelled / dt > 9f && travelled < 2f && !Downed.Value; // a blink jumps further than any dash in one frame
+            if (fast && Time.time >= _ghostAt)
+            {
+                _ghostAt = Time.time + 0.035f;
+                Juice.AfterImage(animator.Renderer, new Color(Color.r, Color.g, Color.b, 0.32f), 0.22f);
+            }
+            if (_wasFast && !fast)
+            {
+                // Landing out of a dodge: a skid of dust.
+                Juice.Dust(transform.position + new Vector3(-0.2f, 0f), 0.55f, 0.4f);
+                Juice.Dust(transform.position + new Vector3(0.2f, 0f), 0.55f, 0.4f);
+            }
+            _wasFast = fast;
+            if (!moving || fast)
+            {
+                _stride = 0f;
+                return;
+            }
+            _stride += travelled;
+            if (_stride < 1.15f) return;
+            _stride = 0f;
+            Juice.Dust(transform.position);
         }
 
         private void Update()
@@ -296,6 +332,7 @@ namespace Game.Gameplay
             _lastPosition = transform.position;
             bool moving = delta.sqrMagnitude > 0.00004f * Mathf.Max(1f, Time.deltaTime * 60f);
             animator.SetBase(moving ? "run" : "idle");
+            Footsteps(delta, moving && !downed);
 
             // Valor (war cry) glows gold; a ghost is pale, see-through and wavers, with a cold glow.
             r.color = downed ? new Color(0.7f, 0.9f, 1f, 0.62f + 0.12f * Mathf.Sin(Time.time * 3.2f)) : Color.white;

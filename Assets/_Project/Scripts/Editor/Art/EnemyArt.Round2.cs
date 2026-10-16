@@ -443,8 +443,8 @@ namespace Game.EditorTools.Art
             const float arm = 48f, staff = 4f;
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(arm, staff, -2f)),
-                rig.Clip("walk", 8f, true, Shamble(arm, staff, -4f)),
+                rig.Clip("idle", 9f, true, Idle(arm, staff, -2f)),
+                rig.Clip("walk", 10.7f, true, Shamble(arm, staff, -4f)),
                 rig.Clip("windup", 8f, false, new[]
                 {
                     new RigPose { ArmFront = 100f, ArmBack = -100f, Torso = 6f, Head = 8f, WeaponAbsolute = 10f },

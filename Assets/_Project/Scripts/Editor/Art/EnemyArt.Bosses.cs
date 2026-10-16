@@ -8,9 +8,9 @@ namespace Game.EditorTools.Art
     {
         private static IEnumerable<RigPose> BossIdle(float arm, float armBack, float? weapon, int bobAmp = 1)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 8; i++)
             {
-                float s = Mathf.Sin(i / 6f * Mathf.PI * 2f);
+                float s = Mathf.Sin(i / 8f * Mathf.PI * 2f);
                 yield return new RigPose
                 {
                     Bob = Mathf.Round(bobAmp * s), Torso = -2f + 1.5f * s, Head = 2f * s,
@@ -21,9 +21,9 @@ namespace Game.EditorTools.Art
 
         private static IEnumerable<RigPose> BossGlide(float arm, float armBack, float? weapon, int bobAmp = 1)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 8; i++)
             {
-                float s = Mathf.Sin(i / 6f * Mathf.PI * 2f);
+                float s = Mathf.Sin(i / 8f * Mathf.PI * 2f);
                 yield return new RigPose
                 {
                     Bob = Mathf.Round(bobAmp * s), Torso = -8f + 2f * s, Head = 4f,
@@ -198,8 +198,8 @@ namespace Game.EditorTools.Art
             const float arm = 35f, armBack = -20f, staff = -5f;
             return new List<Clip>
             {
-                rig.Clip("idle", 5f, true, BossIdle(arm, armBack, staff)),
-                rig.Clip("walk", 7f, true, BossGlide(arm, armBack, staff)),
+                rig.Clip("idle", 6.7f, true, BossIdle(arm, armBack, staff)),
+                rig.Clip("walk", 9.3f, true, BossGlide(arm, armBack, staff)),
                 rig.Clip("windup", 6f, false, new[]
                 {
                     new RigPose { Torso = 4f, ArmFront = 120f, ArmBack = -90f, Head = 6f, WeaponAbsolute = 10f, Cape = 4f },
@@ -362,8 +362,8 @@ namespace Game.EditorTools.Art
             const float arm = 40f, armBack = -25f, staff = 0f;
             return new List<Clip>
             {
-                rig.Clip("idle", 5f, true, BossIdle(arm, armBack, staff, 2)),
-                rig.Clip("walk", 6f, true, BossGlide(arm, armBack, staff, 2)),
+                rig.Clip("idle", 6.7f, true, BossIdle(arm, armBack, staff, 2)),
+                rig.Clip("walk", 8f, true, BossGlide(arm, armBack, staff, 2)),
                 rig.Clip("windup", 6f, false, new[]
                 {
                     new RigPose { Torso = 4f, ArmFront = 120f, ArmBack = -100f, Head = 6f, Bob = 1f, WeaponAbsolute = 5f, Cape = 4f },

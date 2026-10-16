@@ -21,13 +21,13 @@ MonoBehaviour:
   Clips:
   - Name: idle
     Row: 0
-    Frames: 4
-    Fps: 6
+    Frames: 8
+    Fps: 9
     Loop: 1
   - Name: run
     Row: 1
-    Frames: 6
-    Fps: 12
+    Frames: 8
+    Fps: 16
     Loop: 1
   - Name: attack
     Row: 2
@@ -56,12 +56,12 @@ MonoBehaviour:
     Loop: 0
   - Name: hurt
     Row: 7
-    Frames: 2
+    Frames: 3
     Fps: 10
     Loop: 0
   - Name: death
     Row: 8
-    Frames: 6
+    Frames: 8
     Fps: 9
     Loop: 0
   RecolorOf: {fileID: 11400000, guid: 90a436f92d5805a42bfe57beb8937723, type: 2}
@@ -69,37 +69,37 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4288632676
   - serializedVersion: 2
+    rgba: 4282195492
+  - serializedVersion: 2
     rgba: 4280750615
   - serializedVersion: 2
     rgba: 4286201160
   - serializedVersion: 2
     rgba: 4283836978
   - serializedVersion: 2
-    rgba: 4280094483
+    rgba: 4279569167
   - serializedVersion: 2
-    rgba: 4282195492
+    rgba: 4280094483
   - serializedVersion: 2
     rgba: 4280685593
   - serializedVersion: 2
-    rgba: 4279569167
+    rgba: 4281801248
   - serializedVersion: 2
     rgba: 4282327850
   - serializedVersion: 2
-    rgba: 4281801248
-  - serializedVersion: 2
     rgba: 4280619800
   - serializedVersion: 2
-    rgba: 4280094225
-  - serializedVersion: 2
     rgba: 4281473568
+  - serializedVersion: 2
+    rgba: 4280094225
   - serializedVersion: 2
     rgba: 4279963154
   - serializedVersion: 2
     rgba: 4283902771
   - serializedVersion: 2
-    rgba: 4281276960
-  - serializedVersion: 2
     rgba: 4279306765
+  - serializedVersion: 2
+    rgba: 4281276960
   - serializedVersion: 2
     rgba: 4285677128
   - serializedVersion: 2
@@ -108,43 +108,77 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4280965332
   - serializedVersion: 2
+    rgba: 4278981719
+  - serializedVersion: 2
     rgba: 4278913845
   - serializedVersion: 2
     rgba: 4279775912
   - serializedVersion: 2
     rgba: 4279377018
   - serializedVersion: 2
-    rgba: 4278979621
+    rgba: 4278913305
   - serializedVersion: 2
-    rgba: 4278981719
+    rgba: 4278979621
   - serializedVersion: 2
     rgba: 4279046449
   - serializedVersion: 2
-    rgba: 4278913305
+    rgba: 4279242826
   - serializedVersion: 2
     rgba: 4279641169
   - serializedVersion: 2
-    rgba: 4279242826
-  - serializedVersion: 2
     rgba: 4279111473
   - serializedVersion: 2
-    rgba: 4278716454
-  - serializedVersion: 2
     rgba: 4279244353
+  - serializedVersion: 2
+    rgba: 4278716454
   - serializedVersion: 2
     rgba: 4279044641
   - serializedVersion: 2
     rgba: 4279313528
   - serializedVersion: 2
-    rgba: 4279376700
-  - serializedVersion: 2
     rgba: 4278847508
+  - serializedVersion: 2
+    rgba: 4279376700
   - serializedVersion: 2
     rgba: 4280172440
   - serializedVersion: 2
     rgba: 4278519067
-  FixPixels: c80b0000460d000086110000ca1e0000ca210000912a0000922a0000922d00009f2e0000da2e0000213000005c3000009d8e0000e08e0000e28e00001e900000e6cd000017d1000018d100005ae600005be60000214d0100234d0100a24f0100a44f0100605001001f5201005f52010021ad010023ad0100a2af0100a4af010060b00100640d0200660d0200a40d0200a50d0200a70d0200e20d0200e40d0200a10e0200a30e0200646d0200666d0200a46d0200a56d0200a76d0200e26d0200e46d0200a16e0200a36e020063cd020065cd0200a3cd0200a5cd020023ce020025ce020063ce020065ce0200a3ce0200a5ce020063cf020065cf0200222c0300242c0300622c0300642c0300222d0300242d0300622d0300642d0300i
+  FixPixels: c80f000086110000c6110000471b00000b2b00000b2f0000d1360000d1380000d23a00001f3e00005c3e00005d3e0000214000005e40000099400000a1bc0000a3bc00005ebe00001bc0000060c000001dc20000661201009716010098160100da320100db32010021bc010023bc010022bf010024bf010060c001009fc20100dfc20100213c0200233c0200223f0200243f02006040020064bc020066bc0200a4bc0200a5bc0200a7bc0200e2bc0200e4bc020021be020023be0200643c0300663c0300a43c0300a53c0300a73c0300e23c0300e43c0300213e0300233e0300a4bc0300a6bc0300a4bd0300a6bd030024be030026be030064be030066be0300e4be0300e6be030024bf030026bf030064bf030066bf0300e4bf0300e6bf0300223b0400243b0400623b0400643b0400223c0400243c0400e23c0400e43c0400a23d0400a43d0400e23d0400e43d0400623e0400643e0400a23e0400a43e0400i
   FixColors:
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
+  - serializedVersion: 2
+    rgba: 4283085055
   - serializedVersion: 2
     rgba: 4283085055
   - serializedVersion: 2

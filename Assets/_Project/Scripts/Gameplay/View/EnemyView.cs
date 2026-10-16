@@ -136,7 +136,14 @@ namespace Game.Gameplay
             switch (e.Type)
             {
                 case SimEventType.EnemyHit:
-                    if (_visuals.TryGetValue((ushort)e.Id, out var v)) v.Animator.Flash(EnemyCatalog.Get(v.Type).Boss ? 0.035f : 0.07f); // bosses get hit constantly: keep the flash subtle
+                    if (_visuals.TryGetValue((ushort)e.Id, out var v))
+                    {
+                        var hitDef = EnemyCatalog.Get(v.Type);
+                        v.Animator.Flash(hitDef.Boss ? 0.035f : 0.07f); // bosses get hit constantly: keep the flash subtle
+                        bool heavy = (HitInfo.Flags(e.Int) & HitFlags.Heavy) != 0;
+                        if (!hitDef.Flat && (HitInfo.Flags(e.Int) & HitFlags.DamageOverTime) == 0)
+                            Squash.Kick(v.Root.transform, hitDef.Boss ? (heavy ? -0.08f : -0.04f) : heavy ? -0.3f : -0.18f);
+                    }
                     break;
                 case SimEventType.EnemyDied:
                     if (_visuals.Remove((ushort)e.Id, out var dead))
@@ -144,6 +151,7 @@ namespace Game.Gameplay
                         dead.Animator.Frozen = false;
                         dead.Animator.Renderer.color = Color.white;
                         dead.Animator.Play("death", force: true, hold: true);
+                        if (!EnemyCatalog.Get(dead.Type).Flat) Squash.Kick(dead.Root.transform, -0.3f);
                         dead.Icon.enabled = false;
                         dead.Ice.enabled = false;
                         if (dead.Glow != null) dead.Glow.enabled = false;
@@ -198,6 +206,8 @@ namespace Game.Gameplay
                 c.Age += HitStop.DeltaTime;
                 if (c.Age > 1.6f)
                 {
+                    if (c.Age - HitStop.DeltaTime <= 1.6f && !EnemyCatalog.Get(c.Visual.Type).Flat)
+                        Juice.Dust(c.Visual.Root.transform.position, EnemyCatalog.Get(c.Visual.Type).Boss ? 1.6f : 0.8f, 0.45f); // crumbles to dust
                     var color = c.Visual.Animator.Renderer.color;
                     color.a = Mathf.Clamp01(1f - (c.Age - 1.6f) / 0.6f);
                     c.Visual.Animator.Renderer.color = color;
@@ -267,8 +277,8 @@ namespace Game.Gameplay
                 {
                     case EnemyAnim.Idle: v.Animator.SetBase("idle"); v.Animator.Play("idle"); break;
                     case EnemyAnim.Walk: v.Animator.SetBase("walk"); v.Animator.Play("walk"); break;
-                    case EnemyAnim.Windup: v.Animator.Play("windup", force: true, hold: true); break;
-                    case EnemyAnim.Strike: v.Animator.Play("strike", force: true, hold: true); break;
+                    case EnemyAnim.Windup: v.Animator.Play("windup", force: true, hold: true); Squash.Kick(t, def.Boss ? -0.06f : -0.12f); break; // gathers itself
+                    case EnemyAnim.Strike: v.Animator.Play("strike", force: true, hold: true); Squash.Kick(t, def.Boss ? 0.08f : 0.2f); break; // and lets fly
                     case EnemyAnim.Hurt: v.Animator.Play("hurt", force: true); break;
                     case EnemyAnim.Stunned: v.Animator.Play("hurt", force: true, hold: true); break;
                 }
@@ -424,7 +434,10 @@ namespace Game.Gameplay
 
             v.Root.SetActive(true);
             // The lords (and the queen's reflections) stand a head taller than their art: they should loom.
-            v.Root.transform.localScale = Vector3.one * ScaleOf(type, def);
+            var squash = v.Root.GetComponent<Squash>();
+            if (squash == null) squash = v.Root.AddComponent<Squash>();
+            squash.Base = Vector3.one * ScaleOf(type, def);
+            if (!def.Flat && !def.Prop) squash.Kick(0.22f); // springs up out of its summoning circle
             v.Anim = (EnemyAnim)255;
             v.Shadow.enabled = !def.Flat && type != EnemyType.IceMirror; // the queen's reflections cast no shadow
             v.Animator.Renderer.color = Color.white;

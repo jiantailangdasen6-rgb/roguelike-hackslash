@@ -82,12 +82,13 @@ namespace Game.EditorTools.Art
 
         private static IEnumerable<RigPose> Shamble(float arm, float? weapon, float lean)
         {
-            for (int i = 0; i < 6; i++)
+            // Eight frames of a dragging, lurching walk.
+            for (int i = 0; i < 8; i++)
             {
-                float s = Mathf.Sin(i / 6f * Mathf.PI * 2f);
+                float s = Mathf.Sin(i / 8f * Mathf.PI * 2f);
                 yield return new RigPose
                 {
-                    Bob = Mathf.Abs(s) < 0.5f ? 1f : 0f,
+                    Bob = Mathf.Abs(s) < 0.4f ? 1f : 0f,
                     Torso = lean - 3f * s,
                     Head = 6f * s,
                     LegFront = 26f * s,
@@ -101,14 +102,15 @@ namespace Game.EditorTools.Art
 
         private static IEnumerable<RigPose> Idle(float arm, float? weapon, float lean)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 6; i++)
             {
-                float k = i >= 2 ? 1f : 0f;
+                float b = 0.5f - 0.5f * Mathf.Cos(i / 6f * Mathf.PI * 2f);
+                float k = b > 0.5f ? 1f : b;
                 yield return new RigPose
                 {
-                    Bob = -k,
+                    Bob = b > 0.5f ? -1f : 0f,
                     Torso = lean - 2f * k,
-                    Head = i == 1 ? 8f : i == 3 ? -6f : 0f, // twitchy head
+                    Head = i == 1 ? 8f : i == 4 ? -6f : 0f, // twitchy head
                     ArmFront = arm + 4f * k,
                     ArmBack = -6f,
                     WeaponAbsolute = weapon.HasValue ? weapon.Value + 4f * k : null,
@@ -118,8 +120,9 @@ namespace Game.EditorTools.Art
 
         private static IEnumerable<RigPose> Hurt(float arm, float? weapon, float lean)
         {
-            yield return new RigPose { Torso = lean + 22f, Head = 25f, ArmFront = arm + 40f, ArmBack = -50f, LegFront = 10f, Shift = -2f, WeaponAbsolute = weapon + 40f };
-            yield return new RigPose { Torso = lean + 10f, Head = 10f, ArmFront = arm + 15f, ArmBack = -25f, Shift = -1f, WeaponAbsolute = weapon + 15f };
+            yield return new RigPose { Torso = lean + 24f, Head = 28f, ArmFront = arm + 45f, ArmBack = -55f, LegFront = 12f, Shift = -2f, Bob = 1f, WeaponAbsolute = weapon + 45f };
+            yield return new RigPose { Torso = lean + 15f, Head = 16f, ArmFront = arm + 26f, ArmBack = -36f, LegFront = 6f, Shift = -2f, WeaponAbsolute = weapon + 26f };
+            yield return new RigPose { Torso = lean + 6f, Head = 5f, ArmFront = arm + 9f, ArmBack = -15f, Shift = -1f, Bob = -1f, WeaponAbsolute = weapon + 9f };
         }
 
         /// <summary>The skeleton falls apart: bones drop to the floor, the skull rolls.</summary>
@@ -177,8 +180,8 @@ namespace Game.EditorTools.Art
             const float lean = -12f, arm = 20f, weapon = -35f;
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(arm, weapon, lean)),
-                rig.Clip("walk", 9f, true, Shamble(arm, weapon, lean)),
+                rig.Clip("idle", 9f, true, Idle(arm, weapon, lean)),
+                rig.Clip("walk", 12f, true, Shamble(arm, weapon, lean)),
                 rig.Clip("windup", 10f, false, new[]
                 {
                     new RigPose { Torso = lean + 8f, ArmFront = 120f, ArmBack = -30f, Head = 6f },
@@ -220,8 +223,8 @@ namespace Game.EditorTools.Art
             const float lean = -6f, arm = 25f, idleBow = -10f;
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(arm, idleBow, lean)),
-                rig.Clip("walk", 9f, true, Shamble(arm, idleBow, lean)),
+                rig.Clip("idle", 9f, true, Idle(arm, idleBow, lean)),
+                rig.Clip("walk", 12f, true, Shamble(arm, idleBow, lean)),
                 rig.Clip("windup", 8f, false, new[]
                 {
                     new RigPose { Torso = lean + 2f, ArmFront = 70f, ArmBack = 40f, WeaponAbsolute = -20f },
@@ -283,7 +286,7 @@ namespace Game.EditorTools.Art
             const float lean = -30f;
             var clips = new List<Clip>
             {
-                rig.Clip("idle", 7f, true, Idle(35f, null, lean)),
+                rig.Clip("idle", 10.5f, true, Idle(35f, null, lean)),
                 rig.Clip("walk", 13f, true, Gallop(lean)),
                 rig.Clip("windup", 10f, false, new[]
                 {
@@ -347,8 +350,8 @@ namespace Game.EditorTools.Art
             rig.SmearColor = PixelMaterial.Hex("#ff8a2a");
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(25f, -60f, -4f)),
-                rig.Clip("walk", 9f, true, Shamble(25f, -60f, -6f)),
+                rig.Clip("idle", 9f, true, Idle(25f, -60f, -4f)),
+                rig.Clip("walk", 12f, true, Shamble(25f, -60f, -6f)),
                 rig.Clip("windup", 8f, false, new[]
                 {
                     new RigPose { ArmFront = 100f, ArmBack = -90f, Torso = 6f, Head = 8f, WeaponTilt = 0f },
@@ -513,8 +516,8 @@ namespace Game.EditorTools.Art
 
             return new List<Clip>
             {
-                rig.Clip("idle", 5f, true, Idle(arm, sword, lean)),
-                rig.Clip("walk", 8f, true, Shamble(arm, sword, lean)),
+                rig.Clip("idle", 7.5f, true, Idle(arm, sword, lean)),
+                rig.Clip("walk", 10.7f, true, Shamble(arm, sword, lean)),
                 rig.Clip("windup", 7f, false, new[]
                 {
                     new RigPose { Torso = lean + 6f, ArmFront = 120f, ArmBack = 60f, Head = 6f, Cape = 4f },

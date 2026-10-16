@@ -17,33 +17,40 @@ namespace Game.EditorTools.Art
 
         private static IEnumerable<RigPose> Idle(float arm, float armBack, float? weapon, float tilt = 0f)
         {
-            for (int i = 0; i < 4; i++)
+            // Eight frames of a slow breath: the shoulders sink and rise, the head follows a beat late, the cape sways.
+            for (int i = 0; i < IdleFrames; i++)
             {
-                float breath = i >= 2 ? -1f : 0f;
+                float ph = i / (float)IdleFrames * Mathf.PI * 2f;
+                float b = 0.5f - 0.5f * Mathf.Cos(ph);
+                float late = 0.5f - 0.5f * Mathf.Cos(ph - 0.9f);
                 yield return new RigPose
                 {
-                    Bob = breath,
-                    Head = i == 3 ? -2f : 0f,
-                    ArmFront = arm - (i >= 2 ? 3f : 0f),
-                    ArmBack = armBack + (i >= 2 ? 3f : 0f),
-                    WeaponAbsolute = weapon.HasValue ? weapon.Value - (i >= 2 ? 3f : 0f) : null,
+                    Bob = b > 0.55f ? -1f : 0f,
+                    Head = -2.5f * late,
+                    Torso = 1.5f * b,
+                    ArmFront = arm - 4f * b,
+                    ArmBack = armBack + 4f * b,
+                    WeaponAbsolute = weapon.HasValue ? weapon.Value - 4f * b : null,
                     WeaponTilt = tilt,
-                    Cape = -4f - i * 1.5f,
+                    Cape = -5f - 3f * late - 2f * Mathf.Sin(ph),
                 };
             }
         }
 
         private static IEnumerable<RigPose> Run(float arm, float? weapon, float tilt = 0f, float armSwing = 15f)
         {
-            for (int i = 0; i < 6; i++)
+            // Eight frames: contact, down, passing, up on each foot. The body dips as the weight lands and the cape trails.
+            for (int i = 0; i < RunFrames; i++)
             {
-                float s = Mathf.Sin(i / 6f * Mathf.PI * 2f);
-                float c = Mathf.Abs(Mathf.Cos(i / 6f * Mathf.PI * 2f));
+                float ph = i / (float)RunFrames * Mathf.PI * 2f;
+                float s = Mathf.Sin(ph);
+                float c = Mathf.Abs(Mathf.Cos(ph));
+                float drop = Mathf.Abs(Mathf.Sin(ph * 2f - 0.6f));
                 yield return new RigPose
                 {
-                    Bob = c > 0.7f ? 1f : 0f,
-                    Torso = -9f,
-                    Head = 4f,
+                    Bob = c > 0.7f ? 1f : drop > 0.85f ? -1f : 0f,
+                    Torso = -9f - 2f * drop,
+                    Head = 4f + 2f * drop,
                     LegFront = 38f * s,
                     LegBack = -38f * s,
                     ArmBack = 35f * s,
@@ -80,13 +87,15 @@ namespace Game.EditorTools.Art
 
         private static IEnumerable<RigPose> Hurt(float arm, float? weapon, float tilt = 0f)
         {
-            yield return new RigPose { Torso = 16f, Head = 14f, ArmFront = arm + 35f, ArmBack = -45f, LegFront = 12f, LegBack = -8f, WeaponAbsolute = weapon + 35f, WeaponTilt = tilt, Cape = 10f, Shift = -1f };
-            yield return new RigPose { Torso = 8f, Head = 6f, ArmFront = arm + 15f, ArmBack = -20f, LegFront = 6f, LegBack = -4f, WeaponAbsolute = weapon + 15f, WeaponTilt = tilt, Cape = 4f };
+            yield return new RigPose { Torso = 18f, Head = 16f, ArmFront = arm + 40f, ArmBack = -50f, LegFront = 14f, LegBack = -10f, WeaponAbsolute = weapon + 40f, WeaponTilt = tilt, Cape = 12f, Shift = -2f, Bob = 1f };
+            yield return new RigPose { Torso = 12f, Head = 10f, ArmFront = arm + 25f, ArmBack = -32f, LegFront = 9f, LegBack = -6f, WeaponAbsolute = weapon + 25f, WeaponTilt = tilt, Cape = 7f, Shift = -1f };
+            yield return new RigPose { Torso = 4f, Head = 3f, ArmFront = arm + 8f, ArmBack = -12f, LegFront = 4f, LegBack = -2f, WeaponAbsolute = weapon + 8f, WeaponTilt = tilt, Cape = 2f, Bob = -1f };
         }
 
         private static IEnumerable<RigPose> Death(float arm, float tilt)
         {
-            float[] fall = { 0f, 12f, 35f, 62f, 84f, 90f };
+            // Knees give, the body topples, hits the floor with a small bounce and settles.
+            float[] fall = { 0f, 6f, 18f, 36f, 58f, 80f, 95f, 90f };
             for (int i = 0; i < fall.Length; i++)
             {
                 float k = i / (fall.Length - 1f);
@@ -102,10 +111,13 @@ namespace Game.EditorTools.Art
                     Cape = 30f * k,
                     BodyAngle = fall[i],
                     BodyPivot = P(29f, 10f),
-                    BodyOffset = P(0f, i >= 4 ? -2f : 0f),
+                    BodyOffset = P(0f, i == 6 ? -1f : i >= 5 ? -2f : 0f),
                 };
             }
         }
+
+        public const int IdleFrames = 8;
+        public const int RunFrames = 8;
 
         // ------------------------------------------------------------------ Warrior
 
@@ -191,8 +203,8 @@ namespace Game.EditorTools.Art
             const float idleArm = 18f, idleSword = -40f;
             var clips = new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(idleArm, -8f, idleSword)),
-                rig.Clip("run", 12f, true, Run(25f, -55f)),
+                rig.Clip("idle", 9f, true, Idle(idleArm, -8f, idleSword)),
+                rig.Clip("run", 16f, true, Run(25f, -55f)),
                 rig.Clip("attack", 18f, false, Swing(rig, fromArm: 215f, toArm: 35f)),
                 rig.Clip("attack2", 18f, false, Swing(rig, fromArm: 60f, toArm: 200f, backhand: true)),
                 rig.Clip("skill1", 16f, false, Lunge()),
@@ -347,8 +359,8 @@ namespace Game.EditorTools.Art
             const float arm = 48f, staff = 4f; // staff held upright, in front of the body
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(arm, -5f, staff)),
-                rig.Clip("run", 12f, true, Run(35f, 15f, armSwing: 8f)),
+                rig.Clip("idle", 9f, true, Idle(arm, -5f, staff)),
+                rig.Clip("run", 16f, true, Run(35f, 15f, armSwing: 8f)),
                 rig.Clip("attack", 16f, false, Thrust()),
                 rig.Clip("attack2", 16f, false, Thrust()),
                 rig.Clip("skill1", 12f, false, Raise(staffSpin: true)),
@@ -456,8 +468,8 @@ namespace Game.EditorTools.Art
             const float arm = 25f, bow = -15f;
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(arm, -10f, bow)),
-                rig.Clip("run", 12f, true, Run(30f, -25f, armSwing: 10f)),
+                rig.Clip("idle", 9f, true, Idle(arm, -10f, bow)),
+                rig.Clip("run", 16f, true, Run(30f, -25f, armSwing: 10f)),
                 rig.Clip("attack", 18f, false, Shoot()),
                 rig.Clip("attack2", 18f, false, Shoot()),
                 rig.Clip("skill1", 14f, false, Shoot(skyward: true)),

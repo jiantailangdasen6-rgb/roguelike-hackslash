@@ -21,13 +21,13 @@ MonoBehaviour:
   Clips:
   - Name: idle
     Row: 0
-    Frames: 4
-    Fps: 5
+    Frames: 8
+    Fps: 7.5
     Loop: 1
   - Name: run
     Row: 1
-    Frames: 6
-    Fps: 11
+    Frames: 8
+    Fps: 14.7
     Loop: 1
   - Name: attack
     Row: 2
@@ -56,12 +56,12 @@ MonoBehaviour:
     Loop: 0
   - Name: hurt
     Row: 7
-    Frames: 2
+    Frames: 3
     Fps: 10
     Loop: 0
   - Name: death
     Row: 8
-    Frames: 6
+    Frames: 8
     Fps: 9
     Loop: 0
   RecolorOf: {fileID: 11400000, guid: ce592f963e6b74c4d96e073c2b2a4fcc, type: 2}
@@ -71,45 +71,49 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4280050823
   - serializedVersion: 2
-    rgba: 4279314486
-  - serializedVersion: 2
     rgba: 4286936943
   - serializedVersion: 2
     rgba: 4284108103
   - serializedVersion: 2
-    rgba: 4279777096
-  - serializedVersion: 2
-    rgba: 4290490793
+    rgba: 4279314486
   - serializedVersion: 2
     rgba: 4278853422
   - serializedVersion: 2
-    rgba: 4279385431
+    rgba: 4279777096
   - serializedVersion: 2
     rgba: 4279114277
+  - serializedVersion: 2
+    rgba: 4279385431
+  - serializedVersion: 2
+    rgba: 4290490793
+  - serializedVersion: 2
+    rgba: 4280162329
+  - serializedVersion: 2
+    rgba: 4279175948
   - serializedVersion: 2
     rgba: 4278915095
   - serializedVersion: 2
     rgba: 4282003243
   - serializedVersion: 2
-    rgba: 4284925926
-  - serializedVersion: 2
     rgba: 4282991426
   - serializedVersion: 2
-    rgba: 4280885794
-  - serializedVersion: 2
-    rgba: 4280162329
+    rgba: 4280754208
   - serializedVersion: 2
     rgba: 4284437839
   - serializedVersion: 2
     rgba: 4280227862
   - serializedVersion: 2
-    rgba: 4280754208
+    rgba: 4280885794
+  - serializedVersion: 2
+    rgba: 4282398515
   - serializedVersion: 2
     rgba: 4281741617
   - serializedVersion: 2
-    rgba: 4290299339
+    rgba: 4284925926
   - serializedVersion: 2
     rgba: 4287272348
+  - serializedVersion: 2
+    rgba: 4290299339
   - serializedVersion: 2
     rgba: 4281349434
   - serializedVersion: 2
@@ -117,74 +121,74 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4279373070
   - serializedVersion: 2
-    rgba: 4284114027
-  - serializedVersion: 2
     rgba: 4281874749
   - serializedVersion: 2
-    rgba: 4282398515
-  - serializedVersion: 2
-    rgba: 4280885534
+    rgba: 4284114027
   - serializedVersion: 2
     rgba: 4281740846
+  - serializedVersion: 2
+    rgba: 4280885534
   - serializedVersion: 2
     rgba: 4280030486
   - serializedVersion: 2
     rgba: 4280756268
   - serializedVersion: 2
-    rgba: 4279768859
+    rgba: 4287004537
   - serializedVersion: 2
     rgba: 4281027159
   - serializedVersion: 2
-    rgba: 4287004537
-  - serializedVersion: 2
-    rgba: 4279175948
-  - serializedVersion: 2
     rgba: 4282927694
+  - serializedVersion: 2
+    rgba: 4279768859
   RecolorTo:
   - serializedVersion: 2
     rgba: 4281494184
   - serializedVersion: 2
     rgba: 4280306298
   - serializedVersion: 2
-    rgba: 4279443249
-  - serializedVersion: 2
     rgba: 4285168209
   - serializedVersion: 2
     rgba: 4283193142
   - serializedVersion: 2
-    rgba: 4279839297
-  - serializedVersion: 2
-    rgba: 4287406198
+    rgba: 4279443249
   - serializedVersion: 2
     rgba: 4278850594
   - serializedVersion: 2
-    rgba: 4279512138
+    rgba: 4279839297
   - serializedVersion: 2
     rgba: 4279112737
+  - serializedVersion: 2
+    rgba: 4279512138
+  - serializedVersion: 2
+    rgba: 4287406198
+  - serializedVersion: 2
+    rgba: 4279900692
+  - serializedVersion: 2
+    rgba: 4279110923
   - serializedVersion: 2
     rgba: 4278914067
   - serializedVersion: 2
     rgba: 4281547298
   - serializedVersion: 2
-    rgba: 4284126416
-  - serializedVersion: 2
     rgba: 4281875760
   - serializedVersion: 2
-    rgba: 4280427291
-  - serializedVersion: 2
-    rgba: 4279900692
+    rgba: 4280427290
   - serializedVersion: 2
     rgba: 4283193146
   - serializedVersion: 2
     rgba: 4280033299
   - serializedVersion: 2
-    rgba: 4280427290
+    rgba: 4280427291
+  - serializedVersion: 2
+    rgba: 4281744934
   - serializedVersion: 2
     rgba: 4280954148
   - serializedVersion: 2
-    rgba: 4282272570
+    rgba: 4284126416
   - serializedVersion: 2
     rgba: 4281087272
+  - serializedVersion: 2
+    rgba: 4282272570
   - serializedVersion: 2
     rgba: 4279177741
   - serializedVersion: 2
@@ -192,28 +196,24 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4279308301
   - serializedVersion: 2
-    rgba: 4280033817
-  - serializedVersion: 2
     rgba: 4279703317
   - serializedVersion: 2
-    rgba: 4281744934
-  - serializedVersion: 2
-    rgba: 4280559896
+    rgba: 4280033817
   - serializedVersion: 2
     rgba: 4281085731
+  - serializedVersion: 2
+    rgba: 4280559896
   - serializedVersion: 2
     rgba: 4279834899
   - serializedVersion: 2
     rgba: 4279308559
   - serializedVersion: 2
-    rgba: 4279044875
+    rgba: 4284773204
   - serializedVersion: 2
     rgba: 4280760655
   - serializedVersion: 2
-    rgba: 4284773204
-  - serializedVersion: 2
-    rgba: 4279110923
-  - serializedVersion: 2
     rgba: 4280098587
+  - serializedVersion: 2
+    rgba: 4279044875
   FixPixels: 
   FixColors: []

@@ -21,13 +21,13 @@ MonoBehaviour:
   Clips:
   - Name: idle
     Row: 0
-    Frames: 4
-    Fps: 5
+    Frames: 6
+    Fps: 7.5
     Loop: 1
   - Name: walk
     Row: 1
-    Frames: 6
-    Fps: 8
+    Frames: 8
+    Fps: 10.7
     Loop: 1
   - Name: windup
     Row: 2
@@ -41,7 +41,7 @@ MonoBehaviour:
     Loop: 0
   - Name: hurt
     Row: 4
-    Frames: 2
+    Frames: 3
     Fps: 10
     Loop: 0
   - Name: death

@@ -84,8 +84,8 @@ namespace Game.EditorTools.Art
             const float arm = 48f, staff = 4f;
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(arm, -5f, staff)),
-                rig.Clip("run", 12f, true, Run(35f, 15f, armSwing: 8f)),
+                rig.Clip("idle", 9f, true, Idle(arm, -5f, staff)),
+                rig.Clip("run", 16f, true, Run(35f, 15f, armSwing: 8f)),
                 rig.Clip("attack", 16f, false, Thrust()),
                 rig.Clip("attack2", 16f, false, Thrust()),
                 rig.Clip("skill1", 11f, false, Raise(staffSpin: false)),
@@ -183,8 +183,8 @@ namespace Game.EditorTools.Art
             const float idleArm = 18f, idleSword = -40f;
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(idleArm, -8f, idleSword)),
-                rig.Clip("run", 12f, true, Run(25f, -55f)),
+                rig.Clip("idle", 9f, true, Idle(idleArm, -8f, idleSword)),
+                rig.Clip("run", 16f, true, Run(25f, -55f)),
                 rig.Clip("attack", 17f, false, Swing(rig, fromArm: 210f, toArm: 40f)),
                 rig.Clip("attack2", 17f, false, Swing(rig, fromArm: 60f, toArm: 205f, backhand: true)),
                 rig.Clip("skill1", 11f, false, Raise(staffSpin: false)),

@@ -21,13 +21,13 @@ MonoBehaviour:
   Clips:
   - Name: idle
     Row: 0
-    Frames: 4
-    Fps: 6
+    Frames: 8
+    Fps: 9
     Loop: 1
   - Name: run
     Row: 1
-    Frames: 6
-    Fps: 12
+    Frames: 8
+    Fps: 16
     Loop: 1
   - Name: attack
     Row: 2
@@ -56,12 +56,12 @@ MonoBehaviour:
     Loop: 0
   - Name: hurt
     Row: 7
-    Frames: 2
+    Frames: 3
     Fps: 10
     Loop: 0
   - Name: death
     Row: 8
-    Frames: 6
+    Frames: 8
     Fps: 9
     Loop: 0
   RecolorOf: {fileID: 11400000, guid: a5bad22f7f68e8943a4aee62c6aa69be, type: 2}
@@ -69,34 +69,34 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4282524695
   - serializedVersion: 2
-    rgba: 4289222704
-  - serializedVersion: 2
     rgba: 4280357133
   - serializedVersion: 2
     rgba: 4281407762
   - serializedVersion: 2
+    rgba: 4289222704
+  - serializedVersion: 2
     rgba: 4286069279
   - serializedVersion: 2
-    rgba: 4280685066
-  - serializedVersion: 2
     rgba: 4283048467
+  - serializedVersion: 2
+    rgba: 4280685066
   - serializedVersion: 2
     rgba: 4279569162
   RecolorTo:
   - serializedVersion: 2
     rgba: 4279570487
   - serializedVersion: 2
-    rgba: 4280754058
-  - serializedVersion: 2
     rgba: 4279110171
   - serializedVersion: 2
     rgba: 4279307304
   - serializedVersion: 2
+    rgba: 4280754058
+  - serializedVersion: 2
     rgba: 4280096095
   - serializedVersion: 2
-    rgba: 4278978588
-  - serializedVersion: 2
     rgba: 4279504442
+  - serializedVersion: 2
+    rgba: 4278978588
   - serializedVersion: 2
     rgba: 4278978576
   FixPixels: 

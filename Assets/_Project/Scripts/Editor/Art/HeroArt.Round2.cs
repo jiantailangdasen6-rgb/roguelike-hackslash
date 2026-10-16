@@ -92,8 +92,8 @@ namespace Game.EditorTools.Art
             return new List<Clip>
             {
                 // The shield is held up in front (back arm raised), the hammer rests on the shoulder.
-                rig.Clip("idle", 5f, true, Idle(idleArm, 60f, idleHammer)),
-                rig.Clip("run", 11f, true, GuardRun()),
+                rig.Clip("idle", 7.5f, true, Idle(idleArm, 60f, idleHammer)),
+                rig.Clip("run", 14.7f, true, GuardRun()),
                 rig.Clip("attack", 15f, false, Swing(rig, fromArm: 200f, toArm: 40f)),
                 rig.Clip("attack2", 15f, false, Swing(rig, fromArm: 190f, toArm: 30f)),
                 rig.Clip("skill1", 14f, false, ShieldBash()),
@@ -200,7 +200,7 @@ namespace Game.EditorTools.Art
             return new List<Clip>
             {
                 rig.Clip("idle", 7f, true, Crouch()),
-                rig.Clip("run", 14f, true, Run(40f, 20f, armSwing: 12f)),
+                rig.Clip("run", 18.7f, true, Run(40f, 20f, armSwing: 12f)),
                 rig.Clip("attack", 22f, false, Swing(rig, fromArm: 150f, toArm: 45f)),
                 rig.Clip("attack2", 22f, false, Swing(rig, fromArm: 40f, toArm: 150f, backhand: true)),
                 rig.Clip("skill1", 16f, false, Dodge(30f)),
@@ -289,8 +289,8 @@ namespace Game.EditorTools.Art
             const float idleArm = 40f;
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(idleArm, -12f, 10f)),
-                rig.Clip("run", 12f, true, Run(35f, 20f, armSwing: 10f)),
+                rig.Clip("idle", 9f, true, Idle(idleArm, -12f, 10f)),
+                rig.Clip("run", 16f, true, Run(35f, 20f, armSwing: 10f)),
                 rig.Clip("attack", 16f, false, ThrowPoses(underhand: false)),
                 rig.Clip("attack2", 16f, false, ThrowPoses(underhand: false)),
                 rig.Clip("skill1", 13f, false, ThrowPoses(underhand: false, big: true)),

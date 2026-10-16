@@ -21,13 +21,13 @@ MonoBehaviour:
   Clips:
   - Name: idle
     Row: 0
-    Frames: 4
-    Fps: 6
+    Frames: 8
+    Fps: 9
     Loop: 1
   - Name: walk
     Row: 1
-    Frames: 6
-    Fps: 9
+    Frames: 8
+    Fps: 12
     Loop: 1
   - Name: windup
     Row: 2
@@ -41,12 +41,12 @@ MonoBehaviour:
     Loop: 0
   - Name: hurt
     Row: 4
-    Frames: 2
+    Frames: 3
     Fps: 10
     Loop: 0
   - Name: death
     Row: 5
-    Frames: 6
+    Frames: 8
     Fps: 9
     Loop: 0
   RecolorOf: {fileID: 0}

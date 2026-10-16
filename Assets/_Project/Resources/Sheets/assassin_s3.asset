@@ -26,8 +26,8 @@ MonoBehaviour:
     Loop: 1
   - Name: run
     Row: 1
-    Frames: 6
-    Fps: 14
+    Frames: 8
+    Fps: 18.7
     Loop: 1
   - Name: attack
     Row: 2
@@ -56,12 +56,12 @@ MonoBehaviour:
     Loop: 0
   - Name: hurt
     Row: 7
-    Frames: 2
+    Frames: 3
     Fps: 10
     Loop: 0
   - Name: death
     Row: 8
-    Frames: 6
+    Frames: 8
     Fps: 9
     Loop: 0
   RecolorOf: {fileID: 11400000, guid: 45500c5df0b66e844be0d13ab23b98b7, type: 2}
@@ -69,46 +69,48 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4287393390
   - serializedVersion: 2
+    rgba: 4294439918
+  - serializedVersion: 2
     rgba: 4284963151
   - serializedVersion: 2
     rgba: 4284894798
   - serializedVersion: 2
     rgba: 4282922550
   - serializedVersion: 2
-    rgba: 4281017378
-  - serializedVersion: 2
-    rgba: 4294439918
-  - serializedVersion: 2
     rgba: 4283452234
   - serializedVersion: 2
-    rgba: 4280358938
-  - serializedVersion: 2
-    rgba: 4288582022
+    rgba: 4281017378
   - serializedVersion: 2
     rgba: 4284373594
   - serializedVersion: 2
-    rgba: 4279701779
+    rgba: 4288582022
   - serializedVersion: 2
     rgba: 4291938495
   - serializedVersion: 2
-    rgba: 4281016354
+    rgba: 4282332982
+  - serializedVersion: 2
+    rgba: 4280358938
   - serializedVersion: 2
     rgba: 4281871149
   - serializedVersion: 2
     rgba: 4281213474
   - serializedVersion: 2
-    rgba: 4279898642
+    rgba: 4281016354
   - serializedVersion: 2
-    rgba: 4281285631
+    rgba: 4279701779
   - serializedVersion: 2
     rgba: 4279241485
   - serializedVersion: 2
-    rgba: 4282332982
+    rgba: 4281285631
+  - serializedVersion: 2
+    rgba: 4279898642
   - serializedVersion: 2
     rgba: 4279769440
   RecolorTo:
   - serializedVersion: 2
     rgba: 4282944061
+  - serializedVersion: 2
+    rgba: 4283105206
   - serializedVersion: 2
     rgba: 4280306223
   - serializedVersion: 2
@@ -116,39 +118,47 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4280568348
   - serializedVersion: 2
-    rgba: 4279443223
-  - serializedVersion: 2
-    rgba: 4283105206
-  - serializedVersion: 2
     rgba: 4280500273
   - serializedVersion: 2
-    rgba: 4279508752
-  - serializedVersion: 2
-    rgba: 4281629263
+    rgba: 4279443223
   - serializedVersion: 2
     rgba: 4280376902
   - serializedVersion: 2
-    rgba: 4279244301
+    rgba: 4281629263
   - serializedVersion: 2
     rgba: 4283345530
   - serializedVersion: 2
-    rgba: 4279904533
+    rgba: 4279906082
+  - serializedVersion: 2
+    rgba: 4279508752
   - serializedVersion: 2
     rgba: 4280366364
   - serializedVersion: 2
     rgba: 4279775250
   - serializedVersion: 2
-    rgba: 4278983178
+    rgba: 4279904533
   - serializedVersion: 2
-    rgba: 4283105206
+    rgba: 4279244301
   - serializedVersion: 2
     rgba: 4278980106
   - serializedVersion: 2
-    rgba: 4279906082
+    rgba: 4283105206
+  - serializedVersion: 2
+    rgba: 4278983178
   - serializedVersion: 2
     rgba: 4280376902
-  FixPixels: d70b0000591100001a1400004d1400005b150000d8d6000067da00001c3501001d3601009c3601001c3701005c370100d8960100679a01005df601001cf701009df70100dc5502005d5602001c5702005c5702001a61020020b6020060b602009cb602005ab802009ab802001b1103005b1103001b1203005b120300i
+  FixPixels: d70f0000571100005811000018190000da1a00009b1c00000d1d00001aa0000059ac0000581e0100e72201001c9c01001d9d01001c9e01009c9e0100dc9e0100581e0200e72202005d9d02009c9e02001d9f0200dc1c03005d1d03009c1e0300dc1e03001a2c0300a09d03001c9e03005aa00300daa003005aa20300daa203009b160400db1604001b1804005b180400i
   FixColors:
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
+  - serializedVersion: 2
+    rgba: 4279701779
   - serializedVersion: 2
     rgba: 4279701779
   - serializedVersion: 2

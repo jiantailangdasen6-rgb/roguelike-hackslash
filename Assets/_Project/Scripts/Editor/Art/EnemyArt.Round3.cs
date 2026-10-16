@@ -32,8 +32,8 @@ namespace Game.EditorTools.Art
             const float lean = -6f, arm = 70f, hold = 0f;
             return new List<Clip>
             {
-                rig.Clip("idle", 5f, true, Idle(arm, hold, lean)),
-                rig.Clip("walk", 8f, true, Shamble(arm, hold, lean)),
+                rig.Clip("idle", 7.5f, true, Idle(arm, hold, lean)),
+                rig.Clip("walk", 10.7f, true, Shamble(arm, hold, lean)),
                 rig.Clip("windup", 9f, false, new[]
                 {
                     new RigPose { Torso = lean + 10f, ArmFront = 50f, ArmBack = -30f, Head = 6f, Shift = -1f, WeaponAbsolute = 10f },
@@ -64,8 +64,8 @@ namespace Game.EditorTools.Art
             rig.SmearColor = PixelMaterial.Hex("#cf3a3a");
             return new List<Clip>
             {
-                rig.Clip("idle", 6f, true, Idle(20f, -80f, 4f)),
-                rig.Clip("walk", 10f, true, Shamble(20f, -80f, 0f)),
+                rig.Clip("idle", 9f, true, Idle(20f, -80f, 4f)),
+                rig.Clip("walk", 13.3f, true, Shamble(20f, -80f, 0f)),
                 rig.Clip("windup", 9f, false, new[]
                 {
                     new RigPose { ArmFront = 140f, ArmBack = -60f, Torso = 10f, Head = 8f, WeaponAbsolute = 160f },

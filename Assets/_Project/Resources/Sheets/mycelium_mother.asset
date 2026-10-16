@@ -21,13 +21,13 @@ MonoBehaviour:
   Clips:
   - Name: idle
     Row: 0
-    Frames: 6
-    Fps: 5
+    Frames: 8
+    Fps: 6.7
     Loop: 1
   - Name: walk
     Row: 1
-    Frames: 6
-    Fps: 7
+    Frames: 8
+    Fps: 9.3
     Loop: 1
   - Name: windup
     Row: 2

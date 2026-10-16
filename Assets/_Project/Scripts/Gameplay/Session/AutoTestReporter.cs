@@ -19,6 +19,7 @@ namespace Game.Gameplay
         private float _wipeAt;
         private float _freezeAt;
         private float _failAt;
+        private bool _bossHpSet;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Install()
@@ -90,6 +91,20 @@ namespace Game.Gameplay
                     p.InvulnerableTimer = 0f;
                     sim.HurtPlayer(p, 99999f);
                     Debug.Log($"[AutoTest] downed client {p.ClientId}");
+                    break;
+                }
+            }
+            // -bosshp <f> (host): the lord starts its fight at that share of health (screenshots of its stages).
+            if (!_bossHpSet && CommandLine.Has("-bosshp") && RunDirector.Instance?.Sim != null)
+            {
+                var enemies = RunDirector.Instance.Sim.Enemies;
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    if (enemies[i].Dead || !enemies[i].Def.Boss) continue;
+                    ref var boss = ref enemies[i];
+                    boss.Health = boss.MaxHealth * CommandLine.GetFloat("-bosshp", 0.5f);
+                    _bossHpSet = true;
+                    Debug.Log($"[AutoTest] lord set to {boss.Health:0} hp");
                     break;
                 }
             }

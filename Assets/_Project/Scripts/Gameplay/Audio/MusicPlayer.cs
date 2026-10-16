@@ -143,6 +143,10 @@ namespace Game.Gameplay
             _intensity = Mathf.MoveTowards(_intensity, WantedIntensity(), Time.unscaledDeltaTime / 1.4f);
             if (_lowPass != null) _lowPass.cutoffFrequency = Mathf.Lerp(2200f, 22000f, _intensity * _intensity);
             float target = AudioPrefs.Music * Mathf.Lerp(0.7f, 1f, _intensity);
+            // A lord's last stand: the music climbs a touch.
+            var director = RunDirector.Instance;
+            float pitch = director != null && director.IsSpawned && director.BossStage.Value >= 3 ? 1.045f : 1f;
+            foreach (var s in new[] { _a, _b }) s.pitch = Mathf.MoveTowards(s.pitch, pitch, Time.unscaledDeltaTime * 0.03f);
             float step = Time.unscaledDeltaTime / FadeSeconds;
             foreach (var s in new[] { _a, _b })
             {

@@ -514,6 +514,9 @@ namespace Game.Gameplay
                 case AreaKind.RuneFlare:
                     RuneArea(e); // EventPresenter.Runes.cs
                     break;
+                case AreaKind.HallQuake:
+                    QuakeArea(e); // EventPresenter.Stages.cs
+                    break;
                 case AreaKind.SporeCloud:
                 case AreaKind.InkBurst:
                     Lands2Area(e); // EventPresenter.Lands2.cs

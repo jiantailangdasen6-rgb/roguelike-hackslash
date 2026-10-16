@@ -68,36 +68,8 @@ namespace Game.Gameplay
             }
         }
 
-        private float _lastBossHealth = -1f;
-
         /// <summary>The lord in the fight is the Ashen King (his trials borrow the other lords' words).</summary>
         private static bool AshenFight => RunDirector.Instance != null && RunDirector.Instance.BossType.Value == EnemyType.AshenKing;
-
-        /// <summary>
-        /// A lord below half health fights faster (RunSimulation.BossEnraged): the moment it happens is shown, with a
-        /// red shock wave, a roar of light and its name for the new phase.
-        /// </summary>
-        private void UpdateBossRage()
-        {
-            var d = RunDirector.Instance;
-            float hp = d != null && d.IsSpawned ? d.BossHealth.Value : -1f;
-            if (_lastBossHealth > 0.5f && hp >= 0f && hp <= 0.5f)
-            {
-                var boss = EnemyView.Instance != null ? EnemyView.Instance.BossPosition() : null;
-                if (boss.HasValue)
-                {
-                    Vector2 at = boss.Value;
-                    var wave = Spawn("fx_nova", at + Vector2.up * 1f, 1f, 0.7f, 0.5f, 9f, new Color(1f, 0.2f, 0.15f, 0.85f));
-                    wave.FadeOut = true;
-                    AddLight(wave, new Color(1f, 0.2f, 0.1f), 4f, 12f);
-                    for (int i = 0; i < 14; i++) Ember(at + Vector2.up * 1f, i * 25.7f);
-                    HitStop.Freeze(0.1f, -1, major: true);
-                    CameraShake.Add(0.8f);
-                    ShowCallout(at + Vector2.up * 3.6f, "怒り", new Color(1f, 0.35f, 0.3f), 54);
-                }
-            }
-            _lastBossHealth = hp;
-        }
 
         /// <summary>Stains dry and fade away after a while.</summary>
         private void UpdateStains()

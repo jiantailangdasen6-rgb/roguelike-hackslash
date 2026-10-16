@@ -54,6 +54,13 @@ namespace Game.Gameplay
 
         public int VisibleCount => _visuals.Count;
 
+        /// <summary>The lord rears up (a stage roar).</summary>
+        public void KickBoss(float amount)
+        {
+            foreach (var v in _visuals.Values)
+                if (EnemyCatalog.Get(v.Type).Boss && v.Root.activeSelf) Squash.Kick(v.Root.transform, amount);
+        }
+
         /// <summary>Where the lord is drawn (null when none is in sight).</summary>
         public Vector2? BossPosition()
         {

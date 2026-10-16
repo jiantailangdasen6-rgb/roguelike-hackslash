@@ -91,6 +91,8 @@ namespace Game.Core
         CandleLit,     // Pos = the candelabrum
         InkDriven,     // Pos = boss (every candle lit: it is driven out)
         InkFlood,      // Pos = boss (too slow)
+        StageRage,     // Pos = boss, Value = the land (RunSimulation.Stages)
+        StageLast,     // Pos = boss, Value = the land
     }
 
     /// <summary>
@@ -169,6 +171,7 @@ namespace Game.Core
             _bursts.Clear();
             foreach (var p in Players) p.CagedBy = 0;
             ResetLandTrials(); // RunSimulation.Lands.cs
+            ResetBossStages();
         }
 
         /// <summary>Armoured: dread knights always, elites too under "iron guard".</summary>
@@ -205,12 +208,20 @@ namespace Game.Core
             StepCages(dt);
             StepBursts(dt);
             var bossRoom = RoomStates[Map.Boss.Id];
-            if (!bossRoom.Fighting) return;
+            if (!bossRoom.Fighting)
+            {
+                BossStage = 0;
+                return;
+            }
             Room = bossRoom;
             _exposed -= dt;
 
             int b = BossIndex();
-            if (b < 0) return;
+            if (b < 0)
+            {
+                BossStage = 0;
+                return;
+            }
             ref var boss = ref Enemies[b];
             float hp = boss.Health / boss.MaxHealth;
 
@@ -295,6 +306,7 @@ namespace Game.Core
                     }
                     break;
             }
+            StepBossStages(dt); // RunSimulation.Stages.cs
         }
 
         /// <summary>True once when health first drops below a threshold.</summary>

@@ -18,6 +18,8 @@ namespace Game.Gameplay
         private Light2D _global;
         private float _base = 1f;
         private float _dark;
+        private float _rage;
+        private Color _baseColor = Color.white;
         private GameObject _lantern;
         private SpriteRenderer _lanternSprite;
         private Light2D _lanternLight;
@@ -138,13 +140,29 @@ namespace Game.Gameplay
                 inDark = room != null && room.Dark && !d.IsCleared(room.Id);
             }
 
-            // Fade the room's light (the area look sets the base; we only scale it while it is dark).
+            // Fade the room's light (the area look sets the base; we only scale it while it is dark). A raging lord's hall
+            // dims and reddens too (RunSimulation.Stages), more in its last stand.
             if (_global != null)
             {
-                if (_dark <= 0.001f) _base = _global.intensity;
+                int stage = d != null && d.IsSpawned && room != null && room.Kind == RoomKind.Boss ? d.BossStage.Value : 0;
+                float rageGoal = stage >= 3 ? 1f : stage == 2 ? 0.45f : 0f;
+                if (_dark <= 0.001f && _rage <= 0.001f)
+                {
+                    _base = _global.intensity;
+                    _baseColor = _global.color;
+                }
                 _dark = Mathf.MoveTowards(_dark, inDark ? 1f : 0f, Time.deltaTime * (inDark ? 1.2f : 0.8f));
-                if (_dark > 0.001f) _global.intensity = _base * Mathf.Lerp(1f, Darkness, _dark);
-                else _global.intensity = _base;
+                _rage = Mathf.MoveTowards(_rage, rageGoal, Time.deltaTime * 0.5f);
+                if (_dark > 0.001f || _rage > 0.001f)
+                {
+                    _global.intensity = _base * Mathf.Lerp(1f, Darkness, _dark) * Mathf.Lerp(1f, 0.7f, _rage);
+                    _global.color = Color.Lerp(_baseColor, new Color(1f, 0.42f, 0.36f), 0.35f * _rage);
+                }
+                else
+                {
+                    _global.intensity = _base;
+                    _global.color = _baseColor;
+                }
             }
 
             UpdateTwinBeam(d, room);

@@ -252,6 +252,7 @@ namespace Game.Core
         Thrust,       // a lance thrust (Vec = direction, Value = length)
         Lightning,    // a rune's lightning striking a monster (Pos = from, Vec = to)
         RuneFlare,    // a rune answering its skill (Int2 in Size.x = RuneId, Value = radius)
+        HallQuake,    // a raging lord's hall floor bursting (Value = radius)
     }
 
     /// <summary>Owner input sent to the host each network tick. Button presses are counters so a lost packet never loses a press.</summary>

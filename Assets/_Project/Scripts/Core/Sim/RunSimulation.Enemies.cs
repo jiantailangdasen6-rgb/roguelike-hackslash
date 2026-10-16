@@ -88,7 +88,7 @@ namespace Game.Core
                         if (e.StateTimer <= 0f)
                         {
                             e.State = EnemyState.Chase;
-                            e.Cooldown = def.AttackCooldown * _aiRng.Range(0.8f, 1.25f) * (BossEnraged(e) ? 0.7f : 1f) * (def.Boss && BossWarded ? 1.3f : 1f);
+                            e.Cooldown = def.AttackCooldown * _aiRng.Range(0.8f, 1.25f) * (def.Boss ? StageCooldown : 1f) * (def.Boss && BossWarded ? 1.3f : 1f);
                         }
                         break;
                 }
@@ -113,7 +113,6 @@ namespace Game.Core
             return flying ? p : Arena.Resolve(Layout, p, radius);
         }
 
-        private static bool BossEnraged(in Enemy e) => e.Def.Boss && e.Health < e.MaxHealth * 0.5f;
 
         /// <summary>Monsters only go after players in their own room (the others are elsewhere on the map).</summary>
         private SimPlayer NearestLivingPlayer(Vector2 position, int room)
@@ -219,7 +218,7 @@ namespace Game.Core
             var a = def.Attacks[attackIndex];
             e.State = EnemyState.Windup;
             e.AttackIndex = attackIndex;
-            e.StateTimer = a.Windup * (BossEnraged(e) ? 0.75f : 1f) * (DifficultyDef.Has(DifficultyMod.Ferocity) ? DifficultyCatalog.FerocityWindup : 1f);
+            e.StateTimer = a.Windup * (e.Def.Boss ? StageWindup : 1f) * (DifficultyDef.Has(DifficultyMod.Ferocity) ? DifficultyCatalog.FerocityWindup : 1f);
             e.AimDirection = (target.Position - e.Position).sqrMagnitude > 0.0001f ? (target.Position - e.Position).normalized : Vector2.right;
             e.AimTarget = target.Position;
             e.AttackCounter++;

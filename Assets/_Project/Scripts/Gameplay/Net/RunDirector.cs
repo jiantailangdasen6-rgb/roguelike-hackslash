@@ -77,6 +77,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<float> Elapsed = new();
         public readonly NetworkVariable<RunPhase> Phase = new();
         public readonly NetworkVariable<float> BossHealth = new(-1f);
+        /// <summary>The lord's stage (RunSimulation.BossStage): 0 outside its fight, 2 raging, 3 its last stand.</summary>
+        public readonly NetworkVariable<int> BossStage = new();
         public readonly NetworkVariable<bool> Started = new();
         public readonly NetworkVariable<int> Kills = new();
         public readonly NetworkVariable<int> BossesKilled = new();
@@ -589,6 +591,7 @@ namespace Game.Gameplay
             SetIfChanged(Elapsed, Mathf.Floor(Sim.Elapsed));
             SetIfChanged(Phase, Sim.Phase);
             SetIfChanged(BossHealth, BossHealthFraction());
+            SetIfChanged(BossStage, Sim.BossStage);
             SetIfChanged(Kills, Sim.Kills);
             SetIfChanged(BossesKilled, Sim.BossesKilled);
             SetIfChanged(RoomsCleared, Sim.RoomsCleared);

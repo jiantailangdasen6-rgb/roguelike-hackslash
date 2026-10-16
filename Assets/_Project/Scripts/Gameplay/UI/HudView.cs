@@ -40,6 +40,7 @@ namespace Game.Gameplay
             public Text Key;
             public RectTransform KeyCap;
             public Image Rune; // the rune set into this skill (phase 4), top-right corner
+            public Text Charges; // the dodge's charges, top-left (●●)
             public float Last;
             public float FlashAt = -10f;
         }
@@ -140,7 +141,12 @@ namespace Game.Gameplay
             rune.rectTransform.Place(new Vector2(1f, 1f), new Vector2(40f, 40f), new Vector2(10f, 10f));
             rune.raycastTarget = false;
             rune.enabled = false;
-            return new SkillSlot { Root = rect, Icon = icon, Cool = cool, Flash = flash, Time = time, Key = key, KeyCap = capRect, Rune = rune };
+            var charges = UIKit.Title(slot.transform, "", 22, TextAnchor.UpperLeft, new Color(1f, 0.85f, 0.5f));
+            charges.rectTransform.Place(new Vector2(0f, 1f), new Vector2(90f, 30f), new Vector2(8f, -2f));
+            var chargesOutline = charges.gameObject.AddComponent<Outline>();
+            chargesOutline.effectColor = new Color(0f, 0f, 0f, 0.9f);
+            chargesOutline.effectDistance = new Vector2(1.5f, -1.5f);
+            return new SkillSlot { Root = rect, Icon = icon, Cool = cool, Flash = flash, Time = time, Key = key, KeyCap = capRect, Rune = rune, Charges = charges };
         }
 
         private sealed class TeamFrame
@@ -758,7 +764,7 @@ namespace Game.Gameplay
                 _hpText.text = local.Shield.Value > 0 ? $"{local.Hp.Value:0} / {max:0}  (+{local.Shield.Value:0})" : $"{local.Hp.Value:0} / {max:0}";
                 SetCooldown(_skills[1], local.Skill1Cooldown.Value, def.Skill1Cooldown);
                 SetCooldown(_skills[2], local.Skill2Cooldown.Value, def.Skill2Cooldown);
-                SetCooldown(_skills[3], local.DodgeCooldown.Value, ClassCatalog.DodgeCooldown);
+                SetDodge(_skills[3], local.DodgeCharges.Value, local.DodgeCooldown.Value);
                 SetCooldown(_skills[0], 0f, 1f);
                 // The key caps follow the device in use.
                 var reader = local.GetComponent<PlayerInputReader>();
@@ -877,6 +883,13 @@ namespace Game.Gameplay
                     lv.rectTransform.Stretch(-2f);
                 }
             }
+        }
+
+        /// <summary>The dodge: its charges as pips; the slot only greys out with none left (the next one's wait shown then).</summary>
+        private static void SetDodge(SkillSlot slot, int charges, float nextIn)
+        {
+            SetCooldown(slot, charges > 0 ? 0f : nextIn, ClassCatalog.DodgeRechargeTime);
+            slot.Charges.text = new string('●', Mathf.Clamp(charges, 0, ClassCatalog.DodgeCharges)) + new string('○', Mathf.Clamp(ClassCatalog.DodgeCharges - charges, 0, ClassCatalog.DodgeCharges));
         }
 
         private static void SetCooldown(SkillSlot slot, float remaining, float max)

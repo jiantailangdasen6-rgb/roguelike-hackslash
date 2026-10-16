@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver ec2b3424（第5段階「地続きの迷宮」と、次の8案（軽量化・動きと手触り・主の段階・合体技・精鋭の特性・鍛冶と組装備・出来事の間・契約）まで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver f649260a（次の8案のあと、戦闘の大改善の回避の作り直しまで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
@@ -555,6 +555,11 @@
   - 契約は ProfileData.contract（条項ごと2ビット）。拠点では CampDirector.Contract、冒険中は RunDirector.ContractBits/ContractRank で全員に見える
   - 撮影・テスト用：`-contract <ビット>`、`-contractpage`（碑を契約のページで開く）、`-campwait <秒>`（拠点に留まる）
   - 公開：ブラウザ版・Windows版 ver ec2b3424（NetTest・CampTest・OnlineTest（停止あり）・CrossTest 合格、EditMode 251件）。これで8案すべて公開
+### 戦闘の大改善（2026-10-17、ユーザー「戦闘面を大きく改善したい」「回避のリキャストが早いのは？」→「方向性はオッケー、単調さも改善したい」→「全部実装したい、クラス毎にスキルツリー、戦闘中のカード選択をいつでも」）
+- 順番：**1 回避の作り直し → 2 必殺技とゲージ → 3 体勢崩し（ブレイク） → 4 波の種類 → 5 溜め攻撃 → 6 敵の連携 → 7 戦闘中のカード選択 → 8 職業ごとのスキルツリー**。1つずつ公開
+- 7 の形（Claude の提案）：選べる力があると画面下に小さなカード3枚、動きながら 1・2・3（パッドは十字キー）で選ぶ。ソロだけ大きく開くと止まる
+- 8 の形（Claude の提案）：拠点の師範の「熟練」（職業ごと6つ）を、職業ごと3つの枝のツリーに作り替える（魂の欠片で開ける・振り直し可）
+- **1 回避の作り直し（実装）**：回避は2回分の溜め（`ClassCatalog.DodgeCharges`）、1回分は2.4秒で戻る（身軽 ×0.6、疲れ・呪いで遅く）。続けての回避は0.3秒あける。無敵は移動中の0.22秒だけ（以前は0.9秒ごとに0.3秒の無敵で、連打で大半の攻撃を抜けられた）。その一瞬に当たるはずだった攻撃は「見切り」：回避が1回分すぐ戻り、時間が一瞬ゆっくり、水色の輪と文字（`SimEventType.PerfectDodge`）。影のルーンは回避1回分を戻す。HUD の回避アイコンに ●● で溜めの数（尽きたときだけ暗くなり、次の回復を待つ）。操作側（`PlayerMover`）は、ホストの数が届くまで自分で使った回数を差し引いて判断。図鑑（操作）に「回避と見切り」。公開：ver f649260a（NetTest・OnlineTest（停止あり）・CrossTest 合格、EditMode 254件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

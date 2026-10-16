@@ -185,7 +185,7 @@ namespace Game.Gameplay
             var def = local.ClassDef;
             Cool(_skill1, local.Skill1Cooldown.Value, def.Skill1Cooldown);
             Cool(_skill2, local.Skill2Cooldown.Value, def.Skill2Cooldown);
-            Cool(_dodge, local.DodgeCooldown.Value, ClassCatalog.DodgeCooldown);
+            Cool(_dodge, local.DodgeCharges.Value > 0 ? 0f : local.DodgeCooldown.Value, ClassCatalog.DodgeRechargeTime); // greys out only with no dodge left
         }
 
         private static void Set(Pad p, Sprite s)

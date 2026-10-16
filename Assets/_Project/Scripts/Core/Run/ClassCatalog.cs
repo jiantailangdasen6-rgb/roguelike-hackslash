@@ -67,10 +67,15 @@ namespace Game.Core
 
     public static class ClassCatalog
     {
-        public const float DodgeCooldown = 0.9f;
+        // The dodge (2026-10-17 rework: it used to come back every 0.9 s, so pressing it over and over beat most attacks).
+        // Two charges; each comes back after DodgeRechargeTime. Untouchable only while travelling; a hit that would
+        // have landed in that moment is a perfect dodge: the charge comes straight back (RunSimulation.Combat).
+        public const int DodgeCharges = 2;
+        public const float DodgeRechargeTime = 2.4f;
+        public const float DodgeCooldown = 0.3f; // the shortest gap between two dodges
         public const float DodgeDuration = 0.22f;
         public const float DodgeSpeed = 15f;
-        public const float DodgeInvulnerability = 0.3f;
+        public const float DodgeInvulnerability = 0.22f;
 
         // Warrior
         public const float DashSlashDistance = 4.5f;

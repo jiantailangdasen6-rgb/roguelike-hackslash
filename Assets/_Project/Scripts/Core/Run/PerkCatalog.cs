@@ -164,7 +164,7 @@ namespace Game.Core
             new() { Id = PerkId.HunterEye, Name = "狩人の目", Class = ClassId.Ranger, MaxLevel = 2, PerLevel = Mod(StatType.CritChance, ModifierKind.Flat, 0.15f), Text = "会心率 +{0:0}%（会心はダメージ2倍）", Number = 15 },
             new() { Id = PerkId.DeepMark, Name = "深い印", Class = ClassId.Ranger, MaxLevel = 2, Text = "印の効果 +{0:0}%、印の範囲 +25%", Number = 15 },
             new() { Id = PerkId.Venom, Name = "毒矢", Class = ClassId.Ranger, MaxLevel = 2, Locked = true, Text = "矢が毒を与える（毎秒 {0:0} ダメージ×4秒）", Number = 3 },
-            new() { Id = PerkId.Evasive, Name = "身軽", Class = ClassId.Ranger, MaxLevel = 1, Locked = true, Text = "回避のクールダウン −40%、回避後0.5秒は攻撃速度2倍", Number = 0 },
+            new() { Id = PerkId.Evasive, Name = "身軽", Class = ClassId.Ranger, MaxLevel = 1, Locked = true, Text = "回避の回復が40%早い、回避後0.5秒は攻撃速度2倍", Number = 0 },
             new() { Id = PerkId.Ricochet, Name = "跳弾", Class = ClassId.Ranger, MaxLevel = 1, Text = "通常攻撃の矢が命中すると、近くの別の敵へ跳ね返る（威力70%）", Number = 0 },
 
             // ---------------- Guardian

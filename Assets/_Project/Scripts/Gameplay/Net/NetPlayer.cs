@@ -35,7 +35,9 @@ namespace Game.Gameplay
         public readonly NetworkVariable<float> MoveSpeed = new(4.6f);
         public readonly NetworkVariable<float> Skill1Cooldown = new();
         public readonly NetworkVariable<float> Skill2Cooldown = new();
+        /// <summary>Seconds until the next dodge charge comes back (0 when all are ready), and how many are ready.</summary>
         public readonly NetworkVariable<float> DodgeCooldown = new();
+        public readonly NetworkVariable<byte> DodgeCharges = new(ClassCatalog.DodgeCharges);
         public readonly NetworkVariable<bool> Valor = new();
         /// <summary>Perk picks earned and not made yet (banked during fights, chosen between rooms).</summary>
         public readonly NetworkVariable<int> Picks = new();

@@ -162,9 +162,12 @@ namespace Game.Tests
             sim = NewSim(ClassId.Assassin, out p);
             Wear(p, Make("rune_2", ClassId.Assassin, RuneId.Shadow));
             p.DodgeCooldown = 5f;
+            p.DodgeCharges = 0;
+            p.DodgeRecharge = 99f;
             sim.SetPlayerInput(0, new PlayerInput { Aim = Vector2.right, Skill2Count = 1 });
             Run(sim, Dt);
             Assert.LessOrEqual(p.DodgeCooldown, 0f);
+            Assert.AreEqual(1, p.DodgeCharges, "a dodge back at once");
             Assert.Greater(p.SureCritTimer, 0f);
 
             sim = NewSim(ClassId.Paladin, out p);

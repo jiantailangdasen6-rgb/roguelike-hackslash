@@ -41,6 +41,12 @@ namespace Game.Core
                 p.Skill1Cooldown -= dt;
                 p.Skill2Cooldown -= dt;
                 p.DodgeCooldown -= dt;
+                if (p.DodgeWindow > 0f) p.DodgeWindow -= dt;
+                if (p.DodgeCharges < ClassCatalog.DodgeCharges && (p.DodgeRecharge -= dt) <= 0f)
+                {
+                    p.DodgeCharges++;
+                    if (p.DodgeCharges < ClassCatalog.DodgeCharges) p.DodgeRecharge += DodgeRechargeTime(p);
+                }
                 if ((p.ComboResetTimer -= dt) <= 0f) p.Combo = 0;
 
                 if (!p.Alive)
@@ -57,7 +63,7 @@ namespace Game.Core
                 {
                     p.LastDodge = p.Input.DodgeCount;
                     StepGhost(p, dt); // RunSimulation.Ghosts.cs
-                    if (p.DodgeCooldown <= 0f) Dodge(p);
+                    if (p.DodgeCooldown <= 0f && p.DodgeCharges > 0) Dodge(p);
                 }
                 if (p.Input.Skill1Count != p.LastSkill1)
                 {
@@ -83,12 +89,33 @@ namespace Game.Core
         private void Dodge(SimPlayer p)
         {
             bool evasive = p.PerkLevel(PerkId.Evasive) > 0;
-            p.DodgeCooldown = ClassCatalog.DodgeCooldown * (evasive ? 0.6f : 1f) * p.DodgeFactor;
+            if (p.DodgeCharges >= ClassCatalog.DodgeCharges) p.DodgeRecharge = DodgeRechargeTime(p);
+            p.DodgeCharges--;
+            p.DodgeCooldown = ClassCatalog.DodgeCooldown;
             p.InvulnerableTimer = Mathf.Max(p.InvulnerableTimer, ClassCatalog.DodgeInvulnerability);
+            p.DodgeWindow = ClassCatalog.DodgeInvulnerability;
+            p.PerfectThisDodge = false;
             if (evasive) p.EvasiveTimer = 0.5f;
             BlessingOnDodge(p);
             if (p.Stats.Get(StatType.DodgeStrike) > 0f) p.DodgeStrikeTimer = 2f; // gear: the next blow lands harder
             Events.Add(new SimEvent(SimEventType.PlayerAttack) { ClientId = p.ClientId, Int = (int)AttackAnim.Dodge, Pos = p.Position, Vec = AimDirection(p) });
+        }
+
+        /// <summary>How long one dodge charge takes to come back (the ranger's light feet, curses and the difficulty change it).</summary>
+        public float DodgeRechargeTime(SimPlayer p) =>
+            ClassCatalog.DodgeRechargeTime * (p.PerkLevel(PerkId.Evasive) > 0 ? 0.6f : 1f) * p.DodgeFactor;
+
+        /// <summary>A hit that would have landed while dodging: the charge comes straight back, and everyone sees it.</summary>
+        private void PerfectDodge(SimPlayer p)
+        {
+            p.PerfectThisDodge = true;
+            if (p.DodgeCharges < ClassCatalog.DodgeCharges)
+            {
+                p.DodgeCharges++;
+                if (p.DodgeCharges >= ClassCatalog.DodgeCharges) p.DodgeRecharge = 0f;
+            }
+            p.DodgeCooldown = 0f;
+            Events.Add(new SimEvent(SimEventType.PerfectDodge) { ClientId = p.ClientId, Pos = p.Position });
         }
 
         private float AttackInterval(SimPlayer p)

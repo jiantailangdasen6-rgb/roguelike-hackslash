@@ -495,7 +495,12 @@ namespace Game.Core
 
         public void HurtPlayer(SimPlayer p, float damage)
         {
-            if (!p.Alive || p.InvulnerableTimer > 0f) return;
+            if (!p.Alive) return;
+            if (p.InvulnerableTimer > 0f)
+            {
+                if (p.DodgeWindow > 0f && !p.PerfectThisDodge) PerfectDodge(p); // seen and dodged (RunSimulation.Combat)
+                return;
+            }
             float dealt = Mathf.Max(1f, damage - p.Stats.Get(StatType.Armor)) * Mathf.Max(0.2f, p.Stats.Get(StatType.DamageTaken));
             dealt *= SanctuaryFactor(p); // a guardian's holy ground
             if (p.Hp < p.MaxHp * 0.5f) dealt *= 1f - Mathf.Min(0.6f, p.Stats.Get(StatType.LastStand)); // gear

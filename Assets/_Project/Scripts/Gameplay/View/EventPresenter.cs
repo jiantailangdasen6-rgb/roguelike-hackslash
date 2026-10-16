@@ -151,6 +151,17 @@ namespace Game.Gameplay
                 case SimEventType.PlayerHealed:
                     if (e.Value >= 1f) ShowNumber(e.Pos + Vector2.up * 1.2f, $"+{Mathf.RoundToInt(e.Value)}", new Color(0.5f, 1f, 0.55f), 24);
                     break;
+                case SimEventType.PerfectDodge:
+                {
+                    // Seen and dodged: the moment holds, a cold ring, and the dodge is ready again.
+                    bool mine = IsLocal(e.ClientId);
+                    var ring = Spawn("fx_revive_ring", e.Pos + Vector2.up * 0.3f, 1f, 0.35f, 0.4f, 2.4f, new Color(0.7f, 0.95f, 1f, 0.9f), order: 2400);
+                    ring.FadeOut = true;
+                    AddLight(ring, new Color(0.6f, 0.9f, 1f), 2f, 4f);
+                    ShowCallout(e.Pos + Vector2.up * 1.8f, "見切り！", new Color(0.75f, 0.95f, 1f), mine ? 40 : 28);
+                    if (mine) HitStop.Slow(0.35f, 0.35f);
+                    break;
+                }
                 case SimEventType.PlayerHurt:
                     ShowNumber(e.Pos + Vector2.up * 1.2f, Mathf.RoundToInt(e.Value).ToString(), new Color(1f, 0.3f, 0.3f), 28);
                     if (IsLocal(e.ClientId))

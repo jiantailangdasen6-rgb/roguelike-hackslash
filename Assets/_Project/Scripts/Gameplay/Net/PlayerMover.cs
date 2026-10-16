@@ -85,9 +85,22 @@ namespace Game.Gameplay
 
         // ------------------------------------------------------------------ Actions (also used by the bot)
 
+        // Dodges spent here that the host has not counted yet (its charge count arrives a round trip later).
+        private int _unconfirmedDodges;
+        private float _lastDodgeAt = -10f;
+        private int _seenCharges = ClassCatalog.DodgeCharges;
+
         public void Dodge()
         {
-            if (!CanAct || player.Caged.Value || player.DodgeCooldown.Value > 0.05f || Time.time < _dashUntil) return;
+            if (player.DodgeCharges.Value != _seenCharges || Time.time - _lastDodgeAt > 0.8f)
+            {
+                _seenCharges = player.DodgeCharges.Value;
+                _unconfirmedDodges = 0;
+            }
+            if (!CanAct || player.Caged.Value || Time.time < _dashUntil || Time.time - _lastDodgeAt < ClassCatalog.DodgeCooldown) return;
+            if (player.DodgeCharges.Value - _unconfirmedDodges <= 0) return;
+            _unconfirmedDodges++;
+            _lastDodgeAt = Time.time;
             _dodge++;
             player.PredictAction(AttackAnim.Dodge);
             Vector2 move = CurrentMove();

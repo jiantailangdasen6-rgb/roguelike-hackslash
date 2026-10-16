@@ -87,7 +87,7 @@ namespace Game.Core
         public static string CurseText(CurseKind c) => c switch
         {
             CurseKind.Frailty => $"最大HP −{FrailtyPerStack * 100f:0}%",
-            CurseKind.Weariness => $"回避の再使用 +{WearinessPerStack * 100f:0}%",
+            CurseKind.Weariness => $"回避の回復 +{WearinessPerStack * 100f:0}%遅く",
             CurseKind.Thirst => $"回復量 −{(1f - ThirstFactor) * 100f:0}%",
             CurseKind.Hunted => $"受けるダメージ +{HuntedPerStack * 100f:0}%",
             _ => "",

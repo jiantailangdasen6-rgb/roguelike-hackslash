@@ -77,6 +77,11 @@ namespace Game.Core
         public float Skill1Cooldown;
         public float Skill2Cooldown;
         public float DodgeCooldown;
+        /// <summary>Dodges ready (up to ClassCatalog.DodgeCharges), seconds until the next comes back, the dodge's own untouchable moment, and whether a hit was dodged in it.</summary>
+        public int DodgeCharges = ClassCatalog.DodgeCharges;
+        public float DodgeRecharge;
+        public float DodgeWindow;
+        public bool PerfectThisDodge;
         public float DashSlashTimer;   // >0 while the dash-slash travels
         public Vector2 DashSlashFrom;
         public Vector2 DashSlashDir;

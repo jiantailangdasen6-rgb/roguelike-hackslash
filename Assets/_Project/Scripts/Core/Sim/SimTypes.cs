@@ -358,6 +358,7 @@ namespace Game.Core
         EliteAffixes,    // Id = the elite, Int = its EliteAffix bits, Pos
         EliteShield,     // Id = the elite, Int = 0 its ward broke / 1 came back / 2 a summoner's call, Pos
         EncounterResolved, // Id = room, Int = the choice, Value = EncounterKind, Pos = what was met, Size = (gamble: 1 won / 2 lost, players there)
+        PerfectDodge,    // ClientId, Pos: a hit dodged at the last moment (the charge came back)
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

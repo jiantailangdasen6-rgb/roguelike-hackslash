@@ -129,6 +129,7 @@ namespace Game.Core
                     return; // its work is done on the cooldown (RuneCooldown)
                 case RuneId.Shadow:
                     p.DodgeCooldown = 0f;
+                    p.DodgeCharges = Mathf.Min(ClassCatalog.DodgeCharges, p.DodgeCharges + 1); // a dodge back at once
                     p.SureCritTimer = Mathf.Max(p.SureCritTimer, 1.4f * power);
                     flareAt = p.Position;
                     break;

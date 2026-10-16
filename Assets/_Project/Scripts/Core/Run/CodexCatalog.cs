@@ -434,6 +434,10 @@ namespace Game.Core
             list.Add(Open(CodexSection.Controls, "control:Keyboard", "キーボードとマウス", "PC", "warrior", "照準はマウスの方向。回避中は無敵",
                 "WASD：移動　マウス：照準", "左クリック：通常攻撃（押しっぱなし）", "Q・右クリック：スキル1　E：スキル2", "Space・Shift：回避",
                 "I・Tab：袋（装備）　M：地図　F：合図　B：図鑑", "Esc：メニュー"));
+            list.Add(Open(CodexSection.Controls, "control:Dodge", "回避と見切り", "回避は2回分", "fx_revive_ring", "連打せず、予兆を見て当たる直前に避ける",
+                $"回避は{ClassCatalog.DodgeCharges}回分たまる（回避アイコンの●）。1回分は{ClassCatalog.DodgeRechargeTime:0.#}秒で戻る",
+                "無敵は回避で動いている一瞬だけ",
+                "その一瞬に攻撃を受け流すと「見切り」：時間が一瞬ゆっくりになり、回避が1回分すぐ戻る"));
             list.Add(Open(CodexSection.Controls, "control:Gamepad", "ゲームパッド", "パッド", "ranger", "照準は右スティック（倒していなければ移動方向）",
                 "左スティック：移動　右スティック：照準", "RT：通常攻撃　RB：スキル1　LB：スキル2", "A：回避", "Select：地図　十字キー上：合図"));
             list.Add(Open(CodexSection.Controls, "control:Run", "迷宮の進み方", "1回およそ15分", "fx_portal", "寄り道（祠・泉・精鋭）をするほど強くなる",

@@ -259,6 +259,7 @@ namespace Game.Gameplay
                 case SimEventType.EncounterResolved: Play(Mathf.RoundToInt(e.Size.x) == 2 ? "hurt" : "levelup", e.Pos, 0.9f, 0.8f); break;
                 case SimEventType.PerfectDodge: Play("blink", e.Pos, 1.35f, IsLocal(e.ClientId) ? 0.8f : 0.4f); break;
                 case SimEventType.Ultimate: Play("explosion", e.Pos, 0.75f, 0.9f); Play("levelup", e.Pos, 0.7f, 0.9f); Play("roar", e.Pos, 1.3f, 0.4f); break;
+                case SimEventType.EnemyBroken: Play("shatter", e.Pos, 0.8f, 1f); Play("heavyhit", e.Pos, 0.7f, 0.8f); break;
                 case SimEventType.EliteShield:
                     if (e.Int == 0) Play("shatter", e.Pos, 1.25f, 0.6f);
                     else if (e.Int == 1) Play("nova", e.Pos, 1.4f, 0.35f);

@@ -245,6 +245,7 @@ namespace Game.Core
             StepBossTrials(dt);
             StepChampions(dt); // RunSimulation.Champions.cs
             StepAffixes(dt); // RunSimulation.Affixes.cs
+            StepPoise(dt); // RunSimulation.Break.cs
             StepPools(dt); // RunSimulation.Lands.cs
             StepPlayersCombat(dt);
             StepDelayedAreas(dt);

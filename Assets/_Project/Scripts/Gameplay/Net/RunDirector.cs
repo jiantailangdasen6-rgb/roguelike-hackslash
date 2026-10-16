@@ -77,6 +77,8 @@ namespace Game.Gameplay
         public readonly NetworkVariable<float> Elapsed = new();
         public readonly NetworkVariable<RunPhase> Phase = new();
         public readonly NetworkVariable<float> BossHealth = new(-1f);
+        /// <summary>The lord's stance (RunSimulation.Break): 0..1, 0 while broken, -1 none.</summary>
+        public readonly NetworkVariable<float> BossPoise = new(-1f);
         /// <summary>The lord's stage (RunSimulation.BossStage): 0 outside its fight, 2 raging, 3 its last stand.</summary>
         public readonly NetworkVariable<int> BossStage = new();
         /// <summary>The host's contract this run (ContractCatalog bits) and its rank, for the HUD and the result.</summary>
@@ -606,6 +608,7 @@ namespace Game.Gameplay
             SetIfChanged(Phase, Sim.Phase);
             SetIfChanged(BossHealth, BossHealthFraction());
             SetIfChanged(BossStage, Sim.BossStage);
+            SetIfChanged(BossPoise, Mathf.Round(Sim.BossPoiseFraction() * 50f) / 50f);
             SetIfChanged(Kills, Sim.Kills);
             SetIfChanged(BossesKilled, Sim.BossesKilled);
             SetIfChanged(RoomsCleared, Sim.RoomsCleared);

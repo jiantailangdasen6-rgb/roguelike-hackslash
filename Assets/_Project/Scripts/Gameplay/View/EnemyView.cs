@@ -56,6 +56,12 @@ namespace Game.Gameplay
 
         public int VisibleCount => _visuals.Count;
 
+        /// <summary>A monster reels (broken stance).</summary>
+        public void KickEnemy(int id, float amount)
+        {
+            if (_visuals.TryGetValue((ushort)id, out var v)) Squash.Kick(v.Root.transform, amount);
+        }
+
         /// <summary>The lord rears up (a stage roar).</summary>
         public void KickBoss(float amount)
         {

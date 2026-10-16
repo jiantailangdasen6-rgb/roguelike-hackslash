@@ -753,6 +753,8 @@ namespace Game.Core
                 e = ref Enemies[index];
             }
 
+            damage = PoiseDamage(index, damage, flags); // RunSimulation.Break.cs
+            e = ref Enemies[index];
             if (attacker != null && !_ultimateCasting && !e.Def.Prop) GainFocus(attacker, damage * FocusPerDamage); // RunSimulation.Ultimates.cs
             e.Health -= damage;
             Events.Add(new SimEvent(SimEventType.EnemyHit) { Id = e.Id, Pos = e.Position, Value = damage, Int = HitInfo.Pack(flags, attacker) });

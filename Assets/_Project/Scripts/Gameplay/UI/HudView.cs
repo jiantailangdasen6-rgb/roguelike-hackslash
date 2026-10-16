@@ -173,6 +173,7 @@ namespace Game.Gameplay
         private Text _timeText;
         private Text _difficultyText;
         private UIKit.Bar _bossBar;
+        private UIKit.Bar _bossPoise;
         private GameObject _bossRoot;
         private Text _bossName;
         private Text _trialText;
@@ -273,7 +274,10 @@ namespace Game.Gameplay
             _bossName = UIKit.Title(boss.transform, "", 24, TextAnchor.UpperCenter);
             _bossName.rectTransform.Stretch(2f);
             _bossBar = UIKit.CreateBar(boss.transform, "BossHp", new Color(0.6f, 0.08f, 0.1f), new Color(0.1f, 0.02f, 0.03f));
-            _bossBar.Root.Place(new Vector2(0.5f, 0f), new Vector2(860f, 14f), new Vector2(0f, 8f));
+            _bossBar.Root.Place(new Vector2(0.5f, 0f), new Vector2(860f, 14f), new Vector2(0f, 12f));
+            // The stance under the health: worn through, the lord is broken (RunSimulation.Break).
+            _bossPoise = UIKit.CreateBar(boss.transform, "BossPoise", new Color(0.95f, 0.78f, 0.3f), new Color(0.08f, 0.06f, 0.02f));
+            _bossPoise.Root.Place(new Vector2(0.5f, 0f), new Vector2(860f, 5f), new Vector2(0f, 4f));
             // What the boss's trial asks of the team (or of you, shut in a cage).
             _trialText = UIKit.Title(root, "", 34, TextAnchor.UpperCenter, new Color(1f, 0.86f, 0.55f));
             _trialText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1200f, 50f), new Vector2(0f, -100f));
@@ -733,7 +737,11 @@ namespace Game.Gameplay
             {
                 _bossBar.Fill = boss;
                 var def = EnemyCatalog.Get(director.BossType.Value);
-                _bossName.text = boss < 0.5f ? $"{def.Name}  <size=18><color=#ff7060>激昂</color></size>" : def.Name;
+                float poise = director.BossPoise.Value;
+                _bossPoise.Fill = Mathf.Max(0f, poise);
+                int stage = director.BossStage.Value;
+                string state = poise == 0f ? "<color=#ffd27a>崩れた！</color>" : stage >= 3 ? "<color=#ff7060>最後のあがき</color>" : stage == 2 ? "<color=#ff7060>怒り</color>" : "";
+                _bossName.text = state.Length > 0 ? $"{def.Name}  <size=18>{state}</size>" : def.Name;
             }
             _trialText.text = TrialText(director, local);
 

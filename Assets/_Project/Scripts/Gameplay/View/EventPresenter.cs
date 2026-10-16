@@ -152,6 +152,20 @@ namespace Game.Gameplay
                     if (e.Value >= 1f) ShowNumber(e.Pos + Vector2.up * 1.2f, $"+{Mathf.RoundToInt(e.Value)}", new Color(0.5f, 1f, 0.55f), 24);
                     break;
                 case SimEventType.Ultimate: OnUltimate(e); break; // EventPresenter.Ultimates.cs
+                case SimEventType.EnemyBroken:
+                {
+                    // The stance gives way (RunSimulation.Break): a golden crack, the word, a beat of stillness.
+                    bool lord = EnemyCatalog.Get((EnemyType)e.Int).Boss;
+                    var crack = Spawn("fx_nova", e.Pos + Vector2.up * 0.7f, 1f, 0.45f, 0.5f, lord ? 5f : 3f, new Color(1f, 0.85f, 0.4f, 0.9f));
+                    crack.FadeOut = true;
+                    AddLight(crack, new Color(1f, 0.8f, 0.35f), 3f, lord ? 7f : 4.5f);
+                    for (int i = 0; i < (lord ? 16 : 10); i++) Shard(e.Pos + Vector2.up * 0.7f, i * (lord ? 22.5f : 36f) + Random.Range(0f, 15f), new Color(1f, 0.88f, 0.5f));
+                    ShowCallout(e.Pos + Vector2.up * (lord ? 3.4f : 2f), "崩し！", new Color(1f, 0.85f, 0.4f), lord ? 54 : 40);
+                    HitStop.Freeze(lord ? 0.12f : 0.08f, e.Id, major: true);
+                    CameraShake.Add(lord ? 0.6f : 0.3f);
+                    if (EnemyView.Instance != null && EnemyView.Instance.TryGetPosition(e.Id, out _)) EnemyView.Instance.KickEnemy(e.Id, -0.35f);
+                    break;
+                }
                 case SimEventType.PerfectDodge:
                 {
                     // Seen and dodged: the moment holds, a cold ring, and the dodge is ready again.

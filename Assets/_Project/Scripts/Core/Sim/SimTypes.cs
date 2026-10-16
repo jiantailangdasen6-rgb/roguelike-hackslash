@@ -361,6 +361,7 @@ namespace Game.Core
         EncounterResolved, // Id = room, Int = the choice, Value = EncounterKind, Pos = what was met, Size = (gamble: 1 won / 2 lost, players there)
         PerfectDodge,    // ClientId, Pos: a hit dodged at the last moment (the charge came back)
         Ultimate,        // ClientId, Int = ClassId, Pos (the target for the ranger and alchemist), Vec = aim, Value = radius
+        EnemyBroken,     // Id, Pos, Int = EnemyType, Value = seconds broken (RunSimulation.Break)
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

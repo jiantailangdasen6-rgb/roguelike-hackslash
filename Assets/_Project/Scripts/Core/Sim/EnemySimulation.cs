@@ -46,6 +46,12 @@ namespace Game.Core
         public float AffixShield;
         public float AffixTimer;
         public float LastHurt;
+        /// <summary>The stance (RunSimulation.Break): how much it holds now and at most, a quiet time before it steadies, and how long it stays broken.</summary>
+        public float Poise;
+        public float PoiseMax;
+        public float PoiseQuiet;
+        public float Broken;
+        public bool PoiseSet;
         public bool Dead;
 
         // AI

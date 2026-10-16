@@ -73,6 +73,7 @@ namespace Game.Gameplay
             Set(SimEventType.Combo, F.Client | F.Int | F.Pos | F.Value | F.Id | F.Vec | F.Size); // a union: Id = the pair, Vec/Size = the two players
             Set(SimEventType.EliteAffixes, F.Id | F.Int | F.Pos);
             Set(SimEventType.EliteShield, F.Id | F.Int | F.Pos);
+            Set(SimEventType.EncounterResolved, F.Id | F.Int | F.Value | F.Pos | F.Size);
             Set(SimEventType.TrialEvent, F.Int | F.Pos | F.Value | F.Client | F.Id);
             Set(SimEventType.RoomEntered, F.Client | F.Id | F.Int | F.Value); // Value = RoomKind
             Set(SimEventType.PedestalUsed, F.Client | F.Id | F.Int | F.Value | F.Pos);

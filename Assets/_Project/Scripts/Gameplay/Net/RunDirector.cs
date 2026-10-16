@@ -277,6 +277,7 @@ namespace Game.Gameplay
             {
                 "twin" => r => r.Kind == RoomKind.Puzzle && r.Puzzle == PuzzleKind.Twin,
                 "spirit" => r => r.Kind == RoomKind.Spirit,
+                "encounter" => r => r.Kind == RoomKind.Encounter,
                 _ => null,
             };
             if (has != null)

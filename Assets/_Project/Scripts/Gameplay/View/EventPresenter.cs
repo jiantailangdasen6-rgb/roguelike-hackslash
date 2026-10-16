@@ -198,6 +198,7 @@ namespace Game.Gameplay
                 case SimEventType.Combo: OnCombo(e); break;
                 case SimEventType.EliteAffixes: OnEliteAffixes(e); break; // EventPresenter.Affixes.cs
                 case SimEventType.EliteShield: OnEliteShield(e); break;
+                case SimEventType.EncounterResolved: OnEncounter(e); break; // EventPresenter.Encounters.cs
                 case SimEventType.TrialEvent: OnTrial(e); break;
                 case SimEventType.GodSign: OnGodSign(e); break; // EventPresenter.Gods.cs
                 case SimEventType.RoomEvent: OnRoomEvent(e); break; // EventPresenter.Gods.cs
@@ -1261,6 +1262,28 @@ namespace Game.Gameplay
         private void CreateMarks(RunDirector director, MapRoom room, bool used)
         {
             int area = director.Area.Value;
+            if (room.Kind == RoomKind.Encounter)
+            {
+                // The two choices before what is met (RunSimulation.Encounters); the team stands in one together.
+                var kind = room.Encounter;
+                for (int c = 0; c < 2; c++)
+                {
+                    var color = c == 0 ? new Color(0.55f, 0.9f, 1f) : new Color(1f, 0.55f, 0.4f);
+                    string text = used ? "<color=#bfb6aa>選び終えた</color>" : EncounterCatalog.Effect(kind, c);
+                    var choice = CreateMark(RunSimulation.ChoiceSpot(room.Bounds, c), color, null, RunSimulation.VoteRadius,
+                        $"{EncounterCatalog.Choice(kind, c)}\n<size=21><color=#e8e0d4>{text}</color></size>", used);
+                    if (choice.Portal != null)
+                    {
+                        Release(choice.Portal); // a plain ring: these are not doors
+                        choice.Portal = null;
+                    }
+                    _doors.Add(choice);
+                }
+                var title = CreateMark(room.Bounds.center + RunSimulation.EncounterSpot, RoomCatalog.Color(RoomKind.Encounter), null, 0.01f,
+                    $"{EncounterCatalog.Name(kind)}\n<size=21><color=#e8e0d4>{(used ? "もう何も起きない" : EncounterCatalog.Intro(kind) + (NetPlayer.All.Count > 1 ? "（全員で同じ円に立つ）" : "（円に立って選ぶ）"))}</color></size>", true);
+                title.LabelBelow = -0.75f;
+                _doors.Add(title);
+            }
             if (RoomCatalog.HasPedestal(room.Kind))
             {
                 var reward = RoomCatalog.Reward(room.Kind);

@@ -470,6 +470,16 @@ namespace Game.Gameplay
                     else Toast($"仲間が{RoomCatalog.Name(director != null ? director.Map[e.Id]?.Kind ?? RoomKind.Combat : RoomKind.Combat)}を制圧した");
                     break;
                 }
+                case SimEventType.EncounterResolved:
+                {
+                    var kind = (EncounterKind)Mathf.RoundToInt(e.Value);
+                    string hex = ColorUtility.ToHtmlStringRGB(RoomCatalog.Color(RoomKind.Encounter));
+                    string result = kind == EncounterKind.Gambler && e.Int == 0
+                        ? (Mathf.RoundToInt(e.Size.x) == 1 ? "賭けに勝った：力の強化を2回" : $"賭けに負けた：最大HPの{RunSimulation.GambleLoss * 100f:0}%を失った")
+                        : EncounterCatalog.Effect(kind, e.Int);
+                    Toast($"<color=#{hex}>{EncounterCatalog.Name(kind)}</color>：「{EncounterCatalog.Choice(kind, e.Int)}」　{result}");
+                    break;
+                }
                 case SimEventType.PedestalUsed:
                 {
                     var kind = (RoomKind)e.Int;

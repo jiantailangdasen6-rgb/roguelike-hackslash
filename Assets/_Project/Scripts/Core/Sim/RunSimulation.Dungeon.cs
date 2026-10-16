@@ -154,6 +154,7 @@ namespace Game.Core
                 Room = room;
                 if (room.Objective == RoomObjective.Rest) WarmByTheFire(room, dt);
                 if (Map[room.Id].HasPedestal) StepPedestal(room, dt);
+                if (room.Kind == RoomKind.Encounter) StepEncounter(room, dt); // RunSimulation.Encounters.cs
             }
             OfferAll(); // someone may have stepped out of a fight into a quiet room
         }

@@ -128,6 +128,10 @@ namespace Game.Core
         public bool Unlocked;
         /// <summary>Players who used this room's pedestal (each may once).</summary>
         public readonly HashSet<ulong> UsedBy = new();
+        /// <summary>An encounter room: the choice made (-1 none yet), and the vote under way.</summary>
+        public int EncounterChoice = -1;
+        public int VoteFor = -1;
+        public float VoteHold;
         /// <summary>A dark hall (one fight room per area): the lantern lights the way (RunSimulation.Coop).</summary>
         public bool Dark;
         /// <summary>A caged adventurer waits here (RunSimulation.Events).</summary>
@@ -353,6 +357,7 @@ namespace Game.Core
         GodSign,         // ClientId, Int = GodSignKind, Id = GodId, Pos, Vec (blessings at work: lightning, a favour awakening...)
         EliteAffixes,    // Id = the elite, Int = its EliteAffix bits, Pos
         EliteShield,     // Id = the elite, Int = 0 its ward broke / 1 came back / 2 a summoner's call, Pos
+        EncounterResolved, // Id = room, Int = the choice, Value = EncounterKind, Pos = what was met, Size = (gamble: 1 won / 2 lost, players there)
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

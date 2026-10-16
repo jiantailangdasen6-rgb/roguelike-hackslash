@@ -22,6 +22,7 @@ namespace Game.Core
             RoomKind.Treasure => "宝物庫",
             RoomKind.Secret => "隠し部屋",
             RoomKind.Spirit => "霊の祠",
+            RoomKind.Encounter => "出来事の間",
             _ => "",
         };
 
@@ -43,6 +44,7 @@ namespace Game.Core
             RoomKind.Treasure => "宝",
             RoomKind.Secret => "隠",
             RoomKind.Spirit => "霊",
+            RoomKind.Encounter => "遇",
             _ => "",
         };
 
@@ -71,6 +73,7 @@ namespace Game.Core
             RoomKind.MiniBoss => new Color(1f, 0.45f, 0.15f),
             RoomKind.Puzzle => new Color(0.5f, 0.85f, 1f),
             RoomKind.Spirit => new Color(0.62f, 0.92f, 1f),
+            RoomKind.Encounter => new Color(0.95f, 0.78f, 0.55f),
             _ => RewardCatalog.Color(Reward(k)),
         };
 

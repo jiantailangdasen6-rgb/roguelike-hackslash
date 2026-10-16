@@ -371,6 +371,48 @@ namespace Game.Gameplay
                     Decor("decor_rune", o + new Vector2(0f, 0.3f), -955, scale: 1.6f);
                     Glow(o, new Color(0.5f, 0.9f, 1f), 0.6f, 8f);
                     break;
+                case RoomKind.Encounter:
+                {
+                    // What is met (RunSimulation.Encounters), behind the two choice circles.
+                    Vector2 at = b.center + RunSimulation.EncounterSpot;
+                    switch (room.Encounter)
+                    {
+                        case EncounterKind.LostSoul:
+                        {
+                            var soul = Sprite("LostSoul", SpriteSheet.Load("cultist", quiet: true)?.First, at, EnemyView.SortOrder(at.y));
+                            soul.color = new Color(0.75f, 0.72f, 0.68f);
+                            Decor("decor_bones", at + new Vector2(1.3f, -0.4f), -950);
+                            Glow(at + new Vector2(0f, 0.8f), new Color(1f, 0.75f, 0.5f), 0.7f, 4f);
+                            break;
+                        }
+                        case EncounterKind.Statue:
+                            Decor($"prop_statue_{Mathf.Clamp(_area, 0, 8)}", at, scale: 1.25f);
+                            Decor("decal_blood", at + new Vector2(0f, -0.9f), -955);
+                            Glow(at + new Vector2(0f, 1.6f), new Color(1f, 0.25f, 0.2f), 0.9f, 5f);
+                            break;
+                        case EncounterKind.Gambler:
+                        {
+                            var gambler = Sprite("Gambler", SpriteSheet.Load("cultist", quiet: true)?.First, at, EnemyView.SortOrder(at.y));
+                            gambler.color = new Color(1f, 0.85f, 0.5f);
+                            gambler.gameObject.AddComponent<SpriteLoop>().Configure("cultist", 4f);
+                            Decor("decor_gold", at + new Vector2(-1.2f, -0.5f));
+                            Decor("decor_gold", at + new Vector2(1.3f, -0.4f));
+                            Glow(at + new Vector2(0f, 1f), new Color(1f, 0.82f, 0.45f), 0.9f, 5f);
+                            break;
+                        }
+                        default:
+                        {
+                            var font = Sprite("BloodFont", SpriteSheet.Load("prop_font", quiet: true)?.First, at, EnemyView.SortOrder(at.y));
+                            font.color = new Color(1f, 0.45f, 0.45f);
+                            Decor("decal_blood", at + new Vector2(-1f, -0.8f), -955);
+                            Glow(at + new Vector2(0f, 0.8f), new Color(1f, 0.15f, 0.15f), 1f, 5f);
+                            break;
+                        }
+                    }
+                    for (int i = 0; i < 4; i++)
+                        Candle(at + new Vector2(i < 2 ? -2.2f - i * 1.2f : 2.2f + (i - 2) * 1.2f, 0.4f), "fx_candle", new Color(1f, 0.62f, 0.32f));
+                    break;
+                }
                 case RoomKind.Spirit:
                 {
                     // The wandering spirit floats behind its pedestal, pale and see-through, in a cold light.

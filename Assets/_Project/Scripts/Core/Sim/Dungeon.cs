@@ -21,6 +21,7 @@ namespace Game.Core
         Treasure,   // behind a locked door (a key): gear for everyone
         Secret,     // behind a cracked wall: the old map of the area, and treasure
         Spirit,     // a wandering spirit: offer a tenth of your max HP for a god's blessing (each player once)
+        Encounter,  // something met on the way: the team chooses between two (RunSimulation.Encounters)
     }
 
     /// <summary>Which trial a puzzle room holds.</summary>
@@ -58,6 +59,8 @@ namespace Game.Core
         /// <summary>Steps from the start room.</summary>
         public int Depth;
         public PuzzleKind Puzzle;
+        /// <summary>What an encounter room holds.</summary>
+        public EncounterKind Encounter;
         /// <summary>A dark hall: fought by the light of a lantern someone carries.</summary>
         public bool Dark;
         /// <summary>A fight room with a caged adventurer to set free (one per area).</summary>
@@ -428,6 +431,10 @@ namespace Game.Core
             // Deeper in, the shrine is sometimes a wandering spirit instead (a blessing for a tenth of max HP).
             if (Area >= 1 && rng.Chance(0.4f)) treats[2] = RoomKind.Spirit;
             if (Area >= 1) treats.Add(rng.Chance(0.5f) ? RoomKind.CurseAltar : RoomKind.Merchant);
+            // An encounter (decided apart from the map's own draws, so the rest of the map stays as it was).
+            var encounterRng = new GameRandom((ulong)(Boss.Cell.x * 73856093 ^ Boss.Cell.y * 19349663 ^ Campfire.Cell.x * 83492791 ^ Campfire.Cell.y * 2654435 ^ Area * 7919 ^ Rooms.Count * 104729) ^ 0xE7C0ul);
+            // It takes the place of the spring or whetstone now and then (the map keeps its fights).
+            if (encounterRng.Chance(0.6f)) treats[3] = RoomKind.Encounter;
             var treasure = free.Find(r => !onPath.Contains(r.Id) && DoorCount(r) == 1);
             if (treasure != null)
             {
@@ -454,6 +461,8 @@ namespace Game.Core
             if (treasure != null && !Rooms.Exists(r => r.Kind is RoomKind.MiniBoss or RoomKind.Puzzle)) treasure.Kind = RoomKind.Shrine;
             foreach (var r in Rooms)
                 if (r.Kind == RoomKind.Puzzle) r.Puzzle = (PuzzleKind)rng.Range(0, 5);
+            foreach (var r in Rooms)
+                if (r.Kind == RoomKind.Encounter) r.Encounter = (EncounterKind)new GameRandom((ulong)(r.Id * 31 + Area * 977 + r.Depth * 7) ^ 0x5EEDul).Range(0, RunSimulation.EncounterCount);
 
             int maxDepth = Boss.Depth;
             foreach (var r in Rooms)

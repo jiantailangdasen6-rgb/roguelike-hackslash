@@ -31,6 +31,8 @@ namespace Game.Core
                 if (q == p || !q.Alive || now - q.LastSkillAt > UnionWindow || now < q.UnionReadyAt) continue;
                 if ((q.Position - p.Position).sqrMagnitude > UnionRange * UnionRange) continue;
                 Union(p, q);
+                GainFocus(p, FocusUnion);
+                GainFocus(q, FocusUnion);
                 p.LastSkillAt = q.LastSkillAt = -99f;
                 p.UnionReadyAt = q.UnionReadyAt = now + UnionCooldown;
                 return;

@@ -26,6 +26,7 @@ namespace Game.Gameplay
         private byte _skill1;
         private byte _skill2;
         private byte _dodge;
+        private byte _ult;
         private float _sendTimer;
         private bool _attackHeld;
         private bool _bot;
@@ -44,6 +45,7 @@ namespace Game.Gameplay
             input.Skill1Pressed += Skill1;
             input.Skill2Pressed += Skill2;
             input.DodgePressed += Dodge;
+            input.UltimatePressed += Ultimate;
         }
 
         private void OnDisable()
@@ -51,6 +53,7 @@ namespace Game.Gameplay
             input.Skill1Pressed -= Skill1;
             input.Skill2Pressed -= Skill2;
             input.DodgePressed -= Dodge;
+            input.UltimatePressed -= Ultimate;
         }
 
         /// <summary>The host moved this player (a new area, the gathering bell): a jump everyone sees as one.</summary>
@@ -106,6 +109,15 @@ namespace Game.Gameplay
             Vector2 move = CurrentMove();
             StartDash(move.sqrMagnitude > 0.01f ? move.normalized : _aim.normalized, ClassCatalog.DodgeSpeed, ClassCatalog.DodgeDuration);
             SendInput(); // send the press right away
+        }
+
+        /// <summary>The ultimate (RunSimulation.Ultimates): only with a full focus gauge.</summary>
+        public void Ultimate()
+        {
+            if (!CanAct || player.Focus.Value < 100) return;
+            _ult++;
+            player.PredictAction(AttackAnim.Skill2);
+            SendInput();
         }
 
         public void Skill1()
@@ -296,7 +308,7 @@ namespace Game.Gameplay
         {
             _sendTimer = SendInterval;
             if (!player.IsSpawned) return;
-            player.SendInputRpc(_aim, _attackHeld && (CanAct || CanHaunt), _skill1, _skill2, _dodge);
+            player.SendInputRpc(_aim, _attackHeld && (CanAct || CanHaunt), _skill1, _skill2, _dodge, _ult);
         }
 
         // ------------------------------------------------------------------ Test bot
@@ -552,6 +564,7 @@ namespace Game.Gameplay
                     _nextSkill1 = Time.time + 2f;
                     mover.Skill1();
                 }
+                if (_player.Focus.Value >= 100 && nearest.HasValue) mover.Ultimate(); // the bots use their ultimate as soon as it is full
                 if (Time.time > _nextSkill2 && (nearest.HasValue || _player.Class.Value == ClassId.Mage))
                 {
                     _nextSkill2 = Time.time + 3f;

@@ -23,6 +23,7 @@ namespace Game.Gameplay
         private InputAction _skill1;
         private InputAction _skill2;
         private InputAction _dodge;
+        private InputAction _ultimate;
 
         public Vector2 Move => TouchInput.Active && TouchInput.Move.sqrMagnitude > 0.0001f ? TouchInput.Move : _move.ReadValue<Vector2>();
         public Vector2 AimScreenPosition => _aimPoint.ReadValue<Vector2>();
@@ -36,6 +37,7 @@ namespace Game.Gameplay
         public event Action Skill1Pressed;
         public event Action Skill2Pressed;
         public event Action DodgePressed;
+        public event Action UltimatePressed;
 
         private void Awake()
         {
@@ -47,6 +49,7 @@ namespace Game.Gameplay
             _skill1 = _map.FindAction("Skill1", true);
             _skill2 = _map.FindAction("Skill2", true);
             _dodge = _map.FindAction("Dodge", true);
+            _ultimate = _map.FindAction("Ultimate", false);
             ApplyKeys();
         }
 
@@ -56,6 +59,7 @@ namespace Game.Gameplay
             Rebind(_skill1, KeyAction.Skill1);
             Rebind(_skill2, KeyAction.Skill2);
             Rebind(_dodge, KeyAction.Dodge);
+            if (_ultimate != null) Rebind(_ultimate, KeyAction.Ultimate);
         }
 
         private static void Rebind(InputAction action, KeyAction key)
@@ -75,6 +79,7 @@ namespace Game.Gameplay
             _skill1.performed += OnSkill1;
             _skill2.performed += OnSkill2;
             _dodge.performed += OnDodge;
+            if (_ultimate != null) _ultimate.performed += OnUltimate;
             _map.Enable();
         }
 
@@ -86,6 +91,7 @@ namespace Game.Gameplay
             _skill1.performed -= OnSkill1;
             _skill2.performed -= OnSkill2;
             _dodge.performed -= OnDodge;
+            if (_ultimate != null) _ultimate.performed -= OnUltimate;
         }
 
         private void OnAny(InputAction.CallbackContext ctx)
@@ -101,10 +107,12 @@ namespace Game.Gameplay
             if (TouchInput.Pressed(TouchButton.Skill1)) Skill1Pressed?.Invoke();
             if (TouchInput.Pressed(TouchButton.Skill2)) Skill2Pressed?.Invoke();
             if (TouchInput.Pressed(TouchButton.Dodge)) DodgePressed?.Invoke();
+            if (TouchInput.Pressed(TouchButton.Ultimate)) UltimatePressed?.Invoke();
         }
 
         private void OnSkill1(InputAction.CallbackContext _) => Skill1Pressed?.Invoke();
         private void OnSkill2(InputAction.CallbackContext _) => Skill2Pressed?.Invoke();
         private void OnDodge(InputAction.CallbackContext _) => DodgePressed?.Invoke();
+        private void OnUltimate(InputAction.CallbackContext _) => UltimatePressed?.Invoke();
     }
 }

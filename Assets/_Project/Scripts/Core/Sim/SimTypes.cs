@@ -267,6 +267,7 @@ namespace Game.Core
         public byte Skill1Count;
         public byte Skill2Count;
         public byte DodgeCount;
+        public byte UltCount;
     }
 
     public sealed class Projectile
@@ -359,6 +360,7 @@ namespace Game.Core
         EliteShield,     // Id = the elite, Int = 0 its ward broke / 1 came back / 2 a summoner's call, Pos
         EncounterResolved, // Id = room, Int = the choice, Value = EncounterKind, Pos = what was met, Size = (gamble: 1 won / 2 lost, players there)
         PerfectDodge,    // ClientId, Pos: a hit dodged at the last moment (the charge came back)
+        Ultimate,        // ClientId, Int = ClassId, Pos (the target for the ranger and alchemist), Vec = aim, Value = radius
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

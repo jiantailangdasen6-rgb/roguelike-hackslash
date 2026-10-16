@@ -55,6 +55,8 @@ namespace Game.Core
                     p.LastSkill1 = p.Input.Skill1Count;
                     p.LastSkill2 = p.Input.Skill2Count;
                     p.LastDodge = p.Input.DodgeCount;
+                    p.LastUlt = p.Input.UltCount;
+                    p.UltTimer = 0f;
                     StepGhost(p, dt); // RunSimulation.Ghosts.cs
                     continue;
                 }
@@ -64,6 +66,19 @@ namespace Game.Core
                     p.LastDodge = p.Input.DodgeCount;
                     StepGhost(p, dt); // RunSimulation.Ghosts.cs
                     if (p.DodgeCooldown <= 0f && p.DodgeCharges > 0) Dodge(p);
+                }
+                if (p.Input.UltCount != p.LastUlt)
+                {
+                    p.LastUlt = p.Input.UltCount;
+                    _ultimateCasting = true;
+                    TryUltimate(p, AimDirection(p)); // RunSimulation.Ultimates.cs
+                    _ultimateCasting = false;
+                }
+                if (p.UltTimer > 0f)
+                {
+                    _ultimateCasting = true;
+                    StepUltimate(p, dt);
+                    _ultimateCasting = false;
                 }
                 if (p.Input.Skill1Count != p.LastSkill1)
                 {
@@ -109,6 +124,7 @@ namespace Game.Core
         private void PerfectDodge(SimPlayer p)
         {
             p.PerfectThisDodge = true;
+            GainFocus(p, FocusPerfectDodge);
             if (p.DodgeCharges < ClassCatalog.DodgeCharges)
             {
                 p.DodgeCharges++;
@@ -737,6 +753,7 @@ namespace Game.Core
                 e = ref Enemies[index];
             }
 
+            if (attacker != null && !_ultimateCasting && !e.Def.Prop) GainFocus(attacker, damage * FocusPerDamage); // RunSimulation.Ultimates.cs
             e.Health -= damage;
             Events.Add(new SimEvent(SimEventType.EnemyHit) { Id = e.Id, Pos = e.Position, Value = damage, Int = HitInfo.Pack(flags, attacker) });
 

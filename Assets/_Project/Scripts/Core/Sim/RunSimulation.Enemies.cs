@@ -520,6 +520,8 @@ namespace Game.Core
                 dealt -= absorbed;
             }
 
+            if (p.UltTimer > 0f && p.ClassId == ClassId.Warrior) dealt *= 0.5f; // the blade storm (RunSimulation.Ultimates)
+            GainFocus(p, dealt * FocusPerHurt);
             p.Hp -= dealt;
             p.InvulnerableTimer = HitInvulnerability;
             Events.Add(new SimEvent(SimEventType.PlayerHurt) { ClientId = p.ClientId, Pos = p.Position, Value = dealt });

@@ -15,6 +15,7 @@ namespace Game.Gameplay
         Map,
         Ping,
         Codex,
+        Ultimate,
     }
 
     /// <summary>
@@ -34,6 +35,7 @@ namespace Game.Gameplay
             [KeyAction.Map] = Key.M,
             [KeyAction.Ping] = Key.F,
             [KeyAction.Codex] = Key.B,
+            [KeyAction.Ultimate] = Key.R,
         };
 
         public static string ActionName(KeyAction a) => a switch
@@ -41,6 +43,7 @@ namespace Game.Gameplay
             KeyAction.Skill1 => "スキル1",
             KeyAction.Skill2 => "スキル2",
             KeyAction.Dodge => "回避",
+            KeyAction.Ultimate => "必殺技",
             KeyAction.Bag => "袋",
             KeyAction.Map => "地図",
             KeyAction.Ping => "合図",

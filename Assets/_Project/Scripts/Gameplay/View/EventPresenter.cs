@@ -151,6 +151,7 @@ namespace Game.Gameplay
                 case SimEventType.PlayerHealed:
                     if (e.Value >= 1f) ShowNumber(e.Pos + Vector2.up * 1.2f, $"+{Mathf.RoundToInt(e.Value)}", new Color(0.5f, 1f, 0.55f), 24);
                     break;
+                case SimEventType.Ultimate: OnUltimate(e); break; // EventPresenter.Ultimates.cs
                 case SimEventType.PerfectDodge:
                 {
                     // Seen and dodged: the moment holds, a cold ring, and the dodge is ready again.

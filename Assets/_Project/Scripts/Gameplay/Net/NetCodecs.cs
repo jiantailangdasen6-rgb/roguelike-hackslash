@@ -75,6 +75,7 @@ namespace Game.Gameplay
             Set(SimEventType.EliteShield, F.Id | F.Int | F.Pos);
             Set(SimEventType.EncounterResolved, F.Id | F.Int | F.Value | F.Pos | F.Size);
             Set(SimEventType.PerfectDodge, F.Client | F.Pos);
+            Set(SimEventType.Ultimate, F.Client | F.Int | F.Pos | F.Vec | F.Value);
             Set(SimEventType.TrialEvent, F.Int | F.Pos | F.Value | F.Client | F.Id);
             Set(SimEventType.RoomEntered, F.Client | F.Id | F.Int | F.Value); // Value = RoomKind
             Set(SimEventType.PedestalUsed, F.Client | F.Id | F.Int | F.Value | F.Pos);

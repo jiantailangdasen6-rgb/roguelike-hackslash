@@ -38,6 +38,8 @@ namespace Game.Gameplay
         /// <summary>Seconds until the next dodge charge comes back (0 when all are ready), and how many are ready.</summary>
         public readonly NetworkVariable<float> DodgeCooldown = new();
         public readonly NetworkVariable<byte> DodgeCharges = new(ClassCatalog.DodgeCharges);
+        /// <summary>The focus gauge, 0..100 (RunSimulation.Ultimates): full, the ultimate is ready.</summary>
+        public readonly NetworkVariable<byte> Focus = new();
         public readonly NetworkVariable<bool> Valor = new();
         /// <summary>Perk picks earned and not made yet (banked during fights, chosen between rooms).</summary>
         public readonly NetworkVariable<int> Picks = new();
@@ -206,12 +208,12 @@ namespace Game.Gameplay
 
         /// <summary>Owner → host, every network tick. Unreliable: presses are counters, so a dropped packet loses nothing.</summary>
         [Rpc(SendTo.Server, Delivery = RpcDelivery.Unreliable)]
-        public void SendInputRpc(Vector2 aim, bool attack, byte skill1, byte skill2, byte dodge, RpcParams rpcParams = default)
+        public void SendInputRpc(Vector2 aim, bool attack, byte skill1, byte skill2, byte dodge, byte ult, RpcParams rpcParams = default)
         {
             if (rpcParams.Receive.SenderClientId != OwnerClientId) return;
             RunDirector.Instance?.Sim?.SetPlayerInput(OwnerClientId, new PlayerInput
             {
-                Aim = Vector2.ClampMagnitude(aim, 20f), Attack = attack, Skill1Count = skill1, Skill2Count = skill2, DodgeCount = dodge,
+                Aim = Vector2.ClampMagnitude(aim, 20f), Attack = attack, Skill1Count = skill1, Skill2Count = skill2, DodgeCount = dodge, UltCount = ult,
             });
         }
 
@@ -275,6 +277,10 @@ namespace Game.Gameplay
                     if (Mathf.Abs(e.Vec.x) > 0.05f && !IsOwner) animator.Renderer.flipX = e.Vec.x < 0f;
                     break;
                 }
+                case SimEventType.Ultimate:
+                    if (!IsOwner || IsServer) PlayAction(AttackAnim.Skill2); // the owner already started it on the press
+                    Squash.Kick(animator, 0.25f);
+                    break;
                 case SimEventType.PlayerHurt:
                     animator.Flash(0.1f);
                     Squash.Kick(animator, -0.2f);

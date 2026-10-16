@@ -69,6 +69,12 @@ namespace Game.Core
         public byte LastSkill1;
         public byte LastSkill2;
         public byte LastDodge;
+        public byte LastUlt;
+        /// <summary>The focus gauge (0..RunSimulation.FocusMax) and an ultimate that lasts (warrior, ranger).</summary>
+        public float Focus;
+        public float UltTimer;
+        public float UltTick;
+        public Vector2 UltTarget;
 
         // Abilities
         public float BasicTimer;

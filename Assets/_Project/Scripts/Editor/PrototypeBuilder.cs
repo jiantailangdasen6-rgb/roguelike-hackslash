@@ -150,7 +150,8 @@ namespace Game.EditorTools
         private static InputActionAsset LoadOrCreateInputActions()
         {
             var existing = AssetDatabase.LoadAssetAtPath<InputActionAsset>(InputActionsPath);
-            if (existing != null) return existing;
+            // Kept as it is unless an action was added since (the ultimate, 2026-10-17): then it is written anew.
+            if (existing != null && existing.FindAction(PlayerInputReader.MapName + "/Ultimate") != null) return existing;
 
             var asset = ScriptableObject.CreateInstance<InputActionAsset>();
             asset.name = "GameControls";
@@ -173,6 +174,7 @@ namespace Game.EditorTools
             AddButton(map, "Skill1", "<Keyboard>/q", "<Gamepad>/rightShoulder", "<Mouse>/rightButton");
             AddButton(map, "Skill2", "<Keyboard>/e", "<Gamepad>/leftShoulder");
             AddButton(map, "Dodge", "<Keyboard>/space", "<Gamepad>/buttonSouth", "<Keyboard>/leftShift");
+            AddButton(map, "Ultimate", "<Keyboard>/r", "<Gamepad>/buttonNorth");
 
             File.WriteAllText(InputActionsPath, asset.ToJson());
             Object.DestroyImmediate(asset);

@@ -135,6 +135,9 @@ namespace Game.Gameplay
                 }
                 Debug.Log("[AutoTest] spawned elites");
             }
+            // -fullfocus (host): the focus gauge kept full (screenshots of the ultimates; bots use them when full).
+            if (CommandLine.Has("-fullfocus") && RunDirector.Instance?.Sim != null && Time.frameCount % 120 == 0)
+                foreach (var p in RunDirector.Instance.Sim.Players) p.Focus = Game.Core.RunSimulation.FocusMax;
             // -wipeat <s> (host): the whole party falls, to test the result screen and going back to the camp together.
             if (_wipeAt > 0f && Time.time >= _wipeAt && RunDirector.Instance?.Sim != null && RunDirector.Instance.IsRunning)
             {

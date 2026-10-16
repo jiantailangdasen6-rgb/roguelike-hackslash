@@ -438,6 +438,11 @@ namespace Game.Core
                 $"回避は{ClassCatalog.DodgeCharges}回分たまる（回避アイコンの●）。1回分は{ClassCatalog.DodgeRechargeTime:0.#}秒で戻る",
                 "無敵は回避で動いている一瞬だけ",
                 "その一瞬に攻撃を受け流すと「見切り」：時間が一瞬ゆっくりになり、回避が1回分すぐ戻る"));
+            list.Add(Open(CodexSection.Controls, "control:Ultimate", "必殺技と闘志", "R キー・Y ボタン", "fx_holy", "強い敵や群れが来たときのためにとっておく",
+                "敵に攻撃を当てる・攻撃を受ける・見切り・合体技で闘志がたまる（回避の右のアイコン）。満タンで必殺技が使える",
+                $"戦士「{UltimateCatalog.Name(ClassId.Warrior)}」・魔法使い「{UltimateCatalog.Name(ClassId.Mage)}」・狩人「{UltimateCatalog.Name(ClassId.Ranger)}」・守護騎士「{UltimateCatalog.Name(ClassId.Guardian)}」",
+                $"暗殺者「{UltimateCatalog.Name(ClassId.Assassin)}」・錬金術師「{UltimateCatalog.Name(ClassId.Alchemist)}」・死霊術師「{UltimateCatalog.Name(ClassId.Deathcaller)}」・聖騎士「{UltimateCatalog.Name(ClassId.Paladin)}」",
+                "それぞれの働きは鏡（職業選び）で確かめられる"));
             list.Add(Open(CodexSection.Controls, "control:Gamepad", "ゲームパッド", "パッド", "ranger", "照準は右スティック（倒していなければ移動方向）",
                 "左スティック：移動　右スティック：照準", "RT：通常攻撃　RB：スキル1　LB：スキル2", "A：回避", "Select：地図　十字キー上：合図"));
             list.Add(Open(CodexSection.Controls, "control:Run", "迷宮の進み方", "1回およそ15分", "fx_portal", "寄り道（祠・泉・精鋭）をするほど強くなる",

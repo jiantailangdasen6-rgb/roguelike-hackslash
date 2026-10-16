@@ -37,7 +37,7 @@ namespace Game.Gameplay
         private Vector2 _stickOrigin;
         private readonly List<Pad> _pads = new();
         private readonly Dictionary<int, Pad> _held = new();
-        private Pad _attack, _skill1, _skill2, _dodge, _interact;
+        private Pad _attack, _skill1, _skill2, _dodge, _interact, _ultimate;
         private string _iconsFor;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -64,6 +64,7 @@ namespace Game.Gameplay
             _skill1 = AddPad(new Vector2(-440f, 170f), 70f, TouchButton.Skill1, false, null);
             _skill2 = AddPad(new Vector2(-380f, 390f), 70f, TouchButton.Skill2, false, null);
             _dodge = AddPad(new Vector2(-180f, 470f), 64f, TouchButton.Dodge, false, null);
+            _ultimate = AddPad(new Vector2(-520f, 400f), 64f, TouchButton.Ultimate, false, "必");
             _interact = AddPad(new Vector2(-210f, 230f), 100f, TouchButton.Interact, false, "調べる");
             var row = new[] { (TouchButton.Bag, "袋"), (TouchButton.Map, "地図"), (TouchButton.Ping, "合図"), (TouchButton.Codex, "図鑑"), (TouchButton.Menu, "≡") };
             for (int i = 0; i < row.Length; i++)
@@ -137,7 +138,7 @@ namespace Game.Gameplay
             int topIndex = 0;
             foreach (var p in _pads)
             {
-                bool combat = p == _attack || p == _skill1 || p == _skill2 || p == _dodge;
+                bool combat = p == _attack || p == _skill1 || p == _skill2 || p == _dodge || p == _ultimate;
                 bool runOnly = p.Press is TouchButton.Bag or TouchButton.Map or TouchButton.Ping;
                 bool on = p == _interact ? camp : combat ? !camp : !(camp && runOnly);
                 p.Rect.gameObject.SetActive(on);
@@ -186,6 +187,7 @@ namespace Game.Gameplay
             Cool(_skill1, local.Skill1Cooldown.Value, def.Skill1Cooldown);
             Cool(_skill2, local.Skill2Cooldown.Value, def.Skill2Cooldown);
             Cool(_dodge, local.DodgeCharges.Value > 0 ? 0f : local.DodgeCooldown.Value, ClassCatalog.DodgeRechargeTime); // greys out only with no dodge left
+            Cool(_ultimate, local.Focus.Value >= 100 ? 0f : 1f - local.Focus.Value / 100f, 1f); // the gauge fills toward ready
         }
 
         private static void Set(Pad p, Sprite s)

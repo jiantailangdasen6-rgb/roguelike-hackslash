@@ -369,9 +369,10 @@ namespace Game.Gameplay
                 $"HP {current.Health:0}（+{current.HealthPerLevel:0}/Lv）　移動 {current.MoveSpeed:0.0}　防御 {current.Armor:0}\n\n" +
                 $"<color=#e0b45a>◆{current.BasicName}</color>（左クリック）\n" +
                 $"<color=#e0b45a>◆{current.Skill1Name}</color>（Q / 右クリック）\n<size=21><color=#d8d0c4>{current.Skill1Text}</color></size>\n" +
-                $"<color=#e0b45a>◆{current.Skill2Name}</color>（E）\n<size=21><color=#d8d0c4>{current.Skill2Text}</color></size>",
+                $"<color=#e0b45a>◆{current.Skill2Name}</color>（E）\n<size=21><color=#d8d0c4>{current.Skill2Text}</color></size>\n" +
+                $"<color=#ffd27a>◆必殺技「{UltimateCatalog.Name(current.Id)}」</color>（R・闘志が満タンで）\n<size=21><color=#d8d0c4>{UltimateCatalog.Text(current.Id)}</color></size>",
                 24, TextAnchor.UpperLeft);
-            body.rectTransform.Place(new Vector2(0f, 1f), new Vector2(720f, 380f), new Vector2(10f, -220f));
+            body.rectTransform.Place(new Vector2(0f, 1f), new Vector2(720f, 460f), new Vector2(10f, -220f));
         }
 
         private void ChooseSkin(SkinDef skin)

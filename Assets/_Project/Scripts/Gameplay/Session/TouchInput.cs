@@ -14,6 +14,7 @@ namespace Game.Gameplay
         Codex,
         Menu,
         Interact,
+        Ultimate,
     }
 
     /// <summary>

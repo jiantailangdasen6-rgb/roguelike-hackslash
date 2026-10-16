@@ -542,6 +542,7 @@ namespace Game.Gameplay
                 SetIfChanged(p.Skill2Cooldown, Mathf.Max(0f, Quantize(sp.Skill2Cooldown)));
                 SetIfChanged(p.DodgeCooldown, sp.DodgeCharges < ClassCatalog.DodgeCharges ? Mathf.Max(0f, Quantize(sp.DodgeRecharge)) : 0f);
                 SetIfChanged(p.DodgeCharges, (byte)sp.DodgeCharges);
+                SetIfChanged(p.Focus, (byte)Mathf.FloorToInt(sp.Focus));
                 SetIfChanged(p.Valor, sp.ValorTimer > 0f);
                 SetIfChanged(p.Picks, sp.PicksLeft);
                 SetIfChanged(p.Legendary, sp.AnyLegendaryEquipped);

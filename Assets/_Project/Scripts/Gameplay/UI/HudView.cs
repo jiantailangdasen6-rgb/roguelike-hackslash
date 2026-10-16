@@ -197,6 +197,7 @@ namespace Game.Gameplay
         private RectTransform _perkRow;
         private int _perksShown = -1;
         private readonly SkillSlot[] _skills = new SkillSlot[4];
+        private SkillSlot _ult;
         private readonly TeamFrame[] _team = new TeamFrame[GameSession.MaxPlayers - 1];
         private readonly List<(string Text, float Until)> _toasts = new();
         private GuideHints _guide;
@@ -279,6 +280,10 @@ namespace Game.Gameplay
 
             // Bottom: the skill bar, icon slots with their key under them.
             for (int i = 0; i < 4; i++) _skills[i] = CreateSkillSlot(root, i);
+            // The ultimate (RunSimulation.Ultimates): a fifth slot that fills with the focus gauge.
+            _ult = CreateSkillSlot(root, 3);
+            _ult.Root.Place(new Vector2(0.5f, 0f), new Vector2(104f, 104f), new Vector2(2.5f * 126f + 12f, 40f));
+            _ult.Time.fontSize = 26;
 
             _centerText = UIKit.Title(root, "", 38, TextAnchor.MiddleCenter, new Color(0.9f, 0.85f, 0.8f));
             _centerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1300f, 160f), new Vector2(0f, 170f));
@@ -743,6 +748,7 @@ namespace Game.Gameplay
                     {
                         for (int s = 0; s < 3; s++) _skills[s].Icon.sprite = icons[Mathf.Min(ClassCatalog.SkillIcon(def.Id, s), icons.Length - 1)];
                         _skills[3].Icon.sprite = icons[Mathf.Min(ClassCatalog.DodgeIcon, icons.Length - 1)];
+                        _ult.Icon.sprite = icons[Mathf.Min(ClassCatalog.SkillIcon(def.Id, 2), icons.Length - 1)];
                     }
                 }
                 float max = Mathf.Max(1f, local.MaxHp.Value);
@@ -766,6 +772,7 @@ namespace Game.Gameplay
                 SetCooldown(_skills[2], local.Skill2Cooldown.Value, def.Skill2Cooldown);
                 SetDodge(_skills[3], local.DodgeCharges.Value, local.DodgeCooldown.Value);
                 SetCooldown(_skills[0], 0f, 1f);
+                SetUltimate(_ult, local.Focus.Value, reader0: local.GetComponent<PlayerInputReader>());
                 // The key caps follow the device in use.
                 var reader = local.GetComponent<PlayerInputReader>();
                 var keys = reader != null && !reader.UsingMouse ? PadKeys : _mouseKeys;
@@ -883,6 +890,28 @@ namespace Game.Gameplay
                     lv.rectTransform.Stretch(-2f);
                 }
             }
+        }
+
+        /// <summary>The ultimate's slot: dark until the focus gauge fills it (percent shown), then gold and pulsing.</summary>
+        private static void SetUltimate(SkillSlot slot, int focus, PlayerInputReader reader0)
+        {
+            bool ready = focus >= 100;
+            slot.Cool.fillAmount = ready ? 0f : 1f - focus / 100f;
+            slot.Time.text = ready ? "" : $"{focus}%";
+            float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * 6f);
+            slot.Icon.color = ready ? Color.Lerp(new Color(1f, 0.85f, 0.45f), Color.white, pulse) : new Color(0.45f, 0.42f, 0.5f);
+            if (ready && slot.Last < 100f) slot.FlashAt = Time.time;
+            slot.Last = focus;
+            float k = Mathf.Clamp01((Time.time - slot.FlashAt) / 0.5f);
+            slot.Flash.color = new Color(1f, 0.85f, 0.4f, ready ? Mathf.Max((1f - k) * 0.8f, 0.12f * pulse) : 0f);
+            slot.Root.localScale = Vector3.one * (1f + (1f - k) * 0.12f + (ready ? 0.03f * pulse : 0f));
+            string key = reader0 != null && !reader0.UsingMouse ? "Y" : GameSettings.Label(KeyAction.Ultimate);
+            if (slot.Key.text != key)
+            {
+                slot.Key.text = key;
+                slot.KeyCap.sizeDelta = new Vector2(key.Length > 2 ? 86f : key.Length == 2 ? 56f : 44f, 30f);
+            }
+            slot.Charges.text = ready ? "必殺" : "";
         }
 
         /// <summary>The dodge: its charges as pips; the slot only greys out with none left (the next one's wait shown then).</summary>

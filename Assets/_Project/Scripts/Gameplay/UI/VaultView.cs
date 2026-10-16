@@ -32,6 +32,8 @@ namespace Game.Gameplay
         private Text _equipLabel;
         private Button _salvageButton;
         private Text _salvageLabel;
+        private Button _forgeButton, _rerollButton;
+        private Text _forgeLabel, _rerollLabel;
         private Text _expandLabel;
         private Button _expandButton;
         private Text _status;
@@ -112,6 +114,13 @@ namespace Game.Gameplay
             _salvageButton = UIKit.Button(detail.transform, "分解", 22, Salvage);
             _salvageButton.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(255f, 62f), new Vector2(-20f, 20f));
             _salvageLabel = _salvageButton.GetComponentInChildren<Text>();
+            // The blacksmith: forge (+1, up to +5) or reroll one property, for soul shards.
+            _forgeButton = UIKit.Button(detail.transform, "", 20, Forge);
+            _forgeButton.GetComponent<RectTransform>().Place(new Vector2(0f, 0f), new Vector2(255f, 52f), new Vector2(20f, 92f));
+            _forgeLabel = _forgeButton.GetComponentInChildren<Text>();
+            _rerollButton = UIKit.Button(detail.transform, "", 20, Reroll);
+            _rerollButton.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(255f, 52f), new Vector2(-20f, 92f));
+            _rerollLabel = _rerollButton.GetComponentInChildren<Text>();
 
             // Bottom row: housekeeping.
             var commons = UIKit.Button(frame.transform, "「並」を全部分解", 22, SalvageCommons);
@@ -241,13 +250,25 @@ namespace Game.Gameplay
                     : (worn != null ? $"いま装備中：{ItemText.ColoredTitle(worn)}\n" : "この枠はいま空いている（冒険中は貸し出し品が入る）\n") +
                       "<color=#e0b45a>装備すると：</color>\n" + string.Join("\n", ItemText.CompareLines(selected, worn));
             }
-            UIKit.Flow(_detailBody, _compareBody, -70f, -504f, 23, 20);
+            UIKit.Flow(_detailBody, _compareBody, -70f, -440f, 23, 20);
 
             _equipButton.gameObject.SetActive(selected != null);
             _equipLabel.text = inStash ? "装備する" : "外す";
             _equipButton.interactable = inStash || data.items.Count < data.capacity;
             _salvageButton.gameObject.SetActive(selected != null && inStash);
             if (selected != null) _salvageLabel.text = $"分解（魂の欠片 +{RunSimulation.SalvageValue(selected.rarity)}）";
+            bool smith = selected != null && !selected.loaner;
+            _forgeButton.gameObject.SetActive(smith);
+            _rerollButton.gameObject.SetActive(smith);
+            if (smith)
+            {
+                int shards = ProfileStore.Current.shards;
+                bool canForge = Blacksmith.CanForge(selected), canReroll = Blacksmith.CanReroll(selected);
+                _forgeLabel.text = canForge ? $"鍛える +{selected.forge + 1}（欠片 {Blacksmith.ForgeCost(selected)}）" : "これ以上は鍛えられない";
+                _forgeButton.interactable = canForge && shards >= Blacksmith.ForgeCost(selected);
+                _rerollLabel.text = canReroll ? $"振り直す（欠片 {Blacksmith.RerollCost(selected)}）" : "振り直す効果がない";
+                _rerollButton.interactable = canReroll && shards >= Blacksmith.RerollCost(selected);
+            }
 
             bool full = data.capacity >= GearVault.MaxCapacity;
             _expandLabel.text = full ? "倉庫はこれ以上広げられない" : $"倉庫を広げる +{GearVault.CapacityStep}（魂の欠片 {GearVault.ExpandCost(data.capacity)}）";
@@ -278,6 +299,36 @@ namespace Game.Gameplay
             int shards = GearVault.Salvage(Data, _selected - SimPlayer.SlotCount);
             ProfileStore.Current.shards += shards;
             _status.text = $"分解した：魂の欠片 +{shards}";
+            Save();
+        }
+
+        private void Forge() => Smith(item => Blacksmith.CanForge(item) ? (Blacksmith.ForgeCost(item), Blacksmith.Forged(item), "鍛えた") : (0, null, ""));
+
+        private void Reroll() => Smith(item => Blacksmith.CanReroll(item)
+            ? (Blacksmith.RerollCost(item), Blacksmith.Rerolled(item, (ulong)System.DateTime.Now.Ticks), "効果を振り直した")
+            : (0, null, ""));
+
+        /// <summary>The blacksmith works on the selected piece (as stored, not as shown) and takes the shards.</summary>
+        private void Smith(System.Func<ItemInstance, (int Cost, ItemInstance Result, string Done)> work)
+        {
+            var data = Data;
+            bool worn = _selected >= 0 && _selected < SimPlayer.SlotCount;
+            int stash = _selected - SimPlayer.SlotCount;
+            if (!worn && (stash < 0 || stash >= data.items.Count)) return;
+            var item = GearVault.Unpack(worn ? data.equipped[_selected] : data.items[stash]);
+            if (item == null) return;
+            var (cost, result, done) = work(item);
+            if (result == null) return;
+            var profile = ProfileStore.Current;
+            if (profile.shards < cost)
+            {
+                _status.text = "魂の欠片が足りない";
+                return;
+            }
+            profile.shards -= cost;
+            if (worn) data.equipped[_selected] = GearVault.Pack(result);
+            else data.items[stash] = GearVault.Pack(result);
+            _status.text = $"{done}：{ItemText.Name(ForDisplay(result))}";
             Save();
         }
 

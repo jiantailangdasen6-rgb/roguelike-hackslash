@@ -52,6 +52,9 @@ namespace Game.Core
                 foreach (var def in ItemCatalog.Legendaries) if (def.Class == owner) options.Add(def);
                 if (options.Count > 0) item.legendary = options[rng.Range(0, options.Count)].Id;
             }
+            // Some rare armours, amulets and rings belong to a gear set (drawn last: earlier rolls stay as they were).
+            if (rarity == Rarity.Rare && GearSetCatalog.CanBeSetPiece(baseDef.Slot) && rng.Value() < GearSetCatalog.SetChance)
+                item.setId = rng.Range(1, GearSetCatalog.All.Length + 1);
             return item;
         }
 
@@ -137,6 +140,8 @@ namespace Game.Core
             Put(baseIndex >> 4, 1);
             Put((int)item.legendary >> 4, 1); // added later (old items read 0)
             Put((int)item.rune, 4);           // phase 4: runes (old items read 0 = none)
+            Put(item.setId, 4);               // gear sets and the blacksmith (old items read 0)
+            Put(item.forge, 3);
             return v;
         }
 
@@ -171,6 +176,8 @@ namespace Game.Core
             int baseIndex = baseLow | Take(1) << 4;
             legendary |= Take(1) << 4;
             int rune = Take(4);
+            int setId = Take(4);
+            int forge = Take(3);
             if (baseIndex >= ItemCatalog.Bases.Length) return null;
 
             var item = new ItemInstance
@@ -183,6 +190,8 @@ namespace Game.Core
                 itemLevel = itemLevel,
                 loaner = loaner,
                 rune = (RuneId)rune,
+                setId = setId,
+                forge = forge,
             };
             foreach (var (affix, roll) in affixes)
                 if (affix < ItemCatalog.Affixes.Length) item.AddAffix(ItemCatalog.Affixes[affix], roll);

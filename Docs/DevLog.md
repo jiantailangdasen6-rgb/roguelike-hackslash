@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 6dfe8d82（第5段階「地続きの迷宮」、軽量化、動きと手触り、主の段階、合体技、精鋭の特性まで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver a18ed0f5（第5段階「地続きの迷宮」、軽量化、動きと手触り、主の段階、合体技、精鋭の特性、鍛冶と組装備まで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
@@ -534,6 +534,13 @@
   - 通信：イベント `EliteAffixes`（出現時）と `EliteShield`（膜が割れた／戻った／召喚）。図鑑「精鋭の特性」
   - 撮影用：`-allelite`（出る魔物をすべて精鋭に）、`-spawnelite <秒>`（自分のそばに特性付きの精鋭を3体）
   - 公開：ブラウザ版・Windows版 ver 6dfe8d82（NetTest・OnlineTest（停止あり）・CrossTest 合格、EditMode 239件）
+- **5 鍛冶屋と組装備（実装）**
+  - 鍛冶（`Blacksmith`、拠点の倉庫画面のボタン）：「鍛える」で +1（+5まで、1回ごとに全性能 +8%、欠片 (段階+1)×(10+10×レア度)）、「振り直す」で効果の1つを別の効果に引き直す（欠片 15+15×レア度）。貸し出し品は不可。名前に「+2」
+  - 組装備（`GearSetCatalog`）：6組（狩人王の装い・氷葬の礼装・不屈の鎧・盟友の誓い・疾風の装束・業火の遺物）。希少の鎧・首飾り・指輪の25%が組装備（緑の名前、組の名前が頭に付く）。2点・3点で効果（`SimPlayer` の `_setSource`）
+  - 装備の64ビットに組（4ビット）と鍛えた段階（3ビット）を足した（古い装備は0として読める）。生成の乱数は最後に引くので、それまでの落とし物は以前と同じ
+  - 図鑑（武器とルーン）に「鍛冶」「組装備」。撮影用 `-demogear`（倉庫の先頭に鍛えた組装備）
+  - 見送り：職業ごとの組装備（武器は職業ごとに形が違うため、組は職業を問わない鎧・首飾り・指輪の3点にした）
+  - 公開：ブラウザ版・Windows版 ver a18ed0f5（NetTest・CampTest・CrossTest 合格、EditMode 244件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

@@ -32,6 +32,10 @@ namespace Game.Core
         public RuneId rune;
         /// <summary>Lent for this run to fill an empty slot: never taken home, given away or salvaged for shards.</summary>
         public bool loaner;
+        /// <summary>The gear set it belongs to (GearSetCatalog, 0 = none).</summary>
+        public int setId;
+        /// <summary>How many times the blacksmith forged it (+0..+5): every property works <see cref="Blacksmith.ForgePerLevel"/> stronger each time.</summary>
+        public int forge;
         public List<RolledAffix> affixes = new();
 
         public ItemBaseDef Base => ItemCatalog.GetBase(baseId);
@@ -52,14 +56,15 @@ namespace Game.Core
             var def = Base;
             if (def == null) yield break;
             int level = Mathf.Max(1, Mathf.Min(itemLevel, levelCap));
+            float forged = 1f + Blacksmith.ForgePerLevel * Mathf.Clamp(forge, 0, Blacksmith.MaxForge);
 
             var imp = def.Implicit;
-            yield return new StatModifier(imp.Stat, imp.Kind, imp.Value * ItemCatalog.LevelScale(level));
+            yield return new StatModifier(imp.Stat, imp.Kind, imp.Value * ItemCatalog.LevelScale(level) * forged);
 
             foreach (var rolled in affixes)
             {
                 var affix = ItemCatalog.GetAffix(rolled.affixId);
-                if (affix != null) yield return new StatModifier(affix.Stat, affix.Kind, AffixValue(affix, rolled.roll, level));
+                if (affix != null) yield return new StatModifier(affix.Stat, affix.Kind, AffixValue(affix, rolled.roll, level) * forged);
             }
         }
     }

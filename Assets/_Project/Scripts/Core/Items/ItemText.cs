@@ -103,12 +103,15 @@ namespace Game.Core
             if (rune != null) return rune.Name;
             string name = def.ClassNames != null && (int)item.classId < def.ClassNames.Length ? def.ClassNames[(int)item.classId] : def.Name;
             var legendary = ItemCatalog.GetLegendary(item.legendary);
-            return legendary != null ? legendary.Name + name : name;
+            var set = GearSetCatalog.Get(item.setId);
+            if (legendary != null) name = legendary.Name + name;
+            else if (set != null) name = set.Prefix + name;
+            return item.forge > 0 ? $"{name} +{item.forge}" : name;
         }
 
         /// <summary>"[希少] 鎖帷子" in the rarity's colour (uGUI rich text).</summary>
         public static string ColoredTitle(ItemInstance item) =>
-            $"<color={RarityColor(item.rarity)}>[{RarityName(item.rarity)}] {Name(item)}</color>" + (item.loaner ? "<color=#bfb6aa>（貸し出し）</color>" : "");
+            $"<color={(GearSetCatalog.Get(item.setId) != null ? SetColor : RarityColor(item.rarity))}>[{RarityName(item.rarity)}] {Name(item)}</color>" + (item.loaner ? "<color=#bfb6aa>（貸し出し）</color>" : "");
 
         /// <param name="levelCap">Show values as they work in the current room (gear from home is held back early on).</param>
         public static IEnumerable<string> PropertyLines(ItemInstance item, int levelCap = int.MaxValue)
@@ -120,8 +123,17 @@ namespace Game.Core
             if (item.loaner) yield return "<color=#bfb6aa>空き枠の貸し出し品：持ち帰れない・渡せない</color>";
             var legendary = ItemCatalog.GetLegendary(item.legendary);
             if (legendary != null) yield return $"<color={RarityColor(Rarity.Legendary)}>◆ {legendary.Text}</color>";
+            var set = GearSetCatalog.Get(item.setId);
+            if (set != null)
+            {
+                yield return $"<color={SetColor}>◇ 組装備「{set.Name}」（鎧・首飾り・指輪）</color>";
+                yield return $"<color={SetColor}>　2点：{set.TwoText}</color>";
+                yield return $"<color={SetColor}>　3点：{set.ThreeText}</color>";
+            }
+            if (item.forge > 0) yield return $"<color=#bfb6aa>鍛冶で +{item.forge}（性能 +{item.forge * 8}%）</color>";
         }
 
+        public const string SetColor = "#6FE39A";
         public const string BetterColor = "#7dff9a";
         public const string WorseColor = "#ff7a6a";
 

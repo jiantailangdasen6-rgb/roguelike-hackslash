@@ -57,6 +57,17 @@ namespace Game.Gameplay
                 _code.text = invited.Trim().ToUpperInvariant();
                 if (string.IsNullOrEmpty(_status.text)) _status.text = $"招待されました（ルームコード {_code.text}）　「コードで参加」を押そう";
             }
+            if (CommandLine.Has("-demogear"))
+            {
+                // Screenshots: a forged set piece first in the stash.
+                var demo = Game.Core.ItemGenerator.Generate(77, 12, 0f, Game.Core.ClassId.Warrior, Game.Core.Rarity.Rare, Game.Core.EquipSlot.Armor);
+                demo.setId = 1;
+                demo.forge = 2;
+                var gear = Game.Core.GearVault.Normalize(ProfileStore.Current.gear);
+                gear.items.Insert(0, Game.Core.GearVault.Pack(demo));
+                ProfileStore.Current.gear = gear;
+                ProfileStore.Current.shards = System.Math.Max(ProfileStore.Current.shards, 300);
+            }
             if (CommandLine.Has("-openvault")) VaultView.Open(); // screenshots of the stash
             // Failed connections retry (the host may not be up yet), but a refusal is final.
             if (GameSession.Refused) yield break;

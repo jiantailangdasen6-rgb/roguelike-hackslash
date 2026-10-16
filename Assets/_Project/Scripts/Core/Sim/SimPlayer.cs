@@ -352,6 +352,7 @@ namespace Game.Core
         /// <summary>Indexed by <see cref="EquipSlot"/>.</summary>
         public readonly ItemInstance[] Equipped = new ItemInstance[SlotCount];
         private readonly object[] _gearSources = { new(), new(), new(), new(), new(), new() };
+        private readonly object _setSource = new();
 
         /// <summary>The kind of weapon worn: 0 the class's usual one, 1 its other one (WeaponCatalog, "weapon_alt").</summary>
         public int WeaponKind => Equipped[(int)EquipSlot.Weapon]?.baseId == "weapon_alt" ? 1 : 0;
@@ -432,6 +433,9 @@ namespace Game.Core
             var item = Equipped[slot];
             if (item != null)
                 foreach (var mod in item.GetModifiers(GearLevelCap)) Stats.AddModifier(mod, _gearSources[slot]);
+            // Gear sets: two or three pieces worn together (GearSetCatalog).
+            Stats.RemoveModifiersFrom(_setSource);
+            foreach (var mod in GearSetCatalog.Bonuses(Equipped)) Stats.AddModifier(mod, _setSource);
             // More max HP heals by the difference (like levelling); less never kills.
             if (MaxHp > before && !Downed) Hp += MaxHp - before;
             Hp = Mathf.Clamp(Hp, Downed ? 0f : 1f, MaxHp);

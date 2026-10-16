@@ -346,6 +346,18 @@ namespace Game.Core
                     "技1のルーン・技2のルーンの枠にはめると、その技を使うたびに力を貸す",
                     "炎（燃える床）・氷（凍らせる）・雷（近くの敵へ）・命（回復）・響（すぐもう一度）・疾（再使用が早い）・影（回避と会心）・魂（魂が飛び散る）",
                     "突進や貫く矢なら通り道に沿って効く（炎の道など）。冒険中は貸し出されない"),
+                Open(CodexSection.Gear, "gear:Smith", "鍛冶", "拠点の倉庫で", "camp_anvil", "気に入った装備は鍛えて長く使う",
+                    "鍛える：魂の欠片で装備を +1 ずつ鍛える（+5まで）。1回ごとに性能 +8%",
+                    "振り直す：魂の欠片で、効果のうち1つを別の効果に引き直す",
+                    "珍しい装備ほど欠片が多くかかる。貸し出し品は鍛えられない"),
+                Open(CodexSection.Gear, "gear:Sets", "組装備", "鎧・首飾り・指輪の三点", "icons_item", "同じ組の装備を2点・3点とそろえる",
+                    "希少の鎧・首飾り・指輪の一部が組装備（緑の名前）。2点で1つ目、3点で2つ目の効果",
+                    $"{GearSetCatalog.All[0].Name}：2点 {GearSetCatalog.All[0].TwoText}／3点 {GearSetCatalog.All[0].ThreeText}",
+                    $"{GearSetCatalog.All[1].Name}：2点 {GearSetCatalog.All[1].TwoText}／3点 {GearSetCatalog.All[1].ThreeText}",
+                    $"{GearSetCatalog.All[2].Name}：2点 {GearSetCatalog.All[2].TwoText}／3点 {GearSetCatalog.All[2].ThreeText}",
+                    $"{GearSetCatalog.All[3].Name}：2点 {GearSetCatalog.All[3].TwoText}／3点 {GearSetCatalog.All[3].ThreeText}",
+                    $"{GearSetCatalog.All[4].Name}：2点 {GearSetCatalog.All[4].TwoText}／3点 {GearSetCatalog.All[4].ThreeText}",
+                    $"{GearSetCatalog.All[5].Name}：2点 {GearSetCatalog.All[5].TwoText}／3点 {GearSetCatalog.All[5].ThreeText}"),
 
                 // ---------------------------------------------------------------- Teamwork (always open)
                 Open(CodexSection.Teamwork, "team:Shatter", "砕き", "凍結×強打", "fx_ice", "魔法使いの氷結陣のあと、戦士や狩人が強打を合わせる",

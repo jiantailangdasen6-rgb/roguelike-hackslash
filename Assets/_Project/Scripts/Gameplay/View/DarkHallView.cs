@@ -12,7 +12,7 @@ namespace Game.Gameplay
     /// </summary>
     public sealed class DarkHallView : MonoBehaviour
     {
-        private const float Darkness = 0.1f;
+        private const float Darkness = 0.18f;
         private static readonly Color LanternColor = new(1f, 0.74f, 0.4f);
 
         private Light2D _global;

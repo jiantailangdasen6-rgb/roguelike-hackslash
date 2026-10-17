@@ -68,6 +68,8 @@ namespace Game.Gameplay
                         light.color = Color.Lerp(light.color, new Color(1f, 0.82f, 0.62f), 0.6f);
                         light.intensity *= 1.35f;
                     }
+            LandLook.ApplyBrightness(); // the brightness setting
+            GameSettings.Changed += LandLook.ApplyBrightness;
             _root = (RectTransform)UIKit.CreateCanvas("Camp", 20, transform).transform;
 
             foreach (var station in Camp.Stations)
@@ -117,6 +119,7 @@ namespace Game.Gameplay
 
         private void OnDestroy()
         {
+            GameSettings.Changed -= LandLook.ApplyBrightness;
             ProfileStore.Changed -= OnProfileChanged;
             if (_instance == this) _instance = null;
         }

@@ -11,8 +11,8 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 3c59e318（次の8案のあと、戦闘の大改善の8項目すべて：回避・必殺技・体勢崩し・波の種類・溜め攻撃・敵の連携・戦闘中のカード選択・職業ごとの技の木。Windows版と同じ版なので一緒に遊べる） |
-| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 3c59e318）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 8b3204c6（戦闘の大改善の8項目すべてと、マップの明るさの改善。Windows版と同じ版なので一緒に遊べる） |
+| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 8b3204c6）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
 | テスト | EditMode 193件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
@@ -590,6 +590,10 @@
   - 画面：3列の枝、段を線でつなぎ、習得済みは金、奥義は紫の枠。試合中は奥義の宿る技の左上に紫の印、3段目のパークは左上の力の列に最初から並ぶ
   - 図鑑（装備）に「技の木」。テスト `SkillTreeTests`（5件）
   - 公開：ver 3c59e318（NetTest・CampTest・CrossTest 合格、EditMode 274件）
+### 明るさと横文字の名前（2026-10-17、ユーザー「名称が日本語チックなのが気になる、技やクラス含めて全て横文字に」「マップが全体的に暗く見える」→ 表記はカタカナ英語、範囲は名前＋ゲーム用語（説明文は日本語のまま））
+- **明るさ（実装）**：高画質のとき部屋の環境光を 0.62 倍に絞っていたのを 0.88 倍に、各土地の環境光 +0.1、四隅の暗さ（ビネット）0.34→0.22、コントラスト 18→12、彩度 −14→−8、露出 0.15→0.3、影を少し持ち上げ（Lift w 0.025）。闇の間の暗さ 0.1→0.18
+  - 設定の「画面」に**明るさ**（暗め・標準・明るめ・最大）。露出として乗せる（`GameSettings.Brightness`、`LandLook.Exposure`、拠点にも効く）。設定画面の下段を詰めて、キーを戻すボタンを閉じるの横へ
+  - 公開：ver 8b3204c6（NetTest・CampTest・CrossTest 合格）。拠点テストの全滅操作が開始時パーク「不屈」で1人残ることがあったので、テスト側で不屈とシールドも外すようにした
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

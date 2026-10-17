@@ -308,13 +308,13 @@ namespace Game.EditorTools
             bloom.intensity.Override(0.9f);
             bloom.scatter.Override(0.65f);
             var vignette = profile.Add<Vignette>(true);
-            vignette.intensity.Override(0.34f);
+            vignette.intensity.Override(0.22f);
             vignette.smoothness.Override(0.55f);
             vignette.color.Override(new Color(0.02f, 0f, 0.01f));
             var color = profile.Add<ColorAdjustments>(true);
-            color.contrast.Override(18f);
-            color.saturation.Override(-14f);
-            color.postExposure.Override(0.15f);
+            color.contrast.Override(12f);
+            color.saturation.Override(-8f);
+            color.postExposure.Override(LandLook.BaseExposure);
             var lift = profile.Add<LiftGammaGain>(true);
             lift.lift.Override(new Vector4(0.98f, 0.97f, 1.04f, 0f));
 

@@ -17,7 +17,7 @@ namespace Game.Gameplay
         // ------------------------------------------------------------------ Picture quality: the room's own light
 
         /// <summary>At high quality the ambient light is lower and the room's lights do more (so the art's relief shows).</summary>
-        private const float HighQualityAmbient = 0.62f;
+        private const float HighQualityAmbient = 0.88f;
 
         /// <summary>
         /// A soft shadow cast down and to the right (the art is lit from the top-left): long for pillars and statues,

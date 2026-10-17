@@ -57,6 +57,13 @@ namespace Game.Gameplay
             set { PlayerPrefs.SetFloat("set_shake", Mathf.Clamp01(value)); Changed?.Invoke(); }
         }
 
+        /// <summary>How bright the picture is (1 = as made; LandLook turns it into exposure).</summary>
+        public static float Brightness
+        {
+            get => PlayerPrefs.GetFloat("set_bright", 1f);
+            set { PlayerPrefs.SetFloat("set_bright", Mathf.Clamp(value, 0.8f, 1.5f)); Changed?.Invoke(); }
+        }
+
         /// <summary>Softer big flashes (explosions, holy light, the black blink at doors).</summary>
         public static bool ReduceFlashes
         {

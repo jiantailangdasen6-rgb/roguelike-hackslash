@@ -67,7 +67,8 @@ namespace Game.Gameplay
             Header(p, "画面", ref y);
             Choice(p, "画面の揺れ", new[] { "なし", "弱", "強" }, new[] { 0f, 0.5f, 1f }, () => GameSettings.Shake, v => GameSettings.Shake = v, ref y);
             Choice(p, "光の点滅", new[] { "通常", "弱める" }, new[] { 0f, 1f }, () => GameSettings.ReduceFlashes ? 1f : 0f, v => GameSettings.ReduceFlashes = v > 0.5f, ref y);
-            Choice(p, "画質", new[] { "高", "低" }, new[] { 1f, 0f }, () => GameSettings.HighQuality ? 1f : 0f, v => GameSettings.HighQuality = v > 0.5f, ref y);
+            Choice(p, "明るさ", new[] { "暗め", "標準", "明るめ", "最大" }, new[] { 0.85f, 1f, 1.2f, 1.45f }, () => GameSettings.Brightness, v => GameSettings.Brightness = v, ref y);
+            Choice(p, "画質",new[] { "高", "低" }, new[] { 1f, 0f }, () => GameSettings.HighQuality ? 1f : 0f, v => GameSettings.HighQuality = v > 0.5f, ref y);
             Choice(p, "表示の大きさ", new[] { "100%", "115%", "130%" }, new[] { 1f, 1.15f, 1.3f }, () => GameSettings.UiScale, v => GameSettings.UiScale = v, ref y);
             Header(p, "キーの割り当て（キーボード）", ref y);
             var actions = (KeyAction[])Enum.GetValues(typeof(KeyAction));
@@ -75,18 +76,18 @@ namespace Game.Gameplay
             {
                 var a = actions[i];
                 float x = i % 2 == 0 ? 60f : 600f;
-                float ry = y - (i / 2) * 58f;
+                float ry = y - (i / 2) * 52f;
                 UIKit.Label(p, GameSettings.ActionName(a), 26, TextAnchor.MiddleLeft, Color.white).rectTransform.Place(new Vector2(0f, 1f), new Vector2(200f, 50f), new Vector2(x, ry));
                 var button = UIKit.Button(p, "", 26, () => StartCapture(a));
                 button.GetComponent<RectTransform>().Place(new Vector2(0f, 1f), new Vector2(200f, 50f), new Vector2(x + 210f, ry));
                 var label = button.GetComponentInChildren<Text>();
                 _refresh.Add(() => label.text = _capturing == a ? "<color=#e0b45a>キーを押す…</color>" : GameSettings.Label(a));
             }
-            y -= (actions.Length + 1) / 2 * 58f + 8f;
+            // The bottom row: reset the keys on the left (with a note beside it), close on the right.
             var reset = UIKit.Button(p, "キーを初期設定に戻す", 22, () => { GameSettings.ResetKeys(); Refresh(); });
-            reset.GetComponent<RectTransform>().Place(new Vector2(0f, 1f), new Vector2(300f, 48f), new Vector2(60f, y));
+            reset.GetComponent<RectTransform>().Place(new Vector2(0f, 0f), new Vector2(300f, 52f), new Vector2(60f, 28f));
             _note = UIKit.Label(p, "", 20, TextAnchor.MiddleLeft, UIKit.MutedText);
-            _note.rectTransform.Place(new Vector2(0f, 1f), new Vector2(460f, 48f), new Vector2(380f, y));
+            _note.rectTransform.Place(new Vector2(0f, 0f), new Vector2(460f, 52f), new Vector2(380f, 28f));
 
             var close = UIKit.Button(p, "閉じる（Esc）", 26, Close);
             close.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(260f, 60f), new Vector2(-40f, 24f));
@@ -99,7 +100,7 @@ namespace Game.Gameplay
             var rule = UIKit.Panel(p, "Rule", UIKit.GoldTrim);
             rule.raycastTarget = false;
             rule.rectTransform.Place(new Vector2(0f, 1f), new Vector2(1090f, 2f), new Vector2(44f, y - 46f));
-            y -= 58f;
+            y -= 52f;
         }
 
         /// <summary>A volume row: − / ten segments / +.</summary>
@@ -126,7 +127,7 @@ namespace Game.Gameplay
                 for (int i = 0; i < 10; i++) segments[i].color = i < n ? new Color(0.86f, 0.66f, 0.3f) : new Color(0.16f, 0.13f, 0.12f);
                 value.text = $"{n * 10}%";
             });
-            y -= 60f;
+            y -= 54f;
         }
 
         /// <summary>A row of options; the current one is lit.</summary>
@@ -147,7 +148,7 @@ namespace Game.Gameplay
                 for (int i = 0; i < fills.Length; i++)
                     fills[i].color = Mathf.Abs(now - values[i]) < 0.01f ? new Color(0.62f, 0.38f, 0.16f) : UIKit.ButtonColor;
             });
-            y -= 60f;
+            y -= 54f;
         }
 
         private void StartCapture(KeyAction a)

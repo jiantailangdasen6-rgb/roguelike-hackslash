@@ -147,6 +147,8 @@ namespace Game.Gameplay
                 {
                     p.InvulnerableTimer = 0f;
                     p.PhoenixUsed = true;
+                    p.SecondWindUsed = true; // a start perk (the blessed wind) could otherwise keep one on 1 HP
+                    p.Shield = 0f;
                     sim.HurtPlayer(p, 99999f);
                 }
                 Debug.Log("[AutoTest] wiped the party");

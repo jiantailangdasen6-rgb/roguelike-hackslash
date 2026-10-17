@@ -26,32 +26,32 @@ namespace Game.Gameplay
         private static readonly Look[] Looks =
         {
             // crypt: warm grey, candle orange
-            new(new Color(0.9f, 0.82f, 0.8f), 0.8f, new Color(1f, 0.62f, 0.32f), new Color(1f, 0.82f, 0.55f),
-                Color.white, new Vector4(0.98f, 0.97f, 1.04f, 0f), new Vector4(1f, 1f, 1f, 0f)),
+            new(new Color(0.9f, 0.82f, 0.8f), 0.90f, new Color(1f, 0.62f, 0.32f), new Color(1f, 0.82f, 0.55f),
+                Color.white, new Vector4(0.98f, 0.97f, 1.04f, 0.025f), new Vector4(1f, 1f, 1f, 0f)),
             // chapel: blood red
-            new(new Color(0.95f, 0.72f, 0.7f), 0.72f, new Color(1f, 0.35f, 0.28f), new Color(1f, 0.45f, 0.4f),
-                new Color(1f, 0.95f, 0.94f), new Vector4(1.03f, 0.96f, 0.98f, 0f), new Vector4(1.03f, 0.98f, 0.97f, 0f)),
+            new(new Color(0.95f, 0.72f, 0.7f), 0.82f, new Color(1f, 0.35f, 0.28f), new Color(1f, 0.45f, 0.4f),
+                new Color(1f, 0.95f, 0.94f), new Vector4(1.03f, 0.96f, 0.98f, 0.025f), new Vector4(1.03f, 0.98f, 0.97f, 0f)),
             // abyss: cold violet
-            new(new Color(0.72f, 0.7f, 0.95f), 0.7f, new Color(0.72f, 0.48f, 1f), new Color(0.75f, 0.58f, 1f),
-                Color.white, new Vector4(1f, 0.96f, 1.06f, 0f), new Vector4(1f, 0.98f, 1.03f, 0f)),
+            new(new Color(0.72f, 0.7f, 0.95f), 0.80f, new Color(0.72f, 0.48f, 1f), new Color(0.75f, 0.58f, 1f),
+                Color.white, new Vector4(1f, 0.96f, 1.06f, 0.025f), new Vector4(1f, 0.98f, 1.03f, 0f)),
             // sunken: drowned teal-green
-            new(new Color(0.76f, 0.9f, 0.86f), 0.82f, new Color(0.4f, 0.95f, 0.8f), new Color(0.45f, 1f, 0.85f),
-                new Color(0.94f, 1f, 0.97f), new Vector4(0.97f, 1.01f, 1.01f, 0f), new Vector4(0.97f, 1.02f, 1f, 0f)),
+            new(new Color(0.76f, 0.9f, 0.86f), 0.92f, new Color(0.4f, 0.95f, 0.8f), new Color(0.45f, 1f, 0.85f),
+                new Color(0.94f, 1f, 0.97f), new Vector4(0.97f, 1.01f, 1.01f, 0.025f), new Vector4(0.97f, 1.02f, 1f, 0f)),
             // frost: pale blue
-            new(new Color(0.8f, 0.88f, 1f), 0.82f, new Color(0.55f, 0.8f, 1f), new Color(0.7f, 0.88f, 1f),
-                new Color(0.94f, 0.97f, 1f), new Vector4(0.97f, 1f, 1.05f, 0f), new Vector4(0.99f, 1.01f, 1.05f, 0f)),
+            new(new Color(0.8f, 0.88f, 1f), 0.92f, new Color(0.55f, 0.8f, 1f), new Color(0.7f, 0.88f, 1f),
+                new Color(0.94f, 0.97f, 1f), new Vector4(0.97f, 1f, 1.05f, 0.025f), new Vector4(0.99f, 1.01f, 1.05f, 0f)),
             // forge: ember orange
-            new(new Color(0.96f, 0.82f, 0.72f), 0.8f, new Color(1f, 0.55f, 0.22f), new Color(1f, 0.6f, 0.3f),
-                new Color(1f, 0.95f, 0.9f), new Vector4(1.03f, 0.99f, 0.96f, 0f), new Vector4(1.04f, 0.99f, 0.95f, 0f)),
+            new(new Color(0.96f, 0.82f, 0.72f), 0.90f, new Color(1f, 0.55f, 0.22f), new Color(1f, 0.6f, 0.3f),
+                new Color(1f, 0.95f, 0.9f), new Vector4(1.03f, 0.99f, 0.96f, 0.025f), new Vector4(1.04f, 0.99f, 0.95f, 0f)),
             // heart: ash-red with ember gold
-            new(new Color(0.95f, 0.7f, 0.62f), 0.72f, new Color(1f, 0.55f, 0.25f), new Color(1f, 0.5f, 0.25f),
-                new Color(1f, 0.92f, 0.88f), new Vector4(1.04f, 0.97f, 0.96f, 0f), new Vector4(1.05f, 0.98f, 0.94f, 0f)),
+            new(new Color(0.95f, 0.7f, 0.62f), 0.82f, new Color(1f, 0.55f, 0.25f), new Color(1f, 0.5f, 0.25f),
+                new Color(1f, 0.92f, 0.88f), new Vector4(1.04f, 0.97f, 0.96f, 0.025f), new Vector4(1.05f, 0.98f, 0.94f, 0f)),
             // grotto: damp green with a sickly glow
-            new(new Color(0.84f, 0.9f, 0.8f), 0.72f, new Color(0.6f, 1f, 0.4f), new Color(0.65f, 1f, 0.45f),
-                new Color(0.97f, 1f, 0.96f), new Vector4(0.99f, 1.01f, 0.98f, 0f), new Vector4(0.99f, 1.02f, 0.98f, 0f)),
+            new(new Color(0.84f, 0.9f, 0.8f), 0.82f, new Color(0.6f, 1f, 0.4f), new Color(0.65f, 1f, 0.45f),
+                new Color(0.97f, 1f, 0.96f), new Vector4(0.99f, 1.01f, 0.98f, 0.025f), new Vector4(0.99f, 1.02f, 0.98f, 0f)),
             // library: candlelit violet over old wood
-            new(new Color(0.95f, 0.86f, 0.82f), 0.74f, new Color(0.72f, 0.58f, 1f), new Color(0.78f, 0.65f, 1f),
-                new Color(1f, 0.97f, 0.97f), new Vector4(1.02f, 0.99f, 1.0f, 0f), new Vector4(1.02f, 0.99f, 1.0f, 0f)),
+            new(new Color(0.95f, 0.86f, 0.82f), 0.84f, new Color(0.72f, 0.58f, 1f), new Color(0.78f, 0.65f, 1f),
+                new Color(1f, 0.97f, 0.97f), new Vector4(1.02f, 0.99f, 1.0f, 0.025f), new Vector4(1.02f, 0.99f, 1.0f, 0f)),
         };
 
         private static int Index(Biome b) => Mathf.Clamp((int)b, 0, Looks.Length - 1);
@@ -65,8 +65,20 @@ namespace Game.Gameplay
         private static ColorAdjustments _color;
         private static LiftGammaGain _lift;
 
-        /// <summary>Tints the whole picture for a land (a global volume over the scene's own post-processing).</summary>
-        public static void ApplyGrading(Biome b)
+        /// <summary>The scene's own exposure (PrototypeBuilder's post profile); the brightness setting is added on top.</summary>
+        public const float BaseExposure = 0.3f;
+
+        /// <summary>The brightness setting as exposure stops (GameSettings.Brightness: 1 = as made).</summary>
+        public static float Exposure => BaseExposure + Mathf.Log(Mathf.Max(0.5f, GameSettings.Brightness), 2f);
+
+        /// <summary>Only the brightness setting (the camp: no land tint).</summary>
+        public static void ApplyBrightness()
+        {
+            Ensure();
+            _color.postExposure.Override(Exposure);
+        }
+
+        private static void Ensure()
         {
             if (_volume == null)
             {
@@ -79,6 +91,13 @@ namespace Game.Gameplay
                 _lift = profile.Add<LiftGammaGain>();
                 _volume.sharedProfile = profile;
             }
+        }
+
+        /// <summary>Tints the whole picture for a land (a global volume over the scene's own post-processing).</summary>
+        public static void ApplyGrading(Biome b)
+        {
+            Ensure();
+            _color.postExposure.Override(Exposure);
             var look = Looks[Index(b)];
             _color.colorFilter.Override(look.Filter);
             _lift.lift.Override(look.Lift);

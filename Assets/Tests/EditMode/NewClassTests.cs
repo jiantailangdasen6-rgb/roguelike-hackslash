@@ -57,7 +57,7 @@ namespace Game.Tests
                 Assert.AreEqual(cls, def.Id);
                 Assert.IsNotEmpty(def.Sheet);
                 Assert.AreEqual(SkinCatalog.PerClass, SkinCatalog.For(cls).Count(), $"{def.Name} skins");
-                Assert.AreEqual(6, MetaCatalog.NodesFor(cls).Count(), $"{def.Name} mastery");
+                Assert.AreEqual(12, MetaCatalog.NodesFor(cls).Count(), $"{def.Name} mastery");
                 Assert.GreaterOrEqual(PerkCatalog.All.Count(p => p.Class == cls && !p.Locked), 3, $"{def.Name} open perks");
                 foreach (var node in MetaCatalog.NodesFor(cls).Where(n => n.Kind == MasteryKind.UnlockPerk))
                     Assert.AreEqual(cls, PerkCatalog.Get(node.Perk).Class, $"{node.Id} unlocks another class's perk");

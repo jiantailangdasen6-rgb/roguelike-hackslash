@@ -48,13 +48,21 @@ namespace Game.Core
         private static float RuneCooldown(SimPlayer p, int skill, float cooldown)
         {
             var (rune, power) = p.RuneIn(skill);
-            return rune == RuneId.Swift ? cooldown / (1f + 0.35f * power) : cooldown;
+            if (rune == RuneId.Swift) cooldown /= 1f + 0.35f * power;
+            if (p.InnateSkill == skill && p.InnateRune == RuneId.Swift) cooldown /= 1f + 0.35f * MetaCatalog.KeystonePower;
+            return cooldown;
         }
 
-        /// <summary>A skill was used: its rune answers.</summary>
+        /// <summary>A skill was used: its rune answers, then the secret art learnt at the master (an innate rune).</summary>
         private void RuneCast(SimPlayer p, int skill, Vector2 dir)
         {
             var (rune, power) = p.RuneIn(skill);
+            RuneEffect(p, skill, dir, rune, power);
+            if (p.InnateSkill == skill) RuneEffect(p, skill, dir, p.InnateRune, MetaCatalog.KeystonePower);
+        }
+
+        private void RuneEffect(SimPlayer p, int skill, Vector2 dir, RuneId rune, float power)
+        {
             if (rune == RuneId.None) return;
             var (from, to) = SkillLanding(p, skill, dir);
             bool line = (to - from).sqrMagnitude > 0.01f;

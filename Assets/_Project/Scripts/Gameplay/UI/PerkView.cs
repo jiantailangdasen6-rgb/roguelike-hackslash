@@ -37,6 +37,12 @@ namespace Game.Gameplay
         private void Awake()
         {
             Taken.Clear(); // a new Game scene is a new run
+            // The master's tree: perks the run starts with already learnt (SimPlayer.Configure grants them on the host).
+            var loadout = ProfileStore.Current?.ToLoadout();
+            if (loadout != null)
+                foreach (var id in loadout.mastery)
+                    if (MetaCatalog.GetNode(id) is { Kind: MasteryKind.GrantPerk } node && node.Class == loadout.classId)
+                        Taken.Add(new PerkOption((byte)node.Perk, 1));
             var root = UIKit.CreateCanvas("Perks", 40, transform).transform;
             var dim = UIKit.Panel(root, "Dim", new Color(0f, 0f, 0f, 0.7f));
             dim.rectTransform.Stretch();

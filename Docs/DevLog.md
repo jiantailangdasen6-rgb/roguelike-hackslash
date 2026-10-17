@@ -11,8 +11,8 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 0b364536（次の8案のあと、戦闘の大改善の回避・必殺技・体勢崩し・波の種類・溜め攻撃・敵の連携・戦闘中のカード選択まで。Windows版と同じ版なので一緒に遊べる） |
-| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 0b364536）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 3c59e318（次の8案のあと、戦闘の大改善の8項目すべて：回避・必殺技・体勢崩し・波の種類・溜め攻撃・敵の連携・戦闘中のカード選択・職業ごとの技の木。Windows版と同じ版なので一緒に遊べる） |
+| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 3c59e318）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
 | テスト | EditMode 193件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
@@ -584,6 +584,12 @@
   - ひとりのときは Enter で大きく開くと、選ぶまでランが止まる（`RunDirector.SoloPaused`）。協力中は誰も止まらない
   - 図鑑（操作）に「戦闘中の力選び」。テストの「静かな部屋まで待つ」は新しい決まりに合わせて書き換えた
   - 公開：ver 0b364536（NetTest・CrossTest 合格、EditMode 269件）
+- **8 職業ごとのスキルツリー（実装）**：拠点の師範の「熟練」（職業ごとに6つ）を、職業ごとの**技の木**に作り替えた（`MetaCatalog.Mastery`）。3本の枝×4段、魂の欠片で上の段から順に開く
+  - 1・2段目はこれまでの熟練（id はそのまま、持っていた人はそのまま習得済み）。3段目「◯◯の型」は、その職業のパークを1つ持った状態でランが始まる（120）。4段目は**奥義**（200）：技1か技2に決まったルーンが宿り、技そのものが変わる（戦士なら「炎の突進」＝突進斬りの通り道に炎、「雷鳴の鬨」、「影の踏み込み」など全24種。ルーン装備と重ねて効く。強さは珍しいルーンより少し上 ×1.6）
+  - 奥義は職業ごとに1つだけ。「振り直す」でその職業の習得を白紙に戻し、使った欠片は全部戻る（`ProfileData.TryLearn/CanLearn/Respec`）
+  - 画面：3列の枝、段を線でつなぎ、習得済みは金、奥義は紫の枠。試合中は奥義の宿る技の左上に紫の印、3段目のパークは左上の力の列に最初から並ぶ
+  - 図鑑（装備）に「技の木」。テスト `SkillTreeTests`（5件）
+  - 公開：ver 3c59e318（NetTest・CampTest・CrossTest 合格、EditMode 274件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

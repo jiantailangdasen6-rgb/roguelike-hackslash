@@ -108,6 +108,24 @@ namespace Game.Gameplay
             }
         }
 
+        /// <summary>The secret art learnt at the master (an innate rune) glows on the top-left corner of its skill.</summary>
+        private void ShowSecretArt()
+        {
+            var loadout = ProfileStore.Current?.ToLoadout();
+            if (loadout == null) return;
+            var art = MetaCatalog.KeystoneOf(loadout.classId, loadout.mastery);
+            if (art == null) return;
+            var slot = _skills[art.Skill];
+            var glow = UIKit.Panel(slot.Root, "ArtGlow", new Color(0.72f, 0.48f, 0.95f, 0.55f));
+            glow.sprite = UIKit.DiscSprite;
+            glow.rectTransform.Place(new Vector2(0f, 1f), new Vector2(46f, 46f), new Vector2(-12f, 12f));
+            glow.raycastTarget = false;
+            var image = UIKit.Panel(slot.Root, "Art", Color.white);
+            image.sprite = GameIcons.Rune(art.Rune);
+            image.rectTransform.Place(new Vector2(0f, 1f), new Vector2(36f, 36f), new Vector2(-7f, 7f));
+            image.raycastTarget = false;
+        }
+
         private SkillSlot CreateSkillSlot(Transform root, int i)
         {
             var slot = UIKit.Framed(root, "Skill" + i, new Color(0.03f, 0.025f, 0.03f, 0.95f));
@@ -284,6 +302,7 @@ namespace Game.Gameplay
 
             // Bottom: the skill bar, icon slots with their key under them.
             for (int i = 0; i < 4; i++) _skills[i] = CreateSkillSlot(root, i);
+            ShowSecretArt();
             // The ultimate (RunSimulation.Ultimates): a fifth slot that fills with the focus gauge.
             _ult = CreateSkillSlot(root, 3);
             _ult.Root.Place(new Vector2(0.5f, 0f), new Vector2(104f, 104f), new Vector2(2.5f * 126f + 12f, 40f));

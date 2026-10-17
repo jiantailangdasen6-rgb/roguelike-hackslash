@@ -391,32 +391,94 @@ namespace Game.Gameplay
             Save(message);
         }
 
-        // ------------------------------------------------------------------ Master: mastery
+        // ------------------------------------------------------------------ Master: the class's skill tree
 
+        private static readonly Color KeystoneFill = new(0.13f, 0.06f, 0.16f, 1f);
+        private static readonly Color KeystoneEdge = new(0.72f, 0.48f, 0.95f, 1f);
+
+        /// <summary>Three branches side by side, four steps each from top to bottom, joined by lines; the bottom step is
+        /// the branch's secret art (one per class). A button at the top unlearns everything for a full refund.</summary>
         private void BuildMastery()
         {
             var def = ClassCatalog.Get(Profile.IsClassOpen(Profile.selectedClass) ? Profile.selectedClass : ClassId.Warrior);
-            _title.text = $"師範　<size=28><color=#bfb6aa>{def.Name}の熟練（解放した効果は毎回有効）</color></size>";
-            int row = 0;
-            foreach (var node in MetaCatalog.NodesFor(def.Id))
+            int spent = Profile.MasterySpent(def.Id);
+            _title.text = $"師範　<size=28><color=#bfb6aa>{def.Name}の技の木（上から順に開く・奥義は1つだけ）</color></size>";
+            var respec = UIKit.Button(_body, spent > 0 ? $"振り直す（{spent} 戻る）" : "振り直す", 22, () =>
             {
-                bool owned = Profile.IsUnlocked(node.Id);
-                var item = UIKit.Framed(_body, node.Id, owned ? new Color(0.14f, 0.09f, 0.05f, 1f) : new Color(0.06f, 0.05f, 0.06f, 1f),
-                    owned ? UIKit.AccentColor : UIKit.GoldTrim * 0.6f);
-                item.Outer().Place(new Vector2(0.5f, 1f), new Vector2(1100f, 90f), new Vector2(0f, -row * 100f));
-                string kind = node.Kind == MasteryKind.UnlockPerk ? "新しい技" : node.Kind == MasteryKind.StartPerk ? "開始時の加護" : "成長";
-                var label = UIKit.Label(item.transform, $"<b>{node.Name}</b>  <size=20><color=#9fd8ff>{kind}</color></size>\n<size=22><color=#bfb6aa>{node.Text}</color></size>", 28, TextAnchor.MiddleLeft);
-                label.rectTransform.Stretch(14f);
-                label.rectTransform.offsetMax = new Vector2(-230f, -4f);
-                var n = node;
-                var button = UIKit.Button(item.transform, owned ? "習得済み" : $"習得 {node.Cost}", 24, () =>
+                int back = Profile.Respec(def.Id);
+                Save(back > 0 ? $"習得を白紙に戻した（魂の欠片 {back} が戻った）" : null);
+            }, UIKit.BloodColor);
+            respec.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(240f, 48f), new Vector2(0f, 62f));
+            respec.interactable = spent > 0;
+
+            const float colW = 372f, gapX = 22f, nodeH = 120f, gapY = 16f, top = 46f;
+            var keystone = MetaCatalog.KeystoneOf(def.Id, Profile.unlocked);
+            for (int b = 0; b < MetaCatalog.BranchCount; b++)
+            {
+                float x = b * (colW + gapX);
+                var head = UIKit.Title(_body, $"{MetaCatalog.BranchName(def.Id, b)}の道", 30, TextAnchor.MiddleCenter, UIKit.AccentColor);
+                head.rectTransform.Place(new Vector2(0f, 1f), new Vector2(colW, 40f), new Vector2(x, 0f));
+
+                var nodes = MetaCatalog.Branch(def.Id, b);
+                for (int t = 0; t < nodes.Count; t++)
                 {
-                    if (Profile.TryBuy(n.Id, n.Cost)) Save($"「{n.Name}」を習得した");
-                    else _status.text = "魂の欠片が足りない";
-                }, owned ? new Color(0.35f, 0.25f, 0.1f) : new Color(0.1f, 0.15f, 0.25f));
-                button.GetComponent<RectTransform>().Place(new Vector2(1f, 0.5f), new Vector2(200f, 60f), new Vector2(-12f, 0f));
-                button.interactable = !owned && Profile.shards >= node.Cost;
-                row++;
+                    var node = nodes[t];
+                    float y = -top - t * (nodeH + gapY);
+                    bool owned = Profile.IsUnlocked(node.Id);
+                    bool open = Profile.CanLearn(node, out _) || owned;
+                    bool key = node.Kind == MasteryKind.Keystone;
+                    bool blocked = key && !owned && keystone != null; // another secret art is held
+
+                    // The line down to the next step: bright once this step is learnt.
+                    if (t < nodes.Count - 1)
+                    {
+                        var line = UIKit.Rect("Line", _body).Place(new Vector2(0f, 1f), new Vector2(6f, gapY + 8f), new Vector2(x + colW * 0.5f - 3f, y - nodeH + 4f)).gameObject.AddComponent<Image>();
+                        line.sprite = UIKit.WhiteSprite;
+                        line.color = owned ? UIKit.AccentColor : new Color(0.3f, 0.26f, 0.22f, 1f);
+                        line.raycastTarget = false;
+                    }
+
+                    Color fill = owned ? (key ? KeystoneFill * 1.5f : new Color(0.16f, 0.1f, 0.05f, 1f)) : key ? KeystoneFill : new Color(0.06f, 0.05f, 0.06f, 1f);
+                    Color edge = owned ? (key ? KeystoneEdge : UIKit.AccentColor) : open && !blocked ? (key ? KeystoneEdge * 0.7f : UIKit.GoldTrim) : UIKit.GoldTrim * 0.4f;
+                    var item = UIKit.Framed(_body, node.Id, fill, edge);
+                    var outer = item.Outer();
+                    outer.Place(new Vector2(0f, 1f), new Vector2(colW, nodeH), new Vector2(x, y));
+
+                    var icon = UIKit.Rect("Icon", item.transform).Place(new Vector2(0f, 1f), new Vector2(48f, 48f), new Vector2(8f, -8f)).gameObject.AddComponent<Image>();
+                    icon.sprite = key ? GameIcons.Rune(node.Rune) : node.Kind is MasteryKind.UnlockPerk or MasteryKind.GrantPerk ? GameIcons.Perk(node.Perk) : null;
+                    icon.enabled = icon.sprite != null;
+                    icon.raycastTarget = false;
+                    if (!owned) icon.color = open && !blocked ? new Color(0.8f, 0.8f, 0.85f, 1f) : new Color(0.35f, 0.35f, 0.4f, 0.7f);
+                    float textX = icon.enabled ? 64f : 12f;
+
+                    string kind = node.Kind switch
+                    {
+                        MasteryKind.UnlockPerk => "新しい技",
+                        MasteryKind.StartPerk => "開始時の加護",
+                        MasteryKind.GrantPerk => "始めから持つ",
+                        MasteryKind.Keystone => $"奥義・{(node.Skill == 1 ? def.Skill1Name : def.Skill2Name)}",
+                        _ => "成長",
+                    };
+                    var name = UIKit.Label(item.transform, $"<b>{node.Name}</b>", 22, TextAnchor.MiddleLeft, open && !blocked || owned ? Color.white : new Color(1f, 1f, 1f, 0.5f));
+                    name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(colW - textX - 8f, 28f), new Vector2(textX, -4f));
+                    string state = owned ? "<color=#e6b85a>習得済み</color>"
+                        : blocked ? "<color=#6f6a80>奥義は1つだけ</color>"
+                        : !open ? "<color=#6f6a64>上の段が先</color>"
+                        : Profile.shards >= node.Cost ? $"<color=#9fd8ff>習得 {node.Cost}</color>" : $"<color=#6f7f90>習得 {node.Cost}</color>";
+                    var tag = UIKit.Label(item.transform, $"<size=17><color={(key ? "#c9a6ff" : "#9fd8ff")}>{kind}</color></size>　<size=17>{state}</size>", 17, TextAnchor.MiddleLeft);
+                    tag.rectTransform.Place(new Vector2(0f, 1f), new Vector2(colW - textX - 8f, 24f), new Vector2(textX, -30f));
+                    var text = UIKit.Label(item.transform, $"<color=#bfb6aa>{node.Text}</color>", 17, TextAnchor.UpperLeft);
+                    text.rectTransform.Place(new Vector2(0f, 1f), new Vector2(colW - 18f, 60f), new Vector2(10f, -58f));
+
+                    var n = node;
+                    var button = AddButton(outer, () =>
+                    {
+                        if (Profile.IsUnlocked(n.Id)) return;
+                        if (Profile.TryLearn(n, out string why)) Save(n.Kind == MasteryKind.Keystone ? $"奥義「{n.Name}」を会得した" : $"「{n.Name}」を習得した");
+                        else _status.text = why;
+                    });
+                    button.interactable = !owned;
+                }
             }
         }
 

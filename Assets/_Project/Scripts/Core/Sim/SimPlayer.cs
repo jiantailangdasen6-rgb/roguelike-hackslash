@@ -151,7 +151,10 @@ namespace Game.Core
             Phoenix = false;
             HealOnKill = 0f;
             UnlockedPerks.Clear();
+            InnateRune = RuneId.None;
+            InnateSkill = 0;
             Stats.RemoveModifiersFrom(LoadoutSource);
+            var granted = new List<PerkId>();
 
             foreach (var id in loadout.mastery)
             {
@@ -164,8 +167,17 @@ namespace Game.Core
                     case MasteryKind.MightGrowth: MightGrowth += node.Value; break;
                     case MasteryKind.StartPerk: HasStartPerk = true; break;
                     case MasteryKind.Stat: Stats.AddModifier(node.Modifier, LoadoutSource); break;
+                    case MasteryKind.GrantPerk: granted.Add(node.Perk); break;
+                    case MasteryKind.Keystone:
+                        if (InnateRune != RuneId.None) break; // one secret art
+                        InnateRune = node.Rune;
+                        InnateSkill = node.Skill;
+                        break;
                 }
             }
+            // The tree's third steps: the run starts with these class perks already learnt.
+            foreach (var perk in granted)
+                if (PerkLevels[(int)perk] == 0) AddPerk(perk);
 
             // The camp's facilities (CampUpgrades), grown at home with soul shards.
             int hearth = CampUpgrades.Level(loadout.camp, CampUpgrade.Hearth);
@@ -371,6 +383,10 @@ namespace Game.Core
         public int WeaponKind => Equipped[(int)EquipSlot.Weapon]?.baseId == "weapon_alt" ? 1 : 0;
 
         /// <summary>The rune set into a skill (1 or 2) and how strongly it works.</summary>
+        /// <summary>The secret art learnt at the master (MetaCatalog Keystone): a rune that always lives in one skill.</summary>
+        public RuneId InnateRune { get; private set; }
+        public int InnateSkill { get; private set; }
+
         public (RuneId Rune, float Power) RuneIn(int skill)
         {
             var item = Equipped[skill == 1 ? (int)EquipSlot.Rune1 : (int)EquipSlot.Rune2];

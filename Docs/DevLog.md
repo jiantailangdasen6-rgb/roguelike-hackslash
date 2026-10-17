@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 292fb9ed（次の8案のあと、戦闘の大改善の回避・必殺技・体勢崩し・波の種類まで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver a185833c（次の8案のあと、戦闘の大改善の回避・必殺技・体勢崩し・波の種類・溜め攻撃まで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
@@ -572,6 +572,8 @@
   - 奇襲：部屋の入口（扉の内側）から出る／大群：その土地で一番速い魔物が1.8倍の数、体力45%（`PendingSpawn.HealthMul`）／包囲：仲間の一人の周り半径4.5の輪に出る／呼び声の柱：柱（`EnemyType.SummonTotem`、骨の燭台の絵を紫に）が1〜2本と半分の数の魔物。柱は4.5秒ごとに魔物を呼ぶ（部屋の魔物が10×人数未満のとき）。柱が残っている間は部屋が終わらない
   - 波の始めに大きな文字で「第2波　奇襲」と一言（`WaveStarted.Size.x` に種類）。図鑑（部屋）に「波の種類」。撮影用 `-wave <種類>`、`-startin combat`
   - 公開：ver 292fb9ed（NetTest・CrossTest 合格、EditMode 263件）
+- **5 溜め攻撃（実装）**：押しっぱなしの連射はそのまま。押し続けた時間を溜め（`SimPlayer.AttackHold`、`RunSimulation.Charge.cs`）、1.2秒以上で離すと重い一撃（通常攻撃×3）、2.4秒以上で渾身の一撃（×5）。近接（戦士・守護騎士・暗殺者・聖騎士）は200°（渾身は全周）を大きく薙ぎ払い、ほかは貫く衝撃波。強打扱いなので体勢をよく削る
+  - 見た目：自分の足元にだけ溜めの輪（灰→金→赤、`NetPlayer.UpdateChargeRing`。溜めは送らないので他人には見えない）、段階が上がるたびに体が弾む。離すと白金の閃光と破片・土ぼこり・揺れ、渾身は「渾身！」。図鑑（操作）に「溜め攻撃」。ボットも2.7秒ごとに離して使う。公開：ver a185833c（NetTest・CrossTest 合格、EditMode 265件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

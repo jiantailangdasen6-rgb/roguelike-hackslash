@@ -57,6 +57,7 @@ namespace Game.Core
                     p.LastDodge = p.Input.DodgeCount;
                     p.LastUlt = p.Input.UltCount;
                     p.UltTimer = 0f;
+                    p.AttackHold = 0f;
                     StepGhost(p, dt); // RunSimulation.Ghosts.cs
                     continue;
                 }
@@ -74,6 +75,7 @@ namespace Game.Core
                     TryUltimate(p, AimDirection(p)); // RunSimulation.Ultimates.cs
                     _ultimateCasting = false;
                 }
+                StepCharge(p, dt); // RunSimulation.Charge.cs
                 if (p.UltTimer > 0f)
                 {
                     _ultimateCasting = true;

@@ -454,6 +454,10 @@ namespace Game.Core
                 $"回避は{ClassCatalog.DodgeCharges}回分たまる（回避アイコンの●）。1回分は{ClassCatalog.DodgeRechargeTime:0.#}秒で戻る",
                 "無敵は回避で動いている一瞬だけ",
                 "その一瞬に攻撃を受け流すと「見切り」：時間が一瞬ゆっくりになり、回避が1回分すぐ戻る"));
+            list.Add(Open(CodexSection.Controls, "control:Charge", "溜め攻撃", "通常攻撃を押し続けて離す", "fx_nova", "精鋭や主の体勢を崩したいときに",
+                "押し続けている間も通常攻撃は出る。足元の輪が金色になったら（約1.2秒）離すと重い一撃",
+                "さらに押し続けて輪が赤くなったら（約2.4秒）離すと渾身の一撃",
+                "近接の職業は周りを大きく薙ぎ払い、それ以外は貫く衝撃波を放つ。体勢をよく削る"));
             list.Add(Open(CodexSection.Controls, "control:Ultimate", "必殺技と闘志", "R キー・Y ボタン", "fx_holy", "強い敵や群れが来たときのためにとっておく",
                 "敵に攻撃を当てる・攻撃を受ける・見切り・合体技で闘志がたまる（回避の右のアイコン）。満タンで必殺技が使える",
                 $"戦士「{UltimateCatalog.Name(ClassId.Warrior)}」・魔法使い「{UltimateCatalog.Name(ClassId.Mage)}」・狩人「{UltimateCatalog.Name(ClassId.Ranger)}」・守護騎士「{UltimateCatalog.Name(ClassId.Guardian)}」",

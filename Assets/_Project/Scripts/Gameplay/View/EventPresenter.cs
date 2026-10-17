@@ -152,6 +152,21 @@ namespace Game.Gameplay
                     if (e.Value >= 1f) ShowNumber(e.Pos + Vector2.up * 1.2f, $"+{Mathf.RoundToInt(e.Value)}", new Color(0.5f, 1f, 0.55f), 24);
                     break;
                 case SimEventType.Ultimate: OnUltimate(e); break; // EventPresenter.Ultimates.cs
+                case SimEventType.ChargedStrike:
+                {
+                    // The held blow let loose: a white-gold flash, a ring of dust, the screen shaking with the weight of it.
+                    bool full = e.Int >= 2;
+                    var color = full ? new Color(1f, 0.55f, 0.3f) : new Color(1f, 0.88f, 0.5f);
+                    var flash = Spawn("fx_nova", e.Pos + Vector2.up * 0.4f + e.Vec * 0.8f, 1f, 0.3f, 0.5f, full ? 4.2f : 3f, new Color(color.r, color.g, color.b, 0.85f));
+                    flash.FadeOut = true;
+                    AddLight(flash, color, 2.5f, full ? 6f : 4.5f);
+                    for (int i = 0; i < (full ? 12 : 8); i++) Shard(e.Pos + Vector2.up * 0.4f + e.Vec * 0.8f, Mathf.Atan2(e.Vec.y, e.Vec.x) * Mathf.Rad2Deg + Random.Range(-70f, 70f), color);
+                    Juice.Dust(e.Pos, full ? 1.2f : 0.9f, 0.5f);
+                    CameraShake.Add(IsLocal(e.ClientId) ? (full ? 0.5f : 0.3f) : 0.12f);
+                    if (IsLocal(e.ClientId)) HitStop.Freeze(full ? 0.08f : 0.05f, -1, major: true);
+                    if (full) ShowCallout(e.Pos + Vector2.up * 1.9f, "渾身！", color, IsLocal(e.ClientId) ? 36 : 26);
+                    break;
+                }
                 case SimEventType.EnemyBroken:
                 {
                     // The stance gives way (RunSimulation.Break): a golden crack, the word, a beat of stillness.

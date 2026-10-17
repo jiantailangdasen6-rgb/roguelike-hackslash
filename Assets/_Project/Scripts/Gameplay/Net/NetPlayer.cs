@@ -292,6 +292,44 @@ namespace Game.Gameplay
             }
         }
 
+        private SpriteRenderer _chargeRing;
+        private int _chargeShown;
+
+        /// <summary>
+        /// Your own charge (RunSimulation.Charge): a ring at your feet grows while the attack is held, flashes gold
+        /// when the strike is ready and turns fiery at full charge. Only you see it (the hold isn't sent to others).
+        /// </summary>
+        private void UpdateChargeRing()
+        {
+            if (!IsOwner) return;
+            float held = mover != null ? mover.AttackHeldFor : 0f;
+            if (_chargeRing == null)
+            {
+                var go = new GameObject("ChargeRing");
+                go.transform.SetParent(transform, false);
+                go.transform.localPosition = new Vector3(0f, 0.05f);
+                _chargeRing = go.AddComponent<SpriteRenderer>();
+                _chargeRing.sprite = SpriteSheet.Load("fx_revive_ring", quiet: true)?.First;
+            }
+            int level = held >= RunSimulation.ChargeTwo ? 2 : held >= RunSimulation.ChargeOne ? 1 : 0;
+            bool show = held > 0.35f && !Downed.Value;
+            _chargeRing.enabled = show;
+            if (level > _chargeShown && show)
+            {
+                Squash.Kick(animator, 0.12f);
+                Juice.Dust(transform.position, 0.6f, 0.35f);
+            }
+            _chargeShown = show ? level : 0;
+            if (!show) return;
+            float grow = level == 0 ? Mathf.InverseLerp(0.35f, RunSimulation.ChargeOne, held) : 1f;
+            float pulse = 0.5f + 0.5f * Mathf.Sin(Time.time * (level == 2 ? 14f : 8f));
+            _chargeRing.transform.localScale = Vector3.one * Mathf.Lerp(0.5f, 1.25f, grow) * (1f + (level > 0 ? 0.06f * pulse : 0f));
+            _chargeRing.color = level == 2 ? new Color(1f, 0.45f, 0.25f, 0.75f + 0.25f * pulse)
+                : level == 1 ? new Color(1f, 0.85f, 0.4f, 0.7f + 0.2f * pulse)
+                : new Color(0.85f, 0.85f, 0.9f, 0.25f + 0.25f * grow);
+            _chargeRing.sortingOrder = animator.Renderer.sortingOrder - 2;
+        }
+
         private float _stride;
         private float _ghostAt;
         private bool _wasFast;
@@ -341,6 +379,7 @@ namespace Game.Gameplay
             bool moving = delta.sqrMagnitude > 0.00004f * Mathf.Max(1f, Time.deltaTime * 60f);
             animator.SetBase(moving ? "run" : "idle");
             Footsteps(delta, moving && !downed);
+            UpdateChargeRing();
 
             // Valor (war cry) glows gold; a ghost is pale, see-through and wavers, with a cold glow.
             r.color = downed ? new Color(0.7f, 0.9f, 1f, 0.62f + 0.12f * Mathf.Sin(Time.time * 3.2f)) : Color.white;

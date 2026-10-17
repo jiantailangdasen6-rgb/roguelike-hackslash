@@ -29,6 +29,10 @@ namespace Game.Gameplay
         private byte _ult;
         private float _sendTimer;
         private bool _attackHeld;
+        private float _attackHeldSince;
+
+        /// <summary>How long the attack has been held (the charge ring; the host keeps its own count, RunSimulation.Charge).</summary>
+        public float AttackHeldFor => _attackHeld && CanAct ? Time.time - _attackHeldSince : 0f;
         private bool _bot;
         private Bot _botBrain;
 
@@ -207,6 +211,7 @@ namespace Game.Gameplay
             UpdateAim();
             bool wasHeld = _attackHeld;
             _attackHeld = _bot ? _botBrain.Attack : input.AttackHeld;
+            if (_attackHeld && !wasHeld) _attackHeldSince = Time.time;
             if (_attackHeld && !wasHeld && CanAct) player.PredictAction(AttackAnim.BasicA);
 
             if ((CanAct && !player.Caged.Value) || CanWalkInCamp)
@@ -323,6 +328,7 @@ namespace Game.Gameplay
             public Vector2 Move;
             public Vector2 Aim = Vector2.right;
             public bool Attack;
+            private float _nextRelease = 3f;
 
             public Bot(NetPlayer player) => _player = player;
 
@@ -541,6 +547,12 @@ namespace Game.Gameplay
                     float d = to.magnitude;
                     Move = d > want + 0.5f ? to.normalized : d < want - 1f ? -to.normalized : new Vector2(-to.y, to.x).normalized * 0.4f;
                     Attack = d < (melee ? 2.2f : _player.Class.Value is ClassId.Alchemist or ClassId.Deathcaller ? 8f : 10f);
+                    // Now and then let go after a long hold: the charged strike (RunSimulation.Charge).
+                    if (Attack && Time.time > _nextRelease)
+                    {
+                        _nextRelease = Time.time + 2.7f;
+                        Attack = false;
+                    }
                 }
                 else
                 {

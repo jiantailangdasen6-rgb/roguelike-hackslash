@@ -70,6 +70,8 @@ namespace Game.Core
         public byte LastSkill2;
         public byte LastDodge;
         public byte LastUlt;
+        /// <summary>How long the attack has been held without a break (RunSimulation.Charge).</summary>
+        public float AttackHold;
         /// <summary>The focus gauge (0..RunSimulation.FocusMax) and an ultimate that lasts (warrior, ranger).</summary>
         public float Focus;
         public float UltTimer;

@@ -364,6 +364,7 @@ namespace Game.Core
         PerfectDodge,    // ClientId, Pos: a hit dodged at the last moment (the charge came back)
         Ultimate,        // ClientId, Int = ClassId, Pos (the target for the ranger and alchemist), Vec = aim, Value = radius
         EnemyBroken,     // Id, Pos, Int = EnemyType, Value = seconds broken (RunSimulation.Break)
+        ChargedStrike,   // ClientId, Int = charge level (1, 2), Pos, Vec = aim, Value = reach (RunSimulation.Charge)
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

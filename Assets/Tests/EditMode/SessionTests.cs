@@ -51,8 +51,8 @@ namespace Game.Tests
             var ranger = sim.JoinMidRun(9, new Loadout { classId = ClassId.Ranger, playerKey = "late" }, out bool returning);
             Assert.IsFalse(returning);
             Assert.AreEqual(4, ranger.Level);
-            Assert.AreEqual(3, ranger.PicksLeft, "one pick per level gained before joining, chosen between rooms");
-            Assert.IsNull(ranger.PendingOffer, "not mid-fight");
+            Assert.AreEqual(3, ranger.PicksLeft, "one pick per level gained before joining");
+            Assert.IsNotNull(ranger.PendingOffer, "offered at once, even mid-fight (small cards)");
             Assert.AreEqual(ranger.MaxHp, ranger.Hp, 0.01f);
             Assert.Less((ranger.Position - host.Position).magnitude, 2f);
         }

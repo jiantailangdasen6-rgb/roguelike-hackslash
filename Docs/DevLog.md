@@ -11,8 +11,8 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 5c9f78d9（次の8案のあと、戦闘の大改善の回避・必殺技・体勢崩し・波の種類・溜め攻撃・敵の連携まで。Windows版と同じ版なので一緒に遊べる） |
-| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 0b364536（次の8案のあと、戦闘の大改善の回避・必殺技・体勢崩し・波の種類・溜め攻撃・敵の連携・戦闘中のカード選択まで。Windows版と同じ版なので一緒に遊べる） |
+| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 0b364536）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
 | テスト | EditMode 193件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
@@ -579,6 +579,11 @@
   - 癒し手：後ろに下がり（射手と同じ距離感）、5秒ごとに半径4.5の魔物を最大体力の12%回復（凍結・気絶中は止まる）。緑の輪と回復の光・音
   - 頭上に役（「盾役」水色・「癒し手」緑）。図鑑（魔物）に「魔物の小隊」。撮影用 `-warband`
   - 公開：ver 5c9f78d9（NetTest・CrossTest 合格、EditMode 268件）
+- **7 戦闘中のカード選択（実装）**：レベルアップなどの力は、戦闘中でもすぐ提示する（以前は静かな部屋まで貯めていた。闇商人だけは静かな部屋で）。戦闘中は時間切れにならない（`RunSimulation.OfferNext/TickOffers`）
+  - 戦闘中は技の上に小さなカード3枚（`PerkView.ShowCompact`：アイコン・名前・キー）。動きながら 1・2・3（パッドは十字キーの左・下・右）やクリックで選ぶ。選ばずに戦い続けてもよく、戦いが終わると大きなカードに切り替わる
+  - ひとりのときは Enter で大きく開くと、選ぶまでランが止まる（`RunDirector.SoloPaused`）。協力中は誰も止まらない
+  - 図鑑（操作）に「戦闘中の力選び」。テストの「静かな部屋まで待つ」は新しい決まりに合わせて書き換えた
+  - 公開：ver 0b364536（NetTest・CrossTest 合格、EditMode 269件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

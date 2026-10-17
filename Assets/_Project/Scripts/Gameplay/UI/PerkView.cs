@@ -99,13 +99,136 @@ namespace Game.Gameplay
             _skip.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0.5f), new Vector2(360f, 64f), new Vector2(0f, -340f));
 
             _panel.SetActive(false);
+            BuildCompact(root);
             RunDirector.EventReceived += OnEvent;
+        }
+
+        // ------------------------------------------------------------------ Mid-fight: small cards
+
+        private GameObject _compactRoot;
+        private readonly RectTransform[] _smallCards = new RectTransform[PerkRoller.OptionCount];
+        private readonly Text[] _smallTitles = new Text[PerkRoller.OptionCount];
+        private readonly Image[] _smallIcons = new Image[PerkRoller.OptionCount];
+        private readonly Image[] _smallEdges = new Image[PerkRoller.OptionCount];
+        private Text _smallHint;
+        private bool _compact;
+
+        /// <summary>A pick that came mid-fight sits small above the skills: picked with 1/2/3 (pad: the d-pad) while moving.</summary>
+        public static bool IsCompact { get; private set; }
+
+        private void BuildCompact(Transform root)
+        {
+            var strip = UIKit.Rect("Compact", root);
+            strip.Place(new Vector2(0.5f, 0f), new Vector2(940f, 130f), new Vector2(0f, 176f));
+            _compactRoot = strip.gameObject;
+            _smallHint = UIKit.Label(strip, "", 20, TextAnchor.MiddleCenter, new Color(1f, 0.85f, 0.5f));
+            _smallHint.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(940f, 28f), new Vector2(0f, 4f));
+            var hintOutline = _smallHint.gameObject.AddComponent<Outline>();
+            hintOutline.effectColor = new Color(0f, 0f, 0f, 0.9f);
+            for (int i = 0; i < _smallCards.Length; i++)
+            {
+                int index = i;
+                var card = UIKit.Framed(strip, "Small" + i, new Color(0.06f, 0.045f, 0.055f, 0.94f));
+                var outer = card.Outer();
+                outer.Place(new Vector2(0.5f, 0f), new Vector2(300f, 92f), new Vector2((i - 1) * 312f, 0f));
+                _smallCards[i] = outer;
+                var button = outer.gameObject.AddComponent<Button>();
+                button.targetGraphic = outer.GetComponent<Image>();
+                button.onClick.AddListener(() => Choose(index));
+                _smallEdges[i] = UIKit.Panel(card.transform, "Edge", Color.white);
+                _smallEdges[i].rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(6f, 80f), new Vector2(4f, 0f));
+                _smallIcons[i] = UIKit.Rect("Icon", card.transform).Place(new Vector2(0f, 0.5f), new Vector2(64f, 64f), new Vector2(16f, 0f)).gameObject.AddComponent<Image>();
+                _smallIcons[i].preserveAspect = true;
+                _smallTitles[i] = UIKit.Title(card.transform, "", 22, TextAnchor.MiddleLeft, Color.white);
+                _smallTitles[i].rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(196f, 80f), new Vector2(88f, 0f));
+                UIKit.KeyCap(outer, (i + 1).ToString(), 18, out _).Place(new Vector2(1f, 1f), new Vector2(34f, 28f), new Vector2(8f, 10f));
+            }
+            _compactRoot.SetActive(false);
+        }
+
+        private void ShowCompact(PerkOption[] options)
+        {
+            _count = options.Length;
+            _options = options;
+            for (int i = 0; i < _smallCards.Length; i++)
+            {
+                bool used = i < options.Length;
+                _smallCards[i].gameObject.SetActive(used);
+                if (!used) continue;
+                var (title, _) = options[i].Describe();
+                ClassId? cls = options[i].IsPerk ? PerkCatalog.Get((PerkId)options[i].Perk).Class : null;
+                GodId? god = options[i].IsPerk ? PerkCatalog.Get((PerkId)options[i].Perk).God : null;
+                _smallTitles[i].text = title;
+                _smallEdges[i].color = god.HasValue ? GodCatalog.Get(god.Value).Color : ClassColor(cls);
+                _smallIcons[i].sprite = GameIcons.Perk(options[i]);
+                _smallIcons[i].enabled = _smallIcons[i].sprite != null;
+                _affordable[i] = true;
+            }
+            bool alone = NetPlayer.All.Count <= 1;
+            _smallHint.text = alone ? "力を選べる　1・2・3 で選ぶ（Enter：大きく開いて止める）" : "力を選べる　1・2・3 で選ぶ（戦いながらでも）";
+            _shownAt = Time.unscaledTime;
+            _compact = true;
+            IsCompact = true;
+            _compactRoot.SetActive(true);
+            UiSound.Play(UiCue.Page);
+            if (CommandLine.Has("-botmove")) Invoke(nameof(BotChoose), CommandLine.GetFloat("-perkdelay", 0.8f) + 1.2f);
+        }
+
+        private void HideCompact()
+        {
+            _compact = false;
+            IsCompact = false;
+            _compactRoot.SetActive(false);
+        }
+
+        /// <summary>Mid-fight cards: keys and pad pick; alone, Enter opens the big cards and pauses; a quiet room opens them too.</summary>
+        private void UpdateCompact()
+        {
+            if (!_compact) return;
+            var kb = Keyboard.current;
+            var pad = Gamepad.current;
+            bool menus = PauseMenuView.IsOpen || BagView.IsOpen || CodexView.IsOpen || SettingsView.IsOpen;
+            if (!menus)
+            {
+                if (kb != null)
+                {
+                    if (kb.digit1Key.wasPressedThisFrame) { Choose(0); return; }
+                    if (kb.digit2Key.wasPressedThisFrame && _count > 1) { Choose(1); return; }
+                    if (kb.digit3Key.wasPressedThisFrame && _count > 2) { Choose(2); return; }
+                }
+                if (pad != null)
+                {
+                    if (pad.dpad.left.wasPressedThisFrame) { Choose(0); return; }
+                    if (pad.dpad.down.wasPressedThisFrame && _count > 1) { Choose(1); return; }
+                    if (pad.dpad.right.wasPressedThisFrame && _count > 2) { Choose(2); return; }
+                }
+            }
+            var director = RunDirector.Instance;
+            bool quiet = director == null || !director.LocalFighting;
+            bool alone = NetPlayer.All.Count <= 1;
+            bool open = !menus && alone && kb != null && (kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame);
+            if (quiet || open)
+            {
+                // The fight is over (or, alone, the big cards were asked for): the usual cards, the run waiting if alone.
+                var options = _options;
+                HideCompact();
+                RunDirector.SoloPaused = alone && !quiet;
+                Show(options);
+                return;
+            }
+            for (int i = 0; i < _count; i++)
+            {
+                float t = Mathf.Clamp01((Time.unscaledTime - _shownAt - i * 0.07f) / 0.2f);
+                _smallCards[i].localScale = Vector3.one * (0.6f + 0.4f * (1f - (1f - t) * (1f - t)));
+            }
         }
 
         private void OnDestroy()
         {
             RunDirector.EventReceived -= OnEvent;
             IsShowing = false;
+            IsCompact = false;
+            RunDirector.SoloPaused = false;
         }
 
         private void OnEvent(SimEvent e)
@@ -124,7 +247,9 @@ namespace Game.Gameplay
             };
             int more = Mathf.RoundToInt(e.Value);
             if (more > 0) _heading.text += $"  <size=28><color=#bfb6aa>（あと {more} 回）</color></size>";
-            Show(PerkOption.Unpack(e.Seed));
+            // Mid-fight: the small cards above the skills, picked while moving (the merchant always waits for quiet).
+            if (!_shop && RunDirector.Instance != null && RunDirector.Instance.LocalFighting) ShowCompact(PerkOption.Unpack(e.Seed));
+            else Show(PerkOption.Unpack(e.Seed));
         }
 
         private static Color ClassColor(ClassId? c) => c switch
@@ -219,7 +344,7 @@ namespace Game.Gameplay
 
         private void Choose(int index)
         {
-            if (!IsShowing) return;
+            if (!IsShowing && !_compact) return;
             if (index < _count && !_affordable[index]) return; // can't pay for that one
             RunDirector.Instance?.ChoosePerkRpc(index);
             if (_options != null && index < _options.Length && _options[index].IsPerk) Taken.Add(_options[index]);
@@ -231,10 +356,13 @@ namespace Game.Gameplay
         {
             _panel.SetActive(false);
             IsShowing = false;
+            HideCompact();
+            RunDirector.SoloPaused = false;
         }
 
         private void Update()
         {
+            UpdateCompact();
             if (!IsShowing) return;
             var kb = Keyboard.current;
             if (kb != null)

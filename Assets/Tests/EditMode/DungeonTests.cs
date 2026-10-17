@@ -165,7 +165,7 @@ namespace Game.Tests
         }
 
         [Test]
-        public void Picks_WaitForAQuietRoom()
+        public void Picks_ComeMidFight_AsSmallCards()
         {
             var sim = new RunSimulation(5);
             var p = sim.AddPlayer(0);
@@ -175,9 +175,8 @@ namespace Game.Tests
             Run(sim, 0.5f, s => Put(s, p, fight, new Vector2(0f, -4f)));
             p.StockedChoices.Enqueue(ChoiceKind.LevelUp);
             Run(sim, 0.5f, s => Put(s, p, fight, new Vector2(0f, -4f)));
-            Assert.IsNull(p.PendingOffer, "no cards in the middle of a fight");
-            Run(sim, 0.3f, s => Put(s, p, s.Map.Start, new Vector2(0f, -4f)));
-            Assert.IsNotNull(p.PendingOffer, "offered on stepping out");
+            Assert.IsNotNull(p.PendingOffer, "offered mid-fight (small cards, 2026-10-17)");
+            Assert.IsFalse(sim.CanChoose(p), "the room is still being fought: no time-out");
         }
 
         // ------------------------------------------------------------------ Pedestals

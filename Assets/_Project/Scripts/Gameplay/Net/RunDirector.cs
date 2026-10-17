@@ -507,8 +507,12 @@ namespace Game.Gameplay
             return t >= 0f && t < CommandLine.GetFloat("-awayfor", 8f);
         }
 
+        /// <summary>Alone, with the big cards open mid-fight (PerkView): the run waits for the choice.</summary>
+        public static bool SoloPaused { get; set; }
+
         private void Tick()
         {
+            if (SoloPaused && NetPlayer.All.Count <= 1) return;
             // Downed players too: the owner keeps moving until the Downed flag reaches it (latency, dodge travel),
             // so the body and its revive ring can settle away from where the sim knocked it down.
             foreach (var p in NetPlayer.All)

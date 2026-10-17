@@ -563,10 +563,11 @@ namespace Game.Core
 
         // ------------------------------------------------------------------ Perk choices
         //
-        // Fighting and preparing are kept apart: picks (level-ups, pedestals) are banked and offered to each player
-        // while the room they stand in is quiet. Nobody's pick pauses anyone else.
+        // Picks (level-ups, pedestals) are offered as soon as they come, mid-fight too: there they show as small cards
+        // the player picks from while moving (PerkView), and they don't time out until the room is quiet. Nobody's pick
+        // pauses anyone else (alone, a player may open the big cards and pause the run: RunDirector.SoloPaused).
 
-        /// <summary>This player can choose now: the room they stand in is not being fought.</summary>
+        /// <summary>The room this player stands in is quiet (picks there show as the big cards and can time out).</summary>
         public bool CanChoose(SimPlayer p) => p.RoomId < 0 || p.RoomId >= RoomStates.Count || !RoomStates[p.RoomId].Fighting;
 
         public bool AnyPicksLeft
@@ -595,7 +596,9 @@ namespace Game.Core
 
         private void OfferNext(SimPlayer p)
         {
-            if (!CanChoose(p) || p.PendingOffer != null || p.StockedChoices.Count == 0) return;
+            if (p.PendingOffer != null || p.StockedChoices.Count == 0) return;
+            // Powers can be picked mid-fight now (small cards that don't stop anyone); the merchant waits for quiet.
+            if (!CanChoose(p) && p.StockedChoices.Peek() == ChoiceKind.Shop) return;
             var kind = p.StockedChoices.Dequeue();
             var shown = kind;
             p.PendingOffer = kind switch
@@ -663,7 +666,7 @@ namespace Game.Core
         {
             foreach (var p in Players)
             {
-                if (p.PendingOffer == null) continue;
+                if (p.PendingOffer == null || !CanChoose(p)) continue; // no hurry while fighting
                 p.OfferTimer -= dt;
                 if (p.OfferTimer <= 0f) ChoosePerk(p.ClientId, p.OfferKind == ChoiceKind.Shop ? ShopSkip : 0);
             }

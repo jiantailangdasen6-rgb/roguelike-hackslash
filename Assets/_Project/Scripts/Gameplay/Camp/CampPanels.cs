@@ -149,7 +149,7 @@ namespace Game.Gameplay
         {
             if (Open == null) return;
             for (int i = _body.childCount - 1; i >= 0; i--) Object.Destroy(_body.GetChild(i).gameObject);
-            _shards.text = $"魂の欠片 {Profile.shards}";
+            _shards.text = $"ソウルシャード {Profile.shards}";
             switch (Open.Value)
             {
                 case CampStation.Mirror: BuildMirror(); break;
@@ -166,7 +166,7 @@ namespace Game.Gameplay
         /// <summary>The camp's facilities: what each gives now, what the next level gives, and what it costs.</summary>
         private void BuildHearth()
         {
-            _title.text = "焚き火　<size=28><color=#bfb6aa>魂の欠片で拠点を育てる</color></size>";
+            _title.text = "キャンプファイア　<size=28><color=#bfb6aa>ソウルシャードでキャンプを育てる</color></size>";
             string[] icons = { "camp_fire", "camp_anvil", "camp_shelf", "camp_shrine", "camp_urn" };
             for (int i = 0; i < CampUpgrades.All.Length; i++)
             {
@@ -198,7 +198,7 @@ namespace Game.Gameplay
                 var button = UIKit.Button(row.transform, $"{(level == 0 ? "建てる" : "強くする")}  <color=#9fd8ff>{cost}</color>", 24, () =>
                 {
                     if (Profile.TryUpgradeCamp(id)) Save($"{CampUpgrades.Get(id).Name}を{(Profile.CampLevel(id) == 1 ? "建てた" : "強くした")}");
-                    else Save("魂の欠片が足りない");
+                    else Save("ソウルシャードが足りない");
                 }, affordable ? UIKit.BloodColor : (Color?)null);
                 button.GetComponent<RectTransform>().Place(new Vector2(1f, 0.5f), new Vector2(230f, 62f), new Vector2(-24f, 0f));
                 button.interactable = affordable;
@@ -210,7 +210,7 @@ namespace Game.Gameplay
         /// <summary>One request per person in the camp: what, how far, what for, and a button to turn it in.</summary>
         private void BuildQuests()
         {
-            _title.text = "依頼の掲示板　<size=28><color=#bfb6aa>仲間と一緒でも進む・達成したらここで報酬</color></size>";
+            _title.text = "クエストボード　<size=28><color=#bfb6aa>仲間と一緒でも進む・達成したらここで報酬</color></size>";
             var log = Profile.quests;
             int row = 0;
             foreach (var q in QuestCatalog.Active(log))
@@ -234,7 +234,7 @@ namespace Game.Gameplay
                 var count = UIKit.Label(item.transform, done ? "達成！" : $"{progress} / {q.Target}", 22, TextAnchor.MiddleLeft, done ? UIKit.AccentColor : Color.white);
                 count.rectTransform.Place(new Vector2(0f, 0f), new Vector2(160f, 30f), new Vector2(452f, 12f));
 
-                string reward = $"<color=#9fd8ff>魂の欠片 {q.Shards}</color>" + (q.Unlock != null && !Profile.IsUnlocked(q.Unlock) ? $"\n<color=#e0b45a>{q.UnlockName}</color>" : "");
+                string reward = $"<color=#9fd8ff>ソウルシャード {q.Shards}</color>" + (q.Unlock != null && !Profile.IsUnlocked(q.Unlock) ? $"\n<color=#e0b45a>{q.UnlockName}</color>" : "");
                 var rewardText = UIKit.Label(item.transform, $"<size=20><color=#bfb6aa>報酬</color></size>\n{reward}", 24, TextAnchor.UpperLeft);
                 rewardText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 120f), new Vector2(620f, -16f));
 
@@ -259,7 +259,7 @@ namespace Game.Gameplay
             }
             log.Claim(q);
             SfxPlayer.Instance?.Play("levelup");
-            Save($"「{q.Name}」の報酬：魂の欠片 {q.Shards}{extra}");
+            Save($"「{q.Name}」の報酬：ソウルシャード {q.Shards}{extra}");
         }
 
         /// <summary>Requests waiting to be turned in (the board shows a mark).</summary>
@@ -286,7 +286,7 @@ namespace Game.Gameplay
 
         private void BuildMirror()
         {
-            _title.text = "古い鏡　<size=28><color=#bfb6aa>クラスと見た目</color></size>";
+            _title.text = "ミラー　<size=28><color=#bfb6aa>クラスと見た目</color></size>";
             var current = ClassCatalog.Get(Profile.selectedClass);
 
             if (!Profile.IsClassOpen(current.Id)) current = ClassCatalog.Get(ClassId.Warrior);
@@ -304,7 +304,7 @@ namespace Game.Gameplay
                 var name = UIKit.Title(card.transform, def.Name, 26, TextAnchor.UpperLeft, open ? Color.white : new Color(1f, 1f, 1f, 0.45f));
                 name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(250f, 34f), new Vector2(90f, -4f));
                 var unlockQuest = UnlockingQuest(def.Id);
-                string roleText = open ? def.Role : unlockQuest != null ? $"依頼「{unlockQuest.Name}」で解放" : "まだ解放されていない";
+                string roleText = open ? def.Role : unlockQuest != null ? $"「{unlockQuest.Name}」で解放" : "まだ解放されていない";
                 var role = UIKit.Label(card.transform, roleText, 17, TextAnchor.UpperLeft, open ? UIKit.MutedText : new Color(0.9f, 0.75f, 0.45f, 0.8f));
                 role.rectTransform.Place(new Vector2(0f, 1f), new Vector2(262f, 30f), new Vector2(90f, -38f));
                 var id = def.Id;
@@ -314,7 +314,7 @@ namespace Game.Gameplay
                     {
                         var q = UnlockingQuest(id);
                         _status.text = q != null
-                            ? $"「{ClassCatalog.Get(id).Name}」は{QuestCatalog.GiverNames[(int)q.Giver]}の依頼「{q.Name}」（{q.Text}）で解放される"
+                            ? $"「{ClassCatalog.Get(id).Name}」は{QuestCatalog.GiverNames[(int)q.Giver]}のクエスト「{q.Name}」（{q.Text}）で解放される"
                             : "まだ解放されていない";
                         return;
                     }
@@ -332,11 +332,11 @@ namespace Game.Gameplay
             // The title worn next to the name: cycles through the ones earned from achievements.
             var titles = new List<string>(Profile.achievements.Titles());
             string worn = titles.Contains(Profile.title) ? Profile.title : "";
-            var titleButton = UIKit.Button(detail, titles.Count == 0 ? "称号：まだない" : $"称号：{(worn == "" ? "なし" : $"「{worn}」")}", 20, () =>
+            var titleButton = UIKit.Button(detail, titles.Count == 0 ? "タイトル：まだない" : $"タイトル：{(worn == "" ? "なし" : $"「{worn}」")}", 20, () =>
             {
                 if (titles.Count == 0)
                 {
-                    _status.text = "称号は実績を達成すると手に入る（図鑑の「実績」）";
+                    _status.text = "タイトルはアチーブメントを達成すると手に入る（コーデックスの「アチーブメント」）";
                     return;
                 }
                 int next = titles.IndexOf(worn) + 1; // none -> first -> ... -> last -> none
@@ -370,7 +370,7 @@ namespace Game.Gameplay
                 $"<color=#e0b45a>◆{current.BasicName}</color>（左クリック）\n" +
                 $"<color=#e0b45a>◆{current.Skill1Name}</color>（Q / 右クリック）\n<size=21><color=#d8d0c4>{current.Skill1Text}</color></size>\n" +
                 $"<color=#e0b45a>◆{current.Skill2Name}</color>（E）\n<size=21><color=#d8d0c4>{current.Skill2Text}</color></size>\n" +
-                $"<color=#ffd27a>◆必殺技「{UltimateCatalog.Name(current.Id)}」</color>（R・闘志が満タンで）\n<size=21><color=#d8d0c4>{UltimateCatalog.Text(current.Id)}</color></size>",
+                $"<color=#ffd27a>◆アルティメット「{UltimateCatalog.Name(current.Id)}」</color>（R・テンションが満タンで）\n<size=21><color=#d8d0c4>{UltimateCatalog.Text(current.Id)}</color></size>",
                 24, TextAnchor.UpperLeft);
             body.rectTransform.Place(new Vector2(0f, 1f), new Vector2(720f, 460f), new Vector2(10f, -220f));
         }
@@ -382,7 +382,7 @@ namespace Game.Gameplay
             {
                 if (!Profile.TryBuy(skin.Id, skin.Cost))
                 {
-                    _status.text = $"魂の欠片が足りない（「{skin.Name}」は {skin.Cost}）";
+                    _status.text = $"ソウルシャードが足りない（「{skin.Name}」は {skin.Cost}）";
                     return;
                 }
                 message = $"「{skin.Name}」を手に入れた";
@@ -402,11 +402,11 @@ namespace Game.Gameplay
         {
             var def = ClassCatalog.Get(Profile.IsClassOpen(Profile.selectedClass) ? Profile.selectedClass : ClassId.Warrior);
             int spent = Profile.MasterySpent(def.Id);
-            _title.text = $"師範　<size=28><color=#bfb6aa>{def.Name}の技の木（上から順に開く・奥義は1つだけ）</color></size>";
+            _title.text = $"マスター　<size=28><color=#bfb6aa>{def.Name}のスキルツリー（アーツは1つだけ）</color></size>";
             var respec = UIKit.Button(_body, spent > 0 ? $"振り直す（{spent} 戻る）" : "振り直す", 22, () =>
             {
                 int back = Profile.Respec(def.Id);
-                Save(back > 0 ? $"習得を白紙に戻した（魂の欠片 {back} が戻った）" : null);
+                Save(back > 0 ? $"習得を白紙に戻した（ソウルシャード {back} が戻った）" : null);
             }, UIKit.BloodColor);
             respec.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(240f, 48f), new Vector2(0f, 62f));
             respec.interactable = spent > 0;
@@ -416,7 +416,7 @@ namespace Game.Gameplay
             for (int b = 0; b < MetaCatalog.BranchCount; b++)
             {
                 float x = b * (colW + gapX);
-                var head = UIKit.Title(_body, $"{MetaCatalog.BranchName(def.Id, b)}の道", 30, TextAnchor.MiddleCenter, UIKit.AccentColor);
+                var head = UIKit.Title(_body, $"{MetaCatalog.BranchName(def.Id, b)}ルート", 30, TextAnchor.MiddleCenter, UIKit.AccentColor);
                 head.rectTransform.Place(new Vector2(0f, 1f), new Vector2(colW, 40f), new Vector2(x, 0f));
 
                 var nodes = MetaCatalog.Branch(def.Id, b);
@@ -453,16 +453,16 @@ namespace Game.Gameplay
 
                     string kind = node.Kind switch
                     {
-                        MasteryKind.UnlockPerk => "新しい技",
-                        MasteryKind.StartPerk => "開始時の加護",
+                        MasteryKind.UnlockPerk => "新しいスキル",
+                        MasteryKind.StartPerk => "開始時のブレッシング",
                         MasteryKind.GrantPerk => "始めから持つ",
-                        MasteryKind.Keystone => $"奥義・{(node.Skill == 1 ? def.Skill1Name : def.Skill2Name)}",
+                        MasteryKind.Keystone => "アーツ",
                         _ => "成長",
                     };
                     var name = UIKit.Label(item.transform, $"<b>{node.Name}</b>", 22, TextAnchor.MiddleLeft, open && !blocked || owned ? Color.white : new Color(1f, 1f, 1f, 0.5f));
                     name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(colW - textX - 8f, 28f), new Vector2(textX, -4f));
                     string state = owned ? "<color=#e6b85a>習得済み</color>"
-                        : blocked ? "<color=#6f6a80>奥義は1つだけ</color>"
+                        : blocked ? "<color=#6f6a80>1つだけ</color>"
                         : !open ? "<color=#6f6a64>上の段が先</color>"
                         : Profile.shards >= node.Cost ? $"<color=#9fd8ff>習得 {node.Cost}</color>" : $"<color=#6f7f90>習得 {node.Cost}</color>";
                     var tag = UIKit.Label(item.transform, $"<size=17><color={(key ? "#c9a6ff" : "#9fd8ff")}>{kind}</color></size>　<size=17>{state}</size>", 17, TextAnchor.MiddleLeft);
@@ -474,7 +474,7 @@ namespace Game.Gameplay
                     var button = AddButton(outer, () =>
                     {
                         if (Profile.IsUnlocked(n.Id)) return;
-                        if (Profile.TryLearn(n, out string why)) Save(n.Kind == MasteryKind.Keystone ? $"奥義「{n.Name}」を会得した" : $"「{n.Name}」を習得した");
+                        if (Profile.TryLearn(n, out string why)) Save(n.Kind == MasteryKind.Keystone ? $"アーツ「{n.Name}」を会得した" : $"「{n.Name}」を習得した");
                         else _status.text = why;
                     });
                     button.interactable = !owned;
@@ -487,7 +487,7 @@ namespace Game.Gameplay
         private void BuildCharms()
         {
             int equipped = Profile.equippedTrinkets.Count(Profile.IsUnlocked);
-            _title.text = $"お守り職人　<size=28><color=#bfb6aa>持っていけるのは {MetaCatalog.TrinketSlots} つ（いま {equipped}）</color></size>";
+            _title.text = $"チャームメイカー　<size=28><color=#bfb6aa>持っていけるのは {MetaCatalog.TrinketSlots} つ（いま {equipped}）</color></size>";
             const float cardW = 364f, cardH = 100f, gapX = 10f, gapY = 10f;
             int slot = 0;
             foreach (var t in MetaCatalog.Trinkets)
@@ -520,8 +520,8 @@ namespace Game.Gameplay
                 {
                     if (!Profile.IsUnlocked(id))
                     {
-                        if (Profile.TryBuy(id, cost)) Save("お守りを作ってもらった。押すと持っていける");
-                        else _status.text = "魂の欠片が足りない";
+                        if (Profile.TryBuy(id, cost)) Save("チャームを作ってもらった。押すと持っていける");
+                        else _status.text = "ソウルシャードが足りない";
                         return;
                     }
                     Profile.ToggleTrinket(id);
@@ -536,12 +536,12 @@ namespace Game.Gameplay
 
         private void BuildDifficulty()
         {
-            _title.text = "迷宮の碑　<size=28><color=#bfb6aa>難易度</color></size>";
+            _title.text = "モノリス　<size=28><color=#bfb6aa>難易度</color></size>";
             var nm = Unity.Netcode.NetworkManager.Singleton;
             bool host = nm != null && nm.IsServer;
             var current = host || CampDirector.Instance == null ? CampDirector.ChosenDifficulty() : CampDirector.Instance.DifficultyLevel.Value;
             int signed = host || CampDirector.Instance == null ? RunDirector.ChosenContract() : CampDirector.Instance.Contract.Value;
-            var toContract = UIKit.Button(_body, $"契約 →（段位 {ContractCatalog.Rank(signed, DifficultyCatalog.Get(current))}）", 22, () =>
+            var toContract = UIKit.Button(_body, $"コントラクト →（ランク {ContractCatalog.Rank(signed, DifficultyCatalog.Get(current))}）", 22, () =>
             {
                 _contractPage = true;
                 Rebuild();
@@ -557,14 +557,14 @@ namespace Game.Gameplay
                 card.Outer().Place(new Vector2(0f, 1f), new Vector2(272f, 220f), new Vector2(i * 284f, -6f));
                 var name = UIKit.Title(card.transform, def.Name, 44, TextAnchor.MiddleCenter, open ? Color.white : new Color(1f, 1f, 1f, 0.35f));
                 name.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(260f, 64f), new Vector2(0f, -14f));
-                var text = UIKit.Label(card.transform, open ? def.Text : "熟練を踏破すると挑める", 20, TextAnchor.UpperCenter, open ? UIKit.MutedText : new Color(1f, 1f, 1f, 0.35f));
+                var text = UIKit.Label(card.transform, open ? def.Text : "ベテランを踏破すると挑める", 20, TextAnchor.UpperCenter, open ? UIKit.MutedText : new Color(1f, 1f, 1f, 0.35f));
                 text.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(244f, 130f), new Vector2(0f, -84f));
                 var d = def.Id;
                 var button = AddButton(card.Outer(), () =>
                 {
                     if (!Profile.IsDifficultyOpen(d))
                     {
-                        _status.text = "「冥府」は熟練を踏破すると挑める";
+                        _status.text = "「ナイトメア」はベテランを踏破すると挑める";
                         return;
                     }
                     Profile.difficulty = d;
@@ -581,7 +581,7 @@ namespace Game.Gameplay
             var head = UIKit.Title(detail.transform, $"「{chosenDef.Name}」で変わること", 28, TextAnchor.UpperLeft);
             head.rectTransform.Place(new Vector2(0f, 1f), new Vector2(600f, 40f), new Vector2(24f, -14f));
             var scale = UIKit.Label(detail.transform,
-                $"魔物の体力 ×{chosenDef.EnemyHealth:0.##}　攻撃 ×{chosenDef.EnemyDamage:0.##}　数 ×{chosenDef.EnemyCount:0.##}　魂の欠片 ×{chosenDef.Shards:0.##}",
+                $"モンスターの体力 ×{chosenDef.EnemyHealth:0.##}　攻撃 ×{chosenDef.EnemyDamage:0.##}　数 ×{chosenDef.EnemyCount:0.##}　ソウルシャード ×{chosenDef.Shards:0.##}",
                 20, TextAnchor.UpperRight, UIKit.MutedText);
             scale.rectTransform.Place(new Vector2(1f, 1f), new Vector2(560f, 34f), new Vector2(-24f, -20f));
 
@@ -599,12 +599,12 @@ namespace Game.Gameplay
             }
             if (monsterRow + playerRow == 0)
             {
-                var none = UIKit.Label(detail.transform, "特別な強化も枷もない、本来の迷宮", 22, TextAnchor.UpperLeft, UIKit.MutedText);
+                var none = UIKit.Label(detail.transform, "特別な強化も枷もない、本来のラビリンス", 22, TextAnchor.UpperLeft, UIKit.MutedText);
                 none.rectTransform.Place(new Vector2(0f, 1f), new Vector2(800f, 34f), new Vector2(24f, -104f));
             }
             else
             {
-                var monsterHead = UIKit.Label(detail.transform, monsterRow > 0 ? "魔物の強化" : "", 20, TextAnchor.UpperLeft, new Color(1f, 0.55f, 0.48f));
+                var monsterHead = UIKit.Label(detail.transform, monsterRow > 0 ? "モンスターの強化" : "", 20, TextAnchor.UpperLeft, new Color(1f, 0.55f, 0.48f));
                 monsterHead.rectTransform.Place(new Vector2(0f, 1f), new Vector2(400f, 30f), new Vector2(24f, -66f));
                 var playerHead = UIKit.Label(detail.transform, playerRow > 0 ? (chosenDef.Has(DifficultyMod.Mercy) ? "助け" : "あなたたちへの枷") : "", 20, TextAnchor.UpperLeft,
                     chosenDef.Has(DifficultyMod.Mercy) ? new Color(0.56f, 0.89f, 0.6f) : new Color(0.84f, 0.66f, 1f));
@@ -616,13 +616,13 @@ namespace Game.Gameplay
             var strip = UIKit.Framed(_body, "Weekly", weekly ? new Color(0.05f, 0.1f, 0.16f, 1f) : new Color(0.045f, 0.035f, 0.05f, 1f),
                 weekly ? new Color(0.6f, 0.85f, 1f) : UIKit.GoldTrim * 0.7f);
             strip.Outer().Place(new Vector2(0f, 1f), new Vector2(1124f, 96f), new Vector2(0f, -502f));
-            var weekTitle = UIKit.Title(strip.transform, $"今週の迷宮　<size=22><color=#9fd8ff>{Weekly.Label(Weekly.Current)}</color></size>", 30, TextAnchor.MiddleLeft);
+            var weekTitle = UIKit.Title(strip.transform, $"今週のラビリンス　<size=22><color=#9fd8ff>{Weekly.Label(Weekly.Current)}</color></size>", 30, TextAnchor.MiddleLeft);
             weekTitle.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(520f, 50f), new Vector2(24f, 14f));
             int week = Weekly.Current;
             string best = Profile.weeklyWeek == week && Profile.weeklyBestRoom >= 0
                 ? $"今週の記録：{(Profile.weeklyCleared ? $"踏破 {UIKit.FormatTime(Profile.weeklyBestTime)}" : $"{HudView.RoomTitle(Profile.weeklyBestRoom)}まで（{UIKit.FormatTime(Profile.weeklyBestTime)}）")}"
                 : "今週の記録：まだない";
-            var sub = UIKit.Label(strip.transform, $"今週は誰が挑んでも同じ地図（難易度は標準）　{best}", 20, TextAnchor.MiddleLeft, UIKit.MutedText);
+            var sub = UIKit.Label(strip.transform, $"今週は誰が挑んでも同じマップ（難易度はノーマル）　{best}", 20, TextAnchor.MiddleLeft, UIKit.MutedText);
             sub.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(800f, 34f), new Vector2(24f, -24f));
             var toggle = UIKit.Button(strip.transform, weekly ? "挑む（オン）" : "挑まない（オフ）", 24, () =>
             {
@@ -659,7 +659,7 @@ namespace Game.Gameplay
             int contract = host || CampDirector.Instance == null ? RunDirector.ChosenContract() : CampDirector.Instance.Contract.Value;
             var difficulty = DifficultyCatalog.Get(host || CampDirector.Instance == null ? CampDirector.ChosenDifficulty() : CampDirector.Instance.DifficultyLevel.Value);
             int rank = ContractCatalog.Rank(contract, difficulty);
-            _title.text = $"迷宮の碑　<size=28><color=#bfb6aa>契約　段位 {rank}</color></size>";
+            _title.text = $"モノリス　<size=28><color=#bfb6aa>コントラクト　ランク {rank}</color></size>";
 
             var back = UIKit.Button(_body, "← 難易度へ", 22, () =>
             {
@@ -667,9 +667,9 @@ namespace Game.Gameplay
                 Rebuild();
             });
             back.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(200f, 48f), new Vector2(0f, 4f));
-            string best = Profile.bestContract >= 0 ? $"最高記録：段位 {Profile.bestContract} で踏破" : "最高記録：まだない";
+            string best = Profile.bestContract >= 0 ? $"最高記録：ランク {Profile.bestContract} で踏破" : "最高記録：まだない";
             var head = UIKit.Label(_body,
-                $"段位 {rank} / {ContractCatalog.MaxRank}　魂の欠片 ×{1f + ContractCatalog.ShardsPerRank * rank:0.00}　（難易度「{difficulty.Name}」の上に重ねる）　{best}",
+                $"ランク {rank} / {ContractCatalog.MaxRank}　ソウルシャード ×{1f + ContractCatalog.ShardsPerRank * rank:0.00}　（難易度「{difficulty.Name}」の上に重ねる）　{best}",
                 21, TextAnchor.MiddleLeft, UIKit.MutedText);
             head.rectTransform.Place(new Vector2(0f, 1f), new Vector2(900f, 40f), new Vector2(0f, 0f));
 
@@ -700,8 +700,8 @@ namespace Game.Gameplay
             }
 
             var note = UIKit.Label(_body, host
-                    ? "段位が高いほど魂の欠片が増える。段位5・10・20で踏破すると称号（実績）。今週の迷宮では契約は無効"
-                    : "契約は部屋を作った人が結ぶ",
+                    ? "ランクが高いほどソウルシャードが増える。ランク5・10・20で踏破するとタイトル（アチーブメント）。今週のラビリンスではコントラクトは無効"
+                    : "コントラクトは部屋を作った人が結ぶ",
                 20, TextAnchor.MiddleCenter, UIKit.MutedText);
             note.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1080f, 30f), new Vector2(0f, -4f));
         }

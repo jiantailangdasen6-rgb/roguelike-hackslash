@@ -66,7 +66,7 @@ namespace Game.Gameplay
             _dodge = AddPad(new Vector2(-180f, 470f), 64f, TouchButton.Dodge, false, null);
             _ultimate = AddPad(new Vector2(-520f, 400f), 64f, TouchButton.Ultimate, false, "必");
             _interact = AddPad(new Vector2(-210f, 230f), 100f, TouchButton.Interact, false, "調べる");
-            var row = new[] { (TouchButton.Bag, "袋"), (TouchButton.Map, "地図"), (TouchButton.Ping, "合図"), (TouchButton.Codex, "図鑑"), (TouchButton.Menu, "≡") };
+            var row = new[] { (TouchButton.Bag, "袋"), (TouchButton.Map, "マップ"), (TouchButton.Ping, "ピン"), (TouchButton.Codex, "コーデックス"), (TouchButton.Menu, "≡") };
             for (int i = 0; i < row.Length; i++)
             {
                 var pad = AddPad(Vector2.zero, 44f, row[i].Item1, false, row[i].Item2);

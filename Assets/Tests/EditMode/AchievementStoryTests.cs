@@ -15,7 +15,7 @@ namespace Game.Tests
             var died = new SimEvent(SimEventType.EnemyDied) { Int = (int)EnemyType.Lich };
             Assert.IsTrue(log.Add(lich, QuestCatalog.Amount(lich, died)));
             Assert.IsTrue(log.IsDone("a_lich"));
-            Assert.Contains("冥王殺し", log.Titles().ToList());
+            Assert.Contains("リッチスレイヤー", log.Titles().ToList());
 
             var favor = AchievementCatalog.Get("a_favor");
             Assert.AreEqual(1, QuestCatalog.Amount(favor, new SimEvent(SimEventType.GodSign) { Int = (int)GodSignKind.Favor }));
@@ -30,10 +30,19 @@ namespace Game.Tests
         [Test]
         public void OnlyAnEarnedTitle_GoesIntoTheLoadout()
         {
-            var p = new ProfileData { title = "冥王殺し" };
+            var p = new ProfileData { title = "リッチスレイヤー" };
             Assert.AreEqual("", p.ToLoadout().title, "not earned yet");
             p.achievements.Add(AchievementCatalog.Get("a_lich"), 1);
-            Assert.AreEqual("冥王殺し", Loadout.FromJson(p.ToLoadout().ToJson()).title);
+            Assert.AreEqual("リッチスレイヤー", Loadout.FromJson(p.ToLoadout().ToJson()).title);
+        }
+
+        [Test]
+        public void ATitleSavedUnderItsOldName_ComesBackRenamed()
+        {
+            var json = new ProfileData { title = "冥王殺し" }.ToJson();
+            Assert.AreEqual("リッチスレイヤー", ProfileData.FromJson(json).title);
+            Assert.AreEqual("トーチベアラー", AchievementCatalog.RenamedTitle("灯火を継ぐ者"));
+            Assert.AreEqual("なにか", AchievementCatalog.RenamedTitle("なにか"));
         }
 
         [Test]

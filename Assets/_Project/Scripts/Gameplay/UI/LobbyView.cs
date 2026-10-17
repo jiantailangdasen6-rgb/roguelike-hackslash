@@ -94,7 +94,7 @@ namespace Game.Gameplay
             var titleShadow = title.gameObject.AddComponent<Outline>();
             titleShadow.effectColor = new Color(0.25f, 0.06f, 0.02f, 0.9f);
             titleShadow.effectDistance = new Vector2(4f, -4f);
-            var sub = UIKit.Label(root, "ラビリンス・サバイバー　─　仲間と挑む、闇の迷宮", 30, TextAnchor.MiddleCenter, UIKit.MutedText);
+            var sub = UIKit.Label(root, "ラビリンス・サバイバー　─　仲間と挑む、闇のラビリンス", 30, TextAnchor.MiddleCenter, UIKit.MutedText);
             sub.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1200f, 50f), new Vector2(0f, -280f));
             // Gold rules ending in diamonds on both sides of the subtitle.
             foreach (float side in new[] { -1f, 1f })
@@ -140,7 +140,7 @@ namespace Game.Gameplay
                 img.raycastTarget = false;
                 rect.gameObject.AddComponent<UISpriteAnimator>().Play(SkinCatalog.Sheet(def.Id, Profile.SkinFor(def.Id)), "idle");
             }
-            var shards = UIKit.Label(root, $"魂の欠片 {Profile.shards}", 24, TextAnchor.MiddleCenter, new Color(0.6f, 0.85f, 1f));
+            var shards = UIKit.Label(root, $"ソウルシャード {Profile.shards}", 24, TextAnchor.MiddleCenter, new Color(0.6f, 0.85f, 1f));
             shards.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(600f, 36f), new Vector2(0f, -40f));
 
             _soloButton = UIKit.Button(root, "ひとりで遊ぶ", 36, () => GameSession.StartSolo(), UIKit.BloodColor);
@@ -184,7 +184,7 @@ namespace Game.Gameplay
 
             // The codex is open from the title too (what you have met so far).
             gameObject.AddComponent<CodexView>();
-            var codex = UIKit.Button(root, "図鑑（B）", 26, () => CodexView.Open());
+            var codex = UIKit.Button(root, "コーデックス（B）", 26, () => CodexView.Open());
             codex.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(220f, 60f), new Vector2(-28f, -28f));
             gameObject.AddComponent<SettingsView>();
             var settings = UIKit.Button(root, "設定", 26, SettingsView.Open);
@@ -372,7 +372,7 @@ namespace Game.Gameplay
                 _joining = false;
                 if (_status.text == "接続しています…") _status.text = "接続できませんでした";
             }
-            if (_joining && nm.IsConnectedClient) _status.text = "接続しました。拠点へ向かっています…";
+            if (_joining && nm.IsConnectedClient) _status.text = "接続しました。キャンプへ向かっています…";
 
             _statusBar.SetActive(!string.IsNullOrEmpty(_status.text));
         }

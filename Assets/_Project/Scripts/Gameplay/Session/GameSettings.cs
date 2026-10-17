@@ -42,12 +42,12 @@ namespace Game.Gameplay
         {
             KeyAction.Skill1 => "スキル1",
             KeyAction.Skill2 => "スキル2",
-            KeyAction.Dodge => "回避",
-            KeyAction.Ultimate => "必殺技",
-            KeyAction.Bag => "袋",
-            KeyAction.Map => "地図",
-            KeyAction.Ping => "合図",
-            _ => "図鑑",
+            KeyAction.Dodge => "ドッジ",
+            KeyAction.Ultimate => "アルティメット",
+            KeyAction.Bag => "バッグ",
+            KeyAction.Map => "マップ",
+            KeyAction.Ping => "ピン",
+            _ => "コーデックス",
         };
 
         /// <summary>Screen shake strength, 0..1 (default full).</summary>

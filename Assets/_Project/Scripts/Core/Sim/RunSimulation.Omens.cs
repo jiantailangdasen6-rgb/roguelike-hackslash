@@ -18,24 +18,24 @@ namespace Game.Core
     {
         public static string Name(Omen o) => o switch
         {
-            Omen.BloodMoon => "血の月",
-            Omen.Bounty => "豊穣の迷宮",
-            Omen.Frenzy => "狂乱",
-            Omen.Swarm => "群れの季節",
-            Omen.Vengeance => "怨嗟",
-            Omen.Blessed => "祝福の風",
+            Omen.BloodMoon => "ブラッドムーン",
+            Omen.Bounty => "ラビリンスオブプレンティ",
+            Omen.Frenzy => "フレンジー",
+            Omen.Swarm => "スウォームシーズン",
+            Omen.Vengeance => "ヘイトレッド",
+            Omen.Blessed => "ブレスドウィンド",
             _ => "",
         };
 
         /// <summary>What it does, in one line (the banner at the start, the codex).</summary>
         public static string Text(Omen o) => o switch
         {
-            Omen.BloodMoon => "精鋭が増える／魂（経験）が3割増し",
-            Omen.Bounty => "装備が落ちやすい／魔物の体力が増す",
-            Omen.Frenzy => "魔物が素早い／魔物の体力が減る",
-            Omen.Swarm => "群れが大きい／魔物の体力が減る",
-            Omen.Vengeance => "倒れた魔物が魂を弾けさせる／魂（経験）が増す",
-            Omen.Blessed => "始めに力をもう1つ選べる／迷宮の主が手強い",
+            Omen.BloodMoon => "エリートが増える／ソウル（経験）が3割増し",
+            Omen.Bounty => "装備が落ちやすい／モンスターの体力が増す",
+            Omen.Frenzy => "モンスターが素早い／モンスターの体力が減る",
+            Omen.Swarm => "群れが大きい／モンスターの体力が減る",
+            Omen.Vengeance => "倒れたモンスターがソウルを弾けさせる／ソウル（経験）が増す",
+            Omen.Blessed => "始めにパークをもう1つ選べる／ラビリンスのボスが手強い",
             _ => "",
         };
 

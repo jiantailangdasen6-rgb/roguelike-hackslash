@@ -48,7 +48,7 @@ namespace Game.Gameplay
             dim.rectTransform.Stretch();
             _panel = dim.gameObject;
 
-            var title = _heading = UIKit.Title(dim.transform, "力を選べ", 64);
+            var title = _heading = UIKit.Title(dim.transform, "パークを選べ", 64);
             title.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(1400f, 90f), new Vector2(0f, 385f));
             _timerText = UIKit.Label(dim.transform, "", 24, TextAnchor.MiddleCenter, UIKit.MutedText);
             _timerText.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(900f, 40f), new Vector2(0f, 322f));
@@ -76,7 +76,7 @@ namespace Game.Gameplay
                 _edges[i].rectTransform.anchorMax = new Vector2(1f, 1f);
                 _edges[i].rectTransform.pivot = new Vector2(0.5f, 1f);
                 _edges[i].rectTransform.sizeDelta = new Vector2(0f, 46f);
-                _tags[i] = UIKit.Title(_edges[i].transform, "", 24, TextAnchor.MiddleCenter, Color.white);
+                _tags[i] = UIKit.Title(_edges[i].transform, "", 24, TextAnchor.MiddleCenter, Color.white).Fit(14);
                 _tags[i].rectTransform.Stretch();
                 var halo = UIKit.Panel(card.transform, "Halo", new Color(1f, 0.8f, 0.45f, 0.35f));
                 halo.sprite = UIKit.GlowSprite;
@@ -89,7 +89,7 @@ namespace Game.Gameplay
                 medal.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(164f, 164f), new Vector2(0f, -78f));
                 _icons[i] = UIKit.Rect("Icon", card.transform).Place(new Vector2(0.5f, 1f), new Vector2(132f, 132f), new Vector2(0f, -94f)).gameObject.AddComponent<Image>();
                 _icons[i].raycastTarget = false;
-                _titles[i] = UIKit.Title(card.transform, "", 40);
+                _titles[i] = UIKit.Title(card.transform, "", 40).Fit(22);
                 _titles[i].rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(410f, 64f), new Vector2(0f, -254f));
                 var rule = UIKit.Panel(card.transform, "Rule", UIKit.GoldTrim);
                 rule.raycastTarget = false;
@@ -145,7 +145,7 @@ namespace Game.Gameplay
                 _smallEdges[i].rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(6f, 80f), new Vector2(4f, 0f));
                 _smallIcons[i] = UIKit.Rect("Icon", card.transform).Place(new Vector2(0f, 0.5f), new Vector2(64f, 64f), new Vector2(16f, 0f)).gameObject.AddComponent<Image>();
                 _smallIcons[i].preserveAspect = true;
-                _smallTitles[i] = UIKit.Title(card.transform, "", 22, TextAnchor.MiddleLeft, Color.white);
+                _smallTitles[i] = UIKit.Title(card.transform, "", 22, TextAnchor.MiddleLeft, Color.white).Fit(14);
                 _smallTitles[i].rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(196f, 80f), new Vector2(88f, 0f));
                 UIKit.KeyCap(outer, (i + 1).ToString(), 18, out _).Place(new Vector2(1f, 1f), new Vector2(34f, 28f), new Vector2(8f, 10f));
             }
@@ -171,7 +171,7 @@ namespace Game.Gameplay
                 _affordable[i] = true;
             }
             bool alone = NetPlayer.All.Count <= 1;
-            _smallHint.text = alone ? "力を選べる　1・2・3 で選ぶ（Enter：大きく開いて止める）" : "力を選べる　1・2・3 で選ぶ（戦いながらでも）";
+            _smallHint.text = alone ? "パークを選べる　1・2・3 で選ぶ（Enter：大きく開いて止める）" : "パークを選べる　1・2・3 で選ぶ（戦いながらでも）";
             _shownAt = Time.unscaledTime;
             _compact = true;
             IsCompact = true;
@@ -244,12 +244,12 @@ namespace Game.Gameplay
             _shop = (ChoiceKind)e.Int == ChoiceKind.Shop;
             _heading.text = (ChoiceKind)e.Int switch
             {
-                ChoiceKind.Start => "旅立ちの力を選べ",
-                ChoiceKind.Boon => "<color=#ffcc5c>祝福</color>  力を選べ",
-                ChoiceKind.Upgrade => "<color=#8cd9ff>研磨</color>  強化する力を選べ",
-                ChoiceKind.Shop => $"<color=#f2d173>闇商人</color>  1つ買える  <size=30><color=#c9a8ff>手持ちの魂の欠片 {Purse()}</color></size>",
-                ChoiceKind.Blessing => "<color=#ffe3a0>神々の加護</color>  ひとつ授かる",
-                _ => "力を選べ",
+                ChoiceKind.Start => "旅立ちのパークを選べ",
+                ChoiceKind.Boon => "<color=#ffcc5c>ブレッシング</color>  パークを選べ",
+                ChoiceKind.Upgrade => "<color=#8cd9ff>研磨</color>  強化するパークを選べ",
+                ChoiceKind.Shop => $"<color=#f2d173>ダークマーチャント</color>  1つ買える  <size=30><color=#c9a8ff>手持ちのソウルシャード {Purse()}</color></size>",
+                ChoiceKind.Blessing => "<color=#ffe3a0>神々のブレッシング</color>  ひとつ授かる",
+                _ => "パークを選べ",
             };
             int more = Mathf.RoundToInt(e.Value);
             if (more > 0) _heading.text += $"  <size=28><color=#bfb6aa>（あと {more} 回）</color></size>";
@@ -288,22 +288,22 @@ namespace Game.Gameplay
                     // Priced wares; what the team can't pay for is greyed out.
                     int price = RewardCatalog.Price(options[i], Area());
                     _affordable[i] = price <= Purse();
-                    body += _affordable[i] ? $"\n\n<color=#c9a8ff>魂の欠片 {price}</color>" : $"\n\n<color=#8a7f80>魂の欠片 {price}（足りない）</color>";
+                    body += _affordable[i] ? $"\n\n<color=#c9a8ff>ソウルシャード {price}</color>" : $"\n\n<color=#8a7f80>ソウルシャード {price}（足りない）</color>";
                 }
                 _buttons[i].interactable = _affordable[i];
                 GodId? god = options[i].IsPerk ? PerkCatalog.Get((PerkId)options[i].Perk).God : null;
                 Color banner = ClassColor(cls);
-                _tags[i].text = cls.HasValue ? ClassCatalog.Get(cls.Value).Name + "の技" : "共通";
+                _tags[i].text = cls.HasValue ? ClassCatalog.Get(cls.Value).Name + "のスキル" : "共通";
                 if (god.HasValue)
                 {
                     // A god's blessing: the god's colour and name, and how close its favour is.
                     var g = GodCatalog.Get(god.Value);
                     Codex.Record(CodexCatalog.GodEntry(god.Value));
                     banner = g.Color * new Color(0.75f, 0.75f, 0.75f, 1f);
-                    _tags[i].text = g.Name + "の加護";
+                    _tags[i].text = g.Name + "のブレッシング";
                     int have = GodPieces(god.Value);
                     string hex = ColorUtility.ToHtmlStringRGB(Color.Lerp(g.Color, Color.white, 0.3f));
-                    string state = have + 1 >= GodCatalog.FavorPieces ? "これで寵愛が目覚める！" : $"同じ神をあと{GodCatalog.FavorPieces - have - 1}つで";
+                    string state = have + 1 >= GodCatalog.FavorPieces ? "これでフェイバーが目覚める！" : $"同じ神をあと{GodCatalog.FavorPieces - have - 1}つで";
                     body += $"\n\n<size=22><color=#{hex}>{g.FavorName}（{state}）\n{g.FavorText}</color></size>";
                 }
                 _titles[i].text = title;

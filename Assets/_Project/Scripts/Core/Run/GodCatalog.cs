@@ -43,10 +43,10 @@ namespace Game.Core
 
         public static readonly GodDef[] All =
         {
-            new() { Id = GodId.Flame, Name = "焔神アグナ", FavorName = "焔の寵愛", FavorText = "燃えている敵へのダメージ +30%", Color = new Color(1f, 0.45f, 0.2f) },
-            new() { Id = GodId.Frost, Name = "氷姫ニヴァ", FavorName = "霜の寵愛", FavorText = "凍った敵を倒すと冷気が弾け、周りの敵も凍る", Color = new Color(0.55f, 0.85f, 1f) },
-            new() { Id = GodId.Storm, Name = "雷神トラス", FavorName = "雷の寵愛", FavorText = "雷が1体多く落ち、打たれた敵は気絶する", Color = new Color(1f, 0.88f, 0.35f) },
-            new() { Id = GodId.Life, Name = "慈母セレナ", FavorName = "命の寵愛", FavorText = "近くの仲間と自分のHPが毎秒 1.5 回復", Color = new Color(0.5f, 1f, 0.62f) },
+            new() { Id = GodId.Flame, Name = "フレイムロード・アグナ", FavorName = "フレイムフェイバー", FavorText = "燃えている敵へのダメージ +30%", Color = new Color(1f, 0.45f, 0.2f) },
+            new() { Id = GodId.Frost, Name = "アイスメイデン・ニヴァ", FavorName = "フロストフェイバー", FavorText = "凍った敵を倒すと冷気が弾け、周りの敵も凍る", Color = new Color(0.55f, 0.85f, 1f) },
+            new() { Id = GodId.Storm, Name = "ストームロード・トラス", FavorName = "ストームフェイバー", FavorText = "雷が1体多く落ち、打たれた敵はスタンする", Color = new Color(1f, 0.88f, 0.35f) },
+            new() { Id = GodId.Life, Name = "マザー・セレナ", FavorName = "ライフフェイバー", FavorText = "近くの仲間と自分のHPが毎秒 1.5 回復", Color = new Color(0.5f, 1f, 0.62f) },
         };
 
         public static GodDef Get(GodId id) => All[(int)id];

@@ -15,35 +15,58 @@ namespace Game.Core
         /// <summary>The title an achievement grants is kept in <see cref="QuestDef.UnlockName"/>.</summary>
         public static string TitleOf(QuestDef a) => a.UnlockName;
 
+        /// <summary>
+        /// Titles worn before the names went katakana (2026-10-17) are kept by achievement id, so a saved title
+        /// written the old way comes back as the new one.
+        /// </summary>
+        private static readonly System.Collections.Generic.Dictionary<string, string> OldTitles = new()
+        {
+            ["駆け出し"] = "a_kill1", ["魔物狩り"] = "a_kill2", ["屍山の主"] = "a_kill3", ["氷砕き"] = "a_shatter", ["急所狙い"] = "a_crit",
+            ["宝探し"] = "a_chest", ["火遊び好き"] = "a_keg", ["精鋭殺し"] = "a_elite", ["宝箱を疑う者"] = "a_mimic",
+            ["納骨堂の解放者"] = "a_king", ["血を断つ者"] = "a_bishop", ["冥王殺し"] = "a_lich", ["水底を鎮めし者"] = "a_saint",
+            ["霜を割る者"] = "a_queen", ["炉を鎮めし者"] = "a_colossus", ["眠りを払う者"] = "a_mother", ["頁を閉じる者"] = "a_archivist",
+            ["灯火を継ぐ者"] = "a_heart", ["迷宮踏破者"] = "a_win1", ["迷宮の覇者"] = "a_win5", ["深淵を覗く者"] = "a_deep",
+            ["奈落の旅人"] = "a_deep3", ["神に愛されし者"] = "a_favor", ["火の番人"] = "a_rest", ["契約者"] = "a_pact5",
+            ["血盟の者"] = "a_pact10", ["奈落と契りし者"] = "a_pact20",
+        };
+
+        /// <summary>The current name of a saved title (an old one is renamed; anything else is returned as it is).</summary>
+        public static string RenamedTitle(string title)
+        {
+            if (string.IsNullOrEmpty(title) || !OldTitles.TryGetValue(title, out var id)) return title;
+            foreach (var a in All) if (a.Id == id) return a.UnlockName;
+            return title;
+        }
+
         public static readonly QuestDef[] All =
         {
-            A("a_kill1", "初陣", "魔物を50体倒す", QuestGoal.Kill, 50, "駆け出し"),
-            A("a_kill2", "百鬼斬り", "魔物を500体倒す", QuestGoal.Kill, 500, "魔物狩り"),
-            A("a_kill3", "屍の山", "魔物を3000体倒す", QuestGoal.Kill, 3000, "屍山の主"),
-            A("a_shatter", "砕氷", "凍った敵を50回砕く", QuestGoal.Shatter, 50, "氷砕き"),
-            A("a_crit", "急所", "会心の一撃を500回当てる", QuestGoal.Crit, 500, "急所狙い"),
-            A("a_chest", "宝探し", "焚き火の間の宝箱を30個壊す", QuestGoal.BreakChest, 30, "宝探し"),
-            A("a_keg", "火遊び", "火薬樽を50個爆発させる", QuestGoal.ExplodeKeg, 50, "火遊び好き"),
-            A("a_elite", "精鋭狩り", "精鋭の巣を20回制圧する", QuestGoal.Trial, 20, "精鋭殺し"),
-            A("a_mimic", "疑り深い", "ミミックを5体倒す", QuestGoal.Kill, 5, "宝箱を疑う者", EnemyType.Mimic),
-            A("a_king", "納骨堂の解放", "骸骨の騎士王を討つ", QuestGoal.KillBoss, 1, "納骨堂の解放者", EnemyType.BoneKing),
-            A("a_bishop", "血を断つ", "血の司教を討つ", QuestGoal.KillBoss, 1, "血を断つ者", EnemyType.BloodBishop),
-            A("a_lich", "冥王殺し", "冥王リッチを討つ", QuestGoal.KillBoss, 1, "冥王殺し", EnemyType.Lich),
-            A("a_saint", "水底の鎮魂", "水底の聖女を討つ", QuestGoal.KillBoss, 1, "水底を鎮めし者", EnemyType.DrownedSaint),
-            A("a_queen", "春を呼ぶ", "凍てつく女王を討つ", QuestGoal.KillBoss, 1, "霜を割る者", EnemyType.FrostQueen),
-            A("a_colossus", "炉の火を消す", "炉の巨人を討つ", QuestGoal.KillBoss, 1, "炉を鎮めし者", EnemyType.ForgeColossus),
-            A("a_mother", "目覚めの朝", "菌糸の母を討つ", QuestGoal.KillBoss, 1, "眠りを払う者", EnemyType.MyceliumMother),
-            A("a_archivist", "最後の頁", "大司書を討つ", QuestGoal.KillBoss, 1, "頁を閉じる者", EnemyType.Archivist),
-            A("a_heart", "灯火を継ぐ者", "迷宮の心臓で灰の王を討つ", QuestGoal.KillBoss, 1, "灯火を継ぐ者", EnemyType.AshenKing),
-            A("a_win1", "踏破", "迷宮を踏破する", QuestGoal.Victory, 1, "迷宮踏破者"),
-            A("a_win5", "覇者", "迷宮を5回踏破する", QuestGoal.Victory, 5, "迷宮の覇者"),
-            A("a_deep", "深淵", "深層にたどり着く", QuestGoal.ReachArea, RunSimulation.AreaCount, "深淵を覗く者"),
-            A("a_deep3", "深淵の底", "深層 第3階にたどり着く", QuestGoal.ReachArea, RunSimulation.AreaCount + 2, "奈落の旅人"),
-            A("a_favor", "神の寵愛", "神の寵愛を目覚めさせる（仲間でもよい）", QuestGoal.Favor, 1, "神に愛されし者"),
-            A("a_rest", "火の番人", "焚き火の間に30回たどり着く", QuestGoal.Rest, 30, "火の番人"),
-            A("a_pact5", "契約の誓い", "契約の段位5以上で迷宮を踏破する", QuestGoal.Contract, 5, "契約者"),
-            A("a_pact10", "血の契約", "契約の段位10以上で迷宮を踏破する", QuestGoal.Contract, 10, "血盟の者"),
-            A("a_pact20", "奈落の契約", "契約の段位20以上で迷宮を踏破する", QuestGoal.Contract, 20, "奈落と契りし者"),
+            A("a_kill1", "ファーストブラッド", "モンスターを50体倒す", QuestGoal.Kill, 50, "ルーキーハンター"),
+            A("a_kill2", "ハンドレッドスレイヤー", "モンスターを500体倒す", QuestGoal.Kill, 500, "モンスターハンター"),
+            A("a_kill3", "コープスマウンテン", "モンスターを3000体倒す", QuestGoal.Kill, 3000, "キング・オブ・コープス"),
+            A("a_shatter", "アイスブレイク", "凍った敵を50回砕く", QuestGoal.Shatter, 50, "アイスブレイカー"),
+            A("a_crit", "ウィークスポット", "クリティカルの一撃を500回当てる", QuestGoal.Crit, 500, "スナイパー"),
+            A("a_chest", "トレジャーハント", "ボンファイアのチェストを30個壊す", QuestGoal.BreakChest, 30, "トレジャーハント"),
+            A("a_keg", "プレイウィズファイア", "パウダーケグを50個爆発させる", QuestGoal.ExplodeKeg, 50, "パイロマニア"),
+            A("a_elite", "エリートハント", "エリートネストを20回制圧する", QuestGoal.Trial, 20, "エリートスレイヤー"),
+            A("a_mimic", "スケプティック", "ミミックを5体倒す", QuestGoal.Kill, 5, "ミミックハンター", EnemyType.Mimic),
+            A("a_king", "クリプトリベレーション", "スケルトンキングを討つ", QuestGoal.KillBoss, 1, "クリプトリベレーター", EnemyType.BoneKing),
+            A("a_bishop", "ブラッドセヴァー", "ブラッドビショップを討つ", QuestGoal.KillBoss, 1, "ブラッドセヴァラー", EnemyType.BloodBishop),
+            A("a_lich", "リッチスレイヤー", "リッチキングを討つ", QuestGoal.KillBoss, 1, "リッチスレイヤー", EnemyType.Lich),
+            A("a_saint", "ディープレクイエム", "ドラウンドセイントを討つ", QuestGoal.KillBoss, 1, "ディープピースメイカー", EnemyType.DrownedSaint),
+            A("a_queen", "コーリングスプリング", "フロストクイーンを討つ", QuestGoal.KillBoss, 1, "フロストブレイカー", EnemyType.FrostQueen),
+            A("a_colossus", "フォージクエンチ", "フォージコロッサスを討つ", QuestGoal.KillBoss, 1, "フォージクエンチャー", EnemyType.ForgeColossus),
+            A("a_mother", "アウェイクニング", "マイセリアマザーを討つ", QuestGoal.KillBoss, 1, "ドリームブレイカー", EnemyType.MyceliumMother),
+            A("a_archivist", "ラストページ", "グランドライブラリアンを討つ", QuestGoal.KillBoss, 1, "ページクローザー", EnemyType.Archivist),
+            A("a_heart", "トーチベアラー", "ラビリンスハートでアッシュキングを討つ", QuestGoal.KillBoss, 1, "トーチベアラー", EnemyType.AshenKing),
+            A("a_win1", "クリア", "ラビリンスを踏破する", QuestGoal.Victory, 1, "ラビリンスクリアラー"),
+            A("a_win5", "チャンピオン", "ラビリンスを5回踏破する", QuestGoal.Victory, 5, "ラビリンスチャンピオン"),
+            A("a_deep", "アビス", "ディープにたどり着く", QuestGoal.ReachArea, RunSimulation.AreaCount, "アビスゲイザー"),
+            A("a_deep3", "アビスボトム", "ディープ 第3階にたどり着く", QuestGoal.ReachArea, RunSimulation.AreaCount + 2, "アビスウォーカー"),
+            A("a_favor", "ディヴァインフェイバー", "神のフェイバーを目覚めさせる（仲間でもよい）", QuestGoal.Favor, 1, "ゴッズフェイバリット"),
+            A("a_rest", "ファイアキーパー", "ボンファイアに30回たどり着く", QuestGoal.Rest, 30, "ファイアキーパー"),
+            A("a_pact5", "コントラクトオース", "コントラクトのランク5以上でラビリンスを踏破する", QuestGoal.Contract, 5, "コントラクター"),
+            A("a_pact10", "ブラッドパクト", "コントラクトのランク10以上でラビリンスを踏破する", QuestGoal.Contract, 10, "ブラッドボンド"),
+            A("a_pact20", "アビスパクト", "コントラクトのランク20以上でラビリンスを踏破する", QuestGoal.Contract, 20, "アビスパクトキーパー"),
         };
 
         public static QuestDef Get(string id) => Array.Find(All, a => a.Id == id);

@@ -533,9 +533,9 @@ namespace Game.Core
 
         public (string Title, string Body) Describe()
         {
-            if (IsHeal) return ("休息", "HPを40%回復する");
-            if (IsShopTreasure) return ("宝物", "希少以上の装備を1つ");
-            if (IsShopVigor) return ("生命の霊薬", $"最大HP +{RunSimulation.VigorPerStack * 100f:0}%・全回復");
+            if (IsHeal) return ("レスト", "HPを40%回復する");
+            if (IsShopTreasure) return ("トレジャー", "レア以上の装備を1つ");
+            if (IsShopVigor) return ("ライフエリクサー", $"最大HP +{RunSimulation.VigorPerStack * 100f:0}%・全回復");
             var def = PerkCatalog.Get((PerkId)Perk);
             string title = def.MaxLevel > 1 ? $"{def.Name} Lv{Level}" : def.Name;
             if (Level == 1 && def.MaxLevel > 1) title += "（新規）";

@@ -294,7 +294,7 @@ namespace Game.Gameplay
                 Loadouts[request.ClientNetworkId] = Loadout.FromJson(payload.Substring(split + 1));
             if (!response.Approved)
                 response.Reason = !sameBuild ? "ゲームのバージョンが部屋と違います。全員ページを再読み込み（F5）してから、部屋を作り直してください"
-                    : closed ? "仲間は冒険を終えたところです。拠点に戻ってから、もう一度参加してください" : "満員です（最大3人）";
+                    : closed ? "仲間は冒険を終えたところです。キャンプに戻ってから、もう一度参加してください" : "満員です（最大3人）";
         }
 
         private static void OnClientDisconnected(ulong clientId)
@@ -325,7 +325,7 @@ namespace Game.Gameplay
             bool kept = nm != null && nm.IsServer && InGame && RunDirector.Instance != null && RunDirector.Instance.SuspendForResume();
             Debug.LogWarning($"[GameSession] Transport failure: back to the title (run kept: {kept})");
             ReturnToLobby(kept
-                ? "通信が切れました。「続きから部屋を作る」で同じ迷宮の続きへ（新しいルームコードを仲間に伝えてください）"
+                ? "通信が切れました。「続きから部屋を作る」で同じラビリンスの続きへ（新しいルームコードを仲間に伝えてください）"
                 : "通信が切れました（回線が不安定だったようです）。もう一度部屋を作って集まってください");
         }
 

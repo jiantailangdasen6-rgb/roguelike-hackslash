@@ -168,67 +168,67 @@ namespace Game.Core
         {
             new()
             {
-                Id = ClassId.Warrior, Name = "戦士", Role = "前衛・連携の要", Sheet = "warrior",
+                Id = ClassId.Warrior, Name = "ウォリアー", Role = "前衛・連携の要", Sheet = "warrior",
                 Health = 160f, MoveSpeed = 4.6f, Armor = 2f, HealthPerLevel = 8f, MightPerLevel = 0.03f,
-                BasicName = "斬撃（3連撃）", BasicDamage = 15f, BasicInterval = 0.42f, BasicRange = 2.1f, BasicArc = 120f,
-                Skill1Name = "突進斬り", Skill1Text = "照準方向へ突進し、通り道の敵を斬る（無敵）", Skill1Cooldown = 6f,
-                Skill2Name = "鬨の声", Skill2Text = "周囲の敵を吹き飛ばして気絶させ、近くの仲間の攻撃力と防御を上げる", Skill2Cooldown = 14f,
+                BasicName = "スラッシュ（3連撃）", BasicDamage = 15f, BasicInterval = 0.42f, BasicRange = 2.1f, BasicArc = 120f,
+                Skill1Name = "チャージスラッシュ", Skill1Text = "照準方向へ突進し、通り道の敵を斬る（無敵）", Skill1Cooldown = 6f,
+                Skill2Name = "ウォークライ", Skill2Text = "周囲の敵を吹き飛ばしてスタンさせ、近くの仲間の攻撃力と防御を上げる", Skill2Cooldown = 14f,
             },
             new()
             {
-                Id = ClassId.Mage, Name = "魔法使い", Role = "凍結と回復の支援", Sheet = "mage",
+                Id = ClassId.Mage, Name = "メイジ", Role = "フリーズと回復の支援", Sheet = "mage",
                 Health = 105f, MoveSpeed = 4.6f, Armor = 0f, HealthPerLevel = 5f, MightPerLevel = 0.04f,
-                BasicName = "魔弾", BasicDamage = 11f, BasicInterval = 0.36f, BasicRange = 9f, BasicArc = 0f,
-                Skill1Name = "氷結陣", Skill1Text = "照準地点の敵を凍らせる。凍った敵は戦士の斬撃などで「砕ける」", Skill1Cooldown = 9f,
-                Skill2Name = "癒しの光", Skill2Text = "自分と近くの仲間を回復し、ダウン中の仲間の復活を早める", Skill2Cooldown = 16f,
+                BasicName = "マジックボルト", BasicDamage = 11f, BasicInterval = 0.36f, BasicRange = 9f, BasicArc = 0f,
+                Skill1Name = "フロストノヴァ", Skill1Text = "照準地点の敵を凍らせる。凍った敵はウォリアーの斬撃などで「砕ける」", Skill1Cooldown = 9f,
+                Skill2Name = "ヒーリングライト", Skill2Text = "自分と近くの仲間を回復し、ダウン中の仲間の復活を早める", Skill2Cooldown = 16f,
             },
             new()
             {
-                Id = ClassId.Ranger, Name = "狩人", Role = "遠距離・弱点を暴く", Sheet = "ranger",
+                Id = ClassId.Ranger, Name = "レンジャー", Role = "遠距離・弱点を暴く", Sheet = "ranger",
                 Health = 115f, MoveSpeed = 5.0f, Armor = 0f, HealthPerLevel = 6f, MightPerLevel = 0.035f,
-                BasicName = "速射", BasicDamage = 9f, BasicInterval = 0.28f, BasicRange = 11f, BasicArc = 0f,
-                Skill1Name = "貫通の一矢", Skill1Text = "全ての敵を貫く強力な矢。凍った敵を砕ける", Skill1Cooldown = 7f,
-                Skill2Name = "狩人の印", Skill2Text = "照準地点の敵に印を付け、全員から受けるダメージを増やす", Skill2Cooldown = 12f,
+                BasicName = "クイックショット", BasicDamage = 9f, BasicInterval = 0.28f, BasicRange = 11f, BasicArc = 0f,
+                Skill1Name = "ピアシングショット", Skill1Text = "全ての敵を貫く強力な矢。凍った敵を砕ける", Skill1Cooldown = 7f,
+                Skill2Name = "ハンターズマーク", Skill2Text = "照準地点の敵にマークを付け、全員から受けるダメージを増やす", Skill2Cooldown = 12f,
             },
             new()
             {
-                Id = ClassId.Guardian, Name = "守護騎士", Role = "盾役・仲間を守る", Sheet = "guardian",
+                Id = ClassId.Guardian, Name = "ガーディアン", Role = "ガード・仲間を守る", Sheet = "guardian",
                 Health = 190f, MoveSpeed = 4.3f, Armor = 4f, HealthPerLevel = 9f, MightPerLevel = 0.028f,
-                BasicName = "鎚打ち", BasicDamage = 19f, BasicInterval = 0.55f, BasicRange = 1.9f, BasicArc = 110f,
-                Skill1Name = "盾の突進", Skill1Text = "盾を構えて短く突進し、ぶつかった敵を気絶させる（無敵）", Skill1Cooldown = 7f,
-                Skill2Name = "守りの陣", Skill2Text = "足元に5秒間の聖域を張る。中の仲間は受けるダメージが減り、傷が癒える", Skill2Cooldown = 16f,
+                BasicName = "ハンマースマッシュ", BasicDamage = 19f, BasicInterval = 0.55f, BasicRange = 1.9f, BasicArc = 110f,
+                Skill1Name = "シールドバッシュ", Skill1Text = "盾を構えて短く突進し、ぶつかった敵をスタンさせる（無敵）", Skill1Cooldown = 7f,
+                Skill2Name = "サンクチュアリ", Skill2Text = "足元に5秒間の聖域を張る。中の仲間は受けるダメージが減り、傷が癒える", Skill2Cooldown = 16f,
             },
             new()
             {
-                Id = ClassId.Assassin, Name = "暗殺者", Role = "素早い近接・崩れた敵を仕留める", Sheet = "assassin",
+                Id = ClassId.Assassin, Name = "アサシン", Role = "素早い近接・崩れた敵を仕留める", Sheet = "assassin",
                 Health = 110f, MoveSpeed = 5.2f, Armor = 0f, HealthPerLevel = 5f, MightPerLevel = 0.04f,
-                BasicName = "双剣", BasicDamage = 8f, BasicInterval = 0.22f, BasicRange = 1.6f, BasicArc = 100f,
-                Skill1Name = "影渡り", Skill1Text = "照準地点へ瞬時に移り、周りの敵を斬る。凍結・気絶・印の敵には必ず会心", Skill1Cooldown = 6f,
-                Skill2Name = "煙玉", Skill2Text = "周りの敵を気絶させ、4秒間すべての攻撃が会心になる", Skill2Cooldown = 13f,
+                BasicName = "ツインブレード", BasicDamage = 8f, BasicInterval = 0.22f, BasicRange = 1.6f, BasicArc = 100f,
+                Skill1Name = "シャドウステップ", Skill1Text = "照準地点へ瞬時に移り、周りの敵を斬る。フリーズ・スタン・マークの敵には必ずクリティカル", Skill1Cooldown = 6f,
+                Skill2Name = "スモークボム", Skill2Text = "周りの敵をスタンさせ、4秒間すべての攻撃がクリティカルになる", Skill2Cooldown = 13f,
             },
             new()
             {
-                Id = ClassId.Alchemist, Name = "錬金術師", Role = "燃やして守る・投げて癒す", Sheet = "alchemist",
+                Id = ClassId.Alchemist, Name = "アルケミスト", Role = "燃やして守る・投げて癒す", Sheet = "alchemist",
                 Health = 115f, MoveSpeed = 4.6f, Armor = 0f, HealthPerLevel = 5.5f, MightPerLevel = 0.04f,
-                BasicName = "薬瓶投げ", BasicDamage = 12f, BasicInterval = 0.5f, BasicRange = 8f, BasicArc = 0f,
-                Skill1Name = "火炎瓶", Skill1Text = "照準地点に火炎瓶を投げ、4秒間燃える床を作る（火薬樽にも火がつく）", Skill1Cooldown = 9f,
-                Skill2Name = "回復薬", Skill2Text = "照準地点に回復薬を投げ、浴びた仲間を癒す。倒れた仲間の復活も早める", Skill2Cooldown = 14f,
+                BasicName = "フラスクトス", BasicDamage = 12f, BasicInterval = 0.5f, BasicRange = 8f, BasicArc = 0f,
+                Skill1Name = "ファイアフラスク", Skill1Text = "照準地点にファイアフラスクを投げ、4秒間燃える床を作る（パウダーケグにも火がつく）", Skill1Cooldown = 9f,
+                Skill2Name = "ヒールポーション", Skill2Text = "照準地点にヒールポーションを投げ、浴びた仲間を癒す。倒れた仲間の復活も早める", Skill2Cooldown = 14f,
             },
             new()
             {
-                Id = ClassId.Deathcaller, Name = "死霊術師", Role = "骨の兵を率いる・呪いで弱らせる", Sheet = "deathcaller",
+                Id = ClassId.Deathcaller, Name = "ネクロマンサー", Role = "ボーンサーヴァントを率いる・カースで弱らせる", Sheet = "deathcaller",
                 Health = 108f, MoveSpeed = 4.5f, Armor = 0f, HealthPerLevel = 5f, MightPerLevel = 0.04f,
-                BasicName = "魂の矢", BasicDamage = 10f, BasicInterval = 0.42f, BasicRange = 9f, BasicArc = 0f,
-                Skill1Name = "骨の兵", Skill1Text = "照準地点に骨の兵を2体呼ぶ（14秒、最大4体）。兵は近くの敵に斬りかかる", Skill1Cooldown = 10f,
-                Skill2Name = "死の呪い", Skill2Text = "照準地点の敵を呪う。呪われた敵は全員から受けるダメージが増え、倒れると骨の兵になる", Skill2Cooldown = 13f,
+                BasicName = "ソウルボルト", BasicDamage = 10f, BasicInterval = 0.42f, BasicRange = 9f, BasicArc = 0f,
+                Skill1Name = "ボーンサーヴァント", Skill1Text = "照準地点にボーンサーヴァントを2体呼ぶ（14秒、最大4体）。兵は近くの敵に斬りかかる", Skill1Cooldown = 10f,
+                Skill2Name = "デスカース", Skill2Text = "照準地点の敵を呪う。呪われた敵は全員から受けるダメージが増え、倒れるとボーンサーヴァントになる", Skill2Cooldown = 13f,
             },
             new()
             {
-                Id = ClassId.Paladin, Name = "聖騎士", Role = "光で裁き・仲間の傷を肩代わり", Sheet = "paladin",
+                Id = ClassId.Paladin, Name = "パラディン", Role = "光で裁き・仲間の傷を肩代わり", Sheet = "paladin",
                 Health = 170f, MoveSpeed = 4.4f, Armor = 3f, HealthPerLevel = 8f, MightPerLevel = 0.03f,
-                BasicName = "聖剣", BasicDamage = 14f, BasicInterval = 0.46f, BasicRange = 2.05f, BasicArc = 115f,
-                Skill1Name = "裁きの光", Skill1Text = "照準地点に光を落とす。敵を打って気絶させ、中の仲間を癒す", Skill1Cooldown = 8f,
-                Skill2Name = "献身", Skill2Text = "近くの仲間と光の鎖でつながる（6秒）。仲間の受けるダメージの半分を肩代わりし、2人にシールド", Skill2Cooldown = 15f,
+                BasicName = "ホーリーソード", BasicDamage = 14f, BasicInterval = 0.46f, BasicRange = 2.05f, BasicArc = 115f,
+                Skill1Name = "ジャッジメント", Skill1Text = "照準地点に光を落とす。敵を打ってスタンさせ、中の仲間を癒す", Skill1Cooldown = 8f,
+                Skill2Name = "ディヴォーション", Skill2Text = "近くの仲間と光の鎖でつながる（6秒）。仲間の受けるダメージの半分を肩代わりし、2人にシールド", Skill2Cooldown = 15f,
             },
         };
 
@@ -238,14 +238,14 @@ namespace Game.Core
         /// </summary>
         public static readonly WeaponDef[] AltWeapons =
         {
-            new() { Name = "大斧", BasicName = "大振り", Text = "遅いが重い一撃を広く振るう。凍った敵を砕き、敵を大きく吹き飛ばす", Damage = 34f, Interval = 0.78f, Range = 2.4f, Arc = 170f },
-            new() { Name = "魔導書", BasicName = "三連の魔弾", Text = "魔弾を3方向へ同時に放つ。届く距離は短い", Damage = 6.5f, Interval = 0.46f, Range = 7f, Arc = 26f },
-            new() { Name = "弩", BasicName = "重い矢", Text = "ゆっくりだが、敵を2体まで貫く重い矢を放つ", Damage = 27f, Interval = 0.72f, Range = 12f },
-            new() { Name = "大槍", BasicName = "突き", Text = "まっすぐ長く突き、線の上の敵をすべて打つ", Damage = 18f, Interval = 0.5f, Range = 3.3f, Arc = 0.9f },
-            new() { Name = "投げ短剣", BasicName = "投げ短剣", Text = "短剣を投げて離れて戦う。凍結・気絶・印の敵には必ず会心", Damage = 7.5f, Interval = 0.26f, Range = 7.5f },
-            new() { Name = "爆薬瓶", BasicName = "爆薬瓶", Text = "ゆっくりだが、大きく爆ぜる瓶を投げる。凍った敵を砕く", Damage = 21f, Interval = 0.85f, Range = 8f, Arc = 2.2f },
-            new() { Name = "大鎌", BasicName = "薙ぎ払い", Text = "近くを大きく薙ぎ払い、当たった敵の数だけ少し回復する", Damage = 15f, Interval = 0.6f, Range = 2.4f, Arc = 150f },
-            new() { Name = "大剣", BasicName = "大振り", Text = "遅いが重い一撃。当てるたびに少しのシールドを得る", Damage = 33f, Interval = 0.8f, Range = 2.3f, Arc = 160f },
+            new() { Name = "グレートアクス", BasicName = "ヘヴィスイング", Text = "遅いが重い一撃を広く振るう。凍った敵を砕き、敵を大きく吹き飛ばす", Damage = 34f, Interval = 0.78f, Range = 2.4f, Arc = 170f },
+            new() { Name = "グリモア", BasicName = "トリプルボルト", Text = "マジックボルトを3方向へ同時に放つ。届く距離は短い", Damage = 6.5f, Interval = 0.46f, Range = 7f, Arc = 26f },
+            new() { Name = "クロスボウ", BasicName = "ヘヴィボルト", Text = "ゆっくりだが、敵を2体まで貫くヘヴィボルトを放つ", Damage = 27f, Interval = 0.72f, Range = 12f },
+            new() { Name = "グレートランス", BasicName = "突き", Text = "まっすぐ長く突き、線の上の敵をすべて打つ", Damage = 18f, Interval = 0.5f, Range = 3.3f, Arc = 0.9f },
+            new() { Name = "スローイングダガー", BasicName = "スローイングダガー", Text = "短剣を投げて離れて戦う。フリーズ・スタン・マークの敵には必ずクリティカル", Damage = 7.5f, Interval = 0.26f, Range = 7.5f },
+            new() { Name = "ボムフラスク", BasicName = "ボムフラスク", Text = "ゆっくりだが、大きく爆ぜる瓶を投げる。凍った敵を砕く", Damage = 21f, Interval = 0.85f, Range = 8f, Arc = 2.2f },
+            new() { Name = "デスサイズ", BasicName = "リーパースイング", Text = "近くを大きくリーパースイング、当たった敵の数だけ少し回復する", Damage = 15f, Interval = 0.6f, Range = 2.4f, Arc = 150f },
+            new() { Name = "グレートソード", BasicName = "ヘヴィスイング", Text = "遅いが重い一撃。当てるたびに少しのシールドを得る", Damage = 33f, Interval = 0.8f, Range = 2.3f, Arc = 160f },
         };
 
         public static WeaponDef AltWeapon(ClassId id) => AltWeapons[(int)id];
@@ -274,7 +274,7 @@ namespace Game.Core
                 AbilitySlot.Basic => c.BasicName,
                 AbilitySlot.Skill1 => c.Skill1Name,
                 AbilitySlot.Skill2 => c.Skill2Name,
-                _ => "回避",
+                _ => "ドッジ",
             };
         }
     }

@@ -40,14 +40,14 @@ namespace Game.Core
 
         public static readonly CampStationDef[] Stations =
         {
-            new() { Id = CampStation.Gate, Name = "出発の門", Action = "全員で門に立つと出発", Position = new Vector2(0f, 6.9f), Front = new Vector2(0f, 4.9f), Radius = GateRadius },
-            new() { Id = CampStation.Tablet, Name = "迷宮の碑", Action = "難易度を選ぶ", Position = new Vector2(3.6f, 5.2f), Front = new Vector2(3.6f, 4.2f), Radius = 1.3f },
-            new() { Id = CampStation.Mirror, Name = "古い鏡", Action = "クラスと見た目を変える", Position = new Vector2(-9.5f, 3.4f), Front = new Vector2(-9.5f, 2.2f), Radius = 1.6f },
-            new() { Id = CampStation.Master, Name = "師範", Action = "技の木を育てる", Position = new Vector2(-9f, -3.6f), Front = new Vector2(-7.8f, -4.4f), Radius = 1.7f },
-            new() { Id = CampStation.Charms, Name = "お守り職人", Action = "お守りを選ぶ・作る", Position = new Vector2(9f, -3.6f), Front = new Vector2(7.8f, -4.4f), Radius = 1.7f },
-            new() { Id = CampStation.Vault, Name = "倉庫", Action = "装備を整える", Position = new Vector2(9.5f, 3.2f), Front = new Vector2(9.5f, 2.1f), Radius = 1.6f },
-            new() { Id = CampStation.Board, Name = "依頼の掲示板", Action = "依頼を見る・報酬を受け取る", Position = new Vector2(5.2f, -5.3f), Front = new Vector2(5.2f, -4.2f), Radius = 1.6f },
-            new() { Id = CampStation.Hearth, Name = "焚き火", Action = "拠点を育てる", Position = FirePosition, Front = FirePosition + new Vector2(0f, -1.4f), Radius = 1.05f },
+            new() { Id = CampStation.Gate, Name = "ゲート", Action = "全員で門に立つと出発", Position = new Vector2(0f, 6.9f), Front = new Vector2(0f, 4.9f), Radius = GateRadius },
+            new() { Id = CampStation.Tablet, Name = "モノリス", Action = "難易度を選ぶ", Position = new Vector2(3.6f, 5.2f), Front = new Vector2(3.6f, 4.2f), Radius = 1.3f },
+            new() { Id = CampStation.Mirror, Name = "ミラー", Action = "クラスと見た目を変える", Position = new Vector2(-9.5f, 3.4f), Front = new Vector2(-9.5f, 2.2f), Radius = 1.6f },
+            new() { Id = CampStation.Master, Name = "マスター", Action = "スキルツリーを育てる", Position = new Vector2(-9f, -3.6f), Front = new Vector2(-7.8f, -4.4f), Radius = 1.7f },
+            new() { Id = CampStation.Charms, Name = "チャームメイカー", Action = "チャームを選ぶ・作る", Position = new Vector2(9f, -3.6f), Front = new Vector2(7.8f, -4.4f), Radius = 1.7f },
+            new() { Id = CampStation.Vault, Name = "ヴォールト", Action = "装備を整える", Position = new Vector2(9.5f, 3.2f), Front = new Vector2(9.5f, 2.1f), Radius = 1.6f },
+            new() { Id = CampStation.Board, Name = "クエストボード", Action = "クエストを見る・報酬を受け取る", Position = new Vector2(5.2f, -5.3f), Front = new Vector2(5.2f, -4.2f), Radius = 1.6f },
+            new() { Id = CampStation.Hearth, Name = "キャンプファイア", Action = "キャンプを育てる", Position = FirePosition, Front = FirePosition + new Vector2(0f, -1.4f), Radius = 1.05f },
         };
 
         public static CampStationDef Get(CampStation id)

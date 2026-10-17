@@ -30,11 +30,11 @@ namespace Game.Core
 
         public static readonly CampUpgradeDef[] All =
         {
-            new() { Id = CampUpgrade.Hearth, Name = "炉", Costs = new[] { 60, 140, 260 }, Text = l => $"最大HP +{HearthHealth * 100f * l:0}%" },
-            new() { Id = CampUpgrade.Forge, Name = "鍛冶場", Costs = new[] { 120, 300 }, Text = l => l >= 2 ? "空いた枠に貸し出す装備が希少になる" : "空いた枠に貸し出す装備が上質になる" },
-            new() { Id = CampUpgrade.Apothecary, Name = "薬棚", Costs = new[] { 80, 180, 320 }, Text = l => $"部屋を制圧したときの回復 +{ApothecaryHeal * 100f * l:0}%（基本20%）" },
-            new() { Id = CampUpgrade.Altar, Name = "小祭壇", Costs = new[] { 350 }, Text = _ => "ランの始めに力をひとつ選べる" },
-            new() { Id = CampUpgrade.Urn, Name = "魂の壺", Costs = new[] { 100, 220, 400 }, Text = l => $"ランで得る魂の欠片 +{UrnShards * 100f * l:0}%" },
+            new() { Id = CampUpgrade.Hearth, Name = "ハース", Costs = new[] { 60, 140, 260 }, Text = l => $"最大HP +{HearthHealth * 100f * l:0}%" },
+            new() { Id = CampUpgrade.Forge, Name = "フォージ", Costs = new[] { 120, 300 }, Text = l => l >= 2 ? "空いた枠に貸し出す装備がレアになる" : "空いた枠に貸し出す装備がマジックになる" },
+            new() { Id = CampUpgrade.Apothecary, Name = "アポセカリー", Costs = new[] { 80, 180, 320 }, Text = l => $"部屋を制圧したときの回復 +{ApothecaryHeal * 100f * l:0}%（基本20%）" },
+            new() { Id = CampUpgrade.Altar, Name = "オルター", Costs = new[] { 350 }, Text = _ => "ランの始めにパークをひとつ選べる" },
+            new() { Id = CampUpgrade.Urn, Name = "ソウルアーン", Costs = new[] { 100, 220, 400 }, Text = l => $"ランで得るソウルシャード +{UrnShards * 100f * l:0}%" },
         };
 
         public static CampUpgradeDef Get(CampUpgrade id) => All[(int)id];

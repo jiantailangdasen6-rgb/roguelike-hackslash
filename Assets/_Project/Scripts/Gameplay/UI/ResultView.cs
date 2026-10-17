@@ -58,13 +58,13 @@ namespace Game.Gameplay
             _graph = UIKit.Rect("Graph", panel.transform).Place(new Vector2(0.5f, 1f), new Vector2(1000f, 150f), new Vector2(0f, -320f));
             _splits = UIKit.Label(panel.transform, "", 20, TextAnchor.MiddleCenter, UIKit.MutedText);
             _splits.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1000f, 30f), new Vector2(0f, -470f));
-            _splits.text = "<color=#dba84a>■</color> 探索　<color=#c82a24>■</color> 主との戦い";
+            _splits.text = "<color=#dba84a>■</color> 探索　<color=#c82a24>■</color> ボスとの戦い";
             _shardsText = UIKit.Title(panel.transform, "", 52, TextAnchor.MiddleCenter, new Color(0.62f, 0.86f, 1f));
             _shardsText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(1100f, 150f), new Vector2(0f, -505f));
 
-            _back = UIKit.Button(panel.transform, "拠点へ戻る", 34, GameSession.ReturnToCamp, UIKit.BloodColor);
+            _back = UIKit.Button(panel.transform, "キャンプへ戻る", 34, GameSession.ReturnToCamp, UIKit.BloodColor);
             _back.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(400f, 84f), new Vector2(0f, 34f));
-            _wait = UIKit.Label(panel.transform, "仲間（部屋を作った人）が拠点へ戻るのを待っています…", 26, TextAnchor.MiddleCenter, Color.white);
+            _wait = UIKit.Label(panel.transform, "仲間（部屋を作った人）がキャンプへ戻るのを待っています…", 26, TextAnchor.MiddleCenter, Color.white);
             _wait.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(1100f, 50f), new Vector2(0f, 100f));
             _leave = UIKit.Button(panel.transform, "パーティを抜ける", 24, () => GameSession.ReturnToLobby());
             _leave.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(300f, 56f), new Vector2(0f, 34f));
@@ -82,7 +82,7 @@ namespace Game.Gameplay
         {
             if (e.Type != SimEventType.RunEnded) return;
             _victory = e.Int >= 1; // 2: fell in the deep layers after beating the Lich (still a conquest)
-            _title.text = e.Int == 3 ? "心臓に火を灯した" : e.Int == 2 ? "深層に散った" : _victory ? "迷宮を踏破した" : "力尽きた…";
+            _title.text = e.Int == 3 ? "心臓に火を灯した" : e.Int == 2 ? "ディープに散った" : _victory ? "ラビリンスを踏破した" : "力尽きた…";
             _title.color = _victory ? UIKit.AccentColor : new Color(0.75f, 0.15f, 0.15f);
             _shards = -1;
             _logged = false;
@@ -126,7 +126,7 @@ namespace Game.Gameplay
                     boss.sprite = UIKit.GlossSprite;
                     boss.rectTransform.Place(new Vector2(0f, 1f), new Vector2(barMax * (bossEnd - bossStart) / longest, thick), new Vector2(left + barMax * bossStart / longest, y - 5f));
                 }
-                string bossText = a[1] >= 0 && a[2] >= a[1] ? $"<color=#ff8070>主 {UIKit.FormatTime(a[2] - a[1])}</color>　" : "";
+                string bossText = a[1] >= 0 && a[2] >= a[1] ? $"<color=#ff8070>ボス {UIKit.FormatTime(a[2] - a[1])}</color>　" : "";
                 var time = UIKit.Label(_graph, bossText + UIKit.FormatTime(total), 22, TextAnchor.MiddleLeft, Color.white);
                 time.rectTransform.Place(new Vector2(0f, 1f), new Vector2(200f, 36f), new Vector2(left + barMax + 14f, y));
             }
@@ -157,8 +157,8 @@ namespace Game.Gameplay
                 _weeklyNote = "";
                 if (d.WeeklyWeek.Value >= 0)
                     _weeklyNote = ProfileStore.Current.RecordWeekly(d.WeeklyWeek.Value, _victory, d.RoomIndex.Value, d.Elapsed.Value)
-                        ? "　<color=#9fd8ff>今週の迷宮・自己ベスト更新！</color>"
-                        : "　<color=#9fd8ff>今週の迷宮</color>";
+                        ? "　<color=#9fd8ff>今週のラビリンス・自己ベスト更新！</color>"
+                        : "　<color=#9fd8ff>今週のラビリンス</color>";
                 ProfileStore.Current.shards += _shards;
                 ProfileStore.Save();
             }
@@ -177,10 +177,10 @@ namespace Game.Gameplay
             // One line about requests: what was finished, or the one closest to done.
             string quest = "";
             if (QuestTracker.JustCompleted.Count > 0)
-                quest = $"\n<size=26><color=#e0b45a>依頼達成：{string.Join("・", QuestTracker.JustCompleted.ConvertAll(n => $"「{n}」"))}　拠点の掲示板で報酬</color></size>";
+                quest = $"\n<size=26><color=#e0b45a>クエスト達成：{string.Join("・", QuestTracker.JustCompleted.ConvertAll(n => $"「{n}」"))}　キャンプのボードで報酬</color></size>";
             else if (QuestTracker.Nearest() is { } near)
-                quest = $"\n<size=24><color=#bfb6aa>依頼「{near.Quest.Name}」 {near.Progress} / {near.Quest.Target}</color></size>";
-            _shardsText.text = $"魂の欠片 +{Mathf.Max(0, _shards)}\n<size=26><color=#bfb6aa>所持 {ProfileStore.Current.shards}</color></size>{quest}";
+                quest = $"\n<size=24><color=#bfb6aa>クエスト「{near.Quest.Name}」 {near.Progress} / {near.Quest.Target}</color></size>";
+            _shardsText.text = $"ソウルシャード +{Mathf.Max(0, _shards)}\n<size=26><color=#bfb6aa>所持 {ProfileStore.Current.shards}</color></size>{quest}";
         }
     }
 }

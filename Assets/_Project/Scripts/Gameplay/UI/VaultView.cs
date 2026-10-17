@@ -73,7 +73,7 @@ namespace Game.Gameplay
 
             var frame = UIKit.Framed(dim.transform, "VaultFrame", new Color(0.05f, 0.04f, 0.055f, 0.98f));
             frame.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(1720f, 900f), Vector2.zero);
-            var title = UIKit.Title(frame.transform, "倉庫", 52, TextAnchor.UpperLeft);
+            var title = UIKit.Title(frame.transform, "ヴォールト", 52, TextAnchor.UpperLeft);
             title.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 70f), new Vector2(36f, -18f));
             _header = UIKit.Label(frame.transform, "", 24, TextAnchor.UpperRight, UIKit.MutedText);
             _header.rectTransform.Place(new Vector2(1f, 1f), new Vector2(1100f, 40f), new Vector2(-36f, -34f));
@@ -88,10 +88,10 @@ namespace Game.Gameplay
                 caption.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(WornCell + 20f, 30f), new Vector2(0f, -32f));
                 _worn.Add((cell.Frame, cell.Icon));
             }
-            var note = UIKit.Label(frame.transform, "手に入れた装備は全部ここへ。\nルーンは技に宿り、技を変える。\n空いた枠（ルーン以外）には\n冒険中だけ貸し出し品が入る。", 20, TextAnchor.UpperLeft, UIKit.MutedText);
+            var note = UIKit.Label(frame.transform, "手に入れた装備は全部ここへ。\nルーンはスキルに宿り、スキルを変える。\n空いた枠（ルーン以外）には\n冒険中だけ貸し出し品が入る。", 20, TextAnchor.UpperLeft, UIKit.MutedText);
             note.rectTransform.Place(new Vector2(0f, 1f), new Vector2(290f, 220f), new Vector2(40f, -146f - 3f * (WornCell + 46f) + 6f));
 
-            var stashLabel = UIKit.Label(frame.transform, "倉庫", 26, TextAnchor.UpperLeft, UIKit.AccentColor);
+            var stashLabel = UIKit.Label(frame.transform, "ヴォールト", 26, TextAnchor.UpperLeft, UIKit.AccentColor);
             stashLabel.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 36f), new Vector2(350f, -100f));
             for (int i = 0; i < GearVault.MaxCapacity; i++)
             {
@@ -223,7 +223,7 @@ namespace Game.Gameplay
         {
             var data = Data;
             if (At(_selected) == null) _selected = FirstFilled();
-            _header.text = $"倉庫 {data.items.Count}/{data.capacity}　　<color=#9fd8ff>魂の欠片 {ProfileStore.Current.shards}</color>";
+            _header.text = $"ヴォールト {data.items.Count}/{data.capacity}　　<color=#9fd8ff>ソウルシャード {ProfileStore.Current.shards}</color>";
 
             for (int s = 0; s < _worn.Count; s++) Paint(_worn[s].Frame, _worn[s].Icon, At(s), s == _selected);
             for (int i = 0; i < _stash.Count; i++)
@@ -238,7 +238,7 @@ namespace Game.Gameplay
             if (selected == null)
             {
                 _detailTitle.text = "";
-                _detailBody.text = "まだ装備がない。\n冒険で魔物が落とす装備や「宝物」の門の装備は、すべてここに持ち帰られる。";
+                _detailBody.text = "まだ装備がない。\n冒険でモンスターが落とす装備や「宝物」の門の装備は、すべてここに持ち帰られる。";
                 _compareBody.text = "";
             }
             else
@@ -256,7 +256,7 @@ namespace Game.Gameplay
             _equipLabel.text = inStash ? "装備する" : "外す";
             _equipButton.interactable = inStash || data.items.Count < data.capacity;
             _salvageButton.gameObject.SetActive(selected != null && inStash);
-            if (selected != null) _salvageLabel.text = $"分解（魂の欠片 +{RunSimulation.SalvageValue(selected.rarity)}）";
+            if (selected != null) _salvageLabel.text = $"分解（ソウルシャード +{RunSimulation.SalvageValue(selected.rarity)}）";
             bool smith = selected != null && !selected.loaner;
             _forgeButton.gameObject.SetActive(smith);
             _rerollButton.gameObject.SetActive(smith);
@@ -264,14 +264,14 @@ namespace Game.Gameplay
             {
                 int shards = ProfileStore.Current.shards;
                 bool canForge = Blacksmith.CanForge(selected), canReroll = Blacksmith.CanReroll(selected);
-                _forgeLabel.text = canForge ? $"鍛える +{selected.forge + 1}（欠片 {Blacksmith.ForgeCost(selected)}）" : "これ以上は鍛えられない";
+                _forgeLabel.text = canForge ? $"鍛える +{selected.forge + 1}（シャード {Blacksmith.ForgeCost(selected)}）" : "これ以上は鍛えられない";
                 _forgeButton.interactable = canForge && shards >= Blacksmith.ForgeCost(selected);
-                _rerollLabel.text = canReroll ? $"振り直す（欠片 {Blacksmith.RerollCost(selected)}）" : "振り直す効果がない";
+                _rerollLabel.text = canReroll ? $"振り直す（シャード {Blacksmith.RerollCost(selected)}）" : "振り直す効果がない";
                 _rerollButton.interactable = canReroll && shards >= Blacksmith.RerollCost(selected);
             }
 
             bool full = data.capacity >= GearVault.MaxCapacity;
-            _expandLabel.text = full ? "倉庫はこれ以上広げられない" : $"倉庫を広げる +{GearVault.CapacityStep}（魂の欠片 {GearVault.ExpandCost(data.capacity)}）";
+            _expandLabel.text = full ? "ヴォールトはこれ以上広げられない" : $"ヴォールトを広げる +{GearVault.CapacityStep}（ソウルシャード {GearVault.ExpandCost(data.capacity)}）";
             _expandButton.interactable = !full && ProfileStore.Current.shards >= GearVault.ExpandCost(data.capacity);
         }
 
@@ -289,7 +289,7 @@ namespace Game.Gameplay
         {
             var data = Data;
             if (_selected >= SimPlayer.SlotCount) GearVault.Equip(data, _selected - SimPlayer.SlotCount);
-            else if (_selected >= 0 && !GearVault.Unequip(data, (EquipSlot)_selected)) _status.text = "倉庫がいっぱいで外せない";
+            else if (_selected >= 0 && !GearVault.Unequip(data, (EquipSlot)_selected)) _status.text = "ヴォールトがいっぱいで外せない";
             Save();
         }
 
@@ -298,7 +298,7 @@ namespace Game.Gameplay
             if (_selected < SimPlayer.SlotCount) return;
             int shards = GearVault.Salvage(Data, _selected - SimPlayer.SlotCount);
             ProfileStore.Current.shards += shards;
-            _status.text = $"分解した：魂の欠片 +{shards}";
+            _status.text = $"分解した：ソウルシャード +{shards}";
             Save();
         }
 
@@ -322,7 +322,7 @@ namespace Game.Gameplay
             var profile = ProfileStore.Current;
             if (profile.shards < cost)
             {
-                _status.text = "魂の欠片が足りない";
+                _status.text = "ソウルシャードが足りない";
                 return;
             }
             profile.shards -= cost;
@@ -336,7 +336,7 @@ namespace Game.Gameplay
         {
             int shards = GearVault.SalvageCommons(Data);
             ProfileStore.Current.shards += shards;
-            _status.text = shards > 0 ? $"「並」を分解した：魂の欠片 +{shards}" : "分解する「並」はない";
+            _status.text = shards > 0 ? $"「並」を分解した：ソウルシャード +{shards}" : "分解する「並」はない";
             Save();
         }
 
@@ -348,7 +348,7 @@ namespace Game.Gameplay
             if (data.capacity >= GearVault.MaxCapacity || profile.shards < cost) return;
             profile.shards -= cost;
             data.capacity = Mathf.Min(GearVault.MaxCapacity, data.capacity + GearVault.CapacityStep);
-            _status.text = $"倉庫が {data.capacity} 枠になった";
+            _status.text = $"ヴォールトが {data.capacity} 枠になった";
             Save();
         }
     }

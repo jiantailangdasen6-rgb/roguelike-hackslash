@@ -8,10 +8,10 @@ namespace Game.Core
     {
         public static string RarityName(Rarity rarity) => rarity switch
         {
-            Rarity.Common => "並",
-            Rarity.Magic => "上質",
-            Rarity.Rare => "希少",
-            _ => "伝説",
+            Rarity.Common => "コモン",
+            Rarity.Magic => "マジック",
+            Rarity.Rare => "レア",
+            _ => "レジェンダリー",
         };
 
         /// <summary>Hex color used for the rarity in rich text.</summary>
@@ -25,12 +25,12 @@ namespace Game.Core
 
         public static string SlotName(EquipSlot slot) => slot switch
         {
-            EquipSlot.Weapon => "武器",
-            EquipSlot.Armor => "防具",
-            EquipSlot.Amulet => "首飾り",
-            EquipSlot.Rune1 => "技1のルーン",
-            EquipSlot.Rune2 => "技2のルーン",
-            _ => "指輪",
+            EquipSlot.Weapon => "ウェポン",
+            EquipSlot.Armor => "アーマー",
+            EquipSlot.Amulet => "アミュレット",
+            EquipSlot.Rune1 => "スキル1ルーン",
+            EquipSlot.Rune2 => "スキル2ルーン",
+            _ => "リング",
         };
 
         /// <summary>The skill a rune slot belongs to, by class ("突進斬り").</summary>
@@ -60,21 +60,21 @@ namespace Game.Core
             StatType.Might => "与えるダメージ",
             StatType.Cooldown => "スキルの再使用時間",
             StatType.Area => "攻撃範囲",
-            StatType.PickupRange => "魂を拾う範囲",
+            StatType.PickupRange => "ソウルを拾う範囲",
             StatType.Armor => "防御",
             StatType.Regen => "自然回復",
             StatType.AttackSpeed => "攻撃速度",
-            StatType.CritChance => "会心率",
+            StatType.CritChance => "クリティカル率",
             StatType.ReviveSpeed => "仲間の復活速度",
             StatType.FrozenDamage => "凍った敵へのダメージ",
-            StatType.MarkedDamage => "印の敵へのダメージ",
-            StatType.FreezeDuration => "凍結時間",
-            StatType.MarkDuration => "印の持続",
+            StatType.MarkedDamage => "マークの敵へのダメージ",
+            StatType.FreezeDuration => "フリーズ時間",
+            StatType.MarkDuration => "マークの持続",
             StatType.KillHeal => "敵を倒すとHP回復",
             StatType.KillShield => "敵を倒すとシールド",
             StatType.AllyDamage => "近くの仲間1人ごとにダメージ",
             StatType.LastStand => "HP半分以下で受けるダメージ",
-            StatType.DodgeStrike => "回避直後の一撃のダメージ",
+            StatType.DodgeStrike => "ドッジ直後の一撃のダメージ",
             _ => stat.ToString(),
         };
 
@@ -119,18 +119,18 @@ namespace Game.Core
             foreach (var line in SpecialLines(item)) yield return line;
             foreach (var mod in item.GetModifiers(levelCap)) yield return Describe(mod);
             if (item.itemLevel > levelCap)
-                yield return $"<color=#bfb6aa>（この部屋ではLv{levelCap}相当の力。深く進むと本来の力に）</color>";
+                yield return $"<color=#bfb6aa>（この部屋ではLv{levelCap}相当のパーク。深く進むと本来のパークに）</color>";
             if (item.loaner) yield return "<color=#bfb6aa>空き枠の貸し出し品：持ち帰れない・渡せない</color>";
             var legendary = ItemCatalog.GetLegendary(item.legendary);
             if (legendary != null) yield return $"<color={RarityColor(Rarity.Legendary)}>◆ {legendary.Text}</color>";
             var set = GearSetCatalog.Get(item.setId);
             if (set != null)
             {
-                yield return $"<color={SetColor}>◇ 組装備「{set.Name}」（鎧・首飾り・指輪）</color>";
+                yield return $"<color={SetColor}>◇ セット装備「{set.Name}」（鎧・アミュレット・リング）</color>";
                 yield return $"<color={SetColor}>　2点：{set.TwoText}</color>";
                 yield return $"<color={SetColor}>　3点：{set.ThreeText}</color>";
             }
-            if (item.forge > 0) yield return $"<color=#bfb6aa>鍛冶で +{item.forge}（性能 +{item.forge * 8}%）</color>";
+            if (item.forge > 0) yield return $"<color=#bfb6aa>ブラックスミスで +{item.forge}（性能 +{item.forge * 8}%）</color>";
         }
 
         public const string SetColor = "#6FE39A";

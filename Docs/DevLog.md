@@ -11,8 +11,8 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 8b3204c6（戦闘の大改善の8項目すべてと、マップの明るさの改善。Windows版と同じ版なので一緒に遊べる） |
-| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 8b3204c6）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 6c7d6a7e（戦闘の大改善の8項目すべて、マップの明るさの改善、横文字の名前。Windows版と同じ版なので一緒に遊べる） |
+| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 6c7d6a7e）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
 | テスト | EditMode 193件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
@@ -594,6 +594,10 @@
 - **明るさ（実装）**：高画質のとき部屋の環境光を 0.62 倍に絞っていたのを 0.88 倍に、各土地の環境光 +0.1、四隅の暗さ（ビネット）0.34→0.22、コントラスト 18→12、彩度 −14→−8、露出 0.15→0.3、影を少し持ち上げ（Lift w 0.025）。闇の間の暗さ 0.1→0.18
   - 設定の「画面」に**明るさ**（暗め・標準・明るめ・最大）。露出として乗せる（`GameSettings.Brightness`、`LandLook.Exposure`、拠点にも効く）。設定画面の下段を詰めて、キーを戻すボタンを閉じるの横へ
   - 公開：ver 8b3204c6（NetTest・CampTest・CrossTest 合格）。拠点テストの全滅操作が開始時パーク「不屈」で1人残ることがあったので、テスト側で不屈とシールドも外すようにした
+- **横文字の名前（実装）**：クラス・スキル・パーク・アルティメット・ユニオン・敵・ボス・装備・ルーン・チャーム・土地・部屋・キャンプの施設と人・難易度・コントラクト・オーメン・実績とタイトル・クエスト名・スキルツリーを**カタカナ英語**に（戦士→ウォリアー、突進斬り→チャージスラッシュ、骸骨の騎士王→スケルトンキング、魂の欠片→ソウルシャード、精鋭→エリート、主→ボス、図鑑→コーデックス、奥義→アーツ など）。説明文は日本語のまま
+  - 置き換え表は `Docs/naming/glossary.tsv`（語の置き換え、長い語から1回だけ）と `exact.tsv`（文字列まるごと、ファイル限定可）。コードの文字列だけを書き換えた（約2000か所）。保存済みの称号は旧名から新名へ読み替え（`AchievementCatalog.RenamedTitle`）
+  - 長くなった名前のため、ボタン・図鑑の名前とタイトル・パークカード・ルーム表示・装備名などは枠に入らないと文字が縮む（`UIKit.Fit`）。地図の部屋の一文字（入・戦・主…）とルーンの印はアイコンとしてそのまま
+  - 公開：ver 6c7d6a7e（NetTest・CampTest・CrossTest 合格、EditMode 275件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

@@ -46,7 +46,7 @@ namespace Game.Gameplay
                 _dirty = true;
                 if (!log.Add(q, amount)) continue;
                 JustCompleted.Add(q.Name);
-                HudView.Instance?.Toast($"依頼「{q.Name}」達成！　拠点の掲示板で報酬を受け取ろう");
+                HudView.Instance?.Toast($"クエスト「{q.Name}」達成！　キャンプのボードで報酬を受け取ろう");
                 SfxPlayer.Instance?.Play("levelup", null, 1.15f);
             }
             // Achievements count the same deeds over a lifetime; each earns a title.
@@ -58,7 +58,7 @@ namespace Game.Gameplay
                 _dirty = true;
                 if (!deeds.Add(a, amount)) continue;
                 Codex.Record(CodexCatalog.AchievementEntry(a.Id));
-                HudView.Instance?.Toast($"<color=#e6c766>実績「{a.Name}」</color>　称号「{AchievementCatalog.TitleOf(a)}」を得た（拠点の鏡で付けられる）");
+                HudView.Instance?.Toast($"<color=#e6c766>アチーブメント「{a.Name}」</color>　タイトル「{AchievementCatalog.TitleOf(a)}」を得た（キャンプのミラーで付けられる）");
                 SfxPlayer.Instance?.Play("levelup", null, 0.95f);
             }
             RecordStory(e);
@@ -90,8 +90,8 @@ namespace Game.Gameplay
                     _dirty = true;
                     int count = Lore.Count(profile.memories);
                     HudView.Instance?.Toast(count >= 6
-                        ? "<color=#ffd890>六つの記憶がそろった</color>　三つ目の主の先に、迷宮の心臓への道が開く"
-                        : $"<color=#ffd890>{Lore.Get(Lore.MemoryIdOf((EnemyType)e.Int))?.Name}</color>を得た（記憶 {count}/6、図鑑の「記録」）");
+                        ? "<color=#ffd890>六つのメモリーがそろった</color>　三つ目のボスの先に、ラビリンスハートへの道が開く"
+                        : $"<color=#ffd890>{Lore.Get(Lore.MemoryIdOf((EnemyType)e.Int))?.Name}</color>を得た（メモリー {count}/6、コーデックスの「記録」）");
                     break;
                 }
                 case SimEventType.RunEnded when e.Int == 3:

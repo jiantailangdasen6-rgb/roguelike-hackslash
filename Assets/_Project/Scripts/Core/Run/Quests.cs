@@ -49,7 +49,7 @@ namespace Game.Core
 
     public static class QuestCatalog
     {
-        public static readonly string[] GiverNames = { "師範", "お守り職人", "墓守" };
+        public static readonly string[] GiverNames = { "マスター", "チャームメイカー", "グレイヴキーパー" };
 
         private static QuestDef Q(string id, QuestGiver giver, string name, string text, QuestGoal goal, int count, int shards,
             EnemyType[] targets = null, string unlock = null, string unlockName = null) =>
@@ -62,28 +62,28 @@ namespace Game.Core
         {
             new[]
             {
-                Q("m1", QuestGiver.Master, "骨を砕け", "骸骨（兵・弓兵）を倒す", QuestGoal.Kill, 30, 40, T(EnemyType.Skeleton, EnemyType.SkeletonArcher)),
-                Q("m2", QuestGiver.Master, "氷を割れ", "凍った敵を強打で砕く", QuestGoal.Shatter, 10, 50),
-                Q("m3", QuestGiver.Master, "納骨堂の主", "骸骨の騎士王を討つ", QuestGoal.KillBoss, 1, 70, T(EnemyType.BoneKing), unlock: "class_guardian", unlockName: "新クラス「守護騎士」"),
-                Q("m4", QuestGiver.Master, "鎧を崩せ", "亡者の騎士を倒す", QuestGoal.Kill, 6, 70, T(EnemyType.DreadKnight)),
-                Q("m5", QuestGiver.Master, "血の司教", "血の司教を討つ", QuestGoal.KillBoss, 1, 100, T(EnemyType.BloodBishop), unlock: "class_paladin", unlockName: "新クラス「聖騎士」"),
-                Q("m6", QuestGiver.Master, "冥王", "冥王リッチを討つ", QuestGoal.KillBoss, 1, 150, T(EnemyType.Lich)),
+                Q("m1", QuestGiver.Master, "ボーンクラッシャー", "スケルトン（兵・弓兵）を倒す", QuestGoal.Kill, 30, 40, T(EnemyType.Skeleton, EnemyType.SkeletonArcher)),
+                Q("m2", QuestGiver.Master, "アイスブレイカー", "凍った敵を強打で砕く", QuestGoal.Shatter, 10, 50),
+                Q("m3", QuestGiver.Master, "クリプトの王", "スケルトンキングを討つ", QuestGoal.KillBoss, 1, 70, T(EnemyType.BoneKing), unlock: "class_guardian", unlockName: "新クラス「ガーディアン」"),
+                Q("m4", QuestGiver.Master, "アーマーブレイカー", "デスナイトを倒す", QuestGoal.Kill, 6, 70, T(EnemyType.DreadKnight)),
+                Q("m5", QuestGiver.Master, "ブラッドビショップ", "ブラッドビショップを討つ", QuestGoal.KillBoss, 1, 100, T(EnemyType.BloodBishop), unlock: "class_paladin", unlockName: "新クラス「パラディン」"),
+                Q("m6", QuestGiver.Master, "リッチキング", "リッチキングを討つ", QuestGoal.KillBoss, 1, 150, T(EnemyType.Lich)),
             },
             new[]
             {
-                Q("c1", QuestGiver.Crone, "宝箱をあけて", "焚き火の間の宝箱を壊す", QuestGoal.BreakChest, 3, 30, unlock: "feather", unlockName: "お守り「風切り羽」"),
-                Q("c2", QuestGiver.Crone, "火遊び", "火薬樽を爆発させる", QuestGoal.ExplodeKeg, 6, 50),
-                Q("c3", QuestGiver.Crone, "膨れの毒袋", "腐れ膨れを倒す", QuestGoal.Kill, 10, 60, T(EnemyType.Bloater), unlock: "class_alchemist", unlockName: "新クラス「錬金術師」"),
-                Q("c4", QuestGiver.Crone, "急所を突け", "会心の一撃を当てる", QuestGoal.Crit, 80, 70, unlock: "soul_lantern", unlockName: "お守り「魂の灯籠」"),
-                Q("c5", QuestGiver.Crone, "霊の残り香", "怨霊と死霊術師を倒す", QuestGoal.Kill, 12, 90, T(EnemyType.Wraith, EnemyType.Necromancer), unlock: "class_deathcaller", unlockName: "新クラス「死霊術師」"),
+                Q("c1", QuestGiver.Crone, "オープン・ザ・チェスト", "ボンファイアのチェストを壊す", QuestGoal.BreakChest, 3, 30, unlock: "feather", unlockName: "チャーム「スウィフトフェザー」"),
+                Q("c2", QuestGiver.Crone, "プレイウィズファイア", "パウダーケグを爆発させる", QuestGoal.ExplodeKeg, 6, 50),
+                Q("c3", QuestGiver.Crone, "ブロートバスター", "ブロートを倒す", QuestGoal.Kill, 10, 60, T(EnemyType.Bloater), unlock: "class_alchemist", unlockName: "新クラス「アルケミスト」"),
+                Q("c4", QuestGiver.Crone, "クリティカルヒット", "クリティカルの一撃を当てる", QuestGoal.Crit, 80, 70, unlock: "soul_lantern", unlockName: "チャーム「ソウルランタン」"),
+                Q("c5", QuestGiver.Crone, "スピリットハント", "レイスとダークシャーマンを倒す", QuestGoal.Kill, 12, 90, T(EnemyType.Wraith, EnemyType.Necromancer), unlock: "class_deathcaller", unlockName: "新クラス「ネクロマンサー」"),
             },
             new[]
             {
-                Q("g1", QuestGiver.Gravekeeper, "火の番", "焚き火の間にたどり着く", QuestGoal.Rest, 2, 30),
-                Q("g2", QuestGiver.Gravekeeper, "礼拝堂へ", "血塗られた礼拝堂にたどり着く", QuestGoal.ReachArea, 1, 50, unlock: "class_assassin", unlockName: "新クラス「暗殺者」"),
-                Q("g3", QuestGiver.Gravekeeper, "精鋭狩り", "精鋭の巣を制圧する", QuestGoal.Trial, 3, 60),
-                Q("g4", QuestGiver.Gravekeeper, "奈落へ", "奈落の玉座にたどり着く", QuestGoal.ReachArea, 2, 80),
-                Q("g5", QuestGiver.Gravekeeper, "迷宮の果て", "迷宮を踏破する", QuestGoal.Victory, 1, 150),
+                Q("g1", QuestGiver.Gravekeeper, "ファイアウォッチ", "ボンファイアにたどり着く", QuestGoal.Rest, 2, 30),
+                Q("g2", QuestGiver.Gravekeeper, "トゥ・ザ・チャペル", "ブラッドチャペルにたどり着く", QuestGoal.ReachArea, 1, 50, unlock: "class_assassin", unlockName: "新クラス「アサシン」"),
+                Q("g3", QuestGiver.Gravekeeper, "エリートハント", "エリートネストを制圧する", QuestGoal.Trial, 3, 60),
+                Q("g4", QuestGiver.Gravekeeper, "トゥ・ザ・アビス", "アビススローンにたどり着く", QuestGoal.ReachArea, 2, 80),
+                Q("g5", QuestGiver.Gravekeeper, "ラビリンスエンド", "ラビリンスを踏破する", QuestGoal.Victory, 1, 150),
             },
         };
 
@@ -92,18 +92,18 @@ namespace Game.Core
         {
             new[]
             {
-                Q("mr_kill", QuestGiver.Master, "魔物狩り", "魔物を倒す", QuestGoal.Kill, 80, 40),
-                Q("mr_shatter", QuestGiver.Master, "氷を割れ", "凍った敵を強打で砕く", QuestGoal.Shatter, 15, 40),
+                Q("mr_kill", QuestGiver.Master, "モンスターハント", "モンスターを倒す", QuestGoal.Kill, 80, 40),
+                Q("mr_shatter", QuestGiver.Master, "アイスブレイカー", "凍った敵を強打で砕く", QuestGoal.Shatter, 15, 40),
             },
             new[]
             {
-                Q("cr_chest", QuestGiver.Crone, "宝探し", "焚き火の間の宝箱を壊す", QuestGoal.BreakChest, 4, 40),
-                Q("cr_crit", QuestGiver.Crone, "急所を突け", "会心の一撃を当てる", QuestGoal.Crit, 100, 40),
+                Q("cr_chest", QuestGiver.Crone, "トレジャーハント", "ボンファイアのチェストを壊す", QuestGoal.BreakChest, 4, 40),
+                Q("cr_crit", QuestGiver.Crone, "クリティカルヒット", "クリティカルの一撃を当てる", QuestGoal.Crit, 100, 40),
             },
             new[]
             {
-                Q("gr_rest", QuestGiver.Gravekeeper, "火の番", "焚き火の間にたどり着く", QuestGoal.Rest, 3, 40),
-                Q("gr_trial", QuestGiver.Gravekeeper, "精鋭狩り", "精鋭の巣を制圧する", QuestGoal.Trial, 3, 45),
+                Q("gr_rest", QuestGiver.Gravekeeper, "ファイアウォッチ", "ボンファイアにたどり着く", QuestGoal.Rest, 3, 40),
+                Q("gr_trial", QuestGiver.Gravekeeper, "エリートハント", "エリートネストを制圧する", QuestGoal.Trial, 3, 45),
             },
         };
 

@@ -109,13 +109,13 @@ namespace Game.Gameplay
                 if (d.Keys.Value == 0 && !Seen("key"))
                 {
                     key = "key";
-                    text = "鍵のかかった宝物庫。鍵は精鋭の主の間と仕掛けの間で手に入る";
+                    text = "鍵のかかったトレジャリー。鍵はチャンピオンルームとパズルルームで手に入る";
                     return;
                 }
                 if (d.Keys.Value > 0 && !Seen("unlock"))
                 {
                     key = "unlock";
-                    text = "鍵を持っている。宝物庫の扉の前に立つと開く";
+                    text = "鍵を持っている。トレジャリーの扉の前に立つと開く";
                     return;
                 }
             }
@@ -127,7 +127,7 @@ namespace Game.Gameplay
             if (room.Kind == RoomKind.Campfire && !d.BossDoorOpen.Value && !Seen("bossdoor") && NetPlayer.All.Count > 1)
             {
                 key = "bossdoor";
-                text = "主の扉は全員がそろうと開く。集合の鐘で仲間を呼べる";
+                text = "ボスの扉は全員がそろうと開く。集合の鐘で仲間を呼べる";
             }
         }
 

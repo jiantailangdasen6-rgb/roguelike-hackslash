@@ -24,11 +24,11 @@ namespace Game.Gameplay
         }
 
         /// <summary>An area's name: its land, and past the third lord the deep layer too ("深層2・凍てつく霊廟").</summary>
-        public static string AreaName(int area) => area < RunSimulation.AreaCount || IsHeart(area) ? LandName(area) : $"深層{area - RunSimulation.AreaCount + 1}・{LandName(area)}";
+        public static string AreaName(int area) => area < RunSimulation.AreaCount || IsHeart(area) ? LandName(area) : $"ディープ{area - RunSimulation.AreaCount + 1}・{LandName(area)}";
 
         private static bool IsHeart(int area) => RunDirector.Instance != null && RunDirector.Instance.IsSpawned && RunDirector.Instance.BiomeOf(area) == Biome.Heart;
 
-        public static string LayerName(int area) => area < LayerNames.Length ? LayerNames[Mathf.Max(0, area)] : $"深層 第{area - LayerNames.Length + 1}階";
+        public static string LayerName(int area) => area < LayerNames.Length ? LayerNames[Mathf.Max(0, area)] : $"ディープ 第{area - LayerNames.Length + 1}階";
 
         private sealed class SkillSlot
         {
@@ -279,7 +279,7 @@ namespace Game.Gameplay
             // The room you stand in and what to do there, on a plate under the map.
             var plate = UIKit.Framed(root, "RoomPlate", new Color(0.04f, 0.03f, 0.04f, 0.88f));
             plate.Outer().Place(new Vector2(1f, 1f), new Vector2(460f, 96f), new Vector2(-24f, below));
-            _roomText = UIKit.Title(plate.transform, "", 25, TextAnchor.UpperRight, new Color(0.95f, 0.88f, 0.76f));
+            _roomText = UIKit.Title(plate.transform, "", 25, TextAnchor.UpperRight, new Color(0.95f, 0.88f, 0.76f)).Fit(15);
             _roomText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(430f, 36f), new Vector2(-16f, -8f));
             _objectiveText = UIKit.Label(plate.transform, "", 22, TextAnchor.UpperRight, UIKit.AccentColor);
             _objectiveText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(430f, 52f), new Vector2(-16f, -44f));
@@ -371,7 +371,7 @@ namespace Game.Gameplay
             _curtain.gameObject.SetActive(_curtain.alpha > 0.001f);
             // The words go at once; only the dark backdrop fades, so they never hang over the arena.
             _curtainText.gameObject.SetActive(waiting);
-            if (waiting) _curtainText.text = "迷宮へ向かっています" + new string('・', 1 + (int)(Time.unscaledTime * 2f) % 3);
+            if (waiting) _curtainText.text = "ラビリンスへ向かっています" + new string('・', 1 + (int)(Time.unscaledTime * 2f) % 3);
         }
 
         private TeamFrame CreateTeamFrame(Transform root, int index)
@@ -440,7 +440,7 @@ namespace Game.Gameplay
             // Outside a run (the camp's records) the depth says more than a land.
             var d = RunDirector.Instance;
             string name = d != null && d.IsSpawned ? AreaName(area) : LayerName(area);
-            return index % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1 ? $"{name} ─ 主の間" : name;
+            return index % RunSimulation.RoomsPerArea == RunSimulation.RoomsPerArea - 1 ? $"{name} ─ ボスルーム" : name;
         }
 
         public static string RoomTitle(MapRoom room) =>
@@ -454,23 +454,23 @@ namespace Game.Gameplay
             int seconds = Mathf.CeilToInt(d.TrialTimer.Value);
             return d.Trial.Value switch
             {
-                BossTrial.BoneWard => $"骨の燭台を壊して加護を破れ　<color=#ffffff>{done}/{total}</color>",
-                BossTrial.BloodRitual => $"<color=#ff8a7a>血の紋章の上に立って、すべて灯せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.BoneWard => $"ボーンキャンドルを壊してブレッシングを破れ　<color=#ffffff>{done}/{total}</color>",
+                BossTrial.BloodRitual => $"<color=#ff8a7a>ブラッドシジルの上に立って、すべて灯せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 BossTrial.Collapse => $"<color=#c8b0ff>床が崩れる！ 中央へ　{seconds}</color>",
-                BossTrial.Phylactery => $"<color=#9ae8ff>{(d.BossType.Value == EnemyType.AshenKing ? "灰の心臓" : "魂の器")}を壊せ！</color>　<color=#ffffff>残り {seconds}秒</color>",
-                BossTrial.Flood => $"<color=#8affe0>封じの栓を壊して水を引かせろ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Phylactery => $"<color=#9ae8ff>{(d.BossType.Value == EnemyType.AshenKing ? "灰の心臓" : "ソウルヴェッセル")}を壊せ！</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Flood => $"<color=#8affe0>シールプラグを壊して水を引かせろ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 BossTrial.Mirror => $"<color=#bfe4ff>影のない写し身を砕け</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
-                BossTrial.Overheat => $"<color=#ffb070>水甕を壊し、巨人を水へ誘い込め</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Overheat => $"<color=#ffb070>ウォータージャーを壊し、ジャイアントを水へ誘い込め</color>　<color=#ffffff>残り {seconds}秒</color>",
                 BossTrial.Coffins => $"<color=#d8d0b8>揺れる棺を探して壊せ</color>　<color=#ffffff>残り {seconds}秒</color>",
                 BossTrial.Beams => $"<color=#ffe8a0>回る光の帯を避けて耐えろ</color>　<color=#ffffff>残り {seconds}秒</color>",
                 BossTrial.Gaze => $"<color=#d0a8ff>見つめられたら柱の陰へ</color>　<color=#ffffff>{done}/{total}</color>",
-                BossTrial.Shell => $"<color=#8affe0>火薬樽を大蟹のそばで爆ぜさせろ</color>　<color=#ffffff>残り {seconds}秒</color>",
-                BossTrial.Hunt => $"<color=#bfe4ff>印の付いた者は、突進を柱にぶつけさせろ</color>　<color=#ffffff>{done}/{total}</color>",
-                BossTrial.Rows => $"<color=#ffb070>刃の切れ目を抜けて、鎖の杭を壊せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
-                BossTrial.Fog => $"<color=#b4ff8a>光る茸のそばで霧をしのげ</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Shell => $"<color=#8affe0>パウダーケグを大蟹のそばで爆ぜさせろ</color>　<color=#ffffff>残り {seconds}秒</color>",
+                BossTrial.Hunt => $"<color=#bfe4ff>マークの付いた者は、突進を柱にぶつけさせろ</color>　<color=#ffffff>{done}/{total}</color>",
+                BossTrial.Rows => $"<color=#ffb070>刃の切れ目を抜けて、チェインステイクを壊せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Fog => $"<color=#b4ff8a>グロウシュルームのそばで霧をしのげ</color>　<color=#ffffff>残り {seconds}秒</color>",
                 BossTrial.Parasite => $"<color=#b4ff8a>寄生された者は百合のそばへ。ほかの者は離れろ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
-                BossTrial.Sequence => $"<color=#cdb8ff>光った順に禁書を叩け</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
-                BossTrial.Dive => $"<color=#ffd890>燭台のそばに立って火を灯せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Sequence => $"<color=#cdb8ff>光った順にフォービドゥンブックを叩け</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
+                BossTrial.Dive => $"<color=#ffd890>キャンドルスタンドのそばに立って火を灯せ</color>　<color=#ffffff>{done}/{total}　残り {seconds}秒</color>",
                 _ => "",
             };
         }
@@ -495,7 +495,7 @@ namespace Game.Gameplay
                     // Between rooms the pick comes right away, so the reminder is only for level-ups mid-fight.
                     Toast(RunDirector.Instance != null && !RunDirector.Instance.LocalFighting
                         ? $"<color=#e0b45a>レベル {e.Int}！</color>"
-                        : $"<color=#e0b45a>レベル {e.Int}！</color> 力は戦いが終わってから選べる");
+                        : $"<color=#e0b45a>レベル {e.Int}！</color> パークは戦いが終わってから選べる");
                     break;
                 case SimEventType.RoomCleared:
                 {
@@ -509,7 +509,7 @@ namespace Game.Gameplay
                     var kind = (EncounterKind)Mathf.RoundToInt(e.Value);
                     string hex = ColorUtility.ToHtmlStringRGB(RoomCatalog.Color(RoomKind.Encounter));
                     string result = kind == EncounterKind.Gambler && e.Int == 0
-                        ? (Mathf.RoundToInt(e.Size.x) == 1 ? "賭けに勝った：力の強化を2回" : $"賭けに負けた：最大HPの{RunSimulation.GambleLoss * 100f:0}%を失った")
+                        ? (Mathf.RoundToInt(e.Size.x) == 1 ? "賭けに勝った：パークの強化を2回" : $"賭けに負けた：最大HPの{RunSimulation.GambleLoss * 100f:0}%を失った")
                         : EncounterCatalog.Effect(kind, e.Int);
                     Toast($"<color=#{hex}>{EncounterCatalog.Name(kind)}</color>：「{EncounterCatalog.Choice(kind, e.Int)}」　{result}");
                     break;
@@ -526,13 +526,13 @@ namespace Game.Gameplay
                     string text = kind switch
                     {
                         RoomKind.Spring => $"最大HP +{e.Value:0}%、傷が癒えた",
-                        RoomKind.Whetstone => "持っている力を強化する",
-                        RoomKind.CurseAltar => $"力を{RewardCatalog.CursedBoons}つ授かる。代償に「{RewardCatalog.CurseName((CurseKind)Mathf.RoundToInt(e.Value))}」（{RewardCatalog.CurseText((CurseKind)Mathf.RoundToInt(e.Value))}）がこのランの間つく",
-                        RoomKind.Merchant => "魂の欠片で1つ買える（全員の取り分から払う）",
-                        RoomKind.Treasure => "希少以上の装備を手に入れた（I で袋を開く）",
-                        RoomKind.Secret => "古い地図を見つけた（このエリアの全部屋が地図に載った）。装備も手に入れた",
-                        RoomKind.Spirit => $"最大HPの{e.Value:0}%を捧げた。神の加護を授かる",
-                        _ => "新たな力を授かる",
+                        RoomKind.Whetstone => "持っているパークを強化する",
+                        RoomKind.CurseAltar => $"パークを{RewardCatalog.CursedBoons}つ授かる。代償に「{RewardCatalog.CurseName((CurseKind)Mathf.RoundToInt(e.Value))}」（{RewardCatalog.CurseText((CurseKind)Mathf.RoundToInt(e.Value))}）がこのランの間つく",
+                        RoomKind.Merchant => "ソウルシャードで1つ買える（全員の取り分から払う）",
+                        RoomKind.Treasure => "レア以上の装備を手に入れた（I でバッグを開く）",
+                        RoomKind.Secret => "オールドマップを見つけた（このエリアの全部屋がマップに載った）。装備も手に入れた",
+                        RoomKind.Spirit => $"最大HPの{e.Value:0}%を捧げた。神のブレッシングを授かる",
+                        _ => "新たなパークを授かる",
                     };
                     Toast($"<color=#{hex}>{RoomCatalog.Name(kind)}</color>：{text}");
                     break;
@@ -542,15 +542,15 @@ namespace Game.Gameplay
                     var who = NetPlayer.All.Find(p => p.OwnerClientId == e.ClientId);
                     string name = who != null ? $"<color=#{ColorUtility.ToHtmlStringRGB(who.Color)}>{who.DisplayName}（{who.ClassDef.Name}）</color>" : "仲間";
                     Debug.Log($"[Bell] rung by client {e.ClientId}, called {e.Int}");
-                    Toast($"{name}が集合の鐘を鳴らした" + (e.Int > 0 ? $"：{e.Int}人が焚き火の間へ" : "（来られる仲間はいなかった）"));
+                    Toast($"{name}が集合の鐘を鳴らした" + (e.Int > 0 ? $"：{e.Int}人がボンファイアへ" : "（来られる仲間はいなかった）"));
                     break;
                 }
                 case SimEventType.DoorOpened:
-                    if (e.Int == 0) Banner("主の扉が開いた", "覚悟はいいか", 2.4f);
-                    else if (e.Int == 2) Banner("宝物庫の扉が開いた", "", 2f);
-                    else if (e.Int == 3) Banner("隠し部屋を見つけた", "", 2.4f);
-                    else if (e.Int == 4) Banner("主を討った", "帰還するか、さらに深層へ", 3.2f);
-                    else Banner("主を討った", "左右の道から次の地を選べ", 3.2f);
+                    if (e.Int == 0) Banner("ボスの扉が開いた", "覚悟はいいか", 2.4f);
+                    else if (e.Int == 2) Banner("トレジャリーの扉が開いた", "", 2f);
+                    else if (e.Int == 3) Banner("シークレットルームを見つけた", "", 2.4f);
+                    else if (e.Int == 4) Banner("ボスを討った", "帰還するか、さらにディープへ", 3.2f);
+                    else Banner("ボスを討った", "左右の道から次の地を選べ", 3.2f);
                     break;
                 case SimEventType.KeyGained:
                     Banner("鍵を手に入れた", "", 2.4f);
@@ -568,8 +568,8 @@ namespace Game.Gameplay
                 case SimEventType.WaveStarted when e.Int > 1 && RunDirector.Instance != null && RunDirector.Instance.LocalRoom.Id == e.Id:
                 {
                     var wave = (WaveKind)Mathf.RoundToInt(e.Size.x);
-                    if (wave == WaveKind.Normal) Toast($"第{e.Int}波 襲来！");
-                    else Banner($"第{e.Int}波　{WaveCatalog.Name(wave)}", WaveCatalog.Hint(wave), 2.6f);
+                    if (wave == WaveKind.Normal) Toast($"ウェーブ{e.Int} 襲来！");
+                    else Banner($"ウェーブ{e.Int}　{WaveCatalog.Name(wave)}", WaveCatalog.Hint(wave), 2.6f);
                 }
                     break;
                 case SimEventType.PlayerDowned:
@@ -581,7 +581,7 @@ namespace Game.Gameplay
                     break;
                 case SimEventType.PlayerJoined:
                     Toast(IsMe(e.ClientId)
-                        ? "<color=#e0b45a>◆</color> 途中参加：これまでのレベルの分だけ力を授かった"
+                        ? "<color=#e0b45a>◆</color> 途中参加：これまでのレベルの分だけパークを授かった"
                         : "<color=#9fd8ff>仲間が加わった！</color>");
                     break;
                 case SimEventType.PlayerRejoined:
@@ -589,7 +589,7 @@ namespace Game.Gameplay
                     break;
                 case SimEventType.ItemSalvaged when e.Value < 0f:
                     // Bought from the merchant: the whole team's payout shrinks, so everyone hears about it.
-                    Toast($"<color=#f2d173>{(IsMe(e.ClientId) ? "闇商人から買った" : NameOf(e.ClientId) + "が闇商人から買った")}</color>（魂の欠片 {e.Value:0}）");
+                    Toast($"<color=#f2d173>{(IsMe(e.ClientId) ? "ダークマーチャントから買った" : NameOf(e.ClientId) + "がダークマーチャントから買った")}</color>（ソウルシャード {e.Value:0}）");
                     break;
                 case SimEventType.PlayerLeft:
                     Toast($"<color=#ff9a80>{NameOf(e.ClientId)}が抜けた</color>（同じルームコードで戻ってこられる）");
@@ -607,7 +607,7 @@ namespace Game.Gameplay
                 int n = RewardCatalog.CurseStack(packed, (CurseKind)i);
                 if (n > 0) parts.Add(RewardCatalog.CurseName((CurseKind)i) + (n > 1 ? $"×{n}" : ""));
             }
-            return $"<color=#d88cff>呪い：{string.Join("・", parts)}</color>　";
+            return $"<color=#d88cff>カース：{string.Join("・", parts)}</color>　";
         }
 
         private sealed class CodexCard
@@ -640,11 +640,11 @@ namespace Game.Gameplay
             icon.rectTransform.Stretch(4f);
             var mark = UIKit.Title(box.transform, "", 40);
             mark.rectTransform.Stretch();
-            var head = UIKit.Label(card.transform, "図鑑に記録", 18, TextAnchor.UpperLeft, UIKit.AccentColor);
+            var head = UIKit.Label(card.transform, "コーデックスに記録", 18, TextAnchor.UpperLeft, UIKit.AccentColor);
             head.rectTransform.Place(new Vector2(0f, 1f), new Vector2(200f, 26f), new Vector2(86f, -8f));
             var keyHint = UIKit.Label(card.transform, "B で開く", 16, TextAnchor.UpperRight, UIKit.MutedText);
             keyHint.rectTransform.Place(new Vector2(1f, 1f), new Vector2(120f, 24f), new Vector2(-12f, -9f));
-            var name = UIKit.Title(card.transform, "", 28, TextAnchor.LowerLeft, Color.white);
+            var name = UIKit.Title(card.transform, "", 28, TextAnchor.LowerLeft, Color.white).Fit(16);
             name.rectTransform.Place(new Vector2(0f, 0f), new Vector2(260f, 44f), new Vector2(86f, 8f));
             return new CodexCard { Root = rect, Group = group, Icon = icon, Mark = mark, Name = name };
         }
@@ -705,12 +705,12 @@ namespace Game.Gameplay
             var row = _legend;
             for (int i = row.childCount - 1; i >= 0; i--) Destroy(row.GetChild(i).gameObject);
             float x = 0f;
-            foreach (var (key, label) in new[] { (GameSettings.Label(KeyAction.Bag), "袋"), (GameSettings.Label(KeyAction.Map), "地図"), (GameSettings.Label(KeyAction.Ping), "合図"), (GameSettings.Label(KeyAction.Codex), "図鑑"), ("Esc", "メニュー") })
+            foreach (var (key, label) in new[] { (GameSettings.Label(KeyAction.Bag), "バッグ"), (GameSettings.Label(KeyAction.Map), "マップ"), (GameSettings.Label(KeyAction.Ping), "ピン"), (GameSettings.Label(KeyAction.Codex), "コーデックス"), ("Esc", "メニュー") })
             {
                 float w = Mathf.Max(32f, 18f + key.Length * 11f);
                 UIKit.KeyCap(row, key, 17, out _).Place(new Vector2(0f, 0.5f), new Vector2(w, 30f), new Vector2(x, 0f));
                 var text = UIKit.Label(row, label, 19, TextAnchor.MiddleLeft, UIKit.MutedText);
-                text.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(90f, 30f), new Vector2(x + w + 6f, 0f));
+                text.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(label.Length * 20f + 10f, 30f), new Vector2(x + w + 6f, 0f));
                 x += w + 6f + label.Length * 20f + 18f;
             }
         }
@@ -739,13 +739,13 @@ namespace Game.Gameplay
                 _classText.text = local.ClassDef.Name + (banked > 0 && director.LocalFighting ? $"　<size=22><color=#e0b45a>★{banked}</color></size>" : "");
             _timeText.text = UIKit.FormatTime(director.Elapsed.Value);
             string ping = local != null && !director.IsServer && local.Ping.Value > 0 ? $"通信 {PingText(local.Ping.Value)}　" : "";
-            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + (director.WeeklyWeek.Value >= 0 ? "<color=#9fd8ff>今週の迷宮</color>" : $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}" + (director.ContractRank.Value > 0 ? $"　<color=#e0b45a>契約 段位{director.ContractRank.Value}</color>" : "")) + (director.Omen != Omen.None ? $"　<color=#e08a7a>異変：{OmenCatalog.Name(director.Omen)}</color>" : "");
+            _difficultyText.text = CurseText(local != null ? local.Curses.Value : 0) + ping + (director.WeeklyWeek.Value >= 0 ? "<color=#9fd8ff>今週のラビリンス</color>" : $"難易度：{DifficultyCatalog.Get(director.DifficultyLevel.Value).Name}" + (director.ContractRank.Value > 0 ? $"　<color=#e0b45a>コントラクト ランク{director.ContractRank.Value}</color>" : "")) + (director.Omen != Omen.None ? $"　<color=#e08a7a>オーメン：{OmenCatalog.Name(director.Omen)}</color>" : "");
             // The run's omen is announced once, after the first area's title has faded.
             if (director.Omen != Omen.None && !_omenShown && director.Elapsed.Value >= 4f)
             {
                 _omenShown = true;
                 Codex.Record("room:Omen");
-                Banner($"異変：{OmenCatalog.Name(director.Omen)}", OmenCatalog.Text(director.Omen), 4.5f);
+                Banner($"オーメン：{OmenCatalog.Name(director.Omen)}", OmenCatalog.Text(director.Omen), 4.5f);
             }
             var here = director.LocalRoom;
             _roomText.text = RoomTitle(here) + (director.Keys.Value > 0 ? $"　<color=#e6c766>鍵 ×{director.Keys.Value}</color>" : "");
@@ -942,7 +942,7 @@ namespace Game.Gameplay
                 slot.Key.text = key;
                 slot.KeyCap.sizeDelta = new Vector2(key.Length > 2 ? 86f : key.Length == 2 ? 56f : 44f, 30f);
             }
-            slot.Charges.text = ready ? "必殺" : "";
+            slot.Charges.text = ready ? "ULT" : "";
         }
 
         /// <summary>The dodge: its charges as pips; the slot only greys out with none left (the next one's wait shown then).</summary>
@@ -977,28 +977,28 @@ namespace Game.Gameplay
                 case RoomKind.Combat:
                 case RoomKind.Elite:
                     if (d.IsFighting(room.Id))
-                        return $"{(room.Dark ? "闇の群れ" : room.Kind == RoomKind.Elite ? "精鋭の群れ" : "魔物の群れ")}  第{Mathf.Max(1, d.WaveOf(room.Id))}波 / {RunSimulation.WaveCountFor(room.Kind, d.Area.Value)}{(room.Dark ? (d.LanternHolder.Value == 0 ? "　<color=#ffd08a>灯りを拾え</color>" : "　<color=#ffd08a>灯りのそばで戦え</color>") : "")}";
+                        return $"{(room.Dark ? "闇の群れ" : room.Kind == RoomKind.Elite ? "エリートの群れ" : "モンスターの群れ")}  ウェーブ{Mathf.Max(1, d.WaveOf(room.Id))} / {RunSimulation.WaveCountFor(room.Kind, d.Area.Value)}{(room.Dark ? (d.LanternHolder.Value == 0 ? "　<color=#ffd08a>灯りを拾え</color>" : "　<color=#ffd08a>灯りのそばで戦え</color>") : "")}";
                     return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み</color>" : "";
                 case RoomKind.Boss:
-                    if (d.ExitOpen.Value) return Gather(RunSimulation.OffersHome(d.Area.Value) ? (team ? "全員で帰還か深層へ" : "帰還か深層へ") : team ? "全員で次の道を選ぶ" : "次の道を選ぶ");
+                    if (d.ExitOpen.Value) return Gather(RunSimulation.OffersHome(d.Area.Value) ? (team ? "全員で帰還かディープへ" : "帰還かディープへ") : team ? "全員で次の道を選ぶ" : "次の道を選ぶ");
                     return d.IsFighting(room.Id) ? $"{EnemyCatalog.Get(d.BossType.Value).Name}を討て" : "";
                 case RoomKind.MiniBoss:
-                    if (d.IsFighting(room.Id)) return "精鋭の主を倒せ";
+                    if (d.IsFighting(room.Id)) return "チャンピオンを倒せ";
                     return d.IsCleared(room.Id) ? "<color=#bfb6aa>制圧済み</color>" : "";
                 case RoomKind.Puzzle:
                     if (d.IsFighting(room.Id))
                         return room.Puzzle switch
                         {
-                            PuzzleKind.Plates => $"押し板を灯せ　<color=#ffffff>{Mathf.RoundToInt(d.PuzzleValue.Value)}/{RunSimulation.PlateSpots.Length}</color>",
+                            PuzzleKind.Plates => $"プレッシャープレートを灯せ　<color=#ffffff>{Mathf.RoundToInt(d.PuzzleValue.Value)}/{RunSimulation.PlateSpots.Length}</color>",
                             PuzzleKind.Thief => $"小鬼を捕まえろ　<color=#ffffff>残り {Mathf.RoundToInt(d.PuzzleTime.Value)}秒</color>",
-                            PuzzleKind.Gauntlet => "中央の押し板を踏め",
+                            PuzzleKind.Gauntlet => "中央のプレッシャープレートを踏め",
                             PuzzleKind.Twin => $"2枚を同時に踏め　<color=#ffffff>{d.PuzzleValue.Value:P0}</color>",
                             _ => $"結晶を守れ　<color=#ffffff>残り {Mathf.RoundToInt(d.PuzzleTime.Value)}秒　結晶 {d.PuzzleValue.Value:P0}</color>",
                         };
                     return d.IsCleared(room.Id) ? "<color=#bfb6aa>仕掛けは終わった</color>" : "";
                 case RoomKind.Campfire:
-                    if (d.BossDoorOpen.Value) return "主の間へ";
-                    return Gather(team ? "全員で主の扉へ" : "主の扉へ");
+                    if (d.BossDoorOpen.Value) return "ボスルームへ";
+                    return Gather(team ? "全員でボスの扉へ" : "ボスの扉へ");
                 case RoomKind.Start:
                     return "<color=#bfb6aa>探索せよ</color>";
                 default:
@@ -1049,7 +1049,7 @@ namespace Game.Gameplay
                 _bigMap.Update(d);
                 int area = d.Area.Value;
                 string keys = d.Keys.Value > 0 ? $"　<size=28><color=#e6c766>鍵 ×{d.Keys.Value}</color></size>" : "";
-                string boss = d.BossDoorOpen.Value ? "" : "　<size=24><color=#bfb6aa>主の扉は全員がそろうと開く</color></size>";
+                string boss = d.BossDoorOpen.Value ? "" : "　<size=24><color=#bfb6aa>ボスの扉は全員がそろうと開く</color></size>";
                 _mapTitle.text = AreaName(area) + keys + boss;
             }
             float k = (Time.time - _fadeStart) / FadeTime;
@@ -1073,9 +1073,9 @@ namespace Game.Gameplay
             if (room.Kind == RoomKind.Puzzle && room.Puzzle == PuzzleKind.Twin) Codex.Record(CodexCatalog.GimmickId("TwinPlates"));
             if (room.Kind == RoomKind.Start || !_roomsBannered.Add((d.Area.Value, room.Id))) return;
             string sub = room.Kind == RoomKind.Puzzle
-                ? room.Puzzle switch { PuzzleKind.Plates => "押し板の仕掛け", PuzzleKind.Thief => "逃げる宝の小鬼", PuzzleKind.Gauntlet => "罠の通路", PuzzleKind.Twin => "双子の押し板", _ => "結晶を守れ" }
+                ? room.Puzzle switch { PuzzleKind.Plates => "プレッシャープレートの仕掛け", PuzzleKind.Thief => "逃げる宝の小鬼", PuzzleKind.Gauntlet => "罠の通路", PuzzleKind.Twin => "双子のプレッシャープレート", _ => "結晶を守れ" }
                 : CodexCatalog.Get(CodexCatalog.RoomId(room.Kind))?.Sub ?? "";
-            if (room.Dark) Banner("闇の間", "灯りを持つ者のそばで戦え", 2.4f);
+            if (room.Dark) Banner("ダークホール", "灯りを持つ者のそばで戦え", 2.4f);
             else if (room.Kind != RoomKind.Boss) Banner(RoomCatalog.Name(room.Kind), sub, 2f);
         }
 

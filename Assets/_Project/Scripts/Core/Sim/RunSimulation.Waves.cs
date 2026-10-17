@@ -17,19 +17,19 @@ namespace Game.Core
     {
         public static string Name(WaveKind k) => k switch
         {
-            WaveKind.Ambush => "奇襲",
-            WaveKind.Swarm => "大群",
-            WaveKind.Encircle => "包囲",
-            WaveKind.Totem => "呼び声の柱",
+            WaveKind.Ambush => "アンブッシュ",
+            WaveKind.Swarm => "スウォーム",
+            WaveKind.Encircle => "サラウンド",
+            WaveKind.Totem => "コーリングピラー",
             _ => "",
         };
 
         public static string Hint(WaveKind k) => k switch
         {
-            WaveKind.Ambush => "入口から背後を突いてくる",
+            WaveKind.Ambush => "エントランスから背後を突いてくる",
             WaveKind.Swarm => "弱いが数が多い。範囲攻撃でまとめて",
             WaveKind.Encircle => "仲間の一人を囲む。輪の外へ抜ける",
-            WaveKind.Totem => "柱が魔物を呼び続ける。先に柱を壊せ",
+            WaveKind.Totem => "柱がモンスターを呼び続ける。先に柱を壊せ",
             _ => "",
         };
     }

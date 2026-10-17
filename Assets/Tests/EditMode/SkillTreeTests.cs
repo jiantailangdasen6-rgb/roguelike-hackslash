@@ -47,7 +47,7 @@ namespace Game.Tests
             foreach (var n in sword) Assert.IsTrue(profile.TryLearn(n, out _), n.Id);
             for (int t = 0; t < 3; t++) Assert.IsTrue(profile.TryLearn(iron[t], out _), iron[t].Id);
             Assert.IsFalse(profile.TryLearn(iron[3], out why), "only one secret art");
-            StringAssert.Contains("奥義", why);
+            StringAssert.Contains("アーツ", why);
 
             int spent = sword.Sum(n => n.Cost) + iron.Take(3).Sum(n => n.Cost);
             Assert.AreEqual(spent, profile.MasterySpent(ClassId.Warrior));

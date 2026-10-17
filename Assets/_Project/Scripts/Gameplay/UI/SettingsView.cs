@@ -67,7 +67,7 @@ namespace Game.Gameplay
             Header(p, "画面", ref y);
             Choice(p, "画面の揺れ", new[] { "なし", "弱", "強" }, new[] { 0f, 0.5f, 1f }, () => GameSettings.Shake, v => GameSettings.Shake = v, ref y);
             Choice(p, "光の点滅", new[] { "通常", "弱める" }, new[] { 0f, 1f }, () => GameSettings.ReduceFlashes ? 1f : 0f, v => GameSettings.ReduceFlashes = v > 0.5f, ref y);
-            Choice(p, "明るさ", new[] { "暗め", "標準", "明るめ", "最大" }, new[] { 0.85f, 1f, 1.2f, 1.45f }, () => GameSettings.Brightness, v => GameSettings.Brightness = v, ref y);
+            Choice(p, "明るさ", new[] { "暗め", "ノーマル", "明るめ", "最大" }, new[] { 0.85f, 1f, 1.2f, 1.45f }, () => GameSettings.Brightness, v => GameSettings.Brightness = v, ref y);
             Choice(p, "画質",new[] { "高", "低" }, new[] { 1f, 0f }, () => GameSettings.HighQuality ? 1f : 0f, v => GameSettings.HighQuality = v > 0.5f, ref y);
             Choice(p, "表示の大きさ", new[] { "100%", "115%", "130%" }, new[] { 1f, 1.15f, 1.3f }, () => GameSettings.UiScale, v => GameSettings.UiScale = v, ref y);
             Header(p, "キーの割り当て（キーボード）", ref y);

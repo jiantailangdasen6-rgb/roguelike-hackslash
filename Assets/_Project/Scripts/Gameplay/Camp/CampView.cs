@@ -103,7 +103,7 @@ namespace Game.Gameplay
             // What the last run brought home (gear kept in the vault).
             if (BagView.LastBankSummary != null)
             {
-                _hintMessage = BagView.LastBankSummary + "　―　右上の倉庫で付け替えられる";
+                _hintMessage = BagView.LastBankSummary + "　―　右上のヴォールトで付け替えられる";
                 BagView.LastBankSummary = null;
             }
 
@@ -254,13 +254,13 @@ namespace Game.Gameplay
             _gateText.rectTransform.position = ToScreen(gate.Front + Vector2.down * (Camp.GateRadius + 0.15f));
             int party = NetPlayer.All.Count;
             string difficulty = d.WeeklyRun.Value
-                ? $"<size=20><color=#9fd8ff>今週の迷宮（{Weekly.Label(Weekly.Current)}・標準）</color></size>"
+                ? $"<size=20><color=#9fd8ff>今週のラビリンス（{Weekly.Label(Weekly.Current)}・ノーマル）</color></size>"
                 : $"<size=20><color=#bfb6aa>難易度：{DifficultyCatalog.Get(d.DifficultyLevel.Value).Name}</color></size>";
             string status = departing > 0.02f
                 ? $"<color=#e0b45a>出発まで {Mathf.Max(1, Mathf.CeilToInt(Camp.DepartSeconds - d.DepartProgress.Value))}</color>"
                 : inGate > 0 ? $"<size=22>門の前 {inGate} / {party} 人</size>"
                 : party > 1 ? "<size=22>全員で輪の中に立つと出発</size>" : "<size=22>輪の中に立つと出発</size>";
-            _gateText.text = $"出発の門\n{status}\n{difficulty}";
+            _gateText.text = $"ゲート\n{status}\n{difficulty}";
         }
 
         private void UpdateNames(NetPlayer local)
@@ -297,7 +297,7 @@ namespace Game.Gameplay
                 : nm != null && nm.IsServer && !(nm.NetworkConfig.NetworkTransport is Unity.Netcode.Transports.SinglePlayer.SinglePlayerTransport)
                     ? $"LAN の部屋（IP {GameSession.LocalAddress()}）"
                     : nm != null && !nm.IsServer ? "仲間の部屋" : "ひとり旅";
-            _cornerText.text = $"拠点　<color=#9fd8ff>魂の欠片 {ProfileStore.Current.shards}</color>\n<size=22>{room}　仲間 {NetPlayer.All.Count}/{GameSession.MaxPlayers}</size>";
+            _cornerText.text = $"キャンプ　<color=#9fd8ff>ソウルシャード {ProfileStore.Current.shards}</color>\n<size=22>{room}　仲間 {NetPlayer.All.Count}/{GameSession.MaxPlayers}</size>";
             _invite.gameObject.SetActive(code != null);
             _inviteLabel.text = Time.time < _copiedUntil ? "コピーしました" : "招待リンクをコピー";
         }

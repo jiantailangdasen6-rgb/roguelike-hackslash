@@ -186,7 +186,7 @@ namespace Game.Tests
             Assert.IsTrue(sim.GiveItem(0, 0, 1));
             Assert.AreEqual(1, b.Bag.Count);
             Assert.AreEqual(ClassId.Ranger, b.Bag[0].classId, "a weapon reshapes for its new owner");
-            Assert.That(ItemText.Name(b.Bag[0]), Does.Contain("弓"));
+            Assert.That(ItemText.Name(b.Bag[0]), Does.Contain("ボウ"));
 
             int shards = sim.BonusShards;
             var amulet = a.Bag[0];

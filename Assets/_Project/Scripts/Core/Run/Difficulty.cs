@@ -68,12 +68,12 @@ namespace Game.Core
 
         public static readonly DifficultyDef[] All =
         {
-            new() { Id = Difficulty.Easy, Name = "見習い", Text = "魔物が弱く数も少ない。まずは迷宮に慣れたい人に", EnemyHealth = 0.7f, EnemyDamage = 0.6f, EnemyCount = 0.85f, EliteChance = 0.03f, Shards = 0.7f, LootBoost = -0.3f, Mods = DifficultyMod.Mercy },
-            new() { Id = Difficulty.Normal, Name = "標準", Text = "本来の迷宮", EnemyHealth = 1f, EnemyDamage = 1f, EnemyCount = 1f, EliteChance = 0.05f, Shards = 1f },
-            new() { Id = Difficulty.Hard, Name = "熟練", Text = "魂の欠片 1.5倍\n良い装備が出やすい", EnemyHealth = 1.15f, EnemyDamage = 1.15f, EnemyCount = 1.1f, EliteChance = 0.08f, Shards = 1.5f, LootBoost = 0.6f, Mods = HardMods },
+            new() { Id = Difficulty.Easy, Name = "ルーキー", Text = "モンスターが弱く数も少ない。まずはラビリンスに慣れたい人に", EnemyHealth = 0.7f, EnemyDamage = 0.6f, EnemyCount = 0.85f, EliteChance = 0.03f, Shards = 0.7f, LootBoost = -0.3f, Mods = DifficultyMod.Mercy },
+            new() { Id = Difficulty.Normal, Name = "ノーマル", Text = "本来のラビリンス", EnemyHealth = 1f, EnemyDamage = 1f, EnemyCount = 1f, EliteChance = 0.05f, Shards = 1f },
+            new() { Id = Difficulty.Hard, Name = "ベテラン", Text = "ソウルシャード 1.5倍\n良い装備が出やすい", EnemyHealth = 1.15f, EnemyDamage = 1.15f, EnemyCount = 1.1f, EliteChance = 0.08f, Shards = 1.5f, LootBoost = 0.6f, Mods = HardMods },
             new()
             {
-                Id = Difficulty.Nightmare, Name = "冥府", Text = "魂の欠片 2.2倍\n伝説が出やすい\n（熟練を踏破すると解放）", EnemyHealth = 1.3f, EnemyDamage = 1.3f, EnemyCount = 1.25f, EliteChance = 0.12f, Shards = 2.2f, LootBoost = 1.2f,
+                Id = Difficulty.Nightmare, Name = "ナイトメア", Text = "ソウルシャード 2.2倍\nレジェンダリーが出やすい\n（ベテランを踏破すると解放）", EnemyHealth = 1.3f, EnemyDamage = 1.3f, EnemyCount = 1.25f, EliteChance = 0.12f, Shards = 2.2f, LootBoost = 1.2f,
                 Mods = HardMods | DifficultyMod.Vengeance | DifficultyMod.Swiftness | DifficultyMod.LordsWrath | DifficultyMod.Frailty | DifficultyMod.Weariness,
                 UnlockedBy = Difficulty.Hard,
             },
@@ -93,28 +93,28 @@ namespace Game.Core
 
         public static string ModName(DifficultyMod m) => m switch
         {
-            DifficultyMod.IronGuard => "鉄の守り",
+            DifficultyMod.IronGuard => "アイアンガード",
             DifficultyMod.Ferocity => "猛り",
-            DifficultyMod.Vengeance => "怨念",
-            DifficultyMod.Swiftness => "俊足",
-            DifficultyMod.LordsWrath => "主の怒り",
-            DifficultyMod.Thirst => "渇き",
+            DifficultyMod.Vengeance => "グラッジ",
+            DifficultyMod.Swiftness => "スウィフト",
+            DifficultyMod.LordsWrath => "ボスレイジ",
+            DifficultyMod.Thirst => "サースト",
             DifficultyMod.Frailty => "脆い身体",
-            DifficultyMod.Weariness => "重い足",
+            DifficultyMod.Weariness => "ヘヴィフット",
             DifficultyMod.Mercy => "女神の慈悲",
             _ => "",
         };
 
         public static string ModText(DifficultyMod m) => m switch
         {
-            DifficultyMod.IronGuard => "精鋭が鎧をまとう。凍結・気絶・印で崩す",
-            DifficultyMod.Ferocity => $"魔物の攻撃の予兆が{(1f - FerocityWindup) * 100f:0}%短い",
-            DifficultyMod.Vengeance => "倒した魔物が少し後に爆ぜる",
-            DifficultyMod.Swiftness => $"魔物の足が{(SwiftnessSpeed - 1f) * 100f:0}%速い",
-            DifficultyMod.LordsWrath => "主の試練が厳しくなる",
+            DifficultyMod.IronGuard => "エリートが鎧をまとう。フリーズ・スタン・マークで崩す",
+            DifficultyMod.Ferocity => $"モンスターの攻撃の予兆が{(1f - FerocityWindup) * 100f:0}%短い",
+            DifficultyMod.Vengeance => "倒したモンスターが少し後に爆ぜる",
+            DifficultyMod.Swiftness => $"モンスターの足が{(SwiftnessSpeed - 1f) * 100f:0}%速い",
+            DifficultyMod.LordsWrath => "ボスの試練が厳しくなる",
             DifficultyMod.Thirst => $"回復量 −{(1f - ThirstFactor) * 100f:0}%",
             DifficultyMod.Frailty => $"最大HP −{FrailtyFactor * 100f:0}%",
-            DifficultyMod.Weariness => $"回避の再使用 +{(WearinessFactor - 1f) * 100f:0}%",
+            DifficultyMod.Weariness => $"ドッジの再使用 +{(WearinessFactor - 1f) * 100f:0}%",
             DifficultyMod.Mercy => "倒れた仲間が早く起きる",
             _ => "",
         };

@@ -49,7 +49,7 @@ namespace Game.Gameplay
             for (int i = 0; i < 8; i++) Ember(at + Vector2.up * 0.4f, i * 45f + Random.Range(0f, 20f));
             HitStop.Freeze(0.09f, -1, major: true);
             CameraShake.Add(0.45f);
-            ShowNumber(at + Vector2.up * 3.1f, "合体技", Color.Lerp(mix, Color.white, 0.5f), 22);
+            ShowNumber(at + Vector2.up * 3.1f, "ユニオン", Color.Lerp(mix, Color.white, 0.5f), 22);
             ShowCallout(at + Vector2.up * 2.4f, UnionCatalog.Name(e.Id), Color.Lerp(mix, Color.white, 0.35f), 44);
         }
     }

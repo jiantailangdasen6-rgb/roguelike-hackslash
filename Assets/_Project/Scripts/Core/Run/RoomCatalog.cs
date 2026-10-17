@@ -7,22 +7,22 @@ namespace Game.Core
     {
         public static string Name(RoomKind k) => k switch
         {
-            RoomKind.Start => "入口",
-            RoomKind.Combat => "戦いの間",
-            RoomKind.Elite => "精鋭の巣",
-            RoomKind.Shrine => "祈りの祠",
-            RoomKind.Whetstone => "研磨台",
-            RoomKind.Spring => "生命の泉",
-            RoomKind.CurseAltar => "呪いの祭壇",
-            RoomKind.Merchant => "闇商人",
-            RoomKind.Campfire => "焚き火の間",
-            RoomKind.Boss => "主の間",
-            RoomKind.MiniBoss => "精鋭の主の間",
-            RoomKind.Puzzle => "仕掛けの間",
-            RoomKind.Treasure => "宝物庫",
-            RoomKind.Secret => "隠し部屋",
-            RoomKind.Spirit => "霊の祠",
-            RoomKind.Encounter => "出来事の間",
+            RoomKind.Start => "エントランス",
+            RoomKind.Combat => "バトルルーム",
+            RoomKind.Elite => "エリートネスト",
+            RoomKind.Shrine => "シュライン",
+            RoomKind.Whetstone => "グラインドストーン",
+            RoomKind.Spring => "ライフスプリング",
+            RoomKind.CurseAltar => "カースオルター",
+            RoomKind.Merchant => "ダークマーチャント",
+            RoomKind.Campfire => "ボンファイア",
+            RoomKind.Boss => "ボスルーム",
+            RoomKind.MiniBoss => "チャンピオンルーム",
+            RoomKind.Puzzle => "パズルルーム",
+            RoomKind.Treasure => "トレジャリー",
+            RoomKind.Secret => "シークレットルーム",
+            RoomKind.Spirit => "スピリットシュライン",
+            RoomKind.Encounter => "イベントルーム",
             _ => "",
         };
 
@@ -81,27 +81,27 @@ namespace Game.Core
         /// <summary>A few words for the label on the pedestal (the codex has the rest).</summary>
         public static string ShortText(RoomKind k) => k switch
         {
-            RoomKind.Shrine => "力をひとつ授かる",
-            RoomKind.Whetstone => "力をひとつ研ぐ",
+            RoomKind.Shrine => "パークをひとつ授かる",
+            RoomKind.Whetstone => "パークをひとつ研ぐ",
             RoomKind.Spring => $"最大HP +{RunSimulation.VigorPerStack * 100f:0}%・全回復",
-            RoomKind.CurseAltar => "力を2つ　代償に呪い",
-            RoomKind.Merchant => "魂の欠片で買う",
-            RoomKind.Treasure => "希少な装備",
-            RoomKind.Secret => "古い地図と装備",
-            RoomKind.Spirit => "最大HPの1割で加護",
+            RoomKind.CurseAltar => "パークを2つ　代償にカース",
+            RoomKind.Merchant => "ソウルシャードで買う",
+            RoomKind.Treasure => "レアな装備",
+            RoomKind.Secret => "オールドマップと装備",
+            RoomKind.Spirit => "最大HPの1割でブレッシング",
             _ => "",
         };
 
         public static string PedestalText(RoomKind k) => k switch
         {
-            RoomKind.Shrine => "上に立つと、新しい力を1つ選べる",
-            RoomKind.Whetstone => "上に立つと、持っている力を1つ強化できる",
+            RoomKind.Shrine => "上に立つと、新しいパークを1つ選べる",
+            RoomKind.Whetstone => "上に立つと、持っているパークを1つ強化できる",
             RoomKind.Spring => $"上に立つと、最大HP +{RunSimulation.VigorPerStack * 100f:0}%・全回復",
-            RoomKind.CurseAltar => $"上に立つと、力を{RewardCatalog.CursedBoons}回選べる。代償に呪いが1つつく（ランの間ずっと）",
-            RoomKind.Merchant => "上に立つと、魂の欠片で1つ買える（全員の取り分から払う）",
-            RoomKind.Treasure => "上に立つと、希少以上の装備を1つ得る",
-            RoomKind.Secret => "上に立つと、古い地図（このエリアの全部屋が見える）と装備を得る",
-            RoomKind.Spirit => "上に立つと、最大HPの1割を捧げて（ランの間ずっと）神の加護を1つ授かる",
+            RoomKind.CurseAltar => $"上に立つと、パークを{RewardCatalog.CursedBoons}回選べる。代償にカースが1つつく（ランの間ずっと）",
+            RoomKind.Merchant => "上に立つと、ソウルシャードで1つ買える（全員の取り分から払う）",
+            RoomKind.Treasure => "上に立つと、レア以上の装備を1つ得る",
+            RoomKind.Secret => "上に立つと、オールドマップ（このエリアの全部屋が見える）と装備を得る",
+            RoomKind.Spirit => "上に立つと、最大HPの1割を捧げて（ランの間ずっと）神のブレッシングを1つ授かる",
             _ => "",
         };
     }

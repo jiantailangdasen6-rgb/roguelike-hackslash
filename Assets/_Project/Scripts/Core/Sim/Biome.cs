@@ -46,7 +46,7 @@ namespace Game.Core
         {
             new()
             {
-                Id = Biome.Crypt, Name = "朽ちた納骨堂", Hint = "骸骨の群れと、二人の主のどちらか", Lord = EnemyType.BoneKing, AltLord = EnemyType.GraveReaper, Champion = EnemyType.BoneDigger, Music = "music_crypt",
+                Id = Biome.Crypt, Name = "ロッテンクリプト", Hint = "スケルトンの群れと、二人のボスのどちらか", Lord = EnemyType.BoneKing, AltLord = EnemyType.GraveReaper, Champion = EnemyType.BoneDigger, Music = "music_crypt",
                 Pool = new[]
                 {
                     (EnemyType.Skeleton, 38, 0), (EnemyType.SkeletonArcher, 20, 0), (EnemyType.Ghoul, 18, 0), (EnemyType.Bat, 9, 0),
@@ -56,7 +56,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Chapel, Name = "血塗られた礼拝堂", Hint = "狂信者の儀式と、二人の主のどちらか", Lord = EnemyType.BloodBishop, AltLord = EnemyType.ChoirMistress, Champion = EnemyType.TwinAcolyte, Music = "music_chapel",
+                Id = Biome.Chapel, Name = "ブラッドチャペル", Hint = "カルティストの儀式と、二人のボスのどちらか", Lord = EnemyType.BloodBishop, AltLord = EnemyType.ChoirMistress, Champion = EnemyType.TwinAcolyte, Music = "music_chapel",
                 Pool = new[]
                 {
                     (EnemyType.Skeleton, 20, 0), (EnemyType.SkeletonArcher, 15, 0), (EnemyType.Ghoul, 14, 0), (EnemyType.Cultist, 14, 0),
@@ -66,7 +66,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Abyss, Name = "奈落の玉座", Hint = "影と呪い、二人の主のどちらか", Lord = EnemyType.Lich, AltLord = EnemyType.VoidEye, Champion = EnemyType.ShadeLord, Music = "music_abyss",
+                Id = Biome.Abyss, Name = "アビススローン", Hint = "影とカース、二人のボスのどちらか", Lord = EnemyType.Lich, AltLord = EnemyType.VoidEye, Champion = EnemyType.ShadeLord, Music = "music_abyss",
                 Pool = new[]
                 {
                     (EnemyType.Skeleton, 10, 0), (EnemyType.SkeletonArcher, 12, 0), (EnemyType.Ghoul, 12, 0), (EnemyType.Cultist, 11, 0),
@@ -77,7 +77,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Sunken, Name = "水没した地下墓地", Hint = "溺れた亡者と、二人の主のどちらか", Lord = EnemyType.DrownedSaint, AltLord = EnemyType.GreatCrab, Champion = EnemyType.LeechMother, Music = "music_sunken",
+                Id = Biome.Sunken, Name = "サンケンカタコンベ", Hint = "ドラウンドと、二人のボスのどちらか", Lord = EnemyType.DrownedSaint, AltLord = EnemyType.GreatCrab, Champion = EnemyType.LeechMother, Music = "music_sunken",
                 Pool = new[]
                 {
                     (EnemyType.Drowned, 28, 0), (EnemyType.CarrionCrab, 16, 0), (EnemyType.TideWitch, 12, 0), (EnemyType.Skeleton, 14, 0),
@@ -87,7 +87,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Frost, Name = "凍てつく霊廟", Hint = "雪狼の群れと、二人の主のどちらか", Lord = EnemyType.FrostQueen, AltLord = EnemyType.GreatWolf, Champion = EnemyType.IceKnight, Music = "music_frost",
+                Id = Biome.Frost, Name = "フローズンモーソレアム", Hint = "スノーウルフの群れと、二人のボスのどちらか", Lord = EnemyType.FrostQueen, AltLord = EnemyType.GreatWolf, Champion = EnemyType.IceKnight, Music = "music_frost",
                 Pool = new[]
                 {
                     (EnemyType.FrostWolf, 18, 0), (EnemyType.Icebound, 18, 0), (EnemyType.FrostWitch, 12, 0), (EnemyType.Skeleton, 14, 0),
@@ -97,7 +97,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Forge, Name = "燃え落ちた鍛冶場", Hint = "鉄の番兵と、二人の主のどちらか", Lord = EnemyType.ForgeColossus, AltLord = EnemyType.Executioner, Champion = EnemyType.Bombsmith, Music = "music_forge",
+                Id = Biome.Forge, Name = "バーントフォージ", Hint = "アイアンセンチネルと、二人のボスのどちらか", Lord = EnemyType.ForgeColossus, AltLord = EnemyType.Executioner, Champion = EnemyType.Bombsmith, Music = "music_forge",
                 Pool = new[]
                 {
                     (EnemyType.IronSentinel, 12, 0), (EnemyType.FireImp, 16, 0), (EnemyType.SlagBloater, 14, 0), (EnemyType.Skeleton, 16, 0),
@@ -108,7 +108,7 @@ namespace Game.Core
             new()
             {
                 // The heart of the labyrinth: every land's dead walk here, and the Ashen King waits at the bottom.
-                Id = Biome.Heart, Name = "迷宮の心臓", Hint = "灰の王が待つ", Lord = EnemyType.AshenKing, Champion = EnemyType.DreadKnight, Music = "music_heart", Special = true,
+                Id = Biome.Heart, Name = "ラビリンスハート", Hint = "アッシュキングが待つ", Lord = EnemyType.AshenKing, Champion = EnemyType.DreadKnight, Music = "music_heart", Special = true,
                 Pool = new[]
                 {
                     (EnemyType.Drowned, 10, 0), (EnemyType.FrostWolf, 10, 0), (EnemyType.IronSentinel, 8, 0), (EnemyType.ShadeStalker, 10, 0),
@@ -119,7 +119,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Grotto, Name = "菌糸の洞窟", Hint = "胞子の群れと、二人の主のどちらか", Lord = EnemyType.MyceliumMother, AltLord = EnemyType.RotGiant, Champion = EnemyType.GreatCap, Music = "music_grotto",
+                Id = Biome.Grotto, Name = "ファンガルグロット", Hint = "胞子の群れと、二人のボスのどちらか", Lord = EnemyType.MyceliumMother, AltLord = EnemyType.RotGiant, Champion = EnemyType.GreatCap, Music = "music_grotto",
                 Pool = new[]
                 {
                     (EnemyType.Sporeling, 24, 0), (EnemyType.Mycelid, 22, 0), (EnemyType.MossShaman, 12, 0), (EnemyType.Ghoul, 10, 0),
@@ -129,7 +129,7 @@ namespace Game.Core
             },
             new()
             {
-                Id = Biome.Library, Name = "呪われた書庫", Hint = "生きた書物と、二人の主のどちらか", Lord = EnemyType.Archivist, AltLord = EnemyType.InkBeast, Champion = EnemyType.Bookworm, Music = "music_library",
+                Id = Biome.Library, Name = "カースドライブラリ", Hint = "生きた書物と、二人のボスのどちらか", Lord = EnemyType.Archivist, AltLord = EnemyType.InkBeast, Champion = EnemyType.Bookworm, Music = "music_library",
                 Pool = new[]
                 {
                     (EnemyType.LivingTome, 22, 0), (EnemyType.InkWraith, 16, 0), (EnemyType.Scribe, 14, 0), (EnemyType.Skeleton, 14, 0),

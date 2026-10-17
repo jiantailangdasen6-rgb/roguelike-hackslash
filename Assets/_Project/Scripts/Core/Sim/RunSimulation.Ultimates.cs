@@ -7,26 +7,26 @@ namespace Game.Core
     {
         public static string Name(ClassId c) => c switch
         {
-            ClassId.Warrior => "剣嵐",
-            ClassId.Mage => "氷河",
-            ClassId.Ranger => "矢の雨",
-            ClassId.Guardian => "不落の砦",
-            ClassId.Assassin => "千影",
-            ClassId.Alchemist => "大爆薬",
-            ClassId.Deathcaller => "死者の行進",
-            _ => "天罰",
+            ClassId.Warrior => "ブレードストーム",
+            ClassId.Mage => "グレイシャー",
+            ClassId.Ranger => "アローレイン",
+            ClassId.Guardian => "フォートレス",
+            ClassId.Assassin => "サウザンドシャドウ",
+            ClassId.Alchemist => "ビッグボム",
+            ClassId.Deathcaller => "デッドマーチ",
+            _ => "ディヴァインジャッジメント",
         };
 
         public static string Text(ClassId c) => c switch
         {
             ClassId.Warrior => "しばらく剣を振り回し、周りの敵を斬り続ける（受けるダメージ半減）",
             ClassId.Mage => "広い範囲の敵を凍らせ、氷の刃で斬る",
-            ClassId.Ranger => "照準の先に矢の雨。中の敵に印を付ける",
+            ClassId.Ranger => "照準の先にアローレイン。中の敵にマークを付ける",
             ClassId.Guardian => "近くの仲間に大きな盾と、受けるダメージを減らす聖域",
-            ClassId.Assassin => "近くの敵6体まで、一瞬で斬り抜ける（必ず会心）",
+            ClassId.Assassin => "近くの敵6体まで、一瞬で斬り抜ける（必ずクリティカル）",
             ClassId.Alchemist => "照準の先へ大きな爆薬。燃える床が残る",
-            ClassId.Deathcaller => "骨の兵を4体呼び、周りの敵すべてを呪う",
-            _ => "部屋の敵に裁きの光を落とし、仲間を癒す",
+            ClassId.Deathcaller => "ボーンサーヴァントを4体呼び、周りの敵すべてを呪う",
+            _ => "部屋の敵にジャッジメントを落とし、仲間を癒す",
         };
     }
 

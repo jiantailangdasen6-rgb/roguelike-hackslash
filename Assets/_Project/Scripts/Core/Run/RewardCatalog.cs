@@ -10,13 +10,13 @@ namespace Game.Core
 
         public static string Name(RoomReward r) => r switch
         {
-            RoomReward.Boon => "祝福",
+            RoomReward.Boon => "ブレッシング",
             RoomReward.Upgrade => "研磨",
             RoomReward.Vigor => "生命",
-            RoomReward.Shards => "魂の欠片",
+            RoomReward.Shards => "ソウルシャード",
             RoomReward.Treasure => "宝物",
-            RoomReward.Cursed => "呪い",
-            RoomReward.Shop => "闇商人",
+            RoomReward.Cursed => "カース",
+            RoomReward.Shop => "ダークマーチャント",
             _ => "",
         };
 
@@ -26,13 +26,13 @@ namespace Game.Core
             int times = trial ? 2 : 1;
             return r switch
             {
-                RoomReward.Boon => times > 1 ? "新しい力を2回選ぶ" : "新しい力を1つ選ぶ",
-                RoomReward.Upgrade => times > 1 ? "持っている力を2回強化" : "持っている力を1段階強化",
+                RoomReward.Boon => times > 1 ? "新しいパークを2回選ぶ" : "新しいパークを1つ選ぶ",
+                RoomReward.Upgrade => times > 1 ? "持っているパークを2回強化" : "持っているパークを1段階強化",
                 RoomReward.Vigor => $"最大HP +{RunSimulation.VigorPerStack * 100f * times:0}%・全回復",
-                RoomReward.Shards => $"魂の欠片 +{RunSimulation.ShardReward(area) * times}",
-                RoomReward.Treasure => times > 1 ? "希少以上の装備を2つ" : "希少以上の装備を1つ",
-                RoomReward.Cursed => $"新しい力を{CursedBoons}回選ぶ",
-                RoomReward.Shop => "魂の欠片で1人1つ買える",
+                RoomReward.Shards => $"ソウルシャード +{RunSimulation.ShardReward(area) * times}",
+                RoomReward.Treasure => times > 1 ? "レア以上の装備を2つ" : "レア以上の装備を1つ",
+                RoomReward.Cursed => $"新しいパークを{CursedBoons}回選ぶ",
+                RoomReward.Shop => "ソウルシャードで1人1つ買える",
                 _ => "",
             };
         }
@@ -77,17 +77,17 @@ namespace Game.Core
 
         public static string CurseName(CurseKind c) => c switch
         {
-            CurseKind.Frailty => "脆さ",
-            CurseKind.Weariness => "重い足",
-            CurseKind.Thirst => "渇き",
-            CurseKind.Hunted => "狙われる",
+            CurseKind.Frailty => "フレイル",
+            CurseKind.Weariness => "ヘヴィフット",
+            CurseKind.Thirst => "サースト",
+            CurseKind.Hunted => "マークド",
             _ => "",
         };
 
         public static string CurseText(CurseKind c) => c switch
         {
             CurseKind.Frailty => $"最大HP −{FrailtyPerStack * 100f:0}%",
-            CurseKind.Weariness => $"回避の回復 +{WearinessPerStack * 100f:0}%遅く",
+            CurseKind.Weariness => $"ドッジの回復 +{WearinessPerStack * 100f:0}%遅く",
             CurseKind.Thirst => $"回復量 −{(1f - ThirstFactor) * 100f:0}%",
             CurseKind.Hunted => $"受けるダメージ +{HuntedPerStack * 100f:0}%",
             _ => "",

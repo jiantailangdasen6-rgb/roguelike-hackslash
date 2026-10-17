@@ -175,7 +175,7 @@ namespace Game.Gameplay
                     crack.FadeOut = true;
                     AddLight(crack, new Color(1f, 0.8f, 0.35f), 3f, lord ? 7f : 4.5f);
                     for (int i = 0; i < (lord ? 16 : 10); i++) Shard(e.Pos + Vector2.up * 0.7f, i * (lord ? 22.5f : 36f) + Random.Range(0f, 15f), new Color(1f, 0.88f, 0.5f));
-                    ShowCallout(e.Pos + Vector2.up * (lord ? 3.4f : 2f), "崩し！", new Color(1f, 0.85f, 0.4f), lord ? 54 : 40);
+                    ShowCallout(e.Pos + Vector2.up * (lord ? 3.4f : 2f), "ブレイク！", new Color(1f, 0.85f, 0.4f), lord ? 54 : 40);
                     HitStop.Freeze(lord ? 0.12f : 0.08f, e.Id, major: true);
                     CameraShake.Add(lord ? 0.6f : 0.3f);
                     if (EnemyView.Instance != null && EnemyView.Instance.TryGetPosition(e.Id, out _)) EnemyView.Instance.KickEnemy(e.Id, -0.35f);
@@ -358,7 +358,7 @@ namespace Game.Gameplay
             if (armorBreak && CalloutReady(e.Id, 3f))
             {
                 // Someone broke the knight's guard: tell the whole team the window is open.
-                ShowCallout(e.Pos + Vector2.up * 1.7f, "鎧崩し！", ArmorBreakColor, 38);
+                ShowCallout(e.Pos + Vector2.up * 1.7f, "鎧ブレイク！", ArmorBreakColor, 38);
                 for (int i = 0; i < 6; i++) Shard(e.Pos + Vector2.up * 0.5f, i * 60f + Random.Range(0f, 25f), ArmorBreakColor);
                 HitStop.Freeze(0.06f, e.Id, major: true);
                 CameraShake.Add(0.15f);
@@ -395,7 +395,7 @@ namespace Game.Gameplay
                     var ring = Spawn("fx_nova", e.Pos + Vector2.up * 0.3f, 1f, 0.4f, 0.4f, r * 1.1f, new Color(0.85f, 0.95f, 1f, 0.8f));
                     ring.FadeOut = true;
                     AddLight(ring, new Color(0.75f, 0.9f, 1f), 2.6f, r + 2f);
-                    ShowCallout(e.Pos + Vector2.up * 1.8f, "蒸気爆発！", new Color(0.8f, 0.92f, 1f), 44);
+                    ShowCallout(e.Pos + Vector2.up * 1.8f, "スチームバースト！", new Color(0.8f, 0.92f, 1f), 44);
                     HitStop.Freeze(0.09f, -1, major: true);
                     CameraShake.Add(0.4f);
                     break;
@@ -406,7 +406,7 @@ namespace Game.Gameplay
                     slash.FadeOut = true;
                     AddLight(slash, new Color(1f, 0.35f, 0.3f), 2.4f, r + 1.5f);
                     for (int i = 0; i < 8; i++) Shard(e.Pos + Vector2.up * 0.4f, i * 45f + Random.Range(0f, 20f), new Color(0.75f, 0.4f, 1f));
-                    ShowCallout(e.Pos + Vector2.up * 1.7f, "影の処刑！", new Color(0.85f, 0.55f, 1f), 42);
+                    ShowCallout(e.Pos + Vector2.up * 1.7f, "シャドウエクセキュート！", new Color(0.85f, 0.55f, 1f), 42);
                     HitStop.Freeze(0.08f, -1, major: true);
                     CameraShake.Add(0.25f);
                     break;
@@ -418,7 +418,7 @@ namespace Game.Gameplay
                     AddLight(pillar, new Color(1f, 0.85f, 0.45f), 3f, r + 2.5f);
                     var ring = Spawn("fx_revive_ring", e.Pos, 1f, 0.6f, r * 0.6f, r * 1.05f, new Color(1f, 0.9f, 0.5f, 0.9f), order: -300);
                     ring.FadeOut = true;
-                    ShowCallout(e.Pos + Vector2.up * 2.2f, "聖域の鬨！", new Color(1f, 0.88f, 0.5f), 42);
+                    ShowCallout(e.Pos + Vector2.up * 2.2f, "サンクチュアリクライ！", new Color(1f, 0.88f, 0.5f), 42);
                     HitStop.Freeze(0.07f, -1, major: true);
                     CameraShake.Add(0.3f);
                     break;
@@ -429,7 +429,7 @@ namespace Game.Gameplay
                     var flare = Spawn("fx_explosion", e.Pos + Vector2.up * 0.3f, 22f, 0.36f, 0.8f, 1.1f, new Color(1f, 0.75f, 0.45f));
                     flare.Renderer.sortingOrder = 2700;
                     AddLight(flare, new Color(1f, 0.55f, 0.2f), 2.4f, 3.5f);
-                    ShowCallout(e.Pos + Vector2.up * 1.8f, "炎の突進！", new Color(1f, 0.62f, 0.3f), 42);
+                    ShowCallout(e.Pos + Vector2.up * 1.8f, "フレイムチャージ！", new Color(1f, 0.62f, 0.3f), 42);
                     CameraShake.Add(0.2f);
                     break;
                 }
@@ -462,7 +462,7 @@ namespace Game.Gameplay
                     nova.FadeOut = true;
                     AddLight(nova, new Color(0.5f, 1f, 0.9f), 3f, 8f);
                     CameraShake.Add(0.5f);
-                    ShowCallout(e.Pos + Vector2.up * 3f, "不死の加護", new Color(0.75f, 1f, 0.95f), 46);
+                    ShowCallout(e.Pos + Vector2.up * 3f, "不死のブレッシング", new Color(0.75f, 1f, 0.95f), 46);
                     break;
                 }
                 case TrialMoment.RitualStart:
@@ -522,12 +522,12 @@ namespace Game.Gameplay
                     pillar.FadeOut = true;
                     AddLight(pillar, new Color(0.5f, 0.9f, 1f), 3f, 6f);
                     HitStop.Freeze(0.1f, -1, major: true);
-                    ShowCallout(e.Pos + Vector2.up * 2.4f, AshenFight ? "灰の心臓" : "魂の器", new Color(0.6f, 0.95f, 1f), 46);
+                    ShowCallout(e.Pos + Vector2.up * 2.4f, AshenFight ? "灰の心臓" : "ソウルヴェッセル", new Color(0.6f, 0.95f, 1f), 46);
                     break;
                 }
                 case TrialMoment.LichRises:
                     CameraShake.Add(0.6f);
-                    ShowCallout(e.Pos + Vector2.up * 3f, AshenFight ? "灰の王の復活" : "冥王の復活", new Color(0.6f, 0.95f, 1f), 46);
+                    ShowCallout(e.Pos + Vector2.up * 3f, AshenFight ? "アッシュキングの復活" : "リッチキングの復活", new Color(0.6f, 0.95f, 1f), 46);
                     break;
                 default:
                     LandTrial(e); // EventPresenter.Lands.cs
@@ -1341,7 +1341,7 @@ namespace Game.Gameplay
                 if (next == null || next.Kind != RoomKind.Treasure || director.IsUnlocked(next.Id)) continue;
                 int keys = director.Keys.Value;
                 var mark = CreateMark(DungeonMap.EntryPoint(room, d), new Color(0.9f, 0.75f, 0.35f), GameIcons.Reward(RoomReward.Treasure), RunSimulation.UnlockRadius * 0.7f,
-                    keys > 0 ? "宝物庫の扉\n<size=22><color=#e8e0d4>立つと鍵で開く</color></size>" : "宝物庫の扉\n<size=22><color=#e8e0d4>鍵が必要</color></size>", keys <= 0);
+                    keys > 0 ? "トレジャリーの扉\n<size=22><color=#e8e0d4>立つと鍵で開く</color></size>" : "トレジャリーの扉\n<size=22><color=#e8e0d4>鍵が必要</color></size>", keys <= 0);
                 mark.LabelBelow = d == Dir.S ? 1.6f : -1.4f;
                 _doors.Add(mark);
             }
@@ -1360,7 +1360,7 @@ namespace Game.Gameplay
                     if (room.Neighbor[d] != map.Boss.Id) continue;
                     Vector2 door = DungeonMap.EntryPoint(room, d);
                     var mark = CreateMark(door, new Color(1f, 0.3f, 0.25f), null, RunSimulation.BossDoorRadius * 0.6f,
-                        NetPlayer.All.Count > 1 ? "主の扉\n<size=22><color=#e8e0d4>全員でここに立つと開く</color></size>" : "主の扉\n<size=22><color=#e8e0d4>ここに立つと開く</color></size>", false);
+                        NetPlayer.All.Count > 1 ? "ボスの扉\n<size=22><color=#e8e0d4>全員でここに立つと開く</color></size>" : "ボスの扉\n<size=22><color=#e8e0d4>ここに立つと開く</color></size>", false);
                     mark.Gather = true;
                     mark.LabelBelow = d == Dir.S ? 1.6f : -1.4f;
                     _doors.Add(mark);
@@ -1384,11 +1384,11 @@ namespace Game.Gameplay
                 var right = BiomeCatalog.Get(director.Way(1));
                 if (home)
                 {
-                    Way(RunSimulation.DeepOffset, new Color(0.72f, 0.5f, 1f), "深層へ", $"{right.Name}\n{all}ここに立つと、さらに深く（魔物はより強い）");
-                    Way(RunSimulation.HomeOffset, new Color(1f, 0.85f, 0.45f), "帰還", $"{all}ここに立つと踏破して拠点へ");
+                    Way(RunSimulation.DeepOffset, new Color(0.72f, 0.5f, 1f), "ディープへ", $"{right.Name}\n{all}ここに立つと、さらに深く（モンスターはより強い）");
+                    Way(RunSimulation.HomeOffset, new Color(1f, 0.85f, 0.45f), "帰還", $"{all}ここに立つと踏破してキャンプへ");
                     // The six memories are together: the way down to the heart (the end of the story) in the middle.
                     if (director.HeartOpen.Value && director.Biome != Biome.Heart)
-                        Way(RunSimulation.HeartOffset, new Color(1f, 0.45f, 0.25f), "迷宮の心臓へ", $"灰の王が待つ\n{all}ここに立って降りる");
+                        Way(RunSimulation.HeartOffset, new Color(1f, 0.45f, 0.25f), "ラビリンスハートへ", $"アッシュキングが待つ\n{all}ここに立って降りる");
                 }
                 else
                 {

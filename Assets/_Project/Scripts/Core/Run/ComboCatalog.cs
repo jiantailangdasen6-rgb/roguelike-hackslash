@@ -23,16 +23,16 @@ namespace Game.Core
 
         public static readonly ComboDef[] All =
         {
-            new(ComboKind.SteamBurst, ClassId.Mage, ClassId.Alchemist, "蒸気爆発", "燃える床に氷結陣を重ねる"),
-            new(ComboKind.ShadowExecution, ClassId.Assassin, ClassId.Ranger, "影の処刑", "印の付いた敵へ影渡り"),
-            new(ComboKind.HolyWarCry, ClassId.Warrior, ClassId.Guardian, "聖域の鬨", "守りの陣の中で鬨の声"),
-            new(ComboKind.FlameCharge, ClassId.Guardian, ClassId.Alchemist, "炎の突進", "燃える床を通って盾の突進"),
+            new(ComboKind.SteamBurst, ClassId.Mage, ClassId.Alchemist, "スチームバースト", "燃える床にフロストノヴァを重ねる"),
+            new(ComboKind.ShadowExecution, ClassId.Assassin, ClassId.Ranger, "シャドウエクセキュート", "マークの付いた敵へシャドウステップ"),
+            new(ComboKind.HolyWarCry, ClassId.Warrior, ClassId.Guardian, "サンクチュアリクライ", "サンクチュアリの中でウォークライ"),
+            new(ComboKind.FlameCharge, ClassId.Guardian, ClassId.Alchemist, "フレイムチャージ", "燃える床を通ってシールドバッシュ"),
         };
 
         public static string Name(ComboKind kind)
         {
             foreach (var c in All) if (c.Kind == kind) return c.Name;
-            return kind == ComboKind.Union ? "合体技" : ""; // any two players (UnionCatalog names each pair)
+            return kind == ComboKind.Union ? "ユニオン" : ""; // any two players (UnionCatalog names each pair)
         }
 
         /// <summary>The techniques this party can perform (both classes present, played by different people).</summary>

@@ -47,7 +47,7 @@ namespace Game.Gameplay
             title.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(600f, 80f), new Vector2(0f, -30f));
 
             // How to play, the monsters, rooms and teamwork live in the codex.
-            var codex = UIKit.Button(panel.transform, "図鑑　<size=20><color=#bfb6aa>操作・魔物・部屋・連携（B）</color></size>", 30, () => { Toggle(false); CodexView.Open(); });
+            var codex = UIKit.Button(panel.transform, "コーデックス　<size=20><color=#bfb6aa>操作・モンスター・部屋・連携（B）</color></size>", 30, () => { Toggle(false); CodexView.Open(); });
             codex.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(560f, 76f), new Vector2(0f, -140f));
             gameObject.AddComponent<CodexView>();
 
@@ -103,9 +103,9 @@ namespace Game.Gameplay
             bool party = nm != null && nm.IsHost && nm.ConnectedClientsIds.Count > 1;
             bool camp = PlayArea.InCamp;
             _leaveLabel.text = camp ? (IsHost ? (party ? "タイトルへ（部屋を閉じる）" : "タイトルへ戻る") : "パーティを抜ける（タイトルへ）")
-                : IsHost ? "拠点へ戻る（ランを放棄）" : "パーティを抜ける（タイトルへ）";
+                : IsHost ? "キャンプへ戻る（ランを放棄）" : "パーティを抜ける（タイトルへ）";
             _note.text = camp ? (party ? "※ 部屋を閉じると仲間もタイトルへ戻ります" : "")
-                : party ? "※ あなたはホストです。戻ると全員が拠点へ戻ります"
+                : party ? "※ あなたはホストです。戻ると全員がキャンプへ戻ります"
                 : IsHost ? "" : "※ ゲームは止まりません（オンラインのため）";
             _invite.gameObject.SetActive(GameSession.JoinCode != null);
             _inviteLabel.text = "招待リンクをコピー（途中参加OK）";

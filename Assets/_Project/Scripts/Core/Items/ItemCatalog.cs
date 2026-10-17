@@ -146,37 +146,37 @@ namespace Game.Core
         };
 
         // By ClassId: warrior, mage, ranger, guardian, assassin, alchemist, deathcaller, paladin.
-        private static readonly string[] WornWeapon = { "古びた長剣", "古びた杖", "古びた弓", "古びた戦鎚", "古びた双剣", "使い古しの薬瓶", "古びた骨の杖", "古びた片手剣" };
-        private static readonly string[] AltWeapon = { "戦士の大斧", "古き魔導書", "狩人の弩", "守りの大槍", "投げ短剣", "爆薬瓶", "死神の大鎌", "聖なる大剣" };
-        private static readonly string[] KeenWeapon ={ "鋭い戦斧", "水晶の杖", "狩人の長弓", "聖なる戦鎚", "影の双剣", "賢者の薬瓶", "魂火の杖", "聖剣" };
+        private static readonly string[] WornWeapon = { "オールドロングソード", "オールドスタッフ", "オールドボウ", "オールドウォーハンマー", "オールドツインブレード", "オールドフラスク", "オールドボーンワンド", "オールドショートソード" };
+        private static readonly string[] AltWeapon = { "ウォーアクス", "エンシェントグリモア", "ハンタークロスボウ", "ガーディアンランス", "スローイングダガー", "ボムフラスク", "リーパーサイズ", "ホーリーグレートソード" };
+        private static readonly string[] KeenWeapon ={ "シャープバトルアクス", "クリスタルスタッフ", "ハンターロングボウ", "ホーリーウォーハンマー", "シャドウツインブレード", "セージフラスク", "ソウルファイアスタッフ", "ホーリーソード" };
 
         /// <summary>Two bases per slot. Order is part of the wire format.</summary>
         public static readonly ItemBaseDef[] Bases =
         {
-            new("weapon_worn", "古びた武器", EquipSlot.Weapon, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.06f), WornWeapon),
-            new("weapon_keen", "鋭い武器", EquipSlot.Weapon, new StatModifier(StatType.CritChance, ModifierKind.Flat, 0.04f), KeenWeapon),
-            new("leather_armor", "革の鎧", EquipSlot.Armor, new StatModifier(StatType.MaxHealth, ModifierKind.Flat, 15f)),
-            new("chainmail", "鎖帷子", EquipSlot.Armor, new StatModifier(StatType.Armor, ModifierKind.Flat, 1.5f)),
-            new("bone_necklace", "骨の首飾り", EquipSlot.Amulet, new StatModifier(StatType.Regen, ModifierKind.Flat, 0.4f)),
-            new("moon_charm", "月の護符", EquipSlot.Amulet, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.05f)),
-            new("copper_ring", "銅の指輪", EquipSlot.Ring, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.04f)),
-            new("silver_ring", "銀の指輪", EquipSlot.Ring, new StatModifier(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.04f)),
+            new("weapon_worn", "オールドウェポン", EquipSlot.Weapon, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.06f), WornWeapon),
+            new("weapon_keen", "シャープウェポン", EquipSlot.Weapon, new StatModifier(StatType.CritChance, ModifierKind.Flat, 0.04f), KeenWeapon),
+            new("leather_armor", "レザーアーマー", EquipSlot.Armor, new StatModifier(StatType.MaxHealth, ModifierKind.Flat, 15f)),
+            new("chainmail", "チェインメイル", EquipSlot.Armor, new StatModifier(StatType.Armor, ModifierKind.Flat, 1.5f)),
+            new("bone_necklace", "ボーンネックレス", EquipSlot.Amulet, new StatModifier(StatType.Regen, ModifierKind.Flat, 0.4f)),
+            new("moon_charm", "ムーンアミュレット", EquipSlot.Amulet, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.05f)),
+            new("copper_ring", "カッパーリング", EquipSlot.Ring, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.04f)),
+            new("silver_ring", "シルバーリング", EquipSlot.Ring, new StatModifier(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.04f)),
             // Phase 4: each class's other weapon (WeaponCatalog: its basic attack changes) and runes for the two skills.
-            new("weapon_alt", "異形の武器", EquipSlot.Weapon, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.05f), AltWeapon),
-            new("rune_1", "技1のルーン", EquipSlot.Rune1, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.02f)),
-            new("rune_2", "技2のルーン", EquipSlot.Rune2, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.02f)),
+            new("weapon_alt", "エキゾチックウェポン", EquipSlot.Weapon, new StatModifier(StatType.Might, ModifierKind.PercentAdd, 0.05f), AltWeapon),
+            new("rune_1", "スキル1ルーン", EquipSlot.Rune1, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.02f)),
+            new("rune_2", "スキル2ルーン", EquipSlot.Rune2, new StatModifier(StatType.Cooldown, ModifierKind.PercentAdd, -0.02f)),
         };
 
         public static readonly RuneDef[] Runes =
         {
-            new() { Id = RuneId.Ember, Name = "炎のルーン", Mark = "炎", Text = "技の当たる場所に燃える床を残す（突進や矢なら通り道に火の道）" },
-            new() { Id = RuneId.Frost, Name = "氷のルーン", Mark = "氷", Text = "技の当たる場所の敵を凍らせる（凍った敵は砕ける）" },
-            new() { Id = RuneId.Storm, Name = "雷のルーン", Mark = "雷", Text = "技の当たる場所から近くの敵へ雷が飛ぶ" },
-            new() { Id = RuneId.Vital, Name = "命のルーン", Mark = "命", Text = "技を使うと自分と近くの仲間が回復する" },
-            new() { Id = RuneId.Echo, Name = "響のルーン", Mark = "響", Text = "技を使うと、ときどきすぐにもう一度使える" },
-            new() { Id = RuneId.Swift, Name = "疾のルーン", Mark = "疾", Text = "技の再使用時間が大きく縮む" },
-            new() { Id = RuneId.Shadow, Name = "影のルーン", Mark = "影", Text = "技を使うと回避がすぐ使え、少しのあいだ攻撃がすべて会心になる" },
-            new() { Id = RuneId.Soul, Name = "魂のルーン", Mark = "魂", Text = "技の当たる場所から魂が四方へ飛び散り、敵を打つ" },
+            new() { Id = RuneId.Ember, Name = "フレイムルーン", Mark = "炎", Text = "スキルの当たる場所に燃える床を残す（突進や矢なら通り道に火の道）" },
+            new() { Id = RuneId.Frost, Name = "フロストルーン", Mark = "氷", Text = "スキルの当たる場所の敵を凍らせる（凍った敵は砕ける）" },
+            new() { Id = RuneId.Storm, Name = "サンダールーン", Mark = "雷", Text = "スキルの当たる場所から近くの敵へ雷が飛ぶ" },
+            new() { Id = RuneId.Vital, Name = "ライフルーン", Mark = "命", Text = "スキルを使うと自分と近くの仲間が回復する" },
+            new() { Id = RuneId.Echo, Name = "エコールーン", Mark = "響", Text = "スキルを使うと、ときどきすぐにもう一度使える" },
+            new() { Id = RuneId.Swift, Name = "スウィフトルーン", Mark = "疾", Text = "スキルの再使用時間が大きく縮む" },
+            new() { Id = RuneId.Shadow, Name = "シャドウルーン", Mark = "影", Text = "スキルを使うとドッジがすぐ使え、少しのあいだ攻撃がすべてクリティカルになる" },
+            new() { Id = RuneId.Soul, Name = "ソウルルーン", Mark = "魂", Text = "スキルの当たる場所からソウルが四方へ飛び散り、敵を打つ" },
         };
 
         public static RuneDef GetRune(RuneId id)
@@ -190,22 +190,22 @@ namespace Game.Core
 
         public static readonly LegendaryDef[] Legendaries =
         {
-            new() { Id = LegendaryId.WhirlwindBlade, Class = ClassId.Warrior, Name = "旋風の", Text = "突進斬りの終わりに回転斬りを放つ" },
-            new() { Id = LegendaryId.WarDrum, Class = ClassId.Warrior, Name = "鬨の", Text = "鬨の声の範囲が2倍、聞いた仲間の攻撃速度+20%" },
-            new() { Id = LegendaryId.FrostCrown, Class = ClassId.Mage, Name = "霜の王の", Text = "氷結陣が自分についてくる" },
-            new() { Id = LegendaryId.ThunderStaff, Class = ClassId.Mage, Name = "雷鳴の", Text = "魔弾が当たると近くの敵へ連鎖する" },
-            new() { Id = LegendaryId.ShadowQuiver, Class = ClassId.Ranger, Name = "影の", Text = "貫通の一矢が扇状に3本になる" },
-            new() { Id = LegendaryId.HuntGodMark, Class = ClassId.Ranger, Name = "狩神の", Text = "狩人の印が近くのもう1体にも付く" },
-            new() { Id = LegendaryId.Unbreakable, Class = ClassId.Guardian, Name = "不落の", Text = "盾の突進の終わりに衝撃波を放ち、周りの敵も気絶させる" },
-            new() { Id = LegendaryId.Hallowed, Class = ClassId.Guardian, Name = "聖域の", Text = "守りの陣が1.4倍の広さになり、3秒長く続き、回復も1.5倍" },
-            new() { Id = LegendaryId.BlackBlade, Class = ClassId.Assassin, Name = "黒刃の", Text = "影渡りの斬撃が2回になる" },
-            new() { Id = LegendaryId.Mist, Class = ClassId.Assassin, Name = "霧の", Text = "煙玉の範囲が2倍、必中会心の時間+2秒" },
-            new() { Id = LegendaryId.Inferno, Class = ClassId.Alchemist, Name = "業火の", Text = "火炎瓶の燃える床が1.6倍の広さになり、2秒長く燃える" },
-            new() { Id = LegendaryId.BlessedRain, Class = ClassId.Alchemist, Name = "慈雨の", Text = "回復薬を浴びた仲間に25のシールドも与える" },
-            new() { Id = LegendaryId.BoneThrone, Class = ClassId.Deathcaller, Name = "屍王の", Text = "骨の兵の体力と攻撃が2倍になる" },
-            new() { Id = LegendaryId.Underworld, Class = ClassId.Deathcaller, Name = "冥界の", Text = "死の呪いの範囲が1.6倍、呪われた敵は倒れると必ず骨の兵になる" },
-            new() { Id = LegendaryId.Scales, Class = ClassId.Paladin, Name = "天秤の", Text = "献身で2人の仲間とつながる" },
-            new() { Id = LegendaryId.Sunburst, Class = ClassId.Paladin, Name = "日輪の", Text = "裁きの光が3回続けて落ちる" },
+            new() { Id = LegendaryId.WhirlwindBlade, Class = ClassId.Warrior, Name = "サイクロン・", Text = "チャージスラッシュの終わりに回転斬りを放つ" },
+            new() { Id = LegendaryId.WarDrum, Class = ClassId.Warrior, Name = "ウォードラム・", Text = "ウォークライの範囲が2倍、聞いた仲間の攻撃速度+20%" },
+            new() { Id = LegendaryId.FrostCrown, Class = ClassId.Mage, Name = "フロストクラウン・", Text = "フロストノヴァが自分についてくる" },
+            new() { Id = LegendaryId.ThunderStaff, Class = ClassId.Mage, Name = "サンダークラップ・", Text = "マジックボルトが当たると近くの敵へ連鎖する" },
+            new() { Id = LegendaryId.ShadowQuiver, Class = ClassId.Ranger, Name = "シャドウ・", Text = "ピアシングショットが扇状に3本になる" },
+            new() { Id = LegendaryId.HuntGodMark, Class = ClassId.Ranger, Name = "ハントゴッド・", Text = "ハンターズマークが近くのもう1体にも付く" },
+            new() { Id = LegendaryId.Unbreakable, Class = ClassId.Guardian, Name = "アンブレイカブル・", Text = "シールドバッシュの終わりにショックウェーブを放ち、周りの敵もスタンさせる" },
+            new() { Id = LegendaryId.Hallowed, Class = ClassId.Guardian, Name = "ハロウド・", Text = "サンクチュアリが1.4倍の広さになり、3秒長く続き、回復も1.5倍" },
+            new() { Id = LegendaryId.BlackBlade, Class = ClassId.Assassin, Name = "ブラックブレード・", Text = "シャドウステップの斬撃が2回になる" },
+            new() { Id = LegendaryId.Mist, Class = ClassId.Assassin, Name = "ミスト・", Text = "スモークボムの範囲が2倍、必中クリティカルの時間+2秒" },
+            new() { Id = LegendaryId.Inferno, Class = ClassId.Alchemist, Name = "インフェルノ・", Text = "ファイアフラスクの燃える床が1.6倍の広さになり、2秒長く燃える" },
+            new() { Id = LegendaryId.BlessedRain, Class = ClassId.Alchemist, Name = "ブレストレイン・", Text = "ヒールポーションを浴びた仲間に25のシールドも与える" },
+            new() { Id = LegendaryId.BoneThrone, Class = ClassId.Deathcaller, Name = "ボーンスローン・", Text = "ボーンサーヴァントの体力と攻撃が2倍になる" },
+            new() { Id = LegendaryId.Underworld, Class = ClassId.Deathcaller, Name = "アンダーワールド・", Text = "デスカースの範囲が1.6倍、呪われた敵は倒れると必ずボーンサーヴァントになる" },
+            new() { Id = LegendaryId.Scales, Class = ClassId.Paladin, Name = "スケイルズ・", Text = "ディヴォーションで2人の仲間とつながる" },
+            new() { Id = LegendaryId.Sunburst, Class = ClassId.Paladin, Name = "サンバースト・", Text = "ジャッジメントが3回続けて落ちる" },
         };
 
         public static LegendaryDef GetLegendary(LegendaryId id)

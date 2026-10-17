@@ -22,12 +22,12 @@ namespace Game.Core
 
         public static string Name(EliteAffix a) => a switch
         {
-            EliteAffix.Swift => "俊足",
-            EliteAffix.Regenerating => "再生",
-            EliteAffix.Volatile => "爆発",
-            EliteAffix.Splitting => "分裂",
-            EliteAffix.Summoner => "召喚",
-            EliteAffix.Shielded => "守護",
+            EliteAffix.Swift => "スウィフト",
+            EliteAffix.Regenerating => "リジェネ",
+            EliteAffix.Volatile => "ヴォラタイル",
+            EliteAffix.Splitting => "スプリット",
+            EliteAffix.Summoner => "サモナー",
+            EliteAffix.Shielded => "シールド",
             _ => "",
         };
 
@@ -37,7 +37,7 @@ namespace Game.Core
             EliteAffix.Regenerating => "攻撃されない間、体力が戻っていく",
             EliteAffix.Volatile => "倒れたあと、その場が爆発する（円の予兆）",
             EliteAffix.Splitting => "倒れると小さな2体に分かれる",
-            EliteAffix.Summoner => "ときどき仲間の魔物を呼ぶ（2体まで）",
+            EliteAffix.Summoner => "ときどき仲間のモンスターを呼ぶ（2体まで）",
             EliteAffix.Shielded => "体力の25%ぶんの守りの膜。しばらく攻撃されないと戻る",
             _ => "",
         };

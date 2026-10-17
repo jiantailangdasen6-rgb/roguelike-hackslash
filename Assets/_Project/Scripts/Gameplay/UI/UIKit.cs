@@ -93,6 +93,16 @@ namespace Game.Gameplay
             return label;
         }
 
+        /// <summary>Shrinks the text (down to <paramref name="min"/>) when it would not fit its box.</summary>
+        public static Text Fit(this Text label, int min)
+        {
+            label.resizeTextForBestFit = true;
+            label.resizeTextMinSize = Mathf.Min(min, label.fontSize);
+            label.resizeTextMaxSize = label.fontSize;
+            label.verticalOverflow = VerticalWrapMode.Truncate; // best fit only measures against a bounded box
+            return label;
+        }
+
         private static readonly List<CanvasScaler> Scalers = new();
         private static bool _scaleHooked;
 
@@ -195,7 +205,7 @@ namespace Game.Gameplay
             button.colors = colors;
             AddSounds(button);
             button.onClick.AddListener(onClick);
-            Label(image.transform, text, fontSize, TextAnchor.MiddleCenter).rectTransform.Stretch(8f);
+            Label(image.transform, text, fontSize, TextAnchor.MiddleCenter).Fit(Mathf.Max(11, fontSize / 2)).rectTransform.Stretch(8f);
             return button;
         }
 

@@ -14,8 +14,8 @@ namespace Game.Core
     {
         public static string Name(EnemyRole r) => r switch
         {
-            EnemyRole.Guard => "盾役",
-            EnemyRole.Healer => "癒し手",
+            EnemyRole.Guard => "ガード",
+            EnemyRole.Healer => "ヒーラー",
             _ => "",
         };
     }

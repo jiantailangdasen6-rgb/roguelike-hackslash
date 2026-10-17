@@ -69,13 +69,13 @@ namespace Game.Gameplay
 
         /// <summary>The staff roll (the credits of Docs/credits.md, in short).</summary>
         private const string Credits =
-            "<color=#e0b45a>企画・監督</color>\nこの迷宮を思い描いた人\n\n" +
+            "<color=#e0b45a>企画・監督</color>\nこのラビリンスを思い描いた人\n\n" +
             "<color=#e0b45a>実装・ドット絵・効果の加工</color>\nClaude（Anthropic）\n\n" +
             "<color=#e0b45a>音楽</color>\nOf Far Different Nature（LOOP BOX #3）\nProjectHelmet（Philémon Weber）\n\n" +
             "<color=#e0b45a>効果音</color>\nJC Sounds ・ leohpaz ・ Kenney\nartisticdude ・ StarNinjas ・ Iwan 'qubodup' Gabovitch\n\n" +
             "<color=#e0b45a>フォント</color>\nNoto Serif JP（Google / Adobe）\n解星 徳明（Font-Kai）\n\n" +
             "<color=#e0b45a>エンジン</color>\nUnity\n\n\n" +
-            "そして、ともに迷宮へ潜った仲間たちへ。\n\n<size=40><color=#ffd890>遊んでくれて、ありがとう。</color></size>";
+            "そして、ともにラビリンスへ潜った仲間たちへ。\n\n<size=40><color=#ffd890>遊んでくれて、ありがとう。</color></size>";
 
         private void OnEvent(SimEvent e)
         {

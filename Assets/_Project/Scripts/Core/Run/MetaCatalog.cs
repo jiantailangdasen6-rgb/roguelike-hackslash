@@ -62,14 +62,14 @@ namespace Game.Core
 
         private static readonly string[][] BranchNames =
         {
-            new[] { "剣", "鉄", "血" },         // Warrior
-            new[] { "秘術", "守護", "叡智" },   // Mage
-            new[] { "弓", "狩り", "疾風" },     // Ranger
-            new[] { "鎚", "城壁", "聖" },       // Guardian
-            new[] { "刃", "急所", "影" },       // Assassin
-            new[] { "調合", "大瓶", "秘伝" },   // Alchemist
-            new[] { "死霊", "冥府", "禁術" },   // Deathcaller
-            new[] { "剣", "聖印", "叙任" },     // Paladin
+            new[] { "ブレード", "アイアン", "ブラッド" },          // Warrior
+            new[] { "アーケイン", "ガード", "ウィズダム" },      // Mage
+            new[] { "アーチャー", "ハンター", "ゲイル" },        // Ranger
+            new[] { "ハンマー", "ウォール", "ホーリー" },        // Guardian
+            new[] { "ブレード", "ヴァイタル", "シャドウ" },      // Assassin
+            new[] { "ブリュー", "フラスク", "シークレット" },    // Alchemist
+            new[] { "ネクロ", "ヘル", "フォービドゥン" },        // Deathcaller
+            new[] { "ソード", "シジル", "オース" },              // Paladin
         };
 
         public static string BranchName(ClassId c, int branch) => (int)c < BranchNames.Length ? BranchNames[(int)c][branch] : "";
@@ -80,7 +80,7 @@ namespace Game.Core
             return new MasteryNode
             {
                 Id = id, Class = c, Branch = branch, Tier = 3, Cost = GrantCost, Kind = MasteryKind.GrantPerk, Perk = perk,
-                Name = $"{def.Name}の型", Text = $"「{def.Name}」を持って始まる：{def.Describe(1)}",
+                Name = $"{def.Name}スタイル", Text = $"「{def.Name}」を持って始まる：{def.Describe(1)}",
             };
         }
 
@@ -97,132 +97,132 @@ namespace Game.Core
         public static readonly MasteryNode[] Mastery =
         {
             // Warrior: 剣 / 鉄 / 血
-            new() { Id = "w_might", Class = ClassId.Warrior, Branch = 0, Tier = 1, Name = "剣技の研鑽", Text = "レベルごとの攻撃力成長 +1%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.01f },
-            new() { Id = "w_crusher", Class = ClassId.Warrior, Branch = 0, Tier = 2, Name = "技：粉砕", Text = "パーク「粉砕」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Crusher },
+            new() { Id = "w_might", Class = ClassId.Warrior, Branch = 0, Tier = 1, Name = "ソードトレーニング", Text = "レベルごとの攻撃力成長 +1%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.01f },
+            new() { Id = "w_crusher", Class = ClassId.Warrior, Branch = 0, Tier = 2, Name = "スキル：クラッシャー", Text = "パーク「クラッシャー」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Crusher },
             G("w_g_whirl", ClassId.Warrior, 0, PerkId.Whirlwind),
-            K("w_k_ember", ClassId.Warrior, 0, "炎の突進", 1, RuneId.Ember, "突進斬りの通り道に燃える床が残る"),
-            new() { Id = "w_hp", Class = ClassId.Warrior, Branch = 1, Tier = 1, Name = "鍛えた肉体", Text = "レベルごとの最大HP成長 +4", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 4f },
-            new() { Id = "w_armor", Class = ClassId.Warrior, Branch = 1, Tier = 2, Name = "不動", Text = "防御 +2", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Armor, ModifierKind.Flat, 2f) },
+            K("w_k_ember", ClassId.Warrior, 0, "フレイムラッシュ", 1, RuneId.Ember, "チャージスラッシュの通り道に燃える床が残る"),
+            new() { Id = "w_hp", Class = ClassId.Warrior, Branch = 1, Tier = 1, Name = "トレインドボディ", Text = "レベルごとの最大HP成長 +4", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 4f },
+            new() { Id = "w_armor", Class = ClassId.Warrior, Branch = 1, Tier = 2, Name = "イモービル", Text = "防御 +2", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Armor, ModifierKind.Flat, 2f) },
             G("w_g_bulwark", ClassId.Warrior, 1, PerkId.Bulwark),
-            K("w_k_storm", ClassId.Warrior, 1, "雷鳴の鬨", 2, RuneId.Storm, "鬨の声から近くの敵へ雷が飛ぶ"),
-            new() { Id = "w_blood", Class = ClassId.Warrior, Branch = 2, Tier = 1, Name = "技：血の渇き", Text = "パーク「血の渇き」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Bloodlust },
-            new() { Id = "w_start", Class = ClassId.Warrior, Branch = 2, Tier = 2, Name = "歴戦", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+            K("w_k_storm", ClassId.Warrior, 1, "サンダークライ", 2, RuneId.Storm, "ウォークライから近くの敵へ雷が飛ぶ"),
+            new() { Id = "w_blood", Class = ClassId.Warrior, Branch = 2, Tier = 1, Name = "スキル：ブラッドラスト", Text = "パーク「ブラッドラスト」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Bloodlust },
+            new() { Id = "w_start", Class = ClassId.Warrior, Branch = 2, Tier = 2, Name = "ベテランズエッジ", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
             G("w_g_rush", ClassId.Warrior, 2, PerkId.Rush),
-            K("w_k_shadow", ClassId.Warrior, 2, "影の踏み込み", 1, RuneId.Shadow, "突進斬りのあと回避がすぐ戻り、少しのあいだ攻撃がすべて会心"),
+            K("w_k_shadow", ClassId.Warrior, 2, "シャドウランジ", 1, RuneId.Shadow, "チャージスラッシュのあとドッジがすぐ戻り、少しのあいだ攻撃がすべてクリティカル"),
 
             // Mage: 秘術 / 守護 / 叡智
-            new() { Id = "m_might", Class = ClassId.Mage, Branch = 0, Tier = 1, Name = "秘術の研鑽", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
-            new() { Id = "m_chain", Class = ClassId.Mage, Branch = 0, Tier = 2, Name = "技：連鎖する魔弾", Text = "パーク「連鎖する魔弾」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.ChainBolt },
+            new() { Id = "m_might", Class = ClassId.Mage, Branch = 0, Tier = 1, Name = "アーケイントレーニング", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
+            new() { Id = "m_chain", Class = ClassId.Mage, Branch = 0, Tier = 2, Name = "スキル：チェインボルト", Text = "パーク「チェインボルト」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.ChainBolt },
             G("m_g_multi", ClassId.Mage, 0, PerkId.Multicast),
-            K("m_k_storm", ClassId.Mage, 0, "雷氷の陣", 1, RuneId.Storm, "氷結陣から近くの敵へ雷が飛ぶ"),
-            new() { Id = "m_hp", Class = ClassId.Mage, Branch = 1, Tier = 1, Name = "魔力の護り", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
-            new() { Id = "m_cd", Class = ClassId.Mage, Branch = 1, Tier = 2, Name = "高速詠唱", Text = "スキルのクールダウン −8%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Cooldown, ModifierKind.PercentAdd, -0.08f) },
+            K("m_k_storm", ClassId.Mage, 0, "サンダーフロスト", 1, RuneId.Storm, "フロストノヴァから近くの敵へ雷が飛ぶ"),
+            new() { Id = "m_hp", Class = ClassId.Mage, Branch = 1, Tier = 1, Name = "マナシールド", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "m_cd", Class = ClassId.Mage, Branch = 1, Tier = 2, Name = "クイックキャスト", Text = "スキルのクールダウン −8%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Cooldown, ModifierKind.PercentAdd, -0.08f) },
             G("m_g_armor", ClassId.Mage, 1, PerkId.FrostArmor),
-            K("m_k_echo", ClassId.Mage, 1, "響く祈り", 2, RuneId.Echo, "癒しの光が、ときどきすぐにもう一度使える"),
-            new() { Id = "m_ignite", Class = ClassId.Mage, Branch = 2, Tier = 1, Name = "技：燃焼", Text = "パーク「燃焼」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Ignite },
-            new() { Id = "m_start", Class = ClassId.Mage, Branch = 2, Tier = 2, Name = "博識", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+            K("m_k_echo", ClassId.Mage, 1, "エコープレイヤー", 2, RuneId.Echo, "ヒーリングライトが、ときどきすぐにもう一度使える"),
+            new() { Id = "m_ignite", Class = ClassId.Mage, Branch = 2, Tier = 1, Name = "スキル：イグナイト", Text = "パーク「イグナイト」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Ignite },
+            new() { Id = "m_start", Class = ClassId.Mage, Branch = 2, Tier = 2, Name = "ローアマスター", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
             G("m_g_frost", ClassId.Mage, 2, PerkId.Permafrost),
-            K("m_k_soul", ClassId.Mage, 2, "魂散らしの陣", 1, RuneId.Soul, "氷結陣から魂が四方へ飛び散り、敵を打つ"),
+            K("m_k_soul", ClassId.Mage, 2, "ソウルスキャッター", 1, RuneId.Soul, "フロストノヴァからソウルが四方へ飛び散り、敵を打つ"),
 
             // Ranger: 弓 / 狩り / 疾風
-            new() { Id = "r_might", Class = ClassId.Ranger, Branch = 0, Tier = 1, Name = "弓術の研鑽", Text = "レベルごとの攻撃力成長 +1.2%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.012f },
-            new() { Id = "r_venom", Class = ClassId.Ranger, Branch = 0, Tier = 2, Name = "技：毒矢", Text = "パーク「毒矢」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Venom },
+            new() { Id = "r_might", Class = ClassId.Ranger, Branch = 0, Tier = 1, Name = "アーチェリートレーニング", Text = "レベルごとの攻撃力成長 +1.2%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.012f },
+            new() { Id = "r_venom", Class = ClassId.Ranger, Branch = 0, Tier = 2, Name = "スキル：ヴェノムアロー", Text = "パーク「ヴェノムアロー」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Venom },
             G("r_g_spread", ClassId.Ranger, 0, PerkId.Spread),
-            K("r_k_storm", ClassId.Ranger, 0, "雷の一矢", 1, RuneId.Storm, "貫通の一矢の通り道から近くの敵へ雷が飛ぶ"),
-            new() { Id = "r_hp", Class = ClassId.Ranger, Branch = 1, Tier = 1, Name = "野生の体", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
-            new() { Id = "r_speed", Class = ClassId.Ranger, Branch = 1, Tier = 2, Name = "俊足", Text = "移動速度 +6%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.06f) },
+            K("r_k_storm", ClassId.Ranger, 0, "サンダーショット", 1, RuneId.Storm, "ピアシングショットの通り道から近くの敵へ雷が飛ぶ"),
+            new() { Id = "r_hp", Class = ClassId.Ranger, Branch = 1, Tier = 1, Name = "ワイルドボディ", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "r_speed", Class = ClassId.Ranger, Branch = 1, Tier = 2, Name = "フリートフット", Text = "移動速度 +6%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.06f) },
             G("r_g_mark", ClassId.Ranger, 1, PerkId.DeepMark),
-            K("r_k_frost", ClassId.Ranger, 1, "凍てる印", 2, RuneId.Frost, "狩人の印を付けた所の敵が凍る"),
-            new() { Id = "r_evasive", Class = ClassId.Ranger, Branch = 2, Tier = 1, Name = "技：身軽", Text = "パーク「身軽」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Evasive },
-            new() { Id = "r_start", Class = ClassId.Ranger, Branch = 2, Tier = 2, Name = "狩りの心得", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+            K("r_k_frost", ClassId.Ranger, 1, "フロストマーク", 2, RuneId.Frost, "ハンターズマークを付けた所の敵が凍る"),
+            new() { Id = "r_evasive", Class = ClassId.Ranger, Branch = 2, Tier = 1, Name = "スキル：イベイシブ", Text = "パーク「イベイシブ」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Evasive },
+            new() { Id = "r_start", Class = ClassId.Ranger, Branch = 2, Tier = 2, Name = "ハンターズインスティンクト", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
             G("r_g_ricochet", ClassId.Ranger, 2, PerkId.Ricochet),
-            K("r_k_shadow", ClassId.Ranger, 2, "影の狩人", 2, RuneId.Shadow, "狩人の印のあと回避がすぐ戻り、少しのあいだ攻撃がすべて会心"),
+            K("r_k_shadow", ClassId.Ranger, 2, "シャドウハント", 2, RuneId.Shadow, "ハンターズマークのあとドッジがすぐ戻り、少しのあいだ攻撃がすべてクリティカル"),
 
             // Guardian: 鎚 / 城壁 / 聖
-            new() { Id = "g_might", Class = ClassId.Guardian, Branch = 0, Tier = 1, Name = "鎚の研鑽", Text = "レベルごとの攻撃力成長 +1%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.01f },
-            new() { Id = "g_hammer", Class = ClassId.Guardian, Branch = 0, Tier = 2, Name = "技：聖鎚", Text = "パーク「聖鎚」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.HolyHammer },
+            new() { Id = "g_might", Class = ClassId.Guardian, Branch = 0, Tier = 1, Name = "ハンマートレーニング", Text = "レベルごとの攻撃力成長 +1%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.01f },
+            new() { Id = "g_hammer", Class = ClassId.Guardian, Branch = 0, Tier = 2, Name = "スキル：ホーリーハンマー", Text = "パーク「ホーリーハンマー」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.HolyHammer },
             G("g_g_retri", ClassId.Guardian, 0, PerkId.Retribution),
-            K("g_k_storm", ClassId.Guardian, 0, "雷の盾", 1, RuneId.Storm, "盾の突進の通り道から近くの敵へ雷が飛ぶ"),
-            new() { Id = "g_hp", Class = ClassId.Guardian, Branch = 1, Tier = 1, Name = "鋼の骨", Text = "レベルごとの最大HP成長 +5", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 5f },
-            new() { Id = "g_armor", Class = ClassId.Guardian, Branch = 1, Tier = 2, Name = "城門の構え", Text = "防御 +3", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Armor, ModifierKind.Flat, 3f) },
+            K("g_k_storm", ClassId.Guardian, 0, "サンダーシールド", 1, RuneId.Storm, "シールドバッシュの通り道から近くの敵へ雷が飛ぶ"),
+            new() { Id = "g_hp", Class = ClassId.Guardian, Branch = 1, Tier = 1, Name = "スチールボーン", Text = "レベルごとの最大HP成長 +5", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 5f },
+            new() { Id = "g_armor", Class = ClassId.Guardian, Branch = 1, Tier = 2, Name = "ゲートスタンス", Text = "防御 +3", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Armor, ModifierKind.Flat, 3f) },
             G("g_g_wall", ClassId.Guardian, 1, PerkId.ShieldWall),
-            K("g_k_vital", ClassId.Guardian, 1, "癒しの陣", 2, RuneId.Vital, "守りの陣を張ると、自分と近くの仲間がすぐ回復する"),
-            new() { Id = "g_aegis", Class = ClassId.Guardian, Branch = 2, Tier = 1, Name = "技：聖盾", Text = "パーク「聖盾」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Aegis },
-            new() { Id = "g_start", Class = ClassId.Guardian, Branch = 2, Tier = 2, Name = "誓いの剣", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+            K("g_k_vital", ClassId.Guardian, 1, "ヒーリンググラウンド", 2, RuneId.Vital, "サンクチュアリを張ると、自分と近くの仲間がすぐ回復する"),
+            new() { Id = "g_aegis", Class = ClassId.Guardian, Branch = 2, Tier = 1, Name = "スキル：イージス", Text = "パーク「イージス」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Aegis },
+            new() { Id = "g_start", Class = ClassId.Guardian, Branch = 2, Tier = 2, Name = "オースソード", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
             G("g_g_stead", ClassId.Guardian, 2, PerkId.Steadfast),
-            K("g_k_frost", ClassId.Guardian, 2, "凍てる突進", 1, RuneId.Frost, "盾の突進の通り道の敵が凍る"),
+            K("g_k_frost", ClassId.Guardian, 2, "フロストバッシュ", 1, RuneId.Frost, "シールドバッシュの通り道の敵が凍る"),
 
             // Assassin: 刃 / 急所 / 影
-            new() { Id = "a_might", Class = ClassId.Assassin, Branch = 0, Tier = 1, Name = "刃の研鑽", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
-            new() { Id = "a_veil", Class = ClassId.Assassin, Branch = 0, Tier = 2, Name = "技：煙幕", Text = "パーク「煙幕」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.SmokeVeil },
+            new() { Id = "a_might", Class = ClassId.Assassin, Branch = 0, Tier = 1, Name = "ブレードトレーニング", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
+            new() { Id = "a_veil", Class = ClassId.Assassin, Branch = 0, Tier = 2, Name = "スキル：スモークヴェール", Text = "パーク「スモークヴェール」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.SmokeVeil },
             G("a_g_finish", ClassId.Assassin, 0, PerkId.Finisher),
-            K("a_k_soul", ClassId.Assassin, 0, "魂狩り", 1, RuneId.Soul, "影渡りで降りた所から魂が四方へ飛び散り、敵を打つ"),
-            new() { Id = "a_hp", Class = ClassId.Assassin, Branch = 1, Tier = 1, Name = "しなやかな体", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
-            new() { Id = "a_crit", Class = ClassId.Assassin, Branch = 1, Tier = 2, Name = "急所の心得", Text = "会心率 +8%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.CritChance, ModifierKind.Flat, 0.08f) },
+            K("a_k_soul", ClassId.Assassin, 0, "ソウルハント", 1, RuneId.Soul, "シャドウステップで降りた所からソウルが四方へ飛び散り、敵を打つ"),
+            new() { Id = "a_hp", Class = ClassId.Assassin, Branch = 1, Tier = 1, Name = "サプルボディ", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "a_crit", Class = ClassId.Assassin, Branch = 1, Tier = 2, Name = "ヴァイタルストライク", Text = "クリティカル率 +8%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.CritChance, ModifierKind.Flat, 0.08f) },
             G("a_g_poison", ClassId.Assassin, 1, PerkId.PoisonBlades),
-            K("a_k_frost", ClassId.Assassin, 1, "氷の煙", 2, RuneId.Frost, "煙玉で周りの敵が凍る"),
-            new() { Id = "a_twin", Class = ClassId.Assassin, Branch = 2, Tier = 1, Name = "技：双牙", Text = "パーク「双牙」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Twinfang },
-            new() { Id = "a_start", Class = ClassId.Assassin, Branch = 2, Tier = 2, Name = "闇の作法", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+            K("a_k_frost", ClassId.Assassin, 1, "フロストスモーク", 2, RuneId.Frost, "スモークボムで周りの敵が凍る"),
+            new() { Id = "a_twin", Class = ClassId.Assassin, Branch = 2, Tier = 1, Name = "スキル：ツインファング", Text = "パーク「ツインファング」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Twinfang },
+            new() { Id = "a_start", Class = ClassId.Assassin, Branch = 2, Tier = 2, Name = "ダークマナー", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
             G("a_g_dance", ClassId.Assassin, 2, PerkId.ShadowDance),
-            K("a_k_echo", ClassId.Assassin, 2, "影の連歩", 1, RuneId.Echo, "影渡りが、ときどきすぐにもう一度使える"),
+            K("a_k_echo", ClassId.Assassin, 2, "シャドウエコー", 1, RuneId.Echo, "シャドウステップが、ときどきすぐにもう一度使える"),
 
             // Alchemist: 調合 / 大瓶 / 秘伝
-            new() { Id = "x_might", Class = ClassId.Alchemist, Branch = 0, Tier = 1, Name = "調合の研鑽", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
-            new() { Id = "x_catalyst", Class = ClassId.Alchemist, Branch = 0, Tier = 2, Name = "技：触媒", Text = "パーク「触媒」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Catalyst },
+            new() { Id = "x_might", Class = ClassId.Alchemist, Branch = 0, Tier = 1, Name = "ブリューイングトレーニング", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
+            new() { Id = "x_catalyst", Class = ClassId.Alchemist, Branch = 0, Tier = 2, Name = "スキル：カタリスト", Text = "パーク「カタリスト」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Catalyst },
             G("x_g_volatile", ClassId.Alchemist, 0, PerkId.VolatileMix),
-            K("x_k_storm", ClassId.Alchemist, 0, "雷薬", 1, RuneId.Storm, "火炎瓶の割れた所から近くの敵へ雷が飛ぶ"),
-            new() { Id = "x_hp", Class = ClassId.Alchemist, Branch = 1, Tier = 1, Name = "滋養の薬", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
-            new() { Id = "x_area", Class = ClassId.Alchemist, Branch = 1, Tier = 2, Name = "大きな瓶", Text = "スキルと攻撃の範囲 +10%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Area, ModifierKind.PercentAdd, 0.1f) },
+            K("x_k_storm", ClassId.Alchemist, 0, "サンダーブリュー", 1, RuneId.Storm, "ファイアフラスクの割れた所から近くの敵へ雷が飛ぶ"),
+            new() { Id = "x_hp", Class = ClassId.Alchemist, Branch = 1, Tier = 1, Name = "トニック", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "x_area", Class = ClassId.Alchemist, Branch = 1, Tier = 2, Name = "ビッグフラスク", Text = "スキルと攻撃の範囲 +10%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Area, ModifierKind.PercentAdd, 0.1f) },
             G("x_g_remedy", ClassId.Alchemist, 1, PerkId.Remedy),
-            K("x_k_frost", ClassId.Alchemist, 1, "冷却薬", 2, RuneId.Frost, "回復薬の割れた所の敵が凍る"),
-            new() { Id = "x_twin", Class = ClassId.Alchemist, Branch = 2, Tier = 1, Name = "技：二本投げ", Text = "パーク「二本投げ」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.TwinFlask },
-            new() { Id = "x_start", Class = ClassId.Alchemist, Branch = 2, Tier = 2, Name = "秘伝の書", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+            K("x_k_frost", ClassId.Alchemist, 1, "フロストブリュー", 2, RuneId.Frost, "ヒールポーションの割れた所の敵が凍る"),
+            new() { Id = "x_twin", Class = ClassId.Alchemist, Branch = 2, Tier = 1, Name = "スキル：ツインフラスク", Text = "パーク「ツインフラスク」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.TwinFlask },
+            new() { Id = "x_start", Class = ClassId.Alchemist, Branch = 2, Tier = 2, Name = "シークレットレシピ", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
             G("x_g_napalm", ClassId.Alchemist, 2, PerkId.Napalm),
-            K("x_k_echo", ClassId.Alchemist, 2, "連投", 1, RuneId.Echo, "火炎瓶を、ときどきすぐにもう一度投げられる"),
+            K("x_k_echo", ClassId.Alchemist, 2, "ダブルトス", 1, RuneId.Echo, "ファイアフラスクを、ときどきすぐにもう一度投げられる"),
 
             // Deathcaller: 死霊 / 冥府 / 禁術
-            new() { Id = "d_might", Class = ClassId.Deathcaller, Branch = 0, Tier = 1, Name = "死霊術の研鑽", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
-            new() { Id = "d_plague", Class = ClassId.Deathcaller, Branch = 0, Tier = 2, Name = "技：疫病の呪い", Text = "パーク「疫病の呪い」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.PlagueCurse },
+            new() { Id = "d_might", Class = ClassId.Deathcaller, Branch = 0, Tier = 1, Name = "ネクロマンシートレーニング", Text = "レベルごとの攻撃力成長 +1.5%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.015f },
+            new() { Id = "d_plague", Class = ClassId.Deathcaller, Branch = 0, Tier = 2, Name = "スキル：プレイグカース", Text = "パーク「プレイグカース」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.PlagueCurse },
             G("d_g_knell", ClassId.Deathcaller, 0, PerkId.DeathKnell),
-            K("d_k_soul", ClassId.Deathcaller, 0, "魂の呪い", 2, RuneId.Soul, "死の呪いの所から魂が四方へ飛び散り、敵を打つ"),
-            new() { Id = "d_hp", Class = ClassId.Deathcaller, Branch = 1, Tier = 1, Name = "屍の契り", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
-            new() { Id = "d_cd", Class = ClassId.Deathcaller, Branch = 1, Tier = 2, Name = "冥府の門", Text = "スキルのクールダウン −8%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Cooldown, ModifierKind.PercentAdd, -0.08f) },
+            K("d_k_soul", ClassId.Deathcaller, 0, "ソウルカース", 2, RuneId.Soul, "デスカースの所からソウルが四方へ飛び散り、敵を打つ"),
+            new() { Id = "d_hp", Class = ClassId.Deathcaller, Branch = 1, Tier = 1, Name = "コープスパクト", Text = "レベルごとの最大HP成長 +3", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 3f },
+            new() { Id = "d_cd", Class = ClassId.Deathcaller, Branch = 1, Tier = 2, Name = "ヘルゲート", Text = "スキルのクールダウン −8%", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Cooldown, ModifierKind.PercentAdd, -0.08f) },
             G("d_g_siphon", ClassId.Deathcaller, 1, PerkId.SoulSiphon),
-            K("d_k_vital", ClassId.Deathcaller, 1, "命吸う骨", 1, RuneId.Vital, "骨の兵を呼ぶと、自分と近くの仲間が回復する"),
-            new() { Id = "d_storm", Class = ClassId.Deathcaller, Branch = 2, Tier = 1, Name = "技：骨の嵐", Text = "パーク「骨の嵐」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Bonestorm },
-            new() { Id = "d_start", Class = ClassId.Deathcaller, Branch = 2, Tier = 2, Name = "禁書", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+            K("d_k_vital", ClassId.Deathcaller, 1, "ライフドレインボーン", 1, RuneId.Vital, "ボーンサーヴァントを呼ぶと、自分と近くの仲間が回復する"),
+            new() { Id = "d_storm", Class = ClassId.Deathcaller, Branch = 2, Tier = 1, Name = "スキル：ボーンストーム", Text = "パーク「ボーンストーム」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Bonestorm },
+            new() { Id = "d_start", Class = ClassId.Deathcaller, Branch = 2, Tier = 2, Name = "フォービドゥンブック", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
             G("d_g_legion", ClassId.Deathcaller, 2, PerkId.BoneLegion),
-            K("d_k_ember", ClassId.Deathcaller, 2, "業火の呪い", 2, RuneId.Ember, "死の呪いの所に燃える床が残る"),
+            K("d_k_ember", ClassId.Deathcaller, 2, "インフェルノカース", 2, RuneId.Ember, "デスカースの所に燃える床が残る"),
 
             // Paladin: 剣 / 聖印 / 叙任
-            new() { Id = "p_might", Class = ClassId.Paladin, Branch = 0, Tier = 1, Name = "剣の誓い", Text = "レベルごとの攻撃力成長 +1.2%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.012f },
-            new() { Id = "p_martyr", Class = ClassId.Paladin, Branch = 0, Tier = 2, Name = "技：殉教", Text = "パーク「殉教」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Martyr },
+            new() { Id = "p_might", Class = ClassId.Paladin, Branch = 0, Tier = 1, Name = "ソードオース", Text = "レベルごとの攻撃力成長 +1.2%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.012f },
+            new() { Id = "p_martyr", Class = ClassId.Paladin, Branch = 0, Tier = 2, Name = "スキル：マーター", Text = "パーク「マーター」が出現するようになる", Cost = 60, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Martyr },
             G("p_g_zeal", ClassId.Paladin, 0, PerkId.Zeal),
-            K("p_k_storm", ClassId.Paladin, 0, "雷の裁き", 1, RuneId.Storm, "裁きの光から近くの敵へ雷が飛ぶ"),
-            new() { Id = "p_hp", Class = ClassId.Paladin, Branch = 1, Tier = 1, Name = "聖なる体", Text = "レベルごとの最大HP成長 +4", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 4f },
-            new() { Id = "p_armor", Class = ClassId.Paladin, Branch = 1, Tier = 2, Name = "聖印の鎧", Text = "防御 +2", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Armor, ModifierKind.Flat, 2f) },
+            K("p_k_storm", ClassId.Paladin, 0, "サンダージャッジメント", 1, RuneId.Storm, "ジャッジメントから近くの敵へ雷が飛ぶ"),
+            new() { Id = "p_hp", Class = ClassId.Paladin, Branch = 1, Tier = 1, Name = "ホーリーボディ", Text = "レベルごとの最大HP成長 +4", Cost = 30, Kind = MasteryKind.HealthGrowth, Value = 4f },
+            new() { Id = "p_armor", Class = ClassId.Paladin, Branch = 1, Tier = 2, Name = "シジルアーマー", Text = "防御 +2", Cost = 70, Kind = MasteryKind.Stat, Modifier = M(StatType.Armor, ModifierKind.Flat, 2f) },
             G("p_g_shield", ClassId.Paladin, 1, PerkId.LightShield),
-            K("p_k_vital", ClassId.Paladin, 1, "癒しの献身", 2, RuneId.Vital, "献身を使うと、自分と近くの仲間が回復する"),
-            new() { Id = "p_radiance", Class = ClassId.Paladin, Branch = 2, Tier = 1, Name = "技：光輝", Text = "パーク「光輝」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Radiance },
-            new() { Id = "p_start", Class = ClassId.Paladin, Branch = 2, Tier = 2, Name = "叙任", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
+            K("p_k_vital", ClassId.Paladin, 1, "ヒーリングディヴォーション", 2, RuneId.Vital, "ディヴォーションを使うと、自分と近くの仲間が回復する"),
+            new() { Id = "p_radiance", Class = ClassId.Paladin, Branch = 2, Tier = 1, Name = "スキル：レディアンス", Text = "パーク「レディアンス」が出現するようになる", Cost = 80, Kind = MasteryKind.UnlockPerk, Perk = PerkId.Radiance },
+            new() { Id = "p_start", Class = ClassId.Paladin, Branch = 2, Tier = 2, Name = "ナイトフッド", Text = "ラン開始時にパークを1つ選べる", Cost = 100, Kind = MasteryKind.StartPerk },
             G("p_g_steel", ClassId.Paladin, 2, PerkId.BlessedSteel),
-            K("p_k_echo", ClassId.Paladin, 2, "繰り返す裁き", 1, RuneId.Echo, "裁きの光が、ときどきすぐにもう一度使える"),
+            K("p_k_echo", ClassId.Paladin, 2, "リピートジャッジメント", 1, RuneId.Echo, "ジャッジメントが、ときどきすぐにもう一度使える"),
         };
 
         public static readonly TrinketDef[] Trinkets =
         {
-            new() { Id = "charm_hp", Name = "旅人のお守り", Text = "最大HP +15%", Cost = 0, Modifiers = new[] { M(StatType.MaxHealth, ModifierKind.PercentAdd, 0.15f) } },
-            new() { Id = "wolf_fang", Name = "狼の牙", Text = "与えるダメージ +10%", Cost = 0, Modifiers = new[] { M(StatType.Might, ModifierKind.PercentAdd, 0.1f) } },
-            new() { Id = "feather", Name = "風切り羽", Text = "移動速度 +10%", Cost = 40, Modifiers = new[] { M(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.1f) } },
-            new() { Id = "iron_oath", Name = "鉄の誓約", Text = "防御 +3", Cost = 50, Modifiers = new[] { M(StatType.Armor, ModifierKind.Flat, 3f) } },
-            new() { Id = "saint_ash", Name = "聖者の灰", Text = "仲間の復活速度 +60%", Cost = 60, Modifiers = new[] { M(StatType.ReviveSpeed, ModifierKind.PercentAdd, 0.6f) } },
-            new() { Id = "soul_ring", Name = "吸魂の指輪", Text = "敵を倒すとHPが2回復", Cost = 70, HealOnKill = 2f },
-            new() { Id = "hourglass", Name = "時の砂時計", Text = "スキルのクールダウン −12%", Cost = 80, Modifiers = new[] { M(StatType.Cooldown, ModifierKind.PercentAdd, -0.12f) } },
-            new() { Id = "phoenix", Name = "不死鳥の羽", Text = "ランごとに1回、倒れてもその場でHP50%で復活", Cost = 120, Phoenix = true },
-            new() { Id = "soul_lantern", Name = "魂の灯籠", Text = "魂を拾う範囲 +60%", Cost = 40, Modifiers = new[] { M(StatType.PickupRange, ModifierKind.PercentAdd, 0.6f) } },
-            new() { Id = "bone_dice", Name = "骨のさいころ", Text = "会心率 +10%（会心はダメージ2倍）", Cost = 70, Modifiers = new[] { M(StatType.CritChance, ModifierKind.Flat, 0.1f) } },
-            new() { Id = "elder_tome", Name = "古の魔導書", Text = "スキルと攻撃の範囲 +15%", Cost = 90, Modifiers = new[] { M(StatType.Area, ModifierKind.PercentAdd, 0.15f) } },
-            new() { Id = "blood_chalice", Name = "血の聖杯", Text = "与えるダメージ +25%、ただし最大HP −15%", Cost = 100, Modifiers = new[] { M(StatType.Might, ModifierKind.PercentAdd, 0.25f), M(StatType.MaxHealth, ModifierKind.PercentAdd, -0.15f) } },
+            new() { Id = "charm_hp", Name = "トラベラーズチャーム", Text = "最大HP +15%", Cost = 0, Modifiers = new[] { M(StatType.MaxHealth, ModifierKind.PercentAdd, 0.15f) } },
+            new() { Id = "wolf_fang", Name = "ウルフファング", Text = "与えるダメージ +10%", Cost = 0, Modifiers = new[] { M(StatType.Might, ModifierKind.PercentAdd, 0.1f) } },
+            new() { Id = "feather", Name = "スウィフトフェザー", Text = "移動速度 +10%", Cost = 40, Modifiers = new[] { M(StatType.MoveSpeed, ModifierKind.PercentAdd, 0.1f) } },
+            new() { Id = "iron_oath", Name = "アイアンオース", Text = "防御 +3", Cost = 50, Modifiers = new[] { M(StatType.Armor, ModifierKind.Flat, 3f) } },
+            new() { Id = "saint_ash", Name = "セインツアッシュ", Text = "仲間の復活速度 +60%", Cost = 60, Modifiers = new[] { M(StatType.ReviveSpeed, ModifierKind.PercentAdd, 0.6f) } },
+            new() { Id = "soul_ring", Name = "ソウルリング", Text = "敵を倒すとHPが2回復", Cost = 70, HealOnKill = 2f },
+            new() { Id = "hourglass", Name = "アワーグラス", Text = "スキルのクールダウン −12%", Cost = 80, Modifiers = new[] { M(StatType.Cooldown, ModifierKind.PercentAdd, -0.12f) } },
+            new() { Id = "phoenix", Name = "フェニックスフェザー", Text = "ランごとに1回、倒れてもその場でHP50%で復活", Cost = 120, Phoenix = true },
+            new() { Id = "soul_lantern", Name = "ソウルランタン", Text = "ソウルを拾う範囲 +60%", Cost = 40, Modifiers = new[] { M(StatType.PickupRange, ModifierKind.PercentAdd, 0.6f) } },
+            new() { Id = "bone_dice", Name = "ボーンダイス", Text = "クリティカル率 +10%（クリティカルはダメージ2倍）", Cost = 70, Modifiers = new[] { M(StatType.CritChance, ModifierKind.Flat, 0.1f) } },
+            new() { Id = "elder_tome", Name = "エルダートーム", Text = "スキルと攻撃の範囲 +15%", Cost = 90, Modifiers = new[] { M(StatType.Area, ModifierKind.PercentAdd, 0.15f) } },
+            new() { Id = "blood_chalice", Name = "ブラッドチャリス", Text = "与えるダメージ +25%、ただし最大HP −15%", Cost = 100, Modifiers = new[] { M(StatType.Might, ModifierKind.PercentAdd, 0.25f), M(StatType.MaxHealth, ModifierKind.PercentAdd, -0.15f) } },
         };
 
         public static MasteryNode GetNode(string id) => Mastery.FirstOrDefault(n => n.Id == id);
@@ -421,7 +421,7 @@ namespace Game.Core
             if (unlocked.Contains(node.Id)) why = "習得済み";
             else if (MetaCatalog.Requires(node) is { } above && !unlocked.Contains(above.Id)) why = $"先に「{above.Name}」を習得する";
             else if (node.Kind == MasteryKind.Keystone && MetaCatalog.KeystoneOf(node.Class, unlocked) is { } held)
-                why = $"奥義は1つだけ（いまは「{held.Name}」。振り直すと選び直せる）";
+                why = $"アーツは1つだけ（いまは「{held.Name}」。振り直すと選び直せる）";
             return why == null;
         }
 
@@ -430,7 +430,7 @@ namespace Game.Core
             if (!CanLearn(node, out why)) return false;
             if (shards < node.Cost)
             {
-                why = "魂の欠片が足りない";
+                why = "ソウルシャードが足りない";
                 return false;
             }
             shards -= node.Cost;
@@ -485,7 +485,7 @@ namespace Game.Core
                 p.achievements ??= new AchievementLog();
                 p.storyRead ??= new List<string>();
                 p.achievements.Repair();
-                p.title ??= "";
+                p.title = AchievementCatalog.RenamedTitle(p.title ?? "");
                 if (!Enum.IsDefined(typeof(Difficulty), p.difficulty)) p.difficulty = Difficulty.Normal;
                 // Classes added later are the rewards of requests some players have already turned in.
                 if (p.quests.Step(QuestGiver.Crone) >= 5 && !p.unlocked.Contains(ClassCatalog.UnlockId(ClassId.Deathcaller))) p.unlocked.Add(ClassCatalog.UnlockId(ClassId.Deathcaller));

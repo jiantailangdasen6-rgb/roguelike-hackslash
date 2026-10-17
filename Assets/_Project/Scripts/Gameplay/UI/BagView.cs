@@ -52,7 +52,7 @@ namespace Game.Gameplay
 
             var frame = UIKit.Framed(dim.transform, "BagFrame", new Color(0.05f, 0.04f, 0.055f, 0.97f));
             frame.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(1560f, 780f), Vector2.zero);
-            var title = UIKit.Title(frame.transform, "袋", 52, TextAnchor.UpperLeft);
+            var title = UIKit.Title(frame.transform, "バッグ", 52, TextAnchor.UpperLeft);
             title.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 70f), new Vector2(36f, -20f));
             _modeText = UIKit.Label(frame.transform, "", 24, TextAnchor.UpperRight, UIKit.MutedText);
             _modeText.rectTransform.Place(new Vector2(1f, 1f), new Vector2(1000f, 40f), new Vector2(-36f, -34f));
@@ -64,7 +64,7 @@ namespace Game.Gameplay
                 AddCell(frame.transform, s, new Vector2(40f + (s % 2) * (Cell + 26f), -146f - (s / 2) * (Cell + 46f)), ItemText.SlotName((EquipSlot)s));
 
             // Bag: 4 x 3 in the middle.
-            var bagLabel = UIKit.Label(frame.transform, $"袋（{SimPlayer.BagSize}）", 26, TextAnchor.UpperLeft, UIKit.AccentColor);
+            var bagLabel = UIKit.Label(frame.transform, $"バッグ（{SimPlayer.BagSize}）", 26, TextAnchor.UpperLeft, UIKit.AccentColor);
             bagLabel.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 36f), new Vector2(360f, -100f));
             for (int b = 0; b < SimPlayer.BagSize; b++)
                 AddCell(frame.transform, SimPlayer.SlotCount + b, new Vector2(360f + (b % 4) * (Cell + 14f), -146f - (b / 4) * (Cell + 14f)), null);
@@ -72,7 +72,7 @@ namespace Game.Gameplay
             // Detail on the right.
             var detail = UIKit.Framed(frame.transform, "Detail", new Color(0.07f, 0.055f, 0.07f, 1f), UIKit.GoldTrim * 0.7f);
             detail.Outer().Place(new Vector2(1f, 1f), new Vector2(620f, 640f), new Vector2(-30f, -100f));
-            _detailTitle = UIKit.Title(detail.transform, "", 34, TextAnchor.UpperLeft, Color.white);
+            _detailTitle = UIKit.Title(detail.transform, "", 34, TextAnchor.UpperLeft, Color.white).Fit(20);
             _detailTitle.rectTransform.Place(new Vector2(0f, 1f), new Vector2(580f, 50f), new Vector2(20f, -16f));
             _detailBody = UIKit.Label(detail.transform, "", 24, TextAnchor.UpperLeft);
             _detailBody.rectTransform.Place(new Vector2(0f, 1f), new Vector2(580f, 220f), new Vector2(20f, -74f));
@@ -174,17 +174,17 @@ namespace Game.Gameplay
                 }
                 case SimEventType.LootPicked when IsMe(e.ClientId) && e.Int >= 0:
                     _unseen++;
-                    HudView.Instance?.Toast($"<color={ItemText.RarityColor((Rarity)e.Int)}>{ItemText.RarityName((Rarity)e.Int)}の装備</color>を拾った（I で袋を開く）");
+                    HudView.Instance?.Toast($"<color={ItemText.RarityColor((Rarity)e.Int)}>{ItemText.RarityName((Rarity)e.Int)}の装備</color>を拾った（I でバッグを開く）");
                     break;
                 case SimEventType.LootPicked when IsMe(e.ClientId):
-                    HudView.Instance?.Toast("<color=#ff9a80>袋がいっぱいで、残った装備を拾えなかった</color>");
+                    HudView.Instance?.Toast("<color=#ff9a80>バッグがいっぱいで、残った装備を拾えなかった</color>");
                     break;
                 case SimEventType.ItemGiven when IsMe((ulong)e.Id):
                     _unseen++;
                     HudView.Instance?.Toast($"<color=#9fd8ff>{NameOf(e.ClientId)}から装備を受け取った</color>");
                     break;
                 case SimEventType.ItemSalvaged when IsMe(e.ClientId) && e.Value > 0f: // negative = bought from the merchant (HudView)
-                    HudView.Instance?.Toast($"分解した：魂の欠片 +{e.Value:0}");
+                    HudView.Instance?.Toast($"分解した：ソウルシャード +{e.Value:0}");
                     break;
             }
         }
@@ -215,8 +215,8 @@ namespace Game.Gameplay
             profile.shards += result.OverflowShards;
             ProfileStore.Save();
             LastBankSummary = result.OverflowCount > 0
-                ? $"装備を {result.Kept} 個持ち帰った（倉庫があふれたので {result.OverflowCount} 個を分解：魂の欠片 +{result.OverflowShards}）"
-                : $"装備を {result.Kept} 個持ち帰った（拠点の倉庫で付け替えられる）";
+                ? $"装備を {result.Kept} 個持ち帰った（ヴォールトがあふれたので {result.OverflowCount} 個を分解：ソウルシャード +{result.OverflowShards}）"
+                : $"装備を {result.Kept} 個持ち帰った（キャンプのヴォールトで付け替えられる）";
             HudView.Instance?.Toast(LastBankSummary);
         }
 
@@ -347,7 +347,7 @@ namespace Game.Gameplay
             if (selected == null)
             {
                 _detailTitle.text = "";
-                _detailBody.text = "装備はまだない。\n魔物を倒すとたまに落とす（精鋭・主は必ず）。\n「宝物」の門の先では、全員が良い装備を得られる。";
+                _detailBody.text = "装備はまだない。\nモンスターを倒すとたまに落とす（エリート・ボスは必ず）。\n「宝物」の門の先では、全員が良い装備を得られる。";
                 _compareBody.text = "";
             }
             else
@@ -376,7 +376,7 @@ namespace Game.Gameplay
             _equipButton.interactable = between;
 
             _salvageButton.gameObject.SetActive(selected != null && inBag);
-            if (selected != null) _salvageLabel.text = selected.loaner ? "返す（貸し出し品）" : $"分解（魂の欠片 +{RunSimulation.SalvageValue(selected.rarity)}）";
+            if (selected != null) _salvageLabel.text = selected.loaner ? "返す（貸し出し品）" : $"分解（ソウルシャード +{RunSimulation.SalvageValue(selected.rarity)}）";
             _salvageButton.interactable = between;
 
             var mates = NetPlayer.All.Where(p => p != NetPlayer.Local).OrderBy(p => p.Slot.Value).ToList();

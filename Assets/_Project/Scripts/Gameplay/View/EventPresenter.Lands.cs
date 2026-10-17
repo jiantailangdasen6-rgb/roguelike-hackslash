@@ -161,7 +161,7 @@ namespace Game.Gameplay
                 }
                 case TrialMoment.MirrorsRise:
                     CameraShake.Add(0.4f);
-                    ShowCallout(e.Pos + Vector2.up * 3.2f, "氷の写し身", new Color(0.7f, 0.9f, 1f), 46);
+                    ShowCallout(e.Pos + Vector2.up * 3.2f, "アイスミラー", new Color(0.7f, 0.9f, 1f), 46);
                     break;
                 case TrialMoment.MirrorBroken:
                     for (int i = 0; i < 10; i++) Shard(e.Pos + Vector2.up * 0.8f, i * 36f + Random.Range(0f, 20f), new Color(0.8f, 0.95f, 1f));

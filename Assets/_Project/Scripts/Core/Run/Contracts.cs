@@ -28,18 +28,18 @@ namespace Game.Core
 
         public static readonly ContractClause[] All =
         {
-            new() { Index = 0, Name = "鋭い牙", Text = "魔物の攻撃 +15%", MaxLevel = 3, PointsPerLevel = 1, Damage = 0.15f },
-            new() { Index = 1, Name = "厚い皮", Text = "魔物の体力 +15%", MaxLevel = 3, PointsPerLevel = 1, Health = 0.15f },
-            new() { Index = 2, Name = "大群", Text = "魔物の数 +12%", MaxLevel = 2, PointsPerLevel = 1, Count = 0.12f },
-            new() { Index = 3, Name = "精鋭の道", Text = "精鋭が出やすい（+4%）", MaxLevel = 2, PointsPerLevel = 1, Elite = 0.04f },
-            new() { Index = 4, Name = "獰猛", Text = "予兆が短い", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Ferocity },
-            new() { Index = 5, Name = "俊敏", Text = "魔物の足が速い", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Swiftness },
-            new() { Index = 6, Name = "怨念", Text = "倒れた魔物が弾ける", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Vengeance },
-            new() { Index = 7, Name = "鉄の守り", Text = "精鋭が鎧をまとう", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.IronGuard },
-            new() { Index = 8, Name = "主の怒り", Text = "主の試練が厳しい", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.LordsWrath },
-            new() { Index = 9, Name = "渇き", Text = "回復が弱い", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Thirst },
-            new() { Index = 10, Name = "衰え", Text = "最大HPが減る", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Frailty },
-            new() { Index = 11, Name = "疲れ", Text = "回避の戻りが遅い", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Weariness },
+            new() { Index = 0, Name = "シャープファング", Text = "モンスターの攻撃 +15%", MaxLevel = 3, PointsPerLevel = 1, Damage = 0.15f },
+            new() { Index = 1, Name = "シックハイド", Text = "モンスターの体力 +15%", MaxLevel = 3, PointsPerLevel = 1, Health = 0.15f },
+            new() { Index = 2, Name = "スウォーム", Text = "モンスターの数 +12%", MaxLevel = 2, PointsPerLevel = 1, Count = 0.12f },
+            new() { Index = 3, Name = "エリートロード", Text = "エリートが出やすい（+4%）", MaxLevel = 2, PointsPerLevel = 1, Elite = 0.04f },
+            new() { Index = 4, Name = "フェロシティ", Text = "予兆が短い", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Ferocity },
+            new() { Index = 5, Name = "アジリティ", Text = "モンスターの足が速い", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Swiftness },
+            new() { Index = 6, Name = "グラッジ", Text = "倒れたモンスターが弾ける", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Vengeance },
+            new() { Index = 7, Name = "アイアンガード", Text = "エリートが鎧をまとう", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.IronGuard },
+            new() { Index = 8, Name = "ボスレイジ", Text = "ボスの試練が厳しい", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.LordsWrath },
+            new() { Index = 9, Name = "サースト", Text = "回復が弱い", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Thirst },
+            new() { Index = 10, Name = "ディケイ", Text = "最大HPが減る", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Frailty },
+            new() { Index = 11, Name = "ファティーグ", Text = "ドッジの戻りが遅い", MaxLevel = 1, PointsPerLevel = 2, Mod = DifficultyMod.Weariness },
         };
 
         public static int Level(int contract, int clause) => (contract >> (clause * 2)) & 3;

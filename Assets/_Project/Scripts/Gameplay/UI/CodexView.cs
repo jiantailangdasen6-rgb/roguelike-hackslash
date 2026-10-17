@@ -84,8 +84,8 @@ namespace Game.Gameplay
             panel.Outer().Place(new Vector2(0.5f, 0.5f), new Vector2(1700f, 940f), Vector2.zero);
             var p = panel.transform;
 
-            var title = UIKit.Title(p, "図鑑", 64, TextAnchor.MiddleLeft);
-            title.rectTransform.Place(new Vector2(0f, 1f), new Vector2(300f, 90f), new Vector2(40f, -16f));
+            var title = UIKit.Title(p, "コーデックス", 64, TextAnchor.MiddleLeft).Fit(30);
+            title.rectTransform.Place(new Vector2(0f, 1f), new Vector2(190f, 90f), new Vector2(40f, -16f));
             _progress = UIKit.Label(p, "", 24, TextAnchor.MiddleLeft, UIKit.MutedText);
             _progress.rectTransform.Place(new Vector2(0f, 0f), new Vector2(520f, 50f), new Vector2(44f, 16f));
 
@@ -127,7 +127,7 @@ namespace Game.Gameplay
             _pictureMark = UIKit.Title(pictureFrame.transform, "", 120);
             _pictureMark.rectTransform.Stretch();
 
-            _name = UIKit.Title(pg, "", 52, TextAnchor.UpperLeft);
+            _name = UIKit.Title(pg, "", 52, TextAnchor.UpperLeft).Fit(28);
             _name.rectTransform.Place(new Vector2(0f, 1f), new Vector2(480f, 70f), new Vector2(316f, -44f));
             _sub = UIKit.Label(pg, "", 26, TextAnchor.UpperLeft, UIKit.MutedText);
             _sub.rectTransform.Place(new Vector2(0f, 1f), new Vector2(480f, 80f), new Vector2(318f, -122f));
@@ -203,7 +203,7 @@ namespace Game.Gameplay
                 var q = UIKit.Title(frame.transform, "？", 54, TextAnchor.MiddleCenter, new Color(0.6f, 0.55f, 0.5f, 0.8f));
                 q.rectTransform.Stretch();
             }
-            var name = UIKit.Label(rect, known ? entry.Name : "？？？", 19, TextAnchor.UpperCenter, known ? Color.white : UIKit.MutedText);
+            var name = UIKit.Label(rect, known ? entry.Name : "？？？", 19, TextAnchor.UpperCenter, known ? Color.white : UIKit.MutedText).Fit(11);
             name.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(CellW + 6f, 30f), new Vector2(0f, -30f));
 
             var button = rect.gameObject.AddComponent<Button>();
@@ -262,7 +262,7 @@ namespace Game.Gameplay
             }
             else
             {
-                _traits.text = "<color=#8a8078>迷宮のどこかで出会うと記録される</color>";
+                _traits.text = "<color=#8a8078>ラビリンスのどこかで出会うと記録される</color>";
                 _counter.text = "";
             }
             _counterBox.SetActive(known && !string.IsNullOrEmpty(entry.Counter));

@@ -136,7 +136,7 @@ namespace Game.Gameplay
                     AddLight(column, c, 3.5f, 7f);
                     var ring = Spawn("fx_heal", e.Pos, 1f, 0.8f, 0.5f, 3f, Color.white);
                     ring.FadeOut = true;
-                    ShowCallout(e.Pos + Vector2.up * 2.6f, "再生！", Color.Lerp(c, Color.white, 0.3f), 46);
+                    ShowCallout(e.Pos + Vector2.up * 2.6f, "リジェネ！", Color.Lerp(c, Color.white, 0.3f), 46);
                     break;
                 }
             }

@@ -754,6 +754,7 @@ namespace Game.Core
                 damage = AffixDamage(index, damage, ref flags); // RunSimulation.Affixes.cs
                 e = ref Enemies[index];
             }
+            damage = GuardedDamage(index, damage, ref flags); // RunSimulation.Roles.cs
 
             damage = PoiseDamage(index, damage, flags); // RunSimulation.Break.cs
             e = ref Enemies[index];

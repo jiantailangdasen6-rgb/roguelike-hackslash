@@ -307,6 +307,8 @@ namespace Game.Core
         public bool Elite;
         /// <summary>Health beyond the room's scale (a swarm's frail ones; 0 = as usual).</summary>
         public float HealthMul;
+        /// <summary>Its part in a warband (RunSimulation.Roles).</summary>
+        public EnemyRole Role;
     }
 
     public enum SimEventType : byte
@@ -365,6 +367,7 @@ namespace Game.Core
         Ultimate,        // ClientId, Int = ClassId, Pos (the target for the ranger and alchemist), Vec = aim, Value = radius
         EnemyBroken,     // Id, Pos, Int = EnemyType, Value = seconds broken (RunSimulation.Break)
         ChargedStrike,   // ClientId, Int = charge level (1, 2), Pos, Vec = aim, Value = reach (RunSimulation.Charge)
+        EnemyRole,       // Id, Int = EnemyRole (100 = a healer mends those around), Pos, Value = radius (RunSimulation.Roles)
     }
 
     /// <summary>Two classes' abilities meeting (see RunSimulation.Combos).</summary>

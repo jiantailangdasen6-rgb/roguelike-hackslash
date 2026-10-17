@@ -247,6 +247,7 @@ namespace Game.Core
             StepAffixes(dt); // RunSimulation.Affixes.cs
             StepPoise(dt); // RunSimulation.Break.cs
             StepTotems(dt); // RunSimulation.Waves.cs
+            StepHealers(dt); // RunSimulation.Roles.cs
             StepPools(dt); // RunSimulation.Lands.cs
             StepPlayersCombat(dt);
             StepDelayedAreas(dt);
@@ -342,6 +343,11 @@ namespace Game.Core
                 Vector2 at = def.Flying ? s.Position : Arena.Resolve(Layout, s.Position, def.Radius);
                 int id = Enemies.Spawn(s.Type, at, EnemyHealthScale * OmenHealth(def) * (s.HealthMul > 0f ? s.HealthMul : 1f), EnemyDamageScale, s.Elite); // RunSimulation.Omens.cs
                 if (s.Elite && !s.Champion) GiveAffixes(id); // RunSimulation.Affixes.cs
+                if (s.Role != EnemyRole.None)
+                {
+                    Enemies[Enemies.IndexOf(id)].Role = s.Role; // RunSimulation.Roles.cs
+                    Events.Add(new SimEvent(SimEventType.EnemyRole) { Id = id, Int = (int)s.Role, Pos = at });
+                }
                 Enemies[Enemies.IndexOf(id)].RoomId = s.Room;
                 if (s.Champion) MakeChampion(Enemies.IndexOf(id));
                 if (def.Boss)

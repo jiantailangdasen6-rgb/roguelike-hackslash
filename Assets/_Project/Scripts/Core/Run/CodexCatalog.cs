@@ -193,6 +193,17 @@ namespace Game.Core
                 },
                 new()
                 {
+                    Id = "enemy:Warband", Section = CodexSection.Monsters, Name = "魔物の小隊", Sub = "役割のある組（頭上に役）", Sheet = "shield_skeleton", AlwaysKnown = true,
+                    Traits = new[]
+                    {
+                        "エリアの2部屋目から、波に3体の小隊が混じることがある",
+                        $"盾役：守る相手（射手・癒し手）と皆の間に立つ。盾役のそばの魔物は受けるダメージ -{RunSimulation.GuardCover * 100f:0}%",
+                        $"癒し手：後ろに下がり、{RunSimulation.HealEvery:0}秒ごとに周りの魔物を最大体力の{RunSimulation.HealShare * 100f:0}%回復する",
+                    },
+                    Counter = "回り込んで癒し手を先に倒す。盾役から引き離せばダメージが通る",
+                },
+                new()
+                {
                     Id = "enemy:Affixes", Section = CodexSection.Monsters, Name = "精鋭の特性", Sub = "精鋭は特性を持つ（頭上に名前）", Sheet = "dread_knight", AlwaysKnown = true,
                     Traits = new[]
                     {

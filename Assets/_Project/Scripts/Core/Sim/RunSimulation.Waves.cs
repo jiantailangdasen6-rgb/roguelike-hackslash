@@ -117,6 +117,8 @@ namespace Game.Core
                     break;
                 }
                 default:
+                    // Now and then a warband comes with the wave (RunSimulation.Roles).
+                    if (Room.Index >= 1 && size >= 4 && (ForcedWarband || _spawnRng.Chance(WarbandChance)) && SpawnWarband()) size -= 3;
                     for (int i = 0; i < size; i++)
                         QueueSpawn(RandomEnemyType(), (eliteRoom && i == 0) || _spawnRng.Chance(EliteChance));
                     break;

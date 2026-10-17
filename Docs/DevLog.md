@@ -11,7 +11,7 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver a185833c（次の8案のあと、戦闘の大改善の回避・必殺技・体勢崩し・波の種類・溜め攻撃まで。Windows版と同じ版なので一緒に遊べる） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 5c9f78d9（次の8案のあと、戦闘の大改善の回避・必殺技・体勢崩し・波の種類・溜め攻撃・敵の連携まで。Windows版と同じ版なので一緒に遊べる） |
 | PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 5c91ca86）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
@@ -574,6 +574,11 @@
   - 公開：ver 292fb9ed（NetTest・CrossTest 合格、EditMode 263件）
 - **5 溜め攻撃（実装）**：押しっぱなしの連射はそのまま。押し続けた時間を溜め（`SimPlayer.AttackHold`、`RunSimulation.Charge.cs`）、1.2秒以上で離すと重い一撃（通常攻撃×3）、2.4秒以上で渾身の一撃（×5）。近接（戦士・守護騎士・暗殺者・聖騎士）は200°（渾身は全周）を大きく薙ぎ払い、ほかは貫く衝撃波。強打扱いなので体勢をよく削る
   - 見た目：自分の足元にだけ溜めの輪（灰→金→赤、`NetPlayer.UpdateChargeRing`。溜めは送らないので他人には見えない）、段階が上がるたびに体が弾む。離すと白金の閃光と破片・土ぼこり・揺れ、渾身は「渾身！」。図鑑（操作）に「溜め攻撃」。ボットも2.7秒ごとに離して使う。公開：ver a185833c（NetTest・CrossTest 合格、EditMode 265件）
+- **6 敵の連携（実装）**：エリアの2部屋目から、普通の波に45%で3体の小隊（`RunSimulation.Roles.cs`、`EnemyRole`）。中心はその土地の射手（いなければ近接）、半分は癒し手。その前に近接の盾役2体
+  - 盾役：守る相手（射手・癒し手）と一番近い仲間の間に立つ（誰かが近づくと戦う）。盾役のそばの魔物は受けるダメージ -30%（盾役自身と主は除く）
+  - 癒し手：後ろに下がり（射手と同じ距離感）、5秒ごとに半径4.5の魔物を最大体力の12%回復（凍結・気絶中は止まる）。緑の輪と回復の光・音
+  - 頭上に役（「盾役」水色・「癒し手」緑）。図鑑（魔物）に「魔物の小隊」。撮影用 `-warband`
+  - 公開：ver 5c9f78d9（NetTest・CrossTest 合格、EditMode 268件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

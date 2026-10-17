@@ -43,6 +43,39 @@ namespace Game.Gameplay
             label.Seen = false;
         }
 
+        /// <summary>A warband's member (RunSimulation.Roles): its part over its head; a healer's mending as a green pulse.</summary>
+        private void OnEnemyRole(in SimEvent e)
+        {
+            if (e.Int == 100)
+            {
+                var ring = Spawn("fx_revive_ring", e.Pos + Vector2.up * 0.2f, 1f, 0.6f, 0.5f, e.Value * 0.62f, new Color(0.5f, 1f, 0.55f, 0.8f), order: -300);
+                ring.FadeOut = true;
+                AddLight(ring, new Color(0.45f, 1f, 0.5f), 1.6f, e.Value);
+                var heal = Spawn("fx_heal", e.Pos + Vector2.up * 0.6f, 12f, 0.7f, 0.8f, 1.4f, new Color(0.6f, 1f, 0.6f));
+                heal.FadeOut = true;
+                return;
+            }
+            var role = (EnemyRole)e.Int;
+            string text = EnemyRoleCatalog.Name(role);
+            if (text.Length == 0) return;
+            var color = role == EnemyRole.Guard ? new Color(0.6f, 0.82f, 1f) : new Color(0.55f, 1f, 0.6f);
+            if (!_affixLabels.TryGetValue(e.Id, out var label))
+            {
+                var t = UIKit.Label(_numberLayer, text, 15, TextAnchor.MiddleCenter, color);
+                t.font = UIKit.TitleFont;
+                t.rectTransform.sizeDelta = new Vector2(200f, 30f);
+                var outline = t.gameObject.AddComponent<Outline>();
+                outline.effectColor = new Color(0f, 0f, 0f, 0.9f);
+                outline.effectDistance = new Vector2(1.5f, -1.5f);
+                label = new AffixLabel { Text = t };
+                _affixLabels[e.Id] = label;
+            }
+            label.Text.text = text;
+            label.Text.color = color;
+            label.Born = Time.time;
+            label.Seen = false;
+        }
+
         private void OnEliteShield(in SimEvent e)
         {
             switch (e.Int)

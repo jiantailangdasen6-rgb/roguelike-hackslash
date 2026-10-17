@@ -52,6 +52,9 @@ namespace Game.Core
         public float PoiseQuiet;
         public float Broken;
         public bool PoiseSet;
+        /// <summary>Its part in a warband (RunSimulation.Roles) and a timer for it (a healer's mending).</summary>
+        public EnemyRole Role;
+        public float RoleTimer;
         public bool Dead;
 
         // AI

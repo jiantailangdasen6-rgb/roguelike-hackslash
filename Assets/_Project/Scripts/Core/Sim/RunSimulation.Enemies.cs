@@ -145,17 +145,24 @@ namespace Game.Core
             int attack = ChooseAttack(ref e, def, distance);
             var a = def.Attacks[attack];
 
-            // Movement: ranged enemies hold their distance, melee ones close in.
+            // Movement: ranged enemies hold their distance, melee ones close in (a healer keeps back like a shooter).
             Vector2 move = Vector2.zero;
-            if (def.PreferredDistance > 0f)
+            float keep = def.PreferredDistance > 0f ? def.PreferredDistance : e.Role == EnemyRole.Healer ? 5f : 0f;
+            if (keep > 0f)
             {
-                if (distance > def.PreferredDistance + 0.8f) move = dir;
-                else if (distance < def.PreferredDistance - 1.2f) move = -dir;
+                if (distance > keep + 0.8f) move = dir;
+                else if (distance < keep - 1.2f) move = -dir;
                 else move = new Vector2(-dir.y, dir.x) * ((e.Id & 1) == 0 ? 0.5f : -0.5f);
             }
             else if (distance > Mathf.Min(a.Range, 4f) * 0.8f)
             {
                 move = dir;
+            }
+            // A guard of a warband stands before the one it guards until someone comes close (RunSimulation.Roles).
+            if (distance > a.Range * 1.3f && GuardSpot(e, target, out Vector2 post))
+            {
+                Vector2 toPost = post - e.Position;
+                move = toPost.sqrMagnitude > 0.09f ? toPost.normalized : Vector2.zero;
             }
 
             float speed = def.Speed * (e.HitStun > 0f ? 0.25f : 1f) * (DifficultyDef.Has(DifficultyMod.Swiftness) ? DifficultyCatalog.SwiftnessSpeed : 1f) * (e.Haunted > 0f ? GhostSlow : 1f)

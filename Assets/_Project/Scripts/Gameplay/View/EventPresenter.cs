@@ -239,6 +239,7 @@ namespace Game.Gameplay
                 case SimEventType.Combo: OnCombo(e); break;
                 case SimEventType.EliteAffixes: OnEliteAffixes(e); break; // EventPresenter.Affixes.cs
                 case SimEventType.EliteShield: OnEliteShield(e); break;
+                case SimEventType.EnemyRole: OnEnemyRole(e); break; // EventPresenter.Affixes.cs
                 case SimEventType.EncounterResolved: OnEncounter(e); break; // EventPresenter.Encounters.cs
                 case SimEventType.TrialEvent: OnTrial(e); break;
                 case SimEventType.GodSign: OnGodSign(e); break; // EventPresenter.Gods.cs

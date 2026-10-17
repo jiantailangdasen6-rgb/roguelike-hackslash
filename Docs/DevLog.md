@@ -11,8 +11,8 @@
 
 | 項目 | 状態 |
 |---|---|
-| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver 6c7d6a7e（戦闘の大改善の8項目すべて、マップの明るさの改善、横文字の名前。Windows版と同じ版なので一緒に遊べる） |
-| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver 6c7d6a7e）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
+| ブラウザ版 | 公開中 https://jiantailangdasen6-rgb.github.io/roguelike-web/ （公開リポジトリ `roguelike-web` の `gh-pages`、ビルドのみ）。ver ed02b37f（戦闘の大改善の8項目すべて、マップの明るさの改善、横文字の名前、スフィア盤。Windows版と同じ版なので一緒に遊べる） |
+| PC版 | 配布：GitHub Releases（https://github.com/jiantailangdasen6-rgb/roguelike-hackslash/releases/latest、ver ed02b37f）。開発用は `Builds/Windows/LabyrinthSurvivor.exe`（git 管理外） |
 | ソース | GitHub の**公開**リポジトリ `jiantailangdasen6-rgb/roguelike-hackslash`（`origin`、コミット後に `main` を push）。誰でも読めるので秘密情報は入れない |
 | オンライン協力 | Unity Relay＋ルームコードで動作確認済み（PC↔PC 3人、PCホスト↔ブラウザ参加、ブラウザホスト↔PC参加）。ラン後は解散せず拠点へ戻る。ホストの通信が切れても「続きから部屋を作る」で再開できる |
 | テスト | EditMode 193件・PlayMode 1件・NetTest（3人LAN）・OnlineTest（Relay＋ホストを4秒止める）・ResumeTest（通信切れ→続きから）・CampTest・JoinTest・CrossTest（PCホスト＋ブラウザ参加）・BrowserHostTest（ブラウザホスト＋PC参加） すべて合格 |
@@ -598,6 +598,13 @@
   - 置き換え表は `Docs/naming/glossary.tsv`（語の置き換え、長い語から1回だけ）と `exact.tsv`（文字列まるごと、ファイル限定可）。コードの文字列だけを書き換えた（約2000か所）。保存済みの称号は旧名から新名へ読み替え（`AchievementCatalog.RenamedTitle`）
   - 長くなった名前のため、ボタン・図鑑の名前とタイトル・パークカード・ルーム表示・装備名などは枠に入らないと文字が縮む（`UIKit.Fit`）。地図の部屋の一文字（入・戦・主…）とルーンの印はアイコンとしてそのまま
   - 公開：ver 6c7d6a7e（NetTest・CampTest・CrossTest 合格、EditMode 275件）
+- **スフィア盤（実装）**：マスターのスキルツリーを、FF10のスフィア盤のような**クラスごとの円い盤**に作り替えた（`Core/Run/SphereBoard.cs`、画面は `Gameplay/Camp/SphereBoardView.cs`）
+  - 中心にクラス、3本のルート（各10マス）が外へ伸び、2つの輪（内2マス×3、外3マス×3）でつながる。1クラス45マス。開いたマスの隣だけ開けられる
+  - マス：小さなスフィア（ルートごとに攻め・守り・技の能力、輪は移動・拾う範囲・範囲・リジェネなど）、これまでの名前付きのマス（成長・新しいパーク・開始時のパーク選び・始めから持つパーク、idはそのまま）、途中の**シール**（鍵1つ）、外周の**アーツ**3つ
+  - 通貨は新しい**スフィア**（ランの成績：2＋部屋/2＋ボス×3＋踏破5）と**鍵**（ボス1体につき1つ）。結果画面に表示。アーツは全部開けられ、出発時に効くのは装備した1つ（最初に開けたものを自動で装備）。振り直しで使ったスフィアと鍵が全部戻る
+  - 既存のプロフィールは版2へ：スフィア10を配り、持っていたアーツを装備。新しいプロフィールもスフィア10から
+  - 画面：盤はドラッグで動かし、ホイールか＋−で拡大。開放済みは光り、開けられるマスは点滅、開けた瞬間に光の輪。右に説明と「開放する／装備する」。開けると同じ道の次のマスが選ばれる
+  - 公開：ver ed02b37f（NetTest・CampTest・CrossTest 合格、EditMode 278件）
 ### Claude が自分の判断で決めたこと（第4段階）
 - 武器の型は各職業2つ（いつもの武器＋異形の武器）。3つ目まで作ると見た目のシートが倍になり、ブラウザ版が重くなるため
 - ルーンは職業を問わない8種で、技1・技2のどちらにも同じ働き方をする（技ごとの専用ルーンにすると数が多すぎるため）。ルーンの数値、ドロップ率（落とし物の約2割がルーン、約1割が異形の武器）

@@ -13,7 +13,8 @@ namespace Game.Core
         StartPerk,     // a free perk choice when the run starts
         Stat,          // permanent stat modifier
         GrantPerk,     // the run starts with this class perk already learnt
-        Keystone,      // secret art (奥義): an innate rune in one skill; one per class
+        Keystone,      // art (アーツ): an innate rune in one skill; all can be learnt, one is worn
+        Gate,          // a sealed sphere: a key (from a fallen boss) opens the way beyond
     }
 
     /// <summary>Out-of-run growth for one class, bought with soul shards.</summary>
@@ -34,6 +35,12 @@ namespace Game.Core
         /// <summary>Secret art: the skill (1 or 2) that carries the rune.</summary>
         public int Skill;
         public RuneId Rune;
+        /// <summary>The sphere board (SphereBoard): where it sits (board units, centre = 0,0), its neighbours ("core" = the
+        /// centre) and the keys it takes besides spheres.</summary>
+        public Vector2 Pos;
+        public List<string> Links = new();
+        public int Keys;
+        public bool Major;
     }
 
     /// <summary>A fixed-effect charm chosen before a run (two slots).</summary>
@@ -94,7 +101,7 @@ namespace Game.Core
         // Steps 1-2 are the old mastery nodes (ids kept for saves); step 3 starts every run with a class perk; step 4 is
         // the branch's secret art (奥義): it changes one of the skills (an innate rune, RunSimulation.Runes). Only one
         // secret art per class; everything can be unlearnt for a full refund (ProfileData.Respec).
-        public static readonly MasteryNode[] Mastery =
+        private static readonly MasteryNode[] Named =
         {
             // Warrior: 剣 / 鉄 / 血
             new() { Id = "w_might", Class = ClassId.Warrior, Branch = 0, Tier = 1, Name = "ソードトレーニング", Text = "レベルごとの攻撃力成長 +1%", Cost = 40, Kind = MasteryKind.MightGrowth, Value = 0.01f },
@@ -225,16 +232,21 @@ namespace Game.Core
             new() { Id = "blood_chalice", Name = "ブラッドチャリス", Text = "与えるダメージ +25%、ただし最大HP −15%", Cost = 100, Modifiers = new[] { M(StatType.Might, ModifierKind.PercentAdd, 0.25f), M(StatType.MaxHealth, ModifierKind.PercentAdd, -0.15f) } },
         };
 
-        public static MasteryNode GetNode(string id) => Mastery.FirstOrDefault(n => n.Id == id);
+        /// <summary>Every class's sphere board: the named spheres above set into rings of small ones (SphereBoard).</summary>
+        public static readonly MasteryNode[] Mastery = SphereBoard.Build(Named);
+        private static Dictionary<string, MasteryNode> _byId;
+
+        public static MasteryNode GetNode(string id)
+        {
+            if (_byId == null)
+            {
+                _byId = new Dictionary<string, MasteryNode>();
+                foreach (var n in Mastery) _byId[n.Id] = n;
+            }
+            return id != null && _byId.TryGetValue(id, out var node) ? node : null;
+        }
         public static TrinketDef GetTrinket(string id) => Trinkets.FirstOrDefault(t => t.Id == id);
         public static IEnumerable<MasteryNode> NodesFor(ClassId c) => Mastery.Where(n => n.Class == c);
-
-        /// <summary>One branch of a class's tree, top step first.</summary>
-        public static List<MasteryNode> Branch(ClassId c, int branch) => Mastery.Where(n => n.Class == c && n.Branch == branch).OrderBy(n => n.Tier).ToList();
-
-        /// <summary>The step a node needs learnt first (null for the top of a branch).</summary>
-        public static MasteryNode Requires(MasteryNode node) => node.Tier <= 1 ? null
-            : Mastery.FirstOrDefault(n => n.Class == node.Class && n.Branch == node.Branch && n.Tier == node.Tier - 1);
 
         /// <summary>The secret art held among these ids for a class (null for none).</summary>
         public static MasteryNode KeystoneOf(ClassId c, IEnumerable<string> ids) =>
@@ -299,7 +311,7 @@ namespace Game.Core
     [Serializable]
     public sealed class ProfileData
     {
-        public int version = 1;
+        public int version = 2; // 2: the sphere board (spheres, keys, worn arts)
         public int shards;
         public ClassId selectedClass;
         public List<string> unlocked = new();
@@ -411,40 +423,72 @@ namespace Game.Core
             return true;
         }
 
-        /// <summary>Soul shards spent in a class's tree (what unlearning gives back).</summary>
-        public int MasterySpent(ClassId c) => MetaCatalog.NodesFor(c).Where(n => unlocked.Contains(n.Id)).Sum(n => n.Cost);
+        /// <summary>The sphere board's purse (SphereBoard): spheres open spheres, keys open seals.</summary>
+        public int spheres;
+        public int keys;
+        /// <summary>The art worn by each class (MasteryNode ids; at most one per class).</summary>
+        public List<string> arts = new();
 
-        /// <summary>Whether a step of the tree can be learnt now (the step above is learnt, the one secret art is free).</summary>
+        /// <summary>Spheres (and keys) spent on a class's board: what unlearning gives back.</summary>
+        public int SpheresSpent(ClassId c) => MetaCatalog.NodesFor(c).Where(n => unlocked.Contains(n.Id)).Sum(n => n.Cost);
+        public int KeysSpent(ClassId c) => MetaCatalog.NodesFor(c).Where(n => unlocked.Contains(n.Id)).Sum(n => n.Keys);
+
+        /// <summary>A sphere touches the open ones (or the centre).</summary>
+        public bool IsReachable(MasteryNode node) => node.Links.Any(id => id == SphereBoard.Core || unlocked.Contains(id));
+
+        /// <summary>Whether a sphere can be opened now (reachable; the price is checked by TryLearn).</summary>
         public bool CanLearn(MasteryNode node, out string why)
         {
             why = null;
-            if (unlocked.Contains(node.Id)) why = "習得済み";
-            else if (MetaCatalog.Requires(node) is { } above && !unlocked.Contains(above.Id)) why = $"先に「{above.Name}」を習得する";
-            else if (node.Kind == MasteryKind.Keystone && MetaCatalog.KeystoneOf(node.Class, unlocked) is { } held)
-                why = $"アーツは1つだけ（いまは「{held.Name}」。振り直すと選び直せる）";
+            if (unlocked.Contains(node.Id)) why = "開放済み";
+            else if (!IsReachable(node)) why = "開いたスフィアの隣から開ける";
             return why == null;
         }
 
         public bool TryLearn(MasteryNode node, out string why)
         {
             if (!CanLearn(node, out why)) return false;
-            if (shards < node.Cost)
+            if (keys < node.Keys)
             {
-                why = "ソウルシャードが足りない";
+                why = "鍵が足りない（ボスを倒すと手に入る）";
                 return false;
             }
-            shards -= node.Cost;
+            if (spheres < node.Cost)
+            {
+                why = "スフィアが足りない（ランの成績で手に入る）";
+                return false;
+            }
+            spheres -= node.Cost;
+            keys -= node.Keys;
             unlocked.Add(node.Id);
+            if (node.Kind == MasteryKind.Keystone && WornArt(node.Class) == null) WearArt(node); // the first art is worn at once
             return true;
         }
 
-        /// <summary>Unlearns a class's whole tree and gives every shard back.</summary>
+        /// <summary>Unlearns a class's whole board and gives every sphere and key back.</summary>
         public int Respec(ClassId c)
         {
-            int back = MasterySpent(c);
+            int back = SpheresSpent(c);
+            keys += KeysSpent(c);
             foreach (var n in MetaCatalog.NodesFor(c)) unlocked.Remove(n.Id);
-            shards += back;
+            arts.RemoveAll(id => MetaCatalog.GetNode(id)?.Class == c);
+            spheres += back;
             return back;
+        }
+
+        /// <summary>The art a class wears (null for none): learnt arts are all kept, one is worn.</summary>
+        public MasteryNode WornArt(ClassId c)
+        {
+            foreach (var id in arts)
+                if (MetaCatalog.GetNode(id) is { Kind: MasteryKind.Keystone } n && n.Class == c && unlocked.Contains(id)) return n;
+            return null;
+        }
+
+        public void WearArt(MasteryNode art)
+        {
+            if (art == null || art.Kind != MasteryKind.Keystone || !unlocked.Contains(art.Id)) return;
+            arts.RemoveAll(id => MetaCatalog.GetNode(id)?.Class == art.Class);
+            arts.Add(art.Id);
         }
 
         public void ToggleTrinket(string id)
@@ -459,7 +503,7 @@ namespace Game.Core
         {
             classId = IsClassOpen(selectedClass) ? selectedClass : ClassId.Warrior,
             skin = IsUnlocked(SkinCatalog.Get(selectedClass, SkinFor(selectedClass)).Id) ? SkinFor(selectedClass) : 0,
-            mastery = MetaCatalog.NodesFor(selectedClass).Where(n => IsUnlocked(n.Id)).Select(n => n.Id).ToList(),
+            mastery = MetaCatalog.NodesFor(selectedClass).Where(n => IsUnlocked(n.Id) && (n.Kind != MasteryKind.Keystone || n == WornArt(selectedClass))).Select(n => n.Id).ToList(),
             trinkets = equippedTrinkets.Where(IsUnlocked).Take(MetaCatalog.TrinketSlots).ToList(),
             playerKey = playerKey,
             gear = GearVault.LoadoutGear(this.gear = GearVault.Normalize(this.gear)),
@@ -486,6 +530,15 @@ namespace Game.Core
                 p.storyRead ??= new List<string>();
                 p.achievements.Repair();
                 p.title = AchievementCatalog.RenamedTitle(p.title ?? "");
+                p.arts ??= new List<string>();
+                if (p.version < 2)
+                {
+                    // The sphere board came: a first handful of spheres, and the arts already learnt are worn.
+                    p.version = 2;
+                    p.spheres += 10;
+                    foreach (ClassId c in Enum.GetValues(typeof(ClassId)))
+                        if (p.WornArt(c) == null && MetaCatalog.NodesFor(c).FirstOrDefault(n => n.Kind == MasteryKind.Keystone && p.unlocked.Contains(n.Id)) is { } art) p.WearArt(art);
+                }
                 if (!Enum.IsDefined(typeof(Difficulty), p.difficulty)) p.difficulty = Difficulty.Normal;
                 // Classes added later are the rewards of requests some players have already turned in.
                 if (p.quests.Step(QuestGiver.Crone) >= 5 && !p.unlocked.Contains(ClassCatalog.UnlockId(ClassId.Deathcaller))) p.unlocked.Add(ClassCatalog.UnlockId(ClassId.Deathcaller));
@@ -498,6 +551,6 @@ namespace Game.Core
             }
         }
 
-        public static ProfileData Default() => new() { equippedTrinkets = new List<string> { "charm_hp" } };
+        public static ProfileData Default() => new() { equippedTrinkets = new List<string> { "charm_hp" }, spheres = 10 };
     }
 }

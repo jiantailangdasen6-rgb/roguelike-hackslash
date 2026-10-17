@@ -43,7 +43,7 @@ namespace Game.Core
             new() { Id = CampStation.Gate, Name = "ゲート", Action = "全員で門に立つと出発", Position = new Vector2(0f, 6.9f), Front = new Vector2(0f, 4.9f), Radius = GateRadius },
             new() { Id = CampStation.Tablet, Name = "モノリス", Action = "難易度を選ぶ", Position = new Vector2(3.6f, 5.2f), Front = new Vector2(3.6f, 4.2f), Radius = 1.3f },
             new() { Id = CampStation.Mirror, Name = "ミラー", Action = "クラスと見た目を変える", Position = new Vector2(-9.5f, 3.4f), Front = new Vector2(-9.5f, 2.2f), Radius = 1.6f },
-            new() { Id = CampStation.Master, Name = "マスター", Action = "スキルツリーを育てる", Position = new Vector2(-9f, -3.6f), Front = new Vector2(-7.8f, -4.4f), Radius = 1.7f },
+            new() { Id = CampStation.Master, Name = "マスター", Action = "スフィア盤を育てる", Position = new Vector2(-9f, -3.6f), Front = new Vector2(-7.8f, -4.4f), Radius = 1.7f },
             new() { Id = CampStation.Charms, Name = "チャームメイカー", Action = "チャームを選ぶ・作る", Position = new Vector2(9f, -3.6f), Front = new Vector2(7.8f, -4.4f), Radius = 1.7f },
             new() { Id = CampStation.Vault, Name = "ヴォールト", Action = "装備を整える", Position = new Vector2(9.5f, 3.2f), Front = new Vector2(9.5f, 2.1f), Radius = 1.6f },
             new() { Id = CampStation.Board, Name = "クエストボード", Action = "クエストを見る・報酬を受け取る", Position = new Vector2(5.2f, -5.3f), Front = new Vector2(5.2f, -4.2f), Radius = 1.6f },

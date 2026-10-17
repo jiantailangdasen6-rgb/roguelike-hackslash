@@ -27,6 +27,7 @@ namespace Game.Gameplay
         private Button _leave;
         private bool _victory;
         private int _shards = -1;
+        private int _spheres, _keys;
         private float _shownAt;
         private string _weeklyNote = "";
 
@@ -85,6 +86,7 @@ namespace Game.Gameplay
             _title.text = e.Int == 3 ? "心臓に火を灯した" : e.Int == 2 ? "ディープに散った" : _victory ? "ラビリンスを踏破した" : "力尽きた…";
             _title.color = _victory ? UIKit.AccentColor : new Color(0.75f, 0.15f, 0.15f);
             _shards = -1;
+            _spheres = _keys = 0;
             _logged = false;
             _shownAt = Time.time;
             _panel.SetActive(true);
@@ -160,6 +162,11 @@ namespace Game.Gameplay
                         ? "　<color=#9fd8ff>今週のラビリンス・自己ベスト更新！</color>"
                         : "　<color=#9fd8ff>今週のラビリンス</color>";
                 ProfileStore.Current.shards += _shards;
+                // The sphere board's purse (SphereBoard): spheres for the run, a key for each boss.
+                _spheres = SphereBoard.SpheresForRun(d.RoomsCleared.Value, d.BossesKilled.Value, _victory);
+                _keys = SphereBoard.KeysForRun(d.BossesKilled.Value);
+                ProfileStore.Current.spheres += _spheres;
+                ProfileStore.Current.keys += _keys;
                 ProfileStore.Save();
             }
 
@@ -180,7 +187,9 @@ namespace Game.Gameplay
                 quest = $"\n<size=26><color=#e0b45a>クエスト達成：{string.Join("・", QuestTracker.JustCompleted.ConvertAll(n => $"「{n}」"))}　キャンプのボードで報酬</color></size>";
             else if (QuestTracker.Nearest() is { } near)
                 quest = $"\n<size=24><color=#bfb6aa>クエスト「{near.Quest.Name}」 {near.Progress} / {near.Quest.Target}</color></size>";
-            _shardsText.text = $"ソウルシャード +{Mathf.Max(0, _shards)}\n<size=26><color=#bfb6aa>所持 {ProfileStore.Current.shards}</color></size>{quest}";
+            string keys = _keys > 0 ? $"　<color=#e6c766>鍵 +{_keys}</color>" : "";
+            _shardsText.text = $"ソウルシャード +{Mathf.Max(0, _shards)}　<color=#9fd8ff>スフィア +{_spheres}</color>{keys}\n" +
+                $"<size=26><color=#bfb6aa>所持 {ProfileStore.Current.shards}・スフィア {ProfileStore.Current.spheres}・鍵 {ProfileStore.Current.keys}</color></size>{quest}";
         }
     }
 }
